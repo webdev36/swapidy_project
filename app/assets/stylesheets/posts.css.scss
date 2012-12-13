@@ -1,3 +1,19 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.product{
+	border-bottom: solid 1px #CCC;
+	padding: 5px 0;
+	margin-top:10px;
+}
+.product .meta{
+	display: none;
+}
+
+.product:hover .meta{
+	display:inline;
+}
+.product:hover{
+	background: #F0F0F0
+}

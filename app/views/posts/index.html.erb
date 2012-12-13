@@ -1,4 +1,4 @@
-<h1>Listing posts</h1>
+<h1>Your Products</h1>
 
 <table>
   <tr>
@@ -10,15 +10,20 @@
     <th></th>
   </tr>
 
+<%= link_to "Put up a new product", new_post_path, class:'btn btn-primary'%>
 <% @posts.each do |post| %>
-  <tr>
-    <td><%= post.name %></td>
-    <td><%= post.title %></td>
-    <td><%= post.content %></td>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  
+    <div class="product">
+    <p><strong><%= post.name %><strong></p>
+    <p><%= post.title %></p>
+    <p><%= post.content %></p>
+    <%= link_to time_ago_in_words(post.created_at)+" ago", post %> 
+
+    <div class="meta">
+    <%= link_to 'Edit', edit_post_path(post) %> |
+    <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
 <% end %>
 </table>
 
