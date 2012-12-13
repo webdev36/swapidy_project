@@ -1,6 +1,7 @@
 Swapidy::Application.routes.draw do
   resources :posts do
     resources:comments
+    root to: 'post#index'
   end
 
 
