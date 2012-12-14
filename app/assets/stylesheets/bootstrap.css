@@ -288,6 +288,7 @@ a:hover {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
+  height:0px;
   width: 940px;
 }
 

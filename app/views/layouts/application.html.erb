@@ -10,11 +10,11 @@
 	<div class="navbar navbar-fixed-top navbar-inverse">
   	  <div class="navbar-inner">
   		<div class="container">
-   		 <a class="brand" href="#">Swapidy</a>
+   		 <a class="brand" href="#"><img src="images/swapidy_logo.png" height="50px" width="200px"></a>
    		 <ul class="nav pull-right">
-      	 <li><a href="#">Sign Up</a></li>
+      	 <li><%=link_to "Sign Up", new_user_registration_path%></li>
       	 <li class="divider-vertical"></li>
-     	 <li><a href="#">Login</a></li>
+     	 <li><%=link_to "Login", new_user_session_path%></li>
      	 <li class="divider-vertical"></li>
       	 <li><a href="#">Help</a></li>
     	 <form class="navbar-search">
@@ -26,11 +26,9 @@
 	</div>
 	
 		<div class="container">
-
-       <p class="notice"><%= notice %></p>
+       <p class="notice">Hello there!<%= notice %></p>
        <p class="alert"><%= alert %></p>
 
-			<img src="images/swapidy_logo.png" alt="logo">
 			<%= yield %>
 		</div>
 </body>
