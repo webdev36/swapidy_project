@@ -10,12 +10,22 @@
 	<div class="navbar navbar-fixed-top navbar-inverse">
   	  <div class="navbar-inner">
   		<div class="container">
-   		 <a class="brand" href="#"><img src="images/swapidy_logo.png" height="50px" width="200px"></a>
+   		 <a class="brand" href="#"><img src="images/swapidy_logo.png" style="height:80px"></a>
    		 <ul class="nav pull-right">
-      	 <li><%=link_to "Sign Up", new_user_registration_path%></li>
-      	 <li class="divider-vertical"></li>
-     	 <li><%=link_to "Login", new_user_session_path%></li>
-     	 <li class="divider-vertical"></li>
+        <% if user_signed_in? %>
+          <li>
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+          <% else %>
+          <li>
+          <%= link_to('Login', new_user_session_path)  %>  
+          </li>
+           <li><%=link_to "Sign Up", new_user_registration_path%></li>
+         <li class="divider-vertical"></li>
+    
+          <% end %>
+         <li class="divider-vertical"></li>
+      	
+     	 
       	 <li><a href="#">Help</a></li>
     	 <form class="navbar-search">
   			<input type="text" class="search-query" placeholder="Search">
@@ -24,9 +34,25 @@
  	     </div>
  	  </div>
 	</div>
-	
+  <div class="container">
+
+    <%if user_signed_in? %>
+    <div><strong>Signed in as <%= current_user.first_name %></div>
+    <% else %>
+    <div class="hero-unit">
+      <img id="banner_logo" src="images/swapidy_logo.png">
+       <h1></h1>
+      <p></p>
+      <p>
+       <a class="btn btn-primary btn-large">
+       Learn more
+      </a>
+      </p>
+    </div>
+      </div>
+	   <%end%>
 		<div class="container">
-       <p class="notice">Hello there!<%= notice %></p>
+       <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
 
 			<%= yield %>

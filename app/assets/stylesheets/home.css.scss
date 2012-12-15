@@ -2,33 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.item{
-	padding-right:95px;
-}
-#main_catalog_container{
-	height:500px;
-	background-image:url('images/sf.JPG');
-	background-repeat:repeat-x;
-}
+
 #logo{
 	
 }
-#macbook {
-	padding-top:20px;
-	height:170px;
-	width: 300px;
-	float:left;
+
+#ipod {
+	
 }
 #iphone{
-	height:180px;
-	width:100px;
-	float:left;
+	height:250px;
 }
-#imac{
+#ipad{
 	
-	height:200px;
-	width:350px;
-	padding-right:0px;
-	margin-right:0px;
-	float:left;
+	height:235px;
+	width:200px;
+}
+.thumbnail{
+	text-align:center;
 }

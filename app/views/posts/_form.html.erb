@@ -1,4 +1,19 @@
-<%= simple_form_for(@post) do |f| %>
+  <div class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+      <div class="container">
+       <a class="brand" href="#"><img src="images/swapidy_logo.png" style="height:80px"></a>
+       <ul class="nav pull-right">
+         <li><%=link_to "Home", home_index_path%></li>
+         <li class="divider-vertical"></li>
+       
+       <form class="navbar-search">
+        <input type="text" class="search-query" placeholder="Search">
+     </form>
+    </ul>
+       </div>
+    </div>
+  </div>
+<%= simple_form_for(@post, html:{class:'form-horizontal'}) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -10,21 +25,10 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <%=f.input :user_id%>
+  <%=f.input :content%>
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>
 
