@@ -71,8 +71,7 @@
     </form>
     </div>
      <div id="product lineup">
-    <div class="container">
-      <div id="container" class="isotope" style="position: relative; overflow: hidden; height: 240px;">
+      <div id="container" class="isotope" style="position: relative; overflow: hidden; height: 600px;">
           <li class="item"><img src="images/products/ipods/touch_3.png"></li>
           <li class="item"><img src="images/products/ipods/touch_4.png"></li>
           <li class="item"><img src="images/products/ipods/touch_4.png"></li>
@@ -86,8 +85,25 @@
           <li class="item"><img src="images/products/ipods/classic_6.png"></li> 
           <li class="item"><img src="images/products/ipods/shuffle_4.png"></li> 
       </ul>
+       
+  <script src="js/jquery-1.8.3.min.js"></script>
+  <script src="js/jquery.isotope.min.js"></script>
+  <script>
+    $(function(){
+      
+      var $container = $('#container');
+      
+      $container.isotope({
+        itemSelector: '.element'
+      });
+      
+    });
+  </script>
       </div>
     </div>
+      
+  
+
  </div>
 
 </body>
