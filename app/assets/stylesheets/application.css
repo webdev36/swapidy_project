@@ -12,14 +12,13 @@
  *= require_tree .
  */
 body{
-	padding-top: 70px;
+	padding-top: 20px;
 }
 .navbar .brand {
 	display: inline-block;
 	height: 50px;
 	padding: 0;
 	position: relative;
-	bottom: 15px;
 
 }
 .nav{
@@ -36,9 +35,11 @@ body{
 	right: 80px;
 }
 .hero-unit{
-	background: url('images/sf.JPG');
+	text-align: center;
+	background-color: #FFF;
 }
 
 .btn{
 	font-weight: bold;
 }
+
