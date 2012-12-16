@@ -12,3 +12,11 @@
 //
 
 //= require jquery-1.8.3.min
+
+$(document).ready(function(){
+	$('#container').isotope({
+  // options
+  itemSelector : '.item',
+  layoutMode : 'fitRows'
+});
+

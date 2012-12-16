@@ -2,4 +2,95 @@
 <head></head>
 <body>
 
+ <div class="container">
+
+    <%if user_signed_in? %>
+    <div><strong>Signed in as <%= current_user.first_name %></div>
+    <% else %>
+    <div class="hero-unit">
+      
+      <h1 class="hero_title">Buy and sell instantly.</h1><br/>
+      <p class="hero_info">We buy products for honey. You buy anything using honey.</p>
+      <p class="hero_info">It's never been easy to buy and sell.</p>
+      <p>
+       
+      </p>
+    </div>
+      </div>
+	   <%end%>
+  		
+       <div id="main_catalog" class="container">
+  <ul class="thumbnails">
+      <li class="span6">
+      <a href="#" class="">
+        <img class="item" id="iphone" src="images/iphone.png" alt="iphone"></a>
+        <div class="caption">
+        <h3>iPhone 4</h3>
+        <table class="span6">
+          <tr><td>You get:</td><td class="honey">1100<img class="icon" src="images/honey_icon.png"></td>
+        </table>
+      </div>  
+      </li>
+      <li class="span6">
+      <a href="#" class="">
+         <img class="item" id="imac" src="images/imac.png" alt="imac"></a>
+         <div class="caption">
+         <h3>Apple iMac 25GB</h3>
+         <table class="span6">
+         <tr>
+          <th>Poor</th><th>Good</th><th>Flawless</th>
+         </th>
+         <tr>
+          <td class="honey"> 800<img class="icon" src="images/honey_icon.png"></td><td class="honey"> 1200<img class="icon" src="images/honey_icon.png"></td><td class="honey"> 1500<img class="icon" src="images/honey_icon.png"></td>
+         </tr>
+       </table>
+      </li>
+      <li class="span6">
+          <button class="btn-success btn-large"><strong>Sell Now</strong></button>
+      </li>
+      <li class="span6">
+          <button class="btn-primary btn-large"><strong>Buy Now</strong></button>
+      </li>
+  </ul>
+ </div>
+ <div id="product_type" class="container">
+  <h2 style="margin-left:20px;">Select your category</h2>
+  <img id="c_ipod" class="cat_item span4 " alt="ipod" src="images/cat_ipod.png">
+  <img id="c_iphone" class="cat_item span4 " alt="iphone" src="images/cat_iphone.png">
+  <img id="c_macbook" class="cat_item span4 " alt="macbook" src="images/cat_macbook.png">
+ </div>
+ <div id="product_search_container" class="container">
+    <div id="search_container">
+    <form>
+      <h3 class="s_category">Model</h3>
+      <input type="checkbox">lorem</input>
+      <input type="checkbox">ipsum</input>
+      <h3 class="s_category">Memory Space </h3>
+       <input type="checkbox">dolor</input>
+      <input type="checkbox">sit</input>
+    </form>
+    </div>
+     <div id="product lineup">
+    <script>
+    categories = new Array("ipod", "iphone", "macbook");
+    </script>
+    <div class="container">
+      <div id="container" class="isotope" style="position: relative; overflow: hidden; height: 240px;">
+          <li class="item"><img src="images/products/ipods/touch_3.png"></li>
+          <li class="item"><img src="images/products/ipods/touch_4.png"></li>
+          <li class="item"><img src="images/products/ipods/touch_4.png"></li>
+          <li class="item"><img src="images/products/ipods/touch_5.png"></li>
+          <li class="item"><img src="images/products/ipods/nano_3.png"></li>
+          <li class="item"><img src="images/products/ipods/nano_4.png"></li>
+          <li class="item"><img src="images/products/ipods/nano_5.png"></li>
+          <li class="item"><img src="images/products/ipods/nano_6.png"></li>
+          <li class="item"><img src="images/products/ipods/nano_7.png"></li>
+          <li class="item"><img src="images/products/ipods/classic_5.png"></li> 
+          <li class="item"><img src="images/products/ipods/classic_6.png"></li> 
+          <li class="item"><img src="images/products/ipods/shuffle_4.png"></li> 
+      </ul>
+      </div>
+    </div>
+ </div>
+
 </body>
