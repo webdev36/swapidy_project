@@ -21,9 +21,9 @@
 </div>
 <div id="product_type" class="container" style="display:none;">
   <h2 style="margin-left:20px;">Select your category</h2>
-  <img id="c_ipod" class="cat_item span4 " alt="ipod" src="images/cat_ipod.png">
-  <img id="c_iphone" class="cat_item span4 " alt="iphone" src="images/cat_iphone.png">
-  <img id="c_macbook" class="cat_item span4 " alt="macbook" src="images/cat_macbook.png">
+  <div class="category"><img id="c_ipod" class="cat_item span4 " alt="ipod" src="images/cat_ipod.png"></div>
+  <div class="category"><img id="c_iphone" class="cat_item span4 " alt="iphone" src="images/cat_iphone.png"></div>
+  <div class="category"><img id="c_macbook" class="cat_item span4 " alt="macbook" src="images/cat_macbook.png"></div>
 </div>
 
 <div id="product_search_container" class="container" style="display:none;">
@@ -74,13 +74,36 @@
      //optionally remove the 500 (which is time in milliseconds) of the
      //scrolling animation to remove the animation and make it instant
      $('#product_search_container #product').show();
-     $.scrollTo($('#product_search_container #product'), 300);
+     $.scrollTo($('#product_search_container #product'), 500);
      
      var $this = $(this);
      $('#product #container').isotope({ filter: '.' + $this.attr("product-option") });
-     console.log("have run isotope: " + $this.attr("product-option"));
   });
    
+   
+   var $container = $('#product_type'),
+   $articles = $container.children('.category'), timeout;
+   
+   $articles.on( 'mouseenter', function( event ) {
+      var $article = $(this);
+      clearTimeout( timeout );
+      timeout = setTimeout( function() {
+          if( $article.hasClass('active') ) return false;
+          $articles.not($article).removeClass('active').addClass('blur');
+          $article.removeClass('blur').addClass('active');
+      }, 75 );
+  });
+  
+  $articles.on( 'mouseleave', function( event ) {
+      var $article = $(this);
+      $article.removeClass('active blur');
+  });
+   
+  $container.on( 'mouseleave', function( event ) {
+      clearTimeout( timeout );
+      $articles.removeClass('active blur');
+  });
+
   jQuery(window).load(function(){
     $('#product #container').isotope({ filter: '.none' });
     centerIsotypeImages();
