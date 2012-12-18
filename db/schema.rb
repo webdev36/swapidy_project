@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213204646) do
+ActiveRecord::Schema.define(:version => 20121218043334) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "comments", :force => true do |t|
     t.string   "commenter"
@@ -32,6 +39,35 @@ ActiveRecord::Schema.define(:version => 20121213204646) do
   end
 
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "product_models", :force => true do |t|
+    t.string   "title"
+    t.integer  "product_id"
+    t.string   "memory_space"
+    t.string   "comment"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "product_prices", :force => true do |t|
+    t.string   "quality_status"
+    t.integer  "product_model_id"
+    t.decimal  "honey_price"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "products", :force => true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.string   "model"
+    t.string   "memory_style"
+    t.string   "quality_status"
+    t.decimal  "honey_price"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
