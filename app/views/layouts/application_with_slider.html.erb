@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Swapidy</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag 'jquery', 'jquery.isotope.min', 'application', 's3Slider', 'jquery.scrollto.min' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    
+    <%= render :partial => "/layouts/header.html" %>
+    
+    <div id="s3slider">
+      <ul id="s3sliderContent">
+        <li class="s3sliderImage">
+          <img src="/images/sliders/slide-1.jpg">
+          <span>Slide image 01 </span>
+        </li>
+        <li class="s3sliderImage">
+          <img src="/images/sliders/slide-2.jpg">
+          <span>Slide image 02 </span>
+        </li>
+        <li class="s3sliderImage">
+          <img src="/images/sliders/slide-3.jpg">
+          <span>Slide image 03 </span>
+        </li>
+        <li class="s3sliderImage">
+          <img src="/images/sliders/slide-4.jpg">
+          <span>Slide image 04 </span>
+        </li>
+        <li class="s3sliderImage">
+          <img src="/images/sliders/slide-5.jpg">
+          <span>Slide image 05 </span>
+        </li>
+        <div class="clear s3sliderImage"></div>
+      </ul>
+    </div>
+    <script language="JavaScript">
+       $(document).ready(function() { 
+         $('#s3slider').s3Slider({
+           timeOut: 4000
+         });
+       });
+    </script>
+
+    <div class="content">
+      <div class="container">
+        <%=yield %>
+      </div>
+    </div>
+
+  </body>
+</html>

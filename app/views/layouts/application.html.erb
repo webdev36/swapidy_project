@@ -3,55 +3,18 @@
   <head>
     <title>Swapidy</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag 'jquery', 'jquery.isotope.min', 'application', 's3Slider' %>
+    <%= javascript_include_tag 'jquery', 'jquery.isotope.min', 'application' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     
-    <div class="navbar navbar-fixed-top navbar-inverse">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
-          <ul class="nav pull-right">
-            <% if user_signed_in? %>
-              <li>
-                <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-              </li>
-            <% else %>
-              <li>
-                <%= link_to('Login', new_user_session_path)  %>
-              </li>
-              <li>
-                <%= link_to "Sign Up", new_user_registration_path%>
-              </li>
-              <li class="divider-vertical"></li>
-            <% end %>
-
-            <li>
-              <a href="#">Help</a>
-            </li>
-            <form class="navbar-search">
-              <input type="text" class="search-query" placeholder="Search">
-            </form>
-          </ul>
-        </div>
+    <%= render :partial => "/layouts/header.html" %>
+    
+    <div class="content">
+      <div class="container">
+        <%=yield %>
       </div>
     </div>
-
-    <% if user_signed_in? %>
-      <div>
-        <strong>Signed in as <%= current_user.first_name %></strong>
-      </div>
-    <%end%>
-
-    <%if user_signed_in? %>
-      <a href=""><img id="my_trade_ins" src="/images/my_trade_ins.png"></a>
-      <a href=""><img  id="my_orders" src="/images/my_orders.png"></a>
-    <%end%>
-    <a href="http://www.facebook.com/swapidy" target="_blank"><img id="fbtab" src="/images/Like.png"></a>
-    <a href="https://twitter.com/Swapidy" target="_blank"><img id="twtab" src="/images/Follow.png"></a>
-
-    <%=yield %>
 
   </body>
 </html>
