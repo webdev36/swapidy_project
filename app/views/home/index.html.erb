@@ -1,45 +1,84 @@
-<html>
-<head></head>
-<body>
+<div id="s3slider">
+  <ul id="s3sliderContent">
+    <li class="s3sliderImage">
+      <img src="/images/sliders/slide-1.jpg">
+      <span>Your text comes here</span>
+    </li>
+    <li class="s3sliderImage">
+      <img src="/images/sliders/slide-2.jpg">
+      <span>Your text comes here</span>
+    </li>
+    <li class="s3sliderImage">
+      <img src="/images/sliders/slide-3.jpg">
+      <span>Your text comes here 3</span>
+    </li>
+    <li class="s3sliderImage">
+      <img src="/images/sliders/slide-4.jpg">
+      <span>Your text comes here 4</span>
+    </li>
+    <li class="s3sliderImage">
+      <img src="/images/sliders/slide-5.jpg">
+      <span>Your text comes here 5</span>
+    </li>
+    <div class="clear s3sliderImage"></div>
+  </ul>
+</div>
+<script language="JavaScript">
+  $(document).ready(function() { 
+    $('#s3slider').s3Slider({
+      timeOut: 4000
+    });
+  });
+</script>
 
- <div id="product_type" class="container">
+<div class="hero-unit">
+  <h1 class="hero_title">Buy and sell instantly.</h1>
+  <br/>
+  <p class="hero_info">
+    We buy products for honey. You buy anything using honey.
+  </p>
+  <p class="hero_info">
+    It's never been easy to buy and sell.
+  </p>
+  <button class="btn-success btn-large">
+    <strong>Sell Now</strong>
+  </button>
+  <button class="btn-primary btn-large">
+    <strong>Buy Now</strong>
+  </button>
+</div>
+      
+<div id="product_type" class="container">
   <h2 style="margin-left:20px;">Select your category</h2>
   <img id="c_ipod" class="cat_item span4 " alt="ipod" src="images/cat_ipod.png">
   <img id="c_iphone" class="cat_item span4 " alt="iphone" src="images/cat_iphone.png">
   <img id="c_macbook" class="cat_item span4 " alt="macbook" src="images/cat_macbook.png">
- </div>
- <div id="product_search_container" class="container">
-    <div id="search_container">
+</div>
+<div id="product_search_container" class="container">
+  <div id="search_container">
     <form>
       <h3 class="s_category">Model</h3>
       <input type="checkbox">lorem</input>
       <input type="checkbox">ipsum</input>
       <h3 class="s_category">Memory Space </h3>
-       <input type="checkbox">dolor</input>
+      <input type="checkbox">dolor</input>
       <input type="checkbox">sit</input>
     </form>
-    </div>
-     <div id="product lineup">
-      <div id="container" class="isotope thumbnail" style="position: relative; overflow: hidden; min-height: 200px; width:500px;">
+  </div>
+  <div id="product lineup">
+    <div id="container" class="isotope thumbnail" style="position: relative; overflow: hidden; min-height: 200px; width:500px;">
       <ul>
-          <li class="item thumbnail"><img src="images/products/ipods/touch_3.png"></li>
-          <li class="item thumbnail"><img src="images/products/ipods/touch_4.png"></li>
-          <li class="item thumbnail"><img src="images/products/ipods/touch_4.png"></li>
-          <li class="item thumbnail"><img src="images/products/ipods/touch_5.png"></li>
-          
-          <li class="item thumbnail"><img src="images/products/ipods/nano_5.png"></li>
-          <li class="item thumbnail"><img src="images/products/ipods/nano_6.png"></li>
-          <li class="item thumbnail"><img src="images/products/ipods/nano_7.png"></li>
-          <li class="item thumbnail"><img src="images/products/ipods/classic_5.png"></li> 
-          <li class="item thumbnail"><img src="images/products/ipods/classic_6.png"></li> 
-          <li class="item thumbnail"><img src="images/products/ipods/shuffle_4.png"></li> 
+        <li class="item thumbnail"><img src="images/products/ipods/touch_3.png"></li>
+        <li class="item thumbnail"><img src="images/products/ipods/touch_4.png"></li>
+        <li class="item thumbnail"><img src="images/products/ipods/touch_4.png"></li>
+        <li class="item thumbnail"><img src="images/products/ipods/touch_5.png"></li>
+        <li class="item thumbnail"><img src="images/products/ipods/nano_5.png"></li>
+        <li class="item thumbnail"><img src="images/products/ipods/nano_6.png"></li>
+        <li class="item thumbnail"><img src="images/products/ipods/nano_7.png"></li>
+        <li class="item thumbnail"><img src="images/products/ipods/classic_5.png"></li>
+        <li class="item thumbnail"><img src="images/products/ipods/classic_6.png"></li>
+        <li class="item thumbnail"><img src="images/products/ipods/shuffle_4.png"></li>
       </ul>
-       
-      </div>
     </div>
-      
-  
-
- </div>
-
-</body>
+  </div>
+</div>

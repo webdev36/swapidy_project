@@ -82,14 +82,16 @@ top:348px;height:50px;width:50px;margin:0;padding:0;position:fixed;z-index:5000;
 #twtab a{display:block;width:100%;height:100%;}
 
 #s3slider {
-    width: 400px; /* important to be same as image width */
+    width: 100%; /* important to be same as image width */
     height: 300px; /* important to be same as image height */
     position: relative; /* important */
     overflow: hidden; /* important */
+    text-align: center;
+    top: 50px;
 }
  
 #s3sliderContent {
-    width: 400px; /* important to be same as image width or wider */
+    width: 100%; /* important to be same as image width or wider */
     position: absolute; /* important */
     top: 0; /* important */
     margin-left: 0; /* important */
@@ -125,4 +127,3 @@ top:348px;height:50px;width:50px;margin:0;padding:0;position:fixed;z-index:5000;
 .clear {
     clear: both;
 }
-

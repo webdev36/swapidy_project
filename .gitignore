@@ -20,4 +20,9 @@
 
 /public/assets
 
+.DS_Store
+public/.DS_Store
+public/images/.DS_Store
+public/images/example_images/.DS_Store
+
 
