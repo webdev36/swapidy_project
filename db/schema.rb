@@ -11,13 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218043334) do
+ActiveRecord::Schema.define(:version => 20121218165530) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
   end
 
   create_table "comments", :force => true do |t|
@@ -45,16 +48,22 @@ ActiveRecord::Schema.define(:version => 20121218043334) do
     t.integer  "product_id"
     t.string   "memory_space"
     t.string   "comment"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
   end
 
   create_table "product_prices", :force => true do |t|
     t.string   "quality_status"
     t.integer  "product_model_id"
     t.decimal  "honey_price"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
   end
 
   create_table "products", :force => true do |t|

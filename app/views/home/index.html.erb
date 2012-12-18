@@ -21,9 +21,9 @@
 </div>
 <div id="product_type" class="container" style="display:none;">
   <h2 style="margin-left:20px;">Select your category</h2>
-  <div class="category"><img id="c_ipod" class="cat_item span4 " alt="ipod" src="images/cat_ipod.png"></div>
-  <div class="category"><img id="c_iphone" class="cat_item span4 " alt="iphone" src="images/cat_iphone.png"></div>
-  <div class="category"><img id="c_macbook" class="cat_item span4 " alt="macbook" src="images/cat_macbook.png"></div>
+  <% Category.all.each do |category| %>
+    <div class="category span4"><img id="c_<%= category.id %>" class="cat_item" alt="<%= category.title %>" src="<%= category.image_url(:medium) %>"></div>
+  <% end %>
 </div>
 
 <div id="product_search_container" class="container" style="display:none;">

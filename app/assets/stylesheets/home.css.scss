@@ -190,15 +190,19 @@ ul{
 }
 
 #product_type .category{
-    display: block;
-    margin-top:30px;
-    padding: 30px;
+    display: inline-block;
+    margin: 0;
     background: #fff;
     cursor: pointer;
-    float: left;
-    text-align: left;
+    float: center;
+    text-align: center;
     text-transform: none;
     z-index: 10;
+}
+
+#product_type .category img {
+    padding: 0;
+    margin: 30px auto;
 }
 
 #product_type .category.blur{
