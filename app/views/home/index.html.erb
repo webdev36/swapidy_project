@@ -30,32 +30,31 @@
   <div id="search_container">
     <form>
       <h3 class="s_category">Model</h3>
-      <input type="checkbox">lorem</input>
-      <input type="checkbox">ipsum</input>
+      <input type="checkbox" product-option='lorem'>lorem</input>
+      <input type="checkbox" product-option='ipsum'>ipsum</input>
       <h3 class="s_category">Memory Space </h3>
-      <input type="checkbox">dolor</input>
-      <input type="checkbox">sit</input>
+      <input type="checkbox" product-option='dolor'>dolor</input>
+      <input type="checkbox" product-option='sit'>sit</input>
     </form>
   </div>
   <div id="product" style="display:none;">
     <div id="container" class="isotope thumbnail" style="position: relative; overflow: hidden; min-height: 200px; width:500px;">
-      <ul>
-        <li class="item thumbnail"><img src="images/products/ipods/touch_3.png"></li>
-        <li class="item thumbnail"><img src="images/products/ipods/touch_4.png"></li>
-        <li class="item thumbnail"><img src="images/products/ipods/touch_4.png"></li>
-        <li class="item thumbnail"><img src="images/products/ipods/touch_5.png"></li>
-        <li class="item thumbnail"><img src="images/products/ipods/nano_5.png"></li>
-        <li class="item thumbnail"><img src="images/products/ipods/nano_6.png"></li>
-        <li class="item thumbnail"><img src="images/products/ipods/nano_7.png"></li>
-        <li class="item thumbnail"><img src="images/products/ipods/classic_5.png"></li>
-        <li class="item thumbnail"><img src="images/products/ipods/classic_6.png"></li>
-        <li class="item thumbnail"><img src="images/products/ipods/shuffle_4.png"></li>
-      </ul>
+        <div class="item lorem ipsum thumbnail"><img src="/images/products/ipods/touch_3.png"></div>
+        <div class="item lorem sit thumbnail"><img src="/images/products/ipods/touch_4.png"></div>
+        <div class="item ipsum dolor sit thumbnail"><img src="/images/products/ipods/touch_4.png"></div>
+        <div class="item ipsum dolor thumbnail"><img src="/images/products/ipods/touch_5.png"></div>
+        <div class="item lorem dolor thumbnail"><img src="/images/products/ipods/nano_5.png"></div>
+        <div class="item ipsum lorem thumbnail"><img src="/images/products/ipods/nano_6.png"></div>
+        <div class="item thumbnail"><img src="/images/products/ipods/nano_7.png"></div>
+        <div class="item dolor sit thumbnail"><img src="/images/products/ipods/classic_5.png"></div>
+        <div class="item ipsum thumbnail"><img src="/images/products/ipods/classic_6.png"></div>
+        <div class="item ipsum dolor sit thumbnail"><img src="/images/products/ipods/shuffle_4.png"></div>
     </div>
   </div>
 </div>
 
 <script language="JavaScript">
+  
   $('.hero-unit button.btn-large').click(function() {
      //optionally remove the 500 (which is time in milliseconds) of the
      //scrolling animation to remove the animation and make it instant
@@ -68,13 +67,40 @@
      //scrolling animation to remove the animation and make it instant
      $('div#product_search_container').show();
      $.scrollTo($('div#product_search_container'), 500);
+     centerIsotypeImages();
   });
-  
+
   $('#product_search_container input').live('change', function() {
      //optionally remove the 500 (which is time in milliseconds) of the
      //scrolling animation to remove the animation and make it instant
      $('#product_search_container #product').show();
-     $.scrollTo($('#product_search_container #product'), 500);
+     $.scrollTo($('#product_search_container #product'), 300);
+     
+     var $this = $(this);
+     $('#product #container').isotope({ filter: '.' + $this.attr("product-option") });
+     console.log("have run isotope: " + $this.attr("product-option"));
   });
+   
+  jQuery(window).load(function(){
+    $('#product #container').isotope({ filter: '.none' });
+    centerIsotypeImages();
+  });
+  
+  function centerIsotypeImages(){
+    jQuery('#product #container .item').each(function(){
+      var $this = jQuery(this);
+      if($this.find('img').get(0) === undefined){ return; }
+      var cont_ratio = $this.width() / $this.height();
+      var img_ratio = $this.find('img').get(0).width / $this.find('img').get(0).height;
+
+      if(cont_ratio <= img_ratio){
+        $this.find('img').css({ 'width' : 'auto', 'height' : '100%', 'top' : 0 }).css({ 'left' : ~(($this.find('img').width()-$this.width())/2)+1 });
+        $this.find('img').stop(true, true).fadeIn(200);
+      }else{
+        $this.find('img').css({ 'width' : '100%', 'height' : 'auto', 'left' : 0 }).css({ 'top' : ~(($this.find('img').height()-$this.height())/2)+1 });
+        $this.find('img').stop(true, true).fadeIn(200);
+      }
+    });
+  }
 
 </script>
