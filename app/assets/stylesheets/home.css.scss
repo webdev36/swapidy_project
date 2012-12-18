@@ -78,7 +78,35 @@ ul{
   border: 0px;
 }
 
+.hero-unit{
+ color: #FFFFFF;
+    line-height: 1.2;
+ color: #FFFFFF;
+ font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  
+  text-align:left;
+}
+.hero_title{
+  font-weight: bold;
+  text-rendering: optimizelegibility;
+  text-shadow: black 0.1em 0.1em 0.2em;
+}
 
+.hero_info{
+  font-weight:bold;
+  font-size: 30px;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.6), 0 -1px 1px rgba(0, 0, 0, 0.6);
+
+}
+
+#buttons{
+  position:relative;
+  left:100px;
+  margin-top:100px;
+}
+#button_sell{
+  margin-right:60px;
+}
 .isotope-item {
   z-index: 2;
 }
