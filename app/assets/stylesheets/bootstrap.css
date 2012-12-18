@@ -5991,16 +5991,25 @@ a.badge:hover {
 
 .hero-unit {
   padding: 60px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   margin-top: 50px;
+  z-index: 1000;
   font-size: 18px;
   font-weight: 200;
   line-height: 30px;
   color: inherit;
-  background-color: #eeeeee;
+  text-align: center;
+  /* background-color: #eeeeee;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
-          border-radius: 6px;
+          border-radius: 6px; */
+}
+
+.hero-unit-content {
+  width: 940px; 
+  margin-right: auto; 
+  margin-left: auto; 
+  position: relative;
 }
 
 .hero-unit h1 {
