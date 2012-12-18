@@ -1,11 +1,23 @@
 
+ 
     $(function(){
       
-      var container = $('#container');
-      
+      var container = $('#container');   
       container.isotope({
         itemSelector : '.item',
 		layoutMode : 'fitRows'
       });
       
+       $('#fbtab').hover(function () {
+        this.src = 'images/Like_hover.png';
+    }, function () {
+        this.src = 'images/Like.png';
     });
+       $('#twtab').hover(function () {
+        this.src = 'images/Follow_hover.png';
+    }, function () {
+        this.src = 'images/Follow.png';
+    });
+
+    });
+
