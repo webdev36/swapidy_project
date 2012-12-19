@@ -19,14 +19,16 @@
     </button>
   </div>
 </div>
-<div id="product_type" class="container" style="display:none;">
+<div id="product_type" style="display:none;">
   <h2 style="margin-left:20px;">Select your category</h2>
-  <% Category.all.each do |category| %>
-    <div class="category span4"><img id="c_<%= category.id %>" class="cat_item" alt="<%= category.title %>" src="<%= category.image_url(:medium) %>"></div>
-  <% end %>
+  <div id="product_type_container" class="span12">
+    <% Category.all.each do |category| %>
+      <div class="category span4"><img id="c_<%= category.id %>" class="cat_item" alt="<%= category.title %>" src="<%= category.image_url(:medium) %>"></div>
+    <% end %>
+  </div>
 </div>
 
-<div id="product_search_container" class="container" style="display:none;">
+<div id="product_search_container" style="display:none;">
   <div id="search_container">
     <form>
       <h3 class="s_category">Model</h3>
@@ -81,7 +83,7 @@
   });
    
    
-   var $container = $('#product_type'),
+   var $container = $('#product_type_container'),
    $articles = $container.children('.category'), timeout;
    
    $articles.on( 'mouseenter', function( event ) {

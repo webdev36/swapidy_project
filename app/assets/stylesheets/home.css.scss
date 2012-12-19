@@ -189,9 +189,16 @@ ul{
   height:200px;
 }
 
+#product_type_container {
+  margin: 0; 
+  text-align: center;
+  padding-top: 10px;
+}
+
 #product_type .category{
     display: inline-block;
     margin: 0;
+    padding: 0;
     background: #fff;
     cursor: pointer;
     float: center;
