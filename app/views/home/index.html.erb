@@ -44,15 +44,19 @@
     <div id="search_container">
       <div class="attribute_filter">
         <% category.category_attributes.each do |attr|%>
-          <h3 class="s_category"><%= attr.title %></h3>
-          <% attr.attributes_in_models.each do |attr_value_with_models| %>
-            <span class="attr_filter attr_filter_model_all <%= attr_value_with_models[1].map{|model| "attr_filter_model_#{model.id.to_s}"}.join(" ") %>" >
-              <input type="checkbox" 
-                attr-filter-option='<%= attr_value_with_models[0] %>'><%= attr_value_with_models[0] %></input>
-            </span>
-          <% end %>
+          <div class="option-set" data-group="cat_attr_<%= attr.id %>">
+            <h3 class="s_category"><%= attr.title %></h3>
+            <% attr.attributes_in_models.each do |attr_value_with_models| %>
+              <span class="attr_filter attr_filter_model_all <%= attr_value_with_models[1].map{|model| "attr_filter_model_#{model.id.to_s}"}.join(" ") %>" >
+                <input type="checkbox" 
+                  attr-filter-option='<%= attr_value_with_models[0] %>'><%= attr_value_with_models[0] %></input>
+              </span>
+            <% end %>
+          </div>
         <% end %>
-        <%= filter_using_conditions %>
+        <div class="option-set" data-group="cat_attr_condition">
+          <%= filter_using_conditions %>
+        </div>
       </div>
     </div>
     <div class="product_container" style="display:none;">
@@ -70,7 +74,59 @@
 <% end %>
 
 <script language="JavaScript">
-  
+  function get_filter_options() {
+    var filters = {};
+    
+    $("#container_" + current_category_id + ' .attribute_filter input').each(function(index) {
+      var $src = $(this);
+      if(!$src.parent().hasClass("hidden") && $src.is(':checked')){
+        var group = $src.parents("option-set").attr("data-group");
+        if ( !filters[ group ] ) {
+          filters[ group ] = [];
+        }
+        filters[ group ].push('.' + $src.attr("attr-filter-option"));
+      }
+    });
+    
+    filters['product_mode'] = []
+    if(current_model_id == "filter_model_all"){
+      filters['product_mode'].push('.item');
+    }else{
+      filters['product_mode'].push('.product_' + current_model_id );
+    }
+
+    var i = 0;
+    var comboFilters = [];
+
+    for ( var prop in filters ) {
+      //message.push( filters[ prop ].join(' ') );
+      var filterGroup = filters[ prop ];
+      // skip to next filter group if it doesn't have any values
+      if ( !filterGroup.length ) {
+        continue;
+      }
+      if ( i === 0 ) {
+        // copy to new array
+        comboFilters = filterGroup.slice(0);
+      } else {
+        var filterSelectors = [];
+        // copy to fresh array
+        var groupCombo = comboFilters.slice(0); // [ A, B ]
+        // merge filter Groups
+        for (var k=0, len3 = filterGroup.length; k < len3; k++) {
+          for (var j=0, len2 = groupCombo.length; j < len2; j++) {
+            filterSelectors.push( groupCombo[j] + filterGroup[k] ); // [ 1, 2 ]
+          }
+          
+        }
+        // apply filter selectors to combo filters for next group
+        comboFilters = filterSelectors
+      }
+      i++
+    }
+    return comboFilters;
+  }
+     
   $('.hero-unit button.btn-large').click(function() {
      $('div#product_type').fadeIn(600);
      $.scrollTo($('div#product_type'), 400);
@@ -80,7 +136,11 @@
   var current_model_id = "filter_model_all";
 
   $('#product_type .cat_item').live('click', function() {
-    
+     
+     if(current_category_id == $(this).parent().attr("id")){
+       return;
+     }
+     
      if(current_category_id != "") {
        $("#container_" + current_category_id).hide();
        $("#" + current_category_id).removeClass("select").addClass("blur");
@@ -91,6 +151,7 @@
 
      $("#container_" + current_category_id).fadeIn(600);
      $.scrollTo($("#container_" + current_category_id), 300);
+     showIsoTope();
   });
   
   $('.product_search_container .product_model').live('click', function() {
@@ -109,27 +170,9 @@
   
   function showIsoTope(){
     $("#container_" + current_category_id + ' .product_container').fadeIn(600);
-    $.scrollTo($("#container_" + current_category_id + ' #product_models'), 400);
-    var filter_value = "";
-    $("#container_" + current_category_id + ' .attribute_filter input').each(function(index) {
-      var $src = $(this);
-      if(!$src.parent().hasClass("hidden") && $src.is(':checked')){
-        if(filter_value != ""){
-          filter_value += ', '
-        }
-        if(current_model_id == "filter_model_all"){
-          filter_value += '.' + $src.attr("attr-filter-option");
-        }else{
-          filter_value += '.product_' + current_model_id + '.' + $src.attr("attr-filter-option");
-        }
-      }
-    });
-
-    if(filter_value == "") {
-      $("#container_" + current_category_id + ' #products').isotope({ filter: '.item' });
-    }else{
-      $("#container_" + current_category_id + ' #products').isotope({ filter: filter_value });
-    }
+    //$.scrollTo($("#container_" + current_category_id + ' #product_models'), 400);
+    comboFilters = get_filter_options();
+    $("#container_" + current_category_id + ' #products').isotope({ filter: comboFilters.join(', ') });
   }
    
   var $container = $('#product_type_container'),
