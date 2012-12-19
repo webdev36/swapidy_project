@@ -8,10 +8,7 @@
     <p class="hero_info">
       It's never been so easy to buy and sell.
     </p>
-    
   </div>
-
-
 
   <div id="buttons">
   <!--<a class="modern socle" href="#">Sell Now</a>-->
@@ -24,143 +21,129 @@
     </button>
   </div>
 </div>
+
 <div id="product_type" style="display:none;">
   <h2 style="margin-left:20px;">Select your category</h2>
   <div id="product_type_container" class="span12">
     <% Category.all.each do |category| %>
-      <div class="category span4"><img id="cat_<%= category.id %>" class="cat_item" alt="<%= category.title %>" src="<%= category.image_url(:medium) %>"></div>
+      <div id="cat_<%= category.id %>" class="category span4"><img class="cat_item" alt="<%= category.title %>" src="<%= category.image_url(:medium) %>"></div>
     <% end %>
   </div>
 </div>
 
-<div id="product_search_container" style="display:none; padding-top: 40px;">
-  <div id="product_models" style="width: 100%; display: block; text-align: right;" >
-   <% Category.all.each do |category| %>
-      <div class="for_cat_<%= category.id %> model_filter" style="display:none;" >
+<% Category.all.each do |category| %>
+  <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 40px;">
+    <div id="product_models">
+      <div class="model_filter">
         <span class="product_model active" id="filter_model_all">All models</span>
-      <% category.product_models.each do |product_model| %>
-        &nbsp;|&nbsp;<span class="product_model" id="filter_model_<%= product_model.id %>"><%= product_model.title %></span>
-      <% end %>
+        <% category.product_models.each do |product_model| %>
+          &nbsp;|&nbsp;<span class="product_model" id="filter_model_<%= product_model.id %>"><%= product_model.title %></span>
+        <% end %>
       </div>
-   <% end %>
-  </div>
-  <div id="search_container">
-    <% Category.all.each do |category| %>
-      <div class="for_cat_<%= category.id %> attribute_filter" style="display:none;" >
+    </div>
+    <div id="search_container">
+      <div class="attribute_filter">
         <% category.category_attributes.each do |attr|%>
           <h3 class="s_category"><%= attr.title %></h3>
           <% attr.attributes_in_models.each do |attr_value_with_models| %>
-            <span class="attr_filter_model_all <%= attr_value_with_models[1].map{|model| "attr_filter_model_#{model.id.to_s}"}.join(" ") %>" >
+            <span class="attr_filter attr_filter_model_all <%= attr_value_with_models[1].map{|model| "attr_filter_model_#{model.id.to_s}"}.join(" ") %>" >
               <input type="checkbox" 
                 attr-filter-option='<%= attr_value_with_models[0] %>'><%= attr_value_with_models[0] %></input>
             </span>
           <% end %>
         <% end %>
+        <%= filter_using_conditions %>
       </div>
-    <% end %>
-  </div>
-  <div id="product" style="display:none;">
-    <div id="container" class="isotope thumbnail" style="position: relative; overflow: hidden; min-height: 200px; width:500px;">
-        <div class="item 8 product_filter_model_6 thumbnail"><img src="/images/products/ipods/touch_3.png"></div>
-        <div class="item 16 product_filter_model_6 thumbnail"><img src="/images/products/ipods/touch_3.png"></div>
-        <div class="item 32 product_filter_model_1 thumbnail"><img src="/images/products/ipods/touch_3.png"></div>
-        <div class="item 16 product_filter_model_2 thumbnail"><img src="/images/products/ipods/touch_4.png"></div>
-        <div class="item 8 product_filter_model_3 sit thumbnail"><img src="/images/products/ipods/touch_4.png"></div>
-        <div class="item 16 product_filter_model_4 thumbnail"><img src="/images/products/ipods/touch_5.png"></div>
-        <div class="item 16 product_filter_model_5 thumbnail"><img src="/images/products/ipods/nano_5.png"></div>
-        <div class="item 32 product_filter_model_6 thumbnail"><img src="/images/products/ipods/nano_6.png"></div>
-        <div class="item 32 product_filter_model_6 thumbnail"><img src="/images/products/ipods/nano_7.png"></div>
-        <div class="item 8 product_filter_model_8 thumbnail"><img src="/images/products/ipods/classic_5.png"></div>
-        <div class="item 16 product_filter_model_1 thumbnail"><img src="/images/products/ipods/classic_6.png"></div>
-        <div class="item 32 product_filter_model_2 sit thumbnail"><img src="/images/products/ipods/shuffle_4.png"></div>
+    </div>
+    <div class="product_container" style="display:none;">
+      <div id="products" class="isotope thumbnail" style="position: relative; overflow: hidden; min-height: 200px; width:500px;">
+        <% category.products.each do |product| %>
+          <div class="item thumbnail <%= product.using_condition %> <%= product.gen_attribute_names %> product_filter_model_<%= product.product_model.id %>">
+            <p><%= product.title %></p>
+            <img src="<%= product.image_url %>" style="height:150px;">
+            <p><%= product.honey_price ? product.honey_price : "200" %> honey<p>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
 
 <script language="JavaScript">
   
   $('.hero-unit button.btn-large').click(function() {
-     //optionally remove the 500 (which is time in milliseconds) of the
-     //scrolling animation to remove the animation and make it instant
-     $('div#product_type').show();
-     $.scrollTo($('div#product_type'), 500);
+     $('div#product_type').fadeIn(600);
+     $.scrollTo($('div#product_type'), 400);
   });
   
   var current_category_id = "";
   var current_model_id = "filter_model_all";
-  
+
   $('#product_type .cat_item').live('click', function() {
-     //optionally remove the 500 (which is time in milliseconds) of the
-     //scrolling animation to remove the animation and make it instant
+    
      if(current_category_id != "") {
-       $(".for_" + current_category_id).hide();
-       $("#product").hide();
+       $("#container_" + current_category_id).hide();
+       $("#" + current_category_id).removeClass("select").addClass("blur");
      }
-     current_category_id = $(this).attr("id");
-     $(".for_" + current_category_id).show();
      
-     $('div#product_search_container').show();
-     $.scrollTo($('div#product_search_container'), 500);
+     current_category_id = $(this).parent().attr("id");
+     $("#" + current_category_id).addClass("select");
+
+     $("#container_" + current_category_id).fadeIn(600);
+     $.scrollTo($("#container_" + current_category_id), 300);
   });
   
-  $('#product_search_container .product_model').live('click', function() {
-     //optionally remove the 500 (which is time in milliseconds) of the
-     //scrolling animation to remove the animation and make it instant
-     $(".for_" + current_category_id + " .attr_filter_model_all").hide();
-     $(".for_" + current_category_id + " .product_model").removeClass("active");
+  $('.product_search_container .product_model').live('click', function() {
+     $("#container_" + current_category_id + " .attr_filter").addClass("hidden");
+     $("#container_" + current_category_id + " .product_model").removeClass("active");
      
      current_model_id = $(this).attr("id");
-     $(".attr_" + current_model_id).show();
-     $("#" + current_model_id).addClass("active");
-     
-     $('div#product_search_container').show();
-     $.scrollTo($('div#product_search_container'), 500);
+     $("#container_" + current_category_id + " .attr_" + current_model_id).fadeIn(300).removeClass("hidden");
+     $("#container_" + current_category_id + " #" + current_model_id).addClass("active");
      showIsoTope();
   });
 
-  $('#product_search_container input').live('change', function() {
-     //optionally remove the 500 (which is time in milliseconds) of the
-     //scrolling animation to remove the animation and make it instant
+  $('.product_search_container input').live('change', function() {
      showIsoTope();
   });
   
   function showIsoTope(){
-    $('#product_search_container #product').show();
-     $.scrollTo($('#product_search_container #product'), 500);
-     
-     var filter_value = "";
-     $('.for_' + current_category_id + ' input').each(function(index) {
-        var $src = $(this);
-        if($src.is(':checked')){
-          if(filter_value != ""){
-            filter_value += ', '
-          }
-          if(current_model_id == "filter_model_all"){
-            filter_value += '.' + $src.attr("attr-filter-option");
-          }else{
-            filter_value += '.product_' + current_model_id + '.' + $src.attr("attr-filter-option");
-          }
+    $("#container_" + current_category_id + ' .product_container').fadeIn(600);
+    $.scrollTo($("#container_" + current_category_id + ' #product_models'), 400);
+    var filter_value = "";
+    $("#container_" + current_category_id + ' .attribute_filter input').each(function(index) {
+      var $src = $(this);
+      if(!$src.parent().hasClass("hidden") && $src.is(':checked')){
+        if(filter_value != ""){
+          filter_value += ', '
         }
-     });
+        if(current_model_id == "filter_model_all"){
+          filter_value += '.' + $src.attr("attr-filter-option");
+        }else{
+          filter_value += '.product_' + current_model_id + '.' + $src.attr("attr-filter-option");
+        }
+      }
+    });
 
-     
-     if(filter_value == "") {
-       $('#product #container').isotope({ filter: '.item' });
-     }else{
-       $('#product #container').isotope({ filter: filter_value });
-     }
+    if(filter_value == "") {
+      $("#container_" + current_category_id + ' #products').isotope({ filter: '.item' });
+    }else{
+      $("#container_" + current_category_id + ' #products').isotope({ filter: filter_value });
+    }
   }
    
-   var $container = $('#product_type_container'),
-   $articles = $container.children('.category'), timeout;
+  var $container = $('#product_type_container'),
+  $articles = $container.children('.category'), timeout;
    
-   $articles.on( 'mouseenter', function( event ) {
+  $articles.on( 'mouseenter', function( event ) {
       var $article = $(this);
       clearTimeout( timeout );
       timeout = setTimeout( function() {
           if( $article.hasClass('active') ) return false;
-          $articles.not($article).removeClass('active').addClass('blur');
           $article.removeClass('blur').addClass('active');
+          $articles.not($article).removeClass('active').addClass('blur');
+          if(current_category_id == "") return false;
+          $("#" + current_category_id).removeClass('blur').addClass("select");
       }, 75 );
   });
   
@@ -172,11 +155,14 @@
   $container.on( 'mouseleave', function( event ) {
       clearTimeout( timeout );
       $articles.removeClass('active blur');
+      if(current_category_id == "") return false;
+      $articles.addClass('blur');
+      $("#" + current_category_id).removeClass('blur').addClass("select");
   });
 
   jQuery(window).load(function(){
-    $('#product #container').isotope({ filter: '.none' });
-    centerIsotypeImages();
+//    $('#product #container').isotope({ filter: '.none' });
+//    centerIsotypeImages();
   });
   
   function centerIsotypeImages(){

@@ -9,7 +9,24 @@ class Product < ActiveRecord::Base
   belongs_to :product_model
 
   has_many :product_attributes
+  has_many :product_model_attribute, :through => :product_attributes
   
   USING_CONDITIONS = {:poor => "Poor", :good => "Good", :flawless => "Flawless"}
+  
+  def image_url(type = :medium)
+    if self.image_file_name && self.image_file_name.index("/images/products/") == 0
+      return self.image_file_name #For testing only
+    else
+      self.image.url(type)
+    end
+  end
+  
+  def gen_attribute_names
+    result = []
+    self.product_model_attribute.each do |product_model_attribute|
+      result << product_model_attribute.value
+    end
+    result.join(" ")
+  end
   
 end

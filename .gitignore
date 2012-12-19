@@ -22,9 +22,12 @@
 
 .DS_Store
 public/.DS_Store
+public/images/products/.DS_Store 
 public/images/.DS_Store
 public/images/example_images/.DS_Store
 app/.DS_Store
 app/assets/.DS_Store
+db/.DS_Store
+
 
 
