@@ -112,6 +112,36 @@ top:348px;height:50px;width:50px;margin:0;padding:0;position:fixed;z-index:5000;
     
 }
  
+/*content for sign up page*/
+#bg{
+    left: 0;
+    position: absolute;
+    top: 0;
+    max-height: 100%;
+    max-width: 100%;
+    z-index:-1;
+}
+
+#signup_container{
+    height: 400px;
+    left: 50%;
+    margin: -200px 0 0 -190px;
+    position: absolute;
+    top: 400px;
+    width: 400px;
+    z-index: 0;
+}
+#signup_circle{
+}
+
+#fb_signup{
+    width: 150px;
+    height: 30px;
+    position: absolute;
+    top:340px;
+    left:120px;
+    z-index:1;
+}
 .clear {
     clear: both;
 }
@@ -126,4 +156,15 @@ top:348px;height:50px;width:50px;margin:0;padding:0;position:fixed;z-index:5000;
 #product_type .cat_item,
 #product .item img {
   cursor: pointer;
+}
+
+.signup_field{
+    height:40px;
+    color:red;
+}
+
+#signup_form{
+    position: absolute;
+    top:120px;
+    left:70px;
 }
