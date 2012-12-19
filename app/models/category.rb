@@ -3,6 +3,8 @@ class Category < ActiveRecord::Base
   
   belongs_to :user
   has_many :products
+  has_many :product_models
+  has_many :category_attributes
   
   has_attached_file :image, :styles => {:thumb => "50x50>", :medium => "200x200>"}, :default_url => '/images/default_cat_:style.png'
   

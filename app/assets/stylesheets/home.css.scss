@@ -288,3 +288,10 @@ ul{
 #product_type .category.active p {
     opacity: 1;
 }
+
+#product_search_container span.product_model {
+  cursor: pointer;
+}
+#product_search_container span.product_model.active {
+  font-weight: bold;
+}
