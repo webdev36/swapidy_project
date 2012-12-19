@@ -80,7 +80,7 @@
     $("#container_" + current_category_id + ' .attribute_filter input').each(function(index) {
       var $src = $(this);
       if(!$src.parent().hasClass("hidden") && $src.is(':checked')){
-        var group = $src.parents("option-set").attr("data-group");
+        var group = $src.parents(".option-set").attr("data-group");
         if ( !filters[ group ] ) {
           filters[ group ] = [];
         }
@@ -107,11 +107,11 @@
       }
       if ( i === 0 ) {
         // copy to new array
-        comboFilters = filterGroup.slice(0);
+        comboFilters = filterGroup;
       } else {
         var filterSelectors = [];
         // copy to fresh array
-        var groupCombo = comboFilters.slice(0); // [ A, B ]
+        var groupCombo = comboFilters; // [ A, B ]
         // merge filter Groups
         for (var k=0, len3 = filterGroup.length; k < len3; k++) {
           for (var j=0, len2 = groupCombo.length; j < len2; j++) {
@@ -124,6 +124,7 @@
       }
       i++
     }
+    //alert(comboFilters);
     return comboFilters;
   }
      
@@ -159,7 +160,7 @@
      $("#container_" + current_category_id + " .product_model").removeClass("active");
      
      current_model_id = $(this).attr("id");
-     $("#container_" + current_category_id + " .attr_" + current_model_id).fadeIn(300).removeClass("hidden");
+     $("#container_" + current_category_id + " .attr_" + current_model_id).removeClass("hidden");
      $("#container_" + current_category_id + " #" + current_model_id).addClass("active");
      showIsoTope();
   });
