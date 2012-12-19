@@ -61,15 +61,15 @@
   </div>
   <div id="product" style="display:none;">
     <div id="container" class="isotope thumbnail" style="position: relative; overflow: hidden; min-height: 200px; width:500px;">
-        <div class="item 8 product_filter_model_1 thumbnail"><img src="/images/products/ipods/touch_3.png"></div>
-        <div class="item 16 product_filter_model_1 thumbnail"><img src="/images/products/ipods/touch_3.png"></div>
+        <div class="item 8 product_filter_model_6 thumbnail"><img src="/images/products/ipods/touch_3.png"></div>
+        <div class="item 16 product_filter_model_6 thumbnail"><img src="/images/products/ipods/touch_3.png"></div>
         <div class="item 32 product_filter_model_1 thumbnail"><img src="/images/products/ipods/touch_3.png"></div>
         <div class="item 16 product_filter_model_2 thumbnail"><img src="/images/products/ipods/touch_4.png"></div>
         <div class="item 8 product_filter_model_3 sit thumbnail"><img src="/images/products/ipods/touch_4.png"></div>
         <div class="item 16 product_filter_model_4 thumbnail"><img src="/images/products/ipods/touch_5.png"></div>
         <div class="item 16 product_filter_model_5 thumbnail"><img src="/images/products/ipods/nano_5.png"></div>
         <div class="item 32 product_filter_model_6 thumbnail"><img src="/images/products/ipods/nano_6.png"></div>
-        <div class="item 32 product_filter_model_7 thumbnail"><img src="/images/products/ipods/nano_7.png"></div>
+        <div class="item 32 product_filter_model_6 thumbnail"><img src="/images/products/ipods/nano_7.png"></div>
         <div class="item 8 product_filter_model_8 thumbnail"><img src="/images/products/ipods/classic_5.png"></div>
         <div class="item 16 product_filter_model_1 thumbnail"><img src="/images/products/ipods/classic_6.png"></div>
         <div class="item 32 product_filter_model_2 sit thumbnail"><img src="/images/products/ipods/shuffle_4.png"></div>
@@ -101,7 +101,6 @@
      
      $('div#product_search_container').show();
      $.scrollTo($('div#product_search_container'), 500);
-     centerIsotypeImages();
   });
   
   $('#product_search_container .product_model').live('click', function() {
@@ -116,24 +115,41 @@
      
      $('div#product_search_container').show();
      $.scrollTo($('div#product_search_container'), 500);
-     centerIsotypeImages();
+     showIsoTope();
   });
 
   $('#product_search_container input').live('change', function() {
      //optionally remove the 500 (which is time in milliseconds) of the
      //scrolling animation to remove the animation and make it instant
-     $('#product_search_container #product').show();
+     showIsoTope();
+  });
+  
+  function showIsoTope(){
+    $('#product_search_container #product').show();
      $.scrollTo($('#product_search_container #product'), 500);
      
-     var $this = $(this);
-     if(current_model_id == "filter_model_all") {
-       $('#product #container').isotope({ filter: '.' + $this.attr("attr-filter-option") });
-     }else{
-       $('#product #container').isotope({ filter: '.product_' + current_model_id + '.' + $this.attr("attr-filter-option") });
-     }
+     var filter_value = "";
+     $('.for_' + current_category_id + ' input').each(function(index) {
+        var $src = $(this);
+        if($src.is(':checked')){
+          if(filter_value != ""){
+            filter_value += ', '
+          }
+          if(current_model_id == "filter_model_all"){
+            filter_value += '.' + $src.attr("attr-filter-option");
+          }else{
+            filter_value += '.product_' + current_model_id + '.' + $src.attr("attr-filter-option");
+          }
+        }
+     });
+
      
-  });
-   
+     if(filter_value == "") {
+       $('#product #container').isotope({ filter: '.item' });
+     }else{
+       $('#product #container').isotope({ filter: filter_value });
+     }
+  }
    
    var $container = $('#product_type_container'),
    $articles = $container.children('.category'), timeout;
