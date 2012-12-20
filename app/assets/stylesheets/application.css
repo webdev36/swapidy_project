@@ -127,7 +127,7 @@ top:348px;height:50px;width:50px;margin:0;padding:0;position:fixed;z-index:5000;
     left: 50%;
     margin: -200px 0 0 -190px;
     position: absolute;
-    top: 400px;
+    top:60%;
     width: 400px;
     z-index: 0;
 }
@@ -141,6 +141,13 @@ top:348px;height:50px;width:50px;margin:0;padding:0;position:fixed;z-index:5000;
     top:340px;
     left:120px;
     z-index:1;
+}
+
+#signup_motto{
+position: absolute;
+height: 200px;
+bottom: 0px;
+left:0px;
 }
 .clear {
     clear: both;
@@ -170,6 +177,7 @@ top:348px;height:50px;width:50px;margin:0;padding:0;position:fixed;z-index:5000;
 }
 
 .footer {
+  width:100%;
   padding: 30px 0 60px 0;
   margin-top: 100px;
   border-top: 1px solid #E5E5E5;
