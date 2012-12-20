@@ -1,0 +1,93 @@
+<div id="my_orders_container" style="display: none;" >
+  <% if current_user.orders.empty? %>
+    <p>You don't have any order to buy</p>
+  <% else %>
+    <p>Your orders to buy</p>
+    <table class="table table-bordered table-condensed">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% current_user.orders.each_with_index do |order, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= order.title %></td>
+            <td>120 honey</td>
+            <td><%= order.status_title %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+
+<div id="my_trade_ins_container" style="display: none;">
+  <br/>
+  <% if current_user.trade_ins.empty? %>
+    <p>You don't have any order to sell</p>
+  <% else %>
+    <p>Your orders to sell</p>
+    <table class="table table-bordered table-condensed">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% current_user.trade_ins.each_with_index do |order, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= order.title %></td>
+            <td>120 honey</td>
+            <td><%= order.status_title %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+<%if user_signed_in? %>
+  <a href="#my_trade_ins_container" onclick="javascript:processOrderIconsPosition('trade_ins');" class="order_pageslide_link"><img id="my_trade_ins" src="/images/my_trade_ins.png"></a>
+  <a href="#my_orders_container" onclick="javascript:processOrderIconsPosition('orders');" class="order_pageslide_link"><img id="my_orders" src="/images/my_orders.png"></a>
+  <script language="JavaScript">
+    jQuery(window).load(function(){
+      $(".order_pageslide_link").each(function(index) {
+        $(this).pageslide({ direction: "right", modal: true });
+      });
+    });
+    
+    var current_button = "";
+    var begin_position_left = 0;
+    function processOrderIconsPosition(button_name) {
+      if(current_button == ""){
+        begin_position_left = $("#my_trade_ins").position().left;
+      }
+
+      if(current_button == button_name) {
+        current_button = "";
+        $(".order_pageslide_link").each(function() {
+          $(this).children("img").offset({ left: begin_position_left});
+        });
+      }else if(current_button == "") {
+        current_button = button_name;
+        $(".order_pageslide_link").each(function() {
+            $(this).children("img").hide();
+            $(this).children("img").offset({ left: 535});
+            $(this).children("img").fadeIn(500);
+          });
+      }else{
+        current_button = button_name;
+      }
+    }
+  </script>
+<%end%>

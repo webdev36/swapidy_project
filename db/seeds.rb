@@ -45,7 +45,14 @@ categories.keys.each do |category_title|
     end
   end
   
+end
   
+Product.limit(12).each_with_index do |product, index|
+  order = Order.new(order_type: ((index > 5) ? 1 : 0))
+  order.status = index % 3
+  order.product = product
+  order.user = admin
+  order.save
 end
 
 

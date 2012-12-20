@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
                   :stripe_customer_id, :stripe_card_token, :stripe_coupon, :stripe_customer_card_token, :card_number, :card_cvc
  
   attr_accessor :card_number, :card_cvc
+  
+  has_many :orders, :conditions => "order_type = 0"
+  has_many :trade_ins, :conditions => "order_type = 1", :class_name => "Order"
 
   #validates :password, :presence => true, :on => :create
   #validates :email, :presence => true, :uniqueness => true

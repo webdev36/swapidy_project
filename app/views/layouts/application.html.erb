@@ -3,11 +3,11 @@
   <head>
     <title>Swapidy</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag 'jquery', 'jquery.isotope.min', 'application' %>
+    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    
+    <script type="text/javascript" src="/javascripts/jquery.pageslide.min.js"></script>
     <%= render :partial => "/layouts/header.html" %>
     
     <div class="content">
