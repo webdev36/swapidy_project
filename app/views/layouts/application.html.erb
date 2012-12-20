@@ -15,6 +15,6 @@
         <%=yield %>
       </div>
     </div>
-    <%= render :partial => "/layouts/footer.html" %>
+    <%= render :partial => "/layouts/footer.html" unless params[:controller] == "devise/registrations" && ["new", "create"].include?(params[:action]) %>
   </body>
 </html>

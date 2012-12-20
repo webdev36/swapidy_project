@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   #validates :password, :presence => true, :on => :create
   #validates :email, :presence => true, :uniqueness => true
-  validates :first_name, :last_name, :presence => true
+  #validates :first_name, :last_name, :presence => true
   validate :validate_card_info
     
   def card_expired_date
@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
   
   def card_info_valid?
-
+    return if self.card_number.blank? && self.card_name.blank? && self.card_cvc.blank? && self.card_expired_month.blank? && card_expired_year.blank?
     return true if card_token_existed_and_no_change?
 
     begin
