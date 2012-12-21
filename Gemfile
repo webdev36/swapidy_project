@@ -11,6 +11,8 @@ gem 'simple_form'
 gem 'haml'
 gem 'paperclip'
 gem 'stripe'
+gem 'active_shipping'
+gem 'carmen-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

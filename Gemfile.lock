@@ -14,6 +14,15 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
+    active_shipping (0.9.14)
+      active_utils (>= 1.0.1)
+      activesupport (>= 2.3.5)
+      builder
+      i18n
+      json (>= 1.5.1)
+    active_utils (1.0.5)
+      activesupport (>= 2.3.11)
+      i18n
     activemodel (3.2.9)
       activesupport (= 3.2.9)
       builder (~> 3.0.0)
@@ -32,6 +41,10 @@ GEM
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
     builder (3.0.4)
+    carmen (1.0.0.beta2)
+    carmen-rails (1.0.0.beta3)
+      carmen (~> 1.0.0.beta2)
+      rails
     cocaine (0.3.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -132,6 +145,8 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  active_shipping
+  carmen-rails
   coffee-rails (~> 3.2.1)
   devise
   haml

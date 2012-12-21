@@ -37,9 +37,8 @@
   </div>
 <%end%>
 
-<%if user_signed_in? %>
-  <a href=""><img id="my_trade_ins" src="/images/my_trade_ins.png"></a>
-  <a href=""><img  id="my_orders" src="/images/my_orders.png"></a>
-<%end%>
+
 <a href="http://www.facebook.com/swapidy" target="_blank"><img id="fbtab" src="/images/Like.png"></a>
 <a href="https://twitter.com/Swapidy" target="_blank"><img id="twtab" src="/images/Follow.png"></a>
+
+<%= render :partial => "/layouts/orders.html" if current_user %>

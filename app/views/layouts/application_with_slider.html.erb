@@ -3,11 +3,12 @@
   <head>
     <title>Swapidy</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag 'jquery', 'jquery.isotope.min', 'application', 's3Slider', 'jquery.scrollto.min' %>
+    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     
+    <script type="text/javascript" src="/javascripts/jquery.pageslide.min.js"></script>
     <%= render :partial => "/layouts/header.html" %>
                 
     <div id="s3slider">
@@ -49,7 +50,7 @@
         <%=yield %>
       </div>
     </div>
-
+ 
     <%= render :partial => "/layouts/footer.html" %>
   </body>
 </html>

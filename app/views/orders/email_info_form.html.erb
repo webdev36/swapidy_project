@@ -1,0 +1,45 @@
+<div id="progress_indicator" class="three_steps">
+  <ul>
+      <li class="current"><strong>Step 1</strong></li>
+      <li>Step 2</li>
+      <li>Step 3</li>
+  </ul>
+</div>
+
+<div style="float: left; width: 50%;">
+  <h2>Signin with your email </h2>
+  <%= form_for(@user, :as => "user", :url => session_path(@user)) do |f| %>
+    <input type="hidden" name="login_to_order" value="1" />
+    <input type="hidden" name="product_id" value="<%= @product.id %>" />
+    <input type="hidden" name="order_type" value="<%= @order.order_type %>" />
+    
+    <div><%= f.label :email %><br />
+    <%= f.email_field :email %></div>
+  
+    <div><%= f.label :password %><br />
+    <%= f.password_field :password %></div>
+  
+    <div><%= f.submit "Sign in" %></div>
+  <% end %>
+</div>
+
+<div style="float: right; width: 50%;">
+  <h2>Signup new account </h2>
+  <p>We'll use this email address to send you shipping details and progress updates every step of the way.</p>
+    
+  <%= form_for(@user, :as => "user", :url => registration_path(@user)) do |f| %>
+    <input type="hidden" name="login_to_order" value="1" />
+    <input type="hidden" name="product_id" value="<%= @product.id %>" />
+    <input type="hidden" name="order_type" value="<%= @order.order_type %>" />
+    <div class="signup_field"><%= f.label :email %></div>
+    <%= f.email_field :email %>
+  
+    <div class="signup_field"><%= f.label :password %></div>
+    <%= f.password_field :password %>
+  
+    <div class="signup_field"><%= f.label :password_confirmation %></div>
+    <%= f.password_field :password_confirmation %>
+  
+    <div class="signup_field"><%= f.submit "Sign up" %></div>
+  <% end %>
+</div>

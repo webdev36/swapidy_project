@@ -1,0 +1,57 @@
+<div id="progress_indicator" class="three_steps">
+  <ul>
+    <li>
+      Step 1
+    </li>
+    <li class="current">
+      <strong>Step 2</strong>
+    </li>
+    <li>
+      Step 3
+    </li>
+  </ul>
+</div>
+
+<h2>Payment through your Stripe account</h2>
+
+<div id="checkout_content" class="payment_editing_block">
+  <div class="payment_group_contents">
+    <div class="valid_form payout_form standard_form paypal" style="display: block;">
+      
+      <%= form_for(@order, :as => 'order', :url => "/orders/shipping_info") do |f| %>
+        <%= f.hidden_field :order_type %>
+        <%= f.hidden_field :product_id %>
+
+        <%= f.hidden_field :email %>
+        <%= f.hidden_field :email_confirmation %>
+  
+        <%= f.hidden_field :shipping_first_name %>
+        <%= f.hidden_field :shipping_last_name %>
+        <%= f.hidden_field :shipping_address %>
+        <%= f.hidden_field :shipping_optional_address %>
+        <%= f.hidden_field :shipping_city %>
+        <%= f.hidden_field :shipping_state %>
+        <%= f.hidden_field :shipping_zip_code %>
+        <%= f.hidden_field :shipping_country %>
+        <%= f.hidden_field :shipping_method %>
+        <p>
+          Confirm your Stripe email address so we can ensure prompt payment.
+        </p>
+        <br/>
+        <div>
+          <label for="user_email">Your Stripe email address</label>
+          <%= f.email_field :stripe_email %>
+        </div>
+        
+        <div>
+          <label for="user_email_confirmation">Confirm your Stripe emailaddress</label>
+          <%= f.email_field :stripe_email_confirmation %>
+        </div>
+        <div><%= f.submit "Continue" %></div>
+      <% end %>
+    
+    </div>
+
+  </div>
+
+</div>

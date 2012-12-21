@@ -1,0 +1,15 @@
+<div class="item thumbnail product_filter_model_<%= product.product_model.id %> <%= product.using_condition %> <%= product.gen_attribute_names %> ">
+  <div class="box">
+    <div class="product_title"><%= product.title %></div>
+    <div class="product_image"><img src="<%= product.image_url %>"></div>
+    <div>
+      <div class="product_price"><%= product.honey_price ? product.honey_price : "200" %> <b>honey</b></div>
+      <div class="button_for_buy">
+        <%= button_to "Buy", "/orders/buy/#{product.id}", :method => :post %>
+      </div>
+      <div class="button_for_sell">
+        <%= button_to "Sell", "/orders/sell/#{product.id}", :method => :post %>
+      </div>
+    </div>
+  </div>
+</div>
