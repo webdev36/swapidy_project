@@ -12,11 +12,13 @@
 <%= form_for(@order, :as => 'order', :url => "/orders/confirm") do |f| %>
   <%= f.hidden_field :order_type %>
   <%= f.hidden_field :product_id %>
-  <%= f.hidden_field :email %>
-  <%= f.hidden_field :email_confirmation %>
-  <%= f.hidden_field :stripe_email %>
-  <%= f.hidden_field :stripe_email_confirmation %>
-
+  <% unless @order.errors.empty? %>
+    <div style="color: red;">
+      <%= raw @order.errors.full_messages.join("<br/>") %>
+      <br/>
+    </div>
+  <% end %>
+  
   <div id="shipping_address_form" class="address_form_content">
     <div class="form_element text_field first_name half_width left">
       <label for="shipping_information_first_name">First name</label>

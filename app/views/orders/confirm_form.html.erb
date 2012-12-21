@@ -5,12 +5,6 @@
 <%= form_for(@order, :as => 'order', :url => "/orders/create") do |f| %>
   <%= f.hidden_field :order_type %>
   <%= f.hidden_field :product_id %>
-  
-  <%= f.hidden_field :email %>
-  <%= f.hidden_field :email_confirmation %>
-  
-  <%= f.hidden_field :stripe_email %>
-  <%= f.hidden_field :stripe_email_confirmation %>
       
   <%= f.hidden_field :shipping_first_name %>
   <%= f.hidden_field :shipping_last_name %>
@@ -22,22 +16,43 @@
   <%= f.hidden_field :shipping_country %>
   <%= f.hidden_field :shipping_method %>
 
+  <br/>
   <div>
     <label>
       <strong>Contact Email</strong>
       <a href="#" onclick="javascript:changeTo('/orders/email_info');" class="btn btn-mini">Change</a>
     </label>
     <label>All emails about your order will be sent here:</label>
-    <p><%= @order.email %></p>
+    <p><%= current_user.email %></p>
   </div>
+  <br/>
   <div>
     <label>
-      <strong>Stripe Payment Detail</strong>
-      <a href="#" onclick="javascript:changeTo('/orders/payment_info')" class="btn btn-mini">Change</a>
+      <strong>Payment Information</strong>
     </label>
-    <label>We’ll send your Stripe payment to:</label>
-    <p><%= @order.stripe_email %></p>
+    <div>
+      <span>Current Balance:</span>
+      <%= current_user.honey_balance.round %> Honey
+    </div>
+    <div>
+      <span>Product Price:</span>
+      <%= @product.honey_price.round %> Honey
+    </div>
+    <% if current_user.extra_honey_for(@product) <= 0 %>
+      <div>
+        <i>Your balance is enought to buy!</I>
+        <a href="#" class="btn btn-success btn-mini">Get more Honey</a>
+      </div>
+    <% else %>
+      <div>
+        <span>You need to extra Honey:</span>
+        <%= (@product.honey_price - current_user.honey_balance).round %> Honey.<br/>
+        You would be charged $<%= ((@product.honey_price - current_user.honey_balance)/100).round %> (Exchange Rate: 100 Honey / $1 )
+        <a href="#" class="btn btn-mini">Get more Honey</a>
+      </div>
+    <% end %>
   </div>
+  <br/>
   <div>
     <label>
       <strong>Shipping Details</strong>
@@ -54,22 +69,31 @@
       <%= shipping_method_name(@order.shipping_method) %>
     </p>
   </div>
-  <!-- div>
+  <div>
     <label><strong>Terms of service</strong></label>
     <p>
-      <input type="checkbox" /> 
+      <input id="terms_of_service_checkbox" type="checkbox" /> 
       <span>this box, you agree to our <a>terms of service</a> and confirm that 
         the item(s) you are selling have not been reported lost or stolen.</span>
     </p>
-  </div-->
-  
-  <div><%= f.submit "Continue" %></div>
+  </div>
+  <br/>
+  <div><%= f.submit "Continue", :disabled=> "disabled", :id => "submit_button" %></div>
 <% end %>
 <script>
   function changeTo(new_url) {
     $("#new_order").attr("action", new_url);
     $("#new_order").submit();
   }
+  
+  $("#terms_of_service_checkbox").live("change", function() {
+    if($(this).is(':checked')){
+      $("#submit_button").prop('disabled', false);
+    }else{
+      $("#submit_button").prop('disabled', true);
+    }
+  });
+  
 </script>
 
 

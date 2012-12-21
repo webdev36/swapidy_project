@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :address, 
+                  :honey_balance,
                   :card_type, :card_name, :card_expired_month, :card_expired_year, :card_postal_code, :card_last_four_number,
                   :stripe_customer_id, :stripe_card_token, :stripe_coupon, :stripe_customer_card_token, :card_number, :card_cvc
  
@@ -31,7 +32,7 @@ class User < ActiveRecord::Base
   end
   def card_expired_date=(date)
     self.card_expired_month = date.month.to_s
-    self.card_expired_month = date.year.to_s
+    self.card_expired_year = date.year.to_s
   end
   
   def card_info_valid?
@@ -56,6 +57,18 @@ class User < ActiveRecord::Base
       return false
     end
   end
+  
+  def able_to_buy? product
+    return true if extra_honey_for(product) >= 0
+    self.stripe_customer_id && !self.stripe_customer_id.blank?
+  end
+  
+  def extra_honey_for product
+    return 0 if product.honey_price.nil? || product.honey_price == 0 || (self.honey_balance && self.honey_balance >= product.honey_price)
+    return product.honey_price if self.honey_balance.nil?
+    return product.honey_price - self.honey_balance 
+  end
+  
 
   private
   

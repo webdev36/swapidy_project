@@ -1,13 +1,13 @@
 class OrdersController < ApplicationController
 
+  before_filter :require_login, :only => [:payment_info, :shipping_info, :confirm, :create]
   before_filter :set_order_product, :only => [:email_info, :payment_info, :shipping_info, :confirm, :create]
   
   def new
-    @order = Order.new(:order_type => Order::TYPES[params[:order_type].to_sym], :product_id => params[:product_id].to_i )
+    @order = Order.new(:order_type => params[:order_type], :product_id => params[:product_id].to_i )
     @product = Product.find params[:product_id]
 
     if user_signed_in?
-      @order.email = @order.email_confirmation = current_user.email
       render "payment_info_form"
     else
       @user = User.new
@@ -20,15 +20,11 @@ class OrdersController < ApplicationController
   end
   
   def payment_info
-    if @order.valid_to_buy?
-      render "payment_info_form"
-    else
-      render "email_info_form"
-    end
+    render "payment_info_form"
   end
 
   def shipping_info
-    if @order.valid_to_buy?
+    if current_user.able_to_buy? @product
       render "shipping_info_form"
     else
       render "payment_info_form"
@@ -36,7 +32,7 @@ class OrdersController < ApplicationController
   end
   
   def confirm
-    if @order.valid_to_buy?
+    if @order.valid? && current_user.able_to_buy?(@product)
       render "confirm_form"
     else
       render "shipping_info_form"
@@ -44,7 +40,7 @@ class OrdersController < ApplicationController
   end
   
   def create
-    if @order.valid_to_buy?
+    if @order.valid? && current_user.able_to_buy?(@product)
       if user_signed_in?
         @order.user = current_user
       else
@@ -68,8 +64,9 @@ class OrdersController < ApplicationController
   private
 
     def set_order_product
-      @product = Product.find params[:order][:product_id]
       @order = Order.new(params[:order])
+      @order.status = Order::STATUES[:pending]
+      @product = Product.find(params[:order][:product_id])
     end
 
 end
