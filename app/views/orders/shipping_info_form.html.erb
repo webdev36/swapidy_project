@@ -1,0 +1,69 @@
+<div id="progress_indicator" class="three_steps">
+  <ul>
+      <li>Step 1</li>
+      <li>Step 2</li>
+      <li class="current"><strong>Step 3</strong></li>
+  </ul>
+</div>
+
+<h2>Provide your shipping address</h2>
+<p>We use this information to create your shipping labels so you can send your item to us for free!</p>
+
+<%= form_for(@order, :as => 'order', :url => "/orders/confirm") do |f| %>
+  <%= f.hidden_field :order_type %>
+  <%= f.hidden_field :product_id %>
+  <%= f.hidden_field :email %>
+  <%= f.hidden_field :email_confirmation %>
+  <%= f.hidden_field :stripe_email %>
+  <%= f.hidden_field :stripe_email_confirmation %>
+
+  <div id="shipping_address_form" class="address_form_content">
+    <div class="form_element text_field first_name half_width left">
+      <label for="shipping_information_first_name">First name</label>
+      <%= f.text_field :shipping_first_name %>
+    </div>
+
+    <div class="form_element text_field last_name half_width">
+      <label for="shipping_information_last_name">Last name</label>
+      <%= f.text_field :shipping_last_name %>
+    </div>
+
+    <div class="form_element text_field address_1 half_width left">
+      <label for="shipping_information_street_name1">Address Line 1</label>
+      <%= f.text_field :shipping_address %>
+    </div>
+
+    <div class="form_element text_field address_2 half_width">
+      <label class="optional" for="shipping_information_street_name2">Address Line 2 (optional)</label>
+      <%= f.text_field :shipping_optional_address %>
+    </div>
+
+    <div class="form_element text_field city third_width left">
+      <label for="shipping_information_city">City</label>
+      <%= f.text_field :shipping_city %>
+    </div>
+
+    <div class="form_element dropdown state third_width middle" style="display: block;">
+      <label for="shipping_information_state">State</label>
+      <%= f.select :shipping_state, us_subregions, {}%>
+    </div>
+    <div class="form_element text_field zip_code third_width">
+      <label for="shipping_information_zipcode">Zip Code</label>
+      <%= f.text_field :shipping_zip_code %>
+    </div>
+
+    <div class="form_element dropdown country full_width">
+      <label for="shipping_information_country">Country</label>
+      <span class="item_display"><i>United States</i></span><br/>
+      <span class="annotation">We currently only support trades within the United States.</span><br />
+      <%= f.select :shipping_country, country_options, {} %>
+    </div>
+  </div>
+  <div>
+    <div class="form_element full_width">
+      <label>Select shipping method</label>
+      <%= f.select :shipping_method, shipping_method_options, {} %>
+    </div>
+  </div>  
+  <div><%= f.submit "Continue" %></div>
+<% end %>

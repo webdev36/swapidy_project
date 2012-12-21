@@ -1,12 +1,24 @@
 Swapidy::Application.routes.draw do
-  devise_for :users do
-    match "/users/sign_out" => "devise/sessions#destroy"
+  devise_for :users, :controllers => {:sessions => "sessions", :registration => "users/registration"} do
+    match "/users/sign_out" => "sessions#destroy"
   end
 
   resources :posts do
     root to: 'post#index'
   end
-
+  
+  resources :products
+  
+  resources :orders
+  match "/orders/email_info" => "orders#email_info", :method => :post
+  match "/orders/payment_info" => "orders#payment_info", :method => :post
+  match "/orders/shipping_info" => "orders#shipping_info", :method => :post
+  match "/orders/confirm" => "orders#confirm", :method => :post
+  match "/orders/create" => "orders#create", :method => :post
+  match "/orders/complete" => "orders#complete", :method => :get
+  match "/orders/buy/:product_id" => "orders#new", :method => :post, :order_type => "order"
+  match "/orders/sell/:product_id" => "orders#new", :method => :post, :order_type => "trade_ins"
+  
   get "home/index"
 
   # The priority is based upon order of creation:

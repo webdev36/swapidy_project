@@ -16,13 +16,15 @@ class User < ActiveRecord::Base
  
   attr_accessor :card_number, :card_cvc
   
-  has_many :orders, :conditions => "order_type = 0"
-  has_many :trade_ins, :conditions => "order_type = 1", :class_name => "Order"
+  has_many :orders, :conditions => "order_type = 1", :order => "status asc, created_at desc"
+  has_many :trade_ins, :conditions => "order_type = 0", :class_name => "Order", :order => "status asc, created_at desc"
 
-  #validates :password, :presence => true, :on => :create
-  #validates :email, :presence => true, :uniqueness => true
-  #validates :first_name, :last_name, :presence => true
   validate :validate_card_info
+  
+  def self.authenticate_with_password(email, password)
+    user = find_by_email(email)
+    return user if user && user.encrypted_password == BCrypt::Engine.hash_secret(password)
+  end
     
   def card_expired_date
     return "#{self.card_expired_year}-#{self.card_expired_month}-01".to_date rescue nil

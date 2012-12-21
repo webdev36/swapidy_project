@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220130055) do
+ActiveRecord::Schema.define(:version => 20121221073245) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -48,8 +48,20 @@ ActiveRecord::Schema.define(:version => 20121220130055) do
     t.integer  "order_type"
     t.integer  "user_id"
     t.integer  "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.string   "email"
+    t.string   "stripe_email"
+    t.string   "stripe_customer_id"
+    t.string   "shipping_method"
+    t.string   "shipping_first_name"
+    t.string   "shipping_last_name"
+    t.string   "shipping_address"
+    t.string   "shipping_optional_address"
+    t.string   "shipping_city"
+    t.string   "shipping_state"
+    t.string   "shipping_zip_code"
+    t.string   "shipping_country"
   end
 
   create_table "posts", :force => true do |t|

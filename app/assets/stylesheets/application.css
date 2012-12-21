@@ -184,7 +184,7 @@ left:0px;
   background-color: whiteSmoke;
 }
 
-.container a,
-.container a:hover {
+.footer .container a,
+.footer .container a:hover {
   color: #1D95CB;
 }

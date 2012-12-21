@@ -65,11 +65,9 @@ ul{
 }
 
 .hero-unit{
- color: #FFFFFF;
-    line-height: 1.2;
-
- font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  
+  color: #FFFFFF;
+  line-height: 1.2;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   text-align:left;
 }
 .hero_title{
@@ -317,3 +315,27 @@ ul{
   text-align: right;
   padding-bottom: 20px;
 }
+
+.thumbnail .box {
+  display: block;
+  margin: -25px;
+}
+
+.thumbnail .box .product_title {
+  
+}
+.thumbnail .box .product_image img {
+  height: 150px;
+}
+.thumbnail .box .product_price {
+  float: left; 
+  padding-left: 10px;
+  padding-top: 5px;
+}
+.thumbnail .box .button_for_buy,
+.thumbnail .box .button_for_sell {
+  float: right; 
+  padding-right:10px;
+  padding-top: 3px;
+}
+

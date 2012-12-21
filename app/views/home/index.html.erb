@@ -12,8 +12,7 @@
 
   <div id="buttons">
   <!--<a class="modern socle" href="#">Sell Now</a>-->
-
-  <button id="button_sell" class="btn-success btn-large">
+    <button id="button_sell" class="btn-success btn-large">
       <strong>Sell Now</strong>
     </button>
     <button id="button_buy" class="btn-primary btn-large">
@@ -62,11 +61,7 @@
     <div class="product_container" style="display:none;">
       <div id="products" class="isotope thumbnail" style="position: relative; overflow: hidden; min-height: 200px; width:500px;">
         <% category.products.each do |product| %>
-          <div class="item thumbnail <%= product.using_condition %> <%= product.gen_attribute_names %> product_filter_model_<%= product.product_model.id %>">
-            <p><%= product.title %></p>
-            <img src="<%= product.image_url %>" style="height:150px;">
-            <p><%= product.honey_price ? product.honey_price : "200" %> honey<p>
-          </div>
+          <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>
         <% end %>
       </div>
     </div>
@@ -129,8 +124,13 @@
   }
      
   $('.hero-unit button.btn-large').click(function() {
-     $('div#product_type').fadeIn(600);
-     $.scrollTo($('div#product_type'), 400);
+    if($(this).attr('id') == "button_sell"){
+      showScreenToSell()
+    }else{
+      showScreenToBuy();
+    }
+    $('div#product_type').fadeIn(600);
+    $.scrollTo($('div#product_type'), 400);
   });
   
   var current_category_id = "";
@@ -208,6 +208,15 @@
 //    $('#product #container').isotope({ filter: '.none' });
 //    centerIsotypeImages();
   });
+  
+  function showScreenToBuy() {
+    $(".thumbnail .box .button_for_buy").show();
+    $(".thumbnail .box .button_for_sell").hide();
+  }
+  function showScreenToSell() {
+    $(".thumbnail .box .button_for_buy").hide();
+    $(".thumbnail .box .button_for_sell").show();
+  }
   
   function centerIsotypeImages(){
     jQuery('#product #container .item').each(function(){
