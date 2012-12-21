@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   end
   
   def able_to_buy? product
-    return true if extra_honey_for(product) >= 0
+    return true if extra_honey_for(product) <= 0
     self.stripe_customer_id && !self.stripe_customer_id.blank?
   end
   

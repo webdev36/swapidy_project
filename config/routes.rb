@@ -1,5 +1,5 @@
 Swapidy::Application.routes.draw do
-  devise_for :users, :controllers => {:sessions => "sessions", :registration => "users/registration"} do
+  devise_for :users, :controllers => {:sessions => "sessions", :registrations => "registrations"} do
     match "/users/sign_out" => "sessions#destroy"
   end
 
