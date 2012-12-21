@@ -46,8 +46,8 @@
     <% else %>
       <div>
         <span>You need to extra Honey:</span>
-        <%= (@product.honey_price - current_user.honey_balance).round %> Honey.<br/>
-        You would be charged $<%= ((@product.honey_price - current_user.honey_balance)/100).round %> (Exchange Rate: 100 Honey / $1 )
+        <%= current_user.extra_honey_for(@product).round %> Honey<br/>
+        You would be charged $<%= (current_user.extra_honey_for(@product)/100).round %> (Exchange Rate: 100 Honey / $1 )
         <a href="#" class="btn btn-mini">Get more Honey</a>
       </div>
     <% end %>

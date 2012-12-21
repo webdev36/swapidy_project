@@ -17,7 +17,7 @@
 </div>
 
 <div class="product_price">
-  <p><strong>Price: <%= @product.honey_price.round %> Honey</strong></p>
+  <p><strong>Price: <%= (@product.honey_price || 0.0).round %> Honey</strong></p>
 </div>
 
 <div>

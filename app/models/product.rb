@@ -13,6 +13,8 @@ class Product < ActiveRecord::Base
   
   USING_CONDITIONS = {:poor => "Poor", :good => "Good", :flawless => "Flawless"}
   
+  validates :honey_price, :using_condition, :presence => true
+  
   def image_url(type = :medium)
     if self.image_file_name && self.image_file_name.index("/images/products/") == 0
       return self.image_file_name #For testing only
