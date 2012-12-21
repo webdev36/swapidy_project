@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   
   def able_to_buy? product
     return true if extra_honey_for(product) <= 0
-    self.stripe_customer_id && !self.stripe_customer_id.blank?
+    card_valid?
   end
   
   def extra_honey_for product
@@ -69,6 +69,9 @@ class User < ActiveRecord::Base
     return product.honey_price - self.honey_balance 
   end
   
+  def card_valid?
+    self.stripe_card_token && !self.stripe_card_token.blank?
+  end
 
   private
   
