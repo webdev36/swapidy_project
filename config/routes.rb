@@ -16,8 +16,8 @@ Swapidy::Application.routes.draw do
   match "/orders/confirm" => "orders#confirm", :method => :post
   match "/orders/create" => "orders#create", :method => :post
   match "/orders/complete" => "orders#complete", :method => :get
-  match "/orders/buy/:product_id" => "orders#new", :method => :post, :order_type => "order"
-  match "/orders/sell/:product_id" => "orders#new", :method => :post, :order_type => "trade_ins"
+  match "/orders/buy/:product_id" => "orders#new", :method => :post, :order_type => Order::TYPES[:order]
+  match "/orders/sell/:product_id" => "orders#new", :method => :post, :order_type => Order::TYPES[:trade_ins]
   
   get "home/index"
 

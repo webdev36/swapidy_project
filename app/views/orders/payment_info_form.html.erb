@@ -12,7 +12,7 @@
   </ul>
 </div>
 
-<h2>Payment through your Stripe account</h2>
+<h2>Payment information</h2>
 
 <div id="checkout_content" class="payment_editing_block">
   <div class="payment_group_contents">
@@ -21,9 +21,6 @@
       <%= form_for(@order, :as => 'order', :url => "/orders/shipping_info") do |f| %>
         <%= f.hidden_field :order_type %>
         <%= f.hidden_field :product_id %>
-
-        <%= f.hidden_field :email %>
-        <%= f.hidden_field :email_confirmation %>
   
         <%= f.hidden_field :shipping_first_name %>
         <%= f.hidden_field :shipping_last_name %>
@@ -34,24 +31,44 @@
         <%= f.hidden_field :shipping_zip_code %>
         <%= f.hidden_field :shipping_country %>
         <%= f.hidden_field :shipping_method %>
-        <p>
-          Confirm your Stripe email address so we can ensure prompt payment.
-        </p>
-        <br/>
-        <div>
-          <label for="user_email">Your Stripe email address</label>
-          <%= f.email_field :stripe_email %>
-        </div>
         
         <div>
-          <label for="user_email_confirmation">Confirm your Stripe emailaddress</label>
-          <%= f.email_field :stripe_email_confirmation %>
+          <label>Current Balance:</label>
+          <%= current_user.honey_balance.round %> Honey
         </div>
-        <div><%= f.submit "Continue" %></div>
+          <br/>
+        <div>
+          <label>Product Price:</label>
+          <%= @product.honey_price.round %> Honey
+        </div>
+          <br/>
+        <% if current_user.extra_honey_for(@product) <= 0 %>
+          <div>
+            <strong>Your balance is enought to buy!</strong>
+            <a href="#" class="btn btn-success btn-mini">Get more Honey</a>
+          </div>
+          <br/>
+          <br/>
+          <div><%= f.submit "Continue" %></div>
+        <% else %>
+          <div>
+            <label>You need to extra Honey:</label>
+            <%= (@product.honey_price - current_user.honey_balance).round %> Honey.<br/>
+            You would be charged $<%= ((@product.honey_price - current_user.honey_balance)/100).round %> (Exchange Rate: 100 Honey / $1 )
+            <a href="#" class="btn btn-mini">Get more Honey</a>
+          </div>
+          <br/>
+          <br/>
+          <% if current_user.able_to_buy? @product %>
+            <div><%= f.submit "Continue" %></div>
+           <% else %>
+            Your payment has not verified. Please edit <a href="/users/edit#card_info_container">Card Information of your Profile</a>.  
+            <br/>
+            <br/>
+            <a href="/" class="btn">Cancel</a>
+          <% end %>
+        <% end %>
       <% end %>
-    
     </div>
-
   </div>
-
 </div>

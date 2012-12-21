@@ -42,31 +42,58 @@
     return false;
   }
 </script>
+<div id="card_info_container" class="span12">
+  <h2>Card Information</h2>
+  
+  <div style="width: 30%; display: block; float: left;">
+    <div><strong>Current Card info</strong></div>
+    <div>
+      <label>Card Number</label>
+      xxxx-xxxx-xxxx-<%= user.card_last_four_number %>
+    </div>
+    <div>
+      <label>Expiration Date</label>
+      <%= user.card_expired_date.strftime("%B %Y") if user.card_expired_date %>
+    </div>
+    <div>
+      <label>Card Type</label>
+      <%= user.card_type %>
+    </div>
+    <div>
+      <label>Coupon</label>
+      <%= user.stripe_coupon && !user.stripe_coupon.blank? ? user.stripe_coupon : "(none)" %>
+    </div>
+  </div>
+  
+  <div style="width: 70%; display: block; float: right;">
+    <div><strong>Edit Card Information</strong></div>
+    <div id="cardInfoValidate" style="display: none;">
+      <div class="payment-errors" style="color: red;"></div>
+    </div>
+    <div>
+      <%= f.label :card_name %><br />
+      <%= f.text_field :card_name, :size => 20 %>
+    </div>
+    <div>
+      <%= f.label :card_number %><br />
+      <%= f.text_field :card_number, :size => 20, :class => "card-number" %>
+    </div>
+    <div>
+      <%= f.label :card_expired_date %><br />
+      <%= f.select :card_expired_month, month_options, {:prompt => 'Month', :class => "card-expiry-year"} %>
+      <%= f.select :card_expired_year, year_options, {:prompt => 'Year', :class => "card-expiry-year"} %>
+    </div>
+    <div>
+      <%= f.label :card_cvc %><br />
+      <%= f.text_field :card_cvc, :size => 20, :class => "card-cvc" %>
+      <%= f.hidden_field :stripe_card_token %>
+      <%= f.hidden_field :card_type %>
+      <%= f.hidden_field :card_last_four_number %>
+    </div>
+    <div>
+      <%= f.label :stripe_coupon %><br />
+      <%= f.text_field :stripe_coupon, :size => 20 %>
+    </div>
+  </div>
+</div>
 
-<div id="cardInfoValidate" style="display: none;">
-  <div class="payment-errors" style="color: red;"></div>
-</div>
-<div>
-  <%= f.label :card_name %><br />
-  <%= f.text_field :card_name, :size => 20 %>
-</div>
-<div>
-  <%= f.label :card_number %><br />
-  <%= f.text_field :card_number, :size => 20, :class => "card-number" %>
-</div>
-<div>
-  <%= f.label :card_expired_date %><br />
-  <%= f.select :card_expired_month, month_options, {:prompt => 'Month', :class => "card-expiry-year"} %>
-  <%= f.select :card_expired_year, year_options, {:prompt => 'Year', :class => "card-expiry-year"} %>
-</div>
-<div>
-  <%= f.label :card_cvc %><br />
-  <%= f.text_field :card_cvc, :size => 20, :class => "card-cvc" %>
-  <%= f.hidden_field :stripe_card_token %>
-  <%= f.hidden_field :card_type %>
-  <%= f.hidden_field :card_last_four_number %>
-</div>
-<div>
-  <%= f.label :stripe_coupon %><br />
-  <%= f.text_field :stripe_coupon, :size => 20 %>
-</div>

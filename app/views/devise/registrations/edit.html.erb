@@ -19,7 +19,7 @@
   <%= f.password_field :password_confirmation %></div>
 
   <br />
-  <%= render :partial => "/devise/shared/stripe_card_form", :locals => {:submit_form => "edit_profile", :f => f}%>
+  <%= render :partial => "/devise/shared/stripe_card_form", :locals => {:submit_form => "edit_profile", :f => f, :user => resource}%>
   <br />
 
   <div>

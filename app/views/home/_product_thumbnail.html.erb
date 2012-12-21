@@ -3,12 +3,12 @@
     <div class="product_title"><%= product.title %></div>
     <div class="product_image"><img src="<%= product.image_url %>"></div>
     <div>
-      <div class="product_price"><%= product.honey_price ? product.honey_price : "200" %> <b>honey</b></div>
+      <div class="product_price"><%= product.honey_price ? product.honey_price.round : "0" %> <b>honey</b></div>
       <div class="button_for_buy">
-        <%= button_to "Buy", "/orders/buy/#{product.id}", :method => :post %>
+        <a href="/products/<%= product.id %>?for=buy" class="btn btn-mini">Buy</a>
       </div>
       <div class="button_for_sell">
-        <%= button_to "Sell", "/orders/sell/#{product.id}", :method => :post %>
+        <a href="/products/<%= product.id %>?for=sell" class="btn btn-mini">Sell</a>
       </div>
     </div>
   </div>

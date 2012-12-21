@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221073245) do
+ActiveRecord::Schema.define(:version => 20121221151709) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -48,11 +48,8 @@ ActiveRecord::Schema.define(:version => 20121221073245) do
     t.integer  "order_type"
     t.integer  "user_id"
     t.integer  "status"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.string   "email"
-    t.string   "stripe_email"
-    t.string   "stripe_customer_id"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.string   "shipping_method"
     t.string   "shipping_first_name"
     t.string   "shipping_last_name"
@@ -62,6 +59,8 @@ ActiveRecord::Schema.define(:version => 20121221073245) do
     t.string   "shipping_state"
     t.string   "shipping_zip_code"
     t.string   "shipping_country"
+    t.decimal  "honey_price",               :default => 0.0
+    t.string   "using_condition"
   end
 
   create_table "posts", :force => true do |t|
@@ -129,8 +128,8 @@ ActiveRecord::Schema.define(:version => 20121221073245) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "profile_name"
-    t.string   "email",                                   :default => "", :null => false
-    t.string   "encrypted_password",                      :default => "", :null => false
+    t.string   "email",                                   :default => "",  :null => false
+    t.string   "encrypted_password",                      :default => "",  :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -139,8 +138,8 @@ ActiveRecord::Schema.define(:version => 20121221073245) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
     t.string   "card_type"
     t.string   "card_name"
     t.string   "card_expired_month",         :limit => 2
@@ -152,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20121221073245) do
     t.string   "card_last_four_number"
     t.string   "stripe_coupon"
     t.string   "stripe_customer_card_token"
+    t.decimal  "honey_balance",                           :default => 0.0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

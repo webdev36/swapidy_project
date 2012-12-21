@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
   belongs_to :product_model
 
   has_many :product_attributes
-  has_many :product_model_attribute, :through => :product_attributes
+  has_many :product_model_attributes, :through => :product_attributes
   
   USING_CONDITIONS = {:poor => "Poor", :good => "Good", :flawless => "Flawless"}
   
@@ -23,7 +23,7 @@ class Product < ActiveRecord::Base
   
   def gen_attribute_names
     result = []
-    self.product_model_attribute.each do |product_model_attribute|
+    self.product_model_attributes.each do |product_model_attribute|
       result << product_model_attribute.value
     end
     result.join(" ")

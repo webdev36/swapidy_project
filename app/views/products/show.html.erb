@@ -1,0 +1,29 @@
+<div class="product_name">
+  <h2><%= @product.title %></h2>
+  <!-- a href="/sell/ipod/nano/5?expanded=true" class="change_model_link">Change model</a-->
+</div>
+
+<div class="product_model">
+  <strong><%= @product.product_model.title %></strong><br/>
+  <% @product.product_model_attributes.each do |model_attribute| %>
+    <%= model_attribute.category_attribute.title %>: <strong><%= model_attribute.value %></strong><br/>
+  <% end %>
+</div>
+
+<div class="using_condition">
+  <p>Using condition:
+  <strong><%= @product.using_condition %></strong>
+  </p>
+</div>
+
+<div class="product_price">
+  <p><strong>Price: <%= @product.honey_price.round %> Honey</strong></p>
+</div>
+
+<div>
+  <% if (params["for"] && params["for"] == "sell") %>
+    <%= button_to "Sell now", "/orders/sell/#{@product.id}", :method => :post %>
+  <% else %>
+    <%= button_to "Buy now", "/orders/buy/#{@product.id}", :method => :post %>
+  <% end %>
+</div>
