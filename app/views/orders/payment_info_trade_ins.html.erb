@@ -42,31 +42,20 @@
           <%= @product.honey_price.round %> Honey
         </div>
           <br/>
-        <% if current_user.extra_honey_for(@product) <= 0 %>
-          <div>
-            <strong>Your balance is enought to buy!</strong>
-            <a href="#" class="btn btn-success btn-mini">Get more Honey</a>
-          </div>
-          <br/>
+        <div>
+          <i>Your balance would increase to <%= current_user.honey_balance + (@product.honey_price || 0) %> Honey after selling.</i>
+          <br />You could use the Honey money to buy something.
+          <a href="#" class="btn btn-success btn-mini">Get more Honey</a>
+        </div>
+        <% if current_user.card_valid? %>
           <br/>
           <div><%= f.submit "Continue" %></div>
         <% else %>
-          <div>
-            <label>You need to extra Honey:</label>
-            <%= current_user.extra_honey_for(@product).round %> Honey<br/>
-            You would be charged $<%= (current_user.extra_honey_for(@product)/100).round %> (Exchange Rate: 100 Honey / $1 )
-            <a href="#" class="btn btn-mini">Get more Honey</a>
-          </div>
+          <br/>
+          Your payment has not verified. Please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>.  
           <br/>
           <br/>
-          <% if current_user.able_to_buy? @product %>
-            <div><%= f.submit "Continue" %></div>
-          <% else %>
-            Your payment has not verified. Please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>.  
-            <br/>
-            <br/>
-            <a href="/" class="btn">Cancel</a>
-          <% end %>
+          <a href="/" class="btn">Cancel</a>
         <% end %>
       <% end %>
     </div>

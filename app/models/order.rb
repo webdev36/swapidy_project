@@ -14,9 +14,19 @@ class Order < ActiveRecord::Base
   TYPES = {:trade_ins => 0, :order => 1}
   STATUES = {:pending => 0, :fulfilled => 1, :declined => 2}
   SHIPPING_METHODS = {:box => "box", :usps => "usps", :fedex => "fedex"}
+  
+  after_create :adjust_current_balance
 
   scope :to_sell, :conditions => {:order_type => TYPES[:trade_ins]}
   scope :to_buy, :conditions => {:order_type => TYPES[:order]}
+  
+  def is_trade_ins?
+    order_type && order_type == TYPES[:trade_ins]
+  end
+  
+  def is_order?
+    order_type && order_type == TYPES[:order]
+  end
   
   def title
     return self.product.title unless self.product.title.blank?
@@ -29,4 +39,13 @@ class Order < ActiveRecord::Base
     return "Pending"
   end
   
+  private
+  
+    def adjust_current_balance
+      if self.is_trade_ins?
+        self.user.update_attribute :honey_balance, ((self.user.honey_balance || 0) + self.honey_price)
+      else
+        self.user.update_attribute :honey_balance, ((self.user.honey_balance || 0) - self.honey_price)
+      end
+    end
 end

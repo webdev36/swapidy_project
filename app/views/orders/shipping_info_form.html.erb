@@ -7,7 +7,11 @@
 </div>
 
 <h2>Provide your shipping address</h2>
-<p>We use this information to create your shipping labels so you can send your item to us for free!</p>
+<% if @order.is_trade_ins? %>
+ <p>We use this information to create your shipping labels so you can send your item to us for free!</p>
+<% else %>
+ <p>We use this information to create our shipping labels so send send the item to you for free!</p>
+<% end %>
 
 <%= form_for(@order, :as => 'order', :url => "/orders/confirm") do |f| %>
   <%= f.hidden_field :order_type %>

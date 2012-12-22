@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
     @product = Product.find params[:product_id]
 
     if user_signed_in?
-      render "payment_info_form"
+      render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_form"
     else
       @user = User.new
       render "email_info_form"
@@ -20,20 +20,20 @@ class OrdersController < ApplicationController
   end
   
   def payment_info
-    render "payment_info_form"
+    render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_form"
   end
 
   def shipping_info
     if current_user.able_to_buy? @product
       render "shipping_info_form"
     else
-      render "payment_info_form"
+      render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_form"
     end
   end
   
   def confirm
     if @order.valid? && current_user.able_to_buy?(@product)
-      render "confirm_form"
+      render @order.is_trade_ins? ? "confirm_trade_ins" : "confirm_form"
     else
       render "shipping_info_form"
     end
@@ -52,13 +52,15 @@ class OrdersController < ApplicationController
       @order.using_condition = @product.using_condition
       @order.save
       #TODO: send email to user
-      redirect_to "/orders/show"
+      redirect_to "/orders/#{@order.id}"
     else
       render "confirm_form"
     end
   end
   
   def show
+    @order = Order.find params[:id]
+    render @order.is_trade_ins? ? "show_trade_ins" : "show_order"
   end
   
   private
