@@ -82,61 +82,66 @@ ul{
   text-shadow: 0 0 15px rgba(0, 0, 0, 0.6), 0 -1px 1px rgba(0, 0, 0, 0.6);
 
 }
-.modern {
-  display: inline-block;
-  margin: 10px;
-  padding: 8px 15px;
-  background: #B8ED01;
-  border: 1px solid rgba(0,0,0,0.15);
-  border-radius: 4px;
-  transition: all 0.3s ease-out;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    0 2px 2px rgba(0,0,0,0.3),
-    0 0 4px 1px rgba(0,0,0,0.2);
 
-  /* Font styles */
-  text-decoration: none;
-  text-shadow: 0 1px rgba(255,255,255,0.7);
-}
-
-.modern:hover  { background: #C7FE0A; }
-
-.socle {
-  position: relative;
-  z-index: 2;
-}
-.modern:active {
-  box-shadow: 
-    inset 0 -2px 1px rgba(255,255,255,0.2),
-    inset 0 3px 2px rgba(0,0,0,0.12);
-}
-.socle:after {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  border-radius: 6px;
-  box-shadow: 
-  inset 0 1px 0 rgba(0,0,0,0.1),
-  inset 0 -1px 0 rgba(255,255,255,0.7);
-  top: -6px; bottom: -6px;
-  right: -6px; left: -6px;
-  background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0));
-}
-
-
+/*Buy and sell buttons*/
 #buttons{
+margin-left:150px;
+
   position:relative;
-  left:100px;
   margin-top:100px;
+  width:650px;
 }
 
-#button a{
-  text-decoration:none;
+#buttons a{
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 35px;
+    text-decoration: none;
+    font-family: "Lato", Calibri, Arial, sans-serif;
 }
-#button_sell{
-  margin-right:60px;
+
+#buttons .modern{
+display: inline-block;
+    margin: 10px;
+    padding: 8px 15px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    width: 200px;
+    height: 40px;
+
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.5), 
+        0 2px 2px rgba(0,0,0,0.3), 
+        0 0 4px 1px rgba(0,0,0,0.2); 
+
+    text-decoration: none;
+    text-shadow: 0 1px rgba(255,255,255,0.7);  
 }
+
+#buttons .sell_now:hover {
+    background: #00CCFF;
+}
+#buttons .buy_now:hover{
+    background: #FC43CC;
+}
+#buttons .sell_now{
+     background: #0099FF;
+     margin-right:100px;
+
+}
+#buttons .buy_now{
+    background: #EE2C91;
+}
+
+
+/*Isotope*/
 .isotope-item {
   z-index: 2;
 }

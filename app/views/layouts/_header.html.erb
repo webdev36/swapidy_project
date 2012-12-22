@@ -1,28 +1,30 @@
-<div class="navbar navbar-fixed-top navbar-inverse">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="/"><img src="/images/swapidy_logo_header.png" style="height:50px"></a>
+      <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
       <ul class="nav pull-right">
         <% if user_signed_in? %>
           <li>
-            <%= link_to('Profile', edit_user_registration_path, :method => :get) %>
+            <%= link_to('PROFILE', edit_user_registration_path, :method => :get) %>
           </li>
           <li>
-            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+            <%= link_to('LOGOUT', destroy_user_session_path, :method => :delete) %>
           </li>
         <% else %>
           <li>
-            <%= link_to('Login', new_user_session_path)  %>
+            <%= link_to('LOGIN', new_user_session_path)  %>
           </li>
+           <li class="divider-vertical"></li>
           <li>
-            <%= link_to "Sign Up", new_user_registration_path%>
+            <%= link_to "SIGN UP", new_user_registration_path%>
           </li>
           <li class="divider-vertical"></li>
         <% end %>
 
         <li>
-          <a href="#">Help</a>
+          <a href="#">HELP</a>
         </li>
+        <li class="divider-vertical"></li>
         <form class="navbar-search">
           <input type="text" class="search-query" placeholder="Search">
         </form>
