@@ -10,6 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
           set_flash_message :notice, :signed_up if is_navigational_format?
           sign_in(resource_name, resource)
           redirect_to :controller => :orders, :action => :new, :method => :post, :product_id => params[:product_id], :order_type => params[:order_type]
+          UserNotifier.signup_greeting(resource).deliver
           return
         else
           set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?

@@ -67,9 +67,6 @@
   
   <div style="width: 70%; display: block; float: right;">
     <div><strong>Edit Card Information</strong></div>
-    <div id="cardInfoValidate" style="display: none;">
-      <div class="payment-errors" style="color: red;"></div>
-    </div>
     <div>
       <%= f.label :card_name %><br />
       <%= f.text_field :card_name, :size => 20 %>
@@ -93,6 +90,9 @@
     <div>
       <%= f.label :stripe_coupon %><br />
       <%= f.text_field :stripe_coupon, :size => 20 %>
+    </div>
+    <div id="cardInfoValidate" style="display: none;">
+      <div class="payment-errors" style="color: red;"></div>
     </div>
   </div>
 </div>

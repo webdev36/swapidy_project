@@ -48,10 +48,16 @@ class OrdersController < ApplicationController
         user = User.create(:email => @order.email, :address => @order.shipping_address, :password => "123456", :password_confirmation => "123456")
         @order.user = user
       end
+      @order.product = @product
       @order.honey_price = @product.honey_price
       @order.using_condition = @product.using_condition
       @order.save
       #TODO: send email to user
+      if @order.is_trade_ins?
+        OrderNotifier.confirm_to_sell(current_user, @order).deliver
+      else
+        OrderNotifier.confirm_to_buy(current_user, @order).deliver
+      end
       redirect_to "/orders/#{@order.id}"
     else
       render "confirm_form"

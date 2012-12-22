@@ -1,0 +1,19 @@
+<div class="product_name">
+  <h2><%= @product.title %></h2>
+</div>
+
+<div class="product_model">
+  <u><i>Model</i>: <strong><%= @product.product_model.title %></strong></u><br/>
+  <% @product.product_model_attributes.each do |model_attribute| %>
+    <i><%= model_attribute.category_attribute.title %>:</i> <strong><%= model_attribute.value %></strong><br/>
+  <% end %>
+</div>
+<div class="using_condition">
+  <i>Using condition:</i> <strong><%= @product.using_condition %></strong>
+</div>
+<br/>
+
+<div class="product_price">
+  <strong>Price: <%= (@product.honey_price || 0.0).round %> Honey</strong>
+</div>
+<br/>

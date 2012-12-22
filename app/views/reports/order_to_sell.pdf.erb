@@ -1,0 +1,26 @@
+<h1>Trade Ins Number: <%= @order.id %> </h1>
+<p>Created at: <%= @order.created_at %></p>
+<br/>
+
+<h2>Item: <%= @order.product.title %></h2>
+<p>
+  <u><i>Model:</i> <strong><%= @product.product_model.title %></strong></u><br/>
+  <% @product.product_model_attributes.each do |model_attribute| %>
+    <i><%= model_attribute.category_attribute.title %></i>: <strong><%= model_attribute.value %></strong><br/>
+  <% end %>
+</p>
+<p><i>Using condition</i>: <strong><%= @product.using_condition %></strong></p>
+<p><strong><i>Price</i>: <%= @product.honey_price %> Honey</strong></p>
+
+<h2>Shipping from</h2>
+<p>
+  <%= @order.shipping_first_name %> <%= @order.shipping_last_name %><br />
+  <%= @order.shipping_address %><br />
+  <%= @order.shipping_optional_address %>
+  <%= @order.shipping_city %><br />
+  <%= @order.shipping_state %><br />
+  <%= @order.shipping_zip_code %><br />
+  <%= @order.shipping_country %><br />
+  <%= @order.shipping_method_name %>
+</p>
+

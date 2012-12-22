@@ -55,7 +55,7 @@
   <br/>
   <div>
     <label>
-      <strong>Shipping Details</strong>
+      <strong>Shipping Information</strong>
       <a href="#" onclick="javascript:changeTo('/orders/shipping_info');" class="btn btn-mini">Change</a>
     </label>
     <p>
@@ -66,7 +66,7 @@
       <%= @order.shipping_state %><br />
       <%= @order.shipping_zip_code %><br />
       <%= @order.shipping_country %><br />
-      <%= shipping_method_name(@order.shipping_method) %>
+      <%= @order.shipping_method_name %>
     </p>
   </div>
   <div>

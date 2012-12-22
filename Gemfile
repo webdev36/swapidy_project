@@ -13,6 +13,7 @@ gem 'paperclip'
 gem 'stripe'
 gem 'active_shipping'
 gem 'carmen-rails'
+gem 'wicked_pdf'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,6 +28,10 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+group :development, :test do
+  gem 'mailcatcher'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

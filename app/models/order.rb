@@ -15,6 +15,10 @@ class Order < ActiveRecord::Base
   STATUES = {:pending => 0, :fulfilled => 1, :declined => 2}
   SHIPPING_METHODS = {:box => "box", :usps => "usps", :fedex => "fedex"}
   
+  SHIPPING_METHOD_NAMES = { :box => "A box and prepaid label", 
+                            :usps => "Prepaid USPS Shipping Label", 
+                            :fedex => "Prepaid FedEx Shipping Label"}
+  
   after_create :adjust_current_balance
 
   scope :to_sell, :conditions => {:order_type => TYPES[:trade_ins]}
@@ -37,6 +41,10 @@ class Order < ActiveRecord::Base
     return "Fulfilled" if self.status && self.status == STATUES[:fulfilled]
     return "Declined" if self.status && self.status == STATUES[:declined] 
     return "Pending"
+  end
+  
+  def shipping_method_name
+    SHIPPING_METHOD_NAMES[self.shipping_method.to_sym]
   end
   
   private

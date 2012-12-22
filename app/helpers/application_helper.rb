@@ -27,17 +27,9 @@ module ApplicationHelper
   def country_options
     [["USA", "United States"]]
   end
-  
-  SHIPPING_METHOD_NAMES = { :box => "A box and prepaid label", 
-                            :usps => "Prepaid USPS Shipping Label", 
-                            :fedex => "Prepaid FedEx Shipping Label"}
-                    
+
   def shipping_method_options
-    Order::SHIPPING_METHODS.keys.map{|key| [SHIPPING_METHOD_NAMES[key], Order::SHIPPING_METHODS[key]] }
-  end
-  
-  def shipping_method_name(method_key)
-    SHIPPING_METHOD_NAMES[method_key.to_sym]
+    Order::SHIPPING_METHODS.keys.map{|key| [Order::SHIPPING_METHOD_NAMES[key], Order::SHIPPING_METHODS[key]] }
   end
 
   
