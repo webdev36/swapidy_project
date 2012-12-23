@@ -13,8 +13,8 @@ class OrderNotifier < ActionMailer::Base
     mail :to => @user.email, :subject => "Order information to sell" do |format|
       format.text # renders send_report.text.erb for body of email
       format.pdf do
-        attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
-          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb')
+        attachments["TradeInsOrder_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
+          render_to_string(:pdf => "TradeInsOrder_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb')
         )
       end
     end
@@ -27,8 +27,8 @@ class OrderNotifier < ActionMailer::Base
     mail :to => @user.email, :subject => "Order information to buy" do |format|
       format.text # renders send_report.text.erb for body of email
       format.pdf do
-        attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
-          render_to_string(:pdf => "Order_#{@order.id}.pdf", :template => '/reports/order_to_buy.pdf.erb')
+        attachments["PurchaseOrder_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
+          render_to_string(:pdf => "PurchaseOrder_#{@order.id}.pdf", :template => '/reports/order_to_buy.pdf.erb')
         )
       end
     end

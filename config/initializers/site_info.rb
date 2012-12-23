@@ -1,6 +1,6 @@
 COMPANY_NAME = "Swapidy"
 SITE_NAME = "Swapidy"
-ROOT_URI = "localhost:3000"
+ROOT_URI = "swapidy.com"
 COMPANY_ADDRESS = {
   :street => "",
   :suite => "",
