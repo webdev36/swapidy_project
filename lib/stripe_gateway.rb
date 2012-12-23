@@ -29,7 +29,7 @@ module StripeGateway
   # create card token related to the Payment Plan in Stripe.com
   def create_payment_card_token logger = nil
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
-    Stripe.api_key = ENV['STRIPE_PUBLIC_KEY']
+    Stripe.api_key = STRIPE_PUBLIC_KEY
     @logger.info "Public key: #{Stripe.api_key}"
     @logger.info "Card_info: #{self.card_number}"
     begin
@@ -58,12 +58,11 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Create customer: #{self.email}"
     begin
-      Stripe.api_key = STRIPE_PUBLIC_KEY
-      customer_params = {:description => self.email, :card => self.stripe_card_token, :plan => STRIPE_PLAN_ID, :trial_end => get_next_trial_time.to_i}
-      customer_params.merge!(:coupon => self.stripe_coupon) if self.stripe_coupon && !self.stripe_coupon.blank?
+      Stripe.api_key = STRIPE_SECURE_KEY
+      customer_params = {:description => self.email, :card => self.new_stripe_card_token}
       return Stripe::Customer.create(customer_params)
     rescue Exception => e
-      @logger.info "Error: #{e.message}"
+      @logger.info "create_payment_customer - Error: #{e.message}"
       raise e
     end
   end
@@ -74,7 +73,7 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Cancel customer: #{self.email}"
     begin
-      Stripe.api_key = STRIPE_PUBLIC_KEY
+      Stripe.api_key = STRIPE_SECURE_KEY
       cu = Stripe::Customer.retrieve(self.stripe_customer_id) rescue nil
       cu.cancel_subscription if cu
     rescue Exception => e
@@ -90,7 +89,7 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Reactive customer: #{self.email}"
     begin
-      Stripe.api_key = STRIPE_PUBLIC_KEY
+      Stripe.api_key = STRIPE_SECURE_KEY
       cu = Stripe::Customer.retrieve(self.stripe_customer_id) rescue nil
       #cu.create_subscription({:prorate => true, :card => self.stripe_card_token, :plan => STRIPE_PLAN_ID, :trial_end => get_next_trial_time.to_i}) if cu
       cu.update_subscription({:prorate => true, :plan => STRIPE_PLAN_ID, :trial_end => get_next_trial_time.to_i}) if cu
@@ -101,17 +100,18 @@ module StripeGateway
   end
 
   # update customer payment information (card, plan, description and coupon if he/she has)
-  def update_payment_customer logger = nil
+  def update_payment_customer(logger = nil)
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Update customer: #{self.email}"
     begin
-      Stripe.api_key = STRIPE_PUBLIC_KEY
+      Stripe.api_key = STRIPE_SECURE_KEY
       cu = Stripe::Customer.retrieve(self.stripe_customer_id)
       cu.description = self.email
-      cu.card = self.stripe_card_token
-      cu.plan = STRIPE_PLAN_ID
-      cu.coupon = self.stripe_coupon if self.stripe_coupon && !self.stripe_coupon.blank?
+      cu.card = self.new_stripe_card_token
+      #cu.plan = STRIPE_PLAN_ID
+      #cu.coupon = self.stripe_coupon if self.stripe_coupon && !self.stripe_coupon.blank?
       cu.save
+      return true
     rescue Exception => e
       @logger.info "Error: #{e.message}"
       raise e
@@ -123,7 +123,7 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Delete customer: #{params[:email]}"
     begin
-      Stripe.api_key = STRIPE_PUBLIC_KEY
+      Stripe.api_key = STRIPE_SECURE_KEY
       cu = Stripe::Customer.retrieve(self.stripe_customer_id)
       cu.delete
     rescue Exception => e
@@ -133,22 +133,22 @@ module StripeGateway
   end
 
   # create payment charge a customer in stripe.com
-  def create_payment_charge order, logger = nil
+  def create_payment_charge payment, logger = nil
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
-    @logger.info "Charge customer: #{order.user.email}"
+    @logger.info "Charge customer: #{payment.user.email}"
     begin
-      Stripe.api_key = STRIPE_PUBLIC_KEY
+      Stripe.api_key = STRIPE_SECURE_KEY
       charge = Stripe::Charge.create(
-        :amount => (order.amount * 100).to_i, # amount in cents
+        :amount => (payment.amount * 100).to_i, # amount in cents
         :currency => "usd",
-        :customer => order.user.stripe_customer_id,
-        :description => order.user.email
+        :customer => payment.user.stripe_customer_id, #use card_token_id or customer_id
+        :description => "Charge for #{payment.honey_money} Honey"
       )
       @logger.info "Payment result: #{charge.to_s}"
       if charge.paid
         @logger.info "Charge Success (#{charge.id})"
-        order.payment_charge_id = charge.id
-        order.paid_at = Time.now #charge.created
+        payment.payment_charge_id = charge.id
+        #payment.create_at = Time.now #charge.created
         return true
       else
         @logger.info "Charge failure (#{charge.id})"
@@ -161,15 +161,15 @@ module StripeGateway
   end
 
   # create refund for a charge
-  def create_payment_refund refund, logger = nil
+  def create_payment_refund payment, logger = nil
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     
-    return unless refund && refund.order && refund.order.user
-    @logger.info "Refund customer: #{refund.order.user.email}"
+    return unless payment && payment.user
+    @logger.info "Refund customer: #{payment.user.email}"
     begin
       Stripe.api_key = STRIPE_PUBLIC_KEY
-      charge = Stripe::Charge.retrieve(refund.order.payment_charge_id)
-      charge.refund(:amount => (refund.amount*100).to_i)
+      charge = Stripe::Charge.retrieve(payment.payment_charge_id)
+      charge.refund(:amount => (payment.amount*100).to_i) # amount in cents
     rescue Exception => e
       @logger.info "Charge Error: #{e.message}"
       raise e
@@ -192,12 +192,6 @@ module StripeGateway
       @logger.info "Charges Error: #{e.message}"
     end
     return nil
-  end
-
-  def get_next_trial_time
-    #return Time.now + 5.minutes #for testing now
-    next_month = (Time.now.strftime("%d").to_i == 1) ? Time.now : (Time.now + 1.months)
-    return Time.zone.parse("01/#{next_month.strftime("%m/%Y")} 00:00:00", "%d/%m/%Y %H:%M:%s")
   end
   
 end

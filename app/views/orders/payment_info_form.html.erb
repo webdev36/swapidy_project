@@ -34,18 +34,18 @@
         
         <div>
           <label>Current Balance:</label>
-          <%= current_user.honey_balance.round %> Honey
+          <%= format_num(current_user.honey_balance) %> Honey
         </div>
           <br/>
         <div>
           <label>Product Price:</label>
-          <%= @product.honey_price.round %> Honey
+          <%= format_num(@product.honey_price) %> Honey
         </div>
           <br/>
         <% if current_user.extra_honey_for(@product) <= 0 %>
           <div>
             <strong>Your balance is enought to buy!</strong>
-            <% if current_user.card_valid? %>
+            <% if current_user.payment_ready? %>
               <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
             <% end %>
           </div>
@@ -55,13 +55,13 @@
         <% else %>
           <div>
             <label>You need to extra Honey:</label>
-            <%= current_user.extra_honey_for(@product).round %> Honey
+            <%= format_num(current_user.extra_honey_for(@product)) %> Honey
           </div>
           <br/>
           <br/>
           <div>
-            <% if current_user.card_valid? %>
-              You would be charged $<%= (current_user.extra_honey_for(@product)/100).round %> (Exchange Rate: 100 Honey / $1 )
+            <% if current_user.payment_ready? %>
+              You would be charged $<%= format_num(current_user.extra_honey_for(@product)/100) %> (Exchange Rate: 100 Honey / $1 )
               <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
             <% else %>
               Your payment has not verified. Please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>.  

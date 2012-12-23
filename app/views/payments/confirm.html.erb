@@ -1,0 +1,25 @@
+<%= form_for(@payment, :as => 'payment', :url => "/payments/create") do |f| %>
+  <%= f.hidden_field :honey_money %>
+  <h2>Confirm Honey money to buy</h2>
+  <div>
+    <label>Honey money amount:</label>
+    <strong><%= format_num(@payment.honey_money) %> Honey</strong>
+  </div>
+  <div>
+    <label>Charge amount:</label>
+    <strong>$<%= format_num(@payment.amount) %></strong>
+  </div>
+  <br/>
+  <div>
+      <span>Your current balance is:</span>
+      <span style="font-weight: bold;"><%= format_num(current_user.honey_balance) %> Honey</span><br />
+      <span>After payment, your balance will be: </span>
+      <span style="font-weight: bold;"><%= format_num(@payment.honey_money + current_user.honey_balance) %> Honey</span>
+  </div>
+  <h3>Charge to your Credit card</h3>
+  <%= render :partial => "/shared/card_info", :locals => {:card => current_user }%>
+  <br/>
+  <div>
+    <%= f.submit "Do payment" %>
+  </div>    
+<% end %>

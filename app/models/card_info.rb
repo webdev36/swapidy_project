@@ -1,6 +1,8 @@
 
 module CardInfo
   
+  CARD_ATTRS = [:type, :name, :last_four_number, :number, :cvc, :expired_month, :expired_year, :strip_card_token]
+  
   def self.included(base)
     #attr_accessible :card_type, :card_name, :card_expired_month, :card_expired_year, :card_last_four_number  
   end

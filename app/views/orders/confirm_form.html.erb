@@ -32,11 +32,11 @@
     </label>
     <div>
       <span>Current Balance:</span>
-      <%= current_user.honey_balance.round %> Honey
+      <%= format_num(current_user.honey_balance) %> Honey
     </div>
     <div>
       <span>Product Price:</span>
-      <%= @product.honey_price.round %> Honey
+      <%= format_num(@product.honey_price) %> Honey
     </div>
     <% if current_user.extra_honey_for(@product) <= 0 %>
       <div>
@@ -46,8 +46,8 @@
     <% else %>
       <div>
         <span>You need to extra Honey:</span>
-        <%= current_user.extra_honey_for(@product).round %> Honey<br/>
-        You would be charged $<%= (current_user.extra_honey_for(@product)/100).round %> (Exchange Rate: 100 Honey / $1 )
+        <%= format_num(current_user.extra_honey_for(@product)) %> Honey<br/>
+        You would be charged $<%= format_num(current_user.extra_honey_for(@product)/100) %> (Exchange Rate: 100 Honey / $1 )
         <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-mini">Get more Honey</a>
       </div>
     <% end %>

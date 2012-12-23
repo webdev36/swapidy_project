@@ -1,3 +1,5 @@
+
+
 class PaymentTransaction < ActiveRecord::Base
   
   attr_accessible :card_type, :card_name, :card_expired_month, :card_expired_year, :card_last_four_number

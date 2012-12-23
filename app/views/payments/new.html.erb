@@ -6,7 +6,7 @@
   </div>
   
   <h3>Charge to your Credit card</h3>
-  <%= render :partial => "/shared/card_info", :locals => {:card => @payment }%>
+  <%= render :partial => "/shared/card_info", :locals => {:card => current_user }%>
   <br/>
   <div>
     <%= f.submit "Submit" %>

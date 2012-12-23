@@ -8,9 +8,13 @@ Swapidy::Application.routes.draw do
   end
   
   resources :products
-  resources :payments
   
-  resources :orders
+  match "/payments/confirm" => "payments#confirm", :method => :post
+  resources :payments do 
+    post :create, :on => :member
+    post :show, :on => :member
+  end
+  
   match "/orders/email_info" => "orders#email_info", :method => :post
   match "/orders/payment_info" => "orders#payment_info", :method => :post
   match "/orders/shipping_info" => "orders#shipping_info", :method => :post
@@ -19,6 +23,7 @@ Swapidy::Application.routes.draw do
   match "/orders/complete" => "orders#complete", :method => :get
   match "/orders/buy/:product_id" => "orders#new", :method => :post, :order_type => Order::TYPES[:order]
   match "/orders/sell/:product_id" => "orders#new", :method => :post, :order_type => Order::TYPES[:trade_ins]
+  resources :orders
   
   get "home/index"
 

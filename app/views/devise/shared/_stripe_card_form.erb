@@ -15,10 +15,10 @@
     // given a valid form, submit the payment details to stripe
     //$(form['submit-button']).attr("disabled", "disabled")
     Stripe.createToken({
-      number: form.find('#user_card_number').val(),
-      cvc: form.find('#user_card_cvc').val(),
-      exp_month: form.find('#user_card_expired_month').val(),
-      exp_year: form.find('#user_card_expired_year').val()
+      number: form.find('#user_new_card_number').val(),
+      cvc: form.find('#user_new_card_cvc').val(),
+      exp_month: form.find('#user_new_card_expired_month').val(),
+      exp_year: form.find('#user_new_card_expired_year').val()
     }, 100, function(status, response) {
       if (response.error) {
         form.find("#cardInfoValidate").show();
@@ -29,11 +29,11 @@
         form.find(".payment-errors").html(response.error.message);
       } else {
         // token contains id, last4, and card type
-        form.find("#user_stripe_card_token").val(response['id']);
-        form.find("#user_card_type").val(response['card']['type']);
-        form.find("#user_card_last_four_number").val(response['card']['last4']);
-        form.find("#user_card_number").val('');
-        form.find("#user_card_cvc").val('');
+        form.find("#user_new_stripe_card_token").val(response['id']);
+        form.find("#user_new_card_type").val(response['card']['type']);
+        form.find("#user_new_card_last_four_number").val(response['card']['last4']);
+        form.find("#user_new_card_number").val('');
+        form.find("#user_new_card_cvc").val('');
         // insert the stripe token
         // and submit
         form.submit();
@@ -42,7 +42,7 @@
     return false;
   }
 </script>
-<div id="card_info_container" class="span12">
+<div id="card_info_container" class="span12" style="margin-left: 0px;">
   <h2>Card Information</h2>
   
   <div style="width: 30%; display: block; float: left;">
@@ -50,26 +50,29 @@
   </div>
   
   <div style="width: 70%; display: block; float: right;">
-    <div><strong>Edit Card Information</strong></div>
+    <div>
+      <strong>Edit Card Information</strong><br/>
+      <i>(leave blank if you don't want to change it)</i>
+    </div>
     <div>
       <%= f.label :card_name %><br />
-      <%= f.text_field :card_name, :size => 20 %>
+      <%= f.text_field :new_card_name, :size => 20 %>
     </div>
     <div>
       <%= f.label :card_number %><br />
-      <%= f.text_field :card_number, :size => 20, :class => "card-number" %>
+      <%= f.text_field :new_card_number, :size => 20, :class => "card-number" %>
     </div>
     <div>
       <%= f.label :card_expired_date %><br />
-      <%= f.select :card_expired_month, month_options, {:prompt => 'Month', :class => "card-expiry-year"} %>
-      <%= f.select :card_expired_year, year_options, {:prompt => 'Year', :class => "card-expiry-year"} %>
+      <%= f.select :new_card_expired_month, month_options, {:prompt => 'Month', :class => "card-expiry-year"} %>
+      <%= f.select :new_card_expired_year, year_options, {:prompt => 'Year', :class => "card-expiry-year"} %>
     </div>
     <div>
       <%= f.label :card_cvc %><br />
-      <%= f.text_field :card_cvc, :size => 20, :class => "card-cvc" %>
-      <%= f.hidden_field :stripe_card_token %>
-      <%= f.hidden_field :card_type %>
-      <%= f.hidden_field :card_last_four_number %>
+      <%= f.text_field :new_card_cvc, :size => 20, :class => "card-cvc" %>
+      <%= f.hidden_field :new_stripe_card_token %>
+      <%= f.hidden_field :new_card_type %>
+      <%= f.hidden_field :new_card_last_four_number %>
     </div>
     <div id="cardInfoValidate" style="display: none;">
       <div class="payment-errors" style="color: red;"></div>

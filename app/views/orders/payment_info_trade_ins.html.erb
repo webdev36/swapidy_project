@@ -34,18 +34,18 @@
         
         <div>
           <label>Current Balance:</label>
-          <%= current_user.honey_balance.round %> Honey
+          <%= format_num(current_user.honey_balance) %> Honey
         </div>
           <br/>
         <div>
           <label>Product Price:</label>
-          <%= @product.honey_price.round %> Honey
+          <%= format_num(@product.honey_price) %> Honey
         </div>
           <br/>
         <div>
-          <i>Your balance would increase to <%= current_user.honey_balance + (@product.honey_price || 0) %> Honey after selling.</i>
+          <i>Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %> Honey after selling.</i>
           <br />You could use the Honey money to buy something.
-          <% if current_user.card_valid? %>
+          <% if current_user.payment_ready? %>
             <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
           <% end %>
         </div>
