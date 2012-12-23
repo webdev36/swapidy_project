@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
   end
 
   def shipping_info
-    if current_user.able_to_buy? @product
+    if current_user.could_order?(@order)
       render "shipping_info_form"
     else
       render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_form"
@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
   end
   
   def confirm
-    if @order.valid? && current_user.able_to_buy?(@product)
+    if @order.valid?
       render @order.is_trade_ins? ? "confirm_trade_ins" : "confirm_form"
     else
       render "shipping_info_form"
@@ -40,19 +40,10 @@ class OrdersController < ApplicationController
   end
   
   def create
-    if @order.valid? && current_user.able_to_buy?(@product)
-      if user_signed_in?
-        @order.user = current_user
-      else
-        user = User.find_by_email(@order.email) rescue nil
-        user = User.create(:email => @order.email, :address => @order.shipping_address, :password => "123456", :password_confirmation => "123456")
-        @order.user = user
-      end
-      @order.product = @product
+    if @order.valid? && current_user.could_order?(@order)
       @order.honey_price = @product.honey_price
       @order.using_condition = @product.using_condition
       @order.save
-      #TODO: send email to user
       if @order.is_trade_ins?
         OrderNotifier.confirm_to_sell(current_user, @order).deliver
       else
@@ -74,7 +65,8 @@ class OrdersController < ApplicationController
     def set_order_product
       @order = Order.new(params[:order])
       @order.status = Order::STATUES[:pending]
-      @product = Product.find(params[:order][:product_id])
+      @order.user = current_user
+      @product = @order.product = Product.find(params[:order][:product_id])
     end
 
 end

@@ -2,6 +2,9 @@ require 'stripe_gateway'
 
 class User < ActiveRecord::Base
   include StripeGateway
+  
+  attr_accessible :card_type, :card_name, :card_expired_month, :card_expired_year, :card_last_four_number
+  include CardInfo
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -12,7 +15,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :address, 
                   :honey_balance,
-                  :card_type, :card_name, :card_expired_month, :card_expired_year, :card_postal_code, :card_last_four_number,
+                  #:card_type, :card_name, :card_expired_month, :card_expired_year, :card_postal_code, :card_last_four_number,
                   :stripe_customer_id, :stripe_card_token, :stripe_coupon, :stripe_customer_card_token, :card_number, :card_cvc
  
   attr_accessor :card_number, :card_cvc
@@ -21,19 +24,6 @@ class User < ActiveRecord::Base
   has_many :trade_ins, :conditions => "order_type = 0", :class_name => "Order", :order => "status asc, created_at desc"
 
   validate :validate_card_info
-  
-  def self.authenticate_with_password(email, password)
-    user = find_by_email(email)
-    return user if user && user.encrypted_password == BCrypt::Engine.hash_secret(password)
-  end
-    
-  def card_expired_date
-    return "#{self.card_expired_year}-#{self.card_expired_month}-01".to_date rescue nil
-  end
-  def card_expired_date=(date)
-    self.card_expired_month = date.month.to_s
-    self.card_expired_year = date.year.to_s
-  end
   
   def card_info_valid?
     return if self.card_number.blank? && self.card_name.blank? && self.card_cvc.blank? && self.card_expired_month.blank? && card_expired_year.blank?
@@ -58,9 +48,8 @@ class User < ActiveRecord::Base
     end
   end
   
-  def able_to_buy? product
-    return true if extra_honey_for(product) <= 0
-    card_valid?
+  def could_order? order
+    order.is_trade_ins? || extra_honey_for(order.product) <= 0
   end
   
   def extra_honey_for product

@@ -45,18 +45,13 @@
         <div>
           <i>Your balance would increase to <%= current_user.honey_balance + (@product.honey_price || 0) %> Honey after selling.</i>
           <br />You could use the Honey money to buy something.
-          <a href="#" class="btn btn-success btn-mini">Get more Honey</a>
+          <% if current_user.card_valid? %>
+            <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
+          <% end %>
         </div>
-        <% if current_user.card_valid? %>
-          <br/>
-          <div><%= f.submit "Continue" %></div>
-        <% else %>
-          <br/>
-          Your payment has not verified. Please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>.  
-          <br/>
-          <br/>
-          <a href="/" class="btn">Cancel</a>
-        <% end %>
+        
+        <br/>
+        <div><%= f.submit "Continue" %></div>
       <% end %>
     </div>
   </div>

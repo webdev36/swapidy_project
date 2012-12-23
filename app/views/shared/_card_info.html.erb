@@ -1,0 +1,19 @@
+<div>
+  <strong>Current Card info</strong>
+</div>
+<div>
+  <label>Card Name</label>
+  <%= card.card_name %>
+</div>
+<div>
+  <label>Card Type</label>
+  <%= card.card_type %>
+</div>
+<div>
+  <label>Card Number</label>
+  xxxx-xxxx-xxxx-<%= card.card_last_four_number %>
+</div>
+<div>
+  <label>Expiration Date</label>
+  <%= card.card_expired_date.strftime("%B %Y") if card.card_expired_date %>
+</div>

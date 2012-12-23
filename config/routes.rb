@@ -8,6 +8,7 @@ Swapidy::Application.routes.draw do
   end
   
   resources :products
+  resources :payments
   
   resources :orders
   match "/orders/email_info" => "orders#email_info", :method => :post

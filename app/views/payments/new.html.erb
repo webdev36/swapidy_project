@@ -1,0 +1,14 @@
+<%= form_for(@payment, :as => 'payment', :url => "/payments/confirm") do |f| %>
+  <h2>Buy Honey money to join market</h2>
+  <div>
+    <%= f.label :honey_money %>
+    <%= f.text_field :honey_money %>
+  </div>
+  
+  <h3>Charge to your Credit card</h3>
+  <%= render :partial => "/shared/card_info", :locals => {:card => @payment }%>
+  <br/>
+  <div>
+    <%= f.submit "Submit" %>
+  </div>    
+<% end %>

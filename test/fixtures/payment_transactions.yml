@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  gateway: MyString
+  payment_charge_id: MyString
+  status: MyString
+  : 
+  payment_type: MyString
+  amount: 9.99
+  card_name: MyString
+  card_type: MyString
+  card_expried_month: MyString
+  card_expried_year: MyString
+  card_last_four_number: MyString
+
+two:
+  user_id: 1
+  gateway: MyString
+  payment_charge_id: MyString
+  status: MyString
+  : 
+  payment_type: MyString
+  amount: 9.99
+  card_name: MyString
+  card_type: MyString
+  card_expried_month: MyString
+  card_expried_year: MyString
+  card_last_four_number: MyString

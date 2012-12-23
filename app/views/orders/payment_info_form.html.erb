@@ -45,7 +45,9 @@
         <% if current_user.extra_honey_for(@product) <= 0 %>
           <div>
             <strong>Your balance is enought to buy!</strong>
-            <a href="#" class="btn btn-success btn-mini">Get more Honey</a>
+            <% if current_user.card_valid? %>
+              <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
+            <% end %>
           </div>
           <br/>
           <br/>
@@ -53,20 +55,21 @@
         <% else %>
           <div>
             <label>You need to extra Honey:</label>
-            <%= current_user.extra_honey_for(@product).round %> Honey<br/>
-            You would be charged $<%= (current_user.extra_honey_for(@product)/100).round %> (Exchange Rate: 100 Honey / $1 )
-            <a href="#" class="btn btn-mini">Get more Honey</a>
+            <%= current_user.extra_honey_for(@product).round %> Honey
           </div>
           <br/>
           <br/>
-          <% if current_user.able_to_buy? @product %>
-            <div><%= f.submit "Continue" %></div>
-          <% else %>
-            Your payment has not verified. Please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>.  
-            <br/>
-            <br/>
-            <a href="/" class="btn">Cancel</a>
-          <% end %>
+          <div>
+            <% if current_user.card_valid? %>
+              You would be charged $<%= (current_user.extra_honey_for(@product)/100).round %> (Exchange Rate: 100 Honey / $1 )
+              <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
+            <% else %>
+              Your payment has not verified. Please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>.  
+            <% end %>
+          </div>
+          <br/>
+          <br/>
+          <a href="/" class="btn">Cancel</a>
         <% end %>
       <% end %>
     </div>
