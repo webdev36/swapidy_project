@@ -17,7 +17,7 @@
   </div>
 </div>
 <div id="product_type" style="display:none;">
-  <h2 style="margin-left:20px;">Select your category</h2>
+  <h2 style="color:#38B4DE;">Select your category</h2>
   <div id="product_type_container" class="span12">
     <% Category.all.each do |category| %>
       <div id="cat_<%= category.id %>" class="category span4"><img class="cat_item" alt="<%= category.title %>" src="<%= category.image_url(:medium) %>"></div>
@@ -29,9 +29,9 @@
   <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 40px;">
     <div id="product_models">
       <div class="model_filter">
-        <span class="product_model active" id="filter_model_all">All models</span>
+        <span class="product_model active label" id="filter_model_all">All models</span>
         <% category.product_models.each do |product_model| %>
-          &nbsp;|&nbsp;<span class="product_model" id="filter_model_<%= product_model.id %>"><%= product_model.title %></span>
+          &nbsp;|&nbsp;<span class="product_model label label-success" id="filter_model_<%= product_model.id %>"><%= product_model.title %></span>
         <% end %>
       </div>
     </div>
@@ -39,16 +39,16 @@
       <div class="attribute_filter">
         <% category.category_attributes.each do |attr|%>
           <div class="option-set" data-group="cat_attr_<%= attr.id %>">
-            <h3 class="s_category"><%= attr.title %></h3>
+            <h3 class="s_category" style="color:#38B4DE"><%= attr.title %></h3>
             <% attr.attributes_in_models.each do |attr_value_with_models| %>
-              <span class="attr_filter attr_filter_model_all <%= attr_value_with_models[1].map{|model| "attr_filter_model_#{model.id.to_s}"}.join(" ") %>" >
+              <span class="attr_filter label attr_filter_model_all <%= attr_value_with_models[1].map{|model| "attr_filter_model_#{model.id.to_s}"}.join(" ") %>" >
                 <input type="checkbox" 
                   attr-filter-option='<%= attr_value_with_models[0] %>'><%= attr_value_with_models[0] %></input>
               </span>
             <% end %>
           </div>
         <% end %>
-        <div class="option-set" data-group="cat_attr_condition">
+        <div class="option-set" data-group="cat_attr_condition" style="">
           <%= filter_using_conditions %>
         </div>
       </div>

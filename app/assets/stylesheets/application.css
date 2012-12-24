@@ -158,7 +158,7 @@ left:0px;
 }
 
 #product_type{
-    padding-top:180px;
+    padding-top:110px;
 }
 #product_type .cat_item,
 #product .item img {
@@ -181,9 +181,14 @@ left:0px;
   padding: 30px 0 60px 0;
   margin-top: 100px;
   border-top: 1px solid #E5E5E5;
-  background-color: whiteSmoke;
+  background-color: whitesmoke;
+  text-align: center;
 }
 
+.footer li{
+    display: inline;
+    margin-right: 20px;
+}
 .container a,
 .container a:hover {
   color: #000FFF;
@@ -193,3 +198,13 @@ left:0px;
 .footer .container a:hover {
   color: #1D95CB;
 }
+
+h2{
+    color: #FC43CC;
+}
+
+.s_category{
+    color:#38B4DE;
+}
+
+

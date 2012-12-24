@@ -18,6 +18,19 @@ $(function() {
   }, function() {
     this.src = 'images/Follow.png';
   });
+  $('#footer_fb').mouseover(function(){
+    $(this).attr("src",'/images/footer_fb_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/footer_fb.png');
+  });
+  
+  $('#footer_twitter').mouseover(function(){
+    $(this).attr("src",'/images/footer_twitter_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/footer_twitter.png');
+  });
 
 });
 
