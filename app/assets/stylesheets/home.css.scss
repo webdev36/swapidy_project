@@ -303,8 +303,8 @@ display: inline-block;
   border: 0px;
 }
 
-.hidden {
-  display:none;
+.hidden_filter {
+  display: none !important;
 }
 
 .thumbnail .box {

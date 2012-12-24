@@ -55,9 +55,9 @@
           <% Product::USING_CONDITIONS.keys.each do |condition| %>
             <div style="display:inline-block;">
               <div style="display: inline-block; line-height: 30px;">
-                <input type="checkbox" class="regular-checkbox big-checkbox" id="checkbox-cond-<%= condition.to_s %>" 
-                  attr-filter-option="<%= condition.to_s %>" />
-                <label for="checkbox-cond-<%= condition.to_s %>"></label>
+                <input type="checkbox" class="regular-checkbox big-checkbox" id="checkbox-cond-<%= category.id %>-<%= condition.to_s %>" 
+                  attr-filter-option="<%= Product::USING_CONDITIONS[condition] %>" />
+                <label for="checkbox-cond-<%= category.id %>-<%= condition.to_s %>"></label>
               </div>
               <div style="display:inline-block; margin-top: -5px; font-size: 20px; padding-right: 15px;"><%= Product::USING_CONDITIONS[condition] %></div>
             </div>
@@ -81,7 +81,7 @@
     
     $("#container_" + current_category_id + ' .attribute_filter input').each(function(index) {
       var $src = $(this);
-      if(!$src.parent().hasClass("hidden") && $src.is(':checked')){
+      if(!$src.parent().parent().hasClass("hidden_filter") && $src.is(':checked')){
         var group = $src.parents(".option-set").attr("data-group");
         if ( !filters[ group ] ) {
           filters[ group ] = [];
@@ -163,11 +163,11 @@
   });
   
   $('.product_search_container .product_model').live('click', function() {
-     $("#container_" + current_category_id + " .attr_filter").addClass("hidden");
+     $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
      $("#container_" + current_category_id + " .product_model").removeClass("active");
      
      current_model_id = $(this).attr("id");
-     $("#container_" + current_category_id + " .attr_" + current_model_id).removeClass("hidden");
+     $("#container_" + current_category_id + " .attr_" + current_model_id).removeClass("hidden_filter");
      $("#container_" + current_category_id + " #" + current_model_id).addClass("active");
      showIsoTope();
   });
