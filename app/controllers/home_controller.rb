@@ -4,5 +4,9 @@ class HomeController < ApplicationController
 
   def index
   end
+  
+  def static_page
+    render params[:content]
+  end
 
 end
