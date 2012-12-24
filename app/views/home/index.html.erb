@@ -39,24 +39,28 @@
           <div class="option-set" data-group="cat_attr_<%= attr.id %>">
             <h3 class="s_category" style="color:#38B4DE"><%= attr.title %></h3>
             <% attr.attributes_in_models.each do |attr_value_with_models| %>
-              <div style="display: inline-block; line-height: 30px;" class="attr_filter attr_filter_model_all <%= attr_value_with_models[1].map{|model| "attr_filter_model_#{model.id.to_s}"}.join(" ") %>" >
-                <input type="checkbox" id="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>" class="regular-checkbox big-checkbox"
-                    attr-filter-option='<%= attr_value_with_models[0] %>' />
-                <label for="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>"></label>
+              <div style="display:inline-block;" class="attr_filter attr_filter_model_all <%= attr_value_with_models[1].map{|model| "attr_filter_model_#{model.id.to_s}"}.join(" ") %>" >
+                <div style="display: inline-block; line-height: 30px;" >
+                  <input type="checkbox" id="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>" class="regular-checkbox big-checkbox"
+                      attr-filter-option='<%= attr_value_with_models[0] %>' />
+                  <label for="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>"></label>
+                </div>
+                <div style="display:inline-block; margin-top: -5px; font-size: 20px; padding-right: 15px;"><%= attr_value_with_models[0] %></div>
               </div>
-              <div style="display:inline-block; margin-top: -5px; font-size: 20px; padding-right: 15px;"><%= attr_value_with_models[0] %></div>
             <% end %>
           </div>
         <% end %>
         <div class="option-set" data-group="cat_attr_condition">
           <h3 class="s_category">Using conditions</h3>
           <% Product::USING_CONDITIONS.keys.each do |condition| %>
-            <div style="display: inline-block; line-height: 30px;">
-              <input type="checkbox" class="regular-checkbox big-checkbox" id="checkbox-cond-<%= condition.to_s %>" 
-                attr-filter-option="<%= condition.to_s %>" />
-              <label for="checkbox-cond-<%= condition.to_s %>"></label>
+            <div style="display:inline-block;">
+              <div style="display: inline-block; line-height: 30px;">
+                <input type="checkbox" class="regular-checkbox big-checkbox" id="checkbox-cond-<%= condition.to_s %>" 
+                  attr-filter-option="<%= condition.to_s %>" />
+                <label for="checkbox-cond-<%= condition.to_s %>"></label>
+              </div>
+              <div style="display:inline-block; margin-top: -5px; font-size: 20px; padding-right: 15px;"><%= Product::USING_CONDITIONS[condition] %></div>
             </div>
-            <div style="display:inline-block; margin-top: -5px; font-size: 20px; padding-right: 15px;"><%= Product::USING_CONDITIONS[condition] %></div>
           <% end %>
         </div>
       </div>
