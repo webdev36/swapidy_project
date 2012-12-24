@@ -3,7 +3,7 @@
     <div class="product_title"><%= product.title %></div>
     <div class="product_image"><img src="<%= product.image_url %>"></div>
     <div>
-      <div class="product_price"><%= product.honey_price ? product.honey_price.round : "0" %> <b>honey</b></div>
+      <div class="product_price"><%= format_num(product.honey_price) %> <b>honey</b></div>
       <div class="button_for_buy">
         <a href="/products/<%= product.id %>?for=buy" class="btn btn-mini">Buy</a>
       </div>

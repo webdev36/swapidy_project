@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def format_num amount, precision_number = 2
+  def format_num amount, precision_number = 0
     return '0.00' if amount.nil? || amount == 0.0
     is_negative = (amount < 0.0)
     amount = amount * (-1) if amount < 0
