@@ -27,14 +27,12 @@
 
 <% Category.all.each do |category| %>
   <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 40px;">
-    <div id="product_models">
-      <div class="model_filter">
-        <span class="product_model active label" id="filter_model_all">All models</span>
+    <ul id="#product_models" class="nav nav-pills" style="position: relative; float: right;">
+        <li class="product_model active" id="filter_model_all"><a>All models</a></li>
         <% category.product_models.each do |product_model| %>
-          &nbsp;|&nbsp;<span class="product_model label label-important" id="filter_model_<%= product_model.id %>"><%= product_model.title %></span>
+          <li class="product_model" id="filter_model_<%= product_model.id %>"><a><%= product_model.title %></a></li>
         <% end %>
-      </div>
-    </div>
+    </ul>
     <div id="search_container">
       <div class="attribute_filter">
         <% category.category_attributes.each do |attr|%>
@@ -50,10 +48,10 @@
             <% end %>
           </div>
         <% end %>
-        <div class="option-set" data-group="cat_attr_condition" style="">
+        <div class="option-set" data-group="cat_attr_condition">
           <h3 class="s_category">Using conditions</h3>
           <% Product::USING_CONDITIONS.keys.each do |condition| %>
-            <div style="display: inline-block; line-height: 30px;" >
+            <div style="display: inline-block; line-height: 30px;">
               <input type="checkbox" class="regular-checkbox big-checkbox" id="checkbox-cond-<%= condition.to_s %>" 
                 attr-filter-option="<%= condition.to_s %>" />
               <label for="checkbox-cond-<%= condition.to_s %>"></label>
@@ -217,10 +215,16 @@
   function showScreenToBuy() {
     $(".thumbnail .box .button_for_buy").show();
     $(".thumbnail .box .button_for_sell").hide();
+    $(".product_search_container .nav-pills").each(function(index) {
+      $(this).addClass("models_for_buy").removeClass("models_for_sell");
+    });
   }
   function showScreenToSell() {
     $(".thumbnail .box .button_for_buy").hide();
     $(".thumbnail .box .button_for_sell").show();
+    $(".product_search_container .nav-pills").each(function(index) {
+      $(this).addClass("models_for_sell").removeClass("models_for_buy");
+    });
   }
   
   function centerIsotypeImages(){
