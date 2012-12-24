@@ -41,7 +41,9 @@
     <div>
       <i>Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %> Honey after selling.</i>
       <br />You could use the Honey money to buy something.
-      <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
+      <% if current_user.payment_ready? %>
+        <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
+      <% end %>
     </div>
   </div>
   <br/>

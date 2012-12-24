@@ -48,7 +48,9 @@
         <span>You need to extra Honey:</span>
         <%= format_num(current_user.extra_honey_for(@product)) %> Honey<br/>
         You would be charged $<%= format_num(current_user.extra_honey_for(@product)/100) %> (Exchange Rate: 100 Honey / $1 )
-        <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-mini">Get more Honey</a>
+        <% if current_user.payment_ready? %>
+          <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-mini">Get more Honey</a>
+        <% end %>
       </div>
     <% end %>
   </div>

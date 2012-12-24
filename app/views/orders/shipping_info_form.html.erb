@@ -25,41 +25,41 @@
   
   <div id="shipping_address_form" class="address_form_content">
     <div class="form_element text_field first_name half_width left">
-      <label for="shipping_information_first_name">First name</label>
+      <label for="shipping_information_first_name">First name</label><br/>
       <%= f.text_field :shipping_first_name %>
     </div>
 
     <div class="form_element text_field last_name half_width">
-      <label for="shipping_information_last_name">Last name</label>
+      <label for="shipping_information_last_name">Last name</label><br/>
       <%= f.text_field :shipping_last_name %>
     </div>
 
     <div class="form_element text_field address_1 half_width left">
-      <label for="shipping_information_street_name1">Address Line 1</label>
+      <label for="shipping_information_street_name1">Address Line 1</label><br/>
       <%= f.text_field :shipping_address %>
     </div>
 
     <div class="form_element text_field address_2 half_width">
-      <label class="optional" for="shipping_information_street_name2">Address Line 2 (optional)</label>
+      <label class="optional" for="shipping_information_street_name2">Address Line 2 (optional)</label><br/>
       <%= f.text_field :shipping_optional_address %>
     </div>
 
     <div class="form_element text_field city third_width left">
-      <label for="shipping_information_city">City</label>
+      <label for="shipping_information_city">City</label><br/>
       <%= f.text_field :shipping_city %>
     </div>
 
     <div class="form_element dropdown state third_width middle" style="display: block;">
-      <label for="shipping_information_state">State</label>
+      <label for="shipping_information_state">State</label><br/>
       <%= f.select :shipping_state, us_subregions, {}%>
     </div>
     <div class="form_element text_field zip_code third_width">
-      <label for="shipping_information_zipcode">Zip Code</label>
+      <label for="shipping_information_zipcode">Zip Code</label><br/>
       <%= f.text_field :shipping_zip_code %>
     </div>
 
     <div class="form_element dropdown country full_width">
-      <label for="shipping_information_country">Country</label>
+      <label for="shipping_information_country">Country</label><br/>
       <span class="item_display"><i>United States</i></span><br/>
       <span class="annotation">We currently only support trades within the United States.</span><br />
       <%= f.select :shipping_country, country_options, {} %>
@@ -67,7 +67,7 @@
   </div>
   <div>
     <div class="form_element full_width">
-      <label>Select shipping method</label>
+      <label>Select shipping method</label><br/>
       <%= f.select :shipping_method, shipping_method_options, {} %>
     </div>
   </div>  
