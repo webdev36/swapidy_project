@@ -6,7 +6,7 @@ class Category < ActiveRecord::Base
   has_many :product_models
   has_many :category_attributes
   
-  has_attached_file :image, :styles => {:thumb => "50x50>", :medium => "200x200>"}, :default_url => '/images/default_cat_:style.png'
+  has_attached_file :image, :styles => {:thumb => "100x100>", :medium => "150x150>", :large => "200x200>"}, :default_url => '/images/default_cat_:style.png'
   
   def image_url(type)
     if self.image_file_name.index("/images/") == 0

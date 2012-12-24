@@ -20,7 +20,7 @@
   <h2 style="color:#38B4DE;">Choose your product:</h2>
   <div id="product_type_container" class="span12">
     <% Category.all.each do |category| %>
-      <div id="cat_<%= category.id %>" class="category span4"><img class="cat_item" alt="<%= category.title %>" src="<%= category.image_url(:medium) %>"></div>
+      <div id="cat_<%= category.id %>" class="category span4"><img class="cat_item" alt="<%= category.title %>" src="<%= category.image_url(:large) %>"></div>
     <% end %>
   </div>
 </div>
