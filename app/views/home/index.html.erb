@@ -17,7 +17,7 @@
   </div>
 </div>
 <div id="product_type" style="display:none;">
-  <h2 style="color:#38B4DE;">Select your category</h2>
+  <h2 style="color:#38B4DE;">Choose your product:</h2>
   <div id="product_type_container" class="span12">
     <% Category.all.each do |category| %>
       <div id="cat_<%= category.id %>" class="category span4"><img class="cat_item" alt="<%= category.title %>" src="<%= category.image_url(:medium) %>"></div>
@@ -31,7 +31,7 @@
       <div class="model_filter">
         <span class="product_model active label" id="filter_model_all">All models</span>
         <% category.product_models.each do |product_model| %>
-          &nbsp;|&nbsp;<span class="product_model label label-success" id="filter_model_<%= product_model.id %>"><%= product_model.title %></span>
+          &nbsp;|&nbsp;<span class="product_model label label-important" id="filter_model_<%= product_model.id %>"><%= product_model.title %></span>
         <% end %>
       </div>
     </div>

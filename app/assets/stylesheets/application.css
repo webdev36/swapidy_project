@@ -164,7 +164,12 @@ left:0px;
 #product .item img {
   cursor: pointer;
 }
-
+.product_price{
+    font-weight: bold;
+}
+.product_title{
+    font-weight: bold;
+}
 .signup_field{
     height: 20px;
     color: red;
@@ -207,4 +212,18 @@ h2{
     color:#38B4DE;
 }
 
-
+.button_for_sell a{
+color:white;
+}
+.button_for_sell a:hover{
+color:white;
+}
+.button_for_buy a{
+color:white;
+}
+.button_for_buy a:hover{
+color:white;
+}
+.item {
+    margin-bottom: 30px;
+}

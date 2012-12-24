@@ -3322,8 +3322,8 @@ input[type="button"].btn-block {
 .btn-primary {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #006dcc;
-  *background-color: #0044cc;
+  background-color: #38B4DE;
+  *background-color: #38B4DE;
   background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
   background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
@@ -5541,9 +5541,9 @@ a.thumbnail:hover {
 .badge {
   display: inline-block;
   padding: 2px 4px;
-  font-size: 11.844px;
+  font-size: 18px;
   font-weight: bold;
-  line-height: 14px;
+  line-height: 18px;
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   white-space: nowrap;
@@ -5552,9 +5552,10 @@ a.thumbnail:hover {
 }
 
 .label {
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+
 }
 
 .badge {
@@ -5572,14 +5573,13 @@ a.thumbnail:hover {
 
 a.label:hover,
 a.badge:hover {
-  color: #ffffff;
   text-decoration: none;
   cursor: pointer;
 }
 
 .label-important,
 .badge-important {
-  background-color: #b94a48;
+  background-color: #FC43CC;
 }
 
 .label-important[href],
