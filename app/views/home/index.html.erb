@@ -11,30 +11,50 @@
   </div>
 
   <div id="buttons">
-  <!--<a class="modern socle" href="#">Sell Now</a>-->
     <a href="#" id="button_sell" class="modern socle sell_now">Sell Now</a>
     <a href="#" id="button_buy" class="modern socle buy_now">Buy Now</a>
   </div>
 </div>
+
+
 <div id="product_type" style="display:none;">
   <h2 style="color:#38B4DE;">Choose your product:</h2>
-  <div id="product_type_container" class="span12">
-    <% Category.all.each do |category| %>
-      <div id="cat_<%= category.id %>" class="category span4"><img class="cat_item" alt="<%= category.title %>" src="<%= category.image_url(:large) %>"></div>
-    <% end %>
+  <div id="slider-code" class="span12">
+    <a class="left carousel-control buttons prev" href="#">&lsaquo;</a>
+    <div class="viewport">
+        <ul class="overview" style="width: 1560px;">
+          <% Category.all.each_with_index do |category, index| %>
+            <li id="cat_<%= category.id %>" class="item category span3">
+              <img class="cat_item" alt="<%= category.title %>" src="<%= category.image_url(:large) %>">
+              <div style="display:block;">
+                <%= category.title %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+    </div>
+    <a class="left carousel-control buttons next">&rsaquo;</a>
   </div>
 </div>
 
+<script language="JavaScript">
+  jQuery(window).load(function(){
+     $('#slider-code').tinycarousel({display: 2});
+  });
+</script>
+
 <% Category.all.each do |category| %>
   <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 40px;">
-    <ul id="#product_models" class="nav nav-pills" style="position: relative; float: right;">
+    <div style="display: block;">
+      <ul id="#product_models" class="nav nav-pills" style="position: relative; float: right;">
         <li class="product_model active" id="filter_model_all"><a>All models</a></li>
         <% category.product_models.each do |product_model| %>
           <li class="product_model" id="filter_model_<%= product_model.id %>"><a><%= product_model.title %></a></li>
         <% end %>
-    </ul>
-    <div id="search_container">
-      <div class="attribute_filter">
+      </ul>
+    </div>
+    <div style="display: block;">
+      <div id="search_container" class="attribute_filter">
         <% category.category_attributes.each do |attr|%>
           <div class="option-set" data-group="cat_attr_<%= attr.id %>">
             <h3 class="s_category" style="color:#38B4DE"><%= attr.title %></h3>
@@ -64,12 +84,12 @@
           <% end %>
         </div>
       </div>
-    </div>
-    <div class="product_container" style="display:none;">
-      <div id="products" class="isotope thumbnail" style="position: relative; overflow: hidden; min-height: 200px; width:500px;">
-        <% category.products.each do |product| %>
-          <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>
-        <% end %>
+      <div class="product_container" style="display:none; float: right;">
+        <div id="products" class="isotope thumbnail" style="position: relative; overflow: hidden; min-height: 200px; width:500px;">
+          <% category.products.each do |product| %>
+            <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -152,8 +172,9 @@
      if(current_category_id != "") {
        $("#container_" + current_category_id).hide();
        $("#" + current_category_id).removeClass("select").addClass("blur");
+       current_model_id = "filter_model_all";
      }
-     
+
      current_category_id = $(this).parent().attr("id");
      $("#" + current_category_id).addClass("select");
 
@@ -182,33 +203,45 @@
     comboFilters = get_filter_options();
     $("#container_" + current_category_id + ' #products').isotope({ filter: comboFilters.join(', ') });
   }
-   
-  var $container = $('#product_type_container'),
-  $articles = $container.children('.category'), timeout;
-   
-  $articles.on( 'mouseenter', function( event ) {
-      var $article = $(this);
-      clearTimeout( timeout );
-      timeout = setTimeout( function() {
-          if( $article.hasClass('active') ) return false;
-          $article.removeClass('blur').addClass('active');
-          $articles.not($article).removeClass('active').addClass('blur');
-          if(current_category_id == "") return false;
-          $("#" + current_category_id).removeClass('blur').addClass("select");
-      }, 75 );
+  
+  $('#product_type .viewport .category').live("mouseenter", function(){
+    $src = $(this);
+    $src.removeClass("blur").addClass("active");
+    $('#product_type .viewport .category').not(".select").not($src).removeClass("active").addClass("blur");
   });
   
-  $articles.on( 'mouseleave', function( event ) {
-      var $article = $(this);
-      $article.removeClass('active blur');
+  $('#product_type .viewport .category').live("mouseleave", function(){
+    $(this).removeClass("active");
+    if(!$(this).hasClass("select")) {
+      $(this).addClass("blur");
+    }
   });
-   
-  $container.on( 'mouseleave', function( event ) {
-      clearTimeout( timeout );
-      $articles.removeClass('active blur');
-      if(current_category_id == "") return false;
-      $articles.addClass('blur');
-      $("#" + current_category_id).removeClass('blur').addClass("select");
+  
+  /*
+  $('#product_type .viewport .category').live("click", function(){
+    $src = $(this);
+    if(current_category_id != ""){
+       $("#container_" + current_category_id).hide();
+       $("#" + current_category_id).removeClass("select").addClass('blur');
+    }
+    current_category_id = $src.attr("id");
+    $src.addClass("select").removeClass("blur");
+    $("#container_" + current_category_id + ' .product_container').hide();
+    $("#container_" + current_category_id).show();
+    showIsoTope();    
+  });*/
+  
+  $('#slider-code').live('mouseleave', function() {
+    if(current_category_id == "") {
+      $('#product_type .viewport .category').removeClass('active').removeClass('blur');
+    }else{
+      if(!$("#" + current_category_id).hasClass("select")) {
+        $("#" + current_category_id).addClass("select");
+      }
+      if(!$("#" + current_category_id).hasClass("blur")) {
+        $("#" + current_category_id).removeClass("blur");
+      }
+    }
   });
 
   jQuery(window).load(function(){

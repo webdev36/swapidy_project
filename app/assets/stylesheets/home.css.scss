@@ -253,6 +253,7 @@ display: inline-block;
 #product_type .category img {
     padding: 0;
     margin: 30px auto;
+    margin-bottom: 5px;
 }
 
 #product_type .category.blur{
@@ -393,4 +394,44 @@ label {
 
 .models_for_sell li.active a {
   background-color: #08C !important;
-} 
+}
+
+#slider-code {
+  height: 270px; 
+  overflow: hidden;
+}
+#slider-code .viewport {
+  float: left; 
+  width: 725px; 
+  height: 270px; 
+  overflow: hidden; 
+  position: relative;
+}
+#slider-code .disable {
+  visibility: hidden;
+}
+#slider-code .overview {
+  list-style: none; 
+  position: absolute; 
+  padding: 0; 
+  margin: 0; 
+  left: 0; 
+  top: 0;
+}
+#slider-code .overview li {
+  float: left; 
+  padding: 1px; 
+  height: 270px; 
+  width: 236px;
+}
+#slider-code .buttons {
+  display: block; 
+  margin: 0px 25px 0 0; 
+  float: left;
+  text-indent: -999em;
+  width: 39px;
+  height: 37px;
+  overflow: hidden;
+  position: relative;
+}
+
