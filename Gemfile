@@ -14,6 +14,8 @@ gem 'stripe'
 gem 'active_shipping'
 gem 'carmen-rails'
 gem 'wicked_pdf'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Gems used only for assets and not required
 # in production environments by default.

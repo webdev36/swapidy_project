@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121223041847) do
+ActiveRecord::Schema.define(:version => 20121225100009) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -142,6 +142,16 @@ ActiveRecord::Schema.define(:version => 20121223041847) do
   add_index "products", ["category_id"], :name => "index_products_on_category_id"
   add_index "products", ["product_model_id"], :name => "index_products_on_product_model_id"
 
+  create_table "user_providers", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "access_token"
+    t.datetime "token_expires_at"
+    t.integer  "user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -170,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20121223041847) do
     t.string   "stripe_coupon"
     t.string   "stripe_customer_card_token"
     t.decimal  "honey_balance",                           :default => 0.0
+    t.string   "provider_image"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

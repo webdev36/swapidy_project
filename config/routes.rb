@@ -1,7 +1,11 @@
 Swapidy::Application.routes.draw do
-  devise_for :users, :controllers => {:sessions => "sessions", :registrations => "registrations"} do
+  devise_for :users, :controllers => {:sessions => "sessions", 
+                                      :registrations => "registrations", 
+                                      :omniauth_callbacks => "users/omniauth_callbacks"} do
     match "/users/sign_out" => "sessions#destroy"
   end
+
+  #match 'auth/:provider/callback', to: 'users/omniauth_callbacks#create'
 
   match "/about" => "home#static_page", :method => :get, :content => "about"
   match "/faq" => "home#static_page", :method => :get, :content => "faq_general"

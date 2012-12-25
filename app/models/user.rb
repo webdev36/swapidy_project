@@ -2,8 +2,10 @@ require 'stripe_gateway'
 
 class User < ActiveRecord::Base
   include StripeGateway
+
+  devise :omniauthable
   
-  attr_accessible :card_type, :card_name, :card_expired_month, :card_expired_year, :card_last_four_number
+  attr_accessible :card_type, :card_name, :card_expired_month, :card_expired_year, :card_last_four_number, :provider_image
   include CardInfo
 
   # Include default devise modules. Others available are:
@@ -22,8 +24,33 @@ class User < ActiveRecord::Base
 
   has_many :orders, :conditions => "order_type = 1", :order => "status asc, created_at desc"
   has_many :trade_ins, :conditions => "order_type = 0", :class_name => "Order", :order => "status asc, created_at desc"
+  has_many :user_providers
 
   validate :validate_card_info
+  
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    user = User.find_by_email(auth.info.email) || UserProvider.where(:provider => auth.provider, :uid => auth.uid).first.try(:user)
+    unless user
+      user = User.create(first_name: auth.extra.raw_info.first_name,
+                         first_name: auth.extra.raw_info.last_name,
+                         email: auth.info.email,
+                         password: "123456",
+                         password_confirmation: "123456", #Devise.friendly_token[0,20],
+                         address: auth.info.location,
+                         provider_image: auth.info.image
+                         )
+      user.save
+    end
+    
+    provider_attributes = { provider: auth.provider, uid: auth.uid, access_token: auth.credentials.token, token_expires_at: (Time.at(auth.credentials.expires_at) rescue nil) }
+    if user.user_providers.facebook.first.present?
+      user.user_providers.facebook.first.update_attributes provider_attributes
+    else
+      user.user_providers.build(provider_attributes)
+    end
+    return user
+  end
+
   
   def could_order? order
     order.is_trade_ins? || extra_honey_for(order.product) <= 0

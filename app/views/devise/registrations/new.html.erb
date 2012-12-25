@@ -4,7 +4,8 @@
 
   <div id="signup_container">
     <img id="signup_circle" src="/images/signup_circle_new.png" style="top: 338.5px; display: block;">
-    <img id="fb_signup" src="/images/fb_signup.png">
+    <!-- a href="/auth/facebook"><img id="fb_signup" src="/images/fb_signup.png"></a-->
+    <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_signup" src="/images/fb_signup.png"></a>
   
     <div id="signup_form">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
