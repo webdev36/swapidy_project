@@ -11,16 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121225100009) do
+ActiveRecord::Schema.define(:version => 20121225150825) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
     t.integer  "user_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "category_attributes", :force => true do |t|
@@ -42,6 +39,19 @@ ActiveRecord::Schema.define(:version => 20121225100009) do
   end
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
+
+  create_table "images", :force => true do |t|
+    t.integer  "for_object_id"
+    t.string   "for_object_type"
+    t.string   "sum_attribute_names"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.string   "title"
+    t.boolean  "is_main",             :default => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
 
   create_table "orders", :force => true do |t|
     t.integer  "product_id"
@@ -115,11 +125,8 @@ ActiveRecord::Schema.define(:version => 20121225100009) do
   create_table "product_models", :force => true do |t|
     t.string   "title"
     t.string   "comment"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "category_id"
   end
 
@@ -130,13 +137,10 @@ ActiveRecord::Schema.define(:version => 20121225100009) do
     t.integer  "user_id"
     t.integer  "category_id"
     t.decimal  "honey_price"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "using_condition"
     t.integer  "product_model_id"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
   end
 
   add_index "products", ["category_id"], :name => "index_products_on_category_id"

@@ -15,16 +15,32 @@ class Product < ActiveRecord::Base
   
   validates :honey_price, :using_condition, :presence => true
   
-  def image_url(type = :medium)
-    if self.image_file_name && self.image_file_name.index("/images/products/") == 0
-      return self.image_file_name #For testing only
-    elsif self.image_file_name && !self.image_file_name.blank?
-      self.image.url(type)
-    else
-      self.category.image.url(type)
-    end
+  has_many :images, :as => :for_object
+
+  def main_image_url(type)
+    main_image.photo.url(type)
   end
   
+  def main_image
+    return (images.where(:is_main => true).first || images.first) if images.count > 0
+    return category.main_image if product_model.images.count == 0
+    return product_model.main_image if self.product_model_attributes.count == 0
+
+    cat_color_attr = self.category.category_attributes.find_by_title "Color"
+    color_attr_value = product_model_attributes.where(:category_attribute_id => cat_color_attr.id).first if cat_color_attr
+
+    #return image based on color if it existed
+    result_image = product_model.images.find(:first, :conditions => ["sum_attribute_names like ?", "%#{color_attr_value.value}%"]) if color_attr_value
+    return result_image if result_image
+
+    #return images with nearly same attributes 
+    cond_params = product_model_attributes.map{|a| a.value}
+    sql = cond_params.map{|attr_value| "(sum_attribute_names like ? )"}.join(" AND ")
+    like_image = product_model.images.find(:first, :conditions => ( [sql] + cond_params.map{|p| "%#{p}%" })) unless cond_params.empty?
+
+    return like_image || product_model.main_image
+  end
+
   def gen_attribute_names
     result = []
     self.product_model_attributes.each do |product_model_attribute|
