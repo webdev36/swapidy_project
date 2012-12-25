@@ -4,7 +4,6 @@ class SessionsController < Devise::SessionsController
     if(params[:login_to_order].nil? || params[:login_to_order].blank?)
       super
     else
-      #
       self.resource = User.find_by_email params[:user][:email]
       if self.resource && self.resource.valid_password?(params[:user][:password])
         set_flash_message(:notice, :signed_in) if is_navigational_format?
