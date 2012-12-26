@@ -269,3 +269,28 @@ color:white;
 .login_label{
     font-weight: bold;
 }
+
+.profile_info_nav {
+  display: inline-block;
+  padding: 10px 15px 10px;
+}
+.profile_info_nav a,
+.profile_info_nav span {
+  float: none;
+  padding: 0;
+  color: #777777;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #ffffff;
+}
+.profile_info_nav a:focus,
+.profile_info_nav a:hover {
+  color: #333333;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.profile_info_nav a.plushoney_icon {
+  color: red;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #ffffff;
+}

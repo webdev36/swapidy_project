@@ -5,9 +5,13 @@
       <ul class="nav pull-right">
         <% if user_signed_in? %>
           <li>
-            <%= link_to('PROFILE', edit_user_registration_path, :method => :get) %>
+            <div class="profile_info_nav">
+              <div style="display: inline-block;"><%= link_to(current_user.full_name, edit_user_registration_path, :method => :get) %></div>
+              <div style="display: inline-block;">(Honey <%= format_num(current_user.honey_balance) %></div>
+              <div style="display: inline-block;"><%= link_to("+", "/payments/new", :method => :get, :class => "plushoney_icon") %>)</div>
+            </div>
           </li>
-          <% if current_user.is_admin %>
+          <% if current_user.is_admin? %>
             <li>
               <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
             </li>

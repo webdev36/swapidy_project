@@ -6,8 +6,8 @@
     form.find("#cardInfoValidate").hide();
     
     // do nothing if users don't enter Card information
-    if(form.find('#user_card_number').val() == '' && form.find('#user_card_cvc').val() == '' &&
-        form.find('#user_card_expired_month').val() == '' && form.find('#user_card_expired_year').val() == '') {
+    if(form.find('#user_new_card_number').val() == '' && form.find('#user_new_card_cvc').val() == '' &&
+        form.find('#user_new_card_expired_month').val() == '' && form.find('#user_new_card_expired_year').val() == '') {
         form.submit();
         return true;
     }

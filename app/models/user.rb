@@ -28,6 +28,11 @@ class User < ActiveRecord::Base
 
   validate :validate_card_info
   
+  def full_name
+    name = [first_name, last_name].compact.join(" ").strip
+    return name.blank? ? "Profile" : name
+  end
+  
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by_email(auth.info.email) || UserProvider.where(:provider => auth.provider, :uid => auth.uid).first.try(:user)
     unless user

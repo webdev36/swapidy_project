@@ -21,8 +21,8 @@
     <label>
       <strong>Contact Email</strong>
       <a href="#" onclick="javascript:open_in_new_tab('/users/edit');" class="btn btn-mini">Change</a>
-    </label>
-    <label>All emails about your order will be sent here:</label>
+    </label><br />
+    <strong>All emails about your order will be sent here:</strong>
     <p><%= current_user.email %></p>
   </div>
   <br/>
@@ -43,6 +43,8 @@
       <br />You could use the Honey money to buy something.
       <% if current_user.payment_ready? %>
         <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
+      <% else %>
+        <br />Your payment has not verified. To get more Honey, please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>.  
       <% end %>
     </div>
   </div>

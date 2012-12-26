@@ -44,7 +44,8 @@ class PaymentsController < ApplicationController
     
     def payment_ready?
       unless current_user.payment_ready?
-        redirect_to "/"
+        flash[:error] = "Your payment has not verified. Please edit Credit Card information to continue."
+        redirect_to "/users/edit#card_info_container"
       end
     end
 
