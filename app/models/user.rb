@@ -32,8 +32,10 @@ class User < ActiveRecord::Base
     return name.blank? ? "Profile" : name
   end
   
-  def to_s
-    full_name.empty? ? email : full_name
+  def name_in_email
+    return first_name.humanize if first_name && !first_name.blank?
+    return last_name.humanize if last_name && !last_name.blank?
+    ""
   end
   
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
@@ -48,6 +50,7 @@ class User < ActiveRecord::Base
                          provider_image: auth.info.image
                          )
       user.save
+      UserNotifier.signup_greeting(user).deliver
     end
     
     provider_attributes = { provider: auth.provider, uid: auth.uid, access_token: auth.credentials.token, token_expires_at: (Time.at(auth.credentials.expires_at) rescue nil) }

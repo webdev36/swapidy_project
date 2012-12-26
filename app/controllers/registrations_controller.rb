@@ -3,6 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     if(params[:login_to_order].nil? || params[:login_to_order].blank?)
       super
+      UserNotifier.signup_greeting(resource).deliver
     else
       build_resource
       if resource.save

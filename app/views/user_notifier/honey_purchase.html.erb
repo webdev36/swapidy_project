@@ -1,0 +1,27 @@
+Good Day <%= @user.name_in_email %>,<br />
+<br/>
+You just purchased <%= @payment.honey_money %>Honey for $<%= @payment.amount %>. Our honey bees have added their honey into your account so you can buy the products you want.<br/>
+<br/>
+Here are the details of your purchase:<br/>
+<br/>
+Honey money buyed:<br />
+<%= @payment.honey_money %> Honey<br />
+Charged amount:<br />
+$<%= @payment.amount %><br />
+Your current balance is:<br />
+<%= @user.honey_balance %> Honey<br />
+<br />
+Charge to your Credit card:<br />
+Card Name<br />
+<%= @payment.card_name %><br />
+Card Type<br />
+<%= @payment.card_type %><br />
+Card Number<br />
+  xxxx-xxxx-xxxx-<%= @payment.card_last_four_number %><br />
+Expiration Date<br />
+  <%= @payment.card_expired_date.strftime("%B %Y") if @payment.card_expired_date %><br />
+<br />
+Cheerio,<br/>
+<br/>
+The Swap Daddy<br/>
+Swapidy Inc.

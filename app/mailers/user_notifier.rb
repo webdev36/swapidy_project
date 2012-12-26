@@ -8,7 +8,13 @@ class UserNotifier < ActionMailer::Base
   #
   def signup_greeting(user)
     @user = user
-    mail to: user.email
+    mail :to => @user.email, :subject => "Welcome to Swapidy"
   end
-
+  
+  def honey_purchase(payment)
+    @user = payment.user
+    @payment = payment
+    mail :to => @user.email, :subject => "Honey Purchase"
+  end
+  
 end
