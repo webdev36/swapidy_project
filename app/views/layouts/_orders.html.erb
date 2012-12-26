@@ -1,5 +1,5 @@
 <div id="my_orders_container" style="display: none;" >
-  <% if current_user.orders.empty? %>
+  <% if current_user.orders.to_buy.empty? %>
     <p>You don't have any order to buy</p>
   <% else %>
     <p>Your orders to buy</p>
@@ -10,15 +10,17 @@
           <th>Product</th>
           <th>Price</th>
           <th>Status</th>
+          <th>Created At</th>
         </tr>
       </thead>
       <tbody>
-        <% current_user.orders.each_with_index do |order, index| %>
+        <% current_user.orders.to_buy.each_with_index do |order, index| %>
           <tr>
             <td><%= index + 1 %></td>
             <td><%= order.title %></td>
             <td><%= order.honey_price %> honey</td>
             <td><%= order.status_title %></td>
+            <td><%= order.created_at.strftime("%H:%M %b %d, %Y") %></td>
           </tr>
         <% end %>
       </tbody>
@@ -29,7 +31,7 @@
 
 <div id="my_trade_ins_container" style="display: none;">
   <br/>
-  <% if current_user.trade_ins.empty? %>
+  <% if current_user.orders.to_sell.empty? %>
     <p>You don't have any order to sell</p>
   <% else %>
     <p>Your orders to sell</p>
@@ -40,15 +42,17 @@
           <th>Product</th>
           <th>Price</th>
           <th>Status</th>
+          <th>Created At</th>
         </tr>
       </thead>
       <tbody>
-        <% current_user.trade_ins.each_with_index do |order, index| %>
+        <% current_user.orders.to_sell.each_with_index do |order, index| %>
           <tr>
             <td><%= index + 1 %></td>
             <td><%= order.title %></td>
             <td><%= order.honey_price %> honey</td>
             <td><%= order.status_title %></td>
+            <td><%= order.created_at.strftime("%H:%M %b %d, %Y") %></td>
           </tr>
         <% end %>
       </tbody>

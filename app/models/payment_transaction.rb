@@ -12,4 +12,6 @@ class PaymentTransaction < ActiveRecord::Base
   GATEWAY = {:stripe => 0}
   TYPES = {:charge => "charge", :refund => "refund"}
 
+  validates :honey_money, :presence => true, :numericality => {:greater_than => 0.0}
+  
 end

@@ -1,58 +1,46 @@
-<% if for_item != :orders %>
-  <div>
-    <% if current_user.orders.empty? %>
-      <p>You don't have any order to buy</p>
-    <% else %>
-      <p>Your orders to buy</p>
-      <table class="table table-bordered table-condensed">
-        <thead>
-          <tr>
-            <th>No.</th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% current_user.orders.each_with_index do |order, index| %>
-            <tr>
-              <td><%= index + 1 %></td>
-              <td><%= order.title %></td>
-              <td><%= order.honey_price %> honey</td>
-              <td><%= order.status_title %></td>
-            </tr>
+<% 
+  if for_item == :orders
+    orders = current_user.orders.to_buy
+    page_title = "Your orders to buy"
+  elsif for_item == :trade_ins
+    orders = current_user.orders.to_sell
+    page_title = "Your orders to sell"
+  else
+    orders = current_user.orders
+    page_title = "Your orders created"
+  end  
+%>
+
+<% if orders.empty? %>
+  <label>You don't have any orders</label>
+<% else %>
+  <label><%= page_title %></label><br/>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <% if for_item == :all_trans %>
+          <th>Sell/Buy</th>
+        <% end %>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% orders.each_with_index do |order, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <% if for_item == :all_trans %>
+            <td><%= order.is_trade_ins? ? "Sell" : "Buy" %></td>
           <% end %>
-        </tbody>
-      </table>
-    <% end %>
-  </div>
-<% end %>
-<% if for_item != :trade_ins %>
-  <div>
-    <% if current_user.trade_ins.empty? %>
-      <p>You don't have any order to sell</p>
-    <% else %>
-      <p>Your orders to sell</p>
-      <table class="table table-bordered table-condensed">
-        <thead>
-          <tr>
-            <th>No.</th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% current_user.trade_ins.each_with_index do |order, index| %>
-            <tr>
-              <td><%= index + 1 %></td>
-              <td><%= order.title %></td>
-              <td><%= order.honey_price %> honey</td>
-              <td><%= order.status_title %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
-  </div>
+          <td><%= order.title %></td>
+          <td><%= order.honey_price %> honey</td>
+          <td><%= order.status_title %></td>
+          <td><%= order.created_at.strftime("%H:%M %b %d, %Y") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

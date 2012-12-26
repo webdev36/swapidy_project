@@ -16,8 +16,13 @@ class PaymentsController < ApplicationController
   
   def confirm
     @payment = PaymentTransaction.new(params[:payment])
-    @payment.amount = @payment.honey_money / RATIO
-    @payment.user = current_user
+    if @payment.valid? 
+      @payment.amount = @payment.honey_money / RATIO
+      @payment.user = current_user
+      render "confirm"
+    else
+      render "new"
+    end
   end
   
   def create
