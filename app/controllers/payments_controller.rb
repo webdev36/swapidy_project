@@ -15,7 +15,8 @@ class PaymentsController < ApplicationController
   end
   
   def confirm
-    @payment = PaymentTransaction.new(params[:payment])
+    @payment = PaymentTransaction.new()
+    @payment.honey_money = params[:payment][:honey_money].gsub(",", "").to_i rescue nil
     if @payment.valid? 
       @payment.amount = @payment.honey_money / RATIO
       @payment.user = current_user
@@ -26,7 +27,8 @@ class PaymentsController < ApplicationController
   end
   
   def create
-    @payment = PaymentTransaction.new(params[:payment])
+    @payment = PaymentTransaction.new()
+    @payment.honey_money = params[:payment][:honey_money].gsub(",", "").to_i rescue nil
     @payment.amount = @payment.honey_money / RATIO
     @payment.user = current_user
 
