@@ -66,6 +66,19 @@
       });
     });
     
+    $("#my_trade_ins").live("mouseenter", function() {
+      $(this).attr("src", "/images/my_trade_ins_hover.png");
+    });
+    $("#my_orders").live("mouseenter", function() {
+      $(this).attr("src", "/images/my_orders_hover.png");
+    });
+    $("#my_trade_ins").live("mouseleave", function() {
+      $(this).attr("src", "/images/my_trade_ins.png");
+    });
+    $("#my_orders").live("mouseleave", function() {
+      $(this).attr("src", "/images/my_orders.png");
+    });
+    
     var current_button = "";
     var begin_position_left = 0;
     function processOrderIconsPosition(button_name) {

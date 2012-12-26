@@ -39,43 +39,52 @@ body{
 	font-weight: bold;
 }
 #my_trade_ins{
-	left:1px;  /* change this to left: 1px; to put it on the left of the screen */
-
-	top:200px;height:150px;width:150px;margin:0;padding:0;position:fixed;z-index:5000;
-
+	left: 1px;  /* change this to left: 1px; to put it on the left of the screen */
+	top: 200px;
+	height: 100px;
+	width: 100px;
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	z-index: 5000;
 }
 #my_trade_ins a{
-	display:block;width:100%;height:100%;
-
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
 #my_orders{
-	left:1px;  /* change this to left: 1px; to put it on the left of the screen */
-
-	top:400px;height:150px;width:150px;margin:0;padding:0;position:fixed;z-index:5000;
-
+	left: 1px;  /* change this to left: 1px; to put it on the left of the screen */
+	top: 400px;
+	height: 100px;
+	width: 100px;
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	z-index: 5000;
 }
 #my_orders a{
-	display:block;width:100%;height:100%;
-
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 #fbtab{
+  right:1px;  /* change this to left: 1px; to put it on the left of the screen */
+  top:275px;height:50px;width:50px;margin:0;padding:0;position:fixed;z-index:5000;
+}
 
-
-right:1px;  /* change this to left: 1px; to put it on the left of the screen */
-
-top:275px;height:50px;width:50px;margin:0;padding:0;position:fixed;z-index:5000;}
-
-#fbtab a{display:block;width:100%;height:100%;}
-
+#fbtab a {
+  display:block;width:100%;height:100%;
+}
 #twtab{
+  right:1px;  /* change this to left: 1px; to put it on the left of the screen */
+  top:348px;height:50px;width:50px;margin:0;padding:0;position:fixed;z-index:5000;
+}
 
-
-right:1px;  /* change this to left: 1px; to put it on the left of the screen */
-
-top:348px;height:50px;width:50px;margin:0;padding:0;position:fixed;z-index:5000;}
-
-#twtab a{display:block;width:100%;height:100%;}
+#twtab a { 
+  display:block;width:100%;height:100%;
+}
 
 #s3slider {
     width: 100%; /* important to be same as image width */

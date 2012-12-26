@@ -1,0 +1,58 @@
+<% if for_item != :orders %>
+  <div>
+    <% if current_user.orders.empty? %>
+      <p>You don't have any order to buy</p>
+    <% else %>
+      <p>Your orders to buy</p>
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.orders.each_with_index do |order, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= order.title %></td>
+              <td><%= order.honey_price %> honey</td>
+              <td><%= order.status_title %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+<% end %>
+<% if for_item != :trade_ins %>
+  <div>
+    <% if current_user.trade_ins.empty? %>
+      <p>You don't have any order to sell</p>
+    <% else %>
+      <p>Your orders to sell</p>
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.trade_ins.each_with_index do |order, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= order.title %></td>
+              <td><%= order.honey_price %> honey</td>
+              <td><%= order.status_title %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+<% end %>

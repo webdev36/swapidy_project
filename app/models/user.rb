@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     return name.blank? ? "Profile" : name
   end
   
+  def to_s
+    full_name.empty? ? email : full_name
+  end
+  
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by_email(auth.info.email) || UserProvider.where(:provider => auth.provider, :uid => auth.uid).first.try(:user)
     unless user

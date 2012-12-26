@@ -7,6 +7,14 @@ class ProductModelAttribute < ActiveRecord::Base
   has_many :product_attributes
   has_many :products, :through => :product_attributes
   
+  def to_s
+    title
+  end
+  
+  def title
+    [product_model.title, category_attribute.attribute_value].join(" - ")  
+  end
+  
   def attribute_value
     return CategoryAttribute.convert_value(self.category_attribute.attribute_type, self.value)
   end

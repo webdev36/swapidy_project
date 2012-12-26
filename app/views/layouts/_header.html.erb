@@ -6,7 +6,7 @@
         <% if user_signed_in? %>
           <li>
             <div class="profile_info_nav">
-              <div style="display: inline-block;"><%= link_to(current_user.full_name, edit_user_registration_path, :method => :get) %></div>
+              <div style="display: inline-block;"><%= link_to(current_user.full_name, settings_path, :method => :get) %></div>
               <div style="display: inline-block;">(Honey <%= format_num(current_user.honey_balance) %></div>
               <div style="display: inline-block;"><%= link_to("+", "/payments/new", :method => :get, :class => "plushoney_icon") %>)</div>
             </div>

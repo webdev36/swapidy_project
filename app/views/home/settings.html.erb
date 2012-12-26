@@ -1,0 +1,31 @@
+
+<h2>Setting pages</h2>
+<br />
+
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs" style="position: relative;">
+    <li class="active">
+      <a href="#all_trans" data-toggle="tab">All transactions</a>
+    </li>
+    <li class="">
+      <a href="#trade_ins" data-toggle="tab">Trade-ins</a>
+    </li>
+    <li class="">
+      <a href="#orders" data-toggle="tab">Orders</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="all_trans">
+      <br/>
+      <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :all_trans} %>
+    </div>
+    <div class="tab-pane" id="trade_ins">
+      <br/>
+      <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :trade_ins} %>
+    </div>
+    <div class="tab-pane" id="orders">
+      <br/>
+      <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :orders} %>
+    </div>
+  </div>
+</div>
