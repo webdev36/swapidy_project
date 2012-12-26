@@ -31,5 +31,15 @@ class CategoryAttribute < ActiveRecord::Base
     end
     return attribute_values.keys.map{|key| [key, attribute_values[key] ] }
   end
+
+  after_save :expired_fragment_caches
+  after_destroy :expired_fragment_caches
+  
+  private
+    
+    def expired_fragment_caches
+      ActionController::Base.new.expire_fragment("homepage_container_category_#{category.id}")
+      ActionController::Base.new.expire_fragment("homepage_category_#{category.id}_filter_attr")
+    end
   
 end

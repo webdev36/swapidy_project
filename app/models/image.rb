@@ -11,4 +11,12 @@ class Image < ActiveRecord::Base
     is_main
   end
   
+      
+  after_save :expired_fragment_caches
+  after_destroy :expired_fragment_caches
+  
+  def expired_fragment_caches
+    for_object.expired_fragment_caches
+  end
+
 end

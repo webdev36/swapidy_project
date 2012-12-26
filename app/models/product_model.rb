@@ -17,5 +17,20 @@ class ProductModel < ActiveRecord::Base
     return (images.where(:is_main => true).first || images.first) if images.count > 0
     return category.main_image
   end
+    
+  after_save :expired_fragment_caches
+  after_destroy :expired_fragment_cache_destroy
+  
+  def expired_fragment_caches
+    ActionController::Base.new.expire_fragment("homepage_category_#{category.id}_filter_attr")
+    ActionController::Base.new.expire_fragment("homepage_container_category_#{category.id}")
+  end
+  
+  def expired_fragment_cache_destroy
+    ActionController::Base.new.expire_fragment("homepage_category_#{category.id}_filter_attr")
+    ActionController::Base.new.expire_fragment("homepage_container_category_#{category.id}")
+    products.each { |product| product.expired_fragment_caches }
+  end
+    
 
 end

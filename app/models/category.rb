@@ -14,4 +14,18 @@ class Category < ActiveRecord::Base
   def main_image
     images.where(:is_main => true).first || self.images.first || images.new
   end
+
+  after_save :expired_fragment_caches
+  after_destroy :expired_fragment_caches_for_destroy
+
+  def expired_fragment_caches
+    ActionController::Base.new.expire_fragment("homepage_available_categories")
+  end  
+  
+  private
+    
+    def expired_fragment_caches_for_destroy
+      expired_fragment_caches
+      ActionController::Base.new.expire_fragment("homepage_container_category_#{category.id}")
+    end
 end

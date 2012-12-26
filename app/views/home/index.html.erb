@@ -47,16 +47,14 @@
 <% Category.all.each do |category| %>
   <% cache("homepage_container_category_#{category.id}") do %>
     <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 40px;">
-      <% cache("homepage_category_#{category.id}_filter_model") do %>
-        <div style="display: block;">
-          <ul id="#product_models" class="nav nav-pills" style="position: relative; float: right;">
-            <li class="product_model active" id="filter_model_all"><a>All models</a></li>
-            <% category.product_models.each do |product_model| %>
-              <li class="product_model" id="filter_model_<%= product_model.id %>"><a><%= product_model.title %></a></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <div style="display: block;">
+        <ul id="#product_models" class="nav nav-pills" style="position: relative; float: right;">
+          <li class="product_model active" id="filter_model_all"><a>All models</a></li>
+          <% category.product_models.each do |product_model| %>
+            <li class="product_model" id="filter_model_<%= product_model.id %>"><a><%= product_model.title %></a></li>
+          <% end %>
+        </ul>
+      </div>
       <div style="display: block;">
         <% cache("homepage_category_#{category.id}_filter_attr") do %>
           <div id="search_container" class="attribute_filter">
@@ -94,7 +92,9 @@
           <div class="product_container" style="display:none; float: right;">
             <div id="products" class="isotope thumbnail" style="position: relative; overflow: hidden; min-height: 200px; width:500px;">
               <% category.products.each do |product| %>
-                <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>
+                <% cache("homepage_product_thumb_#{product.id}") do %>
+                  <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>
+                <% end %>
               <% end %>
             </div>
           </div>

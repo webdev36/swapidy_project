@@ -17,6 +17,9 @@ class Product < ActiveRecord::Base
   
   has_many :images, :as => :for_object
 
+  after_save :expired_fragment_caches
+  after_destroy :expired_fragment_caches
+
   def main_image_url(type)
     main_image.photo.url(type)
   end
@@ -49,4 +52,10 @@ class Product < ActiveRecord::Base
     result.join(" ")
   end
   
+  def expired_fragment_caches
+    ActionController::Base.new.expire_fragment("homepage_container_category_#{self.category.id}")
+    ActionController::Base.new.expire_fragment("homepage_product_container_category_#{self.category.id}")
+    ActionController::Base.new.expire_fragment("homepage_product_thumb_#{self.id}")
+  end
+
 end
