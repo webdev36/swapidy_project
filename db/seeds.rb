@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 admin = User.find_by_email 'admin@admin.com' rescue nil
-admin = User.new(email: 'admin@admin.com', password: '123456', password_confirmation: '123456') unless admin
+admin = User.new(email: 'admin@admin.com', password: '123456', password_confirmation: '123456', is_admin: true) unless admin
 admin.save
 
 category_names = {"Galaxy" => "cat_galaxy.png", "iPad" => "cat_ipad.png", 

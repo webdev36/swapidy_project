@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   devise :omniauthable
   
-  attr_accessible :card_type, :card_name, :card_expired_month, :card_expired_year, :card_last_four_number, :provider_image
+  attr_accessible :card_type, :card_name, :card_expired_month, :card_expired_year, :card_last_four_number, :provider_image, :is_admin
   include CardInfo
 
   # Include default devise modules. Others available are:
@@ -64,6 +64,10 @@ class User < ActiveRecord::Base
   
   def payment_ready?
     self.stripe_customer_id && !self.stripe_customer_id.blank?
+  end
+  
+  def is_admin?
+    is_admin
   end
 
   private
