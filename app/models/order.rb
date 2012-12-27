@@ -1,13 +1,19 @@
+require 'stamps_shipping'
+
 class Order < ActiveRecord::Base
+  include StampsShipping
   
-  attr_accessible :order_type, :status, :product_id, :honey_price, :using_condition,
+  attr_accessible :order_type, :status, :product_id, :honey_price, :using_condition, 
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,
-                  :shipping_city, :shipping_state, :shipping_zip_code, :shipping_country, :shipping_method
+                  :shipping_city, :shipping_state, :shipping_zip_code, :shipping_country, :shipping_method,
+                  :candidate_addresses, :shipping_zip_code_add_on
   
   validates :order_type, :status, :presence => true
   validates :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_city, :shipping_state, 
             :shipping_zip_code, :shipping_method, :shipping_country, :presence => true
-  
+
+  attr_accessor :candidate_addresses, :shipping_zip_code_add_on
+
   belongs_to :product
   belongs_to :user
   
@@ -45,6 +51,14 @@ class Order < ActiveRecord::Base
   
   def shipping_method_name
     SHIPPING_METHOD_NAMES[self.shipping_method.to_sym]
+  end
+  
+  def valid?
+    result = super
+    
+    varify_addr_result = verify_shipping_address
+    errors.add(:shipping_address, "could not be found") unless varify_addr_result
+    return result && varify_addr_result
   end
   
   private

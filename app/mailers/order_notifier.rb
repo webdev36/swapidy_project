@@ -10,7 +10,7 @@ class OrderNotifier < ActionMailer::Base
     @user = user
     @order = order
     @product = order.product
-    mail :to => @user.email, :subject => "New order to sell" do |format|
+    mail :to => @user.email, :subject => "Shipping Label" do |format|
       format.text # renders send_report.text.erb for body of email
       format.pdf do
         attachments["ShippingLabel_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
@@ -24,7 +24,7 @@ class OrderNotifier < ActionMailer::Base
     @user = user
     @order = order
     @product = order.product
-    mail :to => @user.email, :subject => "New order to buy" do |format|
+    mail :to => @user.email, :subject => "New Order" do |format|
       format.text # renders send_report.text.erb for body of email
       format.pdf do
         attachments["PurchaseOrder_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
@@ -37,13 +37,13 @@ class OrderNotifier < ActionMailer::Base
   def confirm_to_buy(order)
     @user = order.user
     @order = order
-    mail :to => @user.email, :subject => "Order cancelled"
+    mail :to => @user.email, :subject => "Order Cancelled"
   end
   
   def product_declined(order)
     @user = order.user
     @order = order
-    mail :to => @user.email, :subject => "Product declined"
+    mail :to => @user.email, :subject => "Product Declined"
   end
   
   def reminder(order)

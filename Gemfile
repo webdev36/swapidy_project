@@ -18,6 +18,12 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'rails_admin'
 
+gem 'savon', '0.8.6'
+gem 'httpi', '0.7.9'
+gem 'multi_json', '~> 1.0'
+#gem 'stamps'
+#gem 'active_shipping'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -30,7 +36,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+#gem 'jquery-rails'
 
 group :development, :test do
   gem 'mailcatcher'

@@ -22,7 +22,21 @@
       <br/>
     </div>
   <% end %>
-  
+  <% if @order.candidate_addresses && !@order.candidate_addresses.empty? %>
+    <div style="color: red;">
+      There are <%= @order.candidate_addresses.size == 1 ? "an address" : "#{@order.candidate_addresses.size} addresses"%> 
+      would be exactly your address.<br/>
+      <% @order.candidate_addresses.each_with_index do |address, index|%>
+        <%= index + 1 %>. Address: <%= address[:address1]%>. Address 2: <%= address[:address2]%>, City: <%= address[:city] %>.
+                          State: <%= address[:state] %>. ZipCode: <%= address[:zip_code] %>
+        <a href="#" class="select_candidate_address" data-address="<%= address[:address1]%>" data-optional_address="<%= address[:address2]%>"
+          data-city="<%= address[:city]%>" data-state="<%= address[:state]%>" 
+          data-zip_code="<%= address[:zip_code]%>" data-zip_code_add_on="<%= address[:zip_code_add_on]%>"
+        >select</a><br />
+      <% end %>
+      <br />
+    </div>
+  <% end %>
   <div id="shipping_address_form" class="address_form_content">
     <div class="form_element text_field first_name half_width left">
       <label for="shipping_information_first_name">First name</label><br/>
@@ -56,6 +70,7 @@
     <div class="form_element text_field zip_code third_width">
       <label for="shipping_information_zipcode">Zip Code</label><br/>
       <%= f.text_field :shipping_zip_code %>
+      <%= f.hidden_field :shipping_zip_code_add_on %>
     </div>
 
     <div class="form_element dropdown country full_width">
@@ -73,3 +88,14 @@
   </div>  
   <div><%= f.submit "Continue" %></div>
 <% end %>
+
+<script>
+  $(".select_candidate_address").live("click", function() {
+    $("#order_shipping_address").attr("value", $(this).attr("data-address"));
+    $("#order_shipping_optional_address").attr("value", $(this).attr("data-optional_address"));
+    $("#order_shipping_city").attr("value", $(this).attr("data-city"));
+    $("#order_shipping_state").attr("value", $(this).attr("data-state"));
+    $("#order_shipping_zip_code").attr("value", $(this).attr("data-zip_code"));
+    $("#order_shipping_zip_code_add_on").attr("value", $(this).attr("data-zip_code_add_on"));
+  });
+</script>

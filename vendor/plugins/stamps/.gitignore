@@ -1,0 +1,9 @@
+coverage/*
+test/client/coverage/*
+test/coverage/*
+pkg/*
+*.gem
+.bundle
+runner.rb
+.yardoc/*
+doc/*
