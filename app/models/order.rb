@@ -53,12 +53,10 @@ class Order < ActiveRecord::Base
     SHIPPING_METHOD_NAMES[self.shipping_method.to_sym]
   end
   
-  def valid?
-    result = super
-    
-    varify_addr_result = verify_shipping_address
-    errors.add(:shipping_address, "could not be found") unless varify_addr_result
-    return result && varify_addr_result
+  def shipping_address_valid?
+    result = verify_shipping_address
+    errors.add(:shipping_address, "could not be found") unless result
+    return result
   end
   
   private

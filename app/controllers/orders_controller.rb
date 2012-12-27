@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
   end
   
   def confirm
-    if @order.valid?
+    if @order.valid? && @order.shipping_address_valid?
       render @order.is_trade_ins? ? "confirm_trade_ins" : "confirm_form"
     else
       render "shipping_info_form"
@@ -40,14 +40,14 @@ class OrdersController < ApplicationController
   end
   
   def create
-    if @order.valid? && current_user.could_order?(@order)
+    if @order.valid? && @order.shipping_address_valid? && current_user.could_order?(@order)
       @order.honey_price = @product.honey_price
       @order.using_condition = @product.using_condition
       @order.save
       if @order.is_trade_ins?
-        OrderNotifier.confirm_to_sell(current_user, @order).deliver
+        OrderNotifier.confirm_to_sell(@order).deliver
       else
-        OrderNotifier.confirm_to_buy(current_user, @order).deliver
+        OrderNotifier.confirm_to_buy(@order).deliver
       end
       redirect_to "/orders/#{@order.id}"
     else

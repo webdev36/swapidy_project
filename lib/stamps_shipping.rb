@@ -1,6 +1,4 @@
 require 'stamps'
-require "net/http"
-require "uri"
 
 module StampsShipping
   

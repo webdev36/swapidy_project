@@ -27,8 +27,9 @@
       There are <%= @order.candidate_addresses.size == 1 ? "an address" : "#{@order.candidate_addresses.size} addresses"%> 
       would be exactly your address.<br/>
       <% @order.candidate_addresses.each_with_index do |address, index|%>
-        <%= index + 1 %>. Address: <%= address[:address1]%>. Address 2: <%= address[:address2]%>, City: <%= address[:city] %>.
-                          State: <%= address[:state] %>. ZipCode: <%= address[:zip_code] %>
+        <%= index + 1 %>. <%= address[:address1]%> 
+                          <% if address[:address2] && !address[:address2].blank? %> (Address2: <%= address[:address2] %>) <% end %>
+                          - <%= address[:city] %> - <%= address[:state] %> - <%= address[:zip_code] %>
         <a href="#" class="select_candidate_address" data-address="<%= address[:address1]%>" data-optional_address="<%= address[:address2]%>"
           data-city="<%= address[:city]%>" data-state="<%= address[:state]%>" 
           data-zip_code="<%= address[:zip_code]%>" data-zip_code_add_on="<%= address[:zip_code_add_on]%>"

@@ -6,12 +6,12 @@ class OrderNotifier < ActionMailer::Base
   #
   #   en.authentication_notifier.user_activation.subject
   #
-  def confirm_to_sell(user, order)
-    @user = user
+  def confirm_to_sell(order)
+    @user = order.user
     @order = order
     @product = order.product
     mail :to => @user.email, :subject => "Shipping Label" do |format|
-      format.text # renders send_report.text.erb for body of email
+      format.html # renders send_report.text.erb for body of email
       format.pdf do
         attachments["ShippingLabel_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
           render_to_string(:pdf => "ShippingLabel_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb')
@@ -20,12 +20,12 @@ class OrderNotifier < ActionMailer::Base
     end
   end
   
-  def confirm_to_buy(user, order)
-    @user = user
+  def confirm_to_buy(order)
+    @user = order.user
     @order = order
     @product = order.product
     mail :to => @user.email, :subject => "New Order" do |format|
-      format.text # renders send_report.text.erb for body of email
+      format.html # renders send_report.text.erb for body of email
       format.pdf do
         attachments["PurchaseOrder_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
           render_to_string(:pdf => "PurchaseOrder_#{@order.id}.pdf", :template => '/reports/order_to_buy.pdf.erb')
@@ -34,7 +34,7 @@ class OrderNotifier < ActionMailer::Base
     end
   end
   
-  def confirm_to_buy(order)
+  def order_cancel(order)
     @user = order.user
     @order = order
     mail :to => @user.email, :subject => "Order Cancelled"
