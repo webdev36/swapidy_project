@@ -1,7 +1,7 @@
-require 'stamps_shipping'
+require 'stamps_shipping_gateway'
 
 class Order < ActiveRecord::Base
-  include StampsShipping
+  include StampsShippingGateway
   
   attr_accessible :order_type, :status, :product_id, :honey_price, :using_condition, 
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,
@@ -16,6 +16,8 @@ class Order < ActiveRecord::Base
 
   belongs_to :product
   belongs_to :user
+  
+  has_many :shipping_stamps
   
   TYPES = {:trade_ins => 0, :order => 1}
   STATUES = {:pending => 0, :fulfilled => 1, :declined => 2}
@@ -59,6 +61,20 @@ class Order < ActiveRecord::Base
     return result
   end
   
+  def create_new_stamp
+    stamp = is_order? ? create_shipping_order : create_shipping_label
+    new_stamp = shipping_stamps.new
+    new_stamp.integrator_tx_id = stamp[:integrator_tx_id]
+    new_stamp.tracking_number = stamp[:tracking_number]
+    new_stamp.service_type = stamp[:rate][:service_type]
+    new_stamp.rate_amount = stamp[:rate][:amount]
+    new_stamp.package_type = stamp[:rate][:package_type] 
+    new_stamp.due_date = stamp[:rate][:ship_date]
+    new_stamp.stamps_tx_id = stamp[:stamps_tx_id]
+    new_stamp.url = stamp[:url]
+    new_stamp.status = "pending"
+    return new_stamp.save
+  end
   private
   
     def adjust_current_balance

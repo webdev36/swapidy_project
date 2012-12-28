@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121226043512) do
+ActiveRecord::Schema.define(:version => 20121228045309) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20121226043512) do
     t.string   "shipping_country"
     t.decimal  "honey_price",               :default => 0.0
     t.string   "using_condition"
+    t.decimal  "weight_lb",                 :default => 1.0
   end
 
   create_table "payment_transactions", :force => true do |t|
@@ -125,9 +126,10 @@ ActiveRecord::Schema.define(:version => 20121226043512) do
   create_table "product_models", :force => true do |t|
     t.string   "title"
     t.string   "comment"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "category_id"
+    t.decimal  "weight_lb",   :default => 1.0
   end
 
   add_index "product_models", ["category_id"], :name => "index_product_models_on_category_id"
@@ -158,6 +160,21 @@ ActiveRecord::Schema.define(:version => 20121226043512) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "shipping_stamps", :force => true do |t|
+    t.integer  "order_id"
+    t.string   "integrator_tx_id"
+    t.string   "tracking_number"
+    t.string   "service_type"
+    t.string   "rate_amount"
+    t.string   "package_type"
+    t.datetime "due_date"
+    t.string   "stamps_tx_id"
+    t.string   "url"
+    t.string   "status"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "user_providers", :force => true do |t|
     t.string   "provider"

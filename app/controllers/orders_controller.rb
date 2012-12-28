@@ -41,15 +41,25 @@ class OrdersController < ApplicationController
   
   def create
     if @order.valid? && @order.shipping_address_valid? && current_user.could_order?(@order)
+      @order.weight_lb = @order.product.weight_lb
+
       @order.honey_price = @product.honey_price
       @order.using_condition = @product.using_condition
-      @order.save
-      if @order.is_trade_ins?
-        OrderNotifier.confirm_to_sell(@order).deliver
-      else
-        OrderNotifier.confirm_to_buy(@order).deliver
+      begin
+        Order.begin_transaction do
+          @order.save
+          @shipping_stamp = @order.create_new_stamp
+        end
+        if @order.is_trade_ins?
+          OrderNotifier.confirm_to_sell(@order, @shipping_stamp).deliver
+        else
+          OrderNotifier.confirm_to_buy(@order, @shipping_stamp).deliver
+        end
+        redirect_to "/orders/#{@order.id}"
+      rescue Exception => e
+        @order.errors.add(:shipping_stamp, " has errors to create")
+        render "confirm_form"
       end
-      redirect_to "/orders/#{@order.id}"
     else
       render "confirm_form"
     end

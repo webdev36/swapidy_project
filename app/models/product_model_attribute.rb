@@ -12,7 +12,7 @@ class ProductModelAttribute < ActiveRecord::Base
   end
   
   def title
-    [product_model.title, category_attribute.title].join(" - ")  
+    [product_model.title, category_attribute.title, value].join(" - ") rescue ""
   end
   
   def attribute_value

@@ -57,5 +57,9 @@ class Product < ActiveRecord::Base
     ActionController::Base.new.expire_fragment("homepage_product_container_category_#{self.category.id}")
     ActionController::Base.new.expire_fragment("homepage_product_thumb_#{self.id}")
   end
+  
+  def weight_lb
+    category_model.weight_lb
+  end
 
 end

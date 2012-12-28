@@ -16,13 +16,10 @@ Stamps.configure do |config|
   config.endpoint       = 'https://swsim.testing.stamps.com/swsim/swsimv24.asmx'.freeze
   config.namespace      = 'http://stamps.com/xml/namespace/2012/05/swsim/swsimv24'.freeze
   config.log_messages   = true
-  config.return_address  = {  :full_name    => 'Swapidy Inc.',
-                              :address1     => '2310 Rock Street Apt 38',
-                              :address2     => '',
-                              :city         => 'Mountain View',
-                              :state        => 'CA',
-                              :zip_code     => '94043',
-                              :phone_number => ''
-                            }
-  
+  #config.return_address = { :full_name    => 'Swapidy Inc.',
+  #                          :address1     => '2310 Rock Street Apt 38',
+  #                          :city         => 'Mountain View',
+  #                          :state        => 'CA',
+  #                          :zip_code     => '94043'
+  #                         }
 end
