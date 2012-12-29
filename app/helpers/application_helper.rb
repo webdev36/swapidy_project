@@ -35,7 +35,7 @@ module ApplicationHelper
   end
   
   def country_options
-    [["USA", "United States"]]
+    [["United States", "US"]]
   end
 
   def shipping_method_options

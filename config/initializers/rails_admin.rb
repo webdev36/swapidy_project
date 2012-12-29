@@ -38,7 +38,7 @@ RailsAdmin.config do |config|
   # config.excluded_models = [Category, CategoryAttribute, Comment, Image, Order, PaymentTransaction, Post, Product, ProductAttribute, ProductModel, ProductModelAttribute, User, UserProvider]
 
   # Add models here if you want to go 'whitelist mode':
-  config.included_models = [Category, CategoryAttribute, Image, Order, PaymentTransaction, Product, ProductModel, ProductModelAttribute, User]
+  config.included_models = [Category, CategoryAttribute, Image, Order, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductModelAttribute, User]
 
   # Application wide tried label methods for models' instances
   # config.label_methods << :description # Default is [:name, :title]

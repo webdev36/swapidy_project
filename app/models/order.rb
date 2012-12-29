@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
   
   validates :order_type, :status, :presence => true
   validates :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_city, :shipping_state, 
-            :shipping_zip_code, :shipping_method, :shipping_country, :presence => true
+            :shipping_zip_code, :shipping_country, :presence => true
 
   attr_accessor :candidate_addresses, :shipping_zip_code_add_on
 
@@ -52,6 +52,7 @@ class Order < ActiveRecord::Base
   end
   
   def shipping_method_name
+    return "" if self.shipping_method.nil || self.shipping_method.blank?
     SHIPPING_METHOD_NAMES[self.shipping_method.to_sym]
   end
   
@@ -73,8 +74,9 @@ class Order < ActiveRecord::Base
     new_stamp.stamps_tx_id = stamp[:stamps_tx_id]
     new_stamp.url = stamp[:url]
     new_stamp.status = "pending"
-    return new_stamp.save
+    return new_stamp if new_stamp.save
   end
+  
   private
   
     def adjust_current_balance

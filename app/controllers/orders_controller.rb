@@ -45,8 +45,8 @@ class OrdersController < ApplicationController
 
       @order.honey_price = @product.honey_price
       @order.using_condition = @product.using_condition
-      begin
-        Order.begin_transaction do
+      #begin
+        Order.transaction do
           @order.save
           @shipping_stamp = @order.create_new_stamp
         end
@@ -56,10 +56,10 @@ class OrdersController < ApplicationController
           OrderNotifier.confirm_to_buy(@order, @shipping_stamp).deliver
         end
         redirect_to "/orders/#{@order.id}"
-      rescue Exception => e
-        @order.errors.add(:shipping_stamp, " has errors to create")
-        render "confirm_form"
-      end
+      #rescue Exception => e
+      #  @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
+      #  render "confirm_form"
+      #end
     else
       render "confirm_form"
     end

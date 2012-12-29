@@ -59,7 +59,7 @@ class Product < ActiveRecord::Base
   end
   
   def weight_lb
-    category_model.weight_lb
+    product_model.weight_lb
   end
 
 end

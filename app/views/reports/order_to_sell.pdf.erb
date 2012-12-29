@@ -21,9 +21,9 @@
   <%= @order.shipping_state %><br />
   <%= @order.shipping_zip_code %><br />
   <%= @order.shipping_country %><br />
-  <%= @order.shipping_method_name %>
 </p>
 
 <h2>Shipping Label</h2>
-<p><img src="<%= @shipping_stamp.url %>"></p>
+<i>(Next page)</i>
+<div style="page-break-before: always;"><img src="<%= @shipping_stamp.url %>" style="width:400px; height:auto;" ></div>
 
