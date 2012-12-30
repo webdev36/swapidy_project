@@ -37,10 +37,9 @@ end
 
 #gem 'jquery-rails'
 group :production do
-end
-
   gem 'thin'
   gem 'pg'
+end
 
 group :development, :test do
   gem 'mailcatcher'
