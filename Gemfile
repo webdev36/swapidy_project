@@ -5,7 +5,7 @@ gem 'rails', '3.2.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+#gem 'sqlite3'
 gem 'devise'
 gem 'simple_form'
 gem 'haml'
@@ -17,7 +17,6 @@ gem 'wicked_pdf'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'rails_admin'
-
 gem 'savon', '0.8.6'
 gem 'httpi', '0.7.9'
 gem 'multi_json', '~> 1.0'
@@ -37,9 +36,14 @@ group :assets do
 end
 
 #gem 'jquery-rails'
+group :production do
+  gem 'thin'
+  gem 'pg'
+end
 
 group :development, :test do
   gem 'mailcatcher'
+  gem 'sqlite3'
 end
 
 # To use ActiveModel has_secure_password
