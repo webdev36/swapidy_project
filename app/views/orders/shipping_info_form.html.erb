@@ -22,6 +22,25 @@
       <br/>
     </div>
   <% end %>
+  
+  <% if @order.candidate_addresses && !@order.candidate_addresses.empty? %>
+    <div id="candidate_addresses_container" >
+      <br />
+      <b style="color: red;">There are <%= @order.candidate_addresses.size == 1 ? "an address" : "#{@order.candidate_addresses.size} addresses"%> 
+      would be exactly your address.</b><br/>
+      <% @order.candidate_addresses.each_with_index do |address, index|%>
+        <%= index + 1 %>. <%= address[:address1]%> 
+                          <% if address[:address2] && !address[:address2].blank? %> (Address2: <%= address[:address2] %>) <% end %>
+                          - <%= address[:city] %> - <%= address[:state] %> - <%= address[:zip_code] %>
+        <a href="#" class="select_candidate_address" data-address="<%= address[:address1]%>" data-optional_address="<%= address[:address2]%>"
+          data-city="<%= address[:city]%>" data-state="<%= address[:state]%>" 
+          data-zip_code="<%= address[:zip_code]%>" data-zip_code_add_on="<%= address[:zip_code_add_on]%>"
+        >Select</a><br />
+      <% end %>
+      <br />
+    </div>
+  <% end %>
+
   <div id="shipping_address_form" class="address_form_content">
     <div class="form_element text_field first_name half_width left">
       <label for="shipping_information_first_name">First name</label><br/>
@@ -69,22 +88,7 @@
   
   
   <% if @order.candidate_addresses && !@order.candidate_addresses.empty? %>
-    <div><%= f.submit "Continue", :id => "continue_button", :style => "display:none;" %></div>
-    <div id="candidate_addresses_container" >
-      <br />
-      <b style="color: red;">There are <%= @order.candidate_addresses.size == 1 ? "an address" : "#{@order.candidate_addresses.size} addresses"%> 
-      would be exactly your address.</b><br/>
-      <% @order.candidate_addresses.each_with_index do |address, index|%>
-        <%= index + 1 %>. <%= address[:address1]%> 
-                          <% if address[:address2] && !address[:address2].blank? %> (Address2: <%= address[:address2] %>) <% end %>
-                          - <%= address[:city] %> - <%= address[:state] %> - <%= address[:zip_code] %>
-        <a href="#" class="select_candidate_address btn" data-address="<%= address[:address1]%>" data-optional_address="<%= address[:address2]%>"
-          data-city="<%= address[:city]%>" data-state="<%= address[:state]%>" 
-          data-zip_code="<%= address[:zip_code]%>" data-zip_code_add_on="<%= address[:zip_code_add_on]%>"
-        >Select</a><br />
-      <% end %>
-      <br />
-    </div>
+    <div><%= f.submit "Continue", :id => "continue_button" %></div>
 
     <script>
       $(".select_candidate_address").live("click", function() {
@@ -94,14 +98,14 @@
         $("#order_shipping_state").attr("value", $(this).attr("data-state"));
         $("#order_shipping_zip_code").attr("value", $(this).attr("data-zip_code"));
         $("#order_shipping_zip_code_add_on").attr("value", $(this).attr("data-zip_code_add_on"));
-        $("#order_is_candidate_address").attr("value", true);
-        
         $("#new_order").submit();
       });
-      
+      $("#order_is_candidate_address").attr("value", true);
+        
       $(".form_element input").live("change", function() {
         $("#continue_button").show();
         $("#candidate_addresses_container").hide();
+        $("#order_is_candidate_address").attr("value", false);
       });
     </script>
 
