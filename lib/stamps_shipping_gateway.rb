@@ -3,7 +3,7 @@ require 'stamps'
 #This module would be included into Order class/module
 module StampsShippingGateway
   
-  PURCHASE_AMOUNT = 10.0 #purchase $10 if it dont have enought Stamps account's balance
+  PURCHASE_AMOUNT = 100.0 #purchase $10 if it dont have enought Stamps account's balance
   PACKAGE_TYPE = "Package"
   PRIORITY_MAIL_SERVICE_TYPE = 'US-PM' #USPS Priority Mail
   DELIVERY_CONFIRMATION_TYPE = 'US-A-DC'

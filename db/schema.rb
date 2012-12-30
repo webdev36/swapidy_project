@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228045309) do
+ActiveRecord::Schema.define(:version => 20121230173848) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -170,10 +170,10 @@ ActiveRecord::Schema.define(:version => 20121228045309) do
     t.string   "package_type"
     t.datetime "due_date"
     t.string   "stamps_tx_id"
-    t.string   "url"
+    t.string   "url",              :limit => 1000
     t.string   "status"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "user_providers", :force => true do |t|
