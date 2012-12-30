@@ -41,6 +41,7 @@ end
 
 group :development, :test do
   gem 'mailcatcher'
+  gem 'sqlite3'
 end
 
 # To use ActiveModel has_secure_password
