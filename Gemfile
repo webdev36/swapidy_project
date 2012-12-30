@@ -6,7 +6,6 @@ gem 'rails', '3.2.9'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #gem 'sqlite3'
-gem 'pg'
 gem 'devise'
 gem 'simple_form'
 gem 'haml'
@@ -18,7 +17,7 @@ gem 'wicked_pdf'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'rails_admin'
-
+gem 'bundle'
 gem 'savon', '0.8.6'
 gem 'httpi', '0.7.9'
 gem 'multi_json', '~> 1.0'
@@ -38,7 +37,9 @@ group :assets do
 end
 
 #gem 'jquery-rails'
-
+group :production do
+  gem 'pg'
+end
 group :development, :test do
   gem 'mailcatcher'
   gem 'sqlite3'
