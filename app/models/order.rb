@@ -6,13 +6,13 @@ class Order < ActiveRecord::Base
   attr_accessible :order_type, :status, :product_id, :honey_price, :using_condition, 
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,
                   :shipping_city, :shipping_state, :shipping_zip_code, :shipping_country, :shipping_method,
-                  :candidate_addresses, :shipping_zip_code_add_on
+                  :candidate_addresses, :shipping_zip_code_add_on, :is_candidate_address
   
   validates :order_type, :status, :presence => true
   validates :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_city, :shipping_state, 
             :shipping_zip_code, :shipping_country, :presence => true
 
-  attr_accessor :candidate_addresses, :shipping_zip_code_add_on
+  attr_accessor :candidate_addresses, :is_candidate_address
 
   belongs_to :product
   belongs_to :user

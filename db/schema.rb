@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121230173848) do
+ActiveRecord::Schema.define(:version => 20121230194812) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20121230173848) do
     t.decimal  "honey_price",               :default => 0.0
     t.string   "using_condition"
     t.decimal  "weight_lb",                 :default => 1.0
+    t.string   "shipping_zip_code_add_on"
   end
 
   create_table "payment_transactions", :force => true do |t|
