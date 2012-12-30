@@ -58,7 +58,11 @@ class Order < ActiveRecord::Base
   
   def shipping_address_valid?
     result = verify_shipping_address
-    errors.add(:shipping_address, "could not be found") unless result
+    if result.nil? && candidate_addresses
+      errors.add(:shipping_address, "is confused with nearly same addresses. Need confirm again to make sure!") 
+    elsif result.nil?
+      errors.add(:shipping_address, "could not be found") 
+    end
     return result
   end
   
