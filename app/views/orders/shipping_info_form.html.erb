@@ -66,11 +66,12 @@
       <%= f.select :shipping_country, country_options, {} %>
     </div>
   </div>
-
-  <div><%= f.submit "Continue" %></div>
+  
   
   <% if @order.candidate_addresses && !@order.candidate_addresses.empty? %>
-    <div>
+    <div><%= f.submit "Continue", :id => "continue_button", :style => "display:none;" %></div>
+    <div id="candidate_addresses_container" >
+      <br />
       <b style="color: red;">There are <%= @order.candidate_addresses.size == 1 ? "an address" : "#{@order.candidate_addresses.size} addresses"%> 
       would be exactly your address.</b><br/>
       <% @order.candidate_addresses.each_with_index do |address, index|%>
@@ -84,20 +85,28 @@
       <% end %>
       <br />
     </div>
+
+    <script>
+      $(".select_candidate_address").live("click", function() {
+        $("#order_shipping_address").attr("value", $(this).attr("data-address"));
+        $("#order_shipping_optional_address").attr("value", $(this).attr("data-optional_address"));
+        $("#order_shipping_city").attr("value", $(this).attr("data-city"));
+        $("#order_shipping_state").attr("value", $(this).attr("data-state"));
+        $("#order_shipping_zip_code").attr("value", $(this).attr("data-zip_code"));
+        $("#order_shipping_zip_code_add_on").attr("value", $(this).attr("data-zip_code_add_on"));
+        $("#order_is_candidate_address").attr("value", true);
+        
+        $("#new_order").submit();
+      });
+      
+      $(".form_element input").live("change", function() {
+        $("#continue_button").show();
+        $("#candidate_addresses_container").hide();
+      });
+    </script>
+
+  <% else %>
+    <div><%= f.submit "Continue", :id => "continue_button" %></div>
   <% end %>
   
 <% end %>
-
-<script>
-  $(".select_candidate_address").live("click", function() {
-    $("#order_shipping_address").attr("value", $(this).attr("data-address"));
-    $("#order_shipping_optional_address").attr("value", $(this).attr("data-optional_address"));
-    $("#order_shipping_city").attr("value", $(this).attr("data-city"));
-    $("#order_shipping_state").attr("value", $(this).attr("data-state"));
-    $("#order_shipping_zip_code").attr("value", $(this).attr("data-zip_code"));
-    $("#order_shipping_zip_code_add_on").attr("value", $(this).attr("data-zip_code_add_on"));
-    $("#order_is_candidate_address").attr("value", true);
-    
-    $("#shipping_address_form").submit();
-  });
-</script>
