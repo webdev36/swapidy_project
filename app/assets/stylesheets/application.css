@@ -18,16 +18,21 @@ body{
 	display: inline-block;
 	height: 50px;
 	padding: 0;
-	position: relative;
-
 }
+
 .nav{
 	position: absolute;
 	top:10px;
 	font-weight: bold;
 	font-size: 15px;
 }
+#nav_signup:hover{
+  background:#A7A7A7;
+}
 
+#nav_login:hover{
+  background: #A7A7A7;
+}
 #banner_logo{
 	height:200px;
 	width:400px;
@@ -41,8 +46,8 @@ body{
 #my_trade_ins{
 	left: 1px;  /* change this to left: 1px; to put it on the left of the screen */
 	top: 200px;
-	height: 100px;
-	width: 100px;
+	height: 70px;
+	width: 70px;
 	margin: 0;
 	padding: 0;
 	position: fixed;
@@ -56,9 +61,9 @@ body{
 
 #my_orders{
 	left: 1px;  /* change this to left: 1px; to put it on the left of the screen */
-	top: 400px;
-	height: 100px;
-	width: 100px;
+	top: 320px;
+	height: 70px;
+	width: 70px;
 	margin: 0;
 	padding: 0;
 	position: fixed;

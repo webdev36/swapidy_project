@@ -7,7 +7,7 @@
           <li>
             <div class="profile_info_nav">
               <div style="display: inline-block;"><%= link_to(current_user.full_name, settings_path, :method => :get) %></div>
-              <div style="display: inline-block;">(Honey <%= format_num(current_user.honey_balance) %></div>
+              <div style="display: inline-block;">(HONEY <%= format_num(current_user.honey_balance)%></div>
               <div style="display: inline-block;"><%= link_to("+", "/payments/new", :method => :get, :class => "plushoney_icon") %>)</div>
             </div>
           </li>
@@ -20,20 +20,15 @@
             <%= link_to('LOGOUT', destroy_user_session_path, :method => :delete) %>
           </li>
         <% else %>
-          <li>
+          <li id="nav_login">
             <%= link_to('LOGIN', new_user_session_path)  %>
           </li>
            <li class="divider-vertical"></li>
-          <li>
+          <li id="nav_signup">
             <%= link_to "SIGN UP", new_user_registration_path%>
           </li>
           <li class="divider-vertical"></li>
         <% end %>
-
-        <li>
-          <a href="#">HELP</a>
-        </li>
-        
       </ul>
     </div>
   </div>
