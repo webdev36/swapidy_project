@@ -118,8 +118,9 @@ module StampsShippingGateway
                              :to => to_address, 
                              :from => from_address
                            )
-      raise stamp[:errors] if !stamp[:valid?].nil? && stamp[:valid?] == false && stamp[:errors]
-  
+                           
+      Rails.logger.info "stamp.class.name: #{stamp.class.name}"
+      raise stamp[:errors] if !stamp.class.name == "Hash" && stamp[:valid?].nil? && stamp[:valid?] == false && stamp[:errors]
       return stamp
     end
   

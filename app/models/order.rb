@@ -77,6 +77,14 @@ class Order < ActiveRecord::Base
     return new_stamp if new_stamp.save
   end
   
+  def test_address
+    self.attributes.merge!(:shipping_address1 => '1601 WILLOW', 
+                            :shipping_city => 'MENLO PARK', 
+                            :shipping_state => 'CA', 
+                            :shipping_zip_code  => '94025')
+    self.verify_shipping_address
+  end
+  
   private
   
     def adjust_current_balance
