@@ -58,7 +58,7 @@ class Order < ActiveRecord::Base
   
   def shipping_address_valid?
     result = verify_shipping_address
-    return true if is_candidate_address && !result && candidate_addresses
+    return true if is_candidate_address && !result && candidate_addresses && !candidate_addresses.empty? 
     if !result && candidate_addresses
       errors.add(:shipping_address, "is confused with nearly same addresses. Need confirm again to make sure!") 
     elsif !result

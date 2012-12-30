@@ -17,8 +17,8 @@ module StampsShippingGateway
     @logger.info address
     @logger.info "-------- END ------"
     return true if address[:address_match]
-    return true if address[:city_state_zip_oK] && is_candidate_address
     self.candidate_addresses = address[:candidate_addresses][:address] if address[:candidate_addresses]
+    return true if address[:city_state_zip_oK] && is_candidate_address
     return false
   end
 
