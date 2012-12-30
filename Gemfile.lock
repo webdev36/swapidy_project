@@ -43,8 +43,6 @@ GEM
     bcrypt-ruby (3.0.1-x86-mingw32)
     bootstrap-sass (2.1.0.0)
     builder (3.0.4)
-    bundle (0.0.1)
-      bundler
     carmen (1.0.0.beta2)
     carmen-rails (1.0.0.beta3)
       carmen (~> 1.0.0.beta2)
@@ -234,7 +232,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_shipping
-  bundle
   carmen-rails
   coffee-rails (~> 3.2.1)
   devise
@@ -253,5 +250,6 @@ DEPENDENCIES
   simple_form
   sqlite3
   stripe
+  thin
   uglifier (>= 1.0.3)
   wicked_pdf

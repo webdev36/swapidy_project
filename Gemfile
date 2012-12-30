@@ -17,7 +17,6 @@ gem 'wicked_pdf'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'rails_admin'
-gem 'bundle'
 gem 'savon', '0.8.6'
 gem 'httpi', '0.7.9'
 gem 'multi_json', '~> 1.0'
@@ -38,8 +37,11 @@ end
 
 #gem 'jquery-rails'
 group :production do
-  gem 'pg'
 end
+
+  gem 'thin'
+  gem 'pg'
+
 group :development, :test do
   gem 'mailcatcher'
   gem 'sqlite3'
