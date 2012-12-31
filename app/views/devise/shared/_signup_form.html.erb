@@ -1,0 +1,30 @@
+<div id="signup_container">
+  <img id="signup_circle" src="/images/signup_circle_new.png" style="top: 338.5px; display: block;">
+  <!-- a href="/auth/facebook"><img id="fb_signup" src="/images/fb_signup.png"></a-->
+  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_signup" src="/images/fb_signup.png"></a>
+
+  <div id="signup_form">
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource)) do |f| %>
+      <div class="signup_field"><%= f.label :email %></div>
+      <%= f.email_field :email %>
+  
+      <div class="signup_field"><%= f.label :password %></div>
+      <%= f.password_field :password %>
+  
+      <div class="signup_field"><%= f.label :password_confirmation %></div>
+      <%= f.password_field :password_confirmation %>
+      <div class="signup_field">
+        <%= f.submit "Sign up" %>
+        <% if show_cancel_link %>
+          <a href="javascript:hidePopup();" style="color: black; padding-left: 30px;">Cancel</a>
+        <% end %>
+        <% unless resource.errors.empty? %>
+          <span style="color: red;">
+            !!! <%= raw resource.errors.full_messages.first %>.
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+</div>  

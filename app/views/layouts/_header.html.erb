@@ -21,11 +21,11 @@
           </li>
         <% else %>
           <li id="nav_login">
-            <%= link_to('LOGIN', new_user_session_path)  %>
+            <a href="javascript:showPopup('popup-dialog_for_signin');" >LOGIN</a>
           </li>
            <li class="divider-vertical"></li>
           <li id="nav_signup">
-            <%= link_to "SIGN UP", new_user_registration_path%>
+            <a href="javascript:showPopup('popup-dialog_for_signup');" >SIGN UP</a>
           </li>
           <li class="divider-vertical"></li>
         <% end %>
@@ -38,7 +38,20 @@
   <div>
     <strong>Signed in as <%= current_user.first_name %></strong>
   </div>
-<%end%>
+<% else %>
+  <div id="popup-box-bg" style="display: none;"></div>
+  <div id="popup-dialog_for_signup" style="display:none;" class="popup-box-wrapper standard-popup">
+    <div id="dialog-content">
+      <%= render :partial => "/devise/shared/signup_form", :locals => {:resource => User.new, :resource_name => "User", :show_cancel_link => true} %>
+    </div>
+  </div>
+  
+  <div id="popup-dialog_for_signin" style="display:none;" class="popup-box-wrapper standard-popup">
+    <div id="dialog-content"
+      <%= render :partial => "/devise/shared/signin_form", :locals => {:resource => User.new, :resource_name => "User", :show_cancel_link => true} %>
+    </div>
+  </div>
+<% end %>
 
 
 <%= render :partial => "/layouts/orders.html" if current_user %>

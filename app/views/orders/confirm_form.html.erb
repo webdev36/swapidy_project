@@ -14,6 +14,8 @@
   <%= f.hidden_field :shipping_state %>
   <%= f.hidden_field :shipping_zip_code %>
   <%= f.hidden_field :shipping_country %>
+  <%= f.hidden_field :shipping_zip_code_add_on %>
+  <%= f.hidden_field :is_candidate_address %>
 
   <% unless @order.errors.empty? %>
     <div style="color: red;">
@@ -79,6 +81,7 @@
       <%= @order.shipping_city %><br />
       <%= @order.shipping_state %><br />
       <%= @order.shipping_zip_code %><br />
+      <%= @order.shipping_zip_code_add_on %><br />
       <%= @order.shipping_country %><br />
     </p>
   </div>
