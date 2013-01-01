@@ -1052,7 +1052,8 @@ label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color:#FC43CC;
+  font-size: 20px;
+  color:#737373;
   font-family: "Lato",Calibri,Arial,sans-serif;
 }
 
