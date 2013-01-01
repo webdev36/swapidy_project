@@ -2,4 +2,4 @@
 
   <img id="bg" src="/images/signup_background.jpg" style="width: 1905px; height: 1562px; display: inline;">
 
-  <%= render :partial => "devise/shared/signup_form.html", :locals => {:resource => resource, :resource_name => resource_name} %> 
+  <%= render :partial => "/devise/shared/signup_form", :locals => {:resource => resource, :resource_name => resource_name, :show_cancel_link => false} %> 

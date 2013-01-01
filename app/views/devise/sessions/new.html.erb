@@ -1,5 +1,5 @@
 <div id="main" style="width: 1905px; height: 678px;">
-
-  <% render :partial => "devise/shared/signin_form.htnl", :locals => {:resource => resource, :resource_name => resource_name} %>
+  
+  <%= render :partial => "/devise/shared/signin_form", :locals => {:resource => resource, :resource_name => resource_name, :show_cancel_link => false} %>
 
 </div>

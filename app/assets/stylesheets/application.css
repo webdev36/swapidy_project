@@ -183,6 +183,8 @@ left:0px;
 }
 .product_title{
     font-weight: bold;
+    height: 45px;
+    overflow: hidden;
 }
 .signup_field{
     height: 20px;
