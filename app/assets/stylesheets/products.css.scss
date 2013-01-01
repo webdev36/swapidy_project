@@ -4,7 +4,7 @@
 
 #progress_indicator ul {
   height: 30px;
-  line-height: 50px;
+  line-height: 30px;
   z-index: 1;
   position: relative;
   padding: 10px 0px;
@@ -16,13 +16,13 @@
   background: #F7F7F7 no-repeat 100% 50%;
   color: white;
   float: left;
-  height: 30px;
+  height: 24px;
   line-height: 24px;
   width: 140px;
   text-align: center;
   margin-right: 5px;
-  font-size: 20px;
-  background: #38B4DE;
+  font-size: 12px;
+  background: #266986;
   border-radius: 0px 10px 10px 0px;
   -moz-border-radius: 0px 10px 10px 0px;
   -webkit-border-radius: 0px 10px 10px 0px;
@@ -32,7 +32,7 @@
 }
 
 #progress_indicator li.current {
-  background: #38B4DE no-repeat 100% 50%;
+  background: #266986 no-repeat 100% 50%;
   color: white;
   font-weight: bold;
   zoom: 1;
