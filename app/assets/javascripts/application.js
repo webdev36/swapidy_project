@@ -46,7 +46,7 @@ function showPopup(element_id) {
   $('.active-popup').removeClass('active-popup').hide();
   $('#' + element_id).addClass('active-popup');
   $('#' + element_id).fadeIn('fast', function (){
-    resetPopupSize(element_id);
+    //resetPopupSize(element_id);
   });
 }
 
