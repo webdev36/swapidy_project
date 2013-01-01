@@ -1,28 +1,5 @@
 <div id="main" style="width: 1905px; height: 678px;">
-	<img id="bg" src="/images/login_background.jpg" style="width: 1905px; height: 1562px; display: inline;">
+  
+  <%= render :partial => "/devise/shared/signin_form", :locals => {:resource => resource, :resource_name => resource_name, :show_cancel_link => false} %>
 
-	<div id="login_container">
-	<img id="login_circle" src="/images/login_circle_new.png" style="top: 338.5px; display: block;">
-	<img id="login_or" src="/images/login_or.png">
-	<img id="fb_login" src="/images/fb_signup.png">
-
-
-<div id="login_form">
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="login_label"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-
-  <div style="position:relative; top:10px;"><%= f.submit "Sign in" %></div>
-<% end %>
-</div>
-<div id="login_extras">
-<%= render "devise/shared/links" %>
-</div>
 </div>

@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   
   def full_name
     name = [first_name, last_name].compact.join(" ").strip
-    return name.blank? ? "Profile" : name
+    return name.blank? ? "PROFILE" : name
   end
   
   def name_in_email

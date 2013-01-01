@@ -6,13 +6,13 @@ class Order < ActiveRecord::Base
   attr_accessible :order_type, :status, :product_id, :honey_price, :using_condition, 
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,
                   :shipping_city, :shipping_state, :shipping_zip_code, :shipping_country, :shipping_method,
-                  :candidate_addresses, :shipping_zip_code_add_on
+                  :candidate_addresses, :shipping_zip_code_add_on, :is_candidate_address
   
   validates :order_type, :status, :presence => true
   validates :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_city, :shipping_state, 
             :shipping_zip_code, :shipping_country, :presence => true
 
-  attr_accessor :candidate_addresses, :shipping_zip_code_add_on
+  attr_accessor :candidate_addresses, :is_candidate_address
 
   belongs_to :product
   belongs_to :user
@@ -58,7 +58,12 @@ class Order < ActiveRecord::Base
   
   def shipping_address_valid?
     result = verify_shipping_address
-    errors.add(:shipping_address, "could not be found") unless result
+    #return true if is_candidate_address && !result && candidate_addresses && !candidate_addresses.empty? 
+    if !result && candidate_addresses && !candidate_addresses.empty? 
+      errors.add(:shipping_address, "is confused with nearly same addresses. Need confirm again to make sure!") 
+    elsif !result
+      errors.add(:shipping_address, "could not be found") 
+    end
     return result
   end
   
@@ -75,6 +80,14 @@ class Order < ActiveRecord::Base
     new_stamp.url = stamp[:url]
     new_stamp.status = "pending"
     return new_stamp if new_stamp.save
+  end
+  
+  def test_address
+    self.attributes.merge!(:shipping_address1 => '1601 WILLOW', 
+                            :shipping_city => 'MENLO PARK', 
+                            :shipping_state => 'CA', 
+                            :shipping_zip_code  => '94025')
+    self.verify_shipping_address
   end
   
   private

@@ -1,14 +1,14 @@
 <div class="item thumbnail product_filter_model_<%= product.product_model.id %> <%= product.using_condition %> <%= product.gen_attribute_names %> ">
   <div class="box">
-    <div class="product_title" style="color:#FC43CC;"><%= product.title %></div>
-    <div class="product_image thumbnail"><img src="<%= product.main_image_url(:medium) %>"></div>
+    <div class="product_title" style="color:#FC43CC;" title="<%= product.title %>"><%= product.title %></div>
+    <div class="product_image thumbnail"><img title="<%= product.title %>" src="<%= product.main_image_url(:medium) %>"></div>
     <div>
       <div class="product_price"><%= format_num(product.honey_price) %> <b>honey</b></div>
       <div class="button_for_buy">
-        <a href="/products/<%= product.id %>?for=buy" class="btn btn-danger">Buy</a>
+        <a href="/products/<%= product.id %>?for=buy" class="btn btn-danger" title="Buy now: <%= product.title %>">Buy</a>
       </div>
       <div class="button_for_sell">
-        <a href="/products/<%= product.id %>?for=sell" class="btn btn-primary">Sell</a>
+        <a href="/products/<%= product.id %>?for=sell" class="btn btn-primary"title="Sell now: <%= product.title %>">Sell</a>
       </div>
     </div>
   </div>

@@ -206,8 +206,8 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-  #require "omniauth-facebook"
-  #config.omniauth :facebook, '259670540817916', '02d78fa483f86404570fe7a50965b319', :scope => 'email,user_birthday,user_location' #Scrum2B
+  require "omniauth-facebook"
+  config.omniauth :facebook, '259670540817916', '02d78fa483f86404570fe7a50965b319', :scope => 'email,user_birthday,user_location' #Scrum2B
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

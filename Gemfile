@@ -39,6 +39,7 @@ end
 group :production do
   gem 'thin'
   gem 'pg'
+  gem "wkhtmltopdf-heroku", :git => 'git://github.com/camdez/wkhtmltopdf-heroku.git'
 end
 
 group :development, :test do

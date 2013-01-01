@@ -3,7 +3,7 @@ require 'stamps'
 #This module would be included into Order class/module
 module StampsShippingGateway
   
-  PURCHASE_AMOUNT = 10.0 #purchase $10 if it dont have enought Stamps account's balance
+  PURCHASE_AMOUNT = 100.0 #purchase $10 if it dont have enought Stamps account's balance
   PACKAGE_TYPE = "Package"
   PRIORITY_MAIL_SERVICE_TYPE = 'US-PM' #USPS Priority Mail
   DELIVERY_CONFIRMATION_TYPE = 'US-A-DC'
@@ -18,6 +18,7 @@ module StampsShippingGateway
     @logger.info "-------- END ------"
     return true if address[:address_match]
     self.candidate_addresses = address[:candidate_addresses][:address] if address[:candidate_addresses]
+    return true if address[:city_state_zip_ok] && is_candidate_address && is_candidate_address.to_s == "true"
     return false
   end
 
@@ -118,8 +119,9 @@ module StampsShippingGateway
                              :to => to_address, 
                              :from => from_address
                            )
-      raise stamp[:errors] if !stamp[:valid?].nil? && stamp[:valid?] == false && stamp[:errors]
-  
+                           
+      Rails.logger.info "stamp.class.name: #{stamp.class.name}"
+      raise stamp[:errors] if !stamp.class.name == "Hash" && stamp[:valid?].nil? && stamp[:valid?] == false && stamp[:errors]
       return stamp
     end
   
