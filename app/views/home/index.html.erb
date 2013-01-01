@@ -18,14 +18,14 @@
 
 <% cache('homepage_available_categories') do %>
 <div id="product_type" style="display:none;">
-  <h2 style="color:#38B4DE;">Choose your product:</h2>
+  <h2 class="cat_choose">Choose your product:</h2>
   <div id="slider-code" class="span12">
     <a class="left carousel-control buttons prev" href="#">&lsaquo;</a>
     <div class="viewport">
         <ul class="overview" style="width: 1560px;">
           <% Category.all.each_with_index do |category, index| %>
             <li id="cat_<%= category.id %>" class="item category span3" >
-              <img class="cat_item" alt="<%= category.title %>" style="height: 200px; width: auto;" src="<%= category.main_image_url(:large) %>">
+              <img class="cat_item" alt="<%= category.title %>" style="height: 200px;" src="<%= category.main_image_url(:large) %>">
               <div style="display:block;">
                 <%= category.title %>
               </div>
@@ -60,7 +60,7 @@
           <div id="search_container" class="attribute_filter">
             <% category.category_attributes.each do |attr|%>
               <div class="option-set" data-group="cat_attr_<%= attr.id %>">
-                <h3 class="s_category" style="color:#38B4DE"><%= attr.title %></h3>
+                <h3 class="s_category" style="color:#fa3e6e"><%= attr.title %></h3>
                 <% attr.attributes_in_models.each do |attr_value_with_models| %>
                   <div style="display:inline-block;" class="attr_filter attr_filter_model_all <%= attr_value_with_models[1].map{|model| "attr_filter_model_#{model.id.to_s}"}.join(" ") %>" >
                     <div style="display: inline-block; line-height: 30px;" >
