@@ -179,12 +179,25 @@ left:0px;
   cursor: pointer;
 }
 .product_price{
+    color: #38B4DE;
+
     font-weight: bold;
 }
 .product_title{
     font-weight: bold;
     height: 45px;
     overflow: hidden;
+}
+.product_name{
+color:#fa3e6e;
+}
+.product_model{
+  font-size: 20px;
+  color: #38B4DE;
+
+}
+.product_desc{
+  color:#737373;
 }
 .signup_field{
     height: 20px;
@@ -221,13 +234,15 @@ left:0px;
 }
 
 h2{
-    color: #FC43CC;
+    color: #fa3e6e;
 }
 
 .s_category{
-    color:#38B4DE;
+    color:#fa3e6e;
 }
-
+.cat_choose{
+  color: #fa3e6e;
+}
 .button_for_sell a{
 color:white;
 }
@@ -344,4 +359,85 @@ color:white;
   border-radius: 5px;
   box-shadow: 0 0 5px black;
   z-index: 99999;
+}
+.using_condition{
+    color: #38B4DE;
+
+  font-size: 20px;
+}
+.product_price{
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.show_button_sell{
+      text-align: center;
+        background: #fa3e6e;
+    color: white;
+    font-weight: 700;
+    font-size: 40px;
+    text-decoration: none;
+    font-family: "Lato", Calibri, Arial, sans-serif;
+    padding: 8px 15px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    width: 200px;
+    height: 40px;
+
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.5), 
+        0 2px 2px rgba(0,0,0,0.3), 
+        0 0 4px 1px rgba(0,0,0,0.2); 
+
+    text-decoration: none;
+    text-shadow: 0 1px rgba(255,255,255,0.7);  
+    padding-top: 10px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.show_button_buy{
+      text-align: center;
+        background: #38B4DE;
+    color: white;
+    font-weight: 700;
+    font-size: 40px;
+    text-decoration: none;
+    font-family: "Lato", Calibri, Arial, sans-serif;
+    padding: 8px 15px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    width: 200px;
+    height: 40px;
+
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.5), 
+        0 2px 2px rgba(0,0,0,0.3), 
+        0 0 4px 1px rgba(0,0,0,0.2); 
+
+    text-decoration: none;
+    text-shadow: 0 1px rgba(255,255,255,0.7);  
+    padding-top: 10px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.show_button_sell a{
+  color:white;
+}
+
+.show_button_sell a:hover{
+  color:white;
 }

@@ -1,19 +1,20 @@
+
 <div class="product_name">
   <h2><%= @product.title %></h2>
 </div>
 
 <div class="product_model">
-  <u><i>Model</i>: <strong><%= @product.product_model.title %></strong></u><br/>
+	Model: <span class="product_desc"><%= @product.product_model.title %></span><br/><br/>
   <% @product.product_model_attributes.each do |model_attribute| %>
-    <i><%= model_attribute.category_attribute.title %>:</i> <strong><%= model_attribute.value %></strong><br/>
+    <%= model_attribute.category_attribute.title %>:<span class="product_desc"> <%= model_attribute.value %></span><br/><br/>
   <% end %>
 </div>
 <div class="using_condition">
-  <i>Using condition:</i> <strong><%= @product.using_condition %></strong>
+  Using condition:<span class="product_desc"><%= @product.using_condition %></span>
 </div>
 <br/>
 
 <div class="product_price">
-  <strong>Price: <%= format_num(@product.honey_price) %> Honey</strong>
+  Price: <span class="product_desc"><%= format_num(@product.honey_price)%> Honey</span>
 </div>
 <br/>
