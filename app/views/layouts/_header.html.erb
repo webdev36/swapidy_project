@@ -10,7 +10,7 @@
               <div style="display: inline-block;">(HONEY <%= format_num(current_user.honey_balance)%></div>
               <div style="display: inline-block;"><%= link_to("+", "/payments/new", :method => :get, :class => "plushoney_icon") %>)</div>
             </div>
-          </li>
+          </li>im
           <% if current_user.is_admin? %>
             <li>
               <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
@@ -21,11 +21,11 @@
           </li>
         <% else %>
           <li id="nav_login">
-            <a href="javascript:showPopup('popup-dialog_for_signin');" >LOGIN</a>
+            <%= link_to('LOGIN', new_user_session_path)  %>
           </li>
            <li class="divider-vertical"></li>
           <li id="nav_signup">
-            <a href="javascript:showPopup('popup-dialog_for_signup');" >SIGN UP</a>
+            <%= link_to "SIGN UP", new_user_registration_path%>
           </li>
           <li class="divider-vertical"></li>
         <% end %>
@@ -38,6 +38,7 @@
   <div>
     <strong>Signed in as <%= current_user.first_name %></strong>
   </div>
+<<<<<<< HEAD
 <% else %>
   <div id="popup-box-bg" style="display: none;"></div>
   <div id="popup-dialog_for_signup" style="display:none;" class="popup-box-wrapper standard-popup">
@@ -52,6 +53,9 @@
     </div>
   </div>
 <% end %>
+=======
+<%end%>
+>>>>>>> Design changes
 
 
 <%= render :partial => "/layouts/orders.html" if current_user %>
