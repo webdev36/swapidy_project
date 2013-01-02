@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
 
-  attr_accessible :title, :using_condition, :honey_price
+  attr_accessible :title, :using_condition, :honey_price, :product_model_id, :image_ids, :product_attribute_ids, :product_model_attribute_ids
   
   has_attached_file :image, :styles => {:thumb => "50x50>", :medium => "200x200>"}
   

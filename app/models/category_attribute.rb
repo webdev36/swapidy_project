@@ -1,6 +1,6 @@
 class CategoryAttribute < ActiveRecord::Base
 
-  attr_accessible :title, :attribute_type
+  attr_accessible :title, :attribute_type, :category_id
   belongs_to :category
 
   has_many :product_model_attributes
@@ -18,6 +18,10 @@ class CategoryAttribute < ActiveRecord::Base
     elsif type == ATTRIBUTE_TYPES[:number]
       return Decimal.new(value) rescue nil
     end
+  end
+  
+  def to_s
+    [category.title, title].join(" - ")
   end
   
   def attributes_in_models

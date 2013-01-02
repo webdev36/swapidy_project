@@ -1,5 +1,5 @@
 class ProductModel < ActiveRecord::Base
-  attr_accessible :title, :comment
+  attr_accessible :title, :comment, :category_id, :weight_lb, :product_model_attribute_ids, :image_ids
   
   belongs_to :category
   has_many :products

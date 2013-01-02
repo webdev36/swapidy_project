@@ -1,10 +1,13 @@
 class ProductAttribute < ActiveRecord::Base
   
-  attr_accessible :value
+  attr_accessible :value, :product_model_attribute_id, :product_id
   
   belongs_to :product
   belongs_to :product_model_attribute
   
+  def title
+    product_model_attribute.title rescue ""
+  end
   
   def attribute_value
     if value && !value.blank?

@@ -38,7 +38,7 @@ RailsAdmin.config do |config|
   # config.excluded_models = [Category, CategoryAttribute, Comment, Image, Order, PaymentTransaction, Post, Product, ProductAttribute, ProductModel, ProductModelAttribute, User, UserProvider]
 
   # Add models here if you want to go 'whitelist mode':
-  config.included_models = [Category, CategoryAttribute, Image, Order, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductModelAttribute, User]
+  config.included_models = [Category, CategoryAttribute, Image, Order, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User]
 
   # Application wide tried label methods for models' instances
   # config.label_methods << :description # Default is [:name, :title]
@@ -96,11 +96,16 @@ RailsAdmin.config do |config|
        configure :created_at, :datetime 
        configure :updated_at, :datetime   #   # Sections:
      list do
-      filters [:title]  
+      filters [:title]
+      field :title
+      field :user
+      field :product_models
      end
      export do; end
      show do; end
-     edit do; end
+     edit do
+      field :title
+     end
      create do; end
      update do; end
   end
@@ -116,11 +121,18 @@ RailsAdmin.config do |config|
        configure :created_at, :datetime 
        configure :updated_at, :datetime   #   # Sections:
      list do
-      filters [:title, :attribute_type, :category]  
+      filters [:title, :attribute_type, :category]
+      field :title
+      field :attribute_type
+      field :category
      end
      export do; end
      show do; end
-     edit do; end
+     edit do
+      field :title
+      field :attribute_type
+      field :category
+     end
      create do; end
      update do; end
   end
@@ -140,19 +152,19 @@ RailsAdmin.config do |config|
   #   create do; end
   #   update do; end
   # end
-  # config.model Image do
+  config.model Image do
   #   # Found associations:
-  #     configure :for_object, :polymorphic_association   #   # Found columns:
+       configure :for_object, :polymorphic_association   #   # Found columns:
   #     configure :id, :integer 
   #     configure :for_object_id, :integer         # Hidden 
   #     configure :for_object_type, :string         # Hidden 
-  #     configure :sum_attribute_names, :string 
+       configure :sum_attribute_names, :string 
   #     configure :photo_file_name, :string         # Hidden 
   #     configure :photo_content_type, :string         # Hidden 
   #     configure :photo_file_size, :integer         # Hidden 
-  #     configure :photo, :paperclip 
-  #     configure :title, :string 
-  #     configure :is_main, :boolean 
+       configure :photo, :paperclip 
+       configure :title, :string 
+       configure :is_main, :boolean 
   #     configure :created_at, :datetime 
   #     configure :updated_at, :datetime   #   # Sections:
   #   list do; end
@@ -161,7 +173,7 @@ RailsAdmin.config do |config|
   #   edit do; end
   #   create do; end
   #   update do; end
-  # end
+  end
   
   config.model Order do
      # Found associations:
@@ -239,8 +251,8 @@ RailsAdmin.config do |config|
        configure :user, :belongs_to_association 
        configure :category, :belongs_to_association 
        configure :product_model, :belongs_to_association 
-  #     configure :product_attributes, :has_many_association 
-       configure :product_model_attributes, :has_many_association 
+       configure :product_attributes, :has_many_association 
+  #     configure :product_model_attributes, :has_many_association 
        configure :images, :has_many_association   #   # Found columns:
   #     configure :id, :integer 
        configure :title, :string 
@@ -251,30 +263,81 @@ RailsAdmin.config do |config|
   #     configure :updated_at, :datetime 
        configure :using_condition, :string 
   #     configure :product_model_id, :integer         # Hidden   #   # Sections:
-     list do; end
+  
+  #     configure :product_model_attribute_ids, :integer         # Hidden 
+  #    field :product_attribute_ids
+     list do
+      field :title
+      field :honey_price
+      field :using_condition
+      field :category
+      field :product_model
+      field :images
+     end
      export do; end
-     show do; end
-  #   edit do; end
-  #   create do; end
-  #   update do; end
+     show do
+      field :category
+      field :product_model
+      field :title
+      field :honey_price
+      field :using_condition
+      field :images
+      field :product_attributes
+     end
+     edit do; end
+     create do
+      field :product_model
+      field :title
+      field :honey_price
+      field :using_condition
+    #  field :images
+    #  field :product_attributes
+     end
+     update do
+      field :title
+      field :honey_price
+      field :using_condition
+      field :images
+      field :product_attributes
+#      field :product_attributes, :enum do
+#        enum do
+#          except = bindings[:object].product_attributes.map{|a| a.product_model_attribute.id}
+#          if except.empty?
+#            bindings[:object].product_model.product_model_attributes
+#          else
+#            bindings[:object].product_model.product_model_attributes.where("NOT(id IN ?)", except)
+#          end
+#        end
+#      end
+     end
   end
-  # config.model ProductAttribute do
+  config.model ProductAttribute do
   #   # Found associations:
-  #     configure :product, :belongs_to_association 
-  #     configure :product_model_attribute, :belongs_to_association   #   # Found columns:
+       configure :product, :belongs_to_association 
+       configure :product_model_attribute, :belongs_to_association   #   # Found columns:
   #     configure :id, :integer 
-  #     configure :product_id, :integer         # Hidden 
-  #     configure :product_model_attribute_id, :integer         # Hidden 
+       configure :product_id, :integer         # Hidden 
+       configure :product_model_attribute_id, :integer         # Hidden 
   #     configure :value, :string 
   #     configure :created_at, :datetime 
   #     configure :updated_at, :datetime   #   # Sections:
-  #   list do; end
-  #   export do; end
-  #   show do; end
-  #   edit do; end
-  #   create do; end
-  #   update do; end
-  # end
+     list do
+       filters [:product]
+       field :product
+       field :product_model_attribute
+     end
+     export do; end
+     show do
+       field :product
+       field :product_model_attribute
+     end
+     edit do
+       field :product
+       field :product_model_attribute
+     end
+     create do; end
+     update do; end
+  end
   config.model ProductModel do
   #   # Found associations:
        configure :category, :belongs_to_association 
@@ -287,21 +350,37 @@ RailsAdmin.config do |config|
        configure :created_at, :datetime 
        configure :updated_at, :datetime 
   #     configure :category_id, :integer         # Hidden   #   # Sections:
-     list do; end
+     list do
+      field :title
+      field :category
+      field :images
+      field :comment
+     end
      export do; end
      show do; end
+     update do
+      field :title
+      field :product_model_attributes
+      field :images
+      field :comment
+     end
+     create do
+      field :title
+      field :category
+      field :product_model_attributes
+      field :images
+      field :comment
+     end
      edit do; end
-     create do; end
-     update do; end
   end
-  # config.model ProductModelAttribute do
+  config.model ProductModelAttribute do
   #   # Found associations:
-  #     configure :product_model, :belongs_to_association 
-  #     configure :category_attribute, :belongs_to_association   #   # Found columns:
+       configure :product_model, :belongs_to_association 
+       configure :category_attribute, :belongs_to_association   #   # Found columns:
   #     configure :id, :integer 
   #     configure :product_model_id, :integer         # Hidden 
   #     configure :category_attribute_id, :integer         # Hidden 
-  #     configure :value, :string 
+       configure :value, :string 
   #     configure :created_at, :datetime 
   #     configure :updated_at, :datetime   #   # Sections:
   #   list do; end
@@ -310,7 +389,7 @@ RailsAdmin.config do |config|
   #   edit do; end
   #   create do; end
   #   update do; end
-  # end
+  end
   config.model User do
   #   # Found associations:
   #     configure :orders, :has_many_association 
@@ -319,6 +398,7 @@ RailsAdmin.config do |config|
   #     configure :id, :integer 
        configure :first_name, :string 
        configure :last_name, :string 
+       configure :full_name, :string
   #     configure :profile_name, :string 
        configure :email, :string 
        configure :password, :password         # Hidden 
@@ -328,30 +408,56 @@ RailsAdmin.config do |config|
   #     configure :remember_created_at, :datetime 
        configure :sign_in_count, :integer 
   #     configure :current_sign_in_at, :datetime 
-  #     configure :last_sign_in_at, :datetime 
+       configure :last_sign_in_at, :datetime 
   #     configure :current_sign_in_ip, :string 
   #     configure :last_sign_in_ip, :string 
        configure :created_at, :datetime 
        configure :updated_at, :datetime 
-  #     configure :card_type, :string 
-  #     configure :card_name, :string 
-  #     configure :card_expired_month, :string 
-  #     configure :card_expired_year, :string 
+       configure :card_type, :string 
+       configure :card_name, :string 
+       configure :card_expired_month, :string 
+       configure :card_expired_year, :string 
+       configure :card_expired_date, :date 
   #     configure :card_postal_code, :string 
        configure :address, :string 
-  #     configure :stripe_customer_id, :string 
+       configure :stripe_customer_id, :string 
   #     configure :stripe_card_token, :string 
-  #     configure :card_last_four_number, :string 
-  #     configure :stripe_coupon, :string 
+       configure :card_last_four_number, :string 
   #     configure :stripe_customer_card_token, :string 
        configure :honey_balance, :decimal 
   #     configure :provider_image, :string   #   # Sections:
-     list do; end
+       configure :is_admin, :boolean
+     list do
+      field :full_name
+      field :email
+      field :is_admin
+      field :honey_balance
+      field :last_sign_in_at
+     end
      export do; end
-     show do; end
-     edit do; end
+     show do
+      field :first_name
+      field :last_name
+      field :email
+      field :is_admin
+      field :honey_balance
+      field :address
+      field :card_type
+      field :card_name
+      field :card_expired_date
+      field :card_last_four_number
+      field :stripe_customer_id
+      field :last_sign_in_at
+     end
+     update do
+      field :full_name
+      field :email
+      field :is_admin
+      field :honey_balance
+      field :address
+     end
      create do; end
-     update do; end
+     edit do; end
   end
   # config.model UserProvider do
   #   # Found associations:
