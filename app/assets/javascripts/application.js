@@ -31,6 +31,10 @@ $(function() {
   .mouseout(function(){
     $(this).attr("src",'/images/footer_twitter.png');
   });
+  
+  $("#popup-box-bg").live("click", function(){
+    hidePopup();
+  });
 
 });
 
@@ -49,6 +53,7 @@ function showPopup(element_id) {
     //resetPopupSize(element_id);
   });
 }
+
 
 
 function hidePopup() {
