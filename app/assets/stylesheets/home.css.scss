@@ -82,7 +82,12 @@ ul{
   text-shadow: 0 0 15px rgba(0, 0, 0, 0.6), 0 -1px 1px rgba(0, 0, 0, 0.6);
 
 }
-
+.hero_info a{
+  color:white;
+}
+.hero_info a:hover{
+  color:white;
+}
 /*Buy and sell buttons*/
 #buttons{
 margin-left:150px;
@@ -434,4 +439,20 @@ label {
   position: relative;
   color: #FFFFFF;
 }
+.sub_content{
+  color:#666666;
+  font-size:16px;
+}
+.about_img{
+  height:60px;
+  width:60px;
+  margin-top:50px;
+}
+.about_img_desc{
+  font-size:20px;
+  position:relative;
+  font-weight:bold;
+  margin-left:50px;
+  top:30px;
 
+}

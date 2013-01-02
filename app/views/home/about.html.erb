@@ -6,9 +6,8 @@
 	<script type="text/javascript" src="jquery-1.8.3.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
-	$('#about_container').fadeIn(3000);
-	$('#about_circle').fadeIn(3000);
-	$('#about_content').fadeIn(3000);
+	$('#about_container').fadeIn(2000);
+	$('#about_content').fadeIn(2000);
 });
 	</script> 
 </head>
@@ -16,17 +15,18 @@
 	<link rel = "stylesheet" href="about.css">
 </head>
 <body>
-	<img id="bg" src="mountain_view.jpg" style="width: 1905px; height: 1562px;">
 	<div id="about_container" style="display:none;">		
 		<img id="about_circle" src="about_circle.png" style="display:none;">
-		<div id="about_content" style="content display:none;">
-			<h1 id="about_heading">About Us</h1>
+		<h2 class="headings_pink" id="about_heading">About Us</h2>
+		<div id="about_content" class="sub_content" style="content display:none;">
 			<p>Swapidy is a simple ecommerce platform where you can buy and sell instantly using our virtual currency, Honey.</p> 
 
 			<p>At Swapidy, we hate waiting and we realized that people hate waiting too. So, we developed a system where we purchase products from you and literally pay you by the time you checkout. In most cases, we will offer you more for your product than any site out there.  With the honey that you receive, you can buy products in the marketplace.</p> 
 
-			<p>No transaction fees. Free shipping. Instant Gratification.</p> 
+			<img class="about_img" src="/images/about_1.png"><span class="about_img_desc">No transaction fees</span><br/> 
+			<img class="about_img" src="/images/about_2.png"><span class="about_img_desc">Free shipping</span><br/>
+			<img class="about_img" src="/images/about_3.png"><span class="about_img_desc">Instant Gratification</span><br/>
 		</div>
 	</div>
-</body>
+</bod
 </html>
