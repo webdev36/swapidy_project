@@ -3,7 +3,7 @@
     <div class="simply-scroll-clip">
       <div class="scroller" style="position: absolute; top:0;">
         <h2 style="color: #EE2C91;">Your orders to buy</h2>
-        <% if current_user.orders.to_buy.empty? %>
+        <% if current_user.orders.to_buy.not_completed.empty? %>
           <p>You don't have any order to buy</p>
         <% else %>
           <table class="table table-condensed">
@@ -17,7 +17,7 @@
               </tr>
             </thead>
             <tbody style="color: burlyWood; font-size: 13px;">
-              <% current_user.orders.to_buy.each_with_index do |order, index| %>
+              <% current_user.orders.to_buy.not_completed.each_with_index do |order, index| %>
                 <tr>
                   <td><%= index + 1 %></td>
                   <td><%= order.title %></td>
@@ -40,7 +40,7 @@
 
 <div id="my_trade_ins_container" style="display: none;">
   <h2 style="color: #09F;">Your orders to sell</h2>
-  <% if current_user.orders.to_sell.empty? %>
+  <% if current_user.orders.to_sell.not_completed.empty? %>
     <p>You don't have any order to sell</p>
   <% else %>
     <table class="table table-condensed">
@@ -54,7 +54,7 @@
         </tr>
       </thead>
       <tbody style="color: burlyWood; font-size: 13px;">
-        <% current_user.orders.to_sell.each_with_index do |order, index| %>
+        <% current_user.orders.to_sell.not_completed.each_with_index do |order, index| %>
           <tr>
             <td><%= index + 1 %></td>
             <td><%= order.title %></td>
