@@ -62,4 +62,45 @@ class Product < ActiveRecord::Base
     product_model.weight_lb
   end
 
+  rails_admin do
+    configure :using_condition, :enum do
+      enum do
+        Product::USING_CONDITIONS.keys.map {|key| [Product::USING_CONDITIONS[key], Product::USING_CONDITIONS[key]]}
+      end
+    end
+    
+    list do
+      field :title
+      field :honey_price
+      field :using_condition
+      field :category
+      field :product_model
+      field :images
+    end
+    export do; end
+    show do
+      field :category
+      field :product_model
+      field :title
+      field :honey_price
+      field :using_condition
+      field :images
+      field :product_attributes
+    end
+    edit do; end
+    create do
+      field :product_model
+      field :title
+      field :honey_price
+      field :using_condition
+    end
+    update do
+      field :title
+      field :honey_price
+      field :using_condition
+      field :images
+      field :product_attributes
+    end
+  end
+
 end

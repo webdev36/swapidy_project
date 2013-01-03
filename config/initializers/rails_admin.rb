@@ -1,6 +1,7 @@
 # RailsAdmin config file. Generated on December 26, 2012 10:58
 # See github.com/sferik/rails_admin for more informations
-
+require Rails.root.join('lib', 'rails_admin_resend.rb')
+  
 RailsAdmin.config do |config|
 
   # If your default_local is different from :en, uncomment the following 2 lines and set your default locale here:
@@ -78,6 +79,40 @@ RailsAdmin.config do |config|
   #     # Here goes the fields configuration for the list view
   #   end
   # end
+  module RailsAdmin
+    module Config
+      module Actions
+        class Resend < RailsAdmin::Config::Actions::Base
+          RailsAdmin::Config::Actions.register(self)
+        end
+      end
+    end
+  end
+  
+  config.actions do
+    # root actions
+    dashboard                     # mandatory
+    # collection actions 
+    index                         # mandatory
+    new
+    export
+    history_index
+    bulk_delete
+    # member actions
+    show
+    edit
+    delete
+    history_show
+    show_in_app
+    
+    # Set the custom action here
+    resend do
+      # Make it visible only for comments model. You can remove this if you don't need.
+      visible do
+        bindings[:abstract_model].model.to_s == "Order"
+      end
+    end
+  end
 
   # Your model's configuration, to help you get started:
 
@@ -175,35 +210,6 @@ RailsAdmin.config do |config|
   #   update do; end
   end
   
-  config.model Order do
-     # Found associations:
-       configure :product, :belongs_to_association 
-       configure :user, :belongs_to_association   #   # Found columns:
-       configure :id, :integer 
-       configure :product_id, :integer         # Hidden 
-       configure :order_type, :integer 
-       configure :user_id, :integer         # Hidden 
-       configure :status, :integer 
-       configure :created_at, :datetime 
-       configure :updated_at, :datetime 
-       configure :shipping_method, :string 
-       configure :shipping_first_name, :string 
-       configure :shipping_last_name, :string 
-       configure :shipping_address, :string 
-       configure :shipping_optional_address, :string 
-       configure :shipping_city, :string 
-       configure :shipping_state, :string 
-       configure :shipping_zip_code, :string 
-       configure :shipping_country, :string 
-       configure :honey_price, :decimal 
-       configure :using_condition, :string   #   # Sections:
-     list do; end
-     export do; end
-     show do; end
-  #   edit do; end
-  #   create do; end
-  #   update do; end
-  end
   config.model PaymentTransaction do
   #   # Found associations:
        configure :user, :belongs_to_association   #   # Found columns:
@@ -246,71 +252,7 @@ RailsAdmin.config do |config|
   #   create do; end
   #   update do; end
   # end
-  config.model Product do
-  #   # Found associations:
-       configure :user, :belongs_to_association 
-       configure :category, :belongs_to_association 
-       configure :product_model, :belongs_to_association 
-       configure :product_attributes, :has_many_association 
-  #     configure :product_model_attributes, :has_many_association 
-       configure :images, :has_many_association   #   # Found columns:
-  #     configure :id, :integer 
-       configure :title, :string 
-  #     configure :user_id, :integer         # Hidden 
-  #     configure :category_id, :integer         # Hidden 
-       configure :honey_price, :decimal 
-  #     configure :created_at, :datetime 
-  #     configure :updated_at, :datetime 
-       configure :using_condition, :string 
-  #     configure :product_model_id, :integer         # Hidden   #   # Sections:
   
-  #     configure :product_model_attribute_ids, :integer         # Hidden 
-  #    field :product_attribute_ids
-     list do
-      field :title
-      field :honey_price
-      field :using_condition
-      field :category
-      field :product_model
-      field :images
-     end
-     export do; end
-     show do
-      field :category
-      field :product_model
-      field :title
-      field :honey_price
-      field :using_condition
-      field :images
-      field :product_attributes
-     end
-     edit do; end
-     create do
-      field :product_model
-      field :title
-      field :honey_price
-      field :using_condition
-    #  field :images
-    #  field :product_attributes
-     end
-     update do
-      field :title
-      field :honey_price
-      field :using_condition
-      field :images
-      field :product_attributes
-#      field :product_attributes, :enum do
-#        enum do
-#          except = bindings[:object].product_attributes.map{|a| a.product_model_attribute.id}
-#          if except.empty?
-#            bindings[:object].product_model.product_model_attributes
-#          else
-#            bindings[:object].product_model.product_model_attributes.where("NOT(id IN ?)", except)
-#          end
-#        end
-#      end
-     end
-  end
   config.model ProductAttribute do
   #   # Found associations:
        configure :product, :belongs_to_association 
@@ -391,6 +333,7 @@ RailsAdmin.config do |config|
   #   update do; end
   end
   config.model User do
+      object_label_method :email
   #   # Found associations:
   #     configure :orders, :has_many_association 
   #     configure :trade_ins, :has_many_association 
@@ -477,4 +420,25 @@ RailsAdmin.config do |config|
   #   create do; end
   #   update do; end
   # end
+  
+  config.model ShippingStamp do
+  #   # Found associations:
+  #     configure :user, :belongs_to_association   #   # Found columns:
+  #     configure :id, :integer 
+  #     configure :provider, :string 
+  #     configure :uid, :string 
+  #     configure :access_token, :string 
+  #     configure :token_expires_at, :datetime 
+  #     configure :user_id, :integer         # Hidden 
+  #     configure :created_at, :datetime 
+  #     configure :updated_at, :datetime   #   # Sections:
+     list do; end
+  #   export do; end
+     show do; end
+  #   reprint do; end
+  #   edit do; end
+  #   create do; end
+  #   update do; end
+  end
+
 end

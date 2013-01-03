@@ -20,7 +20,7 @@ class Order < ActiveRecord::Base
   has_many :shipping_stamps
   
   TYPES = {:trade_ins => 0, :order => 1}
-  STATUES = {:pending => 0, :fulfilled => 1, :declined => 2}
+  STATUES = {:pending => 0, :completed => 1, :declined => 2}
   SHIPPING_METHODS = {:box => "box", :usps => "usps", :fedex => "fedex"}
   
   SHIPPING_METHOD_NAMES = { :box => "A box and prepaid label", 
@@ -46,9 +46,9 @@ class Order < ActiveRecord::Base
   end
   
   def status_title
-    return "Fulfilled" if self.status && self.status == STATUES[:fulfilled]
+    return "Completed" if self.status && self.status == STATUES[:completed]
     return "Declined" if self.status && self.status == STATUES[:declined] 
-    return "Pending"
+    return "Pending, waiting for arrival"
   end
   
   def shipping_method_name
@@ -82,12 +82,98 @@ class Order < ActiveRecord::Base
     return new_stamp if new_stamp.save
   end
   
-  def test_address
-    self.attributes.merge!(:shipping_address1 => '1601 WILLOW', 
-                            :shipping_city => 'MENLO PARK', 
-                            :shipping_state => 'CA', 
-                            :shipping_zip_code  => '94025')
-    self.verify_shipping_address
+  def shipping_fullname
+  
+  end
+  
+  def shipping_full_address
+    html = shipping_address 
+    html += "(Optional: #{shipping_optional_address})" if shipping_optional_address && !shipping_optional_address.blank?
+    html += "#{shipping_city}, #{shipping_state}, #{shipping_zip_code}"
+    return html
+  end
+  
+  rails_admin do
+    configure :order_type do
+      read_only true
+      pretty_value do
+        util = bindings[:object]
+        util.order_type == TYPES[:order] ? "Order" : "Trade-Ins"
+      end
+    end
+    
+    configure :status, :enum do
+      pretty_value do
+        util = bindings[:object]
+        util.status_title
+      end
+      enum do
+        [['Pending, waiting for arrival', STATUES[:pending]], ['Completed', STATUES[:completed]], ['Declined', STATUES[:declined]]]
+      end
+    end
+    configure :using_condition, :enum do
+      enum do
+        Product::USING_CONDITIONS.keys.map {|key| [Product::USING_CONDITIONS[key], Product::USING_CONDITIONS[key]]}
+      end
+    end
+    
+    list do
+       field :order_type
+       field :status
+       field :product
+       
+       field :user
+       field :shipping_fullname
+     end
+     export do
+       field :order_type
+       field :status
+       field :product
+       field :weight_lb
+       field :using_condition
+       field :honey_price
+       
+       field :user
+       field :shipping_fullname
+       field :shipping_address
+       field :shipping_city
+       field :shipping_state
+       field :shipping_zip_code
+     end
+     show do
+       field :order_type
+       field :status
+       field :product
+       field :weight_lb
+       field :using_condition
+       field :honey_price
+       
+       field :user
+       field :shipping_fullname
+       field :shipping_full_address
+     end
+     edit do
+       field :order_type
+       field :status
+       field :product
+       field :weight_lb
+       field :using_condition
+       field :honey_price
+       
+       field :user
+       field :shipping_first_name
+       field :shipping_last_name
+       field :shipping_address
+       field :shipping_city
+       field :shipping_state, :enum do
+         enum do 
+           Carmen::Country.named('United States').subregions.collect { |sr| [sr.name, sr.code] }
+         end
+       end
+       field :shipping_zip_code
+     end
+  #   create do; end
+  #   update do; end
   end
   
   private

@@ -66,7 +66,7 @@ module Swapidy
       :authentication => :plain,
       :user_name      => ENV['SENDGRID_USERNAME'],
       :password       => ENV['SENDGRID_PASSWORD'],
-      :domain         => 'wapidy.com'
+      :domain         => 'swapidy.com'
     }
 
   end

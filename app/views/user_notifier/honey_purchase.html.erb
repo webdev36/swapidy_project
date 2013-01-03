@@ -1,6 +1,7 @@
 Good Day <%= @user.name_in_email %>,<br />
 <br/>
-You just purchased <%= @payment.honey_money %>Honey for $<%= @payment.amount %>. Our honey bees have added their honey into your account so you can buy the products you want.<br/>
+You just purchased <%= @payment.honey_money %>Honey for $<%= @payment.amount %>. 
+Our honey bees have added their honey into your account so you can buy the products you want.<br/>
 <br/>
 Here are the details of your purchase:<br/>
 <br/>
@@ -21,7 +22,12 @@ Card Number<br />
 Expiration Date<br />
   <%= @payment.card_expired_date.strftime("%B %Y") if @payment.card_expired_date %><br />
 <br />
+<br />
+If you have any questions, please email honey@swapidy.com. Make sure to mention your name and your email. 
+We will answer your questions within 12-24 hours or less.<br />
+<br />
 Cheerio,<br/>
 <br/>
-The Swap Daddy<br/>
-Swapidy Inc.
+<a href="http://www.twitter.com/theswapdaddy"><strong>@TheSwapDaddy</strong></a><br/>
+<a href="http://www.twitter.com/swapidy">@Swapidy</a><br/>
+
