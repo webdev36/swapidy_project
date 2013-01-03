@@ -31,7 +31,7 @@ class Order < ActiveRecord::Base
 
   scope :to_sell, :conditions => {:order_type => TYPES[:trade_ins]}
   scope :to_buy, :conditions => {:order_type => TYPES[:order]}
-  scope :not_completed, :where => ["status != ?", STATUES[:completed]]
+  scope :not_completed, :conditions => ["status != ?", STATUES[:completed]]
   
   def is_trade_ins?
     order_type && order_type == TYPES[:trade_ins]
