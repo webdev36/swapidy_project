@@ -77,7 +77,7 @@
               </div>
             <% end %>
             <div class="option-set" data-group="cat_attr_condition">
-              <h3 class="s_category">Using conditions</h3>
+              <h3 id="conditions"class="s_category">Conditions</h3>
               <% Product::USING_CONDITIONS.keys.each do |condition| %>
                 <div style="display:inline-block;">
                   <div style="display: inline-block; line-height: 30px;">
@@ -167,6 +167,7 @@
       showScreenToSell()
     }else{
       showScreenToBuy();
+      $('#conditions').hide
     }
     $('div#product_type').fadeIn(600);
     $.scrollTo($('div#product_type'), 400);

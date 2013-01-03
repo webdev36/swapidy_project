@@ -117,7 +117,6 @@ body{
     position: relative; /* important */
     display: none; /* important */    
     position:relative;
-    bottom:200px;
 }
  
 .s3sliderImage span {
