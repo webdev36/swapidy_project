@@ -36,7 +36,7 @@ RailsAdmin.config do |config|
 
   #  ==> Included models
   # Add all excluded models here:
-  # config.excluded_models = [Category, CategoryAttribute, Comment, Image, Order, PaymentTransaction, Post, Product, ProductAttribute, ProductModel, ProductModelAttribute, User, UserProvider]
+  config.excluded_models = [Comment, Post]
 
   # Add models here if you want to go 'whitelist mode':
   config.included_models = [Category, CategoryAttribute, Image, Order, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User]
@@ -325,12 +325,22 @@ RailsAdmin.config do |config|
        configure :value, :string 
   #     configure :created_at, :datetime 
   #     configure :updated_at, :datetime   #   # Sections:
-  #   list do; end
+    list do
+      filters [:product_model, :category_attribute]
+      field :product_model do 
+        searchable [:title, :id]
+      end
+      field :category_attribute do
+        searchable [:title, :id]
+      end
+      field :value
+    end
+     
   #   export do; end
   #   show do; end
   #   edit do; end
-  #   create do; end
-  #   update do; end
+     create do; end
+     update do; end
   end
   config.model User do
       object_label_method :email

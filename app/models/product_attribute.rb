@@ -23,8 +23,8 @@ class ProductAttribute < ActiveRecord::Base
   private
     
     def expired_fragment_caches
-      ActionController::Base.new.expire_fragment("homepage_product_thumb_#{product.id}")
-      ActionController::Base.new.expire_fragment("homepage_container_category_#{product.category.id}")
+      ActionController::Base.new.expire_fragment("homepage_product_thumb_#{product.id}") rescue nil
+      ActionController::Base.new.expire_fragment("homepage_container_category_#{product.category.id}") rescue nil
     end
   
 end

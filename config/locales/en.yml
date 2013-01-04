@@ -12,3 +12,10 @@ en:
         bulk_link: "Re-send Stamp"
         member: "Re-send Stamp"
         done: "Re-send"
+  
+  helpers:
+    label:
+      product:
+        using_condition: 'Condition'
+        for_sell: 'For selling'
+        for_buy: 'For buying'

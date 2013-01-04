@@ -1,6 +1,6 @@
 class ProductModelAttribute < ActiveRecord::Base
   
-  attr_accessible :value, :product_model_idm, :category_attribute_id
+  attr_accessible :value, :product_model_id, :category_attribute_id
   
   belongs_to :product_model
   belongs_to :category_attribute

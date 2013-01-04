@@ -1,4 +1,4 @@
-<div class="item thumbnail product_filter_model_<%= product.product_model.id %> <%= product.using_condition %> <%= product.gen_attribute_names %> ">
+<div class="item thumbnail product_filter_model_<%= product.product_model.id %> <%= product.using_condition %> <%= product.gen_attribute_names %> <%= "for_buying" if product.for_buy %> <%= "for_selling" if product.for_sell %>">
   <div class="box">
     <div class="product_title" style="color:#FC43CC;" title="<%= product.title %>"><%= product.title %></div>
     <div class="product_image thumbnail"><img title="<%= product.title %>" src="<%= product.main_image_url(:medium) %>"></div>
