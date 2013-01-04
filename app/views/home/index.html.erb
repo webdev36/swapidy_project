@@ -76,7 +76,7 @@
                 <% end %>
               </div>
             <% end %>
-            <div class="option-set" id="all_using_condition_filter" data-group="cat_attr_condition">
+            <div class="option-set all_using_condition_filter" data-group="cat_attr_condition">
               <h3 id="conditions"class="s_category">Conditions</h3>
               <% Product::USING_CONDITIONS.keys.each do |condition| %>
                 <div style="display:inline-block;">
@@ -268,9 +268,9 @@
     $(".product_search_container .nav-pills").each(function(index) {
       $(this).addClass("models_for_buy").removeClass("models_for_sell");
     });
-    $("#all_using_condition_filter").hide();
-    $("#all_using_condition_filter input").each(function(index) {
-      $(this).addClass("hidden_filter");
+    $(".all_using_condition_filter").removeClass("option-set").hide();
+    $(".all_using_condition_filter input[type=checkbok]").each(function(index) {
+      $(this).parent().parent().addClass("hidden_filter");
     });
   }
   function showScreenToSell() {
@@ -279,9 +279,9 @@
     $(".product_search_container .nav-pills").each(function(index) {
       $(this).addClass("models_for_sell").removeClass("models_for_buy");
     });
-    $("#all_using_condition_filter").show();
-    $("#all_using_condition_filter input").each(function(index) {
-      $(this).removeClass("hidden_filter");
+    $(".all_using_condition_filter").addClass("option-set").show();
+    $("#all_using_condition_filter input[type=checkbok]").each(function(index) {
+      $(this).parent().parent().removeClass("hidden_filter");
     });
   }
   
