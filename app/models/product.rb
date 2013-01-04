@@ -46,10 +46,10 @@ class Product < ActiveRecord::Base
     return like_image || product_model.main_image
   end
 
-  def gen_attribute_names
+  def gen_attribute_filter_ids
     result = []
     self.product_model_attributes.each do |product_model_attribute|
-      result << product_model_attribute.value
+      result << product_model_attribute.gen_fitler_id
     end
     result.join(" ")
   end

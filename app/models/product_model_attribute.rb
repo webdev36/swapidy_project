@@ -19,6 +19,10 @@ class ProductModelAttribute < ActiveRecord::Base
     return CategoryAttribute.convert_value(self.category_attribute.attribute_type, self.value)
   end
   
+  def gen_fitler_id
+    "prod_model_attr_#{self.id}"
+  end
+  
   after_save :expired_fragment_caches
   after_destroy :expired_fragment_caches
   

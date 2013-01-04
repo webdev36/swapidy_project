@@ -26,14 +26,16 @@ class CategoryAttribute < ActiveRecord::Base
   
   def attributes_in_models
     attribute_values = {}
+    attribute_titles = {}
     self.product_model_attributes.each do |attribute|
+      attribute_titles.merge! attribute.gen_fitler_id => attribute.value
       if attribute_values.keys.include? attribute.value
-        attribute_values[attribute.value] << attribute.product_model
+        attribute_values[attribute.gen_fitler_id] << attribute.product_model
       else
-        attribute_values.merge! attribute.value => [attribute.product_model]
+        attribute_values.merge! attribute.gen_fitler_id => [attribute.product_model]
       end
     end
-    return attribute_values.keys.map{|key| [key, attribute_values[key] ] }
+    return attribute_values.keys.map{|key| [key, attribute_titles[key], attribute_values[key] ] }
   end
 
   after_save :expired_fragment_caches
