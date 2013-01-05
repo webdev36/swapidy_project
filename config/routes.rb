@@ -10,11 +10,13 @@ Swapidy::Application.routes.draw do
   #match 'auth/:provider/callback', to: 'users/omniauth_callbacks#create'
 
   match "/about" => "home#static_page", :method => :get, :content => "about"
-  match "/faq" => "home#static_page", :method => :get, :content => "faq_general"
+  match "/faq_general" => "home#static_page", :method => :get, :content => "faq_general"
   match "/faq_buying" => "home#static_page", :method => :get, :content => "faq_buying"
   match "/faq_selling" => "home#static_page", :method => :get, :content => "faq_selling"
   match "/team" => "home#static_page", :method => :get, :content => "team"
   match "/how_it_works" => "home#static_page", :method => :get, :content => "how_it_works"
+  match "/jobs" => "home#static_page", :method => :get, :content => "jobs"
+  match "/team" => "home#static_page", :method => :get, :content => "team"
 
   resources :posts do
     root to: 'post#index'

@@ -6,8 +6,8 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	
-	   // ---- FAQs ---------------------------------------------------------------------------------------------------------------
-		
+	   
+		$('#all').fadeIn(1000);
 		$('.hiw_a').hide(); // Hide all DDs inside .faqs
 		$('.hiw_heading').hover(function(){$(this).addClass('hover')},function(){$(this).removeClass('hover')}).click(function(){ 
 				$(this).next().slideToggle('normal');
@@ -23,7 +23,7 @@ $(document).ready(function () {
 </style>
 </head>
 <body>
-
+<div id="all" style="display:none;">
 <h2 class="headings_pink">How it works</h2>
 <div class="hiw_heading" onclick="scrollOnClick(150); return false;">I want to sell my product.</div>
 <div class="hiw_a">
@@ -50,6 +50,7 @@ $(document).ready(function () {
 <div class="hiw_step hiw_2">Buy additional honey if required</div>
 
 <div class="hiw_step hiw_3">Checkout, you're done!</div>
+</div>
 </div>
 </div>
 </body>

@@ -3,46 +3,90 @@
 <head>
 <meta charset = "utf-8">
 <title>General FAQ</title>
-<script src="jquery-1.8.3.min.js" jqtype="text/javascript"></script>
-<script type="text/javascript" src="scripts/utility.js"></script>
-      
 <style type="text/css">
-		  html{font-size:62.5%}
-		  body{font-size:1.2em;color:#294f88}
-		  .sample{margin:30px;border:1px solid #92cdec;background:#d7e7ff;padding:30px 30px 0 30px}
-		  h1{margin:0;padding:0;font-size:2em;}
-		  p,dl{font-size:1.2em;line-height:170%;margin-bottom:20px}
-		  dl,dt,dd{padding:0;margin:0}
-		.faqs{padding-top:20px}
-		.faqs dt{font-weight:bold;background:url(images/q.gif) 0 4px no-repeat;padding:3px 0 15px 30px;position:relative;}
-		.faqs dt:hover{cursor:pointer}
-		.faqs dd{background:url(images/a.gif) 0 2px no-repeat;padding:0 0 5px 30px;position:relative;color:#333}
-		.faqs .hover{color:#990000;text-decoration:underline}
+dt:hover{
+cursor: pointer;
+}
+dt{
+      color:#38B4DE;
+
+}
+dd{
+    color: #666;
+}
 </style>
+<script type="text/javascript">
+
+$(document).ready(function () {
+    
+        $('.container').fadeIn(1000);
+       // ---- FAQs ---------------------------------------------------------------------------------------------------------------
+        
+        $('.faqs dd').hide(); // Hide all DDs inside .faqs
+        $('.faqs dt').hover(function(){$(this).addClass('hover')},function(){$(this).removeClass('hover')}).click(function(){ // Add class "hover" on dt when hover
+        $(this).next().slideToggle('normal'); // Toggle dd when the respective dt is clicked
+        }); 
+         $('.faqs').hide(); // Hide all DDs inside .faqs
+        $('.faq_cat').hover(function(){$(this).addClass('hover')},function(){$(this).removeClass('hover')}).click(function(){ // Add class "hover" on dt when hover
+        $(this).next().slideToggle('normal'); // Toggle dd when the respective dt is clicked
+        }); 
+    
+});
+</script>     
       
 </head>
 <body>
-
-    <div class="sample">
-        <h1>General FAQ</h1>
-<dl class="faqs">
-        <dt>Q: Can I use Swapidy anywhere?</dt>
-        <dd>A: Our service can only be used in the San Francisco Bay Area for now. Sign up for an account to be notified when it will be in your area!</dd>
-        <dt>Q: How much is 1 Honey worth?</dt>
-        <dd>A: 1 Honey is equal to ten cents (.10) </dd>
-        <dt>Q: What if I don't have any Honey and I just want to buy something?</dt>
-        <dd>A: You can buy Honey from us here [insert link here]. $1 gets you 10 Honey.</dd>
+<div class="container" style="display:none;">
+ <h1 class="headings_pink">FAQ</h1>
+ <br/>
+ <div class="faq_cat"><h2 class="headings_pink">General FAQ</h2></div>
+        <dl class="faqs">
+        <dt>Can I use Swapidy anywhere?</dt>
+        <dd>Our service can only be used in the San Francisco Bay Area for now. Sign up for an account to be notified when it will be in your area!</dd>
+        <dt>How much is 1 Honey worth?</dt>
+        <dd>1 Honey is equal to ten cents (.10) </dd>
+        <dt>What if I don't have any Honey and I just want to buy something?</dt>
+        <dd>You can buy Honey from us here [insert link here]. $1 gets you 10 Honey.</dd>
   		
-    	<dt>Q: When do I get my Honey?</dt>
-        <dd>A: As soon as you choose the product you want to sell and checkout, you get your Honey. It will show up in the upper right hand corner when you're logged in and you will get email confirmation. If you're simply buying Honey, you will get it as soon as you buy it.</dd>
-        <dt>Q: What happens if I don't send Swapidy my product?</dt>
-        <dd>A: Swapidy will charge your credit card for the Honey value that you received.</dd>
-        <dt>Q: What's the best way to get a hold of customer service?</dt>
-        <dd>A: Email us using this email form: [insert link here] - We are happy to help you and will respond within 24-48 hours.</dd>
-        <dt>Q: Can I get a refund if I purchased Honey?</dt>
-        <dd>A: No. All Honey purchases are final.</dd>
+    	<dt>When do I get my Honey?</dt>
+        <dd>As soon as you choose the product you want to sell and checkout, you get your Honey. It will show up in the upper right hand corner when you're logged in and you will get email confirmation. If you're simply buying Honey, you will get it as soon as you buy it.</dd>
+        <dt>What happens if I don't send Swapidy my product?</dt>
+        <dd>Swapidy will charge your credit card for the Honey value that you received.</dd>
+        <dt>What's the best way to get a hold of customer service?</dt>
+        <dd>Email us using this email form: [insert link here] - We are happy to help you and will respond within 24-48 hours.</dd>
+        <dt>Can I get a refund if I purchased Honey?</dt>
+        <dd>No. All Honey purchases are final.</dd>
+          </dl>
+<div class="faq_cat"><h2 class="headings_pink">Buying FAQ</h2></div>
+    <dl class="faqs">
+        <dt>What do I do once I get my Honey? </dt>
+        <dd>With your Honey, you can buy products within our marketplace and we'll ship them out for free.
+</dd>
+        <dt>What if I don't have enough Honey to buy what I want?</dt>
+        <dd>Simply buy the difference of Honey you need here: [insert link here] For example, if you want an iPhone 4 that's 4,000 Honey and you only have 3,500, just buy $50 worth of Honey and you're good to go!</dd>
+        <dt>Once I order a product, how long will it take to get to me? </dt>
+        <dd>Anywhere from 3-7 business days depending upon your location.</dd>
+        
+        <dt>Do I ever have to pay shipping costs?</dt>
+        <dd>Nope, shipping is always free.</dd>
+        
+        </dl>   
+<div class="faq_cat"><h2 class="headings_pink">Selling FAQ</h2></div>
+<dl class="faqs">
+        <dt>What do I do once I get my Honey? </dt>
+        <dd>You must ship your product(s) within 72 hours with the prepaid USPS shipping label we sent you via email. If the products aren't shipped within 72 hours, we will charge your credit card for the Honey value. </dd>
+        <dt>I lost/deleted the email with my USPS prepaid label in it. What do I do?</dt>
+        <dd>Simply click "My Account", find your product that you just sent in under "My Trade-ins" and click "Re-print Label". </dd>
+        <dt>Where do I drop off my package once I put my prepaid label on the box? 
+</dt>
+        <dd>Simply drop it off in your mailbox, drop off centers, or your nearest post office which can be found here: https://tools.usps.com/go/POLocatorAction!input.action</dd>
+        
+        <dt> Can I receive my product back once I've shipped it out? </dt>
+        <dd> No, all trade-ins are final. </dd>
+        <dt>What if the product I sent was faulty and/or didn't match Swapidy's description of poor, good, or flawless? </dt>
+        <dd> Swapidy will send your product back and charge you for the Honey that you received.</dd>
+        
           </dl>   
-    </div>
-    
+</div>       
 </body>
 </html>
