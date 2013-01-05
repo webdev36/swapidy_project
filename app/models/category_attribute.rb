@@ -29,7 +29,7 @@ class CategoryAttribute < ActiveRecord::Base
     attribute_titles = {}
     self.product_model_attributes.each do |attribute|
       attribute_titles.merge! attribute.gen_fitler_id => attribute.value
-      if attribute_values.keys.include? attribute.value
+      if attribute_values[attribute.gen_fitler_id]
         attribute_values[attribute.gen_fitler_id] << attribute.product_model
       else
         attribute_values.merge! attribute.gen_fitler_id => [attribute.product_model]

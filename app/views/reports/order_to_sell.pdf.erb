@@ -1,18 +1,17 @@
-<img src="/swapidy_logo_black.png">
 <h2>Shipping Label</h2>
 <i>(Next page)</i>
 <table style="page-break-before: always; width:100%; height:100%; border: 1px;">
   <tr>
     <td height="100px" style="border-right: none; text-align: left;">
-      <img src="/images/swapidy_logo.png" style="height:100px">
+      Swapidy
     </td>
     <td style="border-left: none; text-align: right;">
-      @order.user.email
+      <%= @order.user.email %>
     </td>
   </tr>
   <tr height="500px;" >
     <td colspan="2">
-      <img src="<%= @shipping_stamp.url %>" style="image-orientation: 90deg; width:600px; height:auto;" >
+      <img src="<%= @shipping_stamp.url %>" style="image-orientation: 90deg; width:500px; height:auto;" >
     </td>
   </tr>
 </table>

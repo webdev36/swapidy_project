@@ -6,11 +6,12 @@ class OrderNotifier < ActionMailer::Base
   #
   #   en.authentication_notifier.user_activation.subject
   #
-  def confirm_to_sell(order, shipping_stamp)
+  def confirm_to_sell(order, shipping_stamp, host_with_port)
     @user = order.user
     @order = order
     @product = order.product
     @shipping_stamp = shipping_stamp
+    @host_with_port = host_with_port
     mail :to => @user.email, :subject => "Shipping Label" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
@@ -21,7 +22,8 @@ class OrderNotifier < ActionMailer::Base
     end
   end
   
-  def confirm_to_buy(order, shipping_stamp)
+  def confirm_to_buy(order, shipping_stamp, host_with_port)
+    @host_with_port = host_with_port
     @user = order.user
     @order = order
     @product = order.product

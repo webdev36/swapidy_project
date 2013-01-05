@@ -20,7 +20,8 @@ class ProductModelAttribute < ActiveRecord::Base
   end
   
   def gen_fitler_id
-    "prod_model_attr_#{self.id}"
+    ext_name = [category_attribute.id.to_s, value].join("_").parameterize
+    return "filter_#{ext_name}"
   end
   
   after_save :expired_fragment_caches

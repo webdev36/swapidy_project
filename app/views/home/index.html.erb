@@ -108,8 +108,11 @@
 <% end %>
 
 <script language="JavaScript">
+  var for_what = "for_selling";
+  
   function get_filter_options() {
     var filters = {};
+    filters["for_what"] = ['.' + for_what];
     
     $("#container_" + current_category_id + ' .attribute_filter input').each(function(index) {
       var $src = $(this);
@@ -263,6 +266,7 @@
   });
   
   function showScreenToBuy() {
+    for_what = "for_buying";
     $(".thumbnail .box .button_for_buy").show();
     $(".thumbnail .box .button_for_sell").hide();
     $(".product_search_container .nav-pills").each(function(index) {
@@ -274,6 +278,7 @@
     });
   }
   function showScreenToSell() {
+    for_what = "for_selling";
     $(".thumbnail .box .button_for_buy").hide();
     $(".thumbnail .box .button_for_sell").show();
     $(".product_search_container .nav-pills").each(function(index) {
