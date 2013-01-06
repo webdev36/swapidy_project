@@ -25,18 +25,12 @@
 
 <h2>Shipping Label</h2>
 <i>(Next page)</i>
-<table style="page-break-before: always; width:100%; height:100%; border: 2px;">
-  <tr>
-    <td height="50px" style="border-right: none; text-align: left;">
-      <img src="<%= File.expand_path(Rails.root) %>/public/images/swapidy_logo.png" style="height: 50px;">
-    </td>
-    <td style="border-left: none; text-align: right;">
-    </td>
-  </tr>
-  <tr height="500px;" >
-    <td colspan="2">
-      <img src="<%= @shipping_stamp.url %>" style="width:400px; height:auto;" >
-    </td>
-  </tr>
-</table>
+
+<div style="width:100%; page-break-before: always; height: 60px; border-style:solid; border-width: 1px; border-color: black; border-bottom: none;">
+  <img src="<%= File.expand_path(Rails.root) %>/public/images/swapidy_logo.png" style="height: 50px; padding: 5px;">
+</div>
+<div style="width:100%; text-align: center; border-style:solid; border-width: 1px; border-color: black;">
+  <img src="<%= @shipping_stamp.url %>" style="width:400px; height:auto; padding: 10px; transform: rotate(90deg);" >
+</div>
+  
 
