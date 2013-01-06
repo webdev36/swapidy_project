@@ -6,7 +6,14 @@
   </ul>
 </div>
 
+
 <h2>Provide your shipping address</h2>
+
+<div>
+  <label><%= @product.title %></label><br />
+  <img src="<%= @product.main_image_url(:large) %>">
+</div>
+
 <% if @order.is_trade_ins? %>
  <p>We use this information to create your shipping labels so you can send your item to us for free!</p>
 <% else %>

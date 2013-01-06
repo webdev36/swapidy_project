@@ -1,7 +1,9 @@
 <div class="product_name">
   <h2><%= @product.title %></h2>
 </div>
-
+<div class="product_image">
+  <img src="<%= @product.main_image_url(:large) %>">
+</div>
 <div class="product_model">
 	Model: <span class="product_desc"><%= @product.product_model.title %></span><br/><br/>
   <% @product.product_model_attributes.each do |model_attribute| %>
@@ -9,7 +11,7 @@
   <% end %>
 </div>
 <div class="using_condition">
-  Conditions:<span class="product_desc"><%= @product.using_condition %></span>
+  Conditions: <span class="product_desc"><%= @product.using_condition %></span>
 </div>
 <br/>
 

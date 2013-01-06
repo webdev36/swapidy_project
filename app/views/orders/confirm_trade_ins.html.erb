@@ -19,6 +19,12 @@
 
   <br/>
   <div>
+    <label><%= @product.title %></label><br />
+    <img src="<%= @product.main_image_url(:large) %>">
+  </div>
+
+  <br/>
+  <div>
     <label>
       <strong>Contact Email</strong>
       <a href="#" onclick="javascript:open_in_new_tab('/users/edit');" class="btn btn-mini">Change</a>

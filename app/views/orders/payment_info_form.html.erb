@@ -32,6 +32,11 @@
         <%= f.hidden_field :shipping_country %>
         
         <div>
+          <label><%= @product.title %></label><br />
+          <img src="<%= @product.main_image_url(:large) %>">
+        </div>
+        
+        <div>
           <label>Current Balance:</label>
           <%= format_num(current_user.honey_balance) %> Honey
         </div>
