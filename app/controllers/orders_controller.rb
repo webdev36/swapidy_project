@@ -76,6 +76,7 @@ class OrdersController < ApplicationController
       @order = Order.new(params[:order])
       @order.status = Order::STATUES[:pending]
       @order.user = current_user
+      @order.shipping_country = "US"
       @product = @order.product = Product.find(params[:order][:product_id])
     end
 
