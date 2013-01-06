@@ -50,11 +50,10 @@ class OrdersController < ApplicationController
           @order.save
           @shipping_stamp = @order.create_new_stamp
         end
-        host_with_port = request.protocol + request.host_with_port
         if @order.is_trade_ins?
-          OrderNotifier.confirm_to_sell(@order, @shipping_stamp, host_with_port).deliver
+          OrderNotifier.confirm_to_sell(@order, @shipping_stamp).deliver
         else
-          OrderNotifier.confirm_to_buy(@order, @shipping_stamp, host_with_port).deliver
+          OrderNotifier.confirm_to_buy(@order, @shipping_stamp).deliver
         end
         redirect_to "/orders/#{@order.id}"
       rescue Exception => e

@@ -109,7 +109,7 @@ RailsAdmin.config do |config|
     resend do
       # Make it visible only for comments model. You can remove this if you don't need.
       visible do
-        bindings[:abstract_model].model.to_s == "Order"
+        bindings[:abstract_model].model.to_s == "ShippingStamp"
       end
     end
   end
