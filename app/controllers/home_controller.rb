@@ -7,11 +7,15 @@ class HomeController < ApplicationController
   def index
   end
   
-  def settings
+  def transactions
     
   end
   
   def notificate_amount
+    
+  end
+  
+  def notification
     
   end
   

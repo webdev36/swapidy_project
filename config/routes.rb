@@ -40,7 +40,7 @@ Swapidy::Application.routes.draw do
   match "/orders/sell/:product_id" => "orders#new", :method => :post, :order_type => Order::TYPES[:trade_ins]
   resources :orders
   
-  match "/settings" => "home#settings", :method => :get
+  match "/transactions" => "home#transactions", :method => :get
   get "home/index"
 
   # The priority is based upon order of creation:
