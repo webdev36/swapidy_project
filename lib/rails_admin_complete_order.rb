@@ -24,7 +24,8 @@ module RailsAdmin
             @objects = [@object]
  
             # Update field statues to :completed
-            @orders.each do |order|
+            @objects.each do |order|
+              next if order.status == Order::STATUES[:completed]
               order.update_attribute(:status, Order::STATUES[:completed])
               order.create_notification_to_complete
             end

@@ -28,6 +28,7 @@ module RailsAdmin
             @objects = [@object]
             # Update field statues to :declined
             @objects.each do |order|
+              next if order.status == Order::STATUES[:declined]
               order.update_attribute(:status, Order::STATUES[:declined])
               order.create_notification_to_decline
             end

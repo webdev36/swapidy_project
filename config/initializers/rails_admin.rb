@@ -94,6 +94,9 @@ RailsAdmin.config do |config|
         class Decline < RailsAdmin::Config::Actions::Base
           RailsAdmin::Config::Actions.register(self)
         end
+        class Reminder < RailsAdmin::Config::Actions::Base
+          RailsAdmin::Config::Actions.register(self)
+        end
       end
     end
   end
@@ -132,6 +135,11 @@ RailsAdmin.config do |config|
       end
     end
     cancel do
+      visible do
+        bindings[:abstract_model].model.to_s == "Order"
+      end
+    end
+    reminder do
       visible do
         bindings[:abstract_model].model.to_s == "Order"
       end

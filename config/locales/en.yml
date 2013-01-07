@@ -36,6 +36,14 @@ en:
         bulk_link: "Cancel"
         member: "Cancel"
         done: "Cancelled"
+      reminder:
+        title: "Reminder"
+        menu: "Reminder"
+        breadcrumb: "Reminder"
+        link: "Reminder"
+        bulk_link: "Reminder"
+        member: "Reminder"
+        done: "Remindered"
   
   helpers:
     label:

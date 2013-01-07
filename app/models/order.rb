@@ -210,6 +210,17 @@ class Order < ActiveRecord::Base
     
     OrderNotifier.product_declined(self).deliver
   end
+  
+  def create_notification_to_reminder
+    return unless self.is_trade_ins?
+    
+    notification = self.notifications.new(:user_id => self.user.id)
+    notification.title = "#{product.title} - Reminder"
+    notification.description = "Trade-ins ##{self.id}: #{self.product.title} - #{self.honey_price} Honey - Reminder" 
+    notification.save
+    
+    OrderNotifier.reminder(self).deliver
+  end
     
   def create_notification_to_cancel
     notification = self.notifications.new(:user_id => self.user.id)

@@ -1,21 +1,21 @@
 require 'rails_admin/config/actions'
 require 'rails_admin/config/actions/base'
 
-module RailsAdminCancelOrder
+module RailsAdminReminderOrder
 
 end
 
 module RailsAdmin
   module Config
     module Actions
-      class Cancel < Base
+      class Reminder < Base
 
         register_instance_option :member? do
           true
         end
 
         register_instance_option :link_icon do
-          'icon-stop'
+          'icon-time'
         end
         
         register_instance_option :controller do
@@ -25,12 +25,12 @@ module RailsAdmin
  
             # Update field statues to :declined
             @objects.each do |order|
-              next if order.status == Order::STATUES[:cancelled]
-              order.update_attribute(:status, Order::STATUES[:cancelled])
-              order.create_notification_to_cancel
+              if order.is_trade_ins? || order.status ==  Order::STATUES[:pending]
+                order.create_notification_to_reminder
+              end
             end
  
-            flash[:success] = "#{@model_config.label} successfully cancelled."
+            flash[:success] = "#{@model_config.label} successfully reminder."
             redirect_to back_or_index
           end
         end
