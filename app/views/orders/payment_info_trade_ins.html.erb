@@ -42,6 +42,11 @@ label{
         <%= f.hidden_field :shipping_country %>
         
         <div>
+          <label><%= @product.title %></label><br />
+          <img src="<%= @product.main_image_url(:large) %>">
+        </div>
+
+        <div>
           <label>After selling, you get:</label>
           <span style="font-weight:bold"><%= format_num(@product.honey_price) %> Honey</span>
         </div>

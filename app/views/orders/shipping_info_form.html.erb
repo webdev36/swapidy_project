@@ -6,11 +6,18 @@
   </ul>
 </div>
 
+
 <h2>Provide your shipping address</h2>
+
+<div>
+  <label><%= @product.title %></label><br />
+  <img src="<%= @product.main_image_url(:large) %>">
+</div>
+
 <% if @order.is_trade_ins? %>
- <p>We use this information to create your shipping labels so you can send your item to us for free!</p>
+ <p>This info will be used to generate a free shipping label to send your product to us.</p>
 <% else %>
- <p>We use this information to create our shipping labels so send send the item to you for free!</p>
+ <p>This info will be used to generate a free shipping label to send the product to you.</p>
 <% end %>
 
 <%= form_for(@order, :as => 'order', :url => "/orders/confirm") do |f| %>
@@ -78,12 +85,6 @@
       <%= f.hidden_field :is_candidate_address %>
     </div>
 
-    <div class="form_element dropdown country full_width">
-      <label for="shipping_information_country">Country</label><br/>
-      <span class="item_display"><i>United States</i></span><br/>
-      <span class="annotation">We currently only support trades within the United States.</span><br />
-      <%= f.select :shipping_country, country_options, {} %>
-    </div>
   </div>
   
   

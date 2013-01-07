@@ -23,6 +23,12 @@
       <br/>
     </div>
   <% end %>
+
+  <br/>
+  <div>
+    <label><%= @product.title %></label><br />
+    <img src="<%= @product.main_image_url(:large) %>">
+  </div>
   
   <br/>
   <div>

@@ -25,7 +25,7 @@ module RailsAdmin
             else
               OrderNotifier.confirm_to_buy(@object.order, @object).deliver
             end
-            flash[:notice] = "The Stamp has been re-printed and sent to client."
+            flash[:notice] = "The Stamp has been re-printed and sent email to client."
             redirect_to back_or_index
           end
         end

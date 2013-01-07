@@ -1,18 +1,36 @@
+<h1>Trade Ins Number: <%= @order.id %> </h1>
+<p>Created at: <%= @order.created_at %></p>
+<br/>
+
+<h2>Item: <%= @order.product.title %></h2>
+<p>
+  <u><i>Model:</i> <strong><%= @product.product_model.title %></strong></u><br/>
+  <% @product.product_model_attributes.each do |model_attribute| %>
+    <i><%= model_attribute.category_attribute.title %></i>: <strong><%= model_attribute.value %></strong><br/>
+  <% end %>
+</p>
+<p><i>Using condition</i>: <strong><%= @product.using_condition %></strong></p>
+<p><strong><i>Price</i>: <%= @product.honey_price %> Honey</strong></p>
+
+<h2>Shipping from</h2>
+<p>
+  <%= @order.shipping_first_name %> <%= @order.shipping_last_name %><br />
+  <%= @order.shipping_address %><br />
+  <%= @order.shipping_optional_address %>
+  <%= @order.shipping_city %><br />
+  <%= @order.shipping_state %><br />
+  <%= @order.shipping_zip_code %><br />
+  <%= @order.shipping_country %><br />
+</p>
+
 <h2>Shipping Label</h2>
 <i>(Next page)</i>
-<table style="page-break-before: always; width:100%; height:100%; border: 1px;">
-  <tr>
-    <td height="100px" style="border-right: none; text-align: left;">
-      Swapidy
-    </td>
-    <td style="border-left: none; text-align: right;">
-      <%= @order.user.email %>
-    </td>
-  </tr>
-  <tr height="500px;" >
-    <td colspan="2">
-      <img src="<%= @shipping_stamp.url %>" style="image-orientation: 90deg; width:500px; height:auto;" >
-    </td>
-  </tr>
-</table>
+
+<div style="width:100%; page-break-before: always; height: 60px; border-style:solid; border-width: 1px; border-color: black; border-bottom: none;">
+  <img src="<%= File.expand_path(Rails.root) %>/public/images/swapidy_logo.png" style="height: 50px; padding: 5px;">
+</div>
+<div style="width:100%; text-align: center; border-style:solid; border-width: 1px; border-color: black;">
+  <img src="<%= @shipping_stamp.url %>" style="width:400px; height:auto; padding: 10px; transform: rotate(90deg);" >
+</div>
+  
 

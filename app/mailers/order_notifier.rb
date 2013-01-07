@@ -6,7 +6,7 @@ class OrderNotifier < ActionMailer::Base
   #
   #   en.authentication_notifier.user_activation.subject
   #
-  def confirm_to_sell(order, shipping_stamp, host_with_port)
+  def confirm_to_sell(order, shipping_stamp, host_with_port = "http://www.swapidy.com")
     @user = order.user
     @order = order
     @product = order.product
@@ -22,7 +22,7 @@ class OrderNotifier < ActionMailer::Base
     end
   end
   
-  def confirm_to_buy(order, shipping_stamp, host_with_port)
+  def confirm_to_buy(order, shipping_stamp, host_with_port = "http://www.swapidy.com")
     @host_with_port = host_with_port
     @user = order.user
     @order = order

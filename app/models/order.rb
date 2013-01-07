@@ -58,6 +58,7 @@ class Order < ActiveRecord::Base
   end
   
   def shipping_address_valid?
+    return true if Rails.env != 'production'
     result = verify_shipping_address
     #return true if is_candidate_address && !result && candidate_addresses && !candidate_addresses.empty? 
     if !result && candidate_addresses && !candidate_addresses.empty? 
@@ -69,7 +70,11 @@ class Order < ActiveRecord::Base
   end
   
   def create_new_stamp
-    stamp = is_order? ? create_shipping_order : create_shipping_label
+    if Rails.env == 'production'
+      stamp = is_order? ? create_shipping_order : create_shipping_label
+    else
+      stamp = create_test_stamp
+    end
     new_stamp = shipping_stamps.new
     new_stamp.integrator_tx_id = stamp[:integrator_tx_id]
     new_stamp.tracking_number = stamp[:tracking_number]
@@ -152,6 +157,7 @@ class Order < ActiveRecord::Base
        field :user
        field :shipping_fullname
        field :shipping_full_address
+       field :shipping_stamps
      end
      edit do
        field :order_type
@@ -185,5 +191,17 @@ class Order < ActiveRecord::Base
       else
         self.user.update_attribute :honey_balance, ((self.user.honey_balance || 0) - self.honey_price)
       end
+    end
+    
+    def create_test_stamp
+      { :integrator_tx_id => self.id,
+        :tracking_number => "9405511201080126838437",
+        :rate => {:service_type => "US-PM",
+                  :amount => 6.2,
+                  :package_type => "Package",
+                  :ship_date => "2013-01-06"},
+        :stamps_tx_id => "382c3dfb-5248-4755-9313-63cedfb6aed6",
+        :url => "https://swsim.testing.stamps.com/Label/label.ashx/label-200.png?AQAAACB4XvO5us8IQBSF6lX3P7p3mV9p1pbb4K_1auJ4nJNNtWIQ-G2rY-ERFOo-WTj53P1t664JlOl3Zxb1Rzpv8JdZ8T1xVQafgZlRsIGBsYGRiZGZgRmbX35RbmIOE1Ave3C4Y4CnS-T___-FjYwNDRSC_J29FYJDFBwDQhSMLf7_5_X1D_ULcfT0UwjzdA1ncnZktTQxMDFmMTIzNfzPDDSBy9HF0VfB0cPX0QVoCL-piZGBgpOrj6-_X4iCcwhQiMfH08k1KCQyzNPHx5XJ04fVzMDAxILFxMLAgMnIgBFox38BBgEGiLmMdgzIgJGBIZ6V8f9_BgaQD_TKzzLmzGRhYLCQYLDRNGa8FM8IVcfCwMTA0MLMCmTqmKypm-uZ8FTg1M2G1SfW7WR6cbOsXHyOuma9Z9G7dTOnSHgtenPgg1mU2w4Gxuh8oAGsxeXFmbliQOtNTQ0NjQwMDSwMDI3MLIwtTIzNGRzabbx2n-dgOLD5-fad5zsYCAG2_wy0AhxMjOAQAXrXABiExGuUAGJGRqXDXcC4AQf-4S7svuUPDQ4IVggJcnT29vRzV1AGagMA5k59TA=="
+      }
     end
 end
