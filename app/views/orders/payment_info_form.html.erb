@@ -1,3 +1,5 @@
+
+
 <div id="progress_indicator" class="three_steps">
   <ul>
     <li>
@@ -11,10 +13,10 @@
     </li>
   </ul>
 </div>
+<div class="container">
+<h2 style='color:#fa3e6e'>Payment information</h2>
 
-<h2>Payment information</h2>
-
-<div id="checkout_content" class="payment_editing_block">
+<div id="checkout_content" class="payment_editing_block" style="color:#666;">
   <div class="payment_group_contents">
     <div class="valid_form payout_form standard_form paypal" style="display: block;">
       
@@ -57,7 +59,7 @@
           </div>
           <br/>
           <br/>
-          <div><%= f.submit "Continue" %></div>
+          <div class="button_sell"><%= f.submit "Continue" %></div>
         <% else %>
           <div>
             <label>You need to extra Honey:</label>
@@ -80,4 +82,5 @@
       <% end %>
     </div>
   </div>
+</div>
 </div>

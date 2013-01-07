@@ -1,3 +1,13 @@
+<style type="text/css">
+label{
+  color:#38B4DE;
+  font-size: 15px;
+}
+#checkout_content{
+  color:#666;
+}
+</style>
+
 <div id="progress_indicator" class="three_steps">
   <ul>
     <li>
@@ -11,8 +21,8 @@
     </li>
   </ul>
 </div>
-
-<h2>Payment information</h2>
+<div class="container">
+<h2 style="color:#fa3e6e;">Payment information</h2>
 
 <div id="checkout_content" class="payment_editing_block">
   <div class="payment_group_contents">
@@ -38,7 +48,7 @@
 
         <div>
           <label>After selling, you get:</label>
-          <%= format_num(@product.honey_price) %> Honey
+          <span style="font-weight:bold"><%= format_num(@product.honey_price) %> Honey</span>
         </div>
           <br/>
         <div>
@@ -47,8 +57,9 @@
         </div>
         
         <br/>
-        <div><%= f.submit "Continue" %></div>
+        <div class="buttom_buy"><%= f.submit "Continue" %></div>
       <% end %>
     </div>
   </div>
+</div>
 </div>
