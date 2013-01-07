@@ -4,6 +4,7 @@
       <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
       <ul class="nav pull-right" role="navigation">
         <% if user_signed_in? %>
+<<<<<<< HEAD
           <li class="dropdown">
             <% if current_user.notifications.unread.count == 0 %>
               <a id="notify_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">NO NEWS</a>
@@ -23,10 +24,20 @@
               </ul>
             <% end %>
           </li>
+=======
+          <li><img class="nav_icon nav_notification" src="/images/notification_icon.png"></li>
+          <li class="divider-vertical"></li>
+>>>>>>> navbar icons
           <li>
             <div class="profile_info_nav">
-              <div style="display: inline-block;"><%= link_to(current_user.full_name, settings_path, :method => :get) %></div>
+              <div style="display: inline-block;"><img class="nav_icons nav_profile" src="/images/profile_icon.png"><%= link_to(current_user.full_name, settings_path, :method => :get) %>
+                <img src="/images/down_icon.png"></div>
             </div>
+            <li class="divider-vertical"></li>
+
+          <li><img class="nav_icons nav_settings" src="/images/settings_icon.png"></li>
+                     <li class="divider-vertical"></li>
+
           </li>
           <div class="honey_display">
            <div style="display: inline-block;"><img src="/images/honey_currency_score.png"><%= format_num(current_user.honey_balance)%></div>
@@ -36,9 +47,12 @@
             <li>
               <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
             </li>
+                       <li class="divider-vertical"></li>
+
           <% end %>
           <li>
             <%= link_to('LOGOUT', destroy_user_session_path, :method => :delete) %>
+
           </li>
         <% else %>
           <li id="nav_login">
