@@ -8,16 +8,7 @@ $(function() {
     layoutMode : 'fitRows'
   });
 
-  $('#fbtab').hover(function() {
-    this.src = 'images/Like_hover.png';
-  }, function() {
-    this.src = 'images/Like.png';
-  });
-  $('#twtab').hover(function() {
-    this.src = 'images/Follow_hover.png';
-  }, function() {
-    this.src = 'images/Follow.png';
-  });
+
   $('#footer_fb').mouseover(function(){
     $(this).attr("src",'/images/footer_fb_hover.png');
   })
@@ -34,6 +25,12 @@ $(function() {
   
   $("#popup-box-bg").live("click", function(){
     hidePopup();
+  });
+    $('.honey_currency_plus').mouseover(function(){
+    $(this).attr("src",'/images/honey_currency_plus_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/honey_currency_plus.png');
   });
 
 });

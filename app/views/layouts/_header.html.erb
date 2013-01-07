@@ -7,10 +7,12 @@
           <li>
             <div class="profile_info_nav">
               <div style="display: inline-block;"><%= link_to(current_user.full_name, settings_path, :method => :get) %></div>
-              <div style="display: inline-block;">(HONEY <%= format_num(current_user.honey_balance)%></div>
-              <div style="display: inline-block;"><%= link_to("+", "/payments/new", :method => :get, :class => "plushoney_icon") %>)</div>
             </div>
           </li>
+          <div class="honey_display">
+           <div style="display: inline-block;"><img src="/images/honey_currency_score.png"><%= format_num(current_user.honey_balance)%></div>
+            <div style="display: inline-block;"><a href="/payments/new"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a></div>
+          </div>
           <% if current_user.is_admin? %>
             <li>
               <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
