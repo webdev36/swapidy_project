@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  user_id: 1
+  notify_object_id: 1
+  notify_object_type: MyString
+  has_read: false
+
+two:
+  title: MyString
+  user_id: 1
+  notify_object_id: 1
+  notify_object_type: MyString
+  has_read: false

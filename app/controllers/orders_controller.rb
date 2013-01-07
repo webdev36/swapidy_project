@@ -50,11 +50,6 @@ class OrdersController < ApplicationController
           @order.save
           @shipping_stamp = @order.create_new_stamp
         end
-        if @order.is_trade_ins?
-          OrderNotifier.confirm_to_sell(@order, @shipping_stamp).deliver
-        else
-          OrderNotifier.confirm_to_buy(@order, @shipping_stamp).deliver
-        end
         redirect_to "/orders/#{@order.id}"
       rescue Exception => e
         @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")

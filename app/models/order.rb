@@ -17,10 +17,14 @@ class Order < ActiveRecord::Base
   belongs_to :product
   belongs_to :user
   
-  has_many :shipping_stamps
+  has_many :shipping_stamps, :order => "created_at desc"
+  
+  has_many :notifications, :as => :notify_object, :class_name => "Notification"
+  after_create :create_notification
+  
   
   TYPES = {:trade_ins => 0, :order => 1}
-  STATUES = {:pending => 0, :completed => 1, :declined => 2}
+  STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3, :confirmed_to_ship => 4}
   SHIPPING_METHODS = {:box => "box", :usps => "usps", :fedex => "fedex"}
   
   SHIPPING_METHOD_NAMES = { :box => "A box and prepaid label", 
@@ -49,6 +53,8 @@ class Order < ActiveRecord::Base
   def status_title
     return "Completed" if self.status && self.status == STATUES[:completed]
     return "Declined" if self.status && self.status == STATUES[:declined] 
+    return "Cancelled" if self.status && self.status == STATUES[:cancelled] 
+    return "Confirmed, wait to ship" if self.status && self.status == STATUES[:confirmed_to_ship] 
     return "Pending, waiting for arrival"
   end
   
@@ -89,9 +95,9 @@ class Order < ActiveRecord::Base
   end
   
   def shipping_fullname
-  
+    [shipping_first_name, shipping_last_name].join(" ")
   end
-  
+
   def shipping_full_address
     html = shipping_address 
     html += "(Optional: #{shipping_optional_address})" if shipping_optional_address && !shipping_optional_address.blank?
@@ -127,9 +133,8 @@ class Order < ActiveRecord::Base
        field :order_type
        field :status
        field :product
-       
+       field :honey_price
        field :user
-       field :shipping_fullname
      end
      export do
        field :order_type
@@ -183,6 +188,58 @@ class Order < ActiveRecord::Base
   #   update do; end
   end
   
+  def create_notification
+    notification = self.notifications.new(:user_id => self.user.id)
+    if self.is_trade_ins?
+      notification.title = "#{product.title} - Processing"
+      notification.description = "Trade-ins ##{self.id} created for #{self.product.title}, #{self.honey_price} Honey" 
+    else
+      notification.title = "#{product.title} Processing"
+      notification.description = "Order ##{self.id} created for #{self.product.title}, #{self.honey_price} Honey" 
+    end 
+    notification.save
+  end
+    
+  def create_notification_to_decline
+    return unless self.is_trade_ins?
+    
+    notification = self.notifications.new(:user_id => self.user.id)
+    notification.title = "#{product.title} - Declined"
+    notification.description = "Trade-ins ##{self.id}: #{self.product.title} - #{self.honey_price} Honey - Declined" 
+    notification.save
+    
+    OrderNotifier.product_declined(self).deliver
+  end
+    
+  def create_notification_to_cancel
+    notification = self.notifications.new(:user_id => self.user.id)
+    if self.is_trade_ins? 
+      notification.title = "#{product.title} - Cancelled"
+      notification.description = "Trade-Ins ##{self.id}: #{self.product.title} - #{self.honey_price} Honey - Cancelled" 
+    else
+      notification.title = "#{product.title} - Cancelled"
+      notification.description = "Order ##{self.id}: #{self.product.title} - #{self.honey_price} Honey - Cancelled" 
+    end
+    notification.save
+    
+    OrderNotifier.order_cancel(self).deliver
+  end
+  
+  
+  def create_notification_to_complete
+    notification = self.notifications.new(:user_id => self.user.id)
+    if self.is_trade_ins? 
+      notification.title = "Product verified"
+      notification.description = "Trade-ins ##{self.id}: #{self.product.title} (#{self.honey_price} Honey) is verified successfully." 
+    else
+      notification.title = "Order ##{self.id} is completed"
+      notification.description = "#{notify_type} ##{self.id} is completed with the product #{self.product.title} and #{self.honey_price} Honey" 
+    end 
+    notification.save
+    
+    OrderNotifier.trade_ins_compelte(self).deliver if self.is_trade_ins?
+  end
+  
   private
   
     def adjust_current_balance
@@ -201,7 +258,7 @@ class Order < ActiveRecord::Base
                   :package_type => "Package",
                   :ship_date => "2013-01-06"},
         :stamps_tx_id => "382c3dfb-5248-4755-9313-63cedfb6aed6",
-        :url => "https://swsim.testing.stamps.com/Label/label.ashx/label-200.png?AQAAACB4XvO5us8IQBSF6lX3P7p3mV9p1pbb4K_1auJ4nJNNtWIQ-G2rY-ERFOo-WTj53P1t664JlOl3Zxb1Rzpv8JdZ8T1xVQafgZlRsIGBsYGRiZGZgRmbX35RbmIOE1Ave3C4Y4CnS-T___-FjYwNDRSC_J29FYJDFBwDQhSMLf7_5_X1D_ULcfT0UwjzdA1ncnZktTQxMDFmMTIzNfzPDDSBy9HF0VfB0cPX0QVoCL-piZGBgpOrj6-_X4iCcwhQiMfH08k1KCQyzNPHx5XJ04fVzMDAxILFxMLAgMnIgBFox38BBgEGiLmMdgzIgJGBIZ6V8f9_BgaQD_TKzzLmzGRhYLCQYLDRNGa8FM8IVcfCwMTA0MLMCmTqmKypm-uZ8FTg1M2G1SfW7WR6cbOsXHyOuma9Z9G7dTOnSHgtenPgg1mU2w4Gxuh8oAGsxeXFmbliQOtNTQ0NjQwMDSwMDI3MLIwtTIzNGRzabbx2n-dgOLD5-fad5zsYCAG2_wy0AhxMjOAQAXrXABiExGuUAGJGRqXDXcC4AQf-4S7svuUPDQ4IVggJcnT29vRzV1AGagMA5k59TA=="
+        :url => "#{File.expand_path(Rails.root)}/public/images/label-200.png"
       }
     end
 end

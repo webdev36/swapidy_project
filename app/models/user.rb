@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
 
   has_many :orders, :order => "status asc, created_at desc"
   has_many :user_providers
+  
+  has_many :notifications, :order => "created_at desc, updated_at desc"
 
   validate :validate_card_info
   
@@ -42,7 +44,7 @@ class User < ActiveRecord::Base
     user = User.find_by_email(auth.info.email)
     user = UserProvider.where(:provider => auth.provider, :uid => auth.uid).first.try(:user) unless user
     
-    unless user
+    unless
       user = User.new(   :first_name => auth.extra.raw_info.first_name,
                          :last_name => auth.extra.raw_info.last_name,
                          :email => auth.info.email,
@@ -60,6 +62,12 @@ class User < ActiveRecord::Base
       user.user_providers.facebook.first.update_attributes provider_attributes
     else
       user.user_providers.build(provider_attributes)
+      
+      user.first_name = auth.extra.raw_info.first_name if (user.first_name || "").blank?
+      user.last_name = auth.extra.raw_info.last_name if (user.last_name || "").blank?
+      user.address = auth.info.location if (user.address || "").blank?
+      user.provider_image = auth.info.image if (user.provider_image || "").blank?
+      user.save
     end
     return user
   end

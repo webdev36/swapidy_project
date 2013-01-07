@@ -15,7 +15,7 @@ module RailsAdmin
         end
 
         register_instance_option :link_icon do
-          'icon-envelope'
+          'icon-repeat'
         end
         
         register_instance_option :controller do
@@ -26,7 +26,7 @@ module RailsAdmin
               OrderNotifier.confirm_to_buy(@object.order, @object).deliver
             end
             flash[:notice] = "The Stamp has been re-printed and sent email to client."
-            redirect_to back_or_index
+            redirect_to show
           end
         end
       end

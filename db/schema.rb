@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103104329) do
+ActiveRecord::Schema.define(:version => 20130107032859) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -51,6 +51,17 @@ ActiveRecord::Schema.define(:version => 20130103104329) do
     t.boolean  "is_main",             :default => false
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+  end
+
+  create_table "notifications", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "user_id"
+    t.integer  "notify_object_id"
+    t.string   "notify_object_type"
+    t.boolean  "has_read",           :default => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
   end
 
   create_table "orders", :force => true do |t|

@@ -2,8 +2,27 @@
   <div class="navbar-inner">
     <div class="container">
       <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
-      <ul class="nav pull-right">
+      <ul class="nav pull-right" role="navigation">
         <% if user_signed_in? %>
+          <li class="dropdown">
+            <% if current_user.notifications.unread.count == 0 %>
+              <a id="notify_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">NO NEWS</a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
+                <li><a tabindex="-1" href="#">No new event</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="#">See All</a></li>
+              </ul>
+            <% else %>
+              <a id="notify_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.notifications.unread.count %> NEWS</a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
+                <% current_user.notifications.unread.limit(20).each do |notification|%>
+                  <li><a tabindex="-1" href="#"><%= notification.title %></a></li>
+                <% end %>
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="#">See All</a></li>
+              </ul>
+            <% end %>
+          </li>
           <li>
             <div class="profile_info_nav">
               <div style="display: inline-block;"><%= link_to(current_user.full_name, settings_path, :method => :get) %></div>

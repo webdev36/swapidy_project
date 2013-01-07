@@ -85,6 +85,15 @@ RailsAdmin.config do |config|
         class Resend < RailsAdmin::Config::Actions::Base
           RailsAdmin::Config::Actions.register(self)
         end
+        class Complete < RailsAdmin::Config::Actions::Base
+          RailsAdmin::Config::Actions.register(self)
+        end
+        class Cancel < RailsAdmin::Config::Actions::Base
+          RailsAdmin::Config::Actions.register(self)
+        end
+        class Decline < RailsAdmin::Config::Actions::Base
+          RailsAdmin::Config::Actions.register(self)
+        end
       end
     end
   end
@@ -110,6 +119,21 @@ RailsAdmin.config do |config|
       # Make it visible only for comments model. You can remove this if you don't need.
       visible do
         bindings[:abstract_model].model.to_s == "ShippingStamp"
+      end
+    end
+    complete do
+      visible do
+        bindings[:abstract_model].model.to_s == "Order"
+      end
+    end
+    decline do
+      visible do
+        bindings[:abstract_model].model.to_s == "Order"
+      end
+    end
+    cancel do
+      visible do
+        bindings[:abstract_model].model.to_s == "Order"
       end
     end
   end

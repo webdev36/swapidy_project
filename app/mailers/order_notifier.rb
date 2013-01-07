@@ -55,12 +55,17 @@ class OrderNotifier < ActionMailer::Base
     @order = order
     mail :to => @user.email, :subject => "Order Reminder"
   end
-  
+
   def tracking_number(order)
     @user = order.user
     @order = order
     mail :to => @user.email, :subject => "Tracking Number"
   end
   
+  def trade_ins_complete(order)
+    @user = order.user
+    @order = order
+    mail :to => @user.email, :subject => "Product verified"
+  end
 
 end

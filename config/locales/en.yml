@@ -12,6 +12,30 @@ en:
         bulk_link: "Re-send Stamp"
         member: "Re-send Stamp"
         done: "Re-send"
+      complete:
+        title: "Complete"
+        menu: "Complete"
+        breadcrumb: "Complete"
+        link: "Complete"
+        bulk_link: "Complete"
+        member: "Complete"
+        done: "Completed"
+      decline:
+        title: "Decline"
+        menu: "Decline"
+        breadcrumb: "Decline"
+        link: "Decline"
+        bulk_link: "Decline"
+        member: "Decline"
+        done: "Declined"
+      cancel:
+        title: "Cancel"
+        menu: "Cancel"
+        breadcrumb: "Cancel"
+        link: "Cancel"
+        bulk_link: "Cancel"
+        member: "Cancel"
+        done: "Cancelled"
   
   helpers:
     label:

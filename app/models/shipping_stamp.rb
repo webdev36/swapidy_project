@@ -5,4 +5,16 @@ class ShippingStamp < ActiveRecord::Base
   
   belongs_to :order
   
+  after_create :send_email_to_customer
+  
+  
+  def send_email_to_customer
+    if self.order.is_trade_ins?
+      OrderNotifier.confirm_to_sell(self.order, self).deliver
+    else
+      OrderNotifier.confirm_to_buy(self.order, self).deliver
+    end
+  end
+  
+  
 end

@@ -11,8 +11,14 @@ class HomeController < ApplicationController
     
   end
   
+  def notificate_amount
+    
+  end
+  
   def static_page
     render params[:content]
   end
+  
+  
 
 end
