@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     user = User.find_by_email(auth.info.email)
     user = UserProvider.where(:provider => auth.provider, :uid => auth.uid).first.try(:user) unless user
     
-    unless
+    unless user
       user = User.new(   :first_name => auth.extra.raw_info.first_name,
                          :last_name => auth.extra.raw_info.last_name,
                          :email => auth.info.email,
@@ -53,8 +53,8 @@ class User < ActiveRecord::Base
                          :address => auth.info.location,
                          :provider_image => auth.info.image
                      )
-      user.save
-      UserNotifier.signup_greeting(user).deliver
+       user.save
+       UserNotifier.signup_greeting(user).deliver
     end
     
     provider_attributes = { provider: auth.provider, uid: auth.uid, access_token: auth.credentials.token, token_expires_at: (Time.at(auth.credentials.expires_at) rescue nil) }
