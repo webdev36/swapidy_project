@@ -4,38 +4,9 @@
       <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
       <ul class="nav pull-right" role="navigation">
         <% if user_signed_in? %>
-          <li class="dropdown">
-            <% if current_user.notifications.unread.count == 0 %>
-              <a id="notify_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">NO NEWS</a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
-                <li><a tabindex="-1" href="#">No new event</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="-1" href="#">See All</a></li>
-              </ul>
-            <% else %>
-              <a id="notify_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.notifications.unread.count %> NEWS</a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
-                <% current_user.notifications.unread.limit(20).each do |notification|%>
-                  <li><a tabindex="-1" href="#"><%= notification.title %></a></li>
-                <% end %>
-                <li class="divider"></li>
-                <li><a tabindex="-1" href="#">See All</a></li>
-              </ul>
-            <% end %>
-          </li>
 
-          <li><img class="nav_icon nav_notification" src="/images/notification_icon.png"></li>
-          <li class="divider-vertical"></li>
-          <li>
-            <div class="profile_info_nav">
-              <div style="display: inline-block;">
-                <img class="nav_icons nav_profile" src="/images/profile_icon.png">
-                <%= link_to(current_user.full_name, transactions_path, :method => :get) %>
-                <img src="/images/down_icon.png">
-              </div>
-            </div>
-          </li>
-          <li class="divider-vertical"></li>
+          <%= render :partial => "/layouts/notifications_menu" %>
+          <%= render :partial => "/layouts/profile_menu" %>
 
           <li>
             <a href="/users/edit" class="nav_settings"> <img class="nav_icons nav_settings" src="/images/settings_icon.png"></a>         
@@ -54,9 +25,7 @@
             </li>
             <li class="divider-vertical"></li>
           <% end %>
-          <li>
-            <%= link_to('LOGOUT', destroy_user_session_path, :method => :delete) %>
-          </li>
+          
         <% else %>
           <li id="nav_login">
             <a href="javascript:showPopup('popup-dialog_for_signin');" >LOGIN</a>

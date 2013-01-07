@@ -8,21 +8,10 @@ class HomeController < ApplicationController
   end
   
   def transactions
-    
-  end
-  
-  def notificate_amount
-    
-  end
-  
-  def notification
-    
   end
   
   def static_page
     render params[:content]
   end
-  
-  
 
 end
