@@ -1,13 +1,13 @@
 <% 
   if for_item == :orders
     orders = current_user.orders.to_buy
-    page_title = "Your orders to buy"
+    page_title = "Here's a list of everything you've bought on Swapidy..."
   elsif for_item == :trade_ins
     orders = current_user.orders.to_sell
-    page_title = "Your orders to sell"
+    page_title = "Here's a list of everything you've sold to Swapidy..."
   else
     orders = current_user.orders
-    page_title = "Your orders created"
+    page_title = "Here's a list of all your transactions..."
   end  
 %>
 
@@ -15,7 +15,7 @@
   <label>You don't have any orders</label>
 <% else %>
   <label><%= page_title %></label><br/>
-  <table class="table table-bordered table-condensed">
+  <table class="table">
     <thead>
       <tr>
         <th>No.</th>
@@ -23,7 +23,7 @@
           <th>Sell/Buy</th>
         <% end %>
         <th>Product</th>
-        <th>Price</th>
+        <th><img src="/images/honey_20px.png"></th>
         <th>Status</th>
         <th>Created At</th>
       </tr>
@@ -36,7 +36,7 @@
             <td><%= order.is_trade_ins? ? "Sell" : "Buy" %></td>
           <% end %>
           <td><%= order.title %></td>
-          <td><%= order.honey_price %> honey</td>
+          <td><%= order.honey_price %></td>
           <td><%= order.status_title %></td>
           <td><%= order.created_at.strftime("%H:%M %b %d, %Y") %></td>
         </tr>

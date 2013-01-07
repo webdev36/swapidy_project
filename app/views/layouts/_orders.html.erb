@@ -6,7 +6,7 @@
         <% if current_user.orders.to_buy.not_completed.empty? %>
           <p>You don't have any order to buy</p>
         <% else %>
-          <table class="table table-condensed">
+          <table class="table ">
             <thead style="color: #EE2C91;">
               <tr>
                 <th>No.</th>
@@ -43,7 +43,7 @@
   <% if current_user.orders.to_sell.not_completed.empty? %>
     <p>You don't have any order to sell</p>
   <% else %>
-    <table class="table table-condensed">
+    <table class="table ">
       <thead style="color: #09F;">
         <tr>
           <th>No.</th>
