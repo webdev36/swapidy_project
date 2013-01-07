@@ -14,7 +14,7 @@
   </ul>
 </div>
 <div class="container">
-<h2 style='color:#fa3e6e'>Payment information</h2>
+<h2 class="headings_pink">Payment information</h2>
 
 <div id="checkout_content" class="payment_editing_block" style="color:#666;">
   <div class="payment_group_contents">
@@ -35,6 +35,7 @@
         
         <div>
           <label><%= @product.title %></label><br />
+          <div class="show_product_image">
           <img src="<%= @product.main_image_url(:large) %>">
         </div>
         

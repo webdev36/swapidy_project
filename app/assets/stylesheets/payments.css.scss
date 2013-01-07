@@ -1,3 +1,37 @@
 // Place all the styles related to the payment controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.show_product_image{
+  float:left;
+  margin-top:30px;
+
+}
+
+#checkout_content label{
+	font-size:30px;
+}
+.payment_product_info{
+}
+.payment_product_image{
+	float:left;
+	margin-top:30px;
+	
+	}
+.payment_after_selling{
+	float:left;
+	margin-top:30px;
+	margin-left:100px;
+	background:#E7EBF2;
+	-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+padding:20px;
+}
+.payment_currency{
+	position:relative;
+	bottom:5px;
+}
+.payment_selling_info{
+	color:#666;
+	font-size:20px;
+}

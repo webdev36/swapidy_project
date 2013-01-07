@@ -1,6 +1,6 @@
 <%= render :partial => "/products/detail_info"%>
 
-<div>
+<div class="show_sellbuy">
   <% if (params["for"] && params["for"] == "sell") %>
         <div class="show_button_sell"><%= link_to "Sell", "/orders/sell/#{@product.id}", :method => :post %></div>
   <% else %>
