@@ -1,0 +1,35 @@
+<h2 class="headings_pink">Your notifications</h2>
+<br />
+
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs" style="position: relative;">
+    <li class="active">
+      <a href="#unread" data-toggle="tab">New events</a>
+    </li>
+    <li class="">
+      <a href="#all" data-toggle="tab">All events</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="unread">
+      <br/>
+      <%= render :partial => "/notifications/list", :locals => {:for_item => :new} %>
+    </div>
+    <div class="tab-pane" id="all">
+      <br/>
+      <%= render :partial => "/notifications/list", :locals => {:for_item => :all} %>
+    </div>
+  </div>
+</div>
+
+<script language="JavaScript">
+  $('.new_notification_row').live("mouseenter", function(){
+    $.ajax({
+      type : 'DEL',
+      url : '/notifications/remove',
+      dataType : 'script'
+    });
+    $(this).removeClass("new_notification_row");
+    return false;
+  });
+</script>

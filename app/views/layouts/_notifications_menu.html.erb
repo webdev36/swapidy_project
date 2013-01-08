@@ -1,25 +1,21 @@
-<li class="dropdown" id="notification_menu" >
-  <% if current_user.notifications.unread.count == 0 %>
-    <a id="notify_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">NO NEWS</a>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
-      <li><a tabindex="-1" href="#">No new event</a></li>
-      <li class="divider"></li>
-      <li><a tabindex="-1" href="#">See All</a></li>
-    </ul>
-  <% else %>
-    <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.notifications.unread.count %> NEWS</a>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
-      <% current_user.notifications.unread.limit(20).each do |notification|%>
-        <li id="notification_<%= notification.id %>">
-          <a style="display: inline-block;" class="notification_title"><%= notification.title %></a>
-          <a style="display: inline-block; float: right; padding-left: 10px; padding-right: 10px;"
-             class="notification_remove_icon" onclick="javascript: removeNotification(<%= notification.id %>)" >x</a>
-        </li>
-      <% end %>
-      <li class="divider"></li>
-      <li><a tabindex="-1" href="#">See All</a></li>
-    </ul>
-  <% end %>
-</li>
-
-<li><img class="nav_icon nav_notification" src="/images/notification_icon.png"></li>
+<% if current_user.notifications.unread.count == 0 %>
+  <a id="notify_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">NO NEWS</a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
+    <li><a tabindex="-1" href="#">No new event</a></li>
+    <li class="divider"></li>
+    <li><a tabindex="-1" href="/notifications">See All</a></li>
+  </ul>
+<% else %>
+  <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.notifications.unread.count %> NEWS</a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
+    <% current_user.notifications.unread.limit(20).each do |notification|%>
+      <li id="notification_<%= notification.id %>">
+        <a style="display: inline-block;" class="notification_title"><%= notification.title %></a>
+        <a style="display: inline-block; float: right; padding-left: 10px; padding-right: 10px;"
+           class="notification_remove_icon" notification-data="<%= notification.id %>" >x</a>
+      </li>
+    <% end %>
+    <li class="divider"></li>
+    <li><a tabindex="-1" href="/notifications">See All</a></li>
+  </ul>
+<% end %>

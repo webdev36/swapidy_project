@@ -5,7 +5,11 @@
       <ul class="nav pull-right" role="navigation">
         <% if user_signed_in? %>
 
-          <%= render :partial => "/layouts/notifications_menu" %>
+          <li class="dropdown" id="notification_menu" >
+            <%= render :partial => "/layouts/notifications_menu" %>
+          </li>
+          <li><img class="nav_icon nav_notification" src="/images/notification_icon.png"></li>
+
           <%= render :partial => "/layouts/profile_menu" %>
 
           <li>
@@ -60,5 +64,17 @@
   </div>
 <% end %>
 
-
+<script language="JavaScript">
+  $('#notification_menu ul li .notification_remove_icon').live("click", function(){
+    var id = $(this).attr("notification-data");
+    alert(id);
+    $.ajax({
+      type : 'PUT',
+      url : '/notifications/' + id + '/hide',
+      dataType : 'script'
+    });
+    $(this).parent().hide();
+    return false;
+  });
+</script>
 <%= render :partial => "/layouts/orders.html" if current_user %>
