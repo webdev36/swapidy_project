@@ -8,3 +8,5 @@ Now time to hook heroku so that you can deploy
 3) Now, run git remote add heroku git@heroku.com:swapidy-test.git
 4) Acid test: try git remote and if you see heroku along with origin, you're good. Otherwise you can look up stuff on stackoverflow and theres extensive documentation.
 5) Congrats if you made it this far. Now remember to always git fetch --all before git push heroku master
+
+Everytime you pull, make sure you run the db initialization script: rake swapidy:db:reset
