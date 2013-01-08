@@ -501,12 +501,13 @@ clear:both;
   color:#38B4DE;
 }
 .nav_notification{
-  height:32px;
+  height:25px;
   position:relative;
-  top:3px;
+  bottom:4px;
+
 }
 .nav_profile{
-  height:30px;
+  height:25px;
   position:relative;
   bottom:8px;
   margin-right:8px;
@@ -529,4 +530,11 @@ bottom:5px;
 .nav-tabs a:hover{
   color:#555555;
   background-color:white;
+}
+.notif_count{
+  color:#fa3e6e;
+  font-size:15px;
+  position:relative;
+  left:40px;
+  bottom:10px;
 }
