@@ -10,3 +10,5 @@ Now time to hook heroku so that you can deploy
 5) Congrats if you made it this far. Now remember to always git fetch --all before git push heroku master
 
 Everytime you pull, make sure you run the db initialization script: rake swapidy:db:reset
+
+If you don't see any js function getting executed, you should run rake assets:precompile
