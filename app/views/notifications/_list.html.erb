@@ -16,9 +16,6 @@
     <thead>
       <tr>
         <th>No.</th>
-        <% if for_item == :all %>
-          <th>Status</th>
-        <% end %>
         <th>Title</th>
         <th>Description</th>
         <th>Created At</th>
@@ -26,11 +23,10 @@
     </thead>
     <tbody>
       <% items.each_with_index do |notification, index| %>
-        <tr class="<%= notification.has_read ? "" : "new_notification_row" %>" id="<%= notification.has_read ? "" : "new_notification_#{notification.id}" %>" >
+        <tr class="<%= notification.has_read ? "" : "new_notification_row" %>" 
+            id="<%= notification.has_read ? "" : "new_notification_#{notification.id}" %>"
+            notification-data="<%= notification.id %>" >
           <td><%= index + 1 %></td>
-          <% if for_item == :all %>
-            <td><%= notification.has_read ? "" : "New" %></td>
-          <% end %>
           <td><%= notification.title %></td>
           <td><%= notification.description %></td>
           <td><%= notification.created_at.strftime("%H:%M %b %d, %Y") %></td>

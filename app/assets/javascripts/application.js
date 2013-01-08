@@ -41,10 +41,6 @@ function open_in_new_tab(url)
   window.focus();
 }
 
-function goto(url) {
-  window.location = url;
-}
-
 // popup boxes - pass popup box ID as parameter (needs "popup-box-bg" empty div that is used as mask)
 function showPopup(element_id) {
   $("#popup-box-bg").show();

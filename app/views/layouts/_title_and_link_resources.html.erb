@@ -1,0 +1,10 @@
+<title>Swapidy</title>
+<link rel="shortcut icon" href="/favicon.ico" />
+<% if  Rails.application.config.assets.debug %> 
+  <%= javascript_include_tag 'jquery-1.8.3.min', 'bootstrap.js', 'jquery.isotope.min', 'jquery.scrollto.min', 'jquery.tinycarousel', 's3Slider', 'accounting', 'home', 'orders', 'notifications', 'payments', 'products' %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+<% else %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag 'application' %>
+<% end %>
+<%= csrf_meta_tags %>
