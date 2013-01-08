@@ -19,6 +19,19 @@ namespace :swapidy do
       end
 
     end
+    
+    desc "Rest database from excel file"
+    task :reset => :environment do
+      logger = Logger.new("log/swapidy_tasks.log")
+      
+      file = File.open(File.join(Rails.root, 'demo_data', "products_init.csv"),"r")
+      content = file.read
+      content.split(/\r/).each do |line|
+        logger.info "line: #{line}"
+        product = Product.import_from_textline(line) #rescue nil
+        logger.info product
+      end
+    end
 
   end
 

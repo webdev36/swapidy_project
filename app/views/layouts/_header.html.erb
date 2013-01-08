@@ -67,13 +67,13 @@
 <script language="JavaScript">
   $('#notification_menu ul li .notification_remove_icon').live("click", function(){
     var id = $(this).attr("notification-data");
-    alert(id);
     $.ajax({
       type : 'PUT',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       url : '/notifications/' + id + '/hide',
       dataType : 'script'
+      //success: function(data) { $("#notification_menu").html(data); }
     });
-    $(this).parent().hide();
     return false;
   });
 </script>
