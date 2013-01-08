@@ -22,3 +22,22 @@
   <% end %>
 </li>
 
+
+<script language="JavaScript">
+  $('#notification_menu ul li .notification_remove_icon').live("click", function(){
+    var id = $(this).attr("notification-data");
+    $.ajax({
+      type : 'PUT',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      url : '/notifications/' + id + '/hide',
+      dataType : 'script'
+      //success: function(data) { $("#notification_menu").html(data); }
+    });
+    return false;
+  });
+  $('#notification_menu ul li .notification_title').live("click", function(){
+    var url = $(this).attr("notification-data");
+    window.location = url;
+    return false;
+  });
+</script>

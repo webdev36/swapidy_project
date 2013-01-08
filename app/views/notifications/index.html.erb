@@ -1,0 +1,41 @@
+<h2 class="headings_pink">Your notifications</h2>
+<br />
+
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs" style="position: relative;">
+    <li class="active">
+      <a href="#unread" data-toggle="tab">New events</a>
+    </li>
+    <li class="">
+      <a href="#all" data-toggle="tab">All events</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="unread">
+      <br/>
+      <%= render :partial => "/notifications/list", :locals => {:for_item => :new} %>
+    </div>
+    <div class="tab-pane" id="all">
+      <br/>
+      <%= render :partial => "/notifications/list", :locals => {:for_item => :all} %>
+    </div>
+  </div>
+</div>
+
+
+<script language="JavaScript">
+  $('.new_notification_row').live("mouseover", function(){
+    var src = $(this);
+    var id = $(this).attr("notification-data");
+    
+    $.ajax({
+      type : 'PUT',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      url : '/notifications/' + id + '/hide',
+      dataType : 'script',
+      success: function(data) { $(src).removeClass("new_notification_row"); }
+    });
+    return false;
+  });
+</script>
+

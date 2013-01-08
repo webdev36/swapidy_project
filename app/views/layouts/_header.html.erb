@@ -5,7 +5,10 @@
       <ul class="nav pull-right" role="navigation">
         <% if user_signed_in? %>
 
-          <%= render :partial => "/layouts/notifications_menu" %>
+          <li class="dropdown" id="notification_menu" >
+            <%= render :partial => "/layouts/notifications_menu" %>
+          </li>
+
           <%= render :partial => "/layouts/profile_menu" %>
 
           <li>
@@ -59,6 +62,5 @@
     </div>
   </div>
 <% end %>
-
 
 <%= render :partial => "/layouts/orders.html" if current_user %>

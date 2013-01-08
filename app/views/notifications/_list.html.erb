@@ -1,0 +1,37 @@
+<% 
+  if for_item == :new
+    items = current_user.notifications.unread
+    page_title = "Unread notifications"
+  else
+    items = current_user.notifications
+    page_title = "All notifications"
+  end
+%>
+
+<% if items.empty? %>
+  <label>You don't have any notifications</label>
+<% else %>
+  <label><%= page_title %></label><br/>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.each_with_index do |notification, index| %>
+        <tr class="<%= notification.has_read ? "" : "new_notification_row" %>" 
+            id="<%= notification.has_read ? "" : "new_notification_#{notification.id}" %>"
+            notification-data="<%= notification.id %>" >
+          <td><%= index + 1 %></td>
+          <td><%= notification.title %></td>
+          <td><%= notification.description %></td>
+          <td><%= notification.created_at.strftime("%H:%M %b %d, %Y") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
