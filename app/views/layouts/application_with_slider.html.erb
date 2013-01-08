@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Swapidy</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag 'application' %>
-    <%= csrf_meta_tags %>
+    <%= render :partial => "/layouts/title_and_link_resources" %>
   </head>
   <body>
     
     <script type="text/javascript" src="/javascripts/jquery.pageslide.min.js"></script>
-    <%= render :partial => "/layouts/header.html" %>
+    <%= render :partial => "/layouts/header" %>
                 
     <div id="s3slider">
       <ul id="s3sliderContent">
