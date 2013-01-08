@@ -1,8 +1,6 @@
 How not to mess things up while setting up Swapidy from scratch:
-
 I'm assuming you would be able to clone the file on your computer.
 I'm controlling versioning using rvm. Its great.
-
 Now time to hook heroku so that you can deploy
 
 1) Send an email to PJ (pulkit@swapidy.com) and he'll add you as a collaborator.
