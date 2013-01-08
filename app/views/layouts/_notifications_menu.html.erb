@@ -1,43 +1,24 @@
-<li class="dropdown" id="notification_menu" >
-  <% if current_user.notifications.unread.count == 0 %>
-    <a id="notify_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><img class="nav_notification" src="/images/notification_icon.png"></a>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
-      <li><a tabindex="-1" href="#">No new event</a></li>
-      <li class="divider"></li>
-      <li><a tabindex="-1" href="#">See All</a></li>
-    </ul>
-  <% else %>
-    <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><span class="notif_count"><%= current_user.notifications.unread.count %></span> <img class="nav_notification" src="/images/notification_icon.png"></a>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
+<% if current_user.notifications.unread.count == 0 %>
+  <a id="notify_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><img class="nav_notification" src="/images/notification_icon.png"></a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
+    <li><a tabindex="-1" href="#">No new event</a></li>
+    <li><a tabindex="-1" href="/notifications" class="see_all">See All</a></li>
+  </ul>
+<% else %>
+  <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><span class="notif_count"><%= current_user.notifications.unread.count %></span> <img class="nav_notification" src="/images/notification_icon.png"></a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
+    <li class="all_new">
       <% current_user.notifications.unread.limit(20).each do |notification|%>
-        <li id="notification_<%= notification.id %>">
-          <a style="display: inline-block;" class="notification_title"><%= notification.title %></a>
-          <a style="display: inline-block; float: right; padding-left: 10px; padding-right: 10px;"
-             class="notification_remove_icon" onclick="javascript: removeNotification(<%= notification.id %>)" >x</a>
-        </li>
+        <div id="notification_<%= notification.id %>" class="notification_row">
+          <span class="notification_title" notification-data="/notifications#new_notification_<%= notification.id %>"
+            ><%= notification.title %></span>
+          <span class="notification_remove_icon" notification-data="<%= notification.id %>" >x</span>
+        </div>
       <% end %>
-      <li class="divider"></li>
-      <li><a tabindex="-1" href="#">See All</a></li>
-    </ul>
-  <% end %>
-</li>
+    </li>
+    <li><a tabindex="-1" href="/notifications" class="see_all">See All</a></li>
+    <li><a tabindex="-1" href="#" class="clear_all">Clear All</a></li>
+  </ul>
+<% end %>
 
 
-<script language="JavaScript">
-  $('#notification_menu ul li .notification_remove_icon').live("click", function(){
-    var id = $(this).attr("notification-data");
-    $.ajax({
-      type : 'PUT',
-      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-      url : '/notifications/' + id + '/hide',
-      dataType : 'script'
-      //success: function(data) { $("#notification_menu").html(data); }
-    });
-    return false;
-  });
-  $('#notification_menu ul li .notification_title').live("click", function(){
-    var url = $(this).attr("notification-data");
-    window.location = url;
-    return false;
-  });
-</script>

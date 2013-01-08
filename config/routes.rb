@@ -43,9 +43,10 @@ Swapidy::Application.routes.draw do
   match "/transactions" => "home#transactions", :method => :get
   get "home/index"
   
-  resources :notifications
-  match "/notifications/refresh" => "notifications#refresh", :method => :get
+  
+  match "/notifications/refresh" => "notifications#refresh", :method => :put
   match "/notifications/:id/hide" => "notifications#hide", :method => :put
+  resources :notifications
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
