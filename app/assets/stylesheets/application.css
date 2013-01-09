@@ -53,6 +53,7 @@ body{
   font-weight: bold;
 }
 #my_trade_ins{
+  display: none;
   left: 1px;  /* change this to left: 1px; to put it on the left of the screen */
   top: 200px;
   height: 70px;
@@ -69,6 +70,7 @@ body{
 }
 
 #my_orders{
+  display: none;
   left: 1px;  /* change this to left: 1px; to put it on the left of the screen */
   top: 320px;
   height: 70px;
@@ -181,7 +183,7 @@ left:0px;
   padding-top: 71px;  
 }
 #product_type{
-  
+
 }
 #product_type .cat_item,
 #product .item img {

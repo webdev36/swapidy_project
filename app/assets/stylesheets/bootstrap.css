@@ -2886,7 +2886,6 @@ table th[class*="span"],
   display: none;
   float: left;
   min-width: 160px;
-  padding: 5px 0;
   margin: 2px 0 0;
   list-style: none;
   background-color: #ffffff;
@@ -2935,14 +2934,14 @@ table th[class*="span"],
 .dropdown-submenu:hover > a {
   color: #ffffff;
   text-decoration: none;
-  background-color: #0081c2;
-  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
-  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-color: #38B4DE;
+  background-image: -moz-linear-gradient(top, #38B4DE, #38B4DE);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#38B4DE), to(#38B4DE));
+  background-image: -webkit-linear-gradient(top, #38B4DE, #38B4DE);
+  background-image: -o-linear-gradient(top, #38B4DE, #38B4DE);
+  background-image: linear-gradient(to bottom, #38B4DE, #38B4DE);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#38B4DE', endColorstr='#38B4DE', GradientType=0);
 }
 
 .dropdown-menu .active > a,
