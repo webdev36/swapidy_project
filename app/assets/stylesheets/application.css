@@ -109,7 +109,6 @@ body{
     z-index: -1; 
     top: 71px;
     background: black;
-
 }
  
 #s3sliderContent {
@@ -181,9 +180,8 @@ left:0px;
 .content .container {
   padding-top: 71px;  
 }
-
 #product_type{
-    padding-top:110px;
+  
 }
 #product_type .cat_item,
 #product .item img {
