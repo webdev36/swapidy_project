@@ -7,7 +7,7 @@ $(function() {
     layoutMode : 'fitRows'
   });
 
-
+//footer
   $('#footer_fb').mouseover(function(){
     $(this).attr("src",'/images/footer_fb_hover.png');
   })
@@ -22,16 +22,45 @@ $(function() {
     $(this).attr("src",'/images/footer_twitter.png');
   });
   
+  //popup
   $("#popup-box-bg").live("click", function(){
     hidePopup();
   });
-    $('.honey_currency_plus').mouseover(function(){
+  
+  //honey scoreboard
+  $('.honey_currency_plus').mouseover(function(){
     $(this).attr("src",'/images/honey_currency_plus_hover.png');
   })
   .mouseout(function(){
     $(this).attr("src",'/images/honey_currency_plus.png');
   });
 
+    $('.nav_notification').mouseover(function(){
+    $(this).attr("src",'/images/notification_icon_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/notification_icon.png');
+  });
+
+    $('#profile_group').mouseover(function(){
+    $(this).attr("src",'/images/profile_icon_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/profile_icon.png');
+  });
+    $('.nav_down').mouseover(function(){
+    $(this).attr("src",'/images/down_icon_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/down_icon.png');
+  });
+  $('.nav_settings').mouseover(function(){
+    $(this).attr("src",'/images/settings_icon_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/settings_icon.png');
+  });
+  
 });
 
 function open_in_new_tab(url)
