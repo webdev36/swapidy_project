@@ -16,5 +16,20 @@ class UserNotifier < ActionMailer::Base
     @payment = payment
     mail :to => @user.email, :subject => "Honey Purchase"
   end
+
+  def free_honey_sent(free_honey)
+    @free_honey = free_honey
+    mail :to => @free_honey.receiver_email, :subject => "Free Honey"
+  end
   
+  def free_honey_completed(free_honey)
+    @free_honey = free_honey
+    mail :to => @free_honey.receiver_email, :subject => "Free Honey Received"
+  end
+  
+  def free_honey_reward(free_honey)
+    @free_honey = free_honey
+    mail :to =>@free_honey.sender.email, :subject => "Free Honey Reward"
+  end
+
 end

@@ -40,21 +40,25 @@ class User < ActiveRecord::Base
     ""
   end
   
+  def self.signup_user user_attributes
+    user = User.new(user_attributes)
+    user.save
+    UserNotifier.signup_greeting(user).deliver
+    return user
+  end
+  
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by_email(auth.info.email)
     user = UserProvider.where(:provider => auth.provider, :uid => auth.uid).first.try(:user) unless user
     
     unless user
-      user = User.new(   :first_name => auth.extra.raw_info.first_name,
+      user = singup_user(:first_name => auth.extra.raw_info.first_name,
                          :last_name => auth.extra.raw_info.last_name,
                          :email => auth.info.email,
                          :password => "123456",
                          :password_confirmation => "123456", #Devise.friendly_token[0,20],
                          :address => auth.info.location,
-                         :provider_image => auth.info.image
-                     )
-       user.save
-       UserNotifier.signup_greeting(user).deliver
+                         :provider_image => auth.info.image)  
     end
     
     provider_attributes = { provider: auth.provider, uid: auth.uid, access_token: auth.credentials.token, token_expires_at: (Time.at(auth.credentials.expires_at) rescue nil) }

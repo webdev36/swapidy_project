@@ -4,7 +4,11 @@
       <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
       <ul class="nav pull-right" role="navigation">
         <% if user_signed_in? %>
-
+          <% if current_user.created_at > 7.days.ago %>
+            <li id="nav_login">
+              <a href="javascript:showPopup('popup-dialog_for_signin');" >GET FREE HONEY</a>
+            </li>
+          <% end %>
           <li class="dropdown" id="notification_menu" >
             <%= render :partial => "/layouts/notifications_menu" %>
           </li>
@@ -83,6 +87,14 @@
   <div>
     <strong>Signed in as <%= current_user.first_name %></strong>
   </div>
+  <% if current_user.created_at > 7.days.ago %>
+    <div id="popup-box-bg" style="display: none;"></div>
+    <div id="popup-dialog_for_signin" style="display:none;" class="popup-box-wrapper standard-popup">
+      <div id="dialog-content"
+        <%= render :partial => "/free_honeys/new" %>
+      </div>
+    </div>
+  <% end %>
 <% else %>
   <div id="popup-box-bg" style="display: none;"></div>
   <div id="popup-dialog_for_signup" style="display:none;" class="popup-box-wrapper standard-popup">
