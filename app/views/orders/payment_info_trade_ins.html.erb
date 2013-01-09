@@ -22,7 +22,7 @@ label{
   </ul>
 </div>
 <div class="container">
-<h2 class="headings_pink">Payment information</h2>
+<h2 class="headings_pink">Payment Information</h2>
 
 <div id="checkout_content" class="payment_editing_block">
   <div class="payment_group_contents">
@@ -54,11 +54,11 @@ label{
           <br/>
         <div class="payment_selling_info">
           <i>Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %><img class="payment_currency" src="/images/honey_20px.png"> after selling.</i>
-          <br />You could use this honey to buy anything!
+          <br />You could use this honey to buy anything!.
         </div>
         
         <br/>
-        <div id="buttons" class="button_buy"><%= f.submit "Continue" %></div>
+        <div class="show_button_sell"><%= f.submit "Continue" %></div>
       <% end %>
     </div>
   </div>

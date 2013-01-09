@@ -1,0 +1,76 @@
+// Place all the styles related to the notifications controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#notification_menu .dropdown-menu .all_new {
+  max-height: 300px;
+  overflow: auto;
+  width: 340px;
+  text-align: center;
+}
+
+#notification_menu .dropdown-menu li .notification_row {
+  display: block;
+  padding: 5px 10px;
+  clear: both;
+  font-weight: normal;
+  line-height: 18px;
+  color: #333333;
+  width: 300px;
+  text-align: left;
+}
+#notification_menu .dropdown-menu li .notification_row:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0081c2;
+  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+}
+#notification_menu .dropdown-menu .notification_title {
+  display: inline-block;
+  white-space: normal;
+  cursor:pointer; 
+  width: 260px;
+  padding: 0;
+}
+#notification_menu .dropdown-menu .notification_remove_icon {
+  display: inline-block; 
+  cursor: pointer; 
+  float: right; 
+  width: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.new_notification_row {
+  border-color: #D59392;
+  border-style: solid;
+  border-left-style: none;
+  border-right-style: none;
+}
+
+.new_notification_row:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0081c2;
+  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+}
+
+#notification_menu .dropdown-menu .see_all,
+#notification_menu .dropdown-menu .clear_all {
+  text-align: center;
+}
+#notification_menu .dropdown-menu .clear_all {
+  color: red;
+}

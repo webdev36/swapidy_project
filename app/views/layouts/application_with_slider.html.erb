@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Swapidy</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag 'application' %>
-    <%= csrf_meta_tags %>
+    <%= render :partial => "/layouts/title_and_link_resources" %>
   </head>
   <body>
     
     <script type="text/javascript" src="/javascripts/jquery.pageslide.min.js"></script>
-    <%= render :partial => "/layouts/header.html" %>
+    <%= render :partial => "/layouts/header" %>
                 
     <div id="s3slider">
       <ul id="s3sliderContent">
@@ -34,6 +30,14 @@
           <img src="/images/sliders/slide-5.jpg">
           <span></span>
         </li>
+        <li class="s3sliderImage">
+          <img src="/images/sliders/slide-6.jpg">
+          <span></span>
+        </li>
+        <li class="s3sliderImage">
+          <img src="/images/sliders/slide-7.jpg">
+          <span></span>
+        </li>
         <div class="clear s3sliderImage"></div>
       </ul>
     </div>
@@ -41,7 +45,7 @@
     <script language="JavaScript">
        $(document).ready(function() { 
          $('#s3slider').s3Slider({
-           timeOut: 6000
+           timeOut: 3000
          });
        });
     </script>

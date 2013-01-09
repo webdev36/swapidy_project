@@ -1,8 +1,21 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-
+@font-face {
+    font-family: "myriad";
+    src: url('/myriad.otf') format("truetype");
+}
+@font-face {
+    font-family: "myriad-b";
+    src: url('/myriad-b.otf') format("truetype");
+}
+@font-face {
+    font-family: "myriad-s";
+    src: url('/myriad-s.otf') format("truetype");
+}
+*{
+  font-family:"myriad";
+}
 #iphone{
 	height:350px;
 	width:350px;
@@ -55,6 +68,12 @@ ul{
 	width:200px;
 }
 
+  font-family:"myriad-s";
+  font-size:20px;
+}
+#search_container .s_category{
+  font-family:"myriad";
+}
 #product_lineup{
 	float:left;
   width:500px;
@@ -63,21 +82,34 @@ ul{
 .hero-unit{
   color: #FFFFFF;
   line-height: 1.2;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   text-align:left;
 }
+
 .hero_title{
-  font-weight: bold;
+  font-family:"myriad";
   text-rendering: optimizelegibility;
   text-shadow: 1px 1px 1px #000;
   text-align:center;
+  position:relative;
+  bottom:50px;
 }
 
+.container.dark-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: medium none;
+    box-shadow: none;
+    -webkit-border-radius: 20px;
+border-radius: 20px;
+width:820px;
+margin:auto;
+}
 .hero_info{
-font-weight: bold;
 font-size: 30px;
 text-shadow: 0 0 15px rgba(0, 0, 0, 0.6),0 -1px 1px rgba(0, 0, 0, 0.6);
 text-align: center;
+  font-family:"myriad";
+position:relative;
+bottom:50px;
 
 }
 .hero_info a{
@@ -91,7 +123,8 @@ text-align: center;
 margin-left:150px;
 
   position:relative;
-  margin-top:100px;
+  bottom:50px;
+  margin-top:50px;
   width:650px;
 }
 
@@ -101,7 +134,7 @@ margin-left:150px;
     font-weight: 700;
     font-size: 33px;
     text-decoration: none;
-    font-family: "Lato", Calibri, Arial, sans-serif;
+    font-family:"myriad";
 }
 
 #buttons .modern{
@@ -218,6 +251,7 @@ display: inline-block;
 }
 
 #product_type{
+    font-family:"myriad";
     position: relative;
     margin: auto;
 }
@@ -421,7 +455,18 @@ width: 25%;
 text-align: left;
 min-height: 250px;
 }
+.product_model{
+  font-family:"myriad-s";
+  font-size:20px;
+}
+.product_model a{
+color:#666;
 
+}
+.product_model a:hover{
+color:#666;
+
+}
 .models_for_buy li.active a {
   background-color: #FC43CC !important;
 } 
@@ -433,6 +478,7 @@ min-height: 250px;
 #slider-code {
   height: 270px; 
   overflow: hidden;
+
 }
 #slider-code .viewport {
   float: left; 
@@ -445,6 +491,8 @@ min-height: 250px;
   visibility: hidden;
 }
 #slider-code .overview {
+font-family:"myriad-s";
+  font-size:20px;
   list-style: none; 
   position: absolute; 
   padding: 0; 
@@ -530,23 +578,27 @@ clear:both;
   color:#38B4DE;
 }
 .nav_notification{
-  height:32px;
+  height:25px;
   position:relative;
-  top:3px;
+  bottom:4px;
+
 }
 .nav_profile{
-  height:30px;
+  height:25px;
   position:relative;
-  bottom:8px;
+  bottom:5px;
   margin-right:8px;
 }
 .nav_settings{
+height:35px;
 position:relative;
-bottom:5px;
-  height:40px;
+bottom:3px;
+
 }
 .nav_down{
-  height:20px;
+  height:15px;
+  position:relative;
+  bottom:4px;
 }
 
 .nav-tabs{
@@ -558,4 +610,11 @@ bottom:5px;
 .nav-tabs a:hover{
   color:#555555;
   background-color:white;
+}
+.notif_count{
+  color:#fa3e6e;
+  font-size:15px;
+  position:relative;
+  left:40px;
+  bottom:10px;
 }

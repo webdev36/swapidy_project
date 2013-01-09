@@ -192,10 +192,10 @@ class Order < ActiveRecord::Base
     notification = self.notifications.new(:user_id => self.user.id)
     if self.is_trade_ins?
       notification.title = "#{product.title} - Processing"
-      notification.description = "Trade-ins ##{self.id} created for #{self.product.title}, #{self.honey_price} Honey" 
+      notification.description = "Trade-ins: created for #{self.product.title}, #{self.honey_price} Honey" 
     else
       notification.title = "#{product.title} Processing"
-      notification.description = "Order ##{self.id} created for #{self.product.title}, #{self.honey_price} Honey" 
+      notification.description = "Order: created for #{self.product.title}, #{self.honey_price} Honey" 
     end 
     notification.save
   end
@@ -205,7 +205,7 @@ class Order < ActiveRecord::Base
     
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "#{product.title} - Declined"
-    notification.description = "Trade-ins ##{self.id}: #{self.product.title} - #{self.honey_price} Honey - Declined" 
+    notification.description = "Trade-ins: #{self.product.title} - #{self.honey_price} Honey - Declined" 
     notification.save
     
     OrderNotifier.product_declined(self).deliver
@@ -216,7 +216,7 @@ class Order < ActiveRecord::Base
     
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "#{product.title} - Reminder"
-    notification.description = "Trade-ins ##{self.id}: #{self.product.title} - #{self.honey_price} Honey - Reminder" 
+    notification.description = "Trade-ins: #{self.product.title} - #{self.honey_price} Honey - Reminder" 
     notification.save
     
     OrderNotifier.reminder(self).deliver
@@ -226,10 +226,10 @@ class Order < ActiveRecord::Base
     notification = self.notifications.new(:user_id => self.user.id)
     if self.is_trade_ins? 
       notification.title = "#{product.title} - Cancelled"
-      notification.description = "Trade-Ins ##{self.id}: #{self.product.title} - #{self.honey_price} Honey - Cancelled" 
+      notification.description = "Trade-Ins: #{self.product.title} - #{self.honey_price} Honey - Cancelled" 
     else
       notification.title = "#{product.title} - Cancelled"
-      notification.description = "Order ##{self.id}: #{self.product.title} - #{self.honey_price} Honey - Cancelled" 
+      notification.description = "Order: #{self.product.title} - #{self.honey_price} Honey - Cancelled" 
     end
     notification.save
     
@@ -241,10 +241,10 @@ class Order < ActiveRecord::Base
     notification = self.notifications.new(:user_id => self.user.id)
     if self.is_trade_ins? 
       notification.title = "Product verified"
-      notification.description = "Trade-ins ##{self.id}: #{self.product.title} (#{self.honey_price} Honey) is verified successfully." 
+      notification.description = "Trade-ins: #{self.product.title} (#{self.honey_price} Honey) is verified successfully." 
     else
-      notification.title = "Order ##{self.id} is completed"
-      notification.description = "#{notify_type} ##{self.id} is completed with the product #{self.product.title} and #{self.honey_price} Honey" 
+      notification.title = "Order is completed"
+      notification.description = "Order: completed with the product #{self.product.title} and #{self.honey_price} Honey" 
     end 
     notification.save
     

@@ -1,0 +1,6 @@
+$("#notification_menu").html("<%= raw escape_javascript(@notifications_menu) %>");
+<% if @notification_id == "all" %>
+  $('.new_notification_row').removeClass('new_notification_row');
+<% else %>
+  $('#new_notification_<%= @notification_id %>').removeClass('new_notification_row');
+<% end %>

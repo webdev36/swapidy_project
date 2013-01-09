@@ -4,8 +4,50 @@
       <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
       <ul class="nav pull-right" role="navigation">
         <% if user_signed_in? %>
+          <% if current_user.created_at > 7.days.ago %>
+            <li id="nav_login">
+              <a href="javascript:showPopup('popup-dialog_for_signin');" >GET FREE HONEY</a>
+            </li>
+          <% end %>
+          <li class="dropdown" id="notification_menu" >
+            <%= render :partial => "/layouts/notifications_menu" %>
+          </li>
+          <script language="JavaScript">
+            $('#notification_menu ul li .notification_remove_icon').live("click", function(){
+              var id = $(this).attr("notification-data");
+              $.ajax({
+                type : 'PUT',
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                url : '/notifications/' + id + '/hide',
+                dataType : 'script'
+              });
+              return false;
+            });
+            $('#notification_menu ul li .notification_title').live("click", function(){
+              var url = $(this).attr("notification-data");
+              window.location = url;
+              return false;
+            });
+            $('#notification_menu ul li .clear_all').live("click", function(){
+              $.ajax({
+                type : 'PUT',
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                url : '/notifications/all/hide',
+                dataType : 'script'
+              });
+              return false;
+            });
+          
+            setInterval(function(){
+              $.ajax({
+                type : 'PUT',
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                url : '/notifications/refresh',
+                dataType : 'script'
+              });
+            },10*60*1000);
+          </script>
 
-          <%= render :partial => "/layouts/notifications_menu" %>
           <%= render :partial => "/layouts/profile_menu" %>
 
           <li>
@@ -45,6 +87,14 @@
   <div>
     <strong>Signed in as <%= current_user.first_name %></strong>
   </div>
+  <% if current_user.created_at > 7.days.ago %>
+    <div id="popup-box-bg" style="display: none;"></div>
+    <div id="popup-dialog_for_signin" style="display:none;" class="popup-box-wrapper standard-popup">
+      <div id="dialog-content"
+        <%= render :partial => "/free_honeys/new" %>
+      </div>
+    </div>
+  <% end %>
 <% else %>
   <div id="popup-box-bg" style="display: none;"></div>
   <div id="popup-dialog_for_signup" style="display:none;" class="popup-box-wrapper standard-popup">
@@ -59,6 +109,5 @@
     </div>
   </div>
 <% end %>
-
 
 <%= render :partial => "/layouts/orders.html" if current_user %>

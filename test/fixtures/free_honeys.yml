@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  email: MyString
+  honey_amount: 9.99
+  token_key: MyString
+  expired_date: 2013-01-09 06:57:42
+  status: MyString
+  completed_at: 2013-01-09 06:57:42
+
+two:
+  user_id: 1
+  email: MyString
+  honey_amount: 9.99
+  token_key: MyString
+  expired_date: 2013-01-09 06:57:42
+  status: MyString
+  completed_at: 2013-01-09 06:57:42

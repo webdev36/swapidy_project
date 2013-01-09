@@ -1,11 +1,29 @@
-<img id="bg" src="/images/login_background.jpg" style="width: 1905px; height: 1562px; display: inline;">
 
-<div id="login_container" style="position:fixed; top:300px;">
-  <img id="login_circle" src="/images/login_circle_new.png" style="top: 338.5px; display: block;">
-  <img id="login_or" src="/images/login_or.png">
-  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_login" src="/images/fb_signup.png"></a>
-  
+<div id="login_container"  class="container" style="position:fixed;    top: 50%;
+    left: 50%;
+    margin-top: -240px;
+    margin-left: -180px;
+    z-index: 0;">
+  <img id="login_circle" src="/images/login_circle_new.png">
+  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_login" src="/images/fb_login.png"></a>
+  <p class="login_or"><span>or</span></p>
   <div id="login_form">
+    <div class="input-prepend">
+  <span class="add-on">E-mail</span>
+  <input class="span2" id="prependedInput" type="text" placeholder="E-mail address">
+  </div><br/>
+  <div class="input-prepend">
+<span class="add-on">Password</span>
+<input class="span2" id="prependedInput" type="password" placeholder="Password">
+</div>
+<a href="#" class="login_button" style="color:white;">Login</a></div>
+<a href="#" class="login_forgot">Forgot your password?</a>
+<div class="login-footer"><p class="signup-link">Don't have a login?
+<a rel="internal silent" href="/session/signup">Sign Up.</a>
+</p>
+</div>
+
+<div style="display:none;">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource)) do |f| %>
       <div><%= f.label :email %><br />
       <%= f.email_field :email %></div>
@@ -21,4 +39,5 @@
       </div>
     <% end %>
   </div>
+</div>  
 </div>

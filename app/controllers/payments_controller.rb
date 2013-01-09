@@ -40,7 +40,8 @@ class PaymentsController < ApplicationController
       @payment.card_last_four_number = current_user.card_last_four_number
       @payment.save
       current_user.update_attribute(:honey_balance, (current_user.honey_balance || 0) + @payment.honey_money)
-      UserNotifier.honey_purchase(@payment).deliver
+      
+      Notification.purchase_honey_notify(@payment)
       redirect_to "/payments/#{@payment.id}"
     else
       flash[:error] = "Failure to charge the credit card"

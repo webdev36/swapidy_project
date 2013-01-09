@@ -128,11 +128,23 @@ class Product < ActiveRecord::Base
       field :title
       field :honey_price
       field :using_condition
+      field :for_sell
+      field :for_buy
       field :category
       field :product_model
       field :images
     end
-    export do; end
+    export do
+      field :title
+      field :honey_price
+      field :using_condition
+      field :for_sell
+      field :for_buy
+      field :category
+      field :product_model
+      field :images
+      field :product_model_attributes
+    end
     show do
       field :category
       field :product_model

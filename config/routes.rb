@@ -41,6 +41,17 @@ Swapidy::Application.routes.draw do
   resources :orders
   
   match "/transactions" => "home#transactions", :method => :get
+  
+  match "/notifications/refresh" => "notifications#refresh", :method => :put
+  match "/notifications/:id/hide" => "notifications#hide", :method => :put
+  resources :notifications
+
+  match "/free_honeys/confirm" => "free_honeys#confirm", :method => :get
+  match "/free_honeys/confirm_complete" => "free_honeys#confirm_complete", :method => :get
+  match "/free_honeys/invalid_token" => "free_honeys#invalid_token", :method => :get
+  match "/free_honeys/create" => "free_honeys#create", :method => :post
+  resources :free_honeys
+  
   get "home/index"
 
   # The priority is based upon order of creation:

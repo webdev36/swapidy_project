@@ -2,6 +2,9 @@
   <h2><%= @product.title %></h2>
 </div>
 <div id="product_container">
+	<div class="show_product_image">
+  		<img src="<%= @product.main_image_url(:large) %>">
+	</div>
 	<div id="product_text">
 		<div class="product_model">
 			Model: <span class="product_desc"><%= @product.product_model.title %></span><br/><br/>
@@ -13,13 +16,8 @@
   		Condition: <span class="product_desc"><%= @product.using_condition %></span>
 		</div>
 		<br/>
-
 		<div class="product_price">
-  		Price: <span class="product_desc"><%= format_num(@product.honey_price)%> Honey</span>
-		</div>
-		<br/>
+  		Price: <span class="product_desc"><%= format_num(@product.honey_price)%> </span><span class="show_honey_symbol"><img src="/images/honey_20px.png"></span>
+		</div>	
 	</div>
-</div>
-<div class="show_product_image">
-  <img src="<%= @product.main_image_url(:large) %>">
 </div>

@@ -39,7 +39,7 @@ RailsAdmin.config do |config|
   config.excluded_models = [Comment, Post]
 
   # Add models here if you want to go 'whitelist mode':
-  config.included_models = [Category, CategoryAttribute, Image, Order, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User]
+  config.included_models = [Category, CategoryAttribute, Image, Order, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User, FreeHoney]
 
   # Application wide tried label methods for models' instances
   # config.label_methods << :description # Default is [:name, :title]
@@ -483,4 +483,57 @@ RailsAdmin.config do |config|
   #   update do; end
   end
 
+
+  config.model FreeHoney do
+    configure :expired?, :boolean
+    configure :status, :enum do
+      enum do
+        FreeHoney::STATUES.keys.map {|key| [key, FreeHoney::STATUES[key]]}
+      end
+    end
+    
+    list do
+      field :status
+      field :receiver_title
+      field :sender_title
+      field :receiver_honey_amount
+      field :expired?
+      field :expired_date
+      field :completed_at
+      field :sender_honey_amount
+      field :created_at
+    end
+    export do
+      field :status
+      field :receiver_title
+      field :sender_title
+      field :receiver_honey_amount
+      field :expired_date
+      field :completed_at
+      field :sender_honey_amount
+      field :created_at
+    end
+    show do
+      field :status
+      field :receiver_title
+      field :sender_title
+      field :receiver_honey_amount
+      field :sender_honey_amount
+      field :token_key
+      field :created_at
+      field :expired?
+      field :expired_date
+      field :completed_at
+    end
+    create do
+      field :receiver_email
+      field :receiver
+      field :receiver_honey_amount
+      #field :expired_date
+    end
+    update do
+      field :status
+      field :expired_date
+    end
+  end
 end
