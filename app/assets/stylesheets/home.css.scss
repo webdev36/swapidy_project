@@ -55,10 +55,6 @@ ul{
 	width:200px;
 }
 
-#search_container{
-	float:left;
-	width:400px;
-}
 #product_lineup{
 	float:left;
   width:500px;
@@ -73,7 +69,7 @@ ul{
 .hero_title{
   font-weight: bold;
   text-rendering: optimizelegibility;
-  text-shadow: black 0.1em 0.1em 0.2em;
+  text-shadow: 1px 1px 1px #000;
   text-align:center;
 }
 
@@ -103,7 +99,7 @@ margin-left:150px;
     text-align: center;
     color: #fff;
     font-weight: 700;
-    font-size: 35px;
+    font-size: 33px;
     text-decoration: none;
     font-family: "Lato", Calibri, Arial, sans-serif;
 }
@@ -129,7 +125,7 @@ display: inline-block;
         0 0 4px 1px rgba(0,0,0,0.2); 
 
     text-decoration: none;
-    text-shadow: 0 1px rgba(255,255,255,0.7);  
+    text-shadow: 0 1px rgba(0,0,0,0.7);  
 }
 
 #buttons .sell_now:hover {
@@ -304,11 +300,35 @@ display: inline-block;
     opacity: 1;
 }
 
+#product_models {
+  position: relative;
+width: 75%;
+margin: 5px auto;
+text-align:center;
+}
+
+#product_models .nab-tabs > li, #product_models .nav-pills > li {
+  float:none;
+}
+
+.product_container {
+  width:100%;
+  overflow:hidden;
+}
+
+.product_container .products {
+  position: relative; 
+  overflow: hidden; 
+  min-height: 200px; 
+  width:98%;
+}
+
 #products .item{
-  width:100px;
-  height: 150px;
-  padding:30px;
+  width:150px;
+  height: 240px;
   border: 0px;
+  overflow:hidden;
+  margin:10px;
 }
 
 .hidden_filter {
@@ -317,7 +337,6 @@ display: inline-block;
 
 .thumbnail .box {
   display: block;
-  margin: -25px;
 }
 
 .thumbnail .box .product_title {
@@ -329,7 +348,7 @@ display: inline-block;
 .thumbnail .box .product_price {
   float: left; 
   padding-left: 10px;
-  padding-top: 5px;
+  padding-top: 9px;
   font-size: 15px;
 }
 .thumbnail .box .button_for_buy,
@@ -377,11 +396,18 @@ label {
   color: #99a1a7;
 }
 
+#search_container{
+width: 80%;
+margin: 0 auto;
+overflow: hidden;
+text-align:center;
+}
 
 .big-checkbox + label {
-  padding: 18px;
-  line-height: 30px;
-  margin-bottom: -11px;
+padding: 8px;
+line-height: 20px;
+margin-bottom: -3px;
+display: inline-block;
 }
 
 .big-checkbox:checked + label:after {
@@ -389,11 +415,11 @@ label {
   left: 6px;
 }
 
-#product_models {
-  display: block;
-  position: relative;
-  text-align: right;
-  padding-bottom: 20px;
+.option-set {
+display: inline-block;
+width: 25%;
+text-align: left;
+min-height: 250px;
 }
 
 .models_for_buy li.active a {
@@ -433,14 +459,17 @@ label {
   width: 236px;
 }
 #slider-code .buttons {
-  display: block; 
-  margin: 0px 25px 0 0; 
-  float: left;
-  width: 39px;
-  height: 37px;
-  overflow: hidden;
-  position: relative;
-  color: #FFFFFF;
+display: block;
+margin: 0px 25px 0 0;
+float: left;
+width: 37px;
+height: 37px;
+overflow: hidden;
+position: relative;
+color: white;
+font-size: 35px;
+cursor: pointer;
+box-shadow: 0px 0px 5px black;
 }
 .sub_content{
   color:#666666;

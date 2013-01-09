@@ -191,9 +191,11 @@ left:0px;
 color:#fa3e6e;
 }
 .product_model{
-  font-size: 20px;
-  color: #38B4DE;
-
+font-size: 20px;
+color: #38B4DE;
+width: 18%;
+text-align:center;
+cursor:pointer;
 }
 .product_desc{
   color:#737373;
