@@ -1,8 +1,21 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-
+@font-face {
+    font-family: "myriad";
+    src: url('/myriad.otf') format("truetype");
+}
+@font-face {
+    font-family: "myriad-b";
+    src: url('/myriad-b.otf') format("truetype");
+}
+@font-face {
+    font-family: "myriad-s";
+    src: url('/myriad-s.otf') format("truetype");
+}
+*{
+  font-family:"myriad";
+}
 #iphone{
 	height:350px;
 	width:350px;
@@ -55,9 +68,8 @@ ul{
 	width:200px;
 }
 
-#search_container{
-	float:left;
-	width:400px;
+#search_container .s_category{
+  font-family:"myriad";
 }
 #product_lineup{
 	float:left;
@@ -67,21 +79,34 @@ ul{
 .hero-unit{
   color: #FFFFFF;
   line-height: 1.2;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   text-align:left;
 }
+
 .hero_title{
-  font-weight: bold;
+  font-family:"myriad";
   text-rendering: optimizelegibility;
-  text-shadow: black 0.1em 0.1em 0.2em;
+  text-shadow: 1px 1px 1px #000;
   text-align:center;
+  position:relative;
+  bottom:50px;
 }
 
+.container.dark-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: medium none;
+    box-shadow: none;
+    -webkit-border-radius: 20px;
+border-radius: 20px;
+width:820px;
+margin:auto;
+}
 .hero_info{
-font-weight: bold;
 font-size: 30px;
 text-shadow: 0 0 15px rgba(0, 0, 0, 0.6),0 -1px 1px rgba(0, 0, 0, 0.6);
 text-align: center;
+  font-family:"myriad";
+position:relative;
+bottom:50px;
 
 }
 .hero_info a{
@@ -95,7 +120,8 @@ text-align: center;
 margin-left:150px;
 
   position:relative;
-  margin-top:100px;
+  bottom:50px;
+  margin-top:50px;
   width:650px;
 }
 
@@ -103,9 +129,9 @@ margin-left:150px;
     text-align: center;
     color: #fff;
     font-weight: 700;
-    font-size: 35px;
+    font-size: 33px;
     text-decoration: none;
-    font-family: "Lato", Calibri, Arial, sans-serif;
+    font-family:"myriad";
 }
 
 #buttons .modern{
@@ -129,7 +155,7 @@ display: inline-block;
         0 0 4px 1px rgba(0,0,0,0.2); 
 
     text-decoration: none;
-    text-shadow: 0 1px rgba(255,255,255,0.7);  
+    text-shadow: 0 1px rgba(0,0,0,0.7);  
 }
 
 #buttons .sell_now:hover {
@@ -222,6 +248,7 @@ display: inline-block;
 }
 
 #product_type{
+    font-family:"myriad";
     position: relative;
     margin: auto;
 }
@@ -304,11 +331,35 @@ display: inline-block;
     opacity: 1;
 }
 
+#product_models {
+  position: relative;
+width: 85%;
+margin: 5px auto;
+text-align:center;
+}
+
+#container_cat_1 .nab-tabs > li, #container_cat_1 .nav-pills > li {
+  float:none;
+}
+
+.product_container {
+  width:100%;
+  overflow:hidden;
+}
+
+.product_container .products {
+  position: relative; 
+  overflow: hidden; 
+  min-height: 200px; 
+  width:98%;
+}
+
 #products .item{
-  width:100px;
-  height: 150px;
-  padding:30px;
+  width:150px;
+  height: 240px;
   border: 0px;
+  overflow:hidden;
+  margin:10px;
 }
 
 .hidden_filter {
@@ -317,7 +368,6 @@ display: inline-block;
 
 .thumbnail .box {
   display: block;
-  margin: -25px;
 }
 
 .thumbnail .box .product_title {
@@ -377,11 +427,18 @@ label {
   color: #99a1a7;
 }
 
+#search_container{
+width: 100%;
+margin: 0 auto;
+overflow: hidden;
+text-align:center;
+}
 
 .big-checkbox + label {
-  padding: 18px;
-  line-height: 30px;
-  margin-bottom: -11px;
+padding: 8px;
+line-height: 20px;
+margin-bottom: -3px;
+display: inline-block;
 }
 
 .big-checkbox:checked + label:after {
@@ -389,13 +446,28 @@ label {
   left: 6px;
 }
 
-#product_models {
-  display: block;
-  position: relative;
-  text-align: right;
-  padding-bottom: 20px;
+.option-set {
+display: inline-block!important;
+width: 140px;
+text-align: left;
+min-height: 335px;
 }
+.product_model{
+font-size: 20px;
+color: #38B4DE;
+width: 150px;
+text-align:center;
+cursor:pointer;
+display:inline-block;
+float:none!important;
+}
+.product_model a{
+color:#666;
 
+}
+.product_model a:hover{
+color:#666;
+}
 .models_for_buy li.active a {
   background-color: #FC43CC !important;
 } 
@@ -407,6 +479,7 @@ label {
 #slider-code {
   height: 270px; 
   overflow: hidden;
+
 }
 #slider-code .viewport {
   float: left; 
@@ -419,6 +492,8 @@ label {
   visibility: hidden;
 }
 #slider-code .overview {
+font-family:"myriad-s";
+  font-size:20px;
   list-style: none; 
   position: absolute; 
   padding: 0; 
@@ -433,14 +508,17 @@ label {
   width: 236px;
 }
 #slider-code .buttons {
-  display: block; 
-  margin: 0px 25px 0 0; 
-  float: left;
-  width: 39px;
-  height: 37px;
-  overflow: hidden;
-  position: relative;
-  color: #FFFFFF;
+display: block;
+margin: 0px 25px 0 0;
+float: left;
+width: 37px;
+height: 37px;
+overflow: hidden;
+position: relative;
+color: white;
+font-size: 35px;
+cursor: pointer;
+box-shadow: 0px 0px 5px black;
 }
 .sub_content{
   color:#666666;
@@ -462,8 +540,7 @@ label {
 .headings_pink{
   color:#fa3e6e;
 }
-.headings_pink{
-cursor:pointer;}
+
 .hiw_steps{
 margin-bottom:30px;
 }
@@ -509,16 +586,19 @@ clear:both;
 .nav_profile{
   height:25px;
   position:relative;
-  bottom:8px;
+  bottom:5px;
   margin-right:8px;
 }
 .nav_settings{
+height:35px;
 position:relative;
-bottom:5px;
-  height:40px;
+bottom:3px;
+
 }
 .nav_down{
-  height:20px;
+  height:15px;
+  position:relative;
+  bottom:4px;
 }
 
 .nav-tabs{

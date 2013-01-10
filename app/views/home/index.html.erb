@@ -1,27 +1,28 @@
 <div class="hero-unit">
   <div style="hero-unit-content">
+<div class="container dark-overlay">
     <h1 class="hero_title">Buy and sell instantly.</h1>
     <br/>
+    
     <p class="hero_info">
       We buy your products for honey. You buy anything using honey.
     </p>
     <p class="hero_info">
       It's never been so easy to buy and sell.
-    </p><br/><br/>
-    <p class="hero_info"  id="hero_how">
-      <a href="/how_it_works">Find out how it works.</a>
     </p>
-  </div>
-
-  <div id="buttons">
+ <div id="buttons">
     <a href="#" id="button_sell" class="modern socle sell_now">Sell Now</a>
     <a href="#" id="button_buy" class="modern socle buy_now">Buy Now</a>
   </div>
+  </div>
+
+</div>
+ 
 </div>
 
 <% cache('homepage_available_categories') do %>
 <div id="product_type" style="display:none;">
-  <h2 class="headings_pink">Choose your product:</h2>
+  <h2 class="headings_pink">What do you want to sell today?</h2>
   <div id="slider-code" class="span12">
     <a class="left carousel-control buttons prev" href="#">&lsaquo;</a>
     <div class="viewport">
@@ -45,55 +46,72 @@
   jQuery(window).load(function(){
      $('#slider-code').tinycarousel({display: 2});
   });
+  $(function() {
+
+    $(window).on('resize', function() {
+
+      $('#s3slider').css({
+        height: $(window).height() - $('.navbar-fixed-top').height() - $('.navbar-fixed-top').height()
+      });
+
+    });
+
+
+  })
 </script>
 
 <% Category.all.each do |category| %>
   <% cache("homepage_container_category_#{category.id}") do %>
-    <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 40px;">
-      <div style="display: block;">
-        <ul id="#product_models" class="nav nav-pills" style="position: relative; float: right;">
+    <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 20px;">
+      <div style="display: block;padding:20px 0 30px;">
+
+        <ul id="product_models" class="nav nav-pills" style="position: relative;">
           <li class="product_model active" id="filter_model_all"><a>All models</a></li>
           <% category.product_models.each do |product_model| %>
             <li class="product_model" id="filter_model_<%= product_model.id %>"><a><%= product_model.title %></a></li>
           <% end %>
         </ul>
-      </div>
-      <div style="display: block;">
         <% cache("homepage_category_#{category.id}_filter_attr") do %>
           <div id="search_container" class="attribute_filter">
             <% category.category_attributes.each do |attr|%>
               <div class="option-set" data-group="cat_attr_<%= attr.id %>">
-                <h3 class="s_category" style="color:#38B4DE"><%= attr.title %></h3>
+                <div style="float:left;">
+                <h3 class="s_category" style="color:#38B4DE;font-size:18px;"><%= attr.title %></h3>
                 <% attr.attributes_in_models.each do |attr_value_with_models| %>
-                  <div style="display:inline-block;" class="attr_filter attr_filter_model_all <%= attr_value_with_models[2].map{|model| "attr_filter_model_#{model.id.to_s}"}.join(" ") %>" >
+                  <div style="display:block;" class="attr_filter attr_filter_model_all <%= attr_value_with_models[2].map{|model| "attr_filter_model_#{model.id.to_s}"}.join(" ") %>" >
                     <div style="display: inline-block; line-height: 30px;" >
                       <input type="checkbox" id="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>" class="regular-checkbox big-checkbox"
                           attr-filter-option='<%= attr_value_with_models[0] %>' />
                       <label for="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>"></label>
                     </div>
-                    <div style="display:inline-block; margin-top: -5px; font-size: 20px; padding-right: 15px;"><%= attr_value_with_models[1] %></div>
+                    <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 15px;"><%= attr_value_with_models[1] %></div>
                   </div>
                 <% end %>
+                </div>
               </div>
             <% end %>
             <div class="option-set all_using_condition_filter" data-group="cat_attr_condition">
-              <h3 id="conditions" style="color:#38B4DE;">Condition</h3>
+              <div style="float:left;">
+              <h3 id="conditions" style="color:#38B4DE;font-size:16px;">Condition</h3>
               <% Product::USING_CONDITIONS.keys.each do |condition| %>
-                <div style="display:inline-block;">
+                <div style="display:block;">
                   <div style="display: inline-block; line-height: 30px;">
                     <input type="checkbox" class="regular-checkbox big-checkbox" id="checkbox-cond-<%= category.id %>-<%= condition.to_s %>" 
                       attr-filter-option="<%= Product::USING_CONDITIONS[condition] %>" />
                     <label for="checkbox-cond-<%= category.id %>-<%= condition.to_s %>"></label>
                   </div>
-                  <div style="display:inline-block; margin-top: -5px; font-size: 20px; padding-right: 15px;"><%= Product::USING_CONDITIONS[condition] %></div>
+                  <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 15px;"><%= Product::USING_CONDITIONS[condition] %></div>
                 </div>
               <% end %>
+              </div>
             </div>
           </div>
         <% end %>
+      </div>
+      <div style="display: block;">
         <% cache("homepage_product_container_category_#{category.id}") do %>
-          <div class="product_container" style="display:none; float: right;">
-            <div id="products" class="isotope thumbnail" style="position: relative; overflow: hidden; min-height: 200px; width:500px;">
+          <div class="product_container">
+            <div id="products" class="isotope" style="">
               <% category.products.each do |product| %>
                 <% cache("homepage_product_thumb_#{product.id}") do %>
                   <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>

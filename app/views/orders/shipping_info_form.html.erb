@@ -6,25 +6,21 @@
   </ul>
 </div>
 
-
-<h2 class="headings_pink">Provide your shipping address</h2>
+<div class="container">
+<h2 class="headings_pink">You're almost there...provide your shipping address<span>*</span></h2>
 
 <div>
-  <label style="color:#38B4DE"><%= @product.title %></label><br />
-  <img src="<%= @product.main_image_url(:large) %>">
+  <label class="confirm_info_head"><%= @product.title %></label><br />
+  <img id="confirm_image" src="<%= @product.main_image_url(:large) %>">
 </div>
 
-<% if @order.is_trade_ins? %>
- <p>This info will be used to generate a free shipping label to send your product to us.</p>
-<% else %>
- <p>This info will be used to generate a free shipping label to send the product to you.</p>
-<% end %>
+
 
 <%= form_for(@order, :as => 'order', :url => "/orders/confirm") do |f| %>
   <%= f.hidden_field :order_type %>
   <%= f.hidden_field :product_id %>
   <% unless @order.errors.empty? %>
-    <div style="color: red;">
+    <div>
       <%= raw @order.errors.full_messages.join("<br/>") %>
       <br/>
     </div>
@@ -89,7 +85,7 @@
   
   
   <% if @order.candidate_addresses && !@order.candidate_addresses.empty? %>
-    <div><%= f.submit "Continue", :id => "continue_button" %></div>
+     <input name="commit" class="order_button_sell" style="width: 180px; height: 50px;" type="submit" value="Continue" />
 
     <script>
       $(".select_candidate_address").live("click", function() {
@@ -111,7 +107,12 @@
     </script>
 
   <% else %>
-    <div><%= f.submit "Continue", :id => "continue_button" %></div>
-  <% end %>
+ <input name="commit" class="order_button_sell" style="width: 180px; height: 50px; padding:0px;" type="submit" value="Continue" />  <% end %>
   
 <% end %>
+<% if @order.is_trade_ins? %>
+ <p class="shipping_footnote"><span>*</span>This info will be used to generate a free shipping label to send your product to us.</p>
+<% else %>
+ <p class="shipping_footnote"><span>*<This info will be used to generate a free shipping label to send the product to you.</p>
+<% end %>
+</div>

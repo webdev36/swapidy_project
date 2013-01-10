@@ -1,6 +1,6 @@
-
-<h2>Confirm your details</h2>
-<p class='headings_pink'>Please confirm the following information is correct.</p>
+<div class="container">
+<h2 class="headings_pink">Confirm your details</h2>
+<p>Please confirm the following information is correct.</p>
 
 <%= form_for(@order, :as => 'order', :url => "/orders/create") do |f| %>
   <%= f.hidden_field :order_type %>
@@ -27,7 +27,7 @@
   <br/>
   <div>
     <label><%= @product.title %></label><br />
-    <img src="<%= @product.main_image_url(:large) %>">
+    <img id="confirm_image" src="<%= @product.main_image_url(:large) %>">
   </div>
   
   <br/>
@@ -102,6 +102,7 @@
   <br/>
   <div><%= f.submit "Continue", :disabled=> "disabled", :id => "submit_button" %></div>
 <% end %>
+</div>
 <script>
   function changeTo(new_url) {
     $("#new_order").attr("action", new_url);

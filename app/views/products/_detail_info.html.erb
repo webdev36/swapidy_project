@@ -7,7 +7,7 @@
 	</div>
 	<div id="product_text">
 		<div class="product_model">
-			Model: <span class="product_desc"><%= @product.product_model.title %></span><br/><br/>
+			<span class="product_att">Model: <span class="product_desc"><%= @product.product_model.title %></span><br/><br/>
   			<% @product.product_model_attributes.each do |model_attribute| %>
    			 <%= model_attribute.category_attribute.title %>:<span class="product_desc"> <%= model_attribute.value %></span><br/><br/>
   			<% end %>

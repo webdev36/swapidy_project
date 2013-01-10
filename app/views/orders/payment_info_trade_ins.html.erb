@@ -53,13 +53,12 @@ label{
           <span style="font-size:20px;"><%= format_num(@product.honey_price) %></span> <img class="payment_currency" src="/images/honey_20px.png"><br/>
           <br/>
         <div class="payment_selling_info">
-          <i>Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %><img class="payment_currency" src="/images/honey_20px.png"> after selling.</i>
+          Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %><img class="payment_currency" src="/images/honey_20px.png"> after selling.
           <br />You could use this honey to buy anything!.
         </div>
         
         <br/>
-        <div class="show_button_sell"><%= f.submit "Continue" %></div>
-      <% end %>
+ <input name="commit" class="payment_button_sell" style="width: 180px; height: 50px; padding:0px;" type="submit" value="Continue" />      <% end %>
     </div>
   </div>
 </div>
