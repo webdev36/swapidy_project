@@ -5,7 +5,7 @@ class CreateRedeemCodes < ActiveRecord::Migration
       t.decimal :honey_amount
       t.integer :user_id
       t.datetime :expired_date
-      t.string :status
+      t.integer :status
       t.timestamps
     end
   end

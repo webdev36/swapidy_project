@@ -53,11 +53,9 @@ Swapidy::Application.routes.draw do
   resources :free_honeys
   
   
-  match "/reddeem/success" => "redeem#success", :method => :get
-  resources :redeem do
-    post :create, :on => :member
-    post :index, :on => :member
-  end
+  match "/redeem/success" => "redeem#success", :method => :get
+  match "/redeem/confirm" => "redeem#confirm", :method => :post
+  resources :redeem
   
   get "home/index"
 

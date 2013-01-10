@@ -1,5 +1,5 @@
 class RedeemCode < ActiveRecord::Base
-  attr_accessible :code, :user_id, :expired_date, :honey_amount, :email
+  attr_accessible :code, :user_id, :expired_date, :honey_amount, :email, :status
   
   attr_accessor :email
   
@@ -19,10 +19,17 @@ class RedeemCode < ActiveRecord::Base
   end
   
   def redeemable?
-    errors.add(:email, "could not be blank") if email.nil? || email.blank?
+    errors.add(:email, "could not be blank") if self.email.nil? || self.email.blank?
     return false unless errors.empty?
     
-    return false unless self.status == STATUES[:pending] && !expired?
+    if self.status != STATUES[:pending]
+      errors.add(:email, "Code has been used before")
+      return false
+    end
+    if expired?
+      errors.add(:code, "is expired")
+      return false
+    end
     if user.nil? && User.where(:email => self.email).exists?
       errors.add(:email, "has signed up before")
       return false
@@ -31,16 +38,17 @@ class RedeemCode < ActiveRecord::Base
   end
   
   def redeem
-    self.user = User.signup_user(:email => receiver_email)
+    self.user = User.signup_user(:email => email)
     self.status = STATUES[:completed] 
     self.save
-    self.receiver.update_attribute(:honey_balance, (self.receiver.honey_balance || 0.00) + self.receiver_honey_amount)
+    self.user.update_attribute(:honey_balance, (self.user.honey_balance || 0.00) + self.honey_amount)
     
     receiver_notification = Notification.new(:title => "Free #{self.honey_amount} Honey Received")
     receiver_notification.user = self.user
-    receiver_notification.description = "Free #{self.receiver_honey_amount} Honey receipted"
+    receiver_notification.description = "Free #{self.honey_amount} Honey receipted"
     receiver_notification.save
     UserNotifier.redeem_completed(self).deliver
+    return true
   end
   
   private

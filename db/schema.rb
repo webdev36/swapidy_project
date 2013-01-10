@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(:version => 20130110041653) do
     t.decimal  "honey_amount"
     t.integer  "user_id"
     t.datetime "expired_date"
-    t.string   "status"
+    t.integer  "status"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
