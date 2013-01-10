@@ -1,0 +1,26 @@
+<h2>Redeem FreeHoney</h2>
+<br />
+
+<%= form_for(@redeem_code, :url => "/redeem/create") do |f| %>
+  <% unless @redeem_code.errors.full_messages.empty? %>
+    <div style="color: red;">
+      <% @redeem_code.errors.full_messages.each do |message| %>
+        <%= message %><br/>
+      <% end %>
+    </div>
+    <br/>
+  <% end %>
+  <div>
+    <%= f.label :code %><br/>
+    <%= f.text_field :code %><br/>
+  </div>
+      
+  <div>
+    <%= f.label :email %><br/>
+    <%= f.email_field :email %><br/>
+  </div>
+  
+  <div>
+    <%= f.submit "Redeem" %>
+  </div>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110000103) do
+ActiveRecord::Schema.define(:version => 20130110041653) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -190,6 +190,16 @@ ActiveRecord::Schema.define(:version => 20130110000103) do
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
+  create_table "redeem_codes", :force => true do |t|
+    t.string   "code"
+    t.decimal  "honey_amount"
+    t.integer  "user_id"
+    t.datetime "expired_date"
+    t.string   "status"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "shipping_stamps", :force => true do |t|
     t.integer  "order_id"
     t.string   "integrator_tx_id"
@@ -203,6 +213,14 @@ ActiveRecord::Schema.define(:version => 20130110000103) do
     t.string   "status"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "swapidy_settings", :force => true do |t|
+    t.string   "title"
+    t.string   "value"
+    t.string   "value_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "user_providers", :force => true do |t|

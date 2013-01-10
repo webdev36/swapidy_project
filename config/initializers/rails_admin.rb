@@ -481,8 +481,88 @@ RailsAdmin.config do |config|
   #   edit do; end
   #   create do; end
   #   update do; end
+  
+  end
+  
+  config.model SwapidySetting do
+    configure :value_type, :enum do
+      enum do
+        SwapidySetting::TYPES.keys.map {|key| [SwapidySetting::TYPES[key], SwapidySetting::TYPES[key]]}
+      end
+    end
+    list do
+      field :title
+      field :value
+      field :value_type
+    end
+    export do
+      field :title
+      field :value
+      field :value_type
+      field :created_at
+      field :updated_at
+    end
+    show do
+      field :title
+      field :value
+      field :value_type
+      field :created_at
+      field :updated_at
+    end
+    edit do
+      field :title
+      field :value_type
+      field :value
+    end
   end
 
+  config.model RedeemCode do
+    #configure :expired?, :boolean
+    configure :status, :enum do
+      enum do
+        RedeemCode::STATUES.keys.map {|key| [key, RedeemCode::STATUES[key]]}
+      end
+    end
+    
+    list do
+      filters [:status]
+
+      field :status
+      field :code
+      field :honey_amount
+      field :expired_date
+      field :user
+      field :created_at
+      field :updated_at
+    end
+    export do
+      field :status
+      field :code
+      field :honey_amount
+      field :expired_date
+      field :user
+      field :created_at
+      field :updated_at
+    end
+    show do
+      field :status
+      field :code
+      field :honey_amount
+      field :expired_date
+      field :user
+      field :created_at
+      field :updated_at
+    end
+    create do
+      field :code
+      field :honey_amount
+      #field :expired_date
+    end
+    update do
+      field :status
+      #field :expired_date
+    end
+  end
 
   config.model FreeHoney do
     #configure :expired?, :boolean
@@ -529,6 +609,7 @@ RailsAdmin.config do |config|
       field :receiver_email
       field :receiver
       field :receiver_honey_amount
+      field :sender_honey_amount
       #field :expired_date
     end
     update do

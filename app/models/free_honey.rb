@@ -4,10 +4,6 @@ class FreeHoney < ActiveRecord::Base
   belongs_to :receiver, :foreign_key => "receiver_id", :class_name => "User"
   belongs_to :sender, :foreign_key => "sender_id", :class_name => "User"
    
-  EXPIRED_DAYS_NUMNER = 7
-  DEFAULT_SENDER_HONEY_AMOUNT = 100.00
-  DEFAULT_RECEIVER_HONEY_AMOUNT = 50.00
-  
   STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3}
   validates :receiver_honey_amount, :status, :expired_date, :token_key, :presence => true
   validates :receiver_email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i}#, :message => "Invalid email address"
@@ -16,6 +12,8 @@ class FreeHoney < ActiveRecord::Base
   before_validation :check_receiver_email
   before_validation :generate_token_key
   after_create :create_notifications
+  
+  scope :pending, :conditions => {:status => STATUES[:pending]}
   
   def expired?
     Time.now > self.expired_date
@@ -33,10 +31,10 @@ class FreeHoney < ActiveRecord::Base
   def confirm
     return false unless able_to_confirm?
     if self.receiver.nil?
-      self.receiver = User.signup_user(:email => receiver_email, :password => "123456", :password_confirmation => "123456")
+      self.receiver = User.signup_user(:email => self.receiver_email)
     end
     self.status = STATUES[:completed] 
-    self.sender_honey_amount = DEFAULT_SENDER_HONEY_AMOUNT
+    self.sender_honey_amount = default_reward_honey
     self.completed_at = Time.now
     self.save
 
@@ -45,6 +43,7 @@ class FreeHoney < ActiveRecord::Base
     receiver_notification.user = self.receiver
     receiver_notification.description = "Free #{self.receiver_honey_amount} Honey receipted"
     receiver_notification.save
+    UserNotifier.free_honey_completed(self).deliver
 
     #create_reward_and_bonus
     if self.sender
@@ -53,10 +52,12 @@ class FreeHoney < ActiveRecord::Base
       sender_notification.user = self.sender
       sender_notification.description = "Free #{self.sender_honey_amount} Honey Reward: #{receiver_title} accepted your invitation}"
       sender_notification.save
+      UserNotifier.free_honey_reward(self).deliver 
     end
     
-    #TODO: send mails
-    #TODO: cancel all other free_honeys to invited the same users to signup. 
+    other_free_honey = FreeHoney.pending.where(:receiver_email => self.receiver_email).where("id != #{self.id}").each do |other_one|
+      other_one.update_attribute(:status => STATUES[:cancelled])
+    end
     return true
   end
   
@@ -87,12 +88,26 @@ class FreeHoney < ActiveRecord::Base
 
   private
   
+    def default_expired_days
+      SwapidySetting.get('FREE_HONEY-DEFAULT_EXPIRED_DAYS') rescue 7
+    end
+    
+    def default_reward_honey  
+      SwapidySetting.get('FREE_HONEY-DEFAULT_REWARD_HONEY') rescue 100.0
+    end
+    
+    def default_receiver_honey
+      SwapidySetting.get('FREE_HONEY-DEFAULT_RECEIVER_HONEY') rescue 50.0
+    end
+  
     def check_receiver_email      
       unless self.receiver
         self.receiver = ( User.find(self.receiver_id) if self.receiver_id ) rescue nil
         self.receiver = ( User.find_by_email(self.receiver_email) if self.receiver_email && self.receiver.nil? ) rescue nil
       end 
-      self.receiver_email = self.receiver.email if self.receiver && (self.receiver_email || "").blank?      
+      self.receiver_email = self.receiver.email if self.receiver && (self.receiver_email || "").blank?
+      self.receiver_honey_amount = default_receiver_honey unless self.receiver_honey_amount
+      self.sender_honey_amount = default_reward_honey unless self.sender_honey_amount
     end
     
     def user_with_right_email?
@@ -115,6 +130,6 @@ class FreeHoney < ActiveRecord::Base
         end while FreeHoney.where(:token_key => token).exists?
         self.token_key = token
       end
-      self.expired_date = (DateTime.now + EXPIRED_DAYS_NUMNER.days) unless self.expired_date
+      self.expired_date = (DateTime.now + default_expired_days.days) unless self.expired_date
     end
 end
