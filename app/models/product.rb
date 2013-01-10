@@ -72,51 +72,6 @@ class Product < ActiveRecord::Base
     return true
   end
   
-  def self.import_from_textline(textline)
-    
-    parts = textline.split(/ \| /)
-    return if parts.size < 3
-    
-    category = Category.find_by_title parts[0].strip
-    return nil unless category
-    
-    model = category.product_models.find_by_title parts[1].strip
-    return nil unless model
-  
-    product = Product.new(:title => parts.last, :using_condition => Product::USING_CONDITIONS[:flawless], :honey_price => 100)
-    product.category = category
-    product.product_model = model
-    parts.each_with_index do |attribute_text, index|
-      next if index < 2 || index == (parts.size - 1)
-      attr_str_pair = attribute_text.split(/\: /)
-      next if attr_str_pair.size != 2 
-      attr_key = attr_str_pair[0].strip
-      attr_value = attr_str_pair[1].strip
-      if attr_key == "Condition"
-        product.using_condition = attr_value
-      elsif attr_key == "Price"
-        product.honey_price = attr_value.to_f
-      else
-        cat_attr = category.category_attributes.find_by_title attr_key
-        unless cat_attr
-          cat_attr = category.category_attributes.new
-          cat_attr.title = attr_key
-        end
-        
-        model_attr_value = model.product_model_attributes.where(:category_attribute_id => cat_attr.id, :value => attr_value).first
-        unless model_attr_value
-          model_attr_value = model.product_model_attributes.new
-          model_attr_value.category_attribute = cat_attr
-          model_attr_value.value = attr_value
-        end
-        attr = product.product_attributes.new
-        attr.product_model_attribute = model_attr_value
-      end
-    end
-
-    return product if product.save
-  end
-
   rails_admin do
     configure :using_condition, :enum do
       enum do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108235742) do
+ActiveRecord::Schema.define(:version => 20130110000103) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20130108235742) do
     t.string   "using_condition"
     t.decimal  "weight_lb",                 :default => 1.0
     t.string   "shipping_zip_code_add_on"
+    t.string   "product_title"
   end
 
   create_table "payment_transactions", :force => true do |t|
@@ -181,8 +182,8 @@ ActiveRecord::Schema.define(:version => 20130108235742) do
     t.string   "username"
     t.integer  "item"
     t.string   "table"
-    t.integer  "month"
-    t.integer  "year",       :limit => 8
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 5
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end

@@ -28,8 +28,8 @@ class ProductModelAttribute < ActiveRecord::Base
   after_destroy :expired_fragment_caches
   
   def expired_fragment_caches
-    ActionController::Base.new.expire_fragment("homepage_category_#{product_model.category.id}_filter_attr")
-    ActionController::Base.new.expire_fragment("homepage_container_category_#{category_attribute.category.id}")
+    ActionController::Base.new.expire_fragment("homepage_category_#{product_model.category.id}_filter_attr") rescue nil
+    ActionController::Base.new.expire_fragment("homepage_container_category_#{category_attribute.category.id}") rescue nil
   end
 
 end
