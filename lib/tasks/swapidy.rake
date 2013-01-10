@@ -15,12 +15,7 @@ namespace :swapidy do
       Product.all.each { |product| product.destroy }
       ProductModelAttribute.all.each { |a| a.destroy }
       ["Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
-        attrs = CategoryAttribute.find_by_title(cat_title)
-        if attrs && attrs.class.name == "CategoryAttribute"
-          attrs.destroy 
-        elsif attrs
-          attrs.each{ |c| c.destroy }
-        end
+        attrs = CategoryAttribute.where(:title => cat_title).each {|attr| attr.destroy }
       end
 
       lines.each_with_index do |line, index|

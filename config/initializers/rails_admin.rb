@@ -485,7 +485,7 @@ RailsAdmin.config do |config|
 
 
   config.model FreeHoney do
-    configure :expired?, :boolean
+    #configure :expired?, :boolean
     configure :status, :enum do
       enum do
         FreeHoney::STATUES.keys.map {|key| [key, FreeHoney::STATUES[key]]}
@@ -497,7 +497,7 @@ RailsAdmin.config do |config|
       field :receiver_title
       field :sender_title
       field :receiver_honey_amount
-      field :expired?
+      #field :expired?
       field :expired_date
       field :completed_at
       field :sender_honey_amount
@@ -564,14 +564,14 @@ RailsAdmin.config do |config|
     list do
        field :order_type
        field :status
-       field :product
+       field :title
        field :honey_price
        field :user
      end
      export do
        field :order_type
        field :status
-       field :product
+       field :product_title
        field :weight_lb
        field :using_condition
        field :honey_price
@@ -586,10 +586,11 @@ RailsAdmin.config do |config|
      show do
        field :order_type
        field :status
-       field :product
+       field :product_title
        field :weight_lb
        field :using_condition
        field :honey_price
+       field :product
        
        field :user
        field :shipping_fullname
@@ -600,6 +601,7 @@ RailsAdmin.config do |config|
        field :order_type
        field :status
        field :product
+       field :product_title
        field :weight_lb
        field :using_condition
        field :honey_price
