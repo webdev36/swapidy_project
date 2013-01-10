@@ -6,12 +6,12 @@ namespace :swapidy do
     task :reset_products => :environment do
       logger = Logger.new("log/swapidy_tasks.log")
       
-      file = File.open(File.join(Rails.root, 'demo_data', "products_20130107.csv"),"r")
+      file = File.open(File.join(Rails.root, 'demo_data', "products_20130110.csv"),"r")
       content = file.read
       lines = content.split(/\r/)
       headers = lines[0].split(",")
       
-      return if headers.size < 8
+      return if headers.size < 10
       Product.all.each { |product| product.destroy }
       ProductModelAttribute.all.each { |a| a.destroy }
       ["Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
