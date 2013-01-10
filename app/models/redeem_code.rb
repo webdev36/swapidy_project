@@ -3,7 +3,7 @@ class RedeemCode < ActiveRecord::Base
   
   attr_accessor :email
   
-  belongs_to :user
+  has_many :users
   
   STATUES = {:pending => 0, :completed => 1, :cancelled => 2}
   scope :pending, :conditions => {:status => STATUES[:pending]}
@@ -30,7 +30,7 @@ class RedeemCode < ActiveRecord::Base
       errors.add(:code, "is expired")
       return false
     end
-    if user.nil? && User.where(:email => self.email).exists?
+    if User.where(:email => self.email).exists?
       errors.add(:email, "has signed up before")
       return false
     end
@@ -38,16 +38,16 @@ class RedeemCode < ActiveRecord::Base
   end
   
   def redeem
-    self.user = User.signup_user(:email => email)
-    self.status = STATUES[:completed] 
-    self.save
-    self.user.update_attribute(:honey_balance, (self.user.honey_balance || 0.00) + self.honey_amount)
+    user = User.signup_user(:email => email)
+    user.honey_balance = (user.honey_balance || 0.00) + self.honey_amount
+    user.redeem_code = self
+    user.save
     
     receiver_notification = Notification.new(:title => "Free #{self.honey_amount} Honey Received")
-    receiver_notification.user = self.user
+    receiver_notification.user = user
     receiver_notification.description = "Free #{self.honey_amount} Honey receipted"
     receiver_notification.save
-    UserNotifier.redeem_completed(self).deliver
+    UserNotifier.redeem_completed(self, user).deliver
     return true
   end
   
@@ -61,7 +61,7 @@ class RedeemCode < ActiveRecord::Base
     end
   
     def generate_fields
-      while(self.code.nil? || self.code.blank? || RedeemCode.where(:code => self.code).exists? ) do
+      while(self.code.nil? || self.code.blank? || RedeemCode.where("id != ? and code = ?", self.id, self.code).exists? ) do
         number_charset = %w{1 2 3 4 6 7 9}
         string_charset = %w{A C D E F G H J K M N P Q R T V W X Y Z}
         number_code = (1..4).map{ number_charset.to_a[rand(number_charset.size)] }.join("")

@@ -531,7 +531,7 @@ RailsAdmin.config do |config|
       field :code
       field :honey_amount
       field :expired_date
-      field :user
+      field :users
       field :created_at
       field :updated_at
     end
@@ -540,7 +540,7 @@ RailsAdmin.config do |config|
       field :code
       field :honey_amount
       field :expired_date
-      field :user
+      field :users
       field :created_at
       field :updated_at
     end
@@ -549,7 +549,7 @@ RailsAdmin.config do |config|
       field :code
       field :honey_amount
       field :expired_date
-      field :user
+      field :users
       field :created_at
       field :updated_at
     end

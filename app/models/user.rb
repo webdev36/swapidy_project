@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
 
   validate :validate_card_info
   
+  belongs_to :redeem_code
+  
   def full_name
     name = [first_name, last_name].compact.join(" ").strip
     return name.blank? ? "PROFILE" : name
