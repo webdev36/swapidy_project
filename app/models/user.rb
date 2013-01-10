@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
     user = UserProvider.where(:provider => auth.provider, :uid => auth.uid).first.try(:user) unless user
     
     unless user
-      user = singup_user(:first_name => auth.extra.raw_info.first_name,
+      user = signup_user(:first_name => auth.extra.raw_info.first_name,
                          :last_name => auth.extra.raw_info.last_name,
                          :email => auth.info.email,
                          :address => auth.info.location,
