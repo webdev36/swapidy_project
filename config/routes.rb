@@ -55,6 +55,7 @@ Swapidy::Application.routes.draw do
   
   match "/redeem/success" => "redeem#success", :method => :get
   match "/redeem/confirm" => "redeem#confirm", :method => :post
+  match "/redeem" => "redeem#index", :method => :get
   resources :redeem
   
   get "home/index"
