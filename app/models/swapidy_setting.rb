@@ -37,6 +37,6 @@ class SwapidySetting < ActiveRecord::Base
   private
 
     def upcase_title
-      self.title.upcase! if self.title  
+      self.title = self.title.upcase if self.title  
     end
 end
