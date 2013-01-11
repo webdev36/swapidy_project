@@ -2,12 +2,13 @@ module ImportExcelProduct
 
   INDEXES = {:title => 0,
              :honey_price => 1,
-             :using_condition => 2,
-             :for_sell => 3,
-             :for_buy => 4,
-             :category => 5,
-             :product_model => 6,
-             :weight_lb => 7
+             :price_for_good_type => 2,
+             :price_for_poor_type => 3,
+             :for_sell => 4,
+             :for_buy => 5,
+             :category => 6,
+             :product_model => 7,
+             :weight_lb => 8
             }
 
   def self.import_from_textline(textline, headers, logger = nil)
@@ -27,8 +28,9 @@ module ImportExcelProduct
     logger.info "model: #{model.id} - #{model.title}"
     
     product = Product.new(:title => columns[INDEXES[:title]], 
-                          :using_condition => columns[INDEXES[:using_condition]], 
-                          :honey_price => columns[INDEXES[:honey_price]].to_f,
+                          :honey_price => (columns[INDEXES[:honey_price]].to_f rescue nil),
+                          :price_for_good_type => (columns[INDEXES[:price_for_good_type]].to_f rescue nil),
+                          :price_for_poor_type => (columns[INDEXES[:price_for_poor_type]].to_f rescue nil),
                           :for_sell => (columns[INDEXES[:for_sell]] == "TRUE"),
                           :for_buy => (columns[INDEXES[:for_buy]] == "TRUE"))
     product.category = category

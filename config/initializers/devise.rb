@@ -4,7 +4,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = "system@swapidy.com"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -207,8 +207,13 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   require "omniauth-facebook"
-  config.omniauth :facebook, '570708872942807', 'ca704f5ff92707ff8980bb593d2116fa', :scope => 'email,user_birthday,user_location' #Swqpidy
-  #config.omniauth :facebook, '259670540817916', '02d78fa483f86404570fe7a50965b319', :scope => 'email,user_birthday,user_location' #Scrum2B
+  if Rails.env == 'production'
+    #Swqpidy
+    config.omniauth :facebook, '570708872942807', 'ca704f5ff92707ff8980bb593d2116fa', :scope => 'email,user_birthday,user_location'
+  else
+    #Scrum2B
+    config.omniauth :facebook, '259670540817916', '02d78fa483f86404570fe7a50965b319', :scope => 'email,user_birthday,user_location'
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

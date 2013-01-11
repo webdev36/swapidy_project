@@ -1,30 +1,28 @@
 <div id="signup_container">
-  <img id="signup_circle" src="/images/signup_circle_new.png" style="top: 338.5px; display: block;">
-  <!-- a href="/auth/facebook"><img id="fb_signup" src="/images/fb_signup.png"></a-->
+  <img id="signup_circle" src="/images/login_circle_new.png" >
   <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_signup" src="/images/fb_signup.png"></a>
-
-  <div id="signup_form">
+  <p class="login_or">
+    <span>or</span>
+  </p>
+  <div id="login_form">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource)) do |f| %>
-      <div class="signup_field"><%= f.label :email %></div>
-      <%= f.email_field :email %>
-  
-      <div class="signup_field"><%= f.label :password %></div>
-      <%= f.password_field :password %>
-  
-      <div class="signup_field"><%= f.label :password_confirmation %></div>
-      <%= f.password_field :password_confirmation %>
-      <div class="signup_field">
-        <%= f.submit "Sign up" %>
-        <% if show_cancel_link %>
-          <a href="javascript:hidePopup();" style="color: black; padding-left: 30px;">Cancel</a>
-        <% end %>
-        <% unless resource.errors.empty? %>
-          <span style="color: red;">
-            !!! <%= raw resource.errors.full_messages.first %>.
-          </span>
-        <% end %>
+      <div class="input-prepend">
+        <span class="add-on">E-mail</span>
+        <%= f.email_field :email, :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %>
       </div>
+      <div class="input-prepend">
+        <span class="add-on">Password</span>
+        <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
+      </div>
+      <div class="input-prepend">
+        <span class="add-on">PassConfirm</span>
+        <%= f.password_field :password_confirmation, :class => "span2", :id => "prependedInput"  %>
+      </div>
+      <%= f.submit "Sign up", :class => "login_button", :style => "top: 135px;" %>
+      <% unless resource.errors.empty? %>
+        <span style="color: red;"> !!! <%= raw resource.errors.full_messages.first %>. </span>
+      <% end %>
     <% end %>
   </div>
 
-</div>  
+</div>

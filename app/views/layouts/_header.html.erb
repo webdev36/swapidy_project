@@ -97,14 +97,14 @@
   <% end %>
 <% else %>
   <div id="popup-box-bg" style="display: none;"></div>
-  <div id="popup-dialog_for_signup" style="display:none;" class="popup-box-wrapper standard-popup">
+  <div id="popup-dialog_for_signup" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
     <div id="dialog-content">
       <%= render :partial => "/devise/shared/signup_form", :locals => {:resource => User.new, :resource_name => "user", :show_cancel_link => true} %>
     </div>
   </div>
   
-  <div id="popup-dialog_for_signin" style="display:none;" class="popup-box-wrapper standard-popup">
-    <div id="dialog-content"
+  <div id="popup-dialog_for_signin" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
+    <div id="dialog-content">
       <%= render :partial => "/devise/shared/signin_form", :locals => {:resource => User.new, :resource_name => "user", :show_cancel_link => true} %>
     </div>
   </div>

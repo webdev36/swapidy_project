@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
 
-  attr_accessible :title, :using_condition, :honey_price, :product_model_id, :image_ids, :for_sell, :for_buy,
-                  :product_attribute_ids, :product_model_attribute_ids
+  attr_accessible :title, :honey_price, :product_model_id, :image_ids, :for_sell, :for_buy,
+                  :product_attribute_ids, :product_model_attribute_ids, :price_for_good_type, :price_for_poor_type
   
   has_attached_file :image, :styles => {:thumb => "50x50>", :medium => "200x200>"}
   
@@ -9,21 +9,36 @@ class Product < ActiveRecord::Base
   belongs_to :category
   belongs_to :product_model
 
-  has_many :product_attributes
+  has_many :product_attributes, :dependent => :destroy
   has_many :product_model_attributes, :through => :product_attributes
   
   USING_CONDITIONS = {:poor => "Poor", :good => "Good", :flawless => "Flawless"}
   
-  validates :honey_price, :using_condition, :presence => true
-  validate :conditions_for_buy_contrains
-  
-  has_many :images, :as => :for_object
+  has_many :images, :as => :for_object, :dependent => :destroy
 
   after_save :expired_fragment_caches
   after_destroy :expired_fragment_caches
 
   def main_image_url(type)
     main_image.photo.url(type)
+  end
+  
+  def has_flawless_type?
+    honey_price && honey_price > 0.0 rescue false
+  end
+  def has_poor_type?
+    price_for_poor_type && price_for_poor_type > 0.0 rescue false
+  end
+  def has_good_type?
+    price_for_good_type && price_for_good_type > 0.0 rescue false
+  end
+  
+  def using_condition_types
+    result = []
+    result << "Flawless" if has_flawless_type?
+    result << "Poor" if has_poor_type?
+    result << "Good" if has_good_type?
+    result.join(" ")
   end
   
   def main_image
@@ -64,25 +79,13 @@ class Product < ActiveRecord::Base
     product_model.weight_lb
   end
   
-  def conditions_for_buy_contrains
-    if for_buy && using_condition && using_condition != USING_CONDITIONS[:flawless]
-      errors.add(:for_buy, "could not allow when it is not Flawless") 
-      return false
-    end
-    return true
-  end
-  
   rails_admin do
-    configure :using_condition, :enum do
-      enum do
-        Product::USING_CONDITIONS.keys.map {|key| [Product::USING_CONDITIONS[key], Product::USING_CONDITIONS[key]]}
-      end
-    end
     
     list do
       field :title
       field :honey_price
-      field :using_condition
+      field :price_for_good_type
+      field :price_for_poor_type
       field :for_sell
       field :for_buy
       field :category
@@ -92,7 +95,8 @@ class Product < ActiveRecord::Base
     export do
       field :title
       field :honey_price
-      field :using_condition
+      field :price_for_good_type
+      field :price_for_poor_type
       field :for_sell
       field :for_buy
       field :category
@@ -105,7 +109,8 @@ class Product < ActiveRecord::Base
       field :product_model
       field :title
       field :honey_price
-      field :using_condition
+      field :price_for_good_type
+      field :price_for_poor_type
       field :images
       field :product_attributes
     end
@@ -114,12 +119,14 @@ class Product < ActiveRecord::Base
       field :product_model
       field :title
       field :honey_price
-      field :using_condition
+      field :price_for_good_type
+      field :price_for_poor_type
     end
     update do
       field :title
       field :honey_price
-      field :using_condition
+      field :price_for_good_type
+      field :price_for_poor_type
       field :images
       field :product_attributes
     end

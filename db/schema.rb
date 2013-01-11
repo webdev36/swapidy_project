@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110100250) do
+ActiveRecord::Schema.define(:version => 20130110144319) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -166,12 +166,13 @@ ActiveRecord::Schema.define(:version => 20130110100250) do
     t.integer  "user_id"
     t.integer  "category_id"
     t.decimal  "honey_price"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.string   "using_condition"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "product_model_id"
-    t.boolean  "for_buy",          :default => true
-    t.boolean  "for_sell",         :default => true
+    t.boolean  "for_buy",             :default => true
+    t.boolean  "for_sell",            :default => true
+    t.decimal  "price_for_good_type"
+    t.decimal  "price_for_poor_type"
   end
 
   add_index "products", ["category_id"], :name => "index_products_on_category_id"

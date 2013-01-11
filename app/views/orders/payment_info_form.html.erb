@@ -60,8 +60,7 @@
           </div>
           <br/>
           <br/>
-          <div class="button_sell"><%= f.submit "Continue" %></div>
-        <% else %>
+ <input name="commit" class="show_button_sell" style="width: 220px; height: 70px; padding: 8px 15px;" type="submit" value="Sign up" />        <% else %>
           <div>
             <label>You need to extra Honey:</label>
             <%= format_num(current_user.extra_honey_for(@product)) %> Honey

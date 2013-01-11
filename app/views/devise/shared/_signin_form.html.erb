@@ -1,24 +1,31 @@
-<img id="bg" src="/images/login_background.jpg" style="width: 1905px; height: 1562px; display: inline;">
-
-<div id="login_container" style="position:fixed; top:300px;">
-  <img id="login_circle" src="/images/login_circle_new.png" style="top: 338.5px; display: block;">
-  <img id="login_or" src="/images/login_or.png">
-  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_login" src="/images/fb_signup.png"></a>
-  
+<div id="login_container"  class="container" >
+  <img id="login_circle" src="/images/login_circle_new.png">
+  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_login" src="/images/fb_login.png"></a>
+  <p class="login_or">
+    <span>or</span>
+  </p>
   <div id="login_form">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource)) do |f| %>
-      <div><%= f.label :email %><br />
-      <%= f.email_field :email %></div>
-    
-      <div><%= f.label :password %><br />
-      <%= f.password_field :password %></div>
-    
-      <div style="position:relative; top:10px;">
-        <%= f.submit "Sign in" %>
-        <% if show_cancel_link %>
-          <a href="javascript:hidePopup();" style="color: black; padding-left: 30px;">Cancel</a>
-        <% end %>
+      <div class="input-prepend">
+        <span class="add-on">E-mail</span>
+        <%= f.email_field :email, :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %>
       </div>
+      <br/>
+      <div class="input-prepend">
+        <span class="add-on">Password</span>
+        <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
+      </div>
+      <%= f.submit "Sign in", :class => "login_button"  %>
     <% end %>
   </div>
+  <a href="#" class="login_forgot">Forgot your password?</a>
+  <% if show_cancel_link %>
+    <a href="javascript:hidePopup();" style="color: black; padding-left: 30px;">Cancel</a>
+  <% end %>
+  <div class="login-footer">
+    <p class="signup-link">
+      Don't have a login? <a rel="internal silent" href="/users/sign_up">Sign Up.</a>
+    </p>
+  </div>
+  
 </div>

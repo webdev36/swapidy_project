@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
       @order.weight_lb = @order.product.weight_lb
 
       @order.honey_price = @product.honey_price
-      @order.using_condition = @product.using_condition
+      #@order.using_condition = @product.using_condition
       begin
         Order.transaction do
           @order.save
