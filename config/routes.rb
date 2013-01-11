@@ -52,6 +52,12 @@ Swapidy::Application.routes.draw do
   match "/free_honeys/create" => "free_honeys#create", :method => :post
   resources :free_honeys
   
+  
+  match "/redeem/success" => "redeem#success", :method => :get
+  match "/redeem/confirm" => "redeem#confirm", :method => :post
+  match "/redeem" => "redeem#index", :method => :get
+  resources :redeem
+  
   get "home/index"
 
   # The priority is based upon order of creation:

@@ -4,7 +4,7 @@ class FreeHoneysController < ApplicationController
     emails = params[:emails].split(";") if params[:emails] && !params[:emails].blank?
     emails.each do |email|
       Rails.logger.info "Email: #{email}"
-      free_honey = FreeHoney.new(:receiver_email => email, :receiver_honey_amount => 50)
+      free_honey = FreeHoney.new(:receiver_email => email)
       free_honey.sender = current_user
       free_honey.save
       if free_honey.valid?

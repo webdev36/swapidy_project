@@ -1,9 +1,17 @@
-<div class="item thumbnail product_filter_model_<%= product.product_model.id %> <%= product.using_condition %> <%= product.gen_attribute_filter_ids %> <%= "for_buying" if product.for_buy %> <%= "for_selling" if product.for_sell %>">
+<div class="item thumbnail product_filter_model_<%= product.product_model.id %> <%= product.using_condition_types %> <%= product.gen_attribute_filter_ids %> <%= "for_buying" if product.for_buy %> <%= "for_selling" if product.for_sell %>">
   <div class="box">
     <div class="product_title" style="color:#FC43CC;" title="<%= product.title %>"><%= product.title %></div>
     <div class="product_image thumbnail"><img title="<%= product.title %>" src="<%= product.main_image_url(:medium) %>"></div>
     <div>
-      <div class="product_price"><%= format_num(product.honey_price) %> <b>honey</b></div>
+      <div class="product_price">
+        <div class="flawless_type">Flawless <%= format_num(product.honey_price) %> </div>
+        <% if product.has_good_type? %>
+          <div class="good_type">Good <%= format_num(product.price_for_good_type) %> </div>
+        <% end %>
+        <% if product.has_poor_type? %>
+          <div class="poor_type">Poor <%= format_num(product.price_for_poor_type) %> </div>
+        <% end %>
+      </div>
       <div class="button_for_buy">
         <a href="/products/<%= product.id %>?for=buy" class="btn btn-danger" title="Buy now: <%= product.title %>">Buy</a>
       </div>

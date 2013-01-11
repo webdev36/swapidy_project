@@ -481,11 +481,91 @@ RailsAdmin.config do |config|
   #   edit do; end
   #   create do; end
   #   update do; end
+  
+  end
+  
+  config.model SwapidySetting do
+    configure :value_type, :enum do
+      enum do
+        SwapidySetting::TYPES.keys.map {|key| [SwapidySetting::TYPES[key], SwapidySetting::TYPES[key]]}
+      end
+    end
+    list do
+      field :title
+      field :value
+      field :value_type
+    end
+    export do
+      field :title
+      field :value
+      field :value_type
+      field :created_at
+      field :updated_at
+    end
+    show do
+      field :title
+      field :value
+      field :value_type
+      field :created_at
+      field :updated_at
+    end
+    edit do
+      field :title
+      field :value_type
+      field :value
+    end
   end
 
+  config.model RedeemCode do
+    #configure :expired?, :boolean
+    configure :status, :enum do
+      enum do
+        RedeemCode::STATUES.keys.map {|key| [key, RedeemCode::STATUES[key]]}
+      end
+    end
+    
+    list do
+      filters [:status]
+
+      field :status
+      field :code
+      field :honey_amount
+      field :expired_date
+      field :users
+      field :created_at
+      field :updated_at
+    end
+    export do
+      field :status
+      field :code
+      field :honey_amount
+      field :expired_date
+      field :users
+      field :created_at
+      field :updated_at
+    end
+    show do
+      field :status
+      field :code
+      field :honey_amount
+      field :expired_date
+      field :users
+      field :created_at
+      field :updated_at
+    end
+    create do
+      field :code
+      field :honey_amount
+      #field :expired_date
+    end
+    update do
+      field :status
+      #field :expired_date
+    end
+  end
 
   config.model FreeHoney do
-    configure :expired?, :boolean
+    #configure :expired?, :boolean
     configure :status, :enum do
       enum do
         FreeHoney::STATUES.keys.map {|key| [key, FreeHoney::STATUES[key]]}
@@ -497,7 +577,7 @@ RailsAdmin.config do |config|
       field :receiver_title
       field :sender_title
       field :receiver_honey_amount
-      field :expired?
+      #field :expired?
       field :expired_date
       field :completed_at
       field :sender_honey_amount
@@ -529,11 +609,97 @@ RailsAdmin.config do |config|
       field :receiver_email
       field :receiver
       field :receiver_honey_amount
+      field :sender_honey_amount
       #field :expired_date
     end
     update do
       field :status
       field :expired_date
     end
+  end
+  
+  config.model Order do
+    configure :order_type do
+      read_only true
+      pretty_value do
+        util = bindings[:object]
+        util.order_type == Order::TYPES[:order] ? "Order" : "Trade-Ins"
+      end
+    end
+    
+    configure :status, :enum do
+      pretty_value do
+        util = bindings[:object]
+        util.status_title
+      end
+      enum do
+        [['Pending, waiting for arrival', Order::STATUES[:pending]], ['Completed', Order::STATUES[:completed]], ['Declined', Order::STATUES[:declined]]]
+      end
+    end
+    configure :using_condition, :enum do
+      enum do
+        Product::USING_CONDITIONS.keys.map {|key| [Product::USING_CONDITIONS[key], Product::USING_CONDITIONS[key]]}
+      end
+    end
+    
+    list do
+       field :order_type
+       field :status
+       field :title
+       field :honey_price
+       field :user
+     end
+     export do
+       field :order_type
+       field :status
+       field :product_title
+       field :weight_lb
+       field :using_condition
+       field :honey_price
+       
+       field :user
+       field :shipping_fullname
+       field :shipping_address
+       field :shipping_city
+       field :shipping_state
+       field :shipping_zip_code
+     end
+     show do
+       field :order_type
+       field :status
+       field :product_title
+       field :weight_lb
+       field :using_condition
+       field :honey_price
+       field :product
+       
+       field :user
+       field :shipping_fullname
+       field :shipping_full_address
+       field :shipping_stamps
+     end
+     edit do
+       field :order_type
+       field :status
+       field :product
+       field :product_title
+       field :weight_lb
+       field :using_condition
+       field :honey_price
+       
+       field :user
+       field :shipping_first_name
+       field :shipping_last_name
+       field :shipping_address
+       field :shipping_city
+       field :shipping_state, :enum do
+         enum do 
+           Carmen::Country.named('United States').subregions.collect { |sr| [sr.name, sr.code] }
+         end
+       end
+       field :shipping_zip_code
+     end
+  #   create do; end
+  #   update do; end
   end
 end

@@ -31,5 +31,11 @@ class UserNotifier < ActionMailer::Base
     @free_honey = free_honey
     mail :to =>@free_honey.sender.email, :subject => "Free Honey Reward"
   end
+  
+  def redeem_completed(redeem_code, user)
+    @redeem_code = redeem_code
+    @user = user
+    mail :to => @user.email, :subject => "Free Honey Reeived"
+  end
 
 end

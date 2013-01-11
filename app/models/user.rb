@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
 
   validate :validate_card_info
   
+  belongs_to :redeem_code
+  
   def full_name
     name = [first_name, last_name].compact.join(" ").strip
     return name.blank? ? "PROFILE" : name
@@ -42,6 +44,9 @@ class User < ActiveRecord::Base
   
   def self.signup_user user_attributes
     user = User.new(user_attributes)
+    if user.password.nil? || user.password.blank?
+      user.password = user.password_confirmation = Devise.friendly_token[0,8]
+    end  
     user.save
     UserNotifier.signup_greeting(user).deliver
     return user
@@ -52,11 +57,9 @@ class User < ActiveRecord::Base
     user = UserProvider.where(:provider => auth.provider, :uid => auth.uid).first.try(:user) unless user
     
     unless user
-      user = singup_user(:first_name => auth.extra.raw_info.first_name,
+      user = signup_user(:first_name => auth.extra.raw_info.first_name,
                          :last_name => auth.extra.raw_info.last_name,
                          :email => auth.info.email,
-                         :password => "123456",
-                         :password_confirmation => "123456", #Devise.friendly_token[0,20],
                          :address => auth.info.location,
                          :provider_image => auth.info.image)  
     end

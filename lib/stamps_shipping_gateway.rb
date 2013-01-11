@@ -126,11 +126,11 @@ module StampsShippingGateway
     end
   
     def get_company_address
-      to_address = Stamps.clean_address(:address => { :full_name => 'Swapidy', 
-                                                      :address1 => '2310 Rock Street Apt 38', 
-                                                      :city => 'Mountain View', 
-                                                      :state => 'CA', 
-                                                      :zip_code  => '94043' })
+      to_address = Stamps.clean_address(:address => { :full_name => SwapidySetting.get("COMPANY_NAME"), 
+                                                      :address1 => SwapidySetting.get("COMPANY_ADDRESS"), 
+                                                      :city => SwapidySetting.get("COMPANY_CITY"), 
+                                                      :state => SwapidySetting.get("COMPANY_STATE"), 
+                                                      :zip_code  => SwapidySetting.get("COMPANY_ZIP_CODE") })
       return to_address[:address]
     end
     

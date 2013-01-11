@@ -1,43 +1,31 @@
-
-<div id="login_container"  class="container" style="position:fixed;    top: 50%;
-    left: 50%;
-    margin-top: -240px;
-    margin-left: -180px;
-    z-index: 0;">
+<div id="login_container"  class="container" style="position:fixed; top: 50%; left: 50%; margin-top: -240px; margin-left: -180px; z-index: 0;">
   <img id="login_circle" src="/images/login_circle_new.png">
   <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_login" src="/images/fb_login.png"></a>
-  <p class="login_or"><span>or</span></p>
+  <p class="login_or">
+    <span>or</span>
+  </p>
   <div id="login_form">
-    <div class="input-prepend">
-  <span class="add-on">E-mail</span>
-  <input class="span2" id="prependedInput" type="text" placeholder="E-mail address">
-  </div><br/>
-  <div class="input-prepend">
-<span class="add-on">Password</span>
-<input class="span2" id="prependedInput" type="password" placeholder="Password">
-</div>
-<a href="#" class="login_button" style="color:white;">Login</a></div>
-<a href="#" class="login_forgot">Forgot your password?</a>
-<div class="login-footer"><p class="signup-link">Don't have a login?
-<a rel="internal silent" href="/session/signup">Sign Up.</a>
-</p>
-</div>
-
-<div style="display:none;">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource)) do |f| %>
-      <div><%= f.label :email %><br />
-      <%= f.email_field :email %></div>
-    
-      <div><%= f.label :password %><br />
-      <%= f.password_field :password %></div>
-    
-      <div style="position:relative; top:10px;">
-        <%= f.submit "Sign in" %>
-        <% if show_cancel_link %>
-          <a href="javascript:hidePopup();" style="color: black; padding-left: 30px;">Cancel</a>
-        <% end %>
-      </div>
+    <div class="input-prepend">
+      <span class="add-on">E-mail</span>
+      <%= f.email_field :email, :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %>
+    </div>
+    <br/>
+    <div class="input-prepend">
+      <span class="add-on">Password</span>
+      <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
+    </div>
+    <%= f.submit "Sign in", :class => "login_button"  %>
     <% end %>
   </div>
-</div>  
+  <a href="#" class="login_forgot">Forgot your password?</a>
+  <% if show_cancel_link %>
+    <a href="javascript:hidePopup();" style="color: black; padding-left: 30px;">Cancel</a>
+  <% end %>
+  <div class="login-footer">
+    <p class="signup-link">
+      Don't have a login? <a rel="internal silent" href="/users/sign_up">Sign Up.</a>
+    </p>
+  </div>
+  
 </div>
