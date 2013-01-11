@@ -6,6 +6,7 @@
 
 # Ignore bundler config
 /.bundle
+/public/system/images/photos
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
