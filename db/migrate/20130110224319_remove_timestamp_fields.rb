@@ -1,5 +1,7 @@
 class RemoveTimestampFields < ActiveRecord::Migration
   def up
+    remove_column :images, :created_at
+    remove_column :images, :updated_at
     remove_column :products, :created_at
     remove_column :products, :updated_at
     remove_column :categories, :created_at
@@ -13,6 +15,8 @@ class RemoveTimestampFields < ActiveRecord::Migration
   end
 
   def down
+    add_column :images, :created_at, :datetime
+    add_column :images, :updated_at, :datetime
     add_column :products, :created_at, :datetime
     add_column :products, :updated_at, :datetime
     add_column :categories, :created_at, :datetime

@@ -11,21 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110144319) do
+ActiveRecord::Schema.define(:version => 20130110224319) do
 
   create_table "categories", :force => true do |t|
-    t.string   "title"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string  "title"
+    t.integer "user_id"
   end
 
   create_table "category_attributes", :force => true do |t|
-    t.integer  "category_id"
-    t.string   "attribute_type"
-    t.string   "title"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer "category_id"
+    t.string  "attribute_type"
+    t.string  "title"
   end
 
   add_index "category_attributes", ["category_id"], :name => "index_category_attributes_on_category_id"
@@ -55,16 +51,14 @@ ActiveRecord::Schema.define(:version => 20130110144319) do
   end
 
   create_table "images", :force => true do |t|
-    t.integer  "for_object_id"
-    t.string   "for_object_type"
-    t.string   "sum_attribute_names"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.string   "title"
-    t.boolean  "is_main",             :default => false
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.integer "for_object_id"
+    t.string  "for_object_type"
+    t.string  "sum_attribute_names"
+    t.string  "photo_file_name"
+    t.string  "photo_content_type"
+    t.integer "photo_file_size"
+    t.string  "title"
+    t.boolean "is_main",             :default => false
   end
 
   create_table "notifications", :force => true do |t|
@@ -140,39 +134,33 @@ ActiveRecord::Schema.define(:version => 20130110144319) do
   add_index "product_attributes", ["product_model_attribute_id"], :name => "index_product_attributes_on_product_model_attribute_id"
 
   create_table "product_model_attributes", :force => true do |t|
-    t.integer  "product_model_id"
-    t.integer  "category_attribute_id"
-    t.string   "value"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.integer "product_model_id"
+    t.integer "category_attribute_id"
+    t.string  "value"
   end
 
   add_index "product_model_attributes", ["category_attribute_id"], :name => "index_product_model_attributes_on_category_attribute_id"
   add_index "product_model_attributes", ["product_model_id"], :name => "index_product_model_attributes_on_product_model_id"
 
   create_table "product_models", :force => true do |t|
-    t.string   "title"
-    t.string   "comment"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.integer  "category_id"
-    t.decimal  "weight_lb",   :default => 1.0
+    t.string  "title"
+    t.string  "comment"
+    t.integer "category_id"
+    t.decimal "weight_lb",   :default => 1.0
   end
 
   add_index "product_models", ["category_id"], :name => "index_product_models_on_category_id"
 
   create_table "products", :force => true do |t|
-    t.string   "title"
-    t.integer  "user_id"
-    t.integer  "category_id"
-    t.decimal  "honey_price"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
-    t.integer  "product_model_id"
-    t.boolean  "for_buy",             :default => true
-    t.boolean  "for_sell",            :default => true
-    t.decimal  "price_for_good_type"
-    t.decimal  "price_for_poor_type"
+    t.string  "title"
+    t.integer "user_id"
+    t.integer "category_id"
+    t.decimal "honey_price"
+    t.integer "product_model_id"
+    t.boolean "for_buy",             :default => true
+    t.boolean "for_sell",            :default => true
+    t.decimal "price_for_good_type"
+    t.decimal "price_for_poor_type"
   end
 
   add_index "products", ["category_id"], :name => "index_products_on_category_id"
