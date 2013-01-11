@@ -22,8 +22,7 @@ namespace :swapidy do
       admin = User.new(email: 'admin@admin.com', password: '123456', password_confirmation: '123456', is_admin: true) unless admin
       admin.save
       
-      category_names = {"Galaxy" => "cat_galaxy.png", "iPad" => "cat_ipad.png", 
-                        "iPhone" => "cat_iphone.png", "Macbook" => "cat_macbook.png", "iPod" => "cat_ipod.png"}
+      category_names = {"Galaxy" => "cat_galaxy.png", "iPad" => "cat_ipad.png", "iPhone" => "cat_iphone.png", "Macbook" => "cat_macbook.png", "iPod" => "cat_ipod.png"}
       category_names.keys.each do |cat_name|
         category = Category.find_by_title cat_name rescue nil
         next if category
