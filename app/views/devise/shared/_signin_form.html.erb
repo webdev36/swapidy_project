@@ -1,4 +1,4 @@
-<div id="login_container"  class="container" style="position:fixed; top: 50%; left: 50%; margin-top: -240px; margin-left: -180px; z-index: 0;">
+<div id="login_container"  class="container" >
   <img id="login_circle" src="/images/login_circle_new.png">
   <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_login" src="/images/fb_login.png"></a>
   <p class="login_or">
@@ -6,16 +6,16 @@
   </p>
   <div id="login_form">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource)) do |f| %>
-    <div class="input-prepend">
-      <span class="add-on">E-mail</span>
-      <%= f.email_field :email, :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %>
-    </div>
-    <br/>
-    <div class="input-prepend">
-      <span class="add-on">Password</span>
-      <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
-    </div>
-    <%= f.submit "Sign in", :class => "login_button"  %>
+      <div class="input-prepend">
+        <span class="add-on">E-mail</span>
+        <%= f.email_field :email, :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %>
+      </div>
+      <br/>
+      <div class="input-prepend">
+        <span class="add-on">Password</span>
+        <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
+      </div>
+      <%= f.submit "Sign in", :class => "login_button"  %>
     <% end %>
   </div>
   <a href="#" class="login_forgot">Forgot your password?</a>

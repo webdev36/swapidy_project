@@ -2,16 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @font-face {
-    font-family: "myriad";
-    src: url('/myriad.otf') format("truetype");
+  font-family: "myriad";
+  src: url('/myriad.otf') format("truetype");
 }
 @font-face {
-    font-family: "myriad-b";
-    src: url('/myriad-b.otf') format("truetype");
+  font-family: "myriad-b";
+  src: url('/myriad-b.otf') format("truetype");
 }
 @font-face {
-    font-family: "myriad-s";
-    src: url('/myriad-s.otf') format("truetype");
+  font-family: "myriad-s";
+  src: url('/myriad-s.otf') format("truetype");
 }
 *{
   font-family:"myriad";
@@ -92,22 +92,21 @@ ul{
 }
 
 .container.dark-overlay {
-    background-color: rgba(0, 0, 0, 0.3);
-    border: medium none;
-    box-shadow: none;
-    -webkit-border-radius: 20px;
-border-radius: 20px;
-width:820px;
-margin:auto;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: medium none;
+  box-shadow: none;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  width:820px;
+  margin:auto;
 }
 .hero_info{
-font-size: 30px;
-text-shadow: 0 0 15px rgba(0, 0, 0, 0.6),0 -1px 1px rgba(0, 0, 0, 0.6);
-text-align: center;
+  font-size: 30px;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.6),0 -1px 1px rgba(0, 0, 0, 0.6);
+  text-align: center;
   font-family:"myriad";
-position:relative;
-bottom:50px;
-
+  position:relative;
+  bottom:50px;
 }
 .hero_info a{
   color:white;
@@ -117,8 +116,7 @@ bottom:50px;
 }
 /*Buy and sell buttons*/
 #buttons{
-margin-left:150px;
-
+  margin-left:150px;
   position:relative;
   bottom:50px;
   margin-top:50px;
@@ -126,51 +124,50 @@ margin-left:150px;
 }
 
 #buttons a{
-    text-align: center;
-    color: #fff;
-    font-weight: 700;
-    font-size: 33px;
-    text-decoration: none;
-    font-family:"myriad";
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 33px;
+  text-decoration: none;
+  font-family:"myriad";
 }
 
 #buttons .modern{
-display: inline-block;
-    margin: 10px;
-    padding: 8px 15px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    width: 200px;
-    height: 40px;
+  display: inline-block;
+  margin: 10px;
+  padding: 8px 15px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  width: 200px;
+  height: 40px;
 
-    -webkit-transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
-    -ms-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
 
-    box-shadow: 
-        inset 0 1px 0 rgba(255,255,255,0.5), 
-        0 2px 2px rgba(0,0,0,0.3), 
-        0 0 4px 1px rgba(0,0,0,0.2); 
+  box-shadow: 
+      inset 0 1px 0 rgba(255,255,255,0.5), 
+      0 2px 2px rgba(0,0,0,0.3), 
+      0 0 4px 1px rgba(0,0,0,0.2); 
 
-    text-decoration: none;
-    text-shadow: 0 1px rgba(0,0,0,0.7);  
+  text-decoration: none;
+  text-shadow: 0 1px rgba(0,0,0,0.7);  
 }
 
 #buttons .sell_now:hover {
-    background: #00CCFF;
+  background: #00CCFF;
 }
 #buttons .buy_now:hover{
-    background: #FC43CC;
+  background: #FC43CC;
 }
 #buttons .sell_now{
-     background: #0099FF;
-     margin-right:100px;
-
+  background: #0099FF;
+  margin-right:100px;
 }
 #buttons .buy_now{
-    background: #EE2C91;
+  background: #EE2C91;
 }
 
 
@@ -248,18 +245,18 @@ display: inline-block;
 }
 
 #product_type{
-    font-family:"myriad";
-    position: relative;
-    margin: auto;
+  font-family:"myriad";
+  position: relative;
+  margin: auto;
 }
 
 #product_type:before,
 #product_type:after {
-    content: "";
-    display: table;
+  content: "";
+  display: table;
 }
 #product_type:after {
-    clear: both;
+  clear: both;
 }
 
 .cat_item {
@@ -273,27 +270,27 @@ display: inline-block;
 }
 
 #product_type .category{
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    background: #fff;
-    cursor: pointer;
-    float: center;
-    text-align: center;
-    text-transform: none;
-    z-index: 10;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  cursor: pointer;
+  float: center;
+  text-align: center;
+  text-transform: none;
+  z-index: 10;
 }
 
 #product_type .category img {
-    padding: 0;
-    margin: 30px auto;
-    margin-bottom: 5px;
+  padding: 0;
+  margin: 30px auto;
+  margin-bottom: 5px;
 }
 
 #product_type .category.blur{
-    box-shadow: 0px 0px 20px 10px rgba(255,255,255,1);
-    transform: scale(0.9);
-    opacity: 0.7;
+  box-shadow: 0px 0px 20px 10px rgba(255,255,255,1);
+  transform: scale(0.9);
+  opacity: 0.7;
 }
 
 #product_type .category.blur a,
@@ -301,23 +298,23 @@ display: inline-block;
 #product_type .category.blur span,
 #product_type .category.blur p
 {
-    text-shadow: 0px 0px 10px rgba(51, 51, 51, 0.9);
-    color: rgba(51, 51, 51, 0);
-    opacity: 0.5;
+  text-shadow: 0px 0px 10px rgba(51, 51, 51, 0.9);
+  color: rgba(51, 51, 51, 0);
+  opacity: 0.5;
 }
 
 #product_type .category.active{
-    transform: scale(1.05);
-    box-shadow: 
-        0px 0px 0px 10px rgba(255,255,255,1), 
-        1px 11px 15px 10px rgba(0,0,0,0.4);
-    z-index: 100;   
-    opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 
+      0px 0px 0px 10px rgba(255,255,255,1), 
+      1px 11px 15px 10px rgba(0,0,0,0.4);
+  z-index: 100;   
+  opacity: 1;
 }
 
 #product_type .category.select{
-    z-index: 100;
-    opacity: 1;
+  z-index: 100;
+  opacity: 1;
 }
 
 #product_type .category.active a,
@@ -328,14 +325,14 @@ display: inline-block;
 #product_type .category.select img,
 #product_type .category.select span,
 #product_type .category.select p {
-    opacity: 1;
+  opacity: 1;
 }
 
 #product_models {
   position: relative;
-width: 85%;
-margin: 5px auto;
-text-align:center;
+  width: 85%;
+  margin: 5px auto;
+  text-align:center;
 }
 
 #container_cat_1 .nab-tabs > li, #container_cat_1 .nav-pills > li {
@@ -356,10 +353,13 @@ text-align:center;
 
 #products .item{
   width:150px;
-  height: 240px;
+  height: 265px;
   border: 0px;
   overflow:hidden;
   margin:10px;
+}
+#products .for_selling {
+  height: 305px !important;
 }
 
 .hidden_filter {
@@ -377,16 +377,17 @@ text-align:center;
   height: 150px;
 }
 .thumbnail .box .product_price {
-  float: left; 
-  padding-left: 5px;
   padding-top: 5px;
   font-size: 15px;
 }
 .thumbnail .box .button_for_buy,
 .thumbnail .box .button_for_sell {
-  float: right; 
   padding-right: 5px;
   padding-top: 3px;
+}
+.thumbnail .box .button_for_sell .btn,
+.thumbnail .box .button_for_buy .btn {
+  width: 75px;  
 }
 
 label {
@@ -428,17 +429,17 @@ label {
 }
 
 #search_container{
-width: 100%;
-margin: 0 auto;
-overflow: hidden;
-text-align:center;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align:center;
 }
 
 .big-checkbox + label {
-padding: 8px;
-line-height: 20px;
-margin-bottom: -3px;
-display: inline-block;
+  padding: 8px;
+  line-height: 20px;
+  margin-bottom: -3px;
+  display: inline-block;
 }
 
 .big-checkbox:checked + label:after {
@@ -447,26 +448,25 @@ display: inline-block;
 }
 
 .option-set {
-display: inline-block!important;
-width: 140px;
-text-align: left;
-min-height: 335px;
+  display: inline-block!important;
+  width: 140px;
+  text-align: left;
+  vertical-align: top;
 }
 .product_model{
-font-size: 20px;
-color: #38B4DE;
-width: 150px;
-text-align:center;
-cursor:pointer;
-display:inline-block;
-float:none!important;
+  font-size: 20px;
+  color: #38B4DE;
+  width: 150px;
+  text-align:center;
+  cursor:pointer;
+  display:inline-block;
+  float:none!important;
 }
 .product_model a{
-color:#666;
-
+  color:#666;
 }
 .product_model a:hover{
-color:#666;
+  color:#666;
 }
 .models_for_buy li.active a {
   background-color: #FC43CC !important;
@@ -492,7 +492,7 @@ color:#666;
   visibility: hidden;
 }
 #slider-code .overview {
-font-family:"myriad-s";
+  font-family:"myriad-s";
   font-size:20px;
   list-style: none; 
   position: absolute; 
@@ -508,17 +508,17 @@ font-family:"myriad-s";
   width: 236px;
 }
 #slider-code .buttons {
-display: block;
-margin: 0px 25px 0 0;
-float: left;
-width: 37px;
-height: 37px;
-overflow: hidden;
-position: relative;
-color: white;
-font-size: 35px;
-cursor: pointer;
-box-shadow: 0px 0px 5px black;
+  display: block;
+  margin: 0px 25px 0 0;
+  float: left;
+  width: 37px;
+  height: 37px;
+  overflow: hidden;
+  position: relative;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px black;
 }
 .sub_content{
   color:#666666;
@@ -542,7 +542,7 @@ box-shadow: 0px 0px 5px black;
 }
 
 .hiw_steps{
-margin-bottom:30px;
+  margin-bottom:30px;
 }
 .hiw_step{
   float:left;
@@ -559,7 +559,7 @@ margin-bottom:30px;
   margin-right:20px;
 }
 .hiw_heading{
-clear:both;
+  clear:both;
   color:#666;
   font-size:25px;
   margin-top:30px;
@@ -590,10 +590,9 @@ clear:both;
   margin-right:8px;
 }
 .nav_settings{
-height:35px;
-position:relative;
-bottom:3px;
-
+  height:35px;
+  position:relative;
+  bottom:3px;
 }
 .nav_down{
   height:15px;
