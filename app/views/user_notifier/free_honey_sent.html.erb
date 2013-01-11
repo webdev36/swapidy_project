@@ -1,6 +1,7 @@
 Good Day <%= @free_honey.receiver.name_in_email if @free_honey.receiver %>,<br/>
 <br/>
 You have received an inviation to join Swapidy.
+<br/>
 Please click here to create your account:
 <a href="http://www.swapidy.com/free_honeys/confirm?token=<%= @free_honey.token_key %>">
   http://www.swapidy.com/free_honeys/confirm?token=<%= @free_honey.token_key %>
