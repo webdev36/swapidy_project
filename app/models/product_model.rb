@@ -22,13 +22,13 @@ class ProductModel < ActiveRecord::Base
   after_destroy :expired_fragment_cache_destroy
   
   def expired_fragment_caches
-    ActionController::Base.new.expire_fragment("homepage_category_#{category.id}_filter_attr")
-    ActionController::Base.new.expire_fragment("homepage_container_category_#{category.id}")
+    ActionController::Base.new.expire_fragment("homepage_category_#{category.id}_filter_attr") rescue nil
+    ActionController::Base.new.expire_fragment("homepage_container_category_#{category.id}") rescue nil
   end
   
   def expired_fragment_cache_destroy
-    ActionController::Base.new.expire_fragment("homepage_category_#{category.id}_filter_attr")
-    ActionController::Base.new.expire_fragment("homepage_container_category_#{category.id}")
+    ActionController::Base.new.expire_fragment("homepage_category_#{category.id}_filter_attr") rescue nil
+    ActionController::Base.new.expire_fragment("homepage_container_category_#{category.id}") rescue nil
     products.each { |product| product.expired_fragment_caches }
   end
     

@@ -16,7 +16,7 @@
 <div class="container">
 <h2 class="headings_pink">Payment Information</h2>
 
-<div id="checkout_content" class="payment_editing_block" style="color:#666;">
+<div id="checkout_content" class="payment_editing_block">
   <div class="payment_group_contents">
     <div class="valid_form payout_form standard_form paypal" style="display: block;">
       
@@ -33,20 +33,20 @@
         <%= f.hidden_field :shipping_zip_code %>
         <%= f.hidden_field :shipping_country %>
         
-        <div>
-          <label><%= @product.title %></label><br />
-          <div class="show_product_image">
-          <img src="<%= @product.main_image_url(:large) %>">
+        <div class="payment_product_info">
+          <label style="color:#38B4DE; font-size:20px;"><%= @product.title %></label><br />
+          <div class="payment_product_image">
+          <img  src="<%= @product.main_image_url(:large) %>">
         </div>
-        
+      <div class="payment_after_selling" style="font-size:20px; color:#666;">  
         <div>
-          <label>Current Balance:</label>
-          <%= format_num(current_user.honey_balance) %> Honey
+          <label style="color:#38b4de;">Current Balance:</label>
+          <%= format_num(current_user.honey_balance) %> <img class="payment_currency" src="/images/honey_20px.png">
         </div>
           <br/>
         <div>
-          <label>Product Price:</label>
-          <%= format_num(@product.honey_price) %> Honey
+          <label style="color:#38b4de; font-size:20px;">Product Price:</label>
+          <%= format_num(@product.honey_price) %> <img class="payment_currency" src="/images/honey_20px.png">
         </div>
           <br/>
         <% if current_user.extra_honey_for(@product) <= 0 %>
@@ -58,9 +58,12 @@
               <% #<br/>Your payment has not verified. To get more Honey, please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>. %> 
             <% end %>
           </div>
+          </div>
           <br/>
           <br/>
- <input name="commit" class="show_button_sell" style="width: 220px; height: 70px; padding: 8px 15px;" type="submit" value="Sign up" />        <% else %>
+
+    
+ <input name="commit" class="payment_button_sell" style="width: 180px; height: 50px; padding:0px;" type="submit" value="Continue" />        <% else %>
           <div>
             <label>You need to extra Honey:</label>
             <%= format_num(current_user.extra_honey_for(@product)) %> Honey

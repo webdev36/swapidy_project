@@ -50,7 +50,6 @@ body{
 }
 
 .btn{
-  font-weight: bold;
 }
 #my_trade_ins{
   display: none;
@@ -365,6 +364,7 @@ h2{
 
 
 .headings_pink{
+  font-family: "myriad";
   color: #fa3e6e;
 }
 .honey_display{

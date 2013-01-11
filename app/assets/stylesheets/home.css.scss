@@ -15,6 +15,7 @@
 }
 *{
   font-family:"myriad";
+  font-smooth: auto;
 }
 #iphone{
 	height:350px;
@@ -83,7 +84,8 @@ ul{
 }
 
 .hero_title{
-  font-family:"myriad";
+  font-family:"myriad-s";
+  font-size:60px;
   text-rendering: optimizelegibility;
   text-shadow: 1px 1px 1px #000;
   text-align:center;
@@ -126,10 +128,9 @@ ul{
 #buttons a{
   text-align: center;
   color: #fff;
-  font-weight: 700;
   font-size: 33px;
   text-decoration: none;
-  font-family:"myriad";
+  font-family:"myriad-s";
 }
 
 #buttons .modern{

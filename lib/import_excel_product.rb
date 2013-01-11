@@ -7,9 +7,10 @@ module ImportExcelProduct
              :for_sell => 4,
              :for_buy => 5,
              :category => 6,
-             :product_model => 7
+             :product_model => 7,
+             :weight_lb => 8
             }
-  PROPERTY_START_INDEX = 8
+  PROPERTY_START_INDEX = 9
   
   def self.import_from_textline(textline, headers, logger = nil)
     
@@ -24,7 +25,7 @@ module ImportExcelProduct
     logger.info "category: #{category.id} - #{category.title}"
 
     model = category.product_models.find_by_title columns[INDEXES[:product_model]]
-    model = category.product_models.create(:title => columns[INDEXES[:product_model]], :weight_lb => columns[INDEXES[:weight_lb]]) unless model
+    model = category.product_models.create(:title => columns[INDEXES[:product_model]], :weight_lb => columns[INDEXES[:weight_lb]].to_i) unless model
     logger.info "model: #{model.id} - #{model.title}"
     
     product = Product.new(:title => columns[INDEXES[:title]], 
@@ -82,12 +83,11 @@ module ImportExcelProduct
       cat_attr = category.category_attributes.find_by_title headers[column_index]
       unless cat_attr
         cat_attr = category.category_attributes.create(:title => headers[column_index])
-        cat_attr.save
       end
       
       model_attr_value = model.product_model_attributes.where(:category_attribute_id => cat_attr.id, :value => columns[column_index]).first
       unless model_attr_value
-        model_attr_value = model.product_model_attributes.create(:value => columns[column_index])
+        model_attr_value = model.product_model_attributes.new(:value => columns[column_index])
         model_attr_value.category_attribute = cat_attr
         model_attr_value.save
       end

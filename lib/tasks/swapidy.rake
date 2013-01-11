@@ -12,7 +12,7 @@ namespace :swapidy do
       FreeHoney.all.each {|obj| obj.destroy }
       Image.all.each {|obj| obj.destroy }
       Notification.all.each {|obj| obj.destroy }
-      Orders.all.each {|obj| obj.destroy }
+      Order.all.each {|obj| obj.destroy }
       PaymentTransaction.all.each {|obj| obj.destroy }
       Product.all.each {|obj| obj.destroy }
       RedeemCode.all.each {|obj| obj.destroy }
@@ -35,8 +35,8 @@ namespace :swapidy do
         image.save
       end
       
-      reset_models
-      reset_products
+      #reset_models
+      #reset_products
     end
     
     desc "Reset database from excel file"
@@ -71,7 +71,7 @@ namespace :swapidy do
       return nil if headers.size < 10
       Product.all.each { |product| product.destroy }
       ProductModelAttribute.all.each { |a| a.destroy }
-      ["Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
+      ["Weight lb", "Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
         attrs = CategoryAttribute.where(:title => cat_title).each {|attr| attr.destroy }
       end
 

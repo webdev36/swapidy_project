@@ -16,7 +16,7 @@ class Image < ActiveRecord::Base
   after_destroy :expired_fragment_caches
   
   def expired_fragment_caches
-    for_object.expired_fragment_caches
+    self.for_object.expired_fragment_caches rescue nil
   end
 
 end
