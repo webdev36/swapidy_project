@@ -1,7 +1,64 @@
 namespace :swapidy do
 
   namespace :db do
+    
+    desc "Reset all database"
+    task :reset => :environment do
+      #Delete all records
+      User.all.each {|obj| obj.destroy }
+      UserProvider.all.each {|obj| obj.destroy }
+      
+      Category.all.each {|obj| obj.destroy }
+      FreeHoney.all.each {|obj| obj.destroy }
+      Image.all.each {|obj| obj.destroy }
+      Notification.all.each {|obj| obj.destroy }
+      Orders.all.each {|obj| obj.destroy }
+      PaymentTransaction.all.each {|obj| obj.destroy }
+      Product.all.each {|obj| obj.destroy }
+      RedeemCode.all.each {|obj| obj.destroy }
+      ShippingStamp.all.each {|obj| obj.destroy }
+      
+      admin = User.find_by_email 'admin@admin.com' rescue nil
+      admin = User.new(email: 'admin@admin.com', password: '123456', password_confirmation: '123456', is_admin: true) unless admin
+      admin.save
+      
+      category_names = {"Galaxy" => "cat_galaxy.png", "iPad" => "cat_ipad.png", 
+                        "iPhone" => "cat_iphone.png", "Macbook" => "cat_macbook.png", "iPod" => "cat_ipod.png"}
+      category_names.keys.each do |cat_name|
+        category = Category.find_by_title cat_name rescue nil
+        next if category
+        category = Category.new(title: cat_name)
+        category.user = admin
+        category.save
+        image = category.images.new(:is_main => true)
+        image.photo = File.open("#{Rails.root}/demo_data/images/#{category_names[cat_name]}")
+        image.save
+      end
+      
+      reset_models
+      reset_products
+    end
+    
+    desc "Reset database from excel file"
+    task :reset_models => :environment do
+      logger = Logger.new("log/swapidy_tasks.log")
+      
+      file = File.open(File.join(Rails.root, 'demo_data', "models_20130111.csv"),"r")
+      content = file.read
+      lines = content.split(/\r/)
+      headers = lines[0].split(",")
+      
+      return nil if headers.size < 3
+      ProductModel.all.each {|model| model.destroy }
 
+      lines.each_with_index do |line, index|
+        next if index == 0
+        logger.info "line: #{line}"
+        model = ImportExcelProduct.import_model(line, headers, logger) #rescue nil
+        logger.info model
+      end
+    end
+    
     desc "Reset database from excel file"
     task :reset_products => :environment do
       logger = Logger.new("log/swapidy_tasks.log")
@@ -11,7 +68,7 @@ namespace :swapidy do
       lines = content.split(/\r/)
       headers = lines[0].split(",")
       
-      return if headers.size < 10
+      return nil if headers.size < 10
       Product.all.each { |product| product.destroy }
       ProductModelAttribute.all.each { |a| a.destroy }
       ["Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
