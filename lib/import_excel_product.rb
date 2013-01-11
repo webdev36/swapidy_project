@@ -72,7 +72,7 @@ module ImportExcelProduct
     category = Category.find_by_title columns[MODEL_INDEXES[:category]]
     category = Category.create(:title => columns[MODEL_INDEXES[:category]]) unless category
     
-    model = category.product_models.find_by_title columns[INDEXES[:product_model]]
+    model = category.product_models.find_by_title columns[MODEL_INDEXES[:product_model]]
     model = category.product_models.create(:title => columns[MODEL_INDEXES[:product_model]], 
                                            :weight_lb => columns[MODEL_INDEXES[:weight_lb]]) unless model
     
@@ -95,7 +95,7 @@ module ImportExcelProduct
     end
     
     image = model.images.new(:sum_attribute_names => attr_names.join(" "), :is_main => true)
-    image.photo = File.open("#{Rails.root}/demo_data/images/#{columns.last}")
+    image.photo = File.open(File.join(Rails.root, 'demo_data', 'images', columns.last))
     image.save
     
     return model if model.save

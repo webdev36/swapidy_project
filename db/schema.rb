@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110224319) do
+ActiveRecord::Schema.define(:version => 20130111190158) do
 
   create_table "categories", :force => true do |t|
     t.string  "title"
@@ -124,11 +124,9 @@ ActiveRecord::Schema.define(:version => 20130110224319) do
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "product_attributes", :force => true do |t|
-    t.integer  "product_id"
-    t.integer  "product_model_attribute_id"
-    t.string   "value"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.integer "product_id"
+    t.integer "product_model_attribute_id"
+    t.string  "value"
   end
 
   add_index "product_attributes", ["product_model_attribute_id"], :name => "index_product_attributes_on_product_model_attribute_id"
@@ -204,11 +202,9 @@ ActiveRecord::Schema.define(:version => 20130110224319) do
   end
 
   create_table "swapidy_settings", :force => true do |t|
-    t.string   "title"
-    t.string   "value"
-    t.string   "value_type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string "title"
+    t.string "value"
+    t.string "value_type"
   end
 
   create_table "user_providers", :force => true do |t|
