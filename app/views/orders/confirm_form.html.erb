@@ -1,6 +1,6 @@
 <div class="container">
 <h2 class="headings_pink">Confirm your details</h2>
-<p>Please confirm the following information is correct.</p>
+<p class="confirm_subheading">Please confirm the following information is correct.</p>
 
 <%= form_for(@order, :as => 'order', :url => "/orders/create") do |f| %>
   <%= f.hidden_field :order_type %>
@@ -18,30 +18,28 @@
   <%= f.hidden_field :is_candidate_address %>
 
   <% unless @order.errors.empty? %>
-    <div style="color: red;">
       <%= raw @order.errors.full_messages.join(".<br/>") %>
       <br/>
-    </div>
   <% end %>
 
   <br/>
   <div>
-    <label><%= @product.title %></label><br />
+    <label class="confirm_info_head"><%= @product.title %></label><br />
     <img id="confirm_image" src="<%= @product.main_image_url(:large) %>">
   </div>
   
   <br/>
   <div>
-    <label>
+    <label class="confirm_info_head">
       <strong>Contact Email</strong>
       <a href="#" onclick="javascript:open_in_new_tab('/users/edit');" class="btn btn-mini">Change</a>
-    </label><br />
+    </label class="confirm_info_head"><br />
     <strong>All emails about your order will be sent here:</strong>
     <p><%= current_user.email %></p>
   </div>
   <br/>
   <div>
-    <label>
+    <label class="confirm_info_head">
       <strong>Payment Information</strong>
     </label>
     <div>
@@ -76,9 +74,9 @@
   </div>
   <br/>
   <div>
-    <label>
+    <label class="confirm_info_head">
       <strong>Shipping Information</strong>
-      <a href="#" onclick="javascript:changeTo('/orders/shipping_info');" class="btn btn-mini">Change</a>
+      <a href="#" onclick="javascript:changeTo('/orders/shipping_info');" class="order_button_buy change">Change</a>
     </label>
     <p>
       <%= @order.shipping_first_name %> <%= @order.shipping_last_name %><br />
@@ -92,7 +90,7 @@
     </p>
   </div>
   <div>
-    <label><strong>Terms of service</strong></label>
+    <label class="confirm_info_head"><strong>Terms of service</strong></label>
     <p>
       <input id="terms_of_service_checkbox" type="checkbox" /> 
       <span>this box, you agree to our <a>terms of service</a> and confirm that 

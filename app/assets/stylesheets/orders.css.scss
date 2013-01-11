@@ -4,10 +4,7 @@
 *{
 	font-family:"myriad";
 }
-label{
-  color:#666;
-  font-size:20px;
-}
+
 .headings_pink{
 font-family:"myriad-s";
 	color:#fa3e6e;
@@ -98,7 +95,7 @@ text-align: center;
   margin-right: auto;
 }
 .order_button_buy:hover{
-  background-color:#F9006E;
+  background-color:#F9006E;      
 }
 .order_button_sell a{
   color:white;
@@ -147,5 +144,8 @@ a.order_link{
 a.order_link:hover{
   text-decoration:underline;
     color:#38B4DE;
-
+    }
+label{
+  color:#666;
+  font-size:20px;
 }
