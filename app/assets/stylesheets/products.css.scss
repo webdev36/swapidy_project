@@ -41,15 +41,15 @@
 text-align:center; 
 font-family:"myriad-s"; 
 color:#fa3e6e;
+font-size:30px;
 }
 
 #product_container{
 text-align:left;
-margin-left:300px;
+margin-left:auto;
 margin-top:50px;
-}
-
-.show_product_image{
+margin-right:auto;
+width:500px;
 }
 
 
@@ -130,12 +130,10 @@ text-align: center;
 }
 .product_model{
   color: #38B4DE;
-    font-weight: bold;
 }
 
 .product_price{
     color: #38B4DE;
-    font-weight: bold;
 }
 .product_title{
     font-weight: bold;
@@ -148,6 +146,11 @@ text-align: center;
 }
 .using_condition{
     color: #38B4DE;
-    font-weight: bold;
     font-size:20px;
+}
+.overview{
+  font-weight:bold;
+}
+.product_show_image{
+  height:250px;
 }

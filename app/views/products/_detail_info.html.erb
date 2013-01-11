@@ -1,17 +1,10 @@
+<div class="container">
 <div class="product_name">
-  <h2><%= @product.title %></h2>
+  <%= @product.title %>
 </div>
 <div id="product_container">
-	<div class="show_product_image">
-  		<img src="<%= @product.main_image_url(:large) %>">
-	</div>
+  		<img class="product_show_image" src="<%= @product.main_image_url(:original) %>">
 	<div id="product_text">
-		<div class="product_model">
-			<span class="product_att">Model: <span class="product_desc"><%= @product.product_model.title %></span><br/><br/>
-  			<% @product.product_model_attributes.each do |model_attribute| %>
-   			 <%= model_attribute.category_attribute.title %>:<span class="product_desc"> <%= model_attribute.value %></span><br/><br/>
-  			<% end %>
-		</div>
 		<div class="using_condition">
   		Condition: <span class="product_desc"><%= @product.using_condition_types %></span>
 		</div>
@@ -20,4 +13,5 @@
   		Price: <span class="product_desc"><%= format_num(@product.honey_price)%> </span><span class="show_honey_symbol"><img src="/images/honey_20px.png"></span>
 		</div>	
 	</div>
+</div>
 </div>
