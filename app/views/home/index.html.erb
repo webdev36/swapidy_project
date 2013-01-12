@@ -29,7 +29,7 @@
         <ul class="overview" style="width: 1560px;">
           <% Category.all.each_with_index do |category, index| %>
             <li id="cat_<%= category.id %>" class="item category span3" >
-              <img class="cat_item" alt="<%= category.title %>" style="height: 200px; width: auto;" src="<%= category.main_image_url(:large) %>">
+              <img class="cat_item" alt="<%= category.title %>" style="height: 200px; width: auto;" src="<%= category.main_image_url(:medium) %>">
               <div style="display:block;">
                 <%= category.title %>
               </div>
@@ -90,21 +90,6 @@
                 </div>
               </div>
             <% end %>
-            <div class="option-set all_using_condition_filter" data-group="cat_attr_condition">
-              <div style="float:left;">
-              <h3 id="conditions" style="color:#38B4DE;font-size:16px;">Condition</h3>
-              <% Product::USING_CONDITIONS.keys.each do |condition| %>
-                <div style="display:block;">
-                  <div style="display: inline-block; line-height: 30px;">
-                    <input type="checkbox" class="regular-checkbox big-checkbox" id="checkbox-cond-<%= category.id %>-<%= condition.to_s %>" 
-                      attr-filter-option="<%= Product::USING_CONDITIONS[condition] %>" />
-                    <label for="checkbox-cond-<%= category.id %>-<%= condition.to_s %>"></label>
-                  </div>
-                  <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 15px;"><%= Product::USING_CONDITIONS[condition] %></div>
-                </div>
-              <% end %>
-              </div>
-            </div>
           </div>
         <% end %>
       </div>

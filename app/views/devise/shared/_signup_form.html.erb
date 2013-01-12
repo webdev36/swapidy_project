@@ -1,29 +1,28 @@
-<div id="signup_container" style="position:fixed;">
+<div id="signup_container">
   <img id="signup_circle" src="/images/login_circle_new.png" >
-  <!-- a href="/auth/facebook"><img id="fb_signup" src="/images/fb_signup.png"></a-->
   <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_signup" src="/images/fb_signup.png"></a>
   <p class="login_or">
     <span>or</span>
   </p>
-    <div id="login_form">
-      <%= form_for(resource, :as => resource_name, :url => registration_path(resource)) do |f| %>
-        <div class="input-prepend">
-          <span class="add-on">E-mail</span>
-          <%= f.email_field :email, :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %>
-        </div>
-        <div class="input-prepend">
-          <span class="add-on">Password</span>
-          <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
-        </div>
-        <div class="input-prepend">
-          <span class="add-on">Password</span>
-          <%= f.password_field :password_confirmation, :class => "span2", :id => "prependedInput"  %>
-        </div>
-        <%= f.submit "Sign up", :class => "login_button", :style => "top: 135px;" %>
-        <% unless resource.errors.empty? %>
-          <span style="color: red;"> !!! <%= raw resource.errors.full_messages.first %>. </span>
-        <% end %>
+  <div id="login_form">
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource)) do |f| %>
+      <div class="input-prepend">
+        <span class="add-on">E-mail</span>
+        <%= f.email_field :email, :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %>
+      </div>
+      <div class="input-prepend">
+        <span class="add-on">Password</span>
+        <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
+      </div>
+      <div class="input-prepend">
+        <span class="add-on">PassConfirm</span>
+        <%= f.password_field :password_confirmation, :class => "span2", :id => "prependedInput"  %>
+      </div>
+      <%= f.submit "Sign up", :class => "login_button", :style => "top: 135px;" %>
+      <% unless resource.errors.empty? %>
+        <span style="color: red;"> !!! <%= raw resource.errors.full_messages.first %>. </span>
       <% end %>
-    </div>
+    <% end %>
+  </div>
 
 </div>

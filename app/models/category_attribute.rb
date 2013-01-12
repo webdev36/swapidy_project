@@ -44,8 +44,8 @@ class CategoryAttribute < ActiveRecord::Base
   private
     
     def expired_fragment_caches
-      ActionController::Base.new.expire_fragment("homepage_container_category_#{category.id}")
-      ActionController::Base.new.expire_fragment("homepage_category_#{category.id}_filter_attr")
+      ActionController::Base.new.expire_fragment("homepage_container_category_#{category.id}") rescue nil
+      ActionController::Base.new.expire_fragment("homepage_category_#{category.id}_filter_attr") rescue nil
     end
   
 end

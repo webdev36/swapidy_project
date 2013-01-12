@@ -3,8 +3,8 @@ class ProductAttribute < ActiveRecord::Base
   attr_accessible :value, :product_model_attribute_id, :product_id
   
   belongs_to :product
-  belongs_to :product_model_attribute
-  
+  belongs_to :product_model_attribute, :dependent => :destroy
+
   def title
     product_model_attribute.title rescue ""
   end
