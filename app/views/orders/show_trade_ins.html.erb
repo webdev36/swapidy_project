@@ -1,13 +1,36 @@
+<script type="text/javascript">
+$(document).ready(function(){
 
-<h2>Thank You</h2>
+	      $(".step1").fadeIn(1000);
+	      $(".step2").delay(1000).fadeIn(1000);
+	      $(".step3").delay(2000).fadeIn(1000);
+	      $('.thanks_button_buy').delay(3000).fadeIn(1000);
 
-<p><label> Happens Next?</label></p>
-<p>1) Check your email for the shipping label</p>
-<p>2) Ship your product out within 24-48 hours</p>
-<p>3) Start buying stuff!</p>
+});
+</script>
 
+<div class="container">
+<div class="thanks_heading" >Congratulations, your transaction was successful!</div>
+<p><label class="thanks_subheading" >What Happens Next?</label></p>
+
+<div id="thanks_container">
+
+	<div class="thanks_steps step1" style="display:none;">
+	<img src="/images/thanks_step1.png">
+	<p class="thanks_steps_text">Check your email for the shipping label</p>
+	</div>
+
+	<div class="thanks_steps step2" style="display:none;">
+	<img src="/images/thanks_step2.png">
+	<p class="thanks_steps_text">Ship your product out within 24-48 hours</p>
+	</div>
+
+	<div class="thanks_steps step3" style="display:none;">
+	<img src="/images/thanks_step3.png">
+	<p class="thanks_steps_text">Start buying stuff!</p>
+	</div>
+</div>
 <p>
-  <a href="/" class="btn">Use your Honey</a>
+   <a href ="/" class="thanks_button_buy" style="width: 180px; height: 50px; padding:10px; display:none;"> Use your honey</a>
 </p>
-
-
+</div>

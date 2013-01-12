@@ -3,7 +3,7 @@
   <%= @product.title %>
 </div>
 <div id="product_container">
-  		<img class="product_show_image" src="<%= @product.main_image_url(:original) %>">
+  		<img class="product_show_image" src="<%= @product.main_image_url(:large) %>">
 	<div id="product_text">
 		<div class="using_condition">
   		Condition: <span class="product_desc"><%= @product.using_condition_types %></span>
