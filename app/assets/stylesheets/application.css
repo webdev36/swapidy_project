@@ -462,3 +462,55 @@ a.login_forgot:hover {
   color: #1c8bc5;
   text-decoration: underline;
 }
+.free_honey_info{
+  color: #666;
+  font-size: 20px;
+  line-height: 1.5;
+  text-align: justify;
+  position: relative;
+  right:40px;
+  bottom: 80px;
+}
+.email_invite{
+  position: relative;
+  bottom:50px;
+  left:30px;
+}
+.email_invite input[type="text"]{
+  height: 40px;
+  width:300px;
+}
+.email_invite_button{
+
+  font-size: 18px;
+  line-height: 23px;
+  min-width: 50px;
+  padding: 6px 20px 7px;
+  text-align: center;
+  background: #fa3e6e;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  font-family: "myriad";
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  width: 60px;
+
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+
+  box-shadow: 
+      inset 0 1px 0 rgba(255,255,255,0.5), 
+      0 2px 2px rgba(0,0,0,0.3), 
+      0 0 4px 1px rgba(0,0,0,0.2); 
+
+  text-decoration: none;
+  text-shadow: 0 1px rgba(255,255,255,0.7);  
+
+}.
+.email_invite_button:hover{
+  background-color:#F9006E;
+}
