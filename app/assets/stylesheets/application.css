@@ -549,3 +549,24 @@ a.login_forgot:hover {
   font-size: 20px;
   line-height: 1.5;
 }
+
+
+.email_info_fb{
+  margin-top: 100px;
+}
+.fb-connect{
+  height:70px;
+  margin-left: 300px;
+}
+.email_info_or{
+  font-size: 20px;
+  color:#666;
+  width: 30px;
+  position: relative;
+  top:40px;
+  left:480px;
+  padding: 10px;
+  padding-left: 20px;
+  background: #ffffff;
+
+}
