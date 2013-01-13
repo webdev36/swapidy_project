@@ -3,12 +3,14 @@
     //$('#all').fadeIn(1000);
     $('.hiw_a').hide();
     // Hide all DDs inside .faqs
-    $('.hiw_heading').hover(function() {
-      $(this).addClass('hover')
-    }, function() {
-      $(this).removeClass('hover')
-    }).click(function() {
+    $('#heading_for_buy').click(function() {
       $(this).next().slideToggle('normal');
+      $('#heading_for_sell').next().hide();
+      // Toggle dd when the respective dt is clicked
+    });
+    $('#heading_for_sell').click(function() {
+      $(this).next().slideToggle('normal');
+      $('#heading_for_buy').next().hide();
       // Toggle dd when the respective dt is clicked
     });
   }); 
@@ -20,9 +22,9 @@
   }
 </style>
 
-<div id="all" class="container" style="background-color: white; border-radius: 10px; padding: 30px 10px; margin-top: -70px;" >
+<div id="all">
   <h2 class="headings_pink">How it works</h2>
-  <div class="hiw_heading" onclick="scrollOnClick(150); return false;">
+  <div class="hiw_heading" id="heading_for_sell" onclick="scrollOnClick(150); return false;" style="cursor: pointer;">
     I want to sell my product.
   </div>
   <div class="hiw_a">
@@ -43,7 +45,7 @@
     </div>
   </div>
 
-  <div class="hiw_heading">
+  <div class="hiw_heading" id="heading_for_buy" onclick="scrollOnClick(150); return false;" >
     I want to buy a product.
   </div>
   <div class="hiw_a">
