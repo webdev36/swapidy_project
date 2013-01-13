@@ -2,6 +2,8 @@
   <div class="navbar-inner">
     <div class="container">
       <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
+      <%= render :partial => "/layouts/locations" %>
+      
       <ul class="nav pull-right" role="navigation">
         <li> <a href="/how_it_works" style="position:fixed; right:1px; top:10px;">HOW IT WORKS?</a></li>
         <% if user_signed_in? %>
