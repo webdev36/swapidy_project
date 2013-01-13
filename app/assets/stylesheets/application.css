@@ -570,3 +570,14 @@ a.login_forgot:hover {
   background: #ffffff;
 
 }
+.popup-box-wrapper .close-popup {
+  float: right;
+  margin-top: -45px;
+  margin-right: -25px;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: url(/assets/close-popup.png) no-repeat;
+  text-indent: -9999px;
+  font-size: 0px;
+}

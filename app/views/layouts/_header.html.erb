@@ -112,10 +112,14 @@
     </div>
   </div>
 <% end %>
-  
+
+
 <div id="popup-dialog_how_it_work" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
-    <%= render :partial => "/home/how_it_works" %>
+    <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 10px; margin-top: -160px;" >
+      <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
+      <%= render :partial => "/home/how_it_works" %>
+    </div>
   </div>
 </div>
 <%= render :partial => "/layouts/orders.html" if current_user %>
