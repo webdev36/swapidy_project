@@ -14,6 +14,7 @@
 /log/*.log
 /log
 /tmp
+/public/system/images/photos
 
 /.project
 /config/database.yml
@@ -28,6 +29,6 @@ public/images/example_images/.DS_Store
 app/.DS_Store
 app/assets/.DS_Store
 db/.DS_Store
-
+app/views/.DS_Store
 
 
