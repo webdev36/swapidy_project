@@ -364,8 +364,14 @@ h2{
 
 
 .headings_pink{
-  font-family: "myriad";
+  font-family: "myriad-s";
   color: #fa3e6e;
+}
+.headings_pink_edit{
+  font-family: "myriad-s";
+  color: #fa3e6e;
+  font-size: 30px;
+  margin-bottom: 30px;
 }
 .honey_display{
   position: fixed;
