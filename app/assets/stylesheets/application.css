@@ -115,22 +115,22 @@ body{
 }
  
 #s3sliderContent {
-width: 100%;
-height:;
-position: relative;
-top: 0;
-margin-left: 0;
-height: 100%;
-min-height: 500px;
-background: black;
+  width: 100%;
+  height: 10px;
+  position: relative;
+  top: 0;
+  margin-left: 0;
+  height: 100%;
+  min-height: 500px;
+  background: black;
 }
  
 .s3sliderImage {
-position: absolute;
-z-index: 80;
-height: 100%;
-width: 100%;
-overflow: hidden;  
+  position: absolute;
+  z-index: 80;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;  
 }
 
 .s3sliderImage img {
@@ -519,7 +519,7 @@ a.login_forgot:hover {
   text-decoration: none;
   text-shadow: 0 1px rgba(255,255,255,0.7);  
 
-}.
+}
 .email_invite_button:hover{
   background-color:#F9006E;
 }
