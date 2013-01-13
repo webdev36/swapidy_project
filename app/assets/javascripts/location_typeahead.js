@@ -45,12 +45,16 @@
 
   , select: function () {
       var val = this.$menu.find('.active').attr('data-value')
+      
       this.$element
         .val(this.updater(val))
         .change()
-      if(val != "Bay Area") {
-        window.location = "/under_contruction"
+
+      var selectedValue = this.$element.attr('data-selectedValue')
+      if(val != selectedValue) {
+        window.location = "/location/" + val
       }
+
       return this.hide()
     }
 
@@ -180,7 +184,7 @@
         .on('blur',     $.proxy(this.blur, this))
         .on('keypress', $.proxy(this.keypress, this))
         .on('keyup',    $.proxy(this.keyup, this))
-        .on('click',    $.proxy(this.mouse_focus, this))
+        .on('click',    $.proxy(this.textbox_click, this))
 
       if (this.eventSupported('keydown')) {
         this.$element.on('keydown', $.proxy(this.keydown, this))
@@ -188,6 +192,7 @@
 
       this.$menu
         .on('click', $.proxy(this.click, this))
+        .on('click', 'li', $.proxy(this.click, this))
         .on('mouseenter', 'li', $.proxy(this.mouseenter, this))
     }
 
@@ -264,8 +269,16 @@
 
   , blur: function (e) {
       var that = this
-      this.$element.attr('value', 'Bay Area')
+      //var selectedValue = this.$element.attr('data-selectedValue') 
+      //setTimeout(function () { that.$element.attr('value', selectedValue) }, 250)
       setTimeout(function () { that.hide() }, 150)
+      setTimeout(function () { 
+        var val = that.$menu.find('.active').attr('data-value')
+        var selectedValue = that.$element.attr('data-selectedValue')
+        if(val != selectedValue) {
+          window.location = "/location/" + val
+        }
+      }, 500);
     }
 
   , click: function (e) {
@@ -278,11 +291,9 @@
       this.$menu.find('.active').removeClass('active')
       $(e.currentTarget).addClass('active')
     }
-  , mouse_focus: function (e) {
-      //var old_value = this.$element.attr('value')
+  , textbox_click: function (e) {
       this.$element.attr('value', '')
       this.lookup()
-      //this.$element.attr('value', old_value)
     }
   }
 

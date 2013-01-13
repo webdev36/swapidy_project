@@ -17,7 +17,8 @@ Swapidy::Application.routes.draw do
   match "/how_it_works" => "home#static_page", :method => :get, :content => "how_it_works"
   match "/jobs" => "home#static_page", :method => :get, :content => "jobs"
   match "/team" => "home#static_page", :method => :get, :content => "team"
-  match "/under_contruction" => "home#static_page", :method => :get, :content => "under_contruction"
+  
+  match "/location/:location" => "location#change", :method => :get
 
   resources :posts do
     root to: 'post#index'
