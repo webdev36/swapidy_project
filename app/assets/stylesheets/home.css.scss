@@ -84,13 +84,14 @@ ul{
 }
 
 .hero_title{
-  font-family:"myriad-s";
-  font-size:60px;
-  text-rendering: optimizelegibility;
-  text-shadow: 1px 1px 1px #000;
-  text-align:center;
-  position:relative;
-  bottom:50px;
+font-family: "myriad-s";
+font-size: 60px;
+text-rendering: optimizelegibility;
+text-shadow: 1px 1px 1px black;
+text-align: center;
+position: relative;
+overflow: hidden;
+padding: 30px 0 10px;
 }
 
 .container.dark-overlay {
@@ -103,12 +104,14 @@ ul{
   margin:auto;
 }
 .hero_info{
-  font-size: 30px;
-  text-shadow: 0 0 15px rgba(0, 0, 0, 0.6),0 -1px 1px rgba(0, 0, 0, 0.6);
-  text-align: center;
-  font-family:"myriad";
-  position:relative;
-  bottom:50px;
+font-size: 28px;
+text-shadow: 0 0 15px rgba(0, 0, 0, 0.6), 0 -1px 1px rgba(0, 0, 0, 0.6);
+text-align: center;
+font-family: "myriad";
+position: relative;
+width: 100%;
+text-align: center;
+margin: 0 auto 15px auto;
 }
 .hero_info a{
   color:white;
@@ -118,11 +121,11 @@ ul{
 }
 /*Buy and sell buttons*/
 #buttons{
-  margin-left:150px;
-  position:relative;
-  bottom:50px;
-  margin-top:50px;
-  width:650px;
+position: relative;
+margin: 10px auto 40px;
+width: 100%;
+overflow: hidden;
+text-align: center;
 }
 
 #buttons a{
@@ -249,6 +252,12 @@ ul{
   font-family:"myriad";
   position: relative;
   margin: auto;
+}
+
+#product_type .headings_pink {
+font-size: 25px;
+text-align: center;
+padding: 5px 0;
 }
 
 #product_type:before,

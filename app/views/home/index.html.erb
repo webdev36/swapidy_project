@@ -1,24 +1,3 @@
-<div class="hero-unit">
-  <div style="hero-unit-content">
-<div class="container dark-overlay">
-    <div class="hero_title">Buy and sell instantly.</div>
-    <br/>
-    
-    <p class="hero_info">
-      We buy your products for honey. You buy anything using honey.
-    </p>
-    <p class="hero_info">
-      It's never been so easy to buy and sell.
-    </p>
- <div id="buttons">
-    <a href="#" id="button_sell" class="modern socle sell_now">Sell Now</a>
-    <a href="#" id="button_buy" class="modern socle buy_now">Buy Now</a>
-  </div>
-  </div>
-
-</div>
- 
-</div>
 
 <% cache('homepage_available_categories') do %>
 <div id="product_type" style="display:none;">
@@ -50,8 +29,14 @@
 
     $(window).on('resize', function() {
 
+      var slideHeight = parseInt($(window).height() - $('.navbar-fixed-top').height() - $('.navbar-fixed-top').height(), 10);
+
+      if(slideHeight >= 600) {
+          slideHeight = 600;
+      }
+
       $('#s3slider').css({
-        height: $(window).height() - $('.navbar-fixed-top').height() - $('.navbar-fixed-top').height()
+        height: slideHeight
       });
 
     });
