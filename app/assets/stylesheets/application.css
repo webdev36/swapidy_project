@@ -156,7 +156,7 @@ max-width:none;
 
 #login_container,
 #signup_container {
-  top: 50%;
+  top: 40%;
   left: 50%;
   position: fixed; 
   width: 515px;
