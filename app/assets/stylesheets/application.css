@@ -49,6 +49,10 @@ body{
   right: 80px;
 }
 
+.hide {
+  display:none;
+}
+
 .btn{
 }
 #my_trade_ins{
@@ -110,7 +114,6 @@ body{
   z-index: 0; 
   top: 69px;
   margin-top: -18px;
-  margin-bottom: 53px;
   min-height:500px;
 }
  

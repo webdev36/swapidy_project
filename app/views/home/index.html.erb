@@ -27,19 +27,25 @@
   });
   $(function() {
 
+    sliderHeight();
+
     $(window).on('resize', function() {
+      sliderHeight();
+    });
+
+    function sliderHeight() {
 
       var slideHeight = parseInt($(window).height() - $('.navbar-fixed-top').height() - $('.navbar-fixed-top').height(), 10);
 
-      if(slideHeight >= 600) {
-          slideHeight = 600;
+      if(slideHeight >= 700) {
+          slideHeight = 700;
       }
 
       $('#s3slider').css({
         height: slideHeight
       });
 
-    });
+    }
 
 
   })
