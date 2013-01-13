@@ -1,0 +1,21 @@
+<input type="text" value="Bay Area" style="width:150px; margin-top:15px;" id="location_search" placeholder="Change your location"
+data-provide="typeahead" data-items="4" 
+data-source="[&quot;Bay Area&quot;,&quot;LA&quot;,&quot;Chicago&quot;,&quot;Miami&quot;,&quot;New York&quot;]">
+
+<script>
+  $("#location_search").change(function() {
+    if($(this).value() != "Bay Area"){
+        window.location = "/under_contruction";
+    }
+  });
+
+  $("#location_search").live("click", funciton(){
+    $(this).addClass("with_search_icon").removeClass("with_location_icon");
+  });
+  
+  $("#location_search").live("blur", funciton(){
+    $(this).addClass("with_location_icon").removeClass("with_search_icon");
+  });
+  
+</script>
+
