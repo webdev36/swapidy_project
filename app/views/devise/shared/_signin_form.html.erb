@@ -18,7 +18,9 @@
       <%= f.submit "Sign in", :class => "login_button"  %>
     <% end %>
   </div>
-  <a href="#" class="login_forgot">Forgot your password?</a>
+  <% if controller_name != 'passwords' %>
+    <a href="<%= new_password_path(resource_name) %>" class="login_forgot">Forgot your password?</a>
+  <% end %>
   <% if show_cancel_link %>
     <a href="javascript:hidePopup();" style="color: black; padding-left: 30px;">Cancel</a>
   <% end %>

@@ -18,10 +18,12 @@
         <span class="add-on">PassConfirm</span>
         <%= f.password_field :password_confirmation, :class => "span2", :id => "prependedInput"  %>
       </div>
-      <%= f.submit "Sign up", :class => "login_button", :style => "top: 135px;" %>
-      <% unless resource.errors.empty? %>
-        <span style="color: red;"> !!! <%= raw resource.errors.full_messages.first %>. </span>
-      <% end %>
+      <div style="top: 135px; display: block;">
+        <%= f.submit "Sign up", :class => "login_button", :style => "position: relative; top: 0;" %>
+        <% unless resource.errors.empty? %>
+          <span style="color: red;"> !!! <%= raw resource.errors.full_messages.first %>. </span>
+        <% end %>
+      </div>
     <% end %>
   </div>
 

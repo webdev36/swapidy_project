@@ -1,9 +1,15 @@
 require "stripe"
 
 module StripeGateway
+  
+  if Rails.env == "production"
+    STRIPE_PUBLIC_KEY = "pk_live_hb8dw0w3yYHBMRxI2bEF2i9h" #public live key
+    STRIPE_SECURE_KEY = "sk_live_EcvSaW2yU5DLgZHKBw718a0X" #secure live key
+  else
+    STRIPE_PUBLIC_KEY = "pk_6oYgqROp7ciSYDTUoIDhK0snQq0kK" #public test key
+    STRIPE_SECURE_KEY = "nmthmgI9n0fvPk7Uawsvaq3tzGXtL7ee" #secure test key
+  end
 
-  STRIPE_PUBLIC_KEY = "pk_live_hb8dw0w3yYHBMRxI2bEF2i9h" #public test key
-  STRIPE_SECURE_KEY = "sk_live_EcvSaW2yU5DLgZHKBw718a0X" #public test key
 
   STRIPE_PLAN_ID = "montly" # a Recurring Payment Plan from Stripe Gateway
 

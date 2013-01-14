@@ -1,0 +1,46 @@
+<%= form_for(@payment, :as => 'payment', :url => "/payments/confirm") do |f| %>
+  <br/>
+  <div class="headings_pink_edit">Buy Honey money to join market</div>
+  <div>
+    <%= f.label :amount %><br />
+    <b>$</b> <%= f.text_field :amount, :autocomplete => "off" %>
+  </div>
+  <div>
+    <label>Ratio</label>: $1 = Honey 10.0
+  </div>
+  <div>
+    <label>Get Honey</label>: <b>Honey <span id="calculate_honey_amount">0.0</span></b>
+  </div>
+  <br />
+  <%#= render :partial => "/shared/card_info", :locals => {:card => current_user }%>
+  <%#= f.fields_for :user do |user| %>
+    <%= render :partial => "/devise/shared/stripe_card_form", :locals => {:submit_form => "new_payment", :field_prefix => "payment_", :f => f, :user => @payment}%>
+  <%# end %>
+  <br />
+  <% unless @payment.errors.empty? %>
+    <div style="color: red;"><%= raw @payment.errors.full_messages.join(".<br/>") %></div>
+    <br/>
+  <% end %>
+  
+  <div>
+    <input type="button" value="Submit" onclick="javascript:new_payment_card_validate();" />
+    <%#= f.submit "Submit" %>
+  </div>
+<% end %>
+
+<script>
+  $("#payment_amount").live("keyup", function(){ recalculate(); });
+  $("#payment_amount").live("blur", function(){ recalculate(); });
+  
+  function recalculate() {
+    var amount = parseInt(accounting.toFixed($("#payment_amount").attr("value")));
+    if(amount > 0) {
+      var honey_money = amount * 10;
+      new_honey_html = accounting.formatNumber(parseInt(honey_money));
+      $("#calculate_honey_amount").html(new_honey_html);
+      $("#payment_amount").attr('value', accounting.formatNumber(amount));
+    }else{
+      $("#calculate_amount").text("0.0");
+    }
+  }
+</script>

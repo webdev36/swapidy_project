@@ -581,3 +581,14 @@ a.login_forgot:hover {
   text-indent: -9999px;
   font-size: 0px;
 }
+.field_with_errors {
+  display: inline;
+}
+.honey_icon {
+  height: 30px;
+  width: 30px;
+  position: relative;
+  display:inline-block;
+  background: url(/images/honey_currency_score.png) no-repeat;
+  background-size: contain;
+}

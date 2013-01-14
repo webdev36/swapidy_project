@@ -61,7 +61,11 @@
           <li>
             <div class="honey_display">
               <div style="display: inline-block;"><img src="/images/honey_currency_score.png"><%= format_num(current_user.honey_balance)%></div>
-              <div style="display: inline-block;"><a href="/payments/new"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a></div>
+              <% if controller_name != "payments" %>
+                <div style="display: inline-block;"><a href="javascript:showPopup('popup-dialog_add_honey');"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a></div>
+              <% else %>
+                <div style="display: inline-block;"><a href="/payments/new"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a></div>
+              <% end %>
             </div>
           </li>
           <% if current_user.is_admin? %>
@@ -113,13 +117,23 @@
   </div>
 <% end %>
 
-
 <div id="popup-dialog_how_it_work" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
-    <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 10px; margin-top: -160px;" >
+    <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 20px; margin-top: -160px;" >
       <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
       <%= render :partial => "/home/how_it_works" %>
     </div>
   </div>
 </div>
+
+<% if current_user && controller_name != "payments" %>
+  <div id="popup-dialog_add_honey" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
+    <div id="dialog-content">
+      <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 20px; margin-top: -160px;" >
+        <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
+        <%= render :partial => "/payments/form" %>
+      </div>
+    </div>
+  </div>
+<% end %>
 <%= render :partial => "/layouts/orders.html" if current_user %>

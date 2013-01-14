@@ -97,54 +97,52 @@ class User < ActiveRecord::Base
   def is_admin?
     is_admin
   end
-
-  private
   
-    def validate_card_info
-      new_card_info_valid?
-      #more checking in there
+  def validate_card_info
+    new_card_info_valid?
+    #more checking in there
+  end
+
+  def new_card_info_valid?
+    return true if new_card_name.blank? && new_card_expired_month.blank? && new_card_expired_year.blank?
+    
+    if new_stripe_card_token.blank? || new_card_last_four_number.blank? || 
+        new_card_expired_month.blank? || new_card_expired_year.blank? || new_card_type.blank?
+      errors.add(:credit_card, "Invalid credit card")
+      return false
     end
     
-    def new_card_info_valid?
-      return true if new_card_name.blank? && new_card_expired_month.blank? && new_card_expired_year.blank?
-      
-      if new_stripe_card_token.blank? || new_card_last_four_number.blank? || 
-          new_card_expired_month.blank? || new_card_expired_year.blank? || new_card_type.blank?
-        errors.add(:credit_card, "Invalid credit card")
-        return false
+    begin
+      if self.stripe_customer_id && !self.stripe_customer_id.blank? && 
+          self.stripe_card_token && self.new_stripe_card_token != self.stripe_card_token
+        if update_payment_customer
+          self.stripe_customer_id = stripe_customer.id
+          self.card_name = self.new_card_name
+          self.card_type = self.new_card_type
+          self.card_expired_year = self.new_card_expired_year
+          self.card_expired_month = self.new_card_expired_month
+          self.card_last_four_number = self.new_card_last_four_number
+          return true
+        end
       end
       
-      begin
-        if self.stripe_customer_id && !self.stripe_customer_id.blank? && 
-            self.stripe_card_token && self.new_stripe_card_token != self.stripe_card_token
-          if update_payment_customer
-            self.stripe_customer_id = stripe_customer.id
-            self.card_name = self.new_card_name
-            self.card_type = self.new_card_type
-            self.card_expired_year = self.new_card_expired_year
-            self.card_expired_month = self.new_card_expired_month
-            self.card_last_four_number = self.new_card_last_four_number
-            return true
-          end
-        end
-        
-        stripe_customer = create_payment_customer
-        self.stripe_customer_id = stripe_customer.id
-        self.card_name = self.new_card_name
-        self.card_type = self.new_card_type
-        self.card_expired_year = self.new_card_expired_year
-        self.card_expired_month = self.new_card_expired_month
-        self.card_last_four_number = self.new_card_last_four_number
-        
-        return true
-      rescue Exception => e
-        if e.message =~ /No such coupon:/
-          errors.add(:stripe_coupon, "is invalid: #{e.message}")
-        else
-          errors.add(:card_number, "is invalid: #{e.message}")
-        end
-        return false
+      stripe_customer = create_payment_customer
+      self.stripe_customer_id = stripe_customer.id
+      self.card_name = self.new_card_name
+      self.card_type = self.new_card_type
+      self.card_expired_year = self.new_card_expired_year
+      self.card_expired_month = self.new_card_expired_month
+      self.card_last_four_number = self.new_card_last_four_number
+      
+      return true
+    rescue Exception => e
+      if e.message =~ /No such coupon:/
+        errors.add(:stripe_coupon, "is invalid: #{e.message}")
+      else
+        errors.add(:card_number, "is invalid: #{e.message}")
       end
+      return false
     end
+  end
 
 end

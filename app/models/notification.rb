@@ -11,7 +11,7 @@ class Notification < ActiveRecord::Base
     notification = Notification.new(:title => "#{payment.honey_money} Honey Purchased")
     notification.notify_object = payment
     notification.user = payment.user
-    notification.description = "#{payment.honey_money} Hoeny Purchased with $#{payment.amount} at #{payement.created_at.strftime("%H:%M %b %d, %Y")}"
+    notification.description = "#{payment.honey_money} Hoeny Purchased with $#{payment.amount} at #{payment.created_at.strftime("%H:%M %b %d, %Y")}"
     notification.save
     UserNotifier.honey_purchase(payment).deliver
   end
