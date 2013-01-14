@@ -217,7 +217,7 @@ max-width:none;
 }
 .container a,
 .container a:hover {
-  color: #000FFF;
+  color: white;
 }
 
 .footer .container a,
@@ -254,7 +254,7 @@ h2{
 .login_or {
   position: absolute;
   top: 248px;
-  left: 221px;
+  left: 224px;
   font-family: "myriad";
 }
 .login_or span {
@@ -278,15 +278,15 @@ h2{
   left: 40px;
 }
 #login_form .add-on {
-  height: 30px;
+  height: 23.5px;
   font-size:14px;
   font-family: "myriad-s";
-  width: 100px;
-  padding-top: 5px;
+  width: 150px;
+  padding-top: 10px;
 }
 #login_form #prependedInput{
   height: 30px;
-  width: 250px;
+  width: 200px;
   font-family: "myriad";
 }
 #login_extras{
@@ -465,6 +465,14 @@ a.login_forgot:hover {
   color: #6f6d65;
   font-size: 16px;
 }
+.signup-footer {
+  font-family: "myriad";
+  position: absolute;
+  top: 210px;
+  left: 100px;
+  color: #6f6d65;
+  font-size: 16px;
+}
 .signup-link a{
   color: #1c8bc5;
 }
@@ -478,13 +486,13 @@ a.login_forgot:hover {
   line-height: 1.5;
   text-align: justify;
   position: relative;
-  right:40px;
+  width: 400px;
+  right:20px;
   bottom: 80px;
 }
 .email_invite{
   position: relative;
-  bottom:50px;
-  left:30px;
+  bottom:60px;
 }
 .email_invite input[type="text"]{
   height: 40px;
@@ -572,7 +580,7 @@ a.login_forgot:hover {
 .popup-box-wrapper .close-popup {
   float: right;
   margin-top: -45px;
-  margin-right: -25px;
+  margin-right: -40px;
   display: block;
   width: 30px;
   height: 30px;
@@ -594,4 +602,16 @@ a.login_forgot:hover {
 }
 #input-prepend{
   font-size: 15px;
+}
+.signup_button{
+  position: relative;
+  bottom:125px;
+}
+.edit_cc_info  a{
+  color:#38B4DE;
+}
+.edit_cc_info  a:hover{
+  text-decoration: underline;
+    color:#38B4DE;
+
 }

@@ -75,12 +75,12 @@
               You would be charged $<%= format_num(current_user.extra_honey_for(@product)/100) %> (Exchange Rate: 100 Honey / $1 )
               <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
             <% else %>
-              Your payment has not verified. Please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>.  
+              Your payment has not verified. Please edit <span class="edit_cc_info"><a href="javascript:open_in_new_tab('/users/edit#card_info_container');" >Card Information of your Profile</a>.  </span>
             <% end %>
           </div>
           <br/>
           <br/>
-          <a href="/" class="btn">Cancel</a>
+          <a href="/" class="show_button_buy buy_cancel">Cancel</a>
         <% end %>
       <% end %>
     </div>

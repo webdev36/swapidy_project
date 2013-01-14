@@ -93,7 +93,7 @@ text-align: center;
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 4px;
   width: 50px;
-  height: 40px;
+  height: 30px;
 
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
@@ -108,7 +108,7 @@ text-align: center;
 
   text-decoration: none;
   text-shadow: 0 1px rgba(255,255,255,0.7);  
-
+  margin-top:50px;
 }
 .show_button_buy:hover{
   background-color:#F9006E;
@@ -156,4 +156,10 @@ text-align: center;
 .product_show_image{
   height:250px;
   float:left;
+}
+.buy_button{
+  margin-left:380px;
+}
+.buy_cancel{
+ font-size:20px; 
 }
