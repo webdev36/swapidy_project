@@ -552,20 +552,22 @@ label {
 
 .hiw_steps{
   margin-bottom:30px;
+  margin-right:30px;
 }
 .hiw_step{
   float:left;
   color:#666;
+  width:270px;
   font-weight:bold;
   font-size:20px;
   line-height:1.5;
-  width:300px;
-  position:relative;
-  bottom:30px;
-  position:relative;
 }
 .hiw_1, .hiw_2{
-  margin-right:20px;
+  margin-top:70px;
+  margin-right:50px;
+}
+.hiw_3{
+  margin-top:70px;
 }
 .hiw_heading{
   clear:both;
@@ -578,6 +580,7 @@ label {
 .hiw_img{
   position:relative;
   bottom:50px;
+  height:300px;
 }
 .team_content{
   color:#666;

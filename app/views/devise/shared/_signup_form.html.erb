@@ -1,5 +1,8 @@
 <div id="signup_container">
   <img id="signup_circle" src="/images/login_rectangle.png" >
+  <% if show_cancel_link %>
+    <a href="javascript:hidePopup();" style="color:#666666; font-family:'myriad-s'; font-size:30px; position:relative; right:30px; bottom:230px;">x</a>
+  <% end %>
   <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_signup" src="/images/fb_signup.png"></a>
   <p class="login_or">
     <span>or</span>
@@ -23,6 +26,7 @@
         <span style="color: red;"> !!! <%= raw resource.errors.full_messages.first %>. </span>
       <% end %>
     <% end %>
-  </div>
 
+  </div>
+     <div class="sub_footer">By signing up, you agree to our <a href="#">Terms of Service</a> and have read our <a href="#">Privacy Policy</a>.</div>
 </div>

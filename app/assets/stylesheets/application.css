@@ -156,7 +156,7 @@ max-width:none;
 
 #login_container,
 #signup_container {
-  top: 40%;
+  top: 50%;
   left: 50%;
   position: fixed; 
   width: 515px;
@@ -173,7 +173,7 @@ max-width:none;
   top:170px;
   height:60px;
   width:306px;
-  left:110px;
+  left:80px;
   z-index:1;
 }
 
@@ -253,15 +253,14 @@ h2{
 
 .login_or {
   position: absolute;
-  top: 238px;
-  left: 251px;
-  font-size: 20px;
+  top: 248px;
+  left: 221px;
   font-family: "myriad";
 }
 .login_or span {
   color:#666666;
   font-family: Helvetica, sans-serif;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 #fb_login{
@@ -269,21 +268,21 @@ h2{
   top: 170px;
   height: 60px;
   width: 306px;
-  left: 110px;
+  left: 80px;
   z-index: 1;
 }
 
 #login_form{
   position: absolute;
-  top: 270px;
-  left: 80px;
+  top: 290px;
+  left: 40px;
 }
 #login_form .add-on {
   height: 30px;
-  font-size:17px;
-  font-weight: bold;
-  font-family: "myriad";
+  font-size:14px;
+  font-family: "myriad-s";
   width: 100px;
+  padding-top: 5px;
 }
 #login_form #prependedInput{
   height: 30px;
@@ -445,8 +444,8 @@ h2{
 }
 .login_forgot{
   position: absolute;
-  top: 400px;
-  left: 210px;
+  top: 420px;
+  left: 190px;
 }
 a.login_forgot{
   color: #1c8bc5;
@@ -461,8 +460,8 @@ a.login_forgot:hover {
 .login-footer {
   font-family: "myriad";
   position: absolute;
-  top: 470px;
-  left: 160px;
+  top: 490px;
+  left: 140px;
   color: #6f6d65;
   font-size: 16px;
 }
@@ -580,4 +579,19 @@ a.login_forgot:hover {
   background: url(/assets/close-popup.png) no-repeat;
   text-indent: -9999px;
   font-size: 0px;
+}
+.sub_footer{
+  color: #ffffff;
+  font-size: 13px;
+}
+.sub_footer a{
+  color:white;
+  text-decoration: underline;
+}
+.sub_footer a:hover{
+  color:white;
+  text-decoration: none;
+}
+#input-prepend{
+  font-size: 15px;
 }
