@@ -7,7 +7,7 @@
       <a href="#unread" data-toggle="tab">New events</a>
     </li>
     <li class="">
-      <a href="#all" data-toggle="tab">All events</a>
+      <a href="#all_notifications" data-toggle="tab">All events</a>
     </li>
   </ul>
   <div class="tab-content">
@@ -15,7 +15,7 @@
       <br/>
       <%= render :partial => "/notifications/list", :locals => {:for_item => :new} %>
     </div>
-    <div class="tab-pane" id="all">
+    <div class="tab-pane" id="all_notifications">
       <br/>
       <%= render :partial => "/notifications/list", :locals => {:for_item => :all} %>
     </div>
