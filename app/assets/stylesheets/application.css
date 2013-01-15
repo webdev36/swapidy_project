@@ -507,6 +507,8 @@ a.login_forgot:hover {
   text-align: center;
   background: #fa3e6e;
   color: white;
+  font-family: "myriad-s";
+  margin-left: 130px;
   font-weight: 700;
   text-decoration: none;
   font-family: "myriad";

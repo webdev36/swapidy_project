@@ -16,20 +16,20 @@
   font-weight: normal;
   line-height: 18px;
   color: #333333;
-  width: 300px;
+  width: 320px;
   text-align: left;
 }
 #notification_menu .dropdown-menu li .notification_row:hover {
   color: #ffffff;
   text-decoration: none;
-  background-color: #0081c2;
-  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
-  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-color: #38b4de;
+  background-image: -moz-linear-gradient(top, #38b4de, #38b4de);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#38b4de), to(#38b4de));
+  background-image: -webkit-linear-gradient(top, #38b4de, #38b4de);
+  background-image: -o-linear-gradient(top, #38b4de, #38b4de);
+  background-image: linear-gradient(to bottom, #38b4de, #38b4de);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#38b4de', endColorstr='#38b4de', GradientType=0);
 }
 #notification_menu .dropdown-menu .notification_title {
   display: inline-block;
@@ -42,11 +42,15 @@
   display: inline-block; 
   cursor: pointer; 
   float: right; 
-  width: 20px;
+  width:20px;
+  font-family:"myriad-s";
   padding-left: 0px;
   padding-right: 0px;
+  position:relative;
+  left:10px;
 }
-
+.notification_remove_icon:hover {
+}
 .new_notification_row {
   border-color: #D59392;
   border-style: solid;
