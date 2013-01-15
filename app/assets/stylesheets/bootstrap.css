@@ -3104,6 +3104,7 @@ table th[class*="span"],
           border-radius: 3px;
 }
 
+
 .fade {
   opacity: 0;
   -webkit-transition: opacity 0.15s linear;

@@ -551,6 +551,7 @@ a.login_forgot:hover {
   height:25px;
   position: relative;
   right:30px;
+  bottom: 7px;
 }
 .product_desc{
   font-size: 20px;
@@ -617,4 +618,36 @@ a.login_forgot:hover {
   text-decoration: underline;
     color:#38B4DE;
 
+}
+.vote_location{
+  text-align: center;
+  width: 130px;
+  float: left;
+}
+.vote_city{
+  font-family: "myriad-s";
+    font-size: 25px;
+
+}
+.vote_count{
+  font-family: "myriad-b";
+  font-size: 35px;
+  color: #fa3e6e;
+}
+.vote_button{
+  height: 20px;
+  position: relative;
+  bottom:5px;
+  cursor:pointer;
+}
+.vote_container{
+margin-left: 70px;}
+.darkoverlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: medium none;
+  box-shadow: none;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  margin:auto;
+  height: 280px;
 }

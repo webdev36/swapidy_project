@@ -60,7 +60,10 @@ $(function() {
   .mouseout(function(){
     $(this).attr("src",'/images/settings_icon.png');
   });
-  
+
+  $('.vote_button').click(function(){
+    $(this).attr("src","/images/vote_after.png");
+});
 });
 
 function open_in_new_tab(url)
