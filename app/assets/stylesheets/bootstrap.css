@@ -3064,7 +3064,8 @@ table th[class*="span"],
 
 .typeahead {
   z-index: 1051;
-  margin-top: 2px;
+  width:175px;
+  margin-top:15px;
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
