@@ -3,11 +3,6 @@
   <div class="profile_info_nav">
       <img class="nav_icons nav_profile" src="/images/profile_icon.png">
       <%= link_to(current_user.full_name.upcase, transactions_path, :method => :get) %>
-      <a id="dropdown_profile_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><img class="nav_down" src="/images/down_icon.png"></a>
-      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_profile_icon">
-        <li><a tabindex="-1" href="#">HISTORY</a></li>
-        <li><%= link_to('LOGOUT', destroy_user_session_path, :method => :delete) %></li>
-      </ul>
   </div>
 </li>
 <li class="divider-vertical"></li>

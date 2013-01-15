@@ -1,7 +1,7 @@
 <div id="login_container"  class="container" >
   <img id="login_circle" src="/images/login_rectangle.png">
     <% if show_cancel_link %>
-    <a href="javascript:hidePopup();" style="color:#666666; font-family:'myriad-s'; font-size:30px; position:relative; right:30px; bottom:230px;">x</a>
+     <a class="close-popup" onclick="hidePopup();" style="position:relative; top:30px; right:95px;" href="#" title="Cancel">Cancel</a>
   <% end %>
   <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_login" src="/images/fb_login.png"></a>
   <p class="login_or">
@@ -25,7 +25,7 @@
 
   <div class="login-footer">
     <p class="signup-link">
-      Don't have a login? <a rel="internal silent" href="/users/sign_up">Sign Up.</a>
+      Don't have a login? <a rel="internal silent" href="/devise/shared/signup_form">Sign Up.</a>
     </p>
   </div>
   <div class="sub_footer">By signing up, you agree to our <a href="#">Terms of Service</a> and have read our <a href="#">Privacy Policy</a>.</div>
