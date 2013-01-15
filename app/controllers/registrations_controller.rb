@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
         if resource.active_for_authentication?
           set_flash_message :notice, :signed_up if is_navigational_format?
           sign_in(resource_name, resource)
-          redirect_to :controller => :orders, :action => :new, :method => :post, :product_id => params[:product_id], :order_type => params[:order_type]
+          redirect_to :controller => :orders, :action => :new, :method => :post, :product_id => params[:product_id], :using_condition => params[:using_condition], :order_type => params[:order_type]
           UserNotifier.signup_greeting(resource).deliver
           return
         else
@@ -22,7 +22,7 @@ class RegistrationsController < Devise::RegistrationsController
       end
       
       @user_for_register = true
-      @order = Order.new(:order_type => params[:order_type])
+      @order = Order.new(:order_type => params[:order_type], :using_condition => params[:using_condition])
       @product = Product.find params[:product_id]
       render "/orders/email_info_form"
     end

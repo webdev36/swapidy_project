@@ -41,6 +41,7 @@ group :production do
   gem 'pg'
   gem "wkhtmltopdf-heroku", :git => 'git://github.com/camdez/wkhtmltopdf-heroku.git'
   gem 'rmagick'
+  gem 'aws-sdk'
 end
 
 group :development, :test do

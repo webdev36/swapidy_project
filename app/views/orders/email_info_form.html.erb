@@ -12,7 +12,7 @@ label{
   </ul>
 </div>
   <div class="email_info_fb">
-  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img class="fb-connect" src="/images/connect-fb.png"></a>
+  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img class="fb-connect" src="/images/Connect-fb.png"></a>
   <p class="email_info_or">or</p>
   </div>
     <hr/>
@@ -20,7 +20,8 @@ label{
 <div class="container">
 <div class="email_info_container" style="float: left; width: 50%;">
   <h2 class="cat_choose">Sign in</h2>
-  <form accept-charset="UTF-8" action="/users/sign_in" class="edit_user" id="edit_user" method="post">
+  <% @user = resource || User.new unless @user %>
+  <%= form_for(@user || resource, :as => "user", :url => session_path(@user)) do |f| %>
     <% if @signin_failure %>
       <div style="color: red;">
         Invalid username or password.
@@ -41,13 +42,12 @@ label{
     <div style="margin:0px; margin-top:20px;">
       <input name="commit" class="show_button_buy" style="width: 130px; height: 50px; padding: 8px 15px;" type="submit" value="Sign in" />
     </div>
-  </form>
+  <% end %>
 </div>
 
 <div class="email_signup_container"style="float: right; width: 50%;">
   <h2 class="cat_choose">Don't have an account? Sign up now!</h2>
   <p class="product_desc">We'll use this email address to send you shipping details and progress updates every step of the way.</p>
-  <% @user = resource || User.new unless @user %>
   <%= form_for(@user || resource, :as => "user", :url => registration_path(@user)) do |f| %>
     <input type="hidden" name="login_to_order" value="1" />
     <input type="hidden" name="product_id" value="<%= @product.id %>" />
