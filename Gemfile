@@ -42,6 +42,8 @@ group :production do
   gem "wkhtmltopdf-heroku", :git => 'git://github.com/camdez/wkhtmltopdf-heroku.git'
   gem 'rmagick'
   gem 'aws-sdk'
+  gem 'memcachier'
+  gem 'dalli'
 end
 
 group :development, :test do
