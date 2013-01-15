@@ -10,7 +10,7 @@
 <h2 class="headings_pink">You're almost there...provide your shipping address<span>*</span></h2>
 
 <div>
-  <label class="confirm_info_head"><%= @product.title %></label><br />
+  <label class="confirm_info_head"><%= @product.title %> (<%= @order.using_condition %>)</label><br />
   <img id="confirm_image" src="<%= @product.main_image_url(:large) %>">
 </div>
 
@@ -19,6 +19,9 @@
 <%= form_for(@order, :as => 'order', :url => "/orders/confirm") do |f| %>
   <%= f.hidden_field :order_type %>
   <%= f.hidden_field :product_id %>
+  <%= f.hidden_field :using_condition %>
+  <%= f.hidden_field :honey_price %>
+
   <% unless @order.errors.empty? %>
     <div>
       <%= raw @order.errors.full_messages.join("<br/>") %>

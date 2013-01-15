@@ -29,6 +29,8 @@ label{
     <input type="hidden" name="login_to_order" value="1" />
     <input type="hidden" name="product_id" value="<%= @product.id %>" />
     <input type="hidden" name="order_type" value="<%= @order.order_type %>" />
+    <input type="hidden" name="using_condition" value="<%= @order.using_condition %>" />
+    <input type="hidden" name="honey_price" value="<%= @order.honey_price %>" />
     
     <div><label for="user_email">Email</label><br />
     <input id="user_email" name="user[email]" size="30" type="email" value="" /></div>
@@ -50,6 +52,9 @@ label{
     <input type="hidden" name="login_to_order" value="1" />
     <input type="hidden" name="product_id" value="<%= @product.id %>" />
     <input type="hidden" name="order_type" value="<%= @order.order_type %>" />
+    <input type="hidden" name="using_condition" value="<%= @order.using_condition %>" />
+    <input type="hidden" name="honey_price" value="<%= @order.honey_price %>" />
+
     <% if @user_for_register && !@user.errors.empty? %>
       <div style="color: red;">
         <%= raw @user.errors.full_messages.join(". ") %>

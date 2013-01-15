@@ -31,7 +31,9 @@ label{
       <%= form_for(@order, :as => 'order', :url => "/orders/shipping_info") do |f| %>
         <%= f.hidden_field :order_type %>
         <%= f.hidden_field :product_id %>
-  
+        <%= f.hidden_field :using_condition %>
+        <%= f.hidden_field :honey_price %>
+
         <%= f.hidden_field :shipping_first_name %>
         <%= f.hidden_field :shipping_last_name %>
         <%= f.hidden_field :shipping_address %>
@@ -42,18 +44,18 @@ label{
         <%= f.hidden_field :shipping_country %>
         
         <div class="payment_product_info">
-         <label ><%= @product.title %></label><br />
+          <label ><%= @product.title %> (<%= @order.using_condition %>)</label><br />
           <div class="payment_product_image">
-          <img src="<%= @product.main_image_url(:large) %>">
-        </div>
+            <img src="<%= @product.main_image_url(:large) %>">
+          </div>
         </div>
 
         <div class="payment_after_selling">
           <label>After selling, you get:</label>
-          <span style="font-size:20px;"><%= format_num(@product.honey_price) %></span> <img class="payment_currency" src="/images/honey_20px.png"><br/>
+          <span style="font-size:20px;"><%= format_num(@order.honey_price) %></span> <img class="payment_currency" src="/images/honey_20px.png"><br/>
           <br/>
         <div class="payment_selling_info">
-          Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %><img class="payment_currency" src="/images/honey_20px.png"> after selling.
+          Your balance would increase to <%= format_num(current_user.honey_balance + (@order.honey_price || 0)) %><img class="payment_currency" src="/images/honey_20px.png"> after selling.
           <br />You could use this honey to buy anything!.
         </div>
         

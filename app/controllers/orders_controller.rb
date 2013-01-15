@@ -5,8 +5,9 @@ class OrdersController < ApplicationController
   
   def new
     @order = Order.new(:order_type => params[:order_type], :product_id => params[:product_id].to_i )
-    @order.using_condition = params[:using_condition] 
+    @order.using_condition = params[:using_condition]
     @product = Product.find params[:product_id]
+    @order.honey_price = @product.price_for(@order.using_condition)
 
     if user_signed_in?
       render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_form"
@@ -74,6 +75,7 @@ class OrdersController < ApplicationController
       @order.user = current_user
       @order.shipping_country = "US"
       @product = @order.product = Product.find(params[:order][:product_id])
+      @order.honey_price = @product.price_for(@order.using_condition)
     end
 
 end

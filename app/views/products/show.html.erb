@@ -3,6 +3,7 @@
 <% else %>
   <form action="/orders/buy/<%= @product.id %>" method="post">
 <% end %>
+<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 <%= render :partial => "/products/detail_info"%>
 
 <div style="text-align:center; width:100%;" >

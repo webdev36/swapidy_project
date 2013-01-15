@@ -1,9 +1,11 @@
-
-<% cache('homepage_available_categories') do %>
+<div id="product_type_previous"></div>
 <div id="product_type" style="display:none;">
-  <div class="headings_pink">What do you want to sell today?</div>
+  <div class="headings_pink">
+    <span id="sell_message" style="display:none;">What do you want to sell today?</span>
+    <span id="buy_message" style="display:none;">What do you want to buy today?</span>
+  </div>
   <div id="slider-code" class="span12">
-    <a class="left carousel-control buttons prev" href="#">&lsaquo;</a>
+    <a class="left carousel-control buttons prev">&lsaquo;</a>
     <div class="viewport">
         <ul class="overview" style="width: 1560px;">
           <% Category.all.each_with_index do |category, index| %>
@@ -19,37 +21,6 @@
     <a class="left carousel-control buttons next">&rsaquo;</a>
   </div>
 </div>
-<% end %>
-
-<script language="JavaScript">
-  jQuery(window).load(function(){
-     $('#slider-code').tinycarousel({display: 2});
-  });
-  $(function() {
-
-    sliderHeight();
-
-    $(window).on('resize', function() {
-      sliderHeight();
-    });
-
-    function sliderHeight() {
-
-      var slideHeight = parseInt($(window).height() - $('.navbar-fixed-top').height() - $('.navbar-fixed-top').height(), 10);
-
-      if(slideHeight >= 700) {
-          slideHeight = 700;
-      }
-
-      $('#s3slider').css({
-        height: slideHeight;
-      });
-
-    }
-
-
-  })
-</script>
 
 <% Category.all.each do |category| %>
   <% cache("homepage_container_category_#{category.id}") do %>
@@ -102,6 +73,23 @@
 <% end %>
 
 <script language="JavaScript">
+
+  $('#slider-code').tinycarousel({display: 2});
+
+  sliderHeight();
+
+  $(window).on('resize', function() {
+    sliderHeight();
+  });
+
+  function sliderHeight() {
+    var slideHeight = parseInt($(window).height() - $('.navbar-fixed-top').height() - $('.navbar-fixed-top').height(), 10);
+    if(slideHeight >= 700) {
+        slideHeight = 700;
+    }
+    $('#s3slider').css({height: slideHeight});
+  }
+  
   var for_what = "for_selling";
   
   function get_filter_options() {
@@ -161,13 +149,12 @@
      
   $('#buttons a').click(function() {
     if($(this).attr('id') == "button_sell"){
-      showScreenToSell()
+      showScreenToSell();
     }else{
       showScreenToBuy();
-      $('#conditions').hide
     }
     $('div#product_type').fadeIn(600);
-    $.scrollTo($('div#product_type'), 400);
+    $.scrollTo($('div#product_type_previous'), 400);
     showIsoTope();
   });
   
@@ -210,7 +197,6 @@
   
   function showIsoTope(){
     $("#container_" + current_category_id + ' .product_container').fadeIn(600);
-    //$.scrollTo($("#container_" + current_category_id + ' #product_models'), 400);
     comboFilters = get_filter_options();
     $("#container_" + current_category_id + ' #products').isotope({ filter: comboFilters.join(', ') });
   }
@@ -228,20 +214,6 @@
     }
   });
   
-  /*
-  $('#product_type .viewport .category').live("click", function(){
-    $src = $(this);
-    if(current_category_id != ""){
-       $("#container_" + current_category_id).hide();
-       $("#" + current_category_id).removeClass("select").addClass('blur');
-    }
-    current_category_id = $src.attr("id");
-    $src.addClass("select").removeClass("blur");
-    $("#container_" + current_category_id + ' .product_container').hide();
-    $("#container_" + current_category_id).show();
-    showIsoTope();    
-  });*/
-  
   $('#slider-code').live('mouseleave', function() {
     if(current_category_id == "") {
       $('#product_type .viewport .category').removeClass('active').removeClass('blur');
@@ -254,14 +226,11 @@
       }
     }
   });
-
-  jQuery(window).load(function(){
-//    $('#product #container').isotope({ filter: '.none' });
-    // centerIsotypeImages();
-  });
   
   function showScreenToBuy() {
     for_what = "for_buying";
+    $("#sell_message").hide();
+    $("#buy_message").show();
     $(".thumbnail .box .button_for_buy").show();
     $(".thumbnail .box .button_for_sell").hide();
     $(".product_search_container .nav-pills").each(function(index) {
@@ -274,6 +243,8 @@
   }
   function showScreenToSell() {
     for_what = "for_selling";
+    $("#sell_message").show();
+    $("#buy_message").hide();
     $(".thumbnail .box .button_for_buy").hide();
     $(".thumbnail .box .button_for_sell").show();
     $(".product_search_container .nav-pills").each(function(index) {

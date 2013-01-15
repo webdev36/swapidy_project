@@ -5,7 +5,9 @@
 <%= form_for(@order, :as => 'order', :url => "/orders/create") do |f| %>
   <%= f.hidden_field :order_type %>
   <%= f.hidden_field :product_id %>
-      
+  <%= f.hidden_field :using_condition %>
+  <%= f.hidden_field :honey_price %>
+
   <%= f.hidden_field :shipping_first_name %>
   <%= f.hidden_field :shipping_last_name %>
   <%= f.hidden_field :shipping_address %>
@@ -24,7 +26,7 @@
 
   <br/>
   <div>
-    <label class="confirm_info_head"><%= @product.title %></label><br />
+    <label class="confirm_info_head"><%= @product.title %> (<%= @order.using_condition %>)</label><br />
     <img id="confirm_image" src="<%= @product.main_image_url(:large) %>">
   </div>
   
@@ -32,7 +34,7 @@
   <div>
     <label class="confirm_info_head">
       <strong>Contact Email</strong>
-      <a href="#" onclick="javascript:open_in_new_tab('/users/edit');" class="btn btn-mini">Change</a>
+      <a href="#" onclick="javascript:open_in_new_tab('/users/edit');" class="order_button_buy change">Change</a>
     </label class="confirm_info_head"><br />
     <strong>All emails about your order will be sent here:</strong>
     <p><%= current_user.email %></p>
@@ -93,12 +95,13 @@
     <label class="confirm_info_head"><strong>Terms of service</strong></label>
     <p>
       <input id="terms_of_service_checkbox" type="checkbox" /> 
-      <span>this box, you agree to our <a>terms of service</a> and confirm that 
+      <span>this box, you agree to our <a class="order_link">terms of service</a> and confirm that 
         the item(s) you are selling have not been reported lost or stolen.</span>
     </p>
   </div>
   <br/>
-  <div><%= f.submit "Continue", :disabled=> "disabled", :id => "submit_button" %></div>
+  <input name="commit" id="submit_button" class="order_button_sell" style="width: 180px; height: 50px;" type="submit" disabled="disabled" value="Continue" />
+
 <% end %>
 </div>
 <script>

@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,
                   :shipping_city, :shipping_state, :shipping_zip_code, :shipping_country, :shipping_method,
                   :candidate_addresses, :shipping_zip_code_add_on, :is_candidate_address
-  
+
   validates :order_type, :status, :presence => true
   validates :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_city, :shipping_state, 
             :shipping_zip_code, :shipping_country, :presence => true
@@ -16,21 +16,19 @@ class Order < ActiveRecord::Base
 
   belongs_to :product
   belongs_to :user
-  
+
   has_many :shipping_stamps, :order => "created_at desc"
-  
   has_many :notifications, :as => :notify_object, :class_name => "Notification"
   after_create :create_notification
-  
-  
+
   TYPES = {:trade_ins => 0, :order => 1}
   STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3, :confirmed_to_ship => 4}
   SHIPPING_METHODS = {:box => "box", :usps => "usps", :fedex => "fedex"}
-  
+
   SHIPPING_METHOD_NAMES = { :box => "A box and prepaid label", 
                             :usps => "Prepaid USPS Shipping Label", 
                             :fedex => "Prepaid FedEx Shipping Label"}
-  
+
   after_create :adjust_current_balance
   before_validation :generate_product_title
 

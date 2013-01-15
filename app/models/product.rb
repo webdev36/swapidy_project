@@ -19,6 +19,12 @@ class Product < ActiveRecord::Base
   after_save :expired_fragment_caches
   after_destroy :expired_fragment_caches
 
+  def price_for(using_condition)
+    return price_for_good_type if using_condition && using_condition == USING_CONDITIONS[:good]
+    return price_for_poor_type if using_condition && using_condition == USING_CONDITIONS[:poor]
+    return honey_price
+  end
+
   def main_image_url(type)
     main_image.photo.url(type)
   end
