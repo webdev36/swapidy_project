@@ -9,6 +9,14 @@ class ProductModel < ActiveRecord::Base
   
   has_many :images, :as => :for_object
 
+  def for_buy?
+    self.products.for_buy.count > 0
+  end
+
+  def for_sell?
+    self.products.for_sell.count > 0
+  end
+
   def main_image_url(type)
     main_image.photo.url(type)
   end

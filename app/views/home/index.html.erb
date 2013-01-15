@@ -23,14 +23,14 @@
 </div>
 
 <% Category.all.each do |category| %>
-  <% cache("homepage_container_category_#{category.id}") do %>
+  <%# cache("homepage_container_category_#{category.id}") do %>
     <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 20px;">
       <div style="display: block;padding:20px 0 30px;">
 
         <ul id="product_models" class="nav nav-pills" style="position: relative;">
           <li class="product_model active" id="filter_model_all"><a>All models</a></li>
           <% category.product_models.each do |product_model| %>
-            <li class="product_model" id="filter_model_<%= product_model.id %>"><a><%= product_model.title %></a></li>
+            <li class="product_model <%= "model_for_buying" if product_model.for_buy? %> <%= "model_for_selling" if product_model.for_sell? %>" id="filter_model_<%= product_model.id %>"><a><%= product_model.title %></a></li>
           <% end %>
         </ul>
         <% cache("homepage_category_#{category.id}_filter_attr") do %>
@@ -69,7 +69,7 @@
         <% end %>
       </div>
     </div>
-  <% end %>
+  <%# end %>
 <% end %>
 
 <script language="JavaScript">
@@ -228,6 +228,8 @@
   });
   
   function showScreenToBuy() {
+    $('li.product_model').not('#filter_model_all').hide();
+    $('li.model_for_buying').show();
     for_what = "for_buying";
     $("#sell_message").hide();
     $("#buy_message").show();
@@ -243,6 +245,8 @@
   }
   function showScreenToSell() {
     for_what = "for_selling";
+    $('li.product_model').not('#filter_model_all').hide();
+    $('li.model_for_buying').show();
     $("#sell_message").show();
     $("#buy_message").hide();
     $(".thumbnail .box .button_for_buy").hide();

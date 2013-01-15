@@ -9,12 +9,16 @@ class Product < ActiveRecord::Base
   belongs_to :category
   belongs_to :product_model
 
+  
+  has_many :images, :as => :for_object, :dependent => :destroy
   has_many :product_attributes, :dependent => :destroy
   has_many :product_model_attributes, :through => :product_attributes
   
+  scope :for_buy, :conditions => {:for_buy => true}
+  scope :for_sell, :conditions => {:for_sell => true}
+  
   USING_CONDITIONS = {:poor => "Poor", :good => "Good", :flawless => "Flawless"}
   
-  has_many :images, :as => :for_object, :dependent => :destroy
 
   after_save :expired_fragment_caches
   after_destroy :expired_fragment_caches
