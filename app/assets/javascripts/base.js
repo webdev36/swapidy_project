@@ -60,13 +60,8 @@ $(function() {
   .mouseout(function(){
     $(this).attr("src",'/images/settings_icon.png');
   });
-  $('.vote_button').mouseover(function(){
-    $(this).attr("src",'/images/vote_after.png');
-  })
-  .mouseout(function(){
-    $(this).attr("src",'/images/vote.png');
-  });
-  $('.vote_button').onclick(function(){
+
+  $('.vote_button').click(function(){
     $(this).attr("src","/images/vote_after.png");
 });
 });
