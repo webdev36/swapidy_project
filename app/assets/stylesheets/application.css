@@ -637,3 +637,14 @@ a.login_forgot:hover {
   bottom:5px;
   cursor:pointer;
 }
+.vote_container{
+margin-left: 70px;}
+.darkoverlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: medium none;
+  box-shadow: none;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  margin:auto;
+  height: 280px;
+}
