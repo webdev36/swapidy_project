@@ -19,7 +19,7 @@ module ImportExcelProduct
     columns = textline.split(/,/).map{|value| value.strip}
     logger.info "columns.size: #{columns.size} - headers.size: #{headers.size}"
     return if columns.size < PROPERTY_START_INDEX || columns.size > headers.size
-    
+
     category = Category.find_by_title columns[INDEXES[:category]]
     category = Category.create(:title => columns[INDEXES[:category]]) unless category
     logger.info "category: #{category.id} - #{category.title}"
@@ -27,7 +27,10 @@ module ImportExcelProduct
     model = category.product_models.find_by_title columns[INDEXES[:product_model]]
     model = category.product_models.create(:title => columns[INDEXES[:product_model]], :weight_lb => columns[INDEXES[:weight_lb]].to_i) unless model
     logger.info "model: #{model.id} - #{model.title}"
-    
+
+    product = Product.find_by_title columns[INDEXES[:title]]
+    return product if product
+
     product = Product.new(:title => columns[INDEXES[:title]], 
                           :honey_price => (columns[INDEXES[:honey_price]].to_f rescue nil),
                           :price_for_good_type => (columns[INDEXES[:price_for_good_type]].to_f rescue nil),

@@ -81,7 +81,25 @@ namespace :swapidy do
         logger.info product
       end
     end
-    
+
+    desc "Reset database from excel file"
+    task :update_20130114 => :environment do
+      logger = Logger.new("log/swapidy_tasks.log")
+
+      file = File.open(File.join(Rails.root, 'demo_data', "products_20130114.csv"),"r")
+      content = file.read
+      lines = content.split(/\n/)
+      headers = lines[0].split(",")
+
+      return nil if headers.size < 10
+      lines.each_with_index do |line, index|
+        next if index == 0
+        logger.info "line: #{line}"
+        product = ImportExcelProduct.import_from_textline(line, headers, logger) #rescue nil
+        logger.info product
+      end
+    end
+
     desc "Enter the default address"
     task :set_company_address => :environment do
       settings = {"COMPANY_NAME" => "Swapidy", 
