@@ -173,7 +173,7 @@ max-width:none;
   top:170px;
   height:60px;
   width:306px;
-  left:110px;
+  left:80px;
   z-index:1;
 }
 
@@ -217,7 +217,7 @@ max-width:none;
 }
 .container a,
 .container a:hover {
-  color: #000FFF;
+  color: white;
 }
 
 .footer .container a,
@@ -253,15 +253,14 @@ h2{
 
 .login_or {
   position: absolute;
-  top: 238px;
-  left: 251px;
-  font-size: 20px;
+  top: 248px;
+  left: 224px;
   font-family: "myriad";
 }
 .login_or span {
   color:#666666;
   font-family: Helvetica, sans-serif;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 #fb_login{
@@ -269,25 +268,25 @@ h2{
   top: 170px;
   height: 60px;
   width: 306px;
-  left: 110px;
+  left: 80px;
   z-index: 1;
 }
 
 #login_form{
   position: absolute;
-  top: 270px;
-  left: 80px;
+  top: 290px;
+  left: 40px;
 }
 #login_form .add-on {
-  height: 30px;
-  font-size:17px;
-  font-weight: bold;
-  font-family: "myriad";
-  width: 100px;
+  height: 23.5px;
+  font-size:14px;
+  font-family: "myriad-s";
+  width: 150px;
+  padding-top: 10px;
 }
 #login_form #prependedInput{
   height: 30px;
-  width: 250px;
+  width: 200px;
   font-family: "myriad";
 }
 #login_extras{
@@ -445,8 +444,8 @@ h2{
 }
 .login_forgot{
   position: absolute;
-  top: 400px;
-  left: 210px;
+  top: 420px;
+  left: 190px;
 }
 a.login_forgot{
   color: #1c8bc5;
@@ -461,8 +460,16 @@ a.login_forgot:hover {
 .login-footer {
   font-family: "myriad";
   position: absolute;
-  top: 470px;
-  left: 160px;
+  top: 490px;
+  left: 140px;
+  color: #6f6d65;
+  font-size: 16px;
+}
+.signup-footer {
+  font-family: "myriad";
+  position: absolute;
+  top: 210px;
+  left: 100px;
   color: #6f6d65;
   font-size: 16px;
 }
@@ -479,13 +486,13 @@ a.login_forgot:hover {
   line-height: 1.5;
   text-align: justify;
   position: relative;
-  right:40px;
+  width: 400px;
+  right:20px;
   bottom: 80px;
 }
 .email_invite{
   position: relative;
-  bottom:50px;
-  left:30px;
+  bottom:60px;
 }
 .email_invite input[type="text"]{
   height: 40px;
@@ -573,7 +580,7 @@ a.login_forgot:hover {
 .popup-box-wrapper .close-popup {
   float: right;
   margin-top: -45px;
-  margin-right: -25px;
+  margin-right: -40px;
   display: block;
   width: 30px;
   height: 30px;
@@ -584,11 +591,30 @@ a.login_forgot:hover {
 .field_with_errors {
   display: inline;
 }
-.honey_icon {
-  height: 30px;
-  width: 30px;
+.sub_footer{
+  color: #ffffff;
+  font-size: 13px;
+}
+.sub_footer a{
+  color:white;
+  text-decoration: underline;
+}
+.sub_footer a:hover{
+  color:white;
+  text-decoration: none;
+}
+#input-prepend{
+  font-size: 15px;
+}
+.signup_button{
   position: relative;
-  display:inline-block;
-  background: url(/images/honey_currency_score.png) no-repeat;
-  background-size: contain;
+  bottom:125px;
+}
+.edit_cc_info  a{
+  color:#38B4DE;
+}
+.edit_cc_info  a:hover{
+  text-decoration: underline;
+    color:#38B4DE;
+
 }

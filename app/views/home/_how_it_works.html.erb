@@ -2,16 +2,28 @@
   $(document).ready(function() {
     //$('#all').fadeIn(1000);
     $('.hiw_a').hide();
+    $('.b1').hide();
+    $('.b2').hide();
+    $('.b3').hide();
+    $('.s1').hide();
+    $('.s2').hide();
+    $('.s3').hide();
     // Hide all DDs inside .faqs
     $('#heading_for_buy').click(function() {
       $(this).next().slideToggle('normal');
       $('#heading_for_sell').next().hide();
       // Toggle dd when the respective dt is clicked
+        $(".b1").fadeIn(2000);
+        $(".b2").delay(1000).fadeIn(1000);
+        $(".b3").delay(2000).fadeIn(1000);
     });
     $('#heading_for_sell').click(function() {
       $(this).next().slideToggle('normal');
       $('#heading_for_buy').next().hide();
       // Toggle dd when the respective dt is clicked
+        $(".s1").fadeIn(2000);
+        $(".s2").delay(1000).fadeIn(1000);
+        $(".s3").delay(2000).fadeIn(1000);
     });
   }); 
 </script>
@@ -27,44 +39,39 @@
   <div class="hiw_heading" id="heading_for_sell" onclick="scrollOnClick(150); return false;" style="cursor: pointer;">
     I want to sell my product.
   </div>
-  <div class="hiw_a">
-    <img class="hiw_img"src="/images/hiw_buy.png">
+<div class="hiw_steps hiw_a">
+  <div class="hiw_step hiw_1 s1">
+    <img class="hiw_img"src="/images/hiw_s_s1.png"><br/>
+            Choose the product you have to sell
 
-    <div class="hiw_steps">
-      <div class="hiw_step hiw_1">
-        Choose the product you have to sell
-      </div>
-
-      <div class="hiw_step hiw_2">
-        Instantly get honey for your product
-      </div>
-
-      <div class="hiw_step hiw_3">
-        Send product(s) to Swapidy
-      </div>
-    </div>
   </div>
+  <div class="hiw_step hiw_2 s2">
+    <img class="hiw_img"src="/images/hiw_s_s2.png"><br/>
+            Instantly get honey for your product
 
-  <div class="hiw_heading" id="heading_for_buy" onclick="scrollOnClick(150); return false;" >
+  </div>
+  <div class="hiw_step hiw_3 s3">
+    <img class="hiw_img"src="/images/hiw_s_s3.png"><br/>
+            Send product(s) to Swapidy
+
+  </div>
+</div>
+
+ <div class="hiw_heading" id="heading_for_buy" onclick="scrollOnClick(150); return false;" >
     I want to buy a product.
-  </div>
-  <div class="hiw_a">
-
-    <img class="hiw_img" src="/images/hiw_sell.png">
-
-    <div class="hiw_steps">
-
-      <div class="hiw_step hiw_1">
+ </div>
+<div class="hiw_steps hiw_a">
+    <div class="hiw_step hiw_1 b1">
+      <img class="hiw_img"src="/images/hiw_b_s1.png"><br/>
         Choose product(s) you want to buy
-      </div>
-
-      <div class="hiw_step hiw_2">
+    </div>
+    <div class="hiw_step hiw_2 b2">
+      <img class="hiw_img"src="/images/hiw_b_s2.png"><br/>
         Buy additional honey if required
-      </div>
-
-      <div class="hiw_step hiw_3">
+    </div>
+    <div class="hiw_step hiw_3 b3">
+        <img class="hiw_img"src="/images/hiw_b_s3.png"><br/>
         Checkout, you're done!
-      </div>
     </div>
   </div>
 </div>
