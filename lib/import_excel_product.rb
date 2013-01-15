@@ -4,15 +4,13 @@ module ImportExcelProduct
              :honey_price => 1,
              :price_for_good_type => 2,
              :price_for_poor_type => 3,
-             :for_sell => 4,
-             :for_buy => 5,
-             :category => 6,
-             :product_model => 7,
-             :weight_lb => 8
+             :category => 4,
+             :product_model => 5,
+             :weight_lb => 6
             }
-  PROPERTY_START_INDEX = 9
+  PROPERTY_START_INDEX = 7
   
-  def self.import_from_textline(textline, headers, logger = nil)
+  def self.import_from_textline(textline, headers, for_buying = true, logger = nil)
     
     logger = Logger.new("log/swapidy_tasks.log") unless logger
     
@@ -35,8 +33,8 @@ module ImportExcelProduct
                           :honey_price => (columns[INDEXES[:honey_price]].to_f rescue nil),
                           :price_for_good_type => (columns[INDEXES[:price_for_good_type]].to_f rescue nil),
                           :price_for_poor_type => (columns[INDEXES[:price_for_poor_type]].to_f rescue nil),
-                          :for_sell => (columns[INDEXES[:for_sell]] == "TRUE"),
-                          :for_buy => (columns[INDEXES[:for_buy]] == "TRUE"))
+                          :for_sell => !for_buying,
+                          :for_buy => for_buying)
     product.category = category
     product.product_model = model
     

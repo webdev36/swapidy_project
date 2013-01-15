@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   
   def new
     @order = Order.new(:order_type => params[:order_type], :product_id => params[:product_id].to_i )
+    @order.using_condition = params[:using_condition] 
     @product = Product.find params[:product_id]
 
     if user_signed_in?

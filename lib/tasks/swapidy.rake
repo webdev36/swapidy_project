@@ -58,45 +58,30 @@ namespace :swapidy do
       end
     end
     
-    desc "Reset database from excel file"
-    task :reset_products => :environment do
-      logger = Logger.new("log/swapidy_tasks.log")
-      
-      file = File.open(File.join(Rails.root, 'demo_data', "products_20130110.csv"),"r")
-      content = file.read
-      lines = content.split(/\r/)
-      headers = lines[0].split(",")
-      
-      return nil if headers.size < 10
-      Product.all.each { |product| product.destroy }
-      ProductModelAttribute.all.each { |a| a.destroy }
-      ["Weight lb", "Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
-        attrs = CategoryAttribute.where(:title => cat_title).each {|attr| attr.destroy }
-      end
-
-      lines.each_with_index do |line, index|
-        next if index == 0
-        logger.info "line: #{line}"
-        product = ImportExcelProduct.import_from_textline(line, headers, logger) #rescue nil
-        logger.info product
-      end
+    task :remove_products => :environment do
+      Product.all.each {|product| product.destroy }
     end
-
-    desc "Reset database from excel file"
-    task :update_20130114 => :environment do
+    
+    desc "Insert products database from excel file"
+    task :insert_products => :environment do
       logger = Logger.new("log/swapidy_tasks.log")
+      ["products_20130114_buy.csv", "products_20130114_sell.csv"].each do |file_name|
+          file = File.open(File.join(Rails.root, 'demo_data', file_name),"r")
+          content = file.read
+          lines = content.split(/\r/)
+          headers = lines[0].split(",")
+          
+          return nil if headers.size < 10
+          ["Weight lb", "Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
+            attrs = CategoryAttribute.where(:title => cat_title).each {|attr| attr.destroy }
+          end
 
-      file = File.open(File.join(Rails.root, 'demo_data', "products_20130114.csv"),"r")
-      content = file.read
-      lines = content.split(/\n/)
-      headers = lines[0].split(",")
-
-      return nil if headers.size < 10
-      lines.each_with_index do |line, index|
-        next if index == 0
-        logger.info "line: #{line}"
-        product = ImportExcelProduct.import_from_textline(line, headers, logger) #rescue nil
-        logger.info product
+          lines.each_with_index do |line, index|
+            next if index == 0
+            logger.info "line: #{line}"
+            product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", logger) #rescue nil
+            logger.info product
+          end
       end
     end
 

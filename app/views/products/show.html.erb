@@ -1,9 +1,15 @@
+<% if (params["for"] && params["for"] == "sell") %>
+  <form action="/orders/sell/<%= @product.id %>" method="post">
+<% else %>
+  <form action="/orders/buy/<%= @product.id %>" method="post">
+<% end %>
 <%= render :partial => "/products/detail_info"%>
 
-<div>
+<div style="text-align:center; width:100%;" >
   <% if (params["for"] && params["for"] == "sell") %>
-        <div class="show_button_sell"><%= link_to "Sell", "/orders/sell/#{@product.id}", :method => :post %></div>
+    <input type="submit" value="Sell" class="show_button_sell" style="padding: 25px 60px;" />
   <% else %>
-		<div class="show_button_buy buy_button"><%= link_to "Buy", "/orders/buy/#{@product.id}", :method => :post %> </div> 
-		<% end %>
+    <input type="submit" value="Buy" class="show_button_buy" style="padding: 25px 60px;" />
+  <% end %>
 </div>
+</form>
