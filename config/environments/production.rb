@@ -42,9 +42,10 @@ Swapidy::Application.configure do
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
-  config.cache_store = :dalli_store, 
-                       ENV["MEMCACHIER_SERVERS"].split(","),
-                       {:username => ENV["MEMCACHIER_USERNAME"], :password => ENV["MEMCACHIER_PASSWORD"]}
+  config.cache_store = :dalli_store, "dev1.ec2.memcachier.com:11211", 
+                       {:username => "5df586", :password => "e95cb1b917a130f11c83"}
+                       #ENV["MEMCACHIER_SERVERS"].split(","),
+                       #{:username => ENV["MEMCACHIER_USERNAME"], :password => ENV["MEMCACHIER_PASSWORD"]}
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
