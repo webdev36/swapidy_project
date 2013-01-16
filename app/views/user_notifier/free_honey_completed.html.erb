@@ -1,10 +1,31 @@
-Good Day <%= @free_honey.receiver.name_in_email if @free_honey.receiver %>,<br/>
-<br/>
-You have received <%= @free_honey.receiver_honey_amount %> FREE honey after receiving an inviation from <%= @free_honey.sender_title %> on Swapidy.
-<br/>
-What are you waiting for? Go and spend that sweet, sweet honey!
-<br/>
-Cheerio,<br/>
-<br/>
-<a href="http://www.twitter.com/theswapdaddy"><strong>@TheSwapDaddy</strong></a><br/>
-<a href="http://www.twitter.com/swapidy">@Swapidy</strong></a><br/>
+<div style="width:580px; margin:auto;">
+	<div style="background:#F2F2F2; margin-top:30px; padding:20px; -webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;">
+		<div style="float:left;">
+			<a href="http://swapidy.com"><img src="http://swapidy-test.herokuapp.com/images/swapidy_logo_email.png" style="height:70px;"></a>
+		</div>
+		<div style="float:right;">	
+			<a href="http://facebook.com/swapidy"><img src="http://swapidy-test.herokuapp.com/images/footer_fb_hover.png" style="height:70px;"></a>
+			<a href="http://twitter.com/swapidy"><img src="http://swapidy-test.herokuapp.com/images/footer_twitter_hover.png" style="height:63px; position:relative; bottom:5px;"></a>
+		</div>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+
+<div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">
+			<b>Good Day <%= @free_honey.receiver.name_in_email if @free_honey.receiver %>,</b><br/>
+			<br/>
+			You have received <%= @free_honey.receiver_honey_amount %> FREE honey after receiving an inviation from <%= @free_honey.sender_title %> on Swapidy.
+			<br/>
+			What are you waiting for? Go and spend that sweet, sweet honey!
+			<br/>
+			Cheerio,<br/>
+			<br/>
+			<a href="http://www.twitter.com/theswapdaddy" style="color:#666;"><strong>@TheSwapDaddy</strong></a><br/>
+			<a href="http://www.twitter.com/swapidy" style="color:#666;"><strong>@Swapidy</strong></a><br/>
+	</div>
+	</div>
+</div>

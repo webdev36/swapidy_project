@@ -1,11 +1,28 @@
-Good Day <%= @user.name_in_email %>,<br />
+<div style="width:580px; margin:auto;">
+	<div style="background:#F2F2F2; margin-top:30px; padding:20px; -webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;">
+		<div style="float:left;">
+			<a href="http://swapidy.com"><img src="http://swapidy-test.herokuapp.com/images/swapidy_logo_email.png" style="height:70px;"></a>
+		</div>
+		<div style="float:right;">	
+			<a href="http://facebook.com/swapidy"><img src="http://swapidy-test.herokuapp.com/images/ooter_fb_hover.png" style="height:70px;"></a>
+			<a href="http://twitter.com/swapidy"><img src="http://swapidy-test.herokuapp.com/images/footer_twitter_hover.png" style="height:63px; position:relative; bottom:5px;"></a>
+		</div>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+<div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">
+	<b>Good Day <%= @user.name_in_email %>,</b><br />
 <br/>
 You just purchased <%= @payment.honey_money %>Honey for $<%= @payment.amount %>. 
 Our honey bees have added their honey into your account so you can buy the products you want.<br/>
 <br/>
 Here are the details of your purchase:<br/>
 <br/>
-Honey purchased:<br />
+<b>Honey purchased:<br />
 <%= @payment.honey_money %> Honey<br />
 Charged amount:<br />
 $<%= @payment.amount %><br />
@@ -22,12 +39,15 @@ Card Number<br />
 Expiration Date<br />
   <%= @payment.card_expired_date.strftime("%B %Y") if @payment.card_expired_date %><br />
 <br />
-<br />
+<br /></b>
 If you have any questions, please email honey@swapidy.com. Make sure to mention your name and your email. 
 We will answer your questions within 12-24 hours or less.<br />
 <br />
 Cheerio,<br/>
 <br/>
-<a href="http://www.twitter.com/theswapdaddy"><strong>@TheSwapDaddy</strong></a><br/>
-<a href="http://www.twitter.com/swapidy">@Swapidy</strong></a><br/>
+<a href="http://www.twitter.com/theswapdaddy" style="color:#666;"><strong>@TheSwapDaddy</strong></a><br/>
+<a href="http://www.twitter.com/swapidy" style="color:#666;"><strong>@Swapidy</strong></a><br/>
 
+	</div>
+	</div>
+</div>
