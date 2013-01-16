@@ -7,6 +7,10 @@
 <%= render :partial => "/products/detail_info"%>
 
 <div style="text-align:center; width:100%;" >
+  <% if @error_message && !@error_message.blank? %>
+    <span style="color: red;"><%= @error_message %></span><br/>
+  <% end %>
+
   <% if (params["for"] && params["for"] == "sell") %>
     <input type="submit" value="Sell" class="show_button_sell" style="padding: 25px 60px;" />
   <% else %>
