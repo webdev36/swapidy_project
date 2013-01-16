@@ -1,14 +1,14 @@
-<div id="product_type_previous"></div>
-<div id="product_type" style="display:none;">
-  <div class="headings_pink">
-    <span id="sell_message" style="display:none;">What do you want to sell today?</span>
-    <span id="buy_message" style="display:none;">What do you want to buy today?</span>
-  </div>
-  <div id="slider-code" class="span12">
-    <a class="left carousel-control buttons prev">&lsaquo;</a>
-    <div class="viewport">
-      <ul class="overview" style="width: 1560px;">
-        <% cache("homepage_available_categories", :expires_in => 1.hour)%>
+
+<% cache("homepage_available_categories", :expires_in => 1.hour) do %>
+  <div id="product_type" style="display:none;">
+    <div class="headings_pink">
+      <span id="sell_message" style="display:none;">What do you want to sell today?</span>
+      <span id="buy_message" style="display:none;">What do you want to buy today?</span>
+    </div>
+    <div id="slider-code" class="span12">
+      <a class="left carousel-control buttons prev">&lsaquo;</a>
+      <div class="viewport">
+        <ul class="overview" style="width: 1560px;">
           <% Category.all.each_with_index do |category, index| %>
             <li id="cat_<%= category.id %>" class="item category span3" >
               <img class="cat_item" alt="<%= category.title %>" style="height: 200px; width: auto;" src="<%= category.main_image_url(:medium) %>">
@@ -17,12 +17,12 @@
               </div>
             </li>
           <% end %>
-        <% end %>
-      </ul>
+        </ul>
+      </div>
+      <a class="left carousel-control buttons next">&rsaquo;</a>
     </div>
-    <a class="left carousel-control buttons next">&rsaquo;</a>
   </div>
-</div>
+<% end %>
 
 <% Category.all.each do |category| %>
     <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 20px;">
@@ -154,7 +154,7 @@
       showScreenToBuy();
     }
     $('div#product_type').fadeIn(600);
-    $.scrollTo($('div#product_type_previous'), 400);
+    $.scrollTo($('div#product_type'), 400);
     showIsoTope();
   });
   
@@ -228,11 +228,11 @@
   });
   
   function showScreenToBuy() {
+    $("#sell_message").hide();
+    $("#buy_message").show();
     $('li.product_model').not('#filter_model_all').hide();
     $('li.model_for_buying').show();
     for_what = "for_buying";
-    $("#sell_message").hide();
-    $("#buy_message").show();
     $(".thumbnail .box .button_for_buy").show();
     $(".thumbnail .box .button_for_sell").hide();
     $(".product_search_container .nav-pills").each(function(index) {
@@ -245,10 +245,10 @@
   }
   function showScreenToSell() {
     for_what = "for_selling";
-    $('li.product_model').not('#filter_model_all').hide();
-    $('li.model_for_selling').show();
     $("#sell_message").show();
     $("#buy_message").hide();
+    $('li.product_model').not('#filter_model_all').hide();
+    $('li.model_for_selling').show();
     $(".thumbnail .box .button_for_buy").hide();
     $(".thumbnail .box .button_for_sell").show();
     $(".product_search_container .nav-pills").each(function(index) {
