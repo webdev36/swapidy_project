@@ -646,7 +646,7 @@ a.login_forgot:hover {
 .vote_container{
 margin-left: 70px;}
 .darkoverlay {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   border: medium none;
   box-shadow: none;
   -webkit-border-radius: 20px;
