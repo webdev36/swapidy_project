@@ -7,7 +7,8 @@
   <div id="slider-code" class="span12">
     <a class="left carousel-control buttons prev">&lsaquo;</a>
     <div class="viewport">
-        <ul class="overview" style="width: 1560px;">
+      <ul class="overview" style="width: 1560px;">
+        <% cache("homepage_available_categories", :expires_in => 1.hour)%>
           <% Category.all.each_with_index do |category, index| %>
             <li id="cat_<%= category.id %>" class="item category span3" >
               <img class="cat_item" alt="<%= category.title %>" style="height: 200px; width: auto;" src="<%= category.main_image_url(:medium) %>">
@@ -16,14 +17,14 @@
               </div>
             </li>
           <% end %>
-        </ul>
+        <% end %>
+      </ul>
     </div>
     <a class="left carousel-control buttons next">&rsaquo;</a>
   </div>
 </div>
 
 <% Category.all.each do |category| %>
-  <%# cache("homepage_container_category_#{category.id}") do %>
     <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 20px;">
       <div style="display: block;padding:20px 0 30px;">
 
@@ -33,7 +34,7 @@
             <li class="product_model <%= "model_for_buying" if product_model.for_buy? %> <%= "model_for_selling" if product_model.for_sell? %>" id="filter_model_<%= product_model.id %>"><a><%= product_model.title %></a></li>
           <% end %>
         </ul>
-        <% cache("homepage_category_#{category.id}_filter_attr") do %>
+        <% cache("homepage_category_#{category.id}_filter_attr", :expires_in => 1.hour) do %>
           <div id="search_container" class="attribute_filter">
             <% category.category_attributes.each do |attr|%>
               <div class="option-set" data-group="cat_attr_<%= attr.id %>">
@@ -60,16 +61,15 @@
           <div class="product_container">
             <div id="products" class="isotope" style="">
               <% category.products.each do |product| %>
-                <%# cache("homepage_product_thumb_#{product.id}") do %>
+                <% cache("homepage_product_thumb_#{product.id}") do %>
                   <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>
-                <%# end %>
+                <% end %>
               <% end %>
             </div>
           </div>
         <% end %>
       </div>
     </div>
-  <%# end %>
 <% end %>
 
 <script language="JavaScript">
@@ -246,7 +246,7 @@
   function showScreenToSell() {
     for_what = "for_selling";
     $('li.product_model').not('#filter_model_all').hide();
-    $('li.model_for_buying').show();
+    $('li.model_for_selling').show();
     $("#sell_message").show();
     $("#buy_message").hide();
     $(".thumbnail .box .button_for_buy").hide();
