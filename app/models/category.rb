@@ -19,6 +19,7 @@ class Category < ActiveRecord::Base
   after_destroy :expired_fragment_caches_for_destroy
 
   def expired_fragment_caches
+    ActionController::Base.new.expire_fragment("homepage_container_category_#{self.id}_filter_attr") rescue nil
     ActionController::Base.new.expire_fragment("homepage_available_categories")
   end  
   

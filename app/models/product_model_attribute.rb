@@ -11,6 +11,21 @@ class ProductModelAttribute < ActiveRecord::Base
     title
   end
   
+  def count_for_buy
+    self.products.for_buy.count
+  end
+
+  def count_for_sell
+    self.products.for_sell.count
+  end
+  
+  def filter_content
+    result = ""
+    result += " attr_filter_model_#{self.product_model.id}_for_buying" if count_for_buy > 0
+    result += " attr_filter_model_#{self.product_model.id}_for_selling" if count_for_sell > 0
+    return result
+  end
+  
   def title
     [product_model.title, category_attribute.title, value].join(" - ") rescue ""
   end

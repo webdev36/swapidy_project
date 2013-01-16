@@ -27,15 +27,22 @@ class CategoryAttribute < ActiveRecord::Base
   def attributes_in_models
     attribute_values = {}
     attribute_titles = {}
+    for_buy_attributes = {}
+    for_sell_attributes = {}
     self.product_model_attributes.each do |attribute|
       attribute_titles.merge! attribute.gen_fitler_id => attribute.value
+      
       if attribute_values[attribute.gen_fitler_id]
-        attribute_values[attribute.gen_fitler_id] << attribute.product_model
+        attribute_values[attribute.gen_fitler_id] << attribute
+        for_buy_attributes[attribute.gen_fitler_id] += attribute.count_for_buy
+        for_sell_attributes[attribute.gen_fitler_id] += attribute.count_for_sell
       else
-        attribute_values.merge! attribute.gen_fitler_id => [attribute.product_model]
+        for_buy_attributes.merge! attribute.gen_fitler_id => attribute.count_for_buy
+        for_sell_attributes.merge! attribute.gen_fitler_id => attribute.count_for_sell
+        attribute_values.merge! attribute.gen_fitler_id => [attribute]
       end
     end
-    return attribute_values.keys.map{|key| [key, attribute_titles[key], attribute_values[key] ] }
+    return attribute_values.keys.reject{|key| (for_buy_attributes[key] + for_sell_attributes[key]) == 0 }.map{|key| [key, attribute_titles[key], attribute_values[key], for_buy_attributes[key], for_sell_attributes[key]] }
   end
 
   after_save :expired_fragment_caches
