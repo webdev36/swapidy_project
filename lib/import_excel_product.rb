@@ -26,7 +26,7 @@ module ImportExcelProduct
     model = category.product_models.create(:title => columns[INDEXES[:product_model]], :weight_lb => columns[INDEXES[:weight_lb]].to_i) unless model
     logger.info "model: #{model.id} - #{model.title}"
 
-    product = Product.find_by_title columns[INDEXES[:title]]
+    product = Product.where(:title => columns[INDEXES[:title]], :for_sell => !for_buying, :for_buy => for_buying).first
     return product if product
 
     product = Product.new(:title => columns[INDEXES[:title]], 

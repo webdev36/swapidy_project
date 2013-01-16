@@ -1,4 +1,5 @@
 require 'stamps_shipping_gateway'
+require 'zip_code'
 
 class Order < ActiveRecord::Base
   include StampsShippingGateway
@@ -11,7 +12,7 @@ class Order < ActiveRecord::Base
   validates :order_type, :status, :presence => true
   validates :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_city, :shipping_state, 
             :shipping_zip_code, :shipping_country, :presence => true
-
+  
   attr_accessor :candidate_addresses, :is_candidate_address
 
   belongs_to :product
@@ -65,6 +66,11 @@ class Order < ActiveRecord::Base
   end
   
   def shipping_address_valid?
+    unless ZipCode::ZIPCODES[self.shipping_zip_code]
+      errors.add(:shipping_zip_code, "has not supported. Please select another value!")
+      return false
+    end
+    
     return true if Rails.env != 'production'
     result = verify_shipping_address
     #return true if is_candidate_address && !result && candidate_addresses && !candidate_addresses.empty? 

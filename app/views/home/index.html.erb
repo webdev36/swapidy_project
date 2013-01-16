@@ -57,7 +57,7 @@
         <% end %>
       </div>
       <div style="display: block;">
-        <% cache("homepage_product_container_category_#{category.id}", :expires_in => 1.hour) do %>
+        <%# cache("homepage_product_container_category_#{category.id}", :expires_in => 1.hour) do %>
           <div class="product_container">
             <div id="products" class="isotope" style="">
               <% category.products.each do |product| %>
@@ -67,7 +67,7 @@
               <% end %>
             </div>
           </div>
-        <% end %>
+        <%# end %>
       </div>
     </div>
 <% end %>
