@@ -1,0 +1,18 @@
+ <%= form_for(@payment, :as => 'payment', :url => "/payments/confirm") do |f| %>
+ <%#= render :partial => "/shared/card_info", :locals => {:card => current_user }%>
+  <%#= f.fields_for :user do |user| %>
+    <%= render :partial => "/devise/shared/stripe_card_form", :locals => {:submit_form => "new_payment", :field_prefix => "payment_", :f => f, :user => @payment}%>
+  <%# end %>
+  <br />
+  <% unless @payment.errors.empty? %>
+    <div style="color: red;"><%= raw @payment.errors.full_messages.join(".<br/>") %></div>
+    <br/>
+  <% end %>
+  
+  <div>
+    <input type="button" value="Submit" class="show_button_buy" onclick="javascript:new_payment_card_validate();" style="color:white; height:40px; margin-left:180px; margin-top:20px;"/>
+    <%#= f.submit "Submit" %>
+  </div>
+<% end %>
+
+
