@@ -5,10 +5,21 @@ class OrdersController < ApplicationController
   
   def new
     @order = Order.new(:order_type => params[:order_type], :product_id => params[:product_id].to_i )
-    @order.using_condition = params[:using_condition]
     @product = Product.find params[:product_id]
+    unless @product
+      redirect_to "/" 
+      return
+    end
+    
+    @order.using_condition = params[:using_condition]
     @order.honey_price = @product.price_for(@order.using_condition)
-
+    if @order.using_condition.nil? || !Product::USING_CONDITIONS.values.include?(@order.using_condition) || @order.honey_price.nil?
+      @error_message = "You need to select at least one of the types!"
+      params["for"] = params[:order_type] && params[:order_type] == Order::TYPES[:order] ? "buy" : "sell"
+      render "/products/show"
+      return
+    end
+    
     if user_signed_in?
       render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_form"
     else
