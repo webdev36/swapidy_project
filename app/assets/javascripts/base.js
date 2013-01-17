@@ -71,7 +71,7 @@ $(function() {
 	guiders.createGuider({
 	buttons: [{ name: "Close" },
 		{ name: "Next" }],
-	description: "<strong>Thanks for Joining! Much sexy times. Upload a profile picture, add some information about yourself It's fast and easy.",
+	description: "<strong>Thanks for Joining! Upload a profile picture, add some information about yourself It's fast and easy.",
 	id: "first",
 	next: "second",
 	overlay: true,
