@@ -65,13 +65,17 @@ namespace :swapidy do
     desc "Insert products database from excel file"
     task :insert_products => :environment do
       logger = Logger.new("log/swapidy_tasks.log")
-      ["products_20130114_buy.csv", "products_20130114_sell.csv"].each do |file_name|
+      begin
+        ["products_20130114_buy.csv", "products_20130114_sell.csv"].each do |file_name|
+          logger.info file_name
+          
           file = File.open(File.join(Rails.root, 'demo_data', file_name),"r")
           content = file.read
           lines = content.split(/\r/)
-          headers = lines[0].split(",")
           
-          return nil if headers.size < 10
+          headers = lines[0].split(/\,/)
+          return nil if headers.size < 7
+          
           ["Weight lb", "Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
             attrs = CategoryAttribute.where(:title => cat_title).each {|attr| attr.destroy }
           end
@@ -82,6 +86,9 @@ namespace :swapidy do
             product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", logger) #rescue nil
             logger.info product
           end
+        end
+      rescue Exception => e
+        logger.info e.message
       end
     end
 

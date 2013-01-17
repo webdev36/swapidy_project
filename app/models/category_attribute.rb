@@ -24,6 +24,23 @@ class CategoryAttribute < ActiveRecord::Base
     [category.title, title].join(" - ")
   end
   
+  def applied_for_models_filter
+    class_types = []
+    total_count_for_buy = 0
+    total_count_for_sell = 0
+    product_model_attributes.each do |model_attr|
+      class_types << "attr_filter_model_#{model_attr.product_model.id}_for_buying" if model_attr.count_for_buy > 0
+      class_types << "attr_filter_model_#{model_attr.product_model.id}_for_selling" if model_attr.count_for_sell > 0
+      
+      total_count_for_buy += model_attr.count_for_buy
+      total_count_for_sell += model_attr.count_for_sell
+    end 
+    
+    class_types << "attr_filter_model_all_for_buying" if total_count_for_buy > 0
+    class_types << "attr_filter_model_all_for_selling" if total_count_for_sell > 0
+    class_types.uniq.join(" ")
+  end
+  
   def attributes_in_models
     attribute_values = {}
     attribute_titles = {}
