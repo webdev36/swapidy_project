@@ -32,7 +32,7 @@
   <% if @order.candidate_addresses && !@order.candidate_addresses.empty? %>
     <div id="candidate_addresses_container" >
       <br />
-      <b style="color: red;">There are <%= @order.candidate_addresses.size == 1 ? "an address" : "#{@order.candidate_addresses.size} addresses"%> 
+      <b class="alert alert-error">There are <%= @order.candidate_addresses.size == 1 ? "an address" : "#{@order.candidate_addresses.size} addresses"%> 
       would be exactly your address.</b><br/>
       <% @order.candidate_addresses.each_with_index do |address, index|%>
         <%= index + 1 %>. <%= address[:address1]%> 
