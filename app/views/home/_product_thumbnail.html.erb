@@ -5,13 +5,13 @@
     <div>
       <div class="product_price">
         <% if product.has_flawless_type? %>
-          <div class="flawless_type">Flawless <%= format_num(product.honey_price) %> </div>
+          <div class="flawless_type">Flawless: <%= format_num(product.honey_price) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"></div>
         <% end %>
         <% if product.has_good_type? %>
-          <div class="good_type">Good <%= format_num(product.price_for_good_type) %> </div>
+          <div class="good_type">Good: <%= format_num(product.price_for_good_type) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"> </div>
         <% end %>
         <% if product.has_poor_type? %>
-          <div class="poor_type">Poor <%= format_num(product.price_for_poor_type) %> </div>
+          <div class="poor_type">Poor <%= format_num(product.price_for_poor_type) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"> </div>
         <% end %>
       </div>
       <div class="button_for_buy">

@@ -15,7 +15,6 @@
 }
 *{
   font-family:"myriad";
-  font-smooth: auto;
 }
 #iphone{
 	height:350px;
@@ -361,7 +360,7 @@ margin-bottom:30px;
 }
 
 #products .item{
-  width:150px;
+  width:160px;
   height: 265px;
   border: 0px;
   overflow:hidden;
@@ -628,6 +627,11 @@ label {
   color:#fa3e6e;
   font-size:15px;
   position:relative;
-  left:40px;
+  left:45px;
   bottom:10px;
+  z-index:5000;
+}
+.home_honey_symbol{
+  position:relative;
+  bottom:3px;
 }

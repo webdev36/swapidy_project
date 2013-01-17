@@ -1158,9 +1158,7 @@ input[type="checkbox"] {
 
 input[type="file"],
 input[type="image"],
-input[type="submit"],
 input[type="reset"],
-input[type="button"],
 input[type="radio"],
 input[type="checkbox"] {
   width: auto;
@@ -2927,6 +2925,7 @@ table th[class*="span"],
   color: #333333;
   white-space: nowrap;
   height:10px;
+  z-index:2000;
 }
 
 .dropdown-menu li > a:hover,
@@ -6004,7 +6003,7 @@ a.badge:hover {
 
 .hero-unit {
 height: 100%;
-z-index: 9999999;
+z-index: 1000;
 position: absolute;
 top: 0;
 height: 330px;
