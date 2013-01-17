@@ -442,6 +442,8 @@ label {
   margin: 0 auto;
   overflow: hidden;
   text-align:center;
+  height: 210px;
+  overflow-y: auto;
 }
 
 .big-checkbox + label {

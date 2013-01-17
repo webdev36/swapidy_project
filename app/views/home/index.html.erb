@@ -39,7 +39,7 @@
             <% category.category_attributes.each do |attr|%>
               <div class="option-set" data-group="cat_attr_<%= attr.id %>">
                 <div style="float:left;">
-                <h3 class="s_category" style="color:#38B4DE;font-size:18px;"><%= attr.title %></h3>
+                <h3 class="s_category <%= attr.applied_for_models_filter %>" style="color:#38B4DE;font-size:18px;"><%= attr.title %></h3>
                 <% attr.attributes_in_models.each do |attr_value_with_models| %>
                   <div style="display:block;" class="attr_filter <%= "attr_filter_model_all_for_buying" if attr_value_with_models[3] > 0 %> <%= "attr_filter_model_all_for_selling" if attr_value_with_models[4] > 0 %> <%= attr_value_with_models[2].map{|model_attribute| model_attribute.filter_content}.join(" ") %>" >
                     <div style="display: inline-block; line-height: 30px;" >
@@ -182,8 +182,10 @@
   });
   
   $('.product_search_container .product_model').live('click', function() {
+     $("#container_" + current_category_id + " .s_category").addClass("hidden_filter");
      $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
      $("#container_" + current_category_id + " .product_model").removeClass("active");
+     
      
      current_model_id = $(this).attr("id");
      $("#container_" + current_category_id + " .attr_" + current_model_id + "_" + for_what).removeClass("hidden_filter");
