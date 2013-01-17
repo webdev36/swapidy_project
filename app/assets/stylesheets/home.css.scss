@@ -437,13 +437,23 @@ label {
   color: #99a1a7;
 }
 
-#search_container{
+#search_container {
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
-  text-align:center;
-  height: 210px;
+  text-align: center;
+}
+.attr_filter_column_items {
+  height: 150px;
   overflow-y: auto;
+  min-width: 110px;
+}
+.attr_filter_column {
+  display: inline;
+}
+.isotop_empty_message {
+  text-align: center;
+  color: red;
 }
 
 .big-checkbox + label {

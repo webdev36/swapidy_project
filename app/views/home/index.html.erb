@@ -37,19 +37,23 @@
         <% cache("homepage_category_#{category.id}_filter_attr", :expires_in => 1.hour) do %>
           <div id="search_container" class="attribute_filter">
             <% category.category_attributes.each do |attr|%>
-              <div class="option-set" data-group="cat_attr_<%= attr.id %>">
-                <div style="float:left;">
-                <h3 class="s_category <%= attr.applied_for_models_filter %>" style="color:#38B4DE;font-size:18px;"><%= attr.title %></h3>
-                <% attr.attributes_in_models.each do |attr_value_with_models| %>
-                  <div style="display:block;" class="attr_filter <%= "attr_filter_model_all_for_buying" if attr_value_with_models[3] > 0 %> <%= "attr_filter_model_all_for_selling" if attr_value_with_models[4] > 0 %> <%= attr_value_with_models[2].map{|model_attribute| model_attribute.filter_content}.join(" ") %>" >
-                    <div style="display: inline-block; line-height: 30px;" >
-                      <input type="checkbox" id="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>" class="regular-checkbox big-checkbox"
-                          attr-filter-option='<%= attr_value_with_models[0] %>' />
-                      <label for="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>"></label>
-                    </div>
-                    <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 15px;"><%= attr_value_with_models[1] %></div>
+              <div class="attr_filter_column <%= attr.applied_for_models_filter %>">
+                <div class="option-set" data-group="cat_attr_<%= attr.id %>">
+                  <div style="float:left; min-width: 110px;">
+                    <h3 class="s_category" style="color:#38B4DE; font-size:18px;"><%= attr.title %></h3>
+                    <div class="attr_filter_column_items" >
+                      <% attr.attributes_in_models.each do |attr_value_with_models| %>
+                        <div style="display:block; min-width: 90px;" class="attr_filter <%= "attr_filter_model_all_for_buying" if attr_value_with_models[3] > 0 %> <%= "attr_filter_model_all_for_selling" if attr_value_with_models[4] > 0 %> <%= attr_value_with_models[2].map{|model_attribute| model_attribute.filter_content}.join(" ") %>" >
+                          <div style="display: inline-block; line-height: 30px;" >
+                            <input type="checkbox" id="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>" class="regular-checkbox big-checkbox"
+                                attr-filter-option='<%= attr_value_with_models[0] %>' />
+                            <label for="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>"></label>
+                          </div>
+                          <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 15px;"><%= attr_value_with_models[1] %></div>
+                        </div>
+                      <% end %>
+                    </div>  
                   </div>
-                <% end %>
                 </div>
               </div>
             <% end %>
@@ -57,6 +61,7 @@
         <% end %>
       </div>
       <div style="display: block;">
+        <div class="isotop_empty_message" style="display: none;">Sorry, there is no such product.</div>
         <%# cache("homepage_product_container_category_#{category.id}", :expires_in => 1.hour) do %>
           <div class="product_container">
             <div id="products" class="isotope" style="">
@@ -182,7 +187,7 @@
   });
   
   $('.product_search_container .product_model').live('click', function() {
-     $("#container_" + current_category_id + " .s_category").addClass("hidden_filter");
+     $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
      $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
      $("#container_" + current_category_id + " .product_model").removeClass("active");
      
@@ -201,6 +206,12 @@
     $("#container_" + current_category_id + ' .product_container').fadeIn(600);
     comboFilters = get_filter_options();
     $("#container_" + current_category_id + ' #products').isotope({ filter: comboFilters.join(', ') });
+    
+    if ( !$("#container_" + current_category_id + ' #products').data('isotope').$filteredAtoms.length ) {
+      $('.isotop_empty_message').fadeIn('slow');
+    } else {
+      $('.isotop_empty_message').fadeOut('fast');
+    }
   }
   
   $('#product_type .viewport .category').live("mouseenter", function(){
