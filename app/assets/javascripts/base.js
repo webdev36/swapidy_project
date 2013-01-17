@@ -71,11 +71,11 @@ $(function() {
 	guiders.createGuider({
 	buttons: [{ name: "Close" },
 		{ name: "Next" }],
-	description: "<strong>Thanks for Joining! Much sexy times. Upload a profile picture, add some information about yourself and discover swap your ass for my penis. It's fast and easy.",
+	description: "<strong>Thanks for Joining! Much sexy times. Upload a profile picture, add some information about yourself It's fast and easy.",
 	id: "first",
 	next: "second",
 	overlay: true,
-	title: "Welcome to AssRapers.com! 41 and older!"
+	title: "Welcome to Yay!"
 	}).show();
 
 	guiders.createGuider({
