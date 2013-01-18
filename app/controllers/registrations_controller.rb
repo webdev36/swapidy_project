@@ -4,6 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
     if(params[:login_to_order].nil? || params[:login_to_order].blank?)
       super
       UserNotifier.signup_greeting(resource).deliver
+      check_to_display_guide
     else
       build_resource
       if resource.save
@@ -12,6 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
           sign_in(resource_name, resource)
           redirect_to :controller => :orders, :action => :new, :method => :post, :product_id => params[:product_id], :using_condition => params[:using_condition], :order_type => params[:order_type]
           UserNotifier.signup_greeting(resource).deliver
+          check_to_display_guide
           return
         else
           set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?

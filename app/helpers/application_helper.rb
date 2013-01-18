@@ -1,5 +1,13 @@
 module ApplicationHelper
   
+  def display_guide?
+    if session[:need_to_display_guide]
+      session[:need_to_display_guide] = nil
+      return true
+    end 
+    return false
+  end
+  
   def csrf_meta_tag
     if protect_against_forgery?
       out = %(<meta name="csrf-param" content="%s"/>\n)

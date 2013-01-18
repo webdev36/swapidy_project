@@ -49,6 +49,10 @@
                 dataType : 'script'
               });
             },10*60*1000);
+            
+            <% if display_guide? %>
+              display_guide();
+            <% end %>
           </script>
 
           <%= render :partial => "/layouts/profile_menu" %>

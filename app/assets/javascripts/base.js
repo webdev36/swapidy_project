@@ -65,43 +65,36 @@ $(function() {
     $(this).attr("src","/images/vote_after.png");
 	});
 	
-	
-	//guiders
-	//if(userLoggedIn && userViews == 1)
-	guiders.createGuider({
-	buttons: [{ name: "Close" },
-		{ name: "Next" }],
-	description: "<strong>Thanks for Joining! Upload a profile picture, add some information about yourself It's fast and easy.",
-	id: "first",
-	next: "second",
-	overlay: true,
-	title: "Welcome to Yay!"
-	}).show();
-
-	guiders.createGuider({
-	attachTo: "#nav_login",
-	buttons: [{ name: "Close" },
-		{ name: "Next" }],
-	description: "Setup your profile, create widgets, see points, change settings and more from here.",
-	id: "second",
-	next: "third",
-	position: '6',
-	title: "Settings",
-	width: 200,
-	overlay: true
-	});
-	//}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 });
+
+function display_guide() {
+  //guiders
+  //if(userLoggedIn && userViews == 1)
+  guiders.createGuider({
+    buttons: [{ name: "Close" },
+              { name: "Next" }],
+    description: "<strong>Thanks for Joining! Upload a profile picture, add some information about yourself It's fast and easy.",
+    id: "first",
+    next: "second",
+    overlay: true,
+    title: "Welcome to Yay!"
+  }).show();
+
+  guiders.createGuider({
+    attachTo: "#nav_login",
+    buttons: [{ name: "Close" },
+              { name: "Next" }],
+    description: "Setup your profile, create widgets, see points, change settings and more from here.",
+    id: "second",
+    next: "third",
+    position: '6',
+    title: "Settings",
+    width: 200,
+    overlay: true
+  });
+  //}
+  
+}
 
 function open_in_new_tab(url)
 {
