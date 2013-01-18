@@ -1,1 +1,2 @@
 $("#popup-dialog_add_honey .render_form").html("<%= raw escape_javascript(@return_content) %>");
+$("#honey_balance_amount_menu").html(accounting.formatNumber("<%= current_user.honey_balance %>"));

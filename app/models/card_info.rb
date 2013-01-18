@@ -32,7 +32,7 @@ module CardInfo
        :card_expired_year => self.new_card_expired_year,
        :card_expired_month => self.new_card_expired_month,
        :card_last_four_number => self.new_card_last_four_number,
-       :card_expired_date => ("#{self.card_expired_year}-#{self.card_expired_month}-01".to_date rescue nil)}
+       :card_expired_date => ("#{self.new_card_expired_year}-#{self.new_card_expired_month}-01".to_date rescue nil)}
     else
       nil
     end

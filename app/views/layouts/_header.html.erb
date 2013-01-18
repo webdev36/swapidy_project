@@ -69,7 +69,7 @@
 
           <li>
             <div class="honey_display">
-              <div style="display: inline-block;"><img src="/images/honey_currency_score.png"><%= format_num(current_user.honey_balance)%></div>
+              <div style="display: inline-block;"><img src="/images/honey_currency_score.png"><span id="honey_balance_amount_menu"><%= format_num(current_user.honey_balance)%></span></div>
               <% if controller_name != "payments" %>
                 <div style="display: inline-block;"><a href="javascript:showPopup('popup-dialog_add_honey');"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a></div>
               <% else %>

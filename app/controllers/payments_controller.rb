@@ -30,6 +30,12 @@ class PaymentsController < ApplicationController
     @payment.card_expired_month = current_user.card_expired_month
     @payment.card_name = current_user.card_name
     @payment.card_last_four_number = current_user.card_last_four_number
+
+    @payment.new_card_expired_year = current_user.card_expired_year
+    @payment.new_card_expired_month = current_user.card_expired_month
+    @payment.new_card_name = current_user.card_name
+    @payment.new_card_number = "xxxx-xxxx-xxxx-#{current_user.card_last_four_number}" unless (current_user.card_last_four_number || "").blank?
+
     respond_to do |format|
       format.js {
         @return_content = render_to_string(:partial => "/payments/edit_card_form")
@@ -41,7 +47,7 @@ class PaymentsController < ApplicationController
     @payment = PaymentTransaction.new(params[:payment])
     @payment.amount = params[:payment][:amount].gsub(",", "").to_i rescue nil
     @payment.honey_money = params[:payment][:honey_money].gsub(",", "").to_i rescue nil
-    
+
     @payment.user = current_user
     if @payment.valid? && @payment.payment_valid?
       Rails.logger.info @payment.errors.full_messages
@@ -58,13 +64,18 @@ class PaymentsController < ApplicationController
     @payment.honey_money = @payment.amount * RATIO
     @payment.user = current_user
     
-    current_user.new_card_name = @payment.new_card_name
-    current_user.new_card_expired_month = @payment.new_card_expired_month
-    current_user.new_card_expired_year = @payment.new_card_expired_year
-    current_user.new_stripe_card_token = @payment.new_stripe_card_token
-    current_user.new_card_type = @payment.new_card_type
-    current_user.new_card_last_four_number = @payment.new_card_last_four_number
-    
+    unless @payment.new_card_name = @payment.card_name && 
+           @payment.new_card_expired_month = @payment.card_expired_month && 
+           @payment.new_card_expired_year = @payment.card_expired_year && 
+           @payment.new_card_last_four_number = "xxxx-xxxx-xxxx-#{@payment.card_last_four_number}"
+      current_user.new_card_name = @payment.new_card_name
+      current_user.new_card_expired_month = @payment.new_card_expired_month
+      current_user.new_card_expired_year = @payment.new_card_expired_year
+      current_user.new_stripe_card_token = @payment.new_stripe_card_token
+      current_user.new_card_type = @payment.new_card_type
+      current_user.new_card_last_four_number = @payment.new_card_last_four_number
+    end
+
     begin
       PaymentTransaction.transaction do
         current_user.honey_balance = (current_user.honey_balance || 0) + @payment.honey_money
