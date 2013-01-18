@@ -1,0 +1,128 @@
+<div class="render_form">
+  <%= form_for(@payment, :as => 'payment', :url => "/payments/edit_card", :html => {:id => "add_honey_form"}) do |f| %>
+    <br/>
+    <div class="headings_pink_edit">
+      How much honey would you like to purchase?
+    </div>
+    <div>
+      <div class="dollar_conversion">
+        <span class="icon_dollar">$&nbsp;</span><%= f.text_field :amount,  :autocomplete => "off", :class =>'dollar_textbox', :placeholder => 'Enter dollar amount' %><span class="payment_equal">=</span>
+      </div>
+    
+      <div class="honey_conversion"><img class="icon_honey_conversion" src="/images/honey_30px.png">&nbsp;
+        <%= f.text_field :honey_money,  :autocomplete => "off", :class =>'honey_textbox', :placeholder => 'Enter honey amount' %>
+      </div>
+    </div>
+    <div class="error_message" style="text-align: center; color: red; display: none;">Please enter valid amounts!<br/><br/></div>  
+    <a href="#" id="add_honey_submit" class="show_button_buy" style="color:white; font-family:'myriad'; position:relative; top:10px; font-size:25px; margin-left:230px; padding:10px;"> Continue</a>
+    <br />
+  <% end %>
+</div>
+
+<script language="JavaScript">
+  
+  $("#add_honey_form #add_honey_submit").live("click", function() {
+    var amount = parseInt(accounting.toFixed($("#add_honey_form #payment_amount").attr("value")));
+    var honey_money = parseInt(accounting.toFixed($("#add_honey_form #payment_honey_money").attr("value")));
+
+    if(amount <= 0 || honey_money <= 0){
+      $("#add_honey_form .error_message").show();
+      return
+    }
+     
+    submit_add_honey_form();
+    return false;
+  });
+  
+  $("#add_honey_form #edit_card_submit").live("click", function() {
+    add_honey_card_validate();
+  });
+  
+  function submit_add_honey_form() {
+    $.ajax({
+      type : 'POST',
+      url : $("#add_honey_form").attr("action"),
+      data : $("#add_honey_form").serialize(),
+      dataType : 'script',
+      success: function(data) {}
+    });
+  }
+  
+  $("#add_honey_form #payment_amount").live("keyup", function() {
+    calculateHoneyMoney(false);
+  });
+  $("#add_honey_form #payment_amount").live("blur", function() {
+    calculateHoneyMoney(true);
+  });
+
+  function calculateHoneyMoney(is_blur) {
+    var amount = parseInt(accounting.toFixed($("#add_honey_form #payment_amount").attr("value")));
+    if (amount > 0) {
+      var honey_money = amount * 10;
+      $("#add_honey_form #payment_honey_money").attr('value', accounting.formatNumber(honey_money));
+      if(is_blur){
+        $("#add_honey_form #payment_amount").attr('value', accounting.formatNumber(amount, 2));
+      }
+    } else {
+      $("#add_honey_form #payment_honey_money").attr('value', '0.0');
+    }
+  }
+  
+  $("#add_honey_form #payment_honey_money").live("keyup", function() {
+    calculateAmount();
+  });
+  $("#add_honey_form #payment_honey_money").live("blur", function() {
+    calculateAmount();
+  });
+
+  function calculateAmount() {
+    var honey_money = parseInt(accounting.toFixed($("#add_honey_form #payment_honey_money").attr("value")));
+    if (honey_money > 0) {
+      var amount = honey_money / 10;
+      //$("#payment_honey_money").attr('value', accounting.formatNumber(honey_money));
+      $("#add_honey_form #payment_amount").attr('value', accounting.formatNumber(amount, 2));
+    } else {
+      $("#add_honey_form #payment_amount").attr('value', '0.0');
+    }
+  }
+  
+  
+  
+  function add_honey_card_validate() {
+    var form = $("#add_honey_form");
+    form.find("#cardInfoValidate").hide();
+    
+    // do nothing if users don't enter Card information
+    if(form.find('#payment_new_card_name').val() == '' && form.find('#payment_new_card_number').val() == '' && form.find('#payment_new_card_cvc').val() == '' &&
+        form.find('#payment_new_card_expired_month').val() == '' && form.find('#payment_new_card_expired_year').val() == '') {
+        submit_add_honey_form();
+        return true;
+    }
+    
+    // given a valid form, submit the payment details to stripe
+    //$(form['submit-button']).attr("disabled", "disabled")
+    Stripe.setPublishableKey('<%= StripeGateway.payment_public_key %>');
+    Stripe.createToken({
+      number: form.find('#payment_new_card_number').val(),
+      cvc: form.find('#payment_new_card_cvc').val(),
+      exp_month: form.find('#payment_new_card_expired_month').val(),
+      exp_year: form.find('#payment_new_card_expired_year').val()
+    }, 100, function(status, response) {
+      if (response.error) {
+        $("#add_honey_form #cardInfoValidate").show();
+        $("#add_honey_form #cardInfoValidate .payment-errors").html(response.error.message);
+      } else {
+        // token contains id, last4, and card type
+        form.find("#payment_new_stripe_card_token").val(response['id']);
+        form.find("#payment_new_card_type").val(response['card']['type']);
+        form.find("#payment_new_card_last_four_number").val(response['card']['last4']);
+        form.find("#payment_new_card_number").val('');
+        form.find("#payment_new_card_cvc").val('');
+        // insert the stripe token
+        // and submit
+        submit_add_honey_form();
+      }
+    });
+    return false;
+  }
+</script>
