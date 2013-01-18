@@ -45,9 +45,8 @@ font-size:30px;
 }
 
 #product_container{
-margin-left:auto;
+margin-left:100px;
 margin-top:50px;
-margin-right:auto;
 width:500px;
 }
 
@@ -56,7 +55,6 @@ width:500px;
 text-align: center;
   background: #0099FF;
   color: white;
-  padding-top:10px;
   font-size: 30px;
   text-decoration: none;
   font-family: "myriad";
@@ -72,11 +70,11 @@ text-align: center;
       0 2px 2px rgba(0,0,0,0.3), 
       0 0 4px 1px rgba(0,0,0,0.2); 
   text-shadow: 0 1px rgba(255,255,255,0.7); 
-  margin-top:30px; 
-  width: 100px;
-  height: 30px;
+  height: 50px;
   margin-left:auto;
   margin-right:auto;
+  position:relative;
+  bottom:200px;
 }
 .show_button_sell:hover{
   background: #00CCFF;
@@ -162,4 +160,29 @@ text-align: center;
 }
 .buy_cancel{
  font-size:20px; 
+}
+.show_definitions{
+font-family:"Times New Roman";
+line-height:1.5;
+position:relative;
+left:600px;
+bottom:270px;
+width:200px;
+
+padding:20px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+background:whitesmoke;
+}
+.show_definitions dt{
+  font-size:20px;
+  color:#fa3e6e;
+  font-style:italic;
+  margin-bottom:10px;
+}
+.show_definitions dd{
+color:#666666;
+font-size:15px;
+  margin-bottom:20px;
 }

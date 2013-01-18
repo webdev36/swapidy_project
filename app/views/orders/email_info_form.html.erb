@@ -23,9 +23,9 @@ label{
   <% @user = resource || User.new unless @user %>
   <%= form_for(@user || resource, :as => "user", :url => session_path(@user)) do |f| %>
     <% if @signin_failure %>
-      <div style="color: red;">
-        Invalid username or password.
-      </div>
+<div class="alert alert-error" style="width:210px;">
+  Invalid username and password.
+</div>
     <% end %>
     <input type="hidden" name="login_to_order" value="1" />
     <input type="hidden" name="product_id" value="<%= @product.id %>" />

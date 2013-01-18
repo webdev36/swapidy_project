@@ -24,7 +24,7 @@
       <div style="top: 135px; display: block;">
         <%= f.submit "Sign up", :class => "login_button", :style => "position: relative; top: 0;" %>
         <% unless resource.errors.empty? %>
-          <span style="color: red;"> !!! <%= raw resource.errors.full_messages.first %>. </span>
+          <div class="alert alert-error" style="width:245px; position:relative; bottom:35px; left:120px;"> <%= raw resource.errors.full_messages.first %>. </span>
         <% end %>
       </div>
     <% end %>
