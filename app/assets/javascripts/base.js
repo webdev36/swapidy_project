@@ -79,7 +79,7 @@ $(function() {
 	}).show();
 
 	guiders.createGuider({
-	attachTo: "#nav_login",
+	attachTo: ".nav_settings",
 	buttons: [{ name: "Close" },
 		{ name: "Next" }],
 	description: "Setup your profile, create widgets, see points, change settings and more from here.",
@@ -90,6 +90,74 @@ $(function() {
 	width: 200,
 	overlay: true
 	});
+
+  guiders.createGuider({
+  attachTo: ".honey_display",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  id: "third",
+  next: "fourth",
+  position: '9',
+  title: "Settings",
+  overlay: true
+  });
+
+  guiders.createGuider({
+  attachTo: "#location_search",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  id: "fourth",
+  next: "fifth",
+  position: '6',
+  width:200,
+  title: "Settings",
+  overlay: true
+  });
+  guiders.createGuider({
+  attachTo: ".sell_now",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  id: "fifth",
+  next: "sixth",
+  position: '12',
+  width:200,
+  highlight: '#buttons',
+  title: "Settings",
+  overlay: false
+  });
+
+  guiders.createGuider({
+  attachTo: ".sell_now",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  id: "sixth",
+  next: "seventh",
+  position: '12',
+  width:200,
+  highlight: '#buttons',
+  title: "Settings",
+  overlay: false
+  });
+
+  guiders.createGuider({
+  attachTo: ".sell_now",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  id: "sixth",
+  next: "seventh",
+  position: '12',
+  width:200,
+  highlight: '#buttons',
+  title: "Settings",
+  overlay: false
+  });
+
+
 	//}
 	
 	
