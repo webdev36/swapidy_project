@@ -27,6 +27,7 @@ Swapidy::Application.routes.draw do
   resources :products
   
   match "/payments/confirm" => "payments#confirm", :method => :post
+  match "/payments/edit_card" => "payments#edit_card", :method => :post
   resources :payments do 
     post :create, :on => :member
     post :show, :on => :member

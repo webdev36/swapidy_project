@@ -1,0 +1,21 @@
+<%= form_for(@payment, :as => 'payment', :url => "/payments/confirm", :html => {:id => "add_honey_form"}) do |f| %>
+
+  <%= f.hidden_field :amount %>
+  <%= f.hidden_field :honey_money %>
+  <%= f.hidden_field :card_type %>
+  <%= f.hidden_field :card_last_four_number %>
+  <%= f.hidden_field :card_name %>
+  <%= f.hidden_field :card_expired_month %>
+  <%= f.hidden_field :card_expired_year %>
+
+  <%= render :partial => "/devise/shared/stripe_card_form", :locals => {:submit_form => "add_honey_form", :field_prefix => "payment_", :f => f, :user => @payment}%>
+  <br />
+  <% unless @payment.errors.empty? %>
+    <div style="color: red;"><%= raw @payment.errors.full_messages.join(".<br/>") %></div>
+    <br/>
+  <% end %>
+
+  <div>
+    <a href="#" id="edit_card_submit" class="show_button_buy" style="color:white; font-family:'myriad'; position:relative; top:10px; font-size:25px; margin-left:230px; padding:10px;"> Continue</a>
+  </div>
+<% end %>

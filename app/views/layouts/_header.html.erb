@@ -49,6 +49,10 @@
                 dataType : 'script'
               });
             },10*60*1000);
+            
+            <% if display_guide? %>
+              display_guide();
+            <% end %>
           </script>
 
           <%= render :partial => "/layouts/profile_menu" %>
@@ -136,15 +140,7 @@
     <div id="dialog-content">
       <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 20px; width:590px; margin-left:160px;" >
         <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
-        <%= render :partial => "/payments/form" %>
-      </div>
-    </div>
-  </div>
-    <div id="popup-dialog_add_honey_1" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
-    <div id="dialog-content">
-      <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 20px; width:500px; margin-left:230px;" >
-        <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
-        <%= render :partial => "/payments/form1" %>
+        <%= render :partial => "/payments/add_honey_form" %>
       </div>
     </div>
   </div>

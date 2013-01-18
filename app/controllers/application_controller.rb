@@ -25,4 +25,8 @@ class ApplicationController < ActionController::Base
     @payment.card_name = current_user.card_name
   end
   
+  def check_to_display_guide
+    session[:need_to_display_guide] = true if current_user.sign_in_count <= 3
+  end
+  
 end

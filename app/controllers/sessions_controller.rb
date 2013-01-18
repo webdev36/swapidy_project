@@ -3,6 +3,7 @@ class SessionsController < Devise::SessionsController
   def create
     if(params[:login_to_order].nil? || params[:login_to_order].blank?)
       super
+      check_to_display_guide if user_signed_in?
     else
       self.resource = User.find_by_email params[:user][:email]
       if self.resource && self.resource.valid_password?(params[:user][:password])
@@ -11,6 +12,7 @@ class SessionsController < Devise::SessionsController
       end
 
       if user_signed_in?
+        check_to_display_guide
         redirect_to :controller => :orders, :action => :new, :method => :post, :product_id => params[:product_id], :using_condition => params[:using_condition], :order_type => params[:order_type]
       else
         @signin_failure = true
