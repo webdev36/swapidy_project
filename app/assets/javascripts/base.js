@@ -65,34 +65,111 @@ $(function() {
     $(this).attr("src","/images/vote_after.png");
 	});
 	
+	
+
+	
+	
+	
+	
+	
+
 });
 
 function display_guide() {
   //guiders
   //if(userLoggedIn && userViews == 1)
   guiders.createGuider({
-    buttons: [{ name: "Close" },
-              { name: "Next" }],
-    description: "<strong>Thanks for Joining! Upload a profile picture, add some information about yourself It's fast and easy.",
-    id: "first",
-    next: "second",
-    overlay: true,
-    title: "Welcome to Yay!"
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "<strong>Thanks for Joining! Upload a profile picture, add some information about yourself It's fast and easy.",
+  id: "first",
+  next: "second",
+  overlay: true,
+  title: "Welcome to Yay!"
   }).show();
 
   guiders.createGuider({
-    attachTo: "#nav_login",
-    buttons: [{ name: "Close" },
-              { name: "Next" }],
-    description: "Setup your profile, create widgets, see points, change settings and more from here.",
-    id: "second",
-    next: "third",
-    position: '6',
-    title: "Settings",
-    width: 200,
-    overlay: true
+  attachTo: ".nav_settings",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  id: "second",
+  next: "third",
+  position: '6',
+  title: "Settings",
+  width: 200,
+  overlay: true
   });
+
+  guiders.createGuider({
+  attachTo: ".honey_display",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  id: "third",
+  next: "fourth",
+  position: '9',
+  title: "Settings",
+  overlay: true
+  });
+
+  guiders.createGuider({
+  attachTo: "#location_search",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  id: "fourth",
+  next: "fifth",
+  position: '6',
+  width:200,
+  title: "Settings",
+  overlay: true
+  });
+  guiders.createGuider({
+  attachTo: ".sell_now",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  id: "fifth",
+  next: "sixth",
+  position: '12',
+  width:200,
+  highlight: '#buttons',
+  title: "Settings",
+  overlay: false
+  });
+
+  guiders.createGuider({
+  attachTo: ".sell_now",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  id: "sixth",
+  next: "seventh",
+  position: '12',
+  width:200,
+  highlight: '#buttons',
+  title: "Settings",
+  overlay: false
+  });
+
+  guiders.createGuider({
+  attachTo: ".sell_now",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  id: "sixth",
+  next: "seventh",
+  position: '12',
+  width:200,
+  highlight: '#buttons',
+  title: "Settings",
+  overlay: false
+  });
+
+
   //}
+  
   
 }
 
