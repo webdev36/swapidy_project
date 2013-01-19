@@ -81,22 +81,61 @@ function display_guide() {
   guiders.createGuider({
   buttons: [{ name: "Close" },
     { name: "Next" }],
-  description: "<strong>Thanks for Joining! Upload a profile picture, add some information about yourself It's fast and easy.",
+  description: "Hello new user, welcome to Swapidy! We'll tell you everything you need to get started step by step.",
   id: "first",
   next: "second",
   overlay: true,
-  title: "Welcome to Yay!"
+  title: "Welcome to Swapidy!"
   }).show();
 
   guiders.createGuider({
-  attachTo: ".nav_settings",
+  attachTo: "#location_search",
   buttons: [{ name: "Close" },
     { name: "Next" }],
   description: "Setup your profile, create widgets, see points, change settings and more from here.",
   id: "second",
   next: "third",
   position: '6',
-  title: "Settings",
+  width:200,
+  title: "Where you at?",
+  overlay: true
+  });
+  
+  guiders.createGuider({
+  attachTo: ".nav_notification",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "Anytime there's any new news with your transactions, you'll receive a notification here. ",
+  id: "third",
+  next: "fourth",
+  position: '6',
+  title: "All your Notifications",
+  width: 200,
+  overlay: true
+  });
+
+  guiders.createGuider({
+  attachTo: ".nav_profile",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "All of your transaction history will be displayed here. ",
+  id: "fourth",
+  next: "fifth",
+  position: '6',
+  title: "Everything you do goes here",
+  width: 200,
+  overlay: true
+  });
+
+  guiders.createGuider({
+  attachTo: ".nav_settings",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "All of your account settings will be displayed here (name, password, credit card).",
+  id: "fifth",
+  next: "sixth",
+  position: '6',
+  title: "All your settings",
   width: 200,
   overlay: true
   });
@@ -105,67 +144,28 @@ function display_guide() {
   attachTo: ".honey_display",
   buttons: [{ name: "Close" },
     { name: "Next" }],
-  description: "Setup your profile, create widgets, see points, change settings and more from here.",
-  id: "third",
-  next: "fourth",
+  description: "This box shows how much honey currency you have. If you click on the plus sign, you can add honey to your account.",
+  id: "sixth",
+  next: "seventh",
   position: '9',
-  title: "Settings",
+  title: "Add honey to your account",
   overlay: true
   });
 
   guiders.createGuider({
-  attachTo: "#location_search",
-  buttons: [{ name: "Close" },
-    { name: "Next" }],
-  description: "Setup your profile, create widgets, see points, change settings and more from here.",
-  id: "fourth",
-  next: "fifth",
-  position: '6',
-  width:200,
-  title: "Settings",
-  overlay: true
-  });
-  guiders.createGuider({
   attachTo: ".sell_now",
   buttons: [{ name: "Close" },
     { name: "Next" }],
-  description: "Setup your profile, create widgets, see points, change settings and more from here.",
-  id: "fifth",
-  next: "sixth",
+  description: "Start selling by clicking sell now and choosing the correct model.",
+  id: "seventh",
+  next: "eighth",
   position: '12',
   width:200,
   highlight: '#buttons',
-  title: "Settings",
+  title: "You're good to go!",
   overlay: false
   });
 
-  guiders.createGuider({
-  attachTo: ".sell_now",
-  buttons: [{ name: "Close" },
-    { name: "Next" }],
-  description: "Setup your profile, create widgets, see points, change settings and more from here.",
-  id: "sixth",
-  next: "seventh",
-  position: '12',
-  width:200,
-  highlight: '#buttons',
-  title: "Settings",
-  overlay: false
-  });
-
-  guiders.createGuider({
-  attachTo: ".sell_now",
-  buttons: [{ name: "Close" },
-    { name: "Next" }],
-  description: "Setup your profile, create widgets, see points, change settings and more from here.",
-  id: "sixth",
-  next: "seventh",
-  position: '12',
-  width:200,
-  highlight: '#buttons',
-  title: "Settings",
-  overlay: false
-  });
 
 
   //}
