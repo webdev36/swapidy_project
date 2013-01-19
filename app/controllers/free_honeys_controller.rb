@@ -3,19 +3,41 @@ class FreeHoneysController < ApplicationController
   before_filter :require_login
 
   def create
-    emails = params[:emails].split(";") if params[:emails] && !params[:emails].blank?
-    emails.each do |email|
-      Rails.logger.info "Email: #{email}"
-      free_honey = FreeHoney.new(:receiver_email => email)
-      free_honey.sender = current_user
-      free_honey.save
-      if free_honey.valid?
-        Rails.logger.info "Valid"
-      else
-        Rails.logger.info "Error: #{free_honey.errors.full_messages}"
+    if(params[:emails] == "") 
+      @free_honey = FreeHoney.new
+      respond_to do |format|
+        format.js {
+          @error_messages = "Please enter valid email!"
+          @return_content = render_to_string(:partial => "/free_honeys/new")
+        }
       end
+      return
     end
-    redirect_to "/"
+    emails = params[:emails].split(";") if params[:emails] && !params[:emails].blank?
+
+    begin
+      FreeHoney.transaction do
+        emails.each do |email|
+          @free_honey = FreeHoney.new(:receiver_email => email)
+          @free_honey.sender = current_user
+          if @free_honey.valid?
+            @free_honey.save
+          else
+            raise "#{@free_honey.errors.full_messages.join(". ")}"
+          end
+        end
+        @free_honey = FreeHoney.new
+      end
+    rescue Exception => e
+      @error_messages = e.message
+      @free_honey = FreeHoney.new(:receiver_email => params[:emails])
+    end
+
+    respond_to do |format|
+      format.js {
+        @return_content = render_to_string(:partial => "/free_honeys/new")
+      }
+    end
   end
 
   def confirm

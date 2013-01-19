@@ -23,6 +23,8 @@ class ApplicationController < ActionController::Base
     @payment.card_expired_year = current_user.card_expired_year
     @payment.card_expired_month = current_user.card_expired_month
     @payment.card_name = current_user.card_name
+    
+    @free_honey = FreeHoney.new if current_user.free_honey_sendable?
   end
   
   def check_to_display_guide

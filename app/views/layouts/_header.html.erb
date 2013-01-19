@@ -7,9 +7,9 @@
       <ul class="nav pull-right nav_header" role="navigation">
         <li> <a href="javascript:showPopup('popup-dialog_how_it_work');" style="position:fixed; right:1px; top:10px;">HOW IT WORKS?</a></li>
         <% if user_signed_in? %>
-          <% if current_user.created_at > 7.days.ago %>
+          <% if current_user.free_honey_sendable? %>
             <li id="nav_login">
-              <a href="javascript:showPopup('popup-dialog_for_signin');" >GET FREE HONEY</a>
+              <a href="javascript:showPopup('popup-dialog_for_free_honey');" >GET FREE HONEY</a>
             </li>
           <% end %>
           <li class="dropdown" id="notification_menu" >
@@ -99,16 +99,28 @@
   </div>
 </div>
 
+<div id="popup-box-bg" style="display: none;"></div>
 <% if user_signed_in? %>
   <div>
     <strong>Signed in as <%= current_user.first_name %></strong>
   </div>
-  <% if current_user.created_at > 7.days.ago %>
-    <div id="popup-box-bg" style="display: none;"></div>
-    <div id="popup-dialog_for_signin" style="display:none;" class="popup-box-wrapper standard-popup">
+  <% if current_user.free_honey_sendable? %>
+    <div id="popup-dialog_for_free_honey" style="display:none;" class="popup-box-wrapper standard-popup">
       <div id="dialog-content">
+        <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
         <%= render :partial => "/free_honeys/new" %>
       </div>
+      <script language="JavaScript">
+        function submitAddHoney(){
+          $.ajax({
+            type : 'POST',
+            url : $("#popup-dialog_for_free_honey #add_honey").attr("action"),
+            data : $("#popup-dialog_for_free_honey #add_honey").serialize(),
+            dataType : 'script',
+            success: function(data) {}
+          });
+        }
+      </script>
     </div>
   <% end %>
 <% else %>

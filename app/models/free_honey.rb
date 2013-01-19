@@ -13,10 +13,17 @@ class FreeHoney < ActiveRecord::Base
   before_validation :generate_token_key
   after_create :create_notifications
   
+  MAX_COUNT = 3
+  
   scope :pending, :conditions => {:status => STATUES[:pending]}
   
   def expired?
     Time.now > self.expired_date
+  end
+  
+  def able_to_send?
+    retun false unless valid?
+    
   end
   
   def able_to_confirm?
@@ -117,6 +124,10 @@ class FreeHoney < ActiveRecord::Base
       end
       if receiver && receiver.email != receiver_email 
         errors.add(:receiver_email, "is not #{receiver.full_name}'s email: #{receiver.email}")
+        return false
+      end
+      if sender && sender.email == receiver_email 
+        errors.add(:receiver_email, "is the same to sender (#{receiver.full_name}'s email: #{receiver.email})")
         return false
       end
       return true

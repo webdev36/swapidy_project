@@ -7,7 +7,7 @@ class PaymentsController < ApplicationController
   def show
     @payment = PaymentTransaction.find params[:id]
   end
-  
+
   def new
   end
   
