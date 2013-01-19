@@ -146,7 +146,9 @@ class User < ActiveRecord::Base
   end
   
   def last_order(order_type = Order::TYPES[:order])
-    (order_type == Order::TYPES[:order]) ? self.orders.to_buy.last : self.orders.to_sell.last
+    last_same_order = (order_type == Order::TYPES[:order]) ? self.orders.to_buy.last : self.orders.to_sell.last
+    return last_same_order if last_same_order
+    return self.orders.last
   end
   
   def has_same_order?(order_type = Order::TYPES[:order])
