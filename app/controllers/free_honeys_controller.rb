@@ -1,5 +1,7 @@
 class FreeHoneysController < ApplicationController
   
+  before_filter :require_login
+
   def create
     emails = params[:emails].split(";") if params[:emails] && !params[:emails].blank?
     emails.each do |email|
