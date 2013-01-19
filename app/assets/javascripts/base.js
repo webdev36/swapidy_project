@@ -92,11 +92,11 @@ function display_guide() {
   attachTo: "#location_search",
   buttons: [{ name: "Close" },
     { name: "Next" }],
-  description: "Setup your profile, create widgets, see points, change settings and more from here.",
+  description: "Click on this tab to choose which location you're in.",
   id: "second",
   next: "third",
   position: '6',
-  width:200,
+  width:400,
   title: "Where you at?",
   overlay: true
   });
@@ -109,8 +109,8 @@ function display_guide() {
   id: "third",
   next: "fourth",
   position: '6',
-  title: "All your Notifications",
-  width: 200,
+  title: "All your notifications",
+  width: 400,
   overlay: true
   });
 
@@ -123,7 +123,7 @@ function display_guide() {
   next: "fifth",
   position: '6',
   title: "Everything you do goes here",
-  width: 200,
+  width: 400,
   overlay: true
   });
 
@@ -136,7 +136,7 @@ function display_guide() {
   next: "sixth",
   position: '6',
   title: "All your settings",
-  width: 200,
+  width: 400,
   overlay: true
   });
 
@@ -144,24 +144,23 @@ function display_guide() {
   attachTo: ".honey_display",
   buttons: [{ name: "Close" },
     { name: "Next" }],
-  description: "This box shows how much honey currency you have. If you click on the plus sign, you can add honey to your account.",
+  description: "<img src='/images/honey_20px_grey.png'> is our honey currency symbol. This box shows how much honey currency you have. If you click on the plus sign, you can add honey to your account.",
   id: "sixth",
   next: "seventh",
   position: '9',
   title: "Add honey to your account",
-  overlay: true
+  overlay: true,
+  width:500
   });
 
   guiders.createGuider({
   attachTo: ".sell_now",
-  buttons: [{ name: "Close" },
-    { name: "Next" }],
+  buttons: [{ name: "Close" }],
   description: "Start selling by clicking sell now and choosing the correct model.",
   id: "seventh",
   next: "eighth",
   position: '12',
-  width:200,
-  highlight: '#buttons',
+  width:400,
   title: "You're good to go!",
   overlay: false
   });
