@@ -37,7 +37,20 @@ class OrdersController < ApplicationController
   end
 
   def shipping_info
+    Rails.logger.info "Testing only"
     if current_user.could_order?(@order)
+      
+      if @order.shipping_address_blank?
+        @order.enter_from_last_address 
+      else
+        Rails.logger.info @order.shipping_first_name
+        Rails.logger.info @order.shipping_last_name
+        Rails.logger.info @order.shipping_address
+        Rails.logger.info @order.shipping_optional_address
+        Rails.logger.info @order.shipping_city
+        Rails.logger.info @order.shipping_state
+        Rails.logger.info @order.shipping_zip_code
+      end
       render "shipping_info_form"
     else
       render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_form"

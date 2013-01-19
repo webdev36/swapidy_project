@@ -186,6 +186,26 @@ class Order < ActiveRecord::Base
     end
   end
   
+  def shipping_address_blank?
+    return (self.shipping_first_name || "").blank? && (self.shipping_last_name || "").blank? && 
+           (self.shipping_address || "").blank? && (self.shipping_optional_address || "").blank? &&
+           (self.shipping_city || "").blank? && (self.shipping_state || "").blank? &&
+           (self.shipping_zip_code || "").blank?
+  end
+  
+  def enter_from_last_address
+    last_one = self.user.last_order(self.order_type)
+    return false unless last_one
+    self.shipping_first_name = last_one.shipping_first_name
+    self.shipping_last_name = last_one.shipping_last_name
+    self.shipping_address = last_one.shipping_address
+    self.shipping_optional_address = last_one.shipping_optional_address
+    self.shipping_city = last_one.shipping_city
+    self.shipping_state = last_one.shipping_state
+    self.shipping_zip_code = last_one.shipping_zip_code
+    return true
+  end
+  
   private
   
     def adjust_current_balance

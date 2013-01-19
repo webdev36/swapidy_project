@@ -88,19 +88,19 @@
       <%= @order.shipping_state %><br />
       <%= @order.shipping_zip_code %><br />
       <%= @order.shipping_zip_code_add_on %><br />
-      <%= @order.shipping_country %><br />
     </p>
   </div>
+  <% has_agreement_before = current_user.has_same_order?(@order.order_type) %>
   <div>
     <label class="confirm_info_head"><strong>Terms of service</strong></label>
     <p>
-      <input id="terms_of_service_checkbox" type="checkbox" /> 
+      <input id="terms_of_service_checkbox" type="checkbox" <% if has_agreement_before %>checked="checked"<% end %> /> 
       <span>this box, you agree to our <a class="order_link">terms of service</a> and confirm that 
         the item(s) you are selling have not been reported lost or stolen.</span>
     </p>
   </div>
   <br/>
-  <input name="commit" id="submit_button" class="order_button_sell" style="width: 180px; height: 50px;" type="submit" disabled="disabled" value="Continue" />
+  <input name="commit" id="submit_button" class="order_button_sell" style="width: 180px; height: 50px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
 
 <% end %>
 </div>
