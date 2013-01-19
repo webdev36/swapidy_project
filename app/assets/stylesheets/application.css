@@ -110,7 +110,6 @@ body{
   z-index: 0; 
   top: 71px;
   margin-top: -18px;
-  margin-bottom: 53px;
   min-height:500px;
 }
  
@@ -204,11 +203,10 @@ max-width:none;
 
 .footer {
   width:100%;
-  padding: 30px 0 60px 0;
-  margin-top: 100px;
-  border-top: 1px solid #E5E5E5;
+  padding: 10px 0 30px 0;
   background-color: whitesmoke;
   text-align: center;
+  height:180px;
 }
 
 .footer li{

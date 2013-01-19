@@ -248,8 +248,10 @@ text-align: center;
 }
 
 #product_type{
+margin-top:40px;
   font-family:"myriad";
   position: relative;
+  margin-bottom:40px;
 }
 
 #product_type .headings_pink {
@@ -601,6 +603,10 @@ label {
 }
 .team_subheading{
   color:#38B4DE;
+}
+.nav_header{
+  font-size:15px;
+  font-family:"myriad-b";
 }
 .nav_notification{
   height:25px;
