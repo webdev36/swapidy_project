@@ -11,8 +11,6 @@ class OrdersController < ApplicationController
       return
     end
 
-     
-    
     @order.using_condition = params[:using_condition]
     @order.honey_price = @product.price_for(@order.using_condition)
     
