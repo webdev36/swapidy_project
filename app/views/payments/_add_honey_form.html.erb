@@ -44,7 +44,7 @@
       url : $("#add_honey_form").attr("action"),
       data : $("#add_honey_form").serialize(),
       dataType : 'script',
-      success: function(data) {}
+      success: function(data) { hidePageLoading(); }
     });
   }
   
