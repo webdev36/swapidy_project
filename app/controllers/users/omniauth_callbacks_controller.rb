@@ -7,7 +7,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   
       if @user
         if session[:creating_order]
-          login(@user)
+          session[:return_to] = "/orders/new?product_id=#{session[:creating_order][:product_id]}&using_condition=#{session[:creating_order][:using_condition]}&order_type=#{session[:creating_order][:order_type]}"
+          sign_in @user, :event => :authentication #this will throw if @user is not activated
           redirect_to :controller => "/orders", :action => :new, :method => :post, :product_id => session[:creating_order][:product_id], :using_condition => session[:creating_order][:using_condition], :order_type => session[:creating_order][:order_type]
         else
           sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
