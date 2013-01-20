@@ -26,7 +26,8 @@
 
 <% Category.all.each do |category| %>
     <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 20px;">
-      <div style="display: block;padding:20px 0 30px;">
+      <div class="headings_pink_edit" style="text-align: center;padding-top: 50px; padding-bottom: 0px; margin-bottom: 0px;">Choose your model</div>
+      <div style="display: block;padding:0 0 30px;">
 
         <ul id="product_models" class="nav nav-pills" style="position: relative;">
           <li class="product_model active" id="filter_model_all"><a>All models</a></li>
@@ -191,7 +192,6 @@
      $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
      $("#container_" + current_category_id + " .product_model").removeClass("active");
      
-     
      current_model_id = $(this).attr("id");
      $("#container_" + current_category_id + " .attr_" + current_model_id + "_" + for_what).removeClass("hidden_filter");
      $("#container_" + current_category_id + " #" + current_model_id).addClass("active");
@@ -288,4 +288,15 @@
     });
   }
 
+  $(function() {
+    <% if params[:show] && params[:show] == "for_sell" %>
+      showScreenToSell();
+      $('div#product_type').fadeIn(600);
+      $.scrollTo($('div#product_type'), 400);
+    <% elsif params[:show] && params[:show] == "for_buy" %>
+      showScreenToBuy();
+      $('div#product_type').fadeIn(600);
+      $.scrollTo($('div#product_type'), 400);
+    <% end %>
+  });
 </script>

@@ -31,6 +31,7 @@ label{
       <%= form_for(@order, :as => 'order', :url => "/orders/shipping_info") do |f| %>
         <%= f.hidden_field :order_type %>
         <%= f.hidden_field :product_id %>
+        <%= f.hidden_field :token_key %>
         <%= f.hidden_field :using_condition %>
         <%= f.hidden_field :honey_price %>
 

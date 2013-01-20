@@ -29,6 +29,7 @@ label{
     <% end %>
     <input type="hidden" name="login_to_order" value="1" />
     <input type="hidden" name="product_id" value="<%= @product.id %>" />
+    <input type="hidden" name="token_key" value="<%= @order.token_key %>" />
     <input type="hidden" name="order_type" value="<%= @order.order_type %>" />
     <input type="hidden" name="using_condition" value="<%= @order.using_condition %>" />
     <input type="hidden" name="honey_price" value="<%= @order.honey_price %>" />
@@ -51,6 +52,7 @@ label{
   <%= form_for(@user || resource, :as => "user", :url => registration_path(@user)) do |f| %>
     <input type="hidden" name="login_to_order" value="1" />
     <input type="hidden" name="product_id" value="<%= @product.id %>" />
+    <input type="hidden" name="token_key" value="<%= @order.token_key %>" />
     <input type="hidden" name="order_type" value="<%= @order.order_type %>" />
     <input type="hidden" name="using_condition" value="<%= @order.using_condition %>" />
     <input type="hidden" name="honey_price" value="<%= @order.honey_price %>" />

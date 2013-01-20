@@ -10,9 +10,14 @@ class OrdersController < ApplicationController
       redirect_to "/" 
       return
     end
+
+     
     
     @order.using_condition = params[:using_condition]
     @order.honey_price = @product.price_for(@order.using_condition)
+    
+    session[:creating_order] = {:token_key => @order.generate_token_key, :product_id => @order.product_id, 
+                                :order_type => @order.order_type, :using_condition => @order.using_condition}
     if @order.using_condition.nil? || !Product::USING_CONDITIONS.values.include?(@order.using_condition) || @order.honey_price.nil?
       @error_message = "You need to select at least one of the types!"
       params["for"] = params[:order_type] && params[:order_type] == Order::TYPES[:order] ? "buy" : "sell"
@@ -70,6 +75,7 @@ class OrdersController < ApplicationController
           @order.save
           @shipping_stamp = @order.create_new_stamp
         end
+        session[:creating_order] = nil
         redirect_to "/orders/#{@order.id}"
       rescue Exception => e
         @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
@@ -94,6 +100,9 @@ class OrdersController < ApplicationController
       @order.shipping_country = "US"
       @product = @order.product = Product.find(params[:order][:product_id])
       @order.honey_price = @product.price_for(@order.using_condition)
+      if(session[:creating_order].nil? || session[:creating_order][:token_key] != @order.token_key)
+        redirect_to "/"
+      end
     end
 
 end
