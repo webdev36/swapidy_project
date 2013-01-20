@@ -99,7 +99,6 @@
   </div>
 </div>
 
-<div id="popup-box-bg" style="display: none;"></div>
 <% if user_signed_in? %>
   <div>
     <strong>Signed in as <%= current_user.first_name %></strong>
@@ -123,7 +122,6 @@
     </div>
   <% end %>
 <% else %>
-  <div id="popup-box-bg" style="display: none;"></div>
   <div id="popup-dialog_for_signup" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
     <div id="dialog-content">
       <%= render :partial => "/devise/shared/signup_form", :locals => {:resource => User.new, :resource_name => "user", :show_cancel_link => true} %>
@@ -136,6 +134,7 @@
     </div>
   </div>
 <% end %>
+<div id="popup-box-bg" style="display: none;"></div>
 
 <div id="popup-dialog_how_it_work" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
@@ -157,3 +156,17 @@
   </div>
 <% end %>
 <%= render :partial => "/layouts/orders.html" if current_user %>
+
+<div id="page_loading_animation" style="display: none;">
+  <div class="wrapper">
+    <div class="inner">
+      <span>L</span>
+      <span>o</span>
+      <span>a</span>
+      <span>d</span>
+      <span>i</span>
+      <span>n</span>
+      <span>g</span>
+    </div>
+  </div>
+</div>
