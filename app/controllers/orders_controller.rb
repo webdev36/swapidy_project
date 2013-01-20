@@ -45,11 +45,7 @@ class OrdersController < ApplicationController
     Rails.logger.info "Testing only"
     if current_user.could_order?(@order)
       
-      if @order.shipping_address_blank?
-        @order.enter_from_last_address 
-      else
-        @order.shipping_state = "CA"
-      end
+      @order.enter_from_last_address if @order.shipping_address_blank?
       render "shipping_info_form"
     else
       render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_form"
