@@ -107,7 +107,6 @@
   <% if current_user.free_honey_sendable? %>
     <div id="popup-dialog_for_free_honey" style="display:none;" class="popup-box-wrapper standard-popup">
       <div id="dialog-content">
-        <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
         <%= render :partial => "/free_honeys/new" %>
       </div>
       <script language="JavaScript">

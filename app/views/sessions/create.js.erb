@@ -1,0 +1,6 @@
+<% if @return_content %>
+  $("#popup-dialog_for_signin #dialog-content").html("<%= raw escape_javascript(@return_content) %>");
+  $("#popup-dialog_for_signin form .alert").show();
+<% else %>
+  location.reload();
+<% end %>

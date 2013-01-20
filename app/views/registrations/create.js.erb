@@ -1,0 +1,5 @@
+<% if @return_content %>
+  $("#popup-dialog_for_signup #dialog-content").html("<%= raw escape_javascript(@return_content) %>");
+<% else %>
+  location.reload();
+<% end %>

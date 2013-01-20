@@ -194,7 +194,6 @@ function hidePopup() {
   $('.active-popup').removeClass('active-popup');
 }
 
-
 function showLoader(element_id) {
   var popupHeight = $(element_id).height();
   var popupWidth = $(element_id).width();
@@ -203,7 +202,26 @@ function showLoader(element_id) {
   $(element_id).html("<div class='loader' style='width: " + popupWidth + "px; height: " + popupHeight + "px;'><img src='/assets/loading.gif' /></div>");
 }
 
-
+function submit_signin_form(){
+  $("#popup-dialog_for_signin form").removeClass('unsavedForm');
+  $.ajax({
+    type : 'POST',
+    url : $("#popup-dialog_for_signin form").attr("action"),
+    data : $("#popup-dialog_for_signin form").serialize(),
+    dataType : 'script',
+    success: function(data) {}
+  });
+}
+function submit_signup_form(){
+  $("#popup-dialog_for_signup form").removeClass('unsavedForm');
+  $.ajax({
+    type : 'POST',
+    url : $("#popup-dialog_for_signup form").attr("action"),
+    data : $("#popup-dialog_for_signup form").serialize(),
+    dataType : 'script',
+    success: function(data) {}
+  });
+}
 
 
 /**

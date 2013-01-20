@@ -2,8 +2,18 @@ class SessionsController < Devise::SessionsController
   
   def create
     if(params[:login_to_order].nil? || params[:login_to_order].blank?)
-      super
-      check_to_display_guide if user_signed_in?
+      Rails.logger.info "Test 1"
+      self.resource = User.find_by_email params[:user][:email]
+      if self.resource && self.resource.valid_password?(params[:user][:password])
+        Rails.logger.info "Test 2"
+        set_flash_message(:notice, :signed_in) if is_navigational_format?
+        sign_in resource, :event => :authentication
+        #respond_with resource, :location => after_sign_in_path_for(resource)
+        check_to_display_guide 
+      else
+        self.resource = User.new(:email => params[:user][:email]) unless self.resource
+        @return_content = render_to_string(:partial => "/devise/shared/signin_form", :locals => {:show_cancel_link => true})
+      end
     else
       self.resource = User.find_by_email params[:user][:email]
       if self.resource && self.resource.valid_password?(params[:user][:password])
