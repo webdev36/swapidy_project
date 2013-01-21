@@ -36,7 +36,7 @@ RailsAdmin.config do |config|
 
   #  ==> Included models
   # Add all excluded models here:
-  config.excluded_models = [Comment, Post]
+  #config.excluded_models = [Comment, Post]
 
   # Add models here if you want to go 'whitelist mode':
   config.included_models = [Category, CategoryAttribute, Image, Order, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User, FreeHoney, RedeemCode, SwapidySetting]
