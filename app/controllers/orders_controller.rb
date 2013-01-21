@@ -6,10 +6,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new(:order_type => params[:order_type], :product_id => params[:product_id].to_i )
     @product = Product.find params[:product_id]
-    unless @product
-      redirect_to "/" 
-      return
-    end
+    (redirect_to "/"; return) unless @product
 
     @order.using_condition = params[:using_condition]
     @order.honey_price = @product.price_for(@order.using_condition)
@@ -42,7 +39,6 @@ class OrdersController < ApplicationController
   def shipping_info
     Rails.logger.info "Testing only"
     if current_user.could_order?(@order)
-      
       @order.enter_from_last_address if @order.shipping_address_blank?
       render "shipping_info_form"
     else
@@ -94,9 +90,7 @@ class OrdersController < ApplicationController
       @order.shipping_country = "US"
       @product = @order.product = Product.find(params[:order][:product_id])
       @order.honey_price = @product.price_for(@order.using_condition)
-      if(session[:creating_order].nil? || session[:creating_order][:token_key] != @order.token_key)
-        redirect_to "/"
-      end
+      redirect_to "/" if session[:creating_order].nil? || session[:creating_order][:token_key] != @order.token_key
     end
 
 end

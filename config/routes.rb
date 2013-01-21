@@ -26,10 +26,6 @@ Swapidy::Application.routes.draw do
   match "/error_not_found" => "home#static_page", :method => :get, :content => "/error_pages/404"
   
   match "/location/:location" => "location#change", :method => :get
-
-  resources :posts do
-    root to: 'post#index'
-  end
   
   resources :products
   
@@ -67,8 +63,6 @@ Swapidy::Application.routes.draw do
   match "/redeem/confirm" => "redeem#confirm", :method => :post
   match "/redeem" => "redeem#index", :method => :get
   resources :redeem
-  
-  get "home/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
