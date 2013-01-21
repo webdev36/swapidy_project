@@ -598,11 +598,31 @@ label {
   height:250px;
 }
 .team_content{
+  font-family:"myriad";
   color:#666;
-  margin-top:20px;
+  font-size:20px;
+  line-height:1.5;
+  float:left;
+  width:760px;
+  margin-left:30px;
+  margin-bottom:50px;
+}
+.team_container{
+  margin-top:30px;
+}
+.team_role{
+  font-family:"myriad-s";
+  }
+
+.team_img{
+  width:150px;
+  float:left;
 }
 .team_subheading{
   color:#38B4DE;
+  font-size:25px;
+  margin-top:20px;
+  font-family:"myriad-s";
 }
 .nav_header{
   font-size:15px;
@@ -794,4 +814,9 @@ line-height: 1.5;
   cursor: pointer;
   height: 13px;
   width: 13px;
+}
+.headings_pink{
+  font-family: "myriad-s";
+  color: #fa3e6e;
+  font-size:30px;
 }
