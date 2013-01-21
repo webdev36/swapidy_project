@@ -24,7 +24,6 @@ class ProductModel < ActiveRecord::Base
   def price_range_filter_content(range)
     result = ""
     result += " attr_filter_model_#{self.id}_for_buying" if self.products.for_buy.price_range(range).count > 0
-    result += " attr_filter_model_#{self.id}_for_selling" if self.products.for_sell.price_range(range).count > 0
     return result
   end
   
