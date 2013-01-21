@@ -10,6 +10,14 @@
   opacity: 0.85;
 }
 
+#page_loading_animation .underneath {
+  font-size: 25px;
+  position: fixed;
+  top: 300px;
+  left: 50%;
+  margin-left: -60px;
+}
+
 #page_loading_animation .wrapper {
 	font-size: 25px; /* 1em */
 

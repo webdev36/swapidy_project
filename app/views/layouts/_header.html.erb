@@ -157,7 +157,7 @@
 <% end %>
 <%= render :partial => "/layouts/orders.html" if current_user %>
 
-<div id="page_loading_animation" style="display: none;">
+<div id="page_loading_animation" style="display: block;">
   <div class="wrapper">
     <div class="inner">
       <span>L</span>
@@ -169,4 +169,5 @@
       <span>g</span>
     </div>
   </div>
+  <div class="underneath"><span>Please wait...</span></div>
 </div>
