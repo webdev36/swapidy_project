@@ -1,14 +1,14 @@
 <div id="login_container"  class="container" >
   <img id="login_circle" src="/images/login_rectangle.png">
-    <% if show_cancel_link %>
-     <a class="close-popup" onclick="hidePopup();" style="position:relative; top:30px; right:95px;" href="#" title="Cancel">Cancel</a>
+  <% if show_cancel_link %>
+    <a class="close-popup" onclick="hidePopup();" style="position:relative; top:30px; right:95px;" href="#" title="Cancel">Cancel</a>
   <% end %>
   <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_login" src="/images/fb_login.png"></a>
   <p class="login_or">
     <span>or</span>
   </p>
   <div id="login_form">
-    <%= form_for(resource, :as => resource_name, :url => session_path(resource)) do |f| %>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource), :method => :post) do |f| %>
       <div class="input-prepend">
         <span class="add-on">E-mail</span>
         <%= f.email_field :email, :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %>
@@ -18,7 +18,8 @@
         <span class="add-on">Password</span>
         <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
       </div>
-      <%= f.submit "Sign in", :class => "login_button"  %>
+      <a href="#" onclick="submit_signin_form();" class="login_button">Sign in</a>
+      <div class="alert alert-error" style="display:none; width:245px; position:relative; bottom:-45px; left:120px;">Invalid username/password. </div>
     <% end %>
   </div>
   <% if controller_name != 'passwords' %>

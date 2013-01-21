@@ -7,9 +7,9 @@
       <ul class="nav pull-right nav_header" role="navigation">
         <li> <a href="javascript:showPopup('popup-dialog_how_it_work');" style="position:fixed; right:1px; top:10px;">HOW IT WORKS?</a></li>
         <% if user_signed_in? %>
-          <% if current_user.created_at > 7.days.ago %>
+          <% if current_user.free_honey_sendable? %>
             <li id="nav_login">
-              <a href="javascript:showPopup('popup-dialog_for_signin');" >GET FREE HONEY</a>
+              <a href="javascript:showPopup('popup-dialog_for_free_honey');" >GET FREE HONEY</a>
             </li>
           <% end %>
           <li class="dropdown" id="notification_menu" >
@@ -103,16 +103,25 @@
   <div>
     <strong>Signed in as <%= current_user.first_name %></strong>
   </div>
-  <% if current_user.created_at > 7.days.ago %>
-    <div id="popup-box-bg" style="display: none;"></div>
-    <div id="popup-dialog_for_signin" style="display:none;" class="popup-box-wrapper standard-popup">
+  <% if current_user.free_honey_sendable? %>
+    <div id="popup-dialog_for_free_honey" style="display:none;" class="popup-box-wrapper standard-popup">
       <div id="dialog-content">
         <%= render :partial => "/free_honeys/new" %>
       </div>
+      <script language="JavaScript">
+        function submitAddHoney(){
+          $.ajax({
+            type : 'POST',
+            url : $("#popup-dialog_for_free_honey #add_honey").attr("action"),
+            data : $("#popup-dialog_for_free_honey #add_honey").serialize(),
+            dataType : 'script',
+            success: function(data) {}
+          });
+        }
+      </script>
     </div>
   <% end %>
 <% else %>
-  <div id="popup-box-bg" style="display: none;"></div>
   <div id="popup-dialog_for_signup" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
     <div id="dialog-content">
       <%= render :partial => "/devise/shared/signup_form", :locals => {:resource => User.new, :resource_name => "user", :show_cancel_link => true} %>
@@ -125,6 +134,7 @@
     </div>
   </div>
 <% end %>
+<div id="popup-box-bg" style="display: none;"></div>
 
 <div id="popup-dialog_how_it_work" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
@@ -146,3 +156,18 @@
   </div>
 <% end %>
 <%= render :partial => "/layouts/orders.html" if current_user %>
+
+<div id="page_loading_animation" style="display: none;">
+  <div class="wrapper">
+    <div class="inner">
+      <span>L</span>
+      <span>o</span>
+      <span>a</span>
+      <span>d</span>
+      <span>i</span>
+      <span>n</span>
+      <span>g</span>
+    </div>
+  </div>
+  <div class="underneath"><span>Please wait...</span></div>
+</div>

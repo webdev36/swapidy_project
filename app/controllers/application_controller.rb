@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   #before_filter :check_uri #deployed on swapidy.com
   before_filter :prepaire_add_honey
-
+  
   #def check_uri
   #  redirect_to request.protocol + "www." + request.host_with_port + request.fullpath if !/^www/.match(request.host) if Rails.env == 'production'
   #end
@@ -23,10 +23,12 @@ class ApplicationController < ActionController::Base
     @payment.card_expired_year = current_user.card_expired_year
     @payment.card_expired_month = current_user.card_expired_month
     @payment.card_name = current_user.card_name
+    
+    @free_honey = FreeHoney.new if current_user.free_honey_sendable?
   end
   
   def check_to_display_guide
     session[:need_to_display_guide] = true if current_user && current_user.sign_in_count <= 3
   end
-  
+
 end

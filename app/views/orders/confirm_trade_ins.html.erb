@@ -7,6 +7,7 @@
   <%= f.hidden_field :product_id %>
   <%= f.hidden_field :using_condition %>
   <%= f.hidden_field :honey_price %>
+  <%= f.hidden_field :token_key %>
 
   <%= f.hidden_field :shipping_first_name %>
   <%= f.hidden_field :shipping_last_name %>
@@ -84,7 +85,7 @@
     </p>
   </div>
   <br/>
-  <input name="commit" id="submit_button" class="order_button_sell" style="width: 180px; height: 50px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
+  <input name="commit" onclick="showPageLoading();" id="submit_button" class="order_button_sell" style="width: 180px; height: 50px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
 <% end %>
 </div>
 </div>

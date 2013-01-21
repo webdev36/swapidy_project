@@ -34,12 +34,18 @@ body{
 </div>
   <div class="show_definitions">
     <dl>
-      <dt>flawless |ˈflôləs|</dt>
-      <dd>Doesn't show any use, like new.</dd>
-      <dt>good |go͝od|</dt>
-      <dd>Normal signs of use.</dd>
-      <dt>poor |po͝or, pôr|</dt>
-      <dd>Damaged and/or does not turn on.</dd>
+      <% if @product.has_flawless_type? %>
+        <dt>flawless |ˈflôləs|</dt>
+        <dd>Doesn't show any use, like new.</dd>
+      <% end %>
+      <% if @product.has_good_type? %>
+        <dt>good |go͝od|</dt>
+        <dd>Normal signs of use.</dd>
+      <% end %>
+      <% if @product.has_poor_type? %>
+        <dt>poor |po͝or, pôr|</dt>
+        <dd>Damaged and/or does not turn on.</dd>
+      <% end %>
     </dl>
   </div>
   <%= render :partial => "/layouts/footer" %>

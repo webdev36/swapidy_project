@@ -18,8 +18,23 @@ class Product < ActiveRecord::Base
   scope :for_sell, :conditions => {:for_sell => true}
   
   USING_CONDITIONS = {:poor => "Poor", :good => "Good", :flawless => "Flawless"}
+  PRICE_RANGES = {3000 => "Below 3000", 
+                  5000 => "3000 -> 5000",
+                  7000 => "5000 -> 7000",
+                  10000 => "7000 -> 10000",
+                  19999 => "10000 -> 20000",
+                  20000 => "Upper 20000"}
+  PRICE_FIELDS = %w(honey_price price_for_good_type price_for_poor_type)
+  PRICE_RANGE_SQLS = {3000 => PRICE_FIELDS.map{|f| "(#{f} > 0 AND #{f} <= 3000)"}.join(" OR "), 
+                      5000 => PRICE_FIELDS.map{|f| "(#{f} >= 3000 AND #{f} <= 5000)"}.join(" OR "),
+                      7000 => PRICE_FIELDS.map{|f| "(#{f} >= 5000 AND #{f} <= 7000)"}.join(" OR "),
+                      10000 => PRICE_FIELDS.map{|f| "(#{f} >= 7000 AND #{f} <= 10000)"}.join(" OR "),
+                      19999 => PRICE_FIELDS.map{|f| "(#{f} >= 10000 AND #{f} <= 20000)"}.join(" OR "),
+                      20000 => PRICE_FIELDS.map{|f| "#{f} >= 20000"}.join(" OR ")
+                      }
+                      
+  scope :price_range, lambda { |key| {:conditions => PRICE_RANGE_SQLS[key]} }
   
-
   after_save :expired_fragment_caches
   after_destroy :expired_fragment_caches
 
@@ -73,7 +88,37 @@ class Product < ActiveRecord::Base
     self.product_model_attributes.each do |product_model_attribute|
       result << product_model_attribute.gen_fitler_id
     end
+    prices = PRICE_RANGES.keys.sort
+    prices.each_with_index do |price, index|
+      if index == 0
+        (result << "price_range_#{price}"; next) if honey_price && honey_price > 0 && honey_price <= price 
+        (result << "price_range_#{price}"; next) if price_for_good_type && price_for_good_type > 0 && price_for_good_type <= price 
+        (result << "price_range_#{price}"; next) if price_for_poor_type && price_for_poor_type > 0 && price_for_poor_type <= price 
+      elsif index < prices.size - 1
+        (result << "price_range_#{price}"; next) if honey_price && honey_price >= prices[index - 1] && honey_price <= price 
+        (result << "price_range_#{price}"; next) if price_for_good_type && price_for_good_type >= prices[index - 1] && price_for_good_type <= price 
+        (result << "price_range_#{price}"; next) if price_for_poor_type && price_for_poor_type >= prices[index - 1] && price_for_poor_type <= price
+      else
+        (result << "price_range_#{price}"; next) if honey_price && honey_price >= price 
+        (result << "price_range_#{price}"; next) if price_for_good_type && price_for_good_type >= price 
+        (result << "price_range_#{price}"; next) if price_for_poor_type && price_for_poor_type >= price
+      end
+    end
     result.join(" ")
+  end
+  
+  def price_range_class(price_compare)
+    prices = PRICE_RANGES.keys.sort
+    prices.each_with_index do |price, index|
+      if index == 0
+        return "price_range_#{price}" if price_compare && price_compare > 0 && price_compare <= price 
+      elsif index < prices.size - 1
+        return "price_range_#{price}" if price_compare && price_compare >= prices[index - 1] && price_compare <= price 
+      else
+        return "price_range_#{price}" if price_compare && price_compare >= price 
+      end
+    end
+    return ""
   end
   
   def expired_fragment_caches

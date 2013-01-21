@@ -13,5 +13,6 @@ module HomeHelper
   def product_using_condition_names 
     Product::USING_CONDITIONS.keys.map{|key| key.to_s}.join(" ")
   end
+  
 
 end

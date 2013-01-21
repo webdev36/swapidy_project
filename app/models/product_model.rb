@@ -21,6 +21,12 @@ class ProductModel < ActiveRecord::Base
     main_image.photo.url(type)
   end
   
+  def price_range_filter_content(range)
+    result = ""
+    result += " attr_filter_model_#{self.id}_for_buying" if self.products.for_buy.price_range(range).count > 0
+    return result
+  end
+  
   def main_image
     return (images.where(:is_main => true).first || images.first) if images.count > 0
     return category.main_image

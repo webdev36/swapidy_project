@@ -9,6 +9,8 @@ Swapidy::Application.routes.draw do
 
   #match 'auth/:provider/callback', to: 'users/omniauth_callbacks#create'
 
+  match "/for_sell" => "home#index", :method => :get, :show => "for_sell"
+  match "/for_buy" => "home#index", :method => :get, :show => "for_buy"
   match "/about" => "home#static_page", :method => :get, :content => "about"
   match "/faq_general" => "home#static_page", :method => :get, :content => "faq_general"
   match "/faq_buying" => "home#static_page", :method => :get, :content => "faq_buying"
@@ -17,6 +19,7 @@ Swapidy::Application.routes.draw do
   match "/how_it_works" => "home#static_page", :method => :get, :content => "how_it_works"
   match "/jobs" => "home#static_page", :method => :get, :content => "jobs"
   match "/team" => "home#static_page", :method => :get, :content => "team"
+  match "/error_not_found" => "home#static_page", :method => :get, :content => "/error_pages/404"
   
   match "/location/:location" => "location#change", :method => :get
 

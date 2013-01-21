@@ -26,7 +26,8 @@
 
 <% Category.all.each do |category| %>
     <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 20px;">
-      <div style="display: block;padding:20px 0 30px;">
+      <div class="headings_pink_edit" style="text-align: center;padding-top: 50px; padding-bottom: 0px; margin-bottom: 0px;">Choose your model</div>
+      <div style="display: block;padding:0 0 30px;">
 
         <ul id="product_models" class="nav nav-pills" style="position: relative;">
           <li class="product_model active" id="filter_model_all"><a>All models</a></li>
@@ -34,22 +35,22 @@
             <li class="product_model <%= "model_for_buying" if product_model.for_buy? %> <%= "model_for_selling" if product_model.for_sell? %>" id="filter_model_<%= product_model.id %>"><a><%= product_model.title %></a></li>
           <% end %>
         </ul>
-        <% cache("homepage_category_#{category.id}_filter_attr", :expires_in => 1.hour) do %>
+        <% cache("homepage_category_#{category.id}_filter_attr") do %>
           <div id="search_container" class="attribute_filter">
             <% category.category_attributes.each do |attr|%>
               <div class="attr_filter_column <%= attr.applied_for_models_filter %>">
                 <div class="option-set" data-group="cat_attr_<%= attr.id %>">
-                  <div style="float:left; min-width: 110px;">
+                  <div style="float:left; min-width: 130px;">
                     <h3 class="s_category" style="color:#38B4DE; font-size:18px;"><%= attr.title %></h3>
                     <div class="attr_filter_column_items" >
                       <% attr.attributes_in_models.each do |attr_value_with_models| %>
-                        <div style="display:block; min-width: 90px;" class="attr_filter <%= "attr_filter_model_all_for_buying" if attr_value_with_models[3] > 0 %> <%= "attr_filter_model_all_for_selling" if attr_value_with_models[4] > 0 %> <%= attr_value_with_models[2].map{|model_attribute| model_attribute.filter_content}.join(" ") %>" >
+                        <div style="display: block; min-width: 100px;" class="attr_filter <%= "attr_filter_model_all_for_buying" if attr_value_with_models[3] > 0 %> <%= "attr_filter_model_all_for_selling" if attr_value_with_models[4] > 0 %> <%= attr_value_with_models[2].map{|model_attribute| model_attribute.filter_content}.join(" ") %>" >
                           <div style="display: inline-block; line-height: 30px;" >
                             <input type="checkbox" id="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>" class="regular-checkbox big-checkbox"
                                 attr-filter-option='<%= attr_value_with_models[0] %>' />
                             <label for="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>"></label>
                           </div>
-                          <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 15px;"><%= attr_value_with_models[1] %></div>
+                          <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 0px;"><%= attr_value_with_models[1] %></div>
                         </div>
                       <% end %>
                     </div>  
@@ -57,6 +58,27 @@
                 </div>
               </div>
             <% end %>
+
+            <div id="price_range_filter" class="attr_filter_column <%= category.price_range_model_filters %>">
+              <div class="option-set" data-group="cat_attr_price_range">
+                <div style="float:left; min-width: 140px;">
+                  <h3 class="s_category" style="color:#38B4DE; font-size:18px;">Price</h3>
+                  <div class="attr_filter_column_items" >
+                    <% Product::PRICE_RANGES.keys.each do |key| %>
+                      <div style="display:block; min-width: 120px;" class="attr_filter <%= category.price_range_model_filters(key) %>" >
+                        <div style="display: inline-block; line-height: 30px;" >
+                          <input type="checkbox" id="checkbox-<%= category.id%>-price-range-<%= key %>" class="regular-checkbox big-checkbox"
+                              attr-filter-option="price_range_<%= key %>" />
+                          <label for="checkbox-<%= category.id%>-price-range-<%= key %>"></label>
+                        </div>
+                        <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 0px;"><%= Product::PRICE_RANGES[key] %></div>
+                      </div>
+                    <% end %>
+                  </div>  
+                </div>
+              </div>
+            </div>
+
           </div>
         <% end %>
       </div>
@@ -181,6 +203,10 @@
      current_category_id = $(this).parent().attr("id");
      $("#" + current_category_id).addClass("select");
 
+     $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
+     $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
+     $("#container_" + current_category_id + " .attr_" + current_model_id + "_" + for_what).removeClass("hidden_filter");
+
      $("#container_" + current_category_id).fadeIn(600);
      $.scrollTo($("#container_" + current_category_id), 400);
      showIsoTope();
@@ -190,7 +216,6 @@
      $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
      $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
      $("#container_" + current_category_id + " .product_model").removeClass("active");
-     
      
      current_model_id = $(this).attr("id");
      $("#container_" + current_category_id + " .attr_" + current_model_id + "_" + for_what).removeClass("hidden_filter");
@@ -288,4 +313,15 @@
     });
   }
 
+  $(function() {
+    <% if params[:show] && params[:show] == "for_sell" %>
+      showScreenToSell();
+      $('div#product_type').fadeIn(600);
+      $.scrollTo($('div#product_type'), 400);
+    <% elsif params[:show] && params[:show] == "for_buy" %>
+      showScreenToBuy();
+      $('div#product_type').fadeIn(600);
+      $.scrollTo($('div#product_type'), 400);
+    <% end %>
+  });
 </script>

@@ -18,6 +18,18 @@ class Category < ActiveRecord::Base
   after_save :expired_fragment_caches
   after_destroy :expired_fragment_caches_for_destroy
 
+  def price_range_model_filters(price_range_key = nil)
+    html = ""
+    if price_range_key.nil?
+      html = "attr_filter_model_all_for_buying "
+      html += product_models.map{|model| "attr_filter_model_#{model.id}_for_buying"}.join(" ")
+    elsif Product::PRICE_RANGES.keys.include?(price_range_key)
+      html += "attr_filter_model_all_for_buying " if products.for_buy.price_range(price_range_key).count > 0
+      html += product_models.map{|model| model.price_range_filter_content(price_range_key) }.join(" ")
+    end
+    html
+  end
+  
   def expired_fragment_caches
     ActionController::Base.new.expire_fragment("homepage_container_category_#{self.id}_filter_attr") rescue nil
     ActionController::Base.new.expire_fragment("homepage_available_categories")

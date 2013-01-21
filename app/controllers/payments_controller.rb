@@ -7,7 +7,7 @@ class PaymentsController < ApplicationController
   def show
     @payment = PaymentTransaction.find params[:id]
   end
-  
+
   def new
   end
   
@@ -50,7 +50,6 @@ class PaymentsController < ApplicationController
 
     @payment.user = current_user
     if @payment.valid? && @payment.payment_valid?
-      Rails.logger.info @payment.errors.full_messages
       @return_content = render_to_string(:partial => "/payments/confirm")
     else
       Rails.logger.info @payment.errors.full_messages
@@ -64,10 +63,10 @@ class PaymentsController < ApplicationController
     @payment.honey_money = @payment.amount * RATIO
     @payment.user = current_user
     
-    unless @payment.new_card_name = @payment.card_name && 
-           @payment.new_card_expired_month = @payment.card_expired_month && 
-           @payment.new_card_expired_year = @payment.card_expired_year && 
-           @payment.new_card_last_four_number = "xxxx-xxxx-xxxx-#{@payment.card_last_four_number}"
+    unless (@payment.new_stripe_card_token || "").blank? && @payment.new_card_name == @payment.card_name && 
+           @payment.new_card_expired_month == @payment.card_expired_month && 
+           @payment.new_card_expired_year == @payment.card_expired_year && 
+           @payment.new_card_number == "xxxx-xxxx-xxxx-#{@payment.card_last_four_number}"
       current_user.new_card_name = @payment.new_card_name
       current_user.new_card_expired_month = @payment.new_card_expired_month
       current_user.new_card_expired_year = @payment.new_card_expired_year
@@ -83,7 +82,7 @@ class PaymentsController < ApplicationController
           @payment.errors.add(:card, "is not valid")
           respond_to do |format|
             format.js {
-              @return_content = render_to_string(:partial => "/payments/add_honey_form")
+              @return_content = render_to_string(:partial => "/payments/edit_card_form")
             }
           end
           #render "/payments/new"
@@ -111,7 +110,7 @@ class PaymentsController < ApplicationController
           #render "/payments/new"
           respond_to do |format|
             format.js {
-              @return_content = render_to_string(:partial => "/payments/add_honey_form")
+              @return_content = render_to_string(:partial => "/payments/edit_card_form")
             }
           end
           return
@@ -119,7 +118,14 @@ class PaymentsController < ApplicationController
       end
     rescue Exception => e
       @payment.errors.add(:payment, e.message)
-      render "/payments/new"
+      Rails.logger.info @payment.errors.full_messages
+      
+      respond_to do |format|
+        format.js {
+          @return_content = render_to_string(:partial => "/payments/edit_card_form")
+        }
+      end
+      #render "/payments/new"
     end
   end
 

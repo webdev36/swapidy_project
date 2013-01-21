@@ -194,16 +194,34 @@ function hidePopup() {
   $('.active-popup').removeClass('active-popup');
 }
 
-
-function showLoader(element_id) {
-  var popupHeight = $(element_id).height();
-  var popupWidth = $(element_id).width();
-  if(popupWidth == 0) popupWidth = 400;
-  if(popupHeight == 0) popupHeight = 200;
-  $(element_id).html("<div class='loader' style='width: " + popupWidth + "px; height: " + popupHeight + "px;'><img src='/assets/loading.gif' /></div>");
+function showPageLoading() {
+  $("#page_loading_animation").show();
 }
 
+function hidePageLoading() {
+  $("#page_loading_animation").hide();
+}
 
+function submit_signin_form(){
+  $("#popup-dialog_for_signin form").removeClass('unsavedForm');
+  $.ajax({
+    type : 'POST',
+    url : $("#popup-dialog_for_signin form").attr("action"),
+    data : $("#popup-dialog_for_signin form").serialize(),
+    dataType : 'script',
+    success: function(data) {}
+  });
+}
+function submit_signup_form(){
+  $("#popup-dialog_for_signup form").removeClass('unsavedForm');
+  $.ajax({
+    type : 'POST',
+    url : $("#popup-dialog_for_signup form").attr("action"),
+    data : $("#popup-dialog_for_signup form").serialize(),
+    dataType : 'script',
+    success: function(data) {}
+  });
+}
 
 
 /**

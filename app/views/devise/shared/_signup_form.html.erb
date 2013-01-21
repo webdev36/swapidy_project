@@ -8,7 +8,7 @@
     <span>or</span>
   </p>
   <div id="login_form">
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource)) do |f| %>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource), :method => :post) do |f| %>
       <div class="input-prepend">
         <span class="add-on signup_add-on">E-mail</span>
         <%= f.email_field :email, :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %>
@@ -22,9 +22,9 @@
         <%= f.password_field :password_confirmation, :class => "span2", :id => "prependedInput"  %>
       </div>
       <div style="top: 135px; display: block;">
-        <%= f.submit "Sign up", :class => "login_button", :style => "position: relative; top: 0;" %>
+        <a href="#" onclick="submit_signup_form();" class="login_button" style="width: 65px; margin-top: 15px;">Sign up</a>
         <% unless resource.errors.empty? %>
-          <div class="alert alert-error" style="width:245px; position:relative; bottom:35px; left:120px;"> <%= raw resource.errors.full_messages.first %>. </span>
+          <div class="alert alert-error" style="width:245px; position:relative; bottom:-5px; left:120px;"> <%= raw resource.errors.full_messages.first %>. </span>
         <% end %>
       </div>
     <% end %>

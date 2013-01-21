@@ -22,10 +22,11 @@ class User < ActiveRecord::Base
 
   attr_accessor :new_card_number, :new_card_cvc, :new_card_type, :new_card_name, :new_card_expired_month, :new_card_expired_year, :new_card_last_four_number, :new_stripe_card_token
 
-  has_many :orders, :order => "status asc, created_at desc"
+  has_many :orders, :order => "created_at desc, status asc"
   has_many :user_providers
   
   has_many :notifications, :order => "created_at desc, updated_at desc"
+  has_many :free_honey_invitations, :foreign_key => "sender_id", :class_name => "FreeHoney", :order => "created_at desc, updated_at desc"
 
   validate :validate_card_info
   
@@ -104,7 +105,7 @@ class User < ActiveRecord::Base
   end
 
   def new_card_info_valid?
-    return true if new_card_name.blank? && new_card_expired_month.blank? && new_card_expired_year.blank?
+    return true unless self.new_card_info
     
     if new_stripe_card_token.blank? || new_card_last_four_number.blank? || 
         new_card_expired_month.blank? || new_card_expired_year.blank? || new_card_type.blank?
@@ -146,13 +147,26 @@ class User < ActiveRecord::Base
   end
   
   def last_order(order_type = Order::TYPES[:order])
-    last_same_order = (order_type == Order::TYPES[:order]) ? self.orders.to_buy.last : self.orders.to_sell.last
+    last_same_order = (order_type == Order::TYPES[:order]) ? self.orders.to_buy.limit(1).first : self.orders.to_sell.limit(1).first
     return last_same_order if last_same_order
-    return self.orders.last
+    return self.orders.limit(1).first
   end
   
   def has_same_order?(order_type = Order::TYPES[:order])
     (order_type == Order::TYPES[:order]) ? self.orders.to_buy.exists? : self.orders.to_sell.exists?
   end
+  
+  def remain_inviation_count
+    if self.free_honey_invitations.count < FreeHoney::MAX_COUNT
+      return FreeHoney::MAX_COUNT - self.free_honey_invitations.count
+    else
+      return 0
+    end
+  end
+  
+  def free_honey_sendable?
+    remain_inviation_count > 0 && self.created_at > 7.days.ago
+  end
+  
 
 end

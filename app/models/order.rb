@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
   attr_accessible :order_type, :status, :product_id, :honey_price, :using_condition, 
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,
                   :shipping_city, :shipping_state, :shipping_zip_code, :shipping_country, :shipping_method,
-                  :candidate_addresses, :shipping_zip_code_add_on, :is_candidate_address
+                  :candidate_addresses, :shipping_zip_code_add_on, :is_candidate_address, :token_key
 
   validates :order_type, :status, :presence => true
   validates :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_city, :shipping_state, 
@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
 
   validates :using_condition, :presence => {:message => "You need to select at least one of the types!"}
 
-  attr_accessor :candidate_addresses, :is_candidate_address
+  attr_accessor :candidate_addresses, :is_candidate_address, :token_key
 
   belongs_to :product
   belongs_to :user
@@ -195,15 +195,24 @@ class Order < ActiveRecord::Base
   
   def enter_from_last_address
     last_one = self.user.last_order(self.order_type)
-    return false unless last_one
-    self.shipping_first_name = last_one.shipping_first_name
-    self.shipping_last_name = last_one.shipping_last_name
-    self.shipping_address = last_one.shipping_address
-    self.shipping_optional_address = last_one.shipping_optional_address
-    self.shipping_city = last_one.shipping_city
-    self.shipping_state = last_one.shipping_state
-    self.shipping_zip_code = last_one.shipping_zip_code
-    return true
+    if last_one
+      self.shipping_first_name = last_one.shipping_first_name
+      self.shipping_last_name = last_one.shipping_last_name
+      self.shipping_address = last_one.shipping_address
+      self.shipping_optional_address = last_one.shipping_optional_address
+      self.shipping_city = last_one.shipping_city
+      self.shipping_state = last_one.shipping_state
+      self.shipping_zip_code = last_one.shipping_zip_code
+      return true
+    else
+      self.shipping_state = "CA"
+      return false
+    end
+  end
+    
+  def generate_token_key
+    self.token_key = Digest::MD5.hexdigest "#{SecureRandom.hex(20)}-order-#{DateTime.now.to_s}"
+    return self.token_key
   end
   
   private

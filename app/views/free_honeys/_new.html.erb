@@ -1,21 +1,21 @@
-
 <div id="login_container">
+  <a class="close-popup" onclick="hidePopup();" style="position:relative; top:30px; right:95px;" href="#" title="Cancel">Cancel</a>
   <img id="login_circle" src="/images/freehoney_rectangle.png" style="top: 338.5px; display: block;">
-  
   <div id="login_form">
-    <%= form_for(FreeHoney.new, :as => "free_honey", :url => "/free_honeys/create") do |f| %>
-    <div class="free_honey_info">
-    <p >Invite your friends by entering their email below. If they join, you'll receive 100 FREE honey (only 3 invites allowed - limited time only).</p>
-    <p style="text-align:center;">You have [invites] invites left.</p>
-  </div>
-      <div class="email_invite">
-      <input id="emails" name="emails" size="30" type="text" placeholder="E-mail address"value="" />
-    
-      <div style="position:relative; top:10px;">
-        <input name="Submit" type="submit" class="email_invite_button" value="Invite" />
-        <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel" style="position:relative; bottom:440px; right:20px;">Cancel</a>
+    <%= form_for(@free_honey, :as => "free_honey", :url => "/free_honeys/create", :html => {:id => "add_honey"}) do |f| %>
+      <div class="free_honey_info">
+        <p >Invite your friends by entering their email below. If they join, you'll receive 100 FREE honey (only 3 invites allowed - limited time only).</p>
+        <p style="text-align:center;">You have <%= current_user.remain_inviation_count %> invites left.</p>
       </div>
-    </div>
+      <% if current_user.free_honey_sendable? %>
+        <div class="email_invite">
+          <input id="emails" name="emails" size="30" type="text" placeholder="E-mail address"value="" />
+          <div style="position:relative; top:10px;">
+            <a href="#" onclick="submitAddHoney();" class="email_invite_button">Invite</a>
+            <% if @error_messages %><br/><span style="color: red;"><%= @error_messages %></span><% end %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
