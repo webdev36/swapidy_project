@@ -25,6 +25,7 @@
 }
 body{
   padding-top: 0px;
+  background: whitesmoke;
 }
 .navbar .brand {
   display: inline-block;
