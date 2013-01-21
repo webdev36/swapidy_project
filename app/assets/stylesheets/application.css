@@ -206,11 +206,14 @@ max-width:none;
   width:100%;
   padding: 30px 0 30px 0;
   background-color: whitesmoke;
-  border-top: 1px solid #E5E5E5;
   text-align: center;
   height:180px;
 }
+.footer ul{
+    border-top: 1px solid #E5E5E5;
+    padding-top: 30px;
 
+}
 .footer li{
   display: inline;
   margin-right: 20px;
