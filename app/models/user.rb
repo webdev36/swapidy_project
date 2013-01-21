@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
   end
 
   def new_card_info_valid?
-    return true if new_card_name.blank? && new_card_expired_month.blank? && new_card_expired_year.blank?
+    return true unless self.new_card_info
     
     if new_stripe_card_token.blank? || new_card_last_four_number.blank? || 
         new_card_expired_month.blank? || new_card_expired_year.blank? || new_card_type.blank?

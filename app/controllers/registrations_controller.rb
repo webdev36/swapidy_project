@@ -50,4 +50,11 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
   
+  def edit
+    resource.new_card_expired_year = resource.card_expired_year
+    resource.new_card_expired_month = resource.card_expired_month
+    resource.new_card_name = resource.card_name
+    resource.new_card_number = "xxxx-xxxx-xxxx-#{resource.card_last_four_number}" unless (resource.card_last_four_number || "").blank?
+  end
+  
 end
