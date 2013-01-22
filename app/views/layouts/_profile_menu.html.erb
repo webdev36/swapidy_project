@@ -1,8 +1,12 @@
 <li class="divider-vertical"></li>
 <li class="dropdown">
   <div class="profile_info_nav">
+    <% if current_user.provider_image && !current_user.provider_image.blank? %>
+      <img class="nav_icons nav_profile" src="<%= current_user.provider_image %>">
+    <% else %>
       <img class="nav_icons nav_profile" src="/images/profile_icon.png">
-      <%= link_to(current_user.full_name.upcase, transactions_path, :method => :get) %>
+    <% end %>
+    <%= link_to(current_user.full_name.upcase, transactions_path, :method => :get) %>
   </div>
 </li>
 <li class="divider-vertical"></li>
