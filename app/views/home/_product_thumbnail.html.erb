@@ -1,11 +1,11 @@
-<div class="item thumbnail product_filter_model_<%= product.product_model.id %> <%= product.using_condition_types %> <%= product.gen_attribute_filter_ids %> <%= "for_buying" if product.for_buy %> <%= "for_selling" if product.for_sell %>">
+<div class="item thumbnail product_filter_model_<%= product.product_model.id %> <%= product.gen_attribute_filter_ids %> <%= "for_buying" if product.for_buy %> <%= "for_selling" if product.for_sell %>">
   <div class="box">
     <div class="product_title" style="color:#FC43CC;" title="<%= product.title %>"><%= product.title %></div>
     <div class="product_image thumbnail"><img title="<%= product.title %>" src="<%= product.main_image_url(:thumb) %>"></div>
     <div>
       <div class="product_price">
         <% if product.has_flawless_type? %>
-          <div class="flawless_type <%= product.price_range_class(product.honey_price) %>">Flawless: <%= format_num(product.honey_price) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"></div>
+          <div class="flawless_type <%= product.price_range_class(product.honey_price) %>"><%= product.flaw_less_name %>: <%= format_num(product.honey_price) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"></div>
         <% end %>
         <% if product.has_good_type? %>
           <div class="good_type <%= product.price_range_class(product.price_for_good_type) %>">Good: <%= format_num(product.price_for_good_type) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"> </div>

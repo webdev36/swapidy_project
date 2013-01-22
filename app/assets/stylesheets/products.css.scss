@@ -45,15 +45,14 @@ font-size:30px;
 }
 
 #product_container{
-margin-left:100px;
-margin-top:50px;
-width:500px;
+  margin-left:100px;
+  margin-top:50px;
+  width:500px;
 }
 
-
-.show_button_sell{
-text-align: center;
-  background: #0099FF;
+.show_button_buy,
+.show_button_sell {
+  text-align: center;
   color: white;
   font-size: 30px;
   text-decoration: none;
@@ -76,56 +75,31 @@ text-align: center;
   position:relative;
   bottom:200px;
 }
+.show_button_sell {
+  background: #0099FF;
+}
 .show_button_sell:hover{
   background: #00CCFF;
 }
-.show_button_buy{
-  font-family:"myriad";
-  text-align: center;
+.show_button_buy {
   background: #fa3e6e;
+}
+.show_button_buy:hover {
+  background-color: #F9006E;
+}
+.show_button_sell a {
   color: white;
-  font-weight: 700;
-  font-size: 30px;
-  text-decoration: none;
-  padding: 8px 15px;
-  border: 1px solid rgba(0,0,0,0.15);
-  border-radius: 4px;
-  width: 50px;
-  height: 30px;
-
-  -webkit-transition: all 0.3s ease-out;
-  -moz-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  -ms-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-  margin-top:30px;
-  box-shadow: 
-      inset 0 1px 0 rgba(255,255,255,0.5), 
-      0 2px 2px rgba(0,0,0,0.3), 
-      0 0 4px 1px rgba(0,0,0,0.2); 
-
-  text-decoration: none;
-  text-shadow: 0 1px rgba(255,255,255,0.7);  
-  margin-top:50px;
 }
-.show_button_buy:hover{
-  background-color:#F9006E;
+.show_button_sell a:hover {
+  color: white;
 }
-.show_button_sell a{
+.show_button_buy a {
+  color: white;
+}
+.show_button_buy a:hover {
   color:white;
 }
-
-.show_button_sell a:hover{
-  color:white;
-}
-.show_button_buy a{
-  color:white;
-}
-
-.show_button_buy a:hover{
-  color:white;
-}
-.product_model{
+.product_model {
   color: #38B4DE;
 }
 #product_text{

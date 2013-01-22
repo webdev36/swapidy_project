@@ -1,9 +1,3 @@
-<style type="text/css">
-body{
-  background: whitesmoke;
-}
-</style>
-
 <div class="container show_container">
   <div class="product_name">
     <%= @product.title %>
@@ -13,7 +7,7 @@ body{
     <div id="product_text">
       <div class="product_price">
         <% if @product.has_flawless_type? %>
-          <input type="radio" id="using_condition" name="using_condition" value="Flawless"></input> Flawless 
+          <input type="radio" id="using_condition" name="using_condition" value="Flawless"></input><%= @product.flaw_less_name %>
           <span class="product_desc"><%= format_num(@product.honey_price)%> </span><span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
           <br/>
         <% end %>
@@ -30,22 +24,20 @@ body{
       </div>	
     </div>
   </div>
-
 </div>
-  <div class="show_definitions">
-    <dl>
-      <% if @product.has_flawless_type? %>
-        <dt>flawless |ˈflôləs|</dt>
-        <dd>Doesn't show any use, like new.</dd>
-      <% end %>
-      <% if @product.has_good_type? %>
-        <dt>good |go͝od|</dt>
-        <dd>Normal signs of use.</dd>
-      <% end %>
-      <% if @product.has_poor_type? %>
-        <dt>poor |po͝or, pôr|</dt>
-        <dd>Damaged and/or does not turn on.</dd>
-      <% end %>
-    </dl>
-  </div>
-  <%= render :partial => "/layouts/footer" %>
+<div class="show_definitions">
+  <dl>
+    <% if @product.has_flawless_type? %>
+      <dt>flawless |ˈflôləs|</dt>
+      <dd>Doesn't show any use, like new.</dd>
+    <% end %>
+    <% if @product.has_good_type? %>
+      <dt>good |go͝od|</dt>
+      <dd>Normal signs of use.</dd>
+    <% end %>
+    <% if @product.has_poor_type? %>
+      <dt>poor |po͝or, pôr|</dt>
+      <dd>Damaged and/or does not turn on.</dd>
+    <% end %>
+  </dl>
+</div>

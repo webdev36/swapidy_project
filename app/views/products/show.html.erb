@@ -3,18 +3,16 @@
 <% else %>
   <form action="/orders/buy/<%= @product.id %>" method="post">
 <% end %>
-<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-<%= render :partial => "/products/detail_info"%>
-
-<div style="text-align:center; width:100%;" >
-  <% if @error_message && !@error_message.blank? %>
-    <span style="color: red;"><%= @error_message %></span><br/>
-  <% end %>
-
-  <% if (params["for"] && params["for"] == "sell") %>
-    <input type="submit" value="Sell" class="show_button_sell" />
-  <% else %>
-    <input type="submit" value="Buy" class="show_button_buy"/>
-  <% end %>
-</div>
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
+    <%= render :partial => "/products/detail_info"%>
+    <% if @error_message && !@error_message.blank? %>
+      <div style="color: red; position: relative; bottom: 200px; text-align:center; width:100%;"><%= @error_message %></div><br/>
+    <% end %>
+    <div style="text-align:center; width:100%;" >
+      <% if (params["for"] && params["for"] == "sell") %>
+        <input type="submit" value="Sell" class="show_button_sell" />
+      <% else %>
+        <input type="submit" value="Buy" class="show_button_buy"/>
+      <% end %>
+    </div>
 </form>
