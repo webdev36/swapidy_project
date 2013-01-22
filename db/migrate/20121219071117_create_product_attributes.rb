@@ -7,6 +7,8 @@ class CreateProductAttributes < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :product_attributes, [:product_model_attribute_id]
+    if Rails.env == 'production'
+      add_index :product_attributes, [:product_model_attribute_id]
+    end
   end
 end

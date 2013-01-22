@@ -1,5 +1,11 @@
 class RemoveTimestampFields < ActiveRecord::Migration
   def up
+    begin
+      remove_index :product_attributes, [:product_model_attribute_id]
+      remove_index :product_model_attributes, [:product_model_id]
+      remove_index :product_model_attributes, [:category_attribute_id]
+    rescue Exception => e
+    end
     remove_column :images, :created_at
     remove_column :images, :updated_at
     remove_column :products, :created_at

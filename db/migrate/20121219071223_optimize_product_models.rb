@@ -15,10 +15,11 @@ class OptimizeProductModels < ActiveRecord::Migration
     add_column :products, :image_file_size, :integer # File size in bytes
 
     drop_table :product_prices
-    
-    add_index :product_models, [:category_id]
-    add_index :products, [:category_id]
-    add_index :products, [:product_model_id]
+    if Rails.env == 'production'
+      add_index :product_models, [:category_id]
+      add_index :products, [:category_id]
+      add_index :products, [:product_model_id]
+    end
   end
 
   def down
@@ -43,8 +44,10 @@ class OptimizeProductModels < ActiveRecord::Migration
     add_column :products, :memory_style, :string
     add_column :products, :quality_status, :string
     
-    remove_index :product_models, [:category_id] rescue nil
-    remove_index :products, [:category_id] rescue nil
-    remove_index :products, [:product_model_id] rescue nil
+    if Rails.env == 'production'
+      remove_index :product_models, [:category_id] rescue nil
+      remove_index :products, [:category_id] rescue nil
+      remove_index :products, [:product_model_id] rescue nil
+    end
   end
 end
