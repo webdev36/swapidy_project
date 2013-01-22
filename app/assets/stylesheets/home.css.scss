@@ -13,9 +13,7 @@
   font-family: "myriad-s";
   src: url('/myriad-s.otf') format("truetype");
 }
-*{
-  font-family:"myriad";
-}
+
 #iphone{
 	height:350px;
 	width:350px;
@@ -24,6 +22,9 @@
 #imac{
 	height:350px;
 	width:550px;
+}
+.container{
+  font-family:"myriad";
 }
 
 a:visited 
@@ -91,9 +92,10 @@ text-align: center;
 position: relative;
 overflow: hidden;
 padding: 30px 0 10px;
+padding-bottom:30px;
 }
 
-.container.dark-overlay {
+.dark-overlay {
   background-color: rgba(0, 0, 0, 0.3);
   border: medium none;
   box-shadow: none;
@@ -122,6 +124,7 @@ margin: 0 auto 15px auto;
 #buttons{
 position: relative;
 margin: 10px auto 40px;
+padding-bottom:30px;
 width: 100%;
 overflow: hidden;
 text-align: center;
@@ -492,7 +495,7 @@ label {
   color:#666;
 }
 .models_for_buy li.active a {
-  background-color: #FC43CC !important;
+  background-color: #fa3e6e !important;
 } 
 
 .models_for_sell li.active a {
@@ -562,6 +565,7 @@ label {
 }
 .headings_pink{
   color:#fa3e6e;
+  font-family:"myriad-s";
 }
 
 .hiw_steps{
@@ -627,7 +631,7 @@ label {
 }
 .nav_header{
   font-size:15px;
-  font-family:"myriad-b";
+  font-family:"myriad-s";
 }
 .nav_notification{
   height:25px;

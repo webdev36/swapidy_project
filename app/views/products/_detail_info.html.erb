@@ -35,17 +35,16 @@ body{
   <div class="show_definitions">
     <dl>
       <% if @product.has_flawless_type? %>
-        <dt>flawless |ˈflôləs|</dt>
+        <dt>flawless</dt>
         <dd>Doesn't show any use, like new.</dd>
       <% end %>
       <% if @product.has_good_type? %>
-        <dt>good |go͝od|</dt>
+        <dt>good</dt>
         <dd>Normal signs of use.</dd>
       <% end %>
       <% if @product.has_poor_type? %>
-        <dt>poor |po͝or, pôr|</dt>
+        <dt>poor</dt>
         <dd>Damaged and/or does not turn on.</dd>
       <% end %>
     </dl>
   </div>
-  <%= render :partial => "/layouts/footer" %>

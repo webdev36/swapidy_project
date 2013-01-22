@@ -1,3 +1,9 @@
+<style type="text/css">
+body{
+  background: whitesmoke;
+}
+</style>
+
 <div id="progress_indicator" class="three_steps">
   <ul>
     <li>
@@ -65,7 +71,7 @@
           <br/>
 
     
- <input name="commit" class="payment_button_sell" style="width: 180px; height: 50px; padding:0px;" type="submit" value="Continue" />        <% else %>
+ <input name="commit" class="payment_button_sell" type="submit" value="Continue" />        <% else %>
           <div>
             <label>You need to extra Honey:</label>
             <%= format_num(current_user.extra_honey_for(@order)) %> Honey

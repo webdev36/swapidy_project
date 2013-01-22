@@ -5,7 +5,7 @@
       <ul class="nav pull-left"><li><%= render :partial => "/layouts/locations" %></li></ul>
       
       <ul class="nav pull-right nav_header" role="navigation">
-        <li> <a href="javascript:showPopup('popup-dialog_how_it_work');" style="position:fixed; right:1px; top:10px;">HOW IT WORKS?</a></li>
+ 
         <% if user_signed_in? %>
           <% if current_user.free_honey_sendable? %>
             <li id="nav_login">
@@ -66,10 +66,10 @@
       </ul>        
           </li>
           <li class="divider-vertical"></li>
-
+                 <li> <a href="javascript:showPopup('popup-dialog_how_it_work');">HOW IT WORKS?</a></li>
           <li>
             <div class="honey_display">
-              <div style="display: inline-block;"><img src="/images/honey_currency_score.png"><span id="honey_balance_amount_menu"><%= format_num(current_user.honey_balance)%></span></div>
+              <div style="display: inline-block;"><img src="/images/honey_currency_score.png"><span id="honey_balance_amount_menu"><%= format_num(current_user.honey_balance)%></span>
               <% if controller_name != "payments" %>
                 <div style="display: inline-block;"><a href="javascript:showPopup('popup-dialog_add_honey');"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a></div>
               <% else %>
@@ -77,6 +77,10 @@
               <% end %>
             </div>
           </li>
+          <li>
+            <div class="help">
+              <div style="display: inline-block;">Need help?<img src="/images/help.png"></div>
+           </li>   
           <% if current_user.is_admin? %>
             <li>
               <%= link_to('ADMIN', rails_admin_path, :method => :get) %>

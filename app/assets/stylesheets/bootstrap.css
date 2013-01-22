@@ -224,7 +224,6 @@ textarea {
 body {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
   line-height: 20px;
   color: #333333;
   background-color: #ffffff;
@@ -2887,6 +2886,8 @@ table th[class*="span"],
   list-style: none;
   background-color: #ffffff;
   border: 1px solid #ccc;
+      font-family: "myriad-s";
+
   border: 1px solid rgba(0, 0, 0, 0.2);
   *border-right-width: 2px;
   *border-bottom-width: 2px;
@@ -2926,12 +2927,16 @@ table th[class*="span"],
   white-space: nowrap;
   height:10px;
   z-index:2000;
+      font-family: "myriad-s";
+
 }
 
 .dropdown-menu li > a:hover,
 .dropdown-menu li > a:focus,
 .dropdown-submenu:hover > a {
   color: #ffffff;
+    font-family: "myriad-s";
+
   text-decoration: none;
   background-color: #38B4DE;
   background-image: -moz-linear-gradient(top, #38B4DE, #38B4DE);
@@ -4307,7 +4312,8 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar-inner {
-  min-height: 40px;
+  min-height: 30px;
+  height: 60px;
   padding-right: 20px;
   padding-left: 20px;
   background-color: #fafafa;
@@ -4351,7 +4357,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .brand {
   display: block;
   float: left;
-  padding: 10px 20px 10px;
+  padding: 5px 20px 10px;
   margin-left: -20px;
   font-size: 20px;
   font-weight: 200;
@@ -6005,11 +6011,10 @@ a.badge:hover {
 height: 100%;
 z-index: 1000;
 position: absolute;
-top: 0;
-height: 330px;
+top: 20%;
+height: 100%;
 width: 100%;
 text-shadow: 0 0 15px rgba(0, 0, 0, 0.6),0 -1px 1px rgba(0, 0, 0, 0.6);
-margin: 20% 0 0 0;
 }
 
 .hero-unit-content {
