@@ -3,7 +3,7 @@ class LocationVote < ActiveRecord::Base
   
   def self.vote_count location
     return 0 if location.nil? || location.blank?
-    return where(:location => location).count
+    return 500 + where(:location => location).count
   end
   
   def self.able_to_vote? user_ip, user_id
