@@ -457,10 +457,11 @@ p.codrops-demos a.current-demo:hover{
     
     $.ajax({
       type : 'POST',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       url : '/location/vote',
       data : 'location_name=' + $(this).attr("data-location"),
       dataType : 'script',
-      success: function(data) { $(select_image).attr('src', '/images/vote_after.png'); }
+      success: function(data) {}
     });
     return false;
   });
