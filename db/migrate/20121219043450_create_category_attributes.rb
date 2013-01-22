@@ -6,6 +6,8 @@ class CreateCategoryAttributes < ActiveRecord::Migration
       t.string  :title
       t.timestamps
     end
-    add_index :category_attributes, [:category_id]
+    if Rails.env == 'production'
+      add_index :category_attributes, [:category_id]
+    end
   end
 end

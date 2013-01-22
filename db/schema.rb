@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130121190218) do
+ActiveRecord::Schema.define(:version => 20130122092330) do
 
   create_table "categories", :force => true do |t|
     t.string  "title"
@@ -25,16 +25,6 @@ ActiveRecord::Schema.define(:version => 20130121190218) do
   end
 
   add_index "category_attributes", ["category_id"], :name => "index_category_attributes_on_category_id"
-
-  create_table "comments", :force => true do |t|
-    t.string   "commenter"
-    t.text     "body"
-    t.integer  "post_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
   create_table "free_honeys", :force => true do |t|
     t.integer  "sender_id"
@@ -121,32 +111,17 @@ ActiveRecord::Schema.define(:version => 20130121190218) do
     t.datetime "updated_at",                                        :null => false
   end
 
-  create_table "posts", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "user_id"
-  end
-
-  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
-
   create_table "product_attributes", :force => true do |t|
     t.integer "product_id"
     t.integer "product_model_attribute_id"
     t.string  "value"
   end
 
-  add_index "product_attributes", ["product_model_attribute_id"], :name => "index_product_attributes_on_product_model_attribute_id"
-
   create_table "product_model_attributes", :force => true do |t|
     t.integer "product_model_id"
     t.integer "category_attribute_id"
     t.string  "value"
   end
-
-  add_index "product_model_attributes", ["category_attribute_id"], :name => "index_product_model_attributes_on_category_attribute_id"
-  add_index "product_model_attributes", ["product_model_id"], :name => "index_product_model_attributes_on_product_model_id"
 
   create_table "product_models", :force => true do |t|
     t.string  "title"
@@ -177,8 +152,8 @@ ActiveRecord::Schema.define(:version => 20130121190218) do
     t.string   "username"
     t.integer  "item"
     t.string   "table"
-    t.integer  "month"
-    t.integer  "year",       :limit => 8
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 5
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end

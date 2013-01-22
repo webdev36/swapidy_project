@@ -49,7 +49,7 @@ label{
         <%= f.hidden_field :shipping_country %>
         
         <div class="payment_product_info">
-          <label ><%= @product.title %> (<%= @order.using_condition %>)</label><br />
+          <label><%= @order.title %></label><br />
           <div class="payment_product_image">
             <img src="<%= @product.main_image_url(:large) %>">
           </div>

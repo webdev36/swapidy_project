@@ -58,12 +58,8 @@ class Product < ActiveRecord::Base
     price_for_good_type && price_for_good_type > 0.0 rescue false
   end
   
-  def using_condition_types
-    result = []
-    result << "Flawless" if has_flawless_type?
-    result << "Poor" if has_poor_type?
-    result << "Good" if has_good_type?
-    result.join(" ")
+  def flaw_less_name
+    for_buy ? "Brand new with warranty" : "Flawless"
   end
   
   def main_image

@@ -48,10 +48,11 @@ class Order < ActiveRecord::Base
   end
   
   def title
-    self.product_title if self.product_title && !self.product_title.blank? 
-    return self.product.title if self.product && !self.product.title.blank?
-    return "#{self.product.category.title} #{self.product.product_model.title}" if self.product && self.product.product_model
-    ""
+    result = self.product_title if self.product_title && !self.product_title.blank? 
+    result = self.product.title if result.nil? && self.product && !self.product.title.blank?
+    result = "#{self.product.category.title} #{self.product.product_model.title}" if result.nil? && self.product && self.product.product_model
+    return "#{result} (#{product.flaw_less_name})" if is_order?
+    "#{result} (#{using_condition})"
   end
   
   def status_title
