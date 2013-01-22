@@ -21,6 +21,8 @@ Swapidy::Application.routes.draw do
   match "/team" => "home#static_page", :method => :get, :content => "team"
   match "/terms" => "home#static_page", :method => :get, :content => "terms"
   match "/privacy" => "home#static_page", :method => :get, :content => "privacy"
+
+  match "/send_contact" => "home#contact_us", :method => :post
   match "/contact_us" => "home#static_page", :method => :get, :content => "contact_us"
 
   match "/error_not_found" => "home#static_page", :method => :get, :content => "/error_pages/404"

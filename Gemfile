@@ -7,6 +7,9 @@ gem 'rails', '3.2.11'
 
 #gem 'sqlite3'
 gem 'devise'
+gem "recaptcha", :require => "recaptcha/rails"
+#gem 'galetahub-simple_captcha', :require => 'simple_captcha', :git => 'git://github.com/galetahub/simple-captcha.git'
+
 gem 'simple_form'
 gem 'haml'
 gem 'paperclip'

@@ -37,5 +37,10 @@ class UserNotifier < ActionMailer::Base
     @user = user
     mail :to => @user.email, :subject => "Free Honey Reeived"
   end
+  
+  def contact_us(admin_email, contact)
+    @contact = contact
+    mail :to => admin_email, :subject => "Swapidy Contact: #{contact[:subject]}"
+  end
 
 end

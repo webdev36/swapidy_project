@@ -1,15 +1,21 @@
-<style type="text/css">
-body{
-	background: whitesmoke;
-}
-</style>
-
-<div class="container">
+<br/>
 <div class='headings_pink'>Contact Us</div>
-<form>
-Email: <input type="text" name="email"><br/>
-Subject: <input type="text" name="subject"><br/>
-Message: <br/><input type="text" name="message" style="    height:200px;
-"><br/>
+<br/>
+<% if flash[:thank_message] %>
+<p style="color: pink;"><%= flash[:thank_message] %></p>
+<% end %>
+<form action="/send_contact" method="post">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
+  Email:<br/>
+  <input type="text" name="contact[email]" id="contact_email" value="<%= params[:contact] ? params[:contact][:email] : ""%>" /><br/>
+  Subject:<br/>
+  <input type="text" name="contact[subject]" id="contact_subject" value="<%= params[:contact] ? params[:contact][:subject] : ""%>"><br/>
+  Message:<br/>
+  <textarea type="text" name="contact[message]" id="contact_message" style="height:200px;"><%= params[:contact] ? params[:contact][:message] : ""%></textarea>
+  <br/>
+  <%= recaptcha_tags %><br/>
+  <% if @error_message %>
+    <p style="color: red;"><%= @error_message %></p>
+  <% end %>
+  <input type="submit" value="Submit">
 </form>
-</div>
