@@ -1,6 +1,6 @@
 class FreeHoneysController < ApplicationController
   
-  before_filter :require_login
+  before_filter :require_login, :only => :create
 
   def create
     if(params[:emails] == "") 

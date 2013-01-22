@@ -25,6 +25,7 @@ Swapidy::Application.routes.draw do
 
   match "/error_not_found" => "home#static_page", :method => :get, :content => "/error_pages/404"
   
+  match "/location/vote" => "location#vote", :method => :post
   match "/location/:location" => "location#change", :method => :get
   
   resources :products

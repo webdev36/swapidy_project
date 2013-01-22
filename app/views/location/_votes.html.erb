@@ -1,0 +1,3 @@
+<% LocationVote::UNSUPPORTS.each do |location_name| %>
+  <%= render :partial => "/location/location_vote", :locals => {:location_name => location_name} %>
+<% end %>

@@ -39,7 +39,7 @@ RailsAdmin.config do |config|
   #config.excluded_models = [Comment, Post]
 
   # Add models here if you want to go 'whitelist mode':
-  config.included_models = [Category, CategoryAttribute, Image, Order, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User, FreeHoney, RedeemCode, SwapidySetting]
+  config.included_models = [Category, CategoryAttribute, Image, Order, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User, FreeHoney, RedeemCode, SwapidySetting, LocationVote ]
 
   # Application wide tried label methods for models' instances
   # config.label_methods << :description # Default is [:name, :title]
@@ -701,5 +701,27 @@ RailsAdmin.config do |config|
      end
   #   create do; end
   #   update do; end
+  end
+  
+  config.model LocationVote do
+    configure :using_condition, :enum do
+      enum do
+        LocationVote::OPTIONS.map {|location| [location, location] }
+      end
+    end
+    
+    list do
+       filters [:location, :user]
+       field :location
+       field :user_ip
+       field :user
+       field :created_at
+     end
+     export do
+       field :location
+       field :user_ip
+       field :user
+       field :created_at
+     end
   end
 end

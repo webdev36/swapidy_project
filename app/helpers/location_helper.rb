@@ -1,7 +1,7 @@
 module LocationHelper
 
   def location_options
-    html = LocationController::OPTIONS.map{|option| "&quot;#{option}&quot;"}.join(",")
+    html = LocationVote::OPTIONS.map{|option| "&quot;#{option}&quot;"}.join(",")
     raw "[#{html}]"
   end
   
@@ -9,7 +9,7 @@ module LocationHelper
     if params[:location] && !params[:location].blank? 
       params[:location]
     else
-      LocationController::SUPPORTS.first
+      LocationVote::SUPPORTS.first
     end
   end
 

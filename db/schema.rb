@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111190158) do
+ActiveRecord::Schema.define(:version => 20130121190218) do
 
   create_table "categories", :force => true do |t|
     t.string  "title"
@@ -59,6 +59,14 @@ ActiveRecord::Schema.define(:version => 20130111190158) do
     t.integer "photo_file_size"
     t.string  "title"
     t.boolean "is_main",             :default => false
+  end
+
+  create_table "location_votes", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "user_ip"
+    t.string   "location"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "notifications", :force => true do |t|
@@ -169,7 +177,7 @@ ActiveRecord::Schema.define(:version => 20130111190158) do
     t.string   "username"
     t.integer  "item"
     t.string   "table"
-    t.integer  "month",      :limit => 2
+    t.integer  "month"
     t.integer  "year",       :limit => 8
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
