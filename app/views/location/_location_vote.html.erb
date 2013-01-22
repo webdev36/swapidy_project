@@ -1,0 +1,9 @@
+<div class="vote_location">
+  <span class="vote_city"><%= location_name %></span><br>
+  <span class="vote_count"><%= LocationVote.vote_count(location_name)%></span>
+  <br>
+  <img class="vote_button" src="<%= @last_vote && @last_vote.location == location_name ? "/images/vote_after.png" : "/images/vote.png"%>" data-location="<%= location_name %>">
+  <% if @last_vote && @last_vote.location == location_name %>
+    <br/><span> You have voted at <%= @last_vote.created_at.strftime("%H:%M %b %d, %Y") %>. You could vote again after 24 hours.</span>
+  <% end %>
+</div>
