@@ -275,7 +275,6 @@
     }
 
   , click: function (e) {
-      alert(1);
       e.stopPropagation()
       e.preventDefault()
       this.select()
