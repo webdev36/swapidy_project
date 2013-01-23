@@ -1,95 +1,163 @@
-<doctype html>
-<html>
-<head>
-<meta charset = "utf-8">
-<title>General FAQ</title>
 <style type="text/css">
-body{
+  body {
     background: whitesmoke;
-}
-dt:hover{
-cursor: pointer;
-}
-dt{
-      color:#38B4DE;
-
-}
-dd{
+  }
+  dt:hover {
+    cursor: pointer;
+  }
+  dt {
+    color: #38B4DE;
+  }
+  dd {
     color: #666;
-}
+  }
 </style>
 <script type="text/javascript">
+  $(document).ready(function() {
 
-$(document).ready(function () {
-    
-        $('.container').fadeIn(1000);
-       // ---- FAQs ---------------------------------------------------------------------------------------------------------------
-        
-        $('.faqs dd').hide(); // Hide all DDs inside .faqs
-        $('.faqs dt').hover(function(){$(this).addClass('hover')},function(){$(this).removeClass('hover')}).click(function(){ // Add class "hover" on dt when hover
-        $(this).next().slideToggle('normal'); // Toggle dd when the respective dt is clicked
-        }); 
-         $('.faqs').hide(); // Hide all DDs inside .faqs
-        $('.faq_cat').hover(function(){$(this).addClass('hover')},function(){$(this).removeClass('hover')}).click(function(){ // Add class "hover" on dt when hover
-        $(this).next().slideToggle('normal'); // Toggle dd when the respective dt is clicked
-        }); 
-    
-});
-</script>     
-      
-</head>
-<body>
+    $('.container').fadeIn(1000);
+    // ---- FAQs ---------------------------------------------------------------------------------------------------------------
+
+    $('.faqs dd').hide();
+    // Hide all DDs inside .faqs
+    $('.faqs dt').hover(function() {
+      $(this).addClass('hover')
+    }, function() {
+      $(this).removeClass('hover')
+    }).click(function() {// Add class "hover" on dt when hover
+      $(this).next().slideToggle('normal');
+      // Toggle dd when the respective dt is clicked
+    });
+    $('.faqs').hide();
+    // Hide all DDs inside .faqs
+    $('.faq_cat').hover(function() {
+      $(this).addClass('hover')
+    }, function() {
+      $(this).removeClass('hover')
+    }).click(function() {// Add class "hover" on dt when hover
+      $(this).next().slideToggle('normal');
+      // Toggle dd when the respective dt is clicked
+    });
+
+  }); 
+</script>
 <div class="container" style="display:none;">
- <h1 class="headings_pink">FAQ</h1>
- <br/>
- <div class="faq_cat"><h2 class="headings_pink">General FAQ</h2></div>
-        <dl class="faqs">
-        <dt>Can I use Swapidy anywhere?</dt>
-        <dd>Our service can only be used in the San Francisco Bay Area for now. Sign up for an account to be notified when it will be in your area!</dd>
-        <dt>How much is 1 honey worth?</dt>
-        <dd>1 honey is equal to ten cents (.10) </dd>
-        <dt>What if I don't have any honey and I just want to buy something?</dt>
-        <dd>You can buy honey from us by clicking the plus sign on the right when you're logged in. $1 gets you 10 honey.</dd>
-  		
-    	<dt>When do I get my honey?</dt>
-        <dd>As soon as you choose the product you want to sell and checkout, you get your honey. It will show up in the upper right hand corner when you're logged in and you will get email confirmation. If you're simply buying honey, you will get it as soon as you buy it.</dd>
-        <dt>What happens if I don't send Swapidy my product?</dt>
-        <dd>Swapidy will cancel any orders placed with the honey from the product you sold and will subtract the honey you received from your account.</dd>
-        <dt>What's the best way to get a hold of customer service?</dt>
-        <dd>Email us at honey@swapidy.com - We are happy to help you and will respond within 12-24 hours or less.</dd>
-        <dt>Can I get a refund if I purchased honey?</dt>
-        <dd>No. All honey purchases are final.</dd>
-          </dl>
-<div class="faq_cat"><h2 class="headings_pink">Buying FAQ</h2></div>
-    <dl class="faqs">
-        <dt>What do I do once I get my honey? </dt>
-        <dd>With your honey, you can buy products within our marketplace and we'll ship them out for free.
-</dd>
-        <dt>What if I don't have enough honey to buy what I want?</dt>
-        <dd>Simply buy the difference of honey during checkout. For example, if you want an iPhone 4 that's 4,000 Honey and you only have 3,500, just buy $50 worth of Honey and you're good to go!</dd>
-        <dt>Once I order a product, how long will it take to get to me? </dt>
-        <dd>Anywhere from 3-7 business days depending upon your location. This time is also subject to how fast you send us any products you sold us, if any.</dd>
-        
-        <dt>Do I ever have to pay shipping costs?</dt>
-        <dd>Nope, shipping is always free.</dd>
-        
-        </dl>   
-<div class="faq_cat"><h2 class="headings_pink">Selling FAQ</h2></div>
-<dl class="faqs">
-        <dt>What do I do once I get my honey? </dt>
-        <dd>You must ship your product(s) within 72 hours with the prepaid USPS shipping label we sent you via email. If the products aren't shipped within 72 hours, we will cancel any orders you placed with the honey and subtract the honey from your account. </dd>
-        <dt>I lost/deleted the email with my USPS prepaid label in it. What do I do?</dt>
-        <dd>Email us at honey@swapidy.com to receive another label. </dd>
-        <dt>Where do I drop off my package once I put my prepaid label on the box? 
-</dt>
-        <dd>Simply drop it off in your mailbox, drop off centers, or your nearest post office which can be found here: https://tools.usps.com/go/POLocatorAction!input.action</dd>
-        
-        <dt> Can I receive my product back once I've shipped it out? </dt>
-        <dd> No, all trade-ins are final. </dd>
-        <dt>What if the product I sent was faulty and/or didn't match Swapidy's description of poor, good, or flawless? </dt>
-        <dd> Swapidy will send your product back and charge you a $25 penalty fee.</dd>
-        
-          </dl>   
-</div>       
-</body>
-</html>
+  <h1 class="headings_pink">FAQ</h1>
+  <br/>
+  <div class="faq_cat">
+    <h2 class="headings_pink">General FAQ</h2>
+  </div>
+  <dl class="faqs">
+    <dt>
+      Can I use Swapidy anywhere?
+    </dt>
+    <dd>
+      Our service can only be used in the San Francisco Bay Area for now. Sign up for an account to be notified when it will be in your area!
+    </dd>
+    <dt>
+      How much is 1 honey worth?
+    </dt>
+    <dd>
+      1 honey is equal to ten cents (.10)
+    </dd>
+    <dt>
+      What if I don't have any honey and I just want to buy something?
+    </dt>
+    <dd>
+      You can buy honey from us by clicking the plus sign on the right when you're logged in. $1 gets you 10 honey.
+    </dd>
+
+    <dt>
+      When do I get my honey?
+    </dt>
+    <dd>
+      As soon as you choose the product you want to sell and checkout, you get your honey. It will show up in the upper right hand corner when you're logged in and you will get email confirmation. If you're simply buying honey, you will get it as soon as you buy it.
+    </dd>
+    <dt>
+      What happens if I don't send Swapidy my product?
+    </dt>
+    <dd>
+      Swapidy will cancel any orders placed with the honey from the product you sold and will subtract the honey you received from your account.
+    </dd>
+    <dt>
+      What's the best way to get a hold of customer service?
+    </dt>
+    <dd>
+      Email us at honey@swapidy.com - We are happy to help you and will respond within 12-24 hours or less.
+    </dd>
+    <dt>
+      Can I get a refund if I purchased honey?
+    </dt>
+    <dd>
+      No. All honey purchases are final.
+    </dd>
+  </dl>
+  <div class="faq_cat">
+    <h2 class="headings_pink">Buying FAQ</h2>
+  </div>
+  <dl class="faqs">
+    <dt>
+      What do I do once I get my honey?
+    </dt>
+    <dd>
+      With your honey, you can buy products within our marketplace and we'll ship them out for free.
+    </dd>
+    <dt>
+      What if I don't have enough honey to buy what I want?
+    </dt>
+    <dd>
+      Simply buy the difference of honey during checkout. For example, if you want an iPhone 4 that's 4,000 Honey and you only have 3,500, just buy $50 worth of Honey and you're good to go!
+    </dd>
+    <dt>
+      Once I order a product, how long will it take to get to me?
+    </dt>
+    <dd>
+      Anywhere from 3-7 business days depending upon your location. This time is also subject to how fast you send us any products you sold us, if any.
+    </dd>
+
+    <dt>
+      Do I ever have to pay shipping costs?
+    </dt>
+    <dd>
+      Nope, shipping is always free.
+    </dd>
+
+  </dl>
+  <div class="faq_cat">
+    <h2 class="headings_pink">Selling FAQ</h2>
+  </div>
+  <dl class="faqs">
+    <dt>
+      What do I do once I get my honey?
+    </dt>
+    <dd>
+      You must ship your product(s) within 72 hours with the prepaid USPS shipping label we sent you via email. If the products aren't shipped within 72 hours, we will cancel any orders you placed with the honey and subtract the honey from your account.
+    </dd>
+    <dt>
+      I lost/deleted the email with my USPS prepaid label in it. What do I do?
+    </dt>
+    <dd>
+      Email us at honey@swapidy.com to receive another label.
+    </dd>
+    <dt>
+      Where do I drop off my package once I put my prepaid label on the box?
+    </dt>
+    <dd>
+      Simply drop it off in your mailbox, drop off centers, or your nearest post office which can be found here: https://tools.usps.com/go/POLocatorAction!input.action
+    </dd>
+
+    <dt>
+      Can I receive my product back once I've shipped it out?
+    </dt>
+    <dd>
+      No, all trade-ins are final.
+    </dd>
+    <dt>
+      What if the product I sent was faulty and/or didn't match Swapidy's description of poor, good, or flawless?
+    </dt>
+    <dd>
+      Swapidy will send your product back and charge you a $25 penalty fee.
+    </dd>
+
+  </dl>
+</div>
