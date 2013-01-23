@@ -47,6 +47,9 @@ Swapidy::Application.routes.draw do
   match "/orders/complete" => "orders#complete", :method => :get
   match "/orders/buy/:product_id" => "orders#new", :method => :post, :order_type => Order::TYPES[:order]
   match "/orders/sell/:product_id" => "orders#new", :method => :post, :order_type => Order::TYPES[:trade_ins]
+  match "/orders/change_email" => "orders#change_email", :method => :post
+  match "/orders/change_shipping_info" => "orders#change_shipping_info", :method => :post
+
   resources :orders
   
   match "/transactions" => "home#transactions", :method => :get

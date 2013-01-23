@@ -1,0 +1,59 @@
+
+<div id="popup-dialog_email_form" style="display:none; width:0px; padding: 0px; position: fixed; top: 55px;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 20px; width:590px; margin-left:160px;" >
+      <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
+      <div class="render_form">
+        <div class='headings_pink_edit'>Update your email</div>
+        <form accept-charset='UTF-8' action='/orders/change_email' class='edit_user nonConfirmForm' id='change_email_form' method='post'>
+          <%= render :partial => "/orders/change_email_form", :locals => {:user => current_user, :form_id => "popup_change_email"} %>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="popup-dialog_shipping_form" style="display:none; width:0px; padding: 0px; position: fixed; top: 15px;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 20px; width:590px; margin-left:160px;" >
+      <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
+      <div class="render_form">
+        <form accept-charset="UTF-8" action="/orders/change_shipping_info" class="new_order nonConfirmForm" id="popup_new_order" method="post">
+          <%= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Change"} %>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $("#terms_of_service_checkbox").live("change", function() {
+    if($(this).is(':checked')){
+      $("#submit_button").prop('disabled', false);
+    }else{
+      $("#submit_button").prop('disabled', true);
+    }
+  });
+
+  $("#popup-dialog_email_form #change_email_form").submit(function(){
+    $.ajax({
+      type : 'POST',
+      url : $(this).attr("action"),
+      data : $(this).serialize(),
+      dataType : 'script',
+      success: function(data) {}
+    });
+    return false;
+  });
+  
+  $("#popup_new_order").submit(function() {
+    $.ajax({
+      type : 'POST',
+      url : $(this).attr("action"),
+      data : $(this).serialize(),
+      dataType : 'script',
+      success: function(data) {}
+    });
+    return false;
+  });
+</script>

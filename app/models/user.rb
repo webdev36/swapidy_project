@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
                   :honey_balance, :sign_in_count,
                   :stripe_customer_id, :stripe_card_token, :stripe_coupon, :card_number, :card_cvc
   attr_accessible :new_card_number, :new_card_cvc, :new_card_type, :new_card_name, :new_card_expired_month, :new_card_expired_year, :new_card_last_four_number, :new_stripe_card_token
-
+  
   attr_accessor :new_card_number, :new_card_cvc, :new_card_type, :new_card_name, :new_card_expired_month, :new_card_expired_year, :new_card_last_four_number, :new_stripe_card_token
 
   has_many :orders, :order => "created_at desc, status asc"
@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
     UserNotifier.signup_greeting(user).deliver
     return user
   end
-  
+
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by_email(auth.info.email)
     user = UserProvider.where(:provider => auth.provider, :uid => auth.uid).first.try(:user) unless user

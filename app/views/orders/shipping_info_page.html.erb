@@ -1,0 +1,27 @@
+<style type="text/css">
+body{
+  background: whitesmoke;
+}
+</style>
+
+<%= render :partial => "steps", :locals => {:current_step => 3 } %>
+
+<div class="container">
+<div class="headings_pink">You're almost there...provide your shipping address<span>*</span></div>
+<br/>
+<div>
+  <label class="confirm_info_head"><%= @order.title %></label><br />
+  <img id="confirm_image" src="<%= @product.main_image_url(:large) %>">
+</div>
+<form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post">
+  <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
+  <%= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Continue"} %>
+</form>
+
+<% if @order.is_trade_ins? %>
+ <p class="shipping_footnote"><span>*</span>This info will be used to generate a free shipping label to send your product to us.</p>
+<% else %>
+ <p class="shipping_footnote"><span>*</span>This info will be used to generate a free shipping label to send the product to you.</p>
+<% end %>
+</div>
+

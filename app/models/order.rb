@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
   attr_accessible :order_type, :status, :product_id, :honey_price, :using_condition, 
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,
                   :shipping_city, :shipping_state, :shipping_zip_code, :shipping_country, :shipping_method,
-                  :candidate_addresses, :shipping_zip_code_add_on, :is_candidate_address, :token_key
+                  :candidate_addresses, :shipping_zip_code_add_on, :is_candidate_address, :token_key, :email
 
   validates :order_type, :status, :presence => true
   validates :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_city, :shipping_state, 
@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
 
   validates :using_condition, :presence => {:message => "You need to select at least one of the conditions!"}
 
-  attr_accessor :candidate_addresses, :is_candidate_address, :token_key
+  attr_accessor :candidate_addresses, :is_candidate_address, :token_key, :email
 
   belongs_to :product
   belongs_to :user

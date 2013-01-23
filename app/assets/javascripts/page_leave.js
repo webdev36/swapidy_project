@@ -23,6 +23,8 @@ function PageLeave_onFormSubmit(src) {
 
 function PageLeave_markAsUnsaved(src) {
   var form = $(src).parents('form');
-  form.addClass('unsavedForm');  
+  if(!form.hasClass("nonConfirmForm")){
+    form.addClass('unsavedForm');  
+  }
 }
 

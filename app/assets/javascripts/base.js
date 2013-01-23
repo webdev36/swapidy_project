@@ -61,6 +61,23 @@ $(function() {
     $(this).attr("src",'/images/settings_icon.png');
   });
 
+  $(".select_candidate_address").live("click", function() {
+    $("#order_shipping_address").attr("value", $(this).attr("data-address"));
+    $("#order_shipping_optional_address").attr("value", $(this).attr("data-optional_address"));
+    $("#order_shipping_city").attr("value", $(this).attr("data-city"));
+    $("#order_shipping_state").attr("value", $(this).attr("data-state"));
+    $("#order_shipping_zip_code").attr("value", $(this).attr("data-zip_code"));
+    $("#order_shipping_zip_code_add_on").attr("value", $(this).attr("data-zip_code_add_on"));
+    $("#new_order").submit();
+  });
+  $("#order_is_candidate_address").attr("value", true);
+
+  $(".form_element input").live("change", function() {
+    $("#continue_button").show();
+    $("#candidate_addresses_container").hide();
+    $("#order_is_candidate_address").attr("value", false);
+  });
+
 });
 
 function switchToCheckoutStep(form_id, step_url) {
@@ -215,7 +232,6 @@ function submit_signup_form(){
     success: function(data) {}
   });
 }
-
 
 /**
  * guiders.js

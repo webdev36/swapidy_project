@@ -1,0 +1,21 @@
+<input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
+
+<div><label for='user_email'>Email</label><br>
+<input id='user_email' name='user[email]' size='30' type='email' value='<%= user.email %>'></div>
+
+<% unless session[:signed_in_via_facebook] %>
+  <div>
+    <label for='user_current_password'>Current Password</label> <i>(we need your current password to confirm your changes)</i><br />
+    <input id='user_current_password' name='user[current_password]' size='30' type='password'>
+  </div>
+<% end %>
+
+
+<div>
+  <input type='submit' value='Update'>
+  <% if !user.errors.empty? || @error_message %>
+    <span style='color: red;'><%= user.errors.full_messages.join('.') %> <%= @error_message if @error_message %></span>
+  <% elsif @success_message %>
+    <span style='color: pink;'><%= @success_message %></span>
+  <% end %>
+</div>
