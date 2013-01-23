@@ -44,7 +44,6 @@ a:visited
 }
 
 td{
-	font-weight:bold;
 }
 
 
@@ -595,7 +594,6 @@ label {
   color:#666;
   font-size:25px;
   margin-top:30px;
-  font-weight:bold;
   pointer:cursor;
 }
 .hiw_img{
@@ -840,4 +838,32 @@ line-height: 1.5;
 }
 ul{
   list-style-type: circle;
+}
+.help_unit{
+  float:left;
+  width:200px;
+  font-size:20px;
+  font-family:"myriad-s";
+  color:#666;
+  margin-left:30px;
+}
+.help_unit a:hover{
+  float:left;
+  width:200px;
+  font-size:20px;
+  font-family:"myriad-s";
+  color:#666;
+}
+.help_unit a{
+  float:left;
+  width:200px;
+  font-size:20px;
+  font-family:"myriad-s";
+  color:#666;
+}
+.help_2 a{
+text-decoration:underline;
+}
+.help_img{
+  height:150px;
 }

@@ -59,7 +59,7 @@ body{
     </div>
     <div>
       Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %> Honey after selling.
-      <br />You could use the Honey money to buy something.
+      <br />You can use the honey to products in our marketplace.
       <% if current_user.payment_ready? %>
         <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
       <% else %>
@@ -71,6 +71,7 @@ body{
   <div>
     <label class="confirm_info_head">
       <div class="headings_pink">Shipping Details</div>
+
       <a  href="#" onclick="switchToCheckoutStep('new_order', '/orders/shipping_info');" class="order_button_buy change" style="position:relative; bottom:30px; left:150px;">Change</a>
     </label>
     <p>

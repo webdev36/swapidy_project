@@ -49,8 +49,8 @@ label{
           <span style="font-size:20px;"><%= format_num(@order.honey_price) %></span> <img class="payment_currency" src="/images/honey_20px.png"><br/>
           <br/>
         <div class="payment_selling_info">
-          Your balance would increase to&nbsp; <%= format_num(current_user.honey_balance + (@order.honey_price || 0)) %><img class="payment_currency" src="/images/honey_20px.png"> after selling.
-          <br />You could use this honey to buy anything!.
+          Your balance would increase to <%= format_num(current_user.honey_balance + (@order.honey_price || 0)) %>&nbsp;<img class="payment_currency" src="/images/honey_20px.png"> after selling.
+          <br />You could use this honey to buy anything!
         </div>
         
         <br/>
