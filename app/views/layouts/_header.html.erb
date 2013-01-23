@@ -79,7 +79,7 @@
           </li>
           <li>
             <div class="help">
-              <div style="display: inline-block;">Need help?<img src="/images/help.png"></div>
+              <a href="javascript:showPopup('popup-dialog_help');" ><div style="display: inline-block;">Need help? &nbsp;<img class="help_icon" src="/images/help.png"></a></div>
            </li>   
           <% if current_user.is_admin? %>
             <li>
@@ -148,7 +148,15 @@
     </div>
   </div>
 </div>
+<div id="popup-dialog_help" style="display:none; width:300px; padding: 0px;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 30px; position:fixed; top:100px; line-height:1.5; text-align:center; width:300px; margin-left:260px;" >
+            <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
 
+      <span class="headings_pink">Call us Now<br/> (1800-SWAPIDY)<br/> <span style='color:#666; font-size:20px; '> or</span>  <span class="headings_pink"><br/> <a href="/contact_us" style="color:#38b4de; text-decoration:underline;">Email us</a></span>
+    </div>
+  </div>
+</div>
 <% if current_user && controller_name != "payments" %>
   <div id="popup-dialog_add_honey" style="display:none; width:0px; padding: 0px;" class="popup-box-wrapper standard-popup">
     <div id="dialog-content">

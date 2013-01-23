@@ -10,7 +10,7 @@ body{
       Step 1
     </li>
     <li class="current">
-      <strong>Step 2</strong>
+  Step 2
     </li>
     <li>
       Step 3
@@ -18,7 +18,7 @@ body{
   </ul>
 </div>
 <div class="container">
-<h2 class="headings_pink">Payment Information</h2>
+<div class="headings_pink">Payment Information</div><br/>
 
 <div id="checkout_content" class="payment_editing_block">
   <div class="payment_group_contents">
@@ -41,25 +41,25 @@ body{
         <%= f.hidden_field :shipping_country %>
         
         <div class="payment_product_info">
-          <label style="color:#38B4DE; font-size:20px;"><%= @order.title %></label><br />
+          <label style="color:#38B4DE; font-size:20px; font-family:'myriad-s'";><%= @order.title %></label><br />
           <div class="payment_product_image">
             <img  src="<%= @product.main_image_url(:large) %>">
           </div>
 
       <div class="payment_after_selling" style="font-size:20px; color:#666;">  
         <div>
-          <label style="color:#38b4de;">Current Balance:</label>
+          <label style="color:#38b4de; font-family:'myriad-s'">Current Balance:</label>
           <%= format_num(current_user.honey_balance) %> <img class="payment_currency" src="/images/honey_20px.png">
         </div>
           <br/>
         <div>
-          <label style="color:#38b4de; font-size:20px;">Product Price:</label>
+          <label style="color:#38b4de; font-size:20px; font-family:'myriad-s'">Product Price:</label>
           <%= format_num(@order.honey_price) %> <img class="payment_currency" src="/images/honey_20px.png">
         </div>
           <br/>
         <% if current_user.extra_honey_for(@order) <= 0 %>
           <div>
-            <strong>Your balance is enough to buy this product</strong>
+            Your balance is enough to buy this product
             <% if current_user.payment_ready? %>
               <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
             <% else %>
@@ -95,3 +95,5 @@ body{
   </div>
 </div>
 </div>
+
+    <%= render :partial => "/layouts/footer" %>

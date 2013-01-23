@@ -27,6 +27,7 @@ font-family:"myriad";
 	
 	}
 .payment_after_selling{
+line-height:1.5;
 	float:left;
 	margin-top:30px;
 	margin-left:50px;
@@ -50,12 +51,9 @@ padding:20px;
 text-align: center;
   background: #0099FF;
   color: white;
-  font-weight: 700;
   font-size: 30px;
   text-decoration: none;
   font-family: "Lato", Calibri, Arial, sans-serif;
-  padding: 8px 15px;
-  padding-bottom:10px;
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 4px;
   -webkit-transition: all 0.3s ease-out;
@@ -73,10 +71,10 @@ text-align: center;
   text-shadow: 0 1px rgba(255,255,255,0.7);  
   margin-left: 120px;
   margin-right: auto;
-  width: 220px;
-  height: 70px;
+  width: 206px;
+  height: 50px;
   position: relative;
-  top:30px;
+  top:10px;
 
 }
 .payment_button_sell:hover{
@@ -136,4 +134,10 @@ text-align: center;
 .shipping_footnote span{
 position:relative;
 bottom:5px;
+}
+.help{
+  font-family:"myriad";
+}
+.help_icon{
+  height:20px;
 }

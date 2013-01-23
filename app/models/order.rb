@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
   validates :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_city, :shipping_state, 
             :shipping_zip_code, :shipping_country, :presence => true
 
-  validates :using_condition, :presence => {:message => "You need to select at least one of the types!"}
+  validates :using_condition, :presence => {:message => "You need to select at least one of the conditions!"}
 
   attr_accessor :candidate_addresses, :is_candidate_address, :token_key
 

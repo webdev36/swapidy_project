@@ -6,9 +6,9 @@
     <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
     <%= render :partial => "/products/detail_info"%>
     <% if @error_message && !@error_message.blank? %>
-      <div style="color: red; position: relative; bottom: 200px; text-align:center; width:100%;"><%= @error_message %></div><br/>
+      <div class="alert alert-error" style=" position: relative; bottom:100px;left:280px; text-align:center; width:400px;"><%= @error_message %></div><br/>
     <% end %>
-    <div style="text-align:center; width:100%;" >
+    <div style="text-align:center; position:relative; bottom:280px;" >
       <% if (params["for"] && params["for"] == "sell") %>
         <input type="submit" value="Sell" class="show_button_sell" />
       <% else %>
@@ -16,3 +16,4 @@
       <% end %>
     </div>
 </form>
+    <%= render :partial => "/layouts/footer" %>

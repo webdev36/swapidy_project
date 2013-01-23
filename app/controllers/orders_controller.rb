@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
     session[:creating_order] = {:token_key => @order.generate_token_key, :product_id => @order.product_id, 
                                 :order_type => @order.order_type, :using_condition => @order.using_condition}
     if @order.using_condition.nil? || !Product::USING_CONDITIONS.values.include?(@order.using_condition) || @order.honey_price.nil?
-      @error_message = "You need to select at least one of the types!"
+      @error_message = "You need to select at least one of the conditions!"
       params["for"] = params[:order_type] && params[:order_type] == Order::TYPES[:order] ? "buy" : "sell"
       render "/products/show"
       return

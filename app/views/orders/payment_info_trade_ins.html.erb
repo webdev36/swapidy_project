@@ -18,7 +18,7 @@ label{
       Step 1
     </li>
     <li class="current">
-      <strong>Step 2</strong>
+      Step 2
     </li>
     <li>
       Step 3
@@ -26,8 +26,8 @@ label{
   </ul>
 </div>
 <div class="container">
-<h2 class="headings_pink">Payment Information</h2>
-
+<div class="headings_pink">Payment Information</div>
+<br/>
 <div id="checkout_content" class="payment_editing_block">
   <div class="payment_group_contents">
     <div class="valid_form payout_form standard_form paypal" style="display: block;">
@@ -60,7 +60,7 @@ label{
           <span style="font-size:20px;"><%= format_num(@order.honey_price) %></span> <img class="payment_currency" src="/images/honey_20px.png"><br/>
           <br/>
         <div class="payment_selling_info">
-          Your balance would increase to <%= format_num(current_user.honey_balance + (@order.honey_price || 0)) %><img class="payment_currency" src="/images/honey_20px.png"> after selling.
+          Your balance would increase to&nbsp; <%= format_num(current_user.honey_balance + (@order.honey_price || 0)) %><img class="payment_currency" src="/images/honey_20px.png"> after selling.
           <br />You could use this honey to buy anything!.
         </div>
         
@@ -71,3 +71,6 @@ label{
 </div>
 </div>
         </div>
+
+            <%= render :partial => "/layouts/footer" %>
+

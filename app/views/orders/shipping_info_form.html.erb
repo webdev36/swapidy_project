@@ -8,13 +8,13 @@ body{
   <ul>
       <li>Step 1</li>
       <li>Step 2</li>
-      <li class="current"><strong>Step 3</strong></li>
+      <li class="current">Step 3</li>
   </ul>
 </div>
 
 <div class="container">
-<h2 class="headings_pink">You're almost there...provide your shipping address<span>*</span></h2>
-
+<div class="headings_pink">You're almost there...provide your shipping address<span>*</span></div>
+<br/>
 <div>
   <label class="confirm_info_head"><%= @order.title %></label><br />
   <img id="confirm_image" src="<%= @product.main_image_url(:large) %>">
@@ -95,7 +95,7 @@ body{
   
   
   <% if @order.candidate_addresses && !@order.candidate_addresses.empty? %>
-     <input name="commit" class="order_button_sell" style="width: 180px; height: 50px;" type="submit" value="Continue" />
+     <input name="commit" class="order_button_sell" style="width: 206px; height: 50px;" type="submit" value="Continue" />
 
     <script>
       $(".select_candidate_address").live("click", function() {
@@ -117,7 +117,7 @@ body{
     </script>
 
   <% else %>
- <input name="commit" class="order_button_sell" style="width: 180px; height: 50px; padding:0px;" type="submit" value="Continue" />  <% end %>
+ <input name="commit" class="order_button_sell" style="width: 206px; height: 50px; padding:0px;" type="submit" value="Continue" />  <% end %>
   
 <% end %>
 <% if @order.is_trade_ins? %>
@@ -126,3 +126,5 @@ body{
  <p class="shipping_footnote"><span>*</span>This info will be used to generate a free shipping label to send the product to you.</p>
 <% end %>
 </div>
+
+    <%= render :partial => "/layouts/footer" %>

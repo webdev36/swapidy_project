@@ -9,11 +9,12 @@ $(document).ready(function(){
 </script>
 
 <div class="container" style="display:none;">
-	<div class="thanks_heading">Thank You! You're order has been successfully placed!</div>
+	<div class="thanks_heading">Thank You! Your order has been successfully placed!</div>
 	<img class="thanks_img_order" src="/images/show_order.png">
 	<p><label class="thanks_subheading">What Happens Next?</label>
 	</p>
 	<p class="thanks_list">Check your email. We will be shipping your order soon! Please make sure you have dispatched all items from your previous trade-ins.</p>
-	  <a href="/for_sell" class="thanks_button_buy" style="padding:10px;">Continue to Marketplace</a>
+	  <a href="/" class="thanks_button_buy" style="padding:10px;">Continue to Marketplace</a>
 	</p>
 </div>
+    <%= render :partial => "/layouts/footer" %>

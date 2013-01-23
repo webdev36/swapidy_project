@@ -32,12 +32,11 @@ table tr{
 text-align: center;
   background: #0099FF;
   color: white;
-  font-weight: 700;
   font-size: 30px;
   text-decoration: none;
-  font-family: "Lato", Calibri, Arial, sans-serif;
   padding: 8px 15px;
   padding-bottom:10px;
+  font-family:"myriad-s";
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 4px;
   -webkit-transition: all 0.3s ease-out;
@@ -62,6 +61,7 @@ text-align: center;
   background: #00CCFF;
 }
 .order_button_buy{
+font-family:"myriad";
   text-align: center;
   background: #fa3e6e;
   color: white;
@@ -197,7 +197,7 @@ color:#fa3e6e;
   text-shadow: 0 1px rgba(255,255,255,0.7);  
   position:relative;
   top:50px;
-  margin-left: 350px;
+  margin-left: 320px;
 }
 .thanks_button_buy:hover{
   background-color:#F9006E;      
