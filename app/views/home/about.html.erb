@@ -3,7 +3,13 @@
 <head>
 <meta charset = "utf-8">
 <style type="text/css">
+html{
+	height: 100%;
+}
+body{
 background:whitesmoke;
+height: 100%;
+}
 </style>
 <title>About Us</title>
 	<script type="text/javascript">
@@ -14,9 +20,9 @@ background:whitesmoke;
 	</script> 
 </head>
 <body>
-	<div id="about_container" class="container" style="display:none;">		
+	<div id="about_container" class="container" style="display:none; position:relative; bottom:250px;">		
 		<img id="about_circle" src="about_circle.png" style="display:none;">
-		<h2 class="headings_pink" id="about_heading">About Us</h2>
+		<div class="headings_pink" id="about_heading">About Us</div><br/>
 		<div id="about_content" class="sub_content" style="content display:none;">
 			<p>Swapidy is a simple ecommerce platform where you can buy and sell instantly using our virtual currency, Honey.</p> 
 
@@ -27,5 +33,6 @@ background:whitesmoke;
 			<img class="about_img" src="/images/about_3.png"><span class="about_img_desc">Instant Gratification</span><br/>
 		</div>
 	</div>
-</bod
+</body>
 </html>
+    <div><%= render :partial => "/layouts/footer" %>
