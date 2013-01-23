@@ -1,6 +1,7 @@
 <style type="text/css">
 body{
   background: whitesmoke;
+  line-height: 1.5;
 }
 label{
   color:#666;
@@ -9,20 +10,20 @@ label{
 </style>
 <div id="progress_indicator" class="three_steps">
   <ul>
-      <li class="current"><strong>Step 1</strong></li>
+      <li class="current">Step 1</strong></li>
       <li>Step 2</li>
       <li>Step 3</li>
   </ul>
 </div>
   <div class="email_info_fb">
-  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img class="fb-connect" src="/images/Connect-fb.png"></a>
+  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img class="fb-connect" src="/images/fb_login.png"></a>
   <p class="email_info_or">or</p>
   </div>
     <hr/>
 
 <div class="container">
 <div class="email_info_container" style="float: left; width: 50%;">
-  <h2 class="cat_choose">Sign in</h2>
+  <div class="headings_pink cat_choose">Sign in</div><br/>
   <% @user = resource || User.new unless @user %>
   <%= form_for(@user || resource, :as => "user", :url => session_path(@user), :method => :post) do |f| %>
     <% if @signin_failure %>
@@ -50,7 +51,7 @@ label{
 </div>
 
 <div class="email_signup_container"style="float: right; width: 50%;">
-  <h2 class="cat_choose">Don't have an account? Sign up now!</h2>
+  <div class="headings_pink cat_choose">Don't have an account? Sign up now!</div><br/>
   <p class="product_desc">We'll use this email address to send you shipping details and progress updates every step of the way.</p>
   <%= form_for(@user || resource, :as => "user", :url => registration_path(@user), :method => :post) do |f| %>
     <input type="hidden" name="login_to_order" value="1" />
@@ -81,4 +82,4 @@ label{
 </div>
 
 </div>
-
+ <%= render :partial => "/layouts/footer" %>

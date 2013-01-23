@@ -589,7 +589,7 @@ a.login_forgot:hover {
 }
 .fb-connect{
   height:70px;
-  margin-left: 300px;
+  margin-left: 230px;
 }
 .email_info_or{
   font-size: 20px;
@@ -597,10 +597,10 @@ a.login_forgot:hover {
   width: 30px;
   position: relative;
   top:40px;
-  left:480px;
+  left:380px;
   padding: 10px;
   padding-left: 20px;
-  background: #ffffff;
+  background: whitesmoke;
 
 }
 .popup-box-wrapper .close-popup {
