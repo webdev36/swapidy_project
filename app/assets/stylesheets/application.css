@@ -718,3 +718,6 @@ margin-left: 70px;}
   bottom:5px;
   height: 25px;
 }
+ul.location_typeahead li {
+  text-align: left;
+}
