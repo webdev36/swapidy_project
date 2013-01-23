@@ -10,7 +10,7 @@ label{
 </style>
 <div id="progress_indicator" class="three_steps">
   <ul>
-      <li class="current">Step 1</strong></li>
+      <li class="current">Step 1</li>
       <li>Step 2</li>
       <li>Step 3</li>
   </ul>
@@ -20,6 +20,10 @@ label{
   <p class="email_info_or">or</p>
   </div>
     <hr/>
+
+
+<%= render :partial => "steps", :locals => {:current_step => 1 } %>
+
 
 <div class="container">
 <div class="email_info_container" style="float: left; width: 50%;">

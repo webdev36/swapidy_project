@@ -10,7 +10,7 @@ body{
 <br/>
 <p class="confirm_subheading">Please confirm the following information is correct.</p>
 
-<%= form_for(@order, :as => 'order', :url => "/orders/create") do |f| %>
+<%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
   <%= f.hidden_field :order_type %>
   <%= f.hidden_field :product_id %>
   <%= f.hidden_field :using_condition %>
@@ -59,7 +59,7 @@ body{
     </div>
     <div>
       Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %> Honey after selling.
-      <br />You could use the Honey money to buy something.
+      <br />You can use the honey to products in our marketplace.
       <% if current_user.payment_ready? %>
         <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
       <% else %>
@@ -71,7 +71,8 @@ body{
   <div>
     <label class="confirm_info_head">
       <div class="headings_pink">Shipping Details</div>
-      <a  href="#" onclick="javascript:changeTo('/orders/shipping_info');" class="order_button_buy change" style="position:relative; bottom:30px; left:150px;">Change</a>
+
+      <a  href="#" onclick="switchToCheckoutStep('new_order', '/orders/shipping_info');" class="order_button_buy change" style="position:relative; bottom:30px; left:150px;">Change</a>
     </label>
     <p>
       <%= @order.shipping_first_name %> <%= @order.shipping_last_name %><br />
@@ -98,11 +99,6 @@ body{
 </div>
 </div>
 <script>
-  function changeTo(new_url) {
-    $("#new_order").attr("action", new_url);
-    $("#new_order").submit();
-  }
-  
   $("#terms_of_service_checkbox").live("change", function() {
     if($(this).is(':checked')){
       $("#submit_button").prop('disabled', false);
@@ -110,7 +106,6 @@ body{
       $("#submit_button").prop('disabled', true);
     }
   });
-  
 </script>
 
     <%= render :partial => "/layouts/footer" %>

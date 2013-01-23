@@ -4,19 +4,8 @@ body{
 }
 </style>
 
-<div id="progress_indicator" class="three_steps">
-  <ul>
-    <li>
-      Step 1
-    </li>
-    <li class="current">
-  Step 2
-    </li>
-    <li>
-      Step 3
-    </li>
-  </ul>
-</div>
+<%= render :partial => "steps", :locals => {:current_step => 2 } %>
+
 <div class="container">
 <div class="headings_pink">Payment Information</div><br/>
 
@@ -24,7 +13,7 @@ body{
   <div class="payment_group_contents">
     <div class="valid_form payout_form standard_form paypal" style="display: block;">
       
-      <%= form_for(@order, :as => 'order', :url => "/orders/shipping_info") do |f| %>
+      <%= form_for(@order, :as => 'order', :url => "/orders/shipping_info", :html => {:id => "new_order"}) do |f| %>
         <%= f.hidden_field :order_type %>
         <%= f.hidden_field :product_id %>
         <%= f.hidden_field :token_key %>
