@@ -1,6 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
   def create
+    session[:signed_in_via_facebook] = nil
     if(params[:login_to_order].nil? || params[:login_to_order].blank?)
       build_resource
 
@@ -55,6 +56,29 @@ class RegistrationsController < Devise::RegistrationsController
     resource.new_card_expired_month = resource.card_expired_month
     resource.new_card_name = resource.card_name
     resource.new_card_number = "xxxx-xxxx-xxxx-#{resource.card_last_four_number}" unless (resource.card_last_four_number || "").blank?
+  end
+  
+  def update
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+
+    if session[:signed_in_via_facebook]
+      update_result =  resource.update_without_password(resource_params)
+    else
+      update_result =  resource.update_with_password(resource_params)
+    end
+    if update_result
+      if is_navigational_format?
+        flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
+          :update_needs_confirmation : :updated
+        set_flash_message :notice, flash_key
+      end
+      sign_in resource_name, resource, :bypass => true
+      respond_with resource, :location => after_update_path_for(resource)
+    else
+      clean_up_passwords resource
+      respond_with resource
+    end
   end
   
 end

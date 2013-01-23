@@ -21,11 +21,13 @@
   <br />
   <%= render :partial => "/devise/shared/stripe_card_form", :locals => {:submit_form => "edit_profile", :field_prefix => "user_", :f => f, :user => resource}%>
   <br />
-
-  <div>
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %>
-  </div>
+  
+  <% unless session[:signed_in_via_facebook] %>
+    <div>
+      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password %>
+    </div>
+  <% end %>
 
   <div>
     <input type="button" value="Update" onclick="javascript:edit_profile_card_validate();" />

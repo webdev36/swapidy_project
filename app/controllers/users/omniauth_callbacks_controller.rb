@@ -6,8 +6,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
   
       if @user
+        session[:signed_in_via_facebook] = true
         if session[:creating_order]
-          session[:return_to] = "/orders/new?product_id=#{session[:creating_order][:product_id]}&using_condition=#{session[:creating_order][:using_condition]}&order_type=#{session[:creating_order][:order_type]}"
           sign_in @user, :event => :authentication #this will throw if @user is not activated
           redirect_to :controller => "/orders", :action => :new, :method => :post, :product_id => session[:creating_order][:product_id], :using_condition => session[:creating_order][:using_condition], :order_type => session[:creating_order][:order_type]
         else
@@ -16,16 +16,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
         check_to_display_guide
       else
+        session[:signed_in_via_facebook] = nil
         session["devise.facebook_data"] = request.env["omniauth.auth"]
         redirect_to new_user_registration_url
       end
     else
       render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
     end
-  end
-  
-  def login user
-    self.current_user = user
   end
 
 end

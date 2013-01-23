@@ -1,6 +1,7 @@
 class SessionsController < Devise::SessionsController
   
   def create
+    session[:signed_in_via_facebook] = nil
     if(params[:login_to_order].nil? || params[:login_to_order].blank?)
       Rails.logger.info "Test 1"
       self.resource = User.find_by_email params[:user][:email]
