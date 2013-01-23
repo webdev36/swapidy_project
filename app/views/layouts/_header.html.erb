@@ -2,141 +2,163 @@
   <div class="navbar-inner">
     <div class="container">
       <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
-      <ul class="nav pull-left"><li><%= render :partial => "/layouts/locations" %></li></ul>
-      
+      <ul class="nav pull-left">
+        <li>
+          <%= render :partial => "/layouts/locations" %>
+        </li>
+      </ul>
+
       <ul class="nav pull-right nav_header" role="navigation" style="margin-right: -160px;">
- 
+
         <% if user_signed_in? %>
-          <% if current_user.free_honey_sendable? %>
-            <li id="nav_login">
-              <a href="javascript:showPopup('popup-dialog_for_free_honey');" >GET FREE HONEY</a>
+        <% if current_user.free_honey_sendable? %>
+        <li id="nav_login">
+          <a href="javascript:showPopup('popup-dialog_for_free_honey');" >GET FREE HONEY</a>
+        </li>
+        <% end %>
+        <li class="dropdown" id="notification_menu" >
+          <%= render :partial => "/layouts/notifications_menu" %>
+        </li>
+        <script language="JavaScript">
+          $('#notification_menu ul li .notification_remove_icon').live("click", function() {
+            var id = $(this).attr("notification-data");
+            $.ajax({
+              type : 'PUT',
+              beforeSend : function(xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+              },
+              url : '/notifications/' + id + '/hide',
+              dataType : 'script'
+            });
+            return false;
+          });
+          $('#notification_menu ul li .notification_title').live("click", function() {
+            var url = $(this).attr("notification-data");
+            window.location = url;
+            return false;
+          });
+          $('#notification_menu ul li .clear_all').live("click", function() {
+            $.ajax({
+              type : 'PUT',
+              beforeSend : function(xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+              },
+              url : '/notifications/all/hide',
+              dataType : 'script'
+            });
+            return false;
+          });
+
+          setInterval(function() {
+            $.ajax({
+              type : 'PUT',
+              beforeSend : function(xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+              },
+              url : '/notifications/refresh',
+              dataType : 'script'
+            });
+          }, 10 * 60 * 1000);
+
+          <% if display_guide? %>display_guide();<% end %>
+        </script>
+
+        <%= render :partial => "/layouts/profile_menu" %>
+
+        <li class="dropdown">
+          <a id="dropdown_profile_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <img class="nav_icons nav_settings" src="/images/settings_icon.png"></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_profile_icon">
+            <li>
+              <a tabindex="-1" href="/users/edit">ACCOUNT SETTINGS</a>
             </li>
-          <% end %>
-          <li class="dropdown" id="notification_menu" >
-            <%= render :partial => "/layouts/notifications_menu" %>
-          </li>
-          <script language="JavaScript">
-            $('#notification_menu ul li .notification_remove_icon').live("click", function(){
-              var id = $(this).attr("notification-data");
-              $.ajax({
-                type : 'PUT',
-                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-                url : '/notifications/' + id + '/hide',
-                dataType : 'script'
-              });
-              return false;
-            });
-            $('#notification_menu ul li .notification_title').live("click", function(){
-              var url = $(this).attr("notification-data");
-              window.location = url;
-              return false;
-            });
-            $('#notification_menu ul li .clear_all').live("click", function(){
-              $.ajax({
-                type : 'PUT',
-                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-                url : '/notifications/all/hide',
-                dataType : 'script'
-              });
-              return false;
-            });
-          
-            setInterval(function(){
-              $.ajax({
-                type : 'PUT',
-                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-                url : '/notifications/refresh',
-                dataType : 'script'
-              });
-            },10*60*1000);
-            
-            <% if display_guide? %>
-              display_guide();
-            <% end %>
-          </script>
-
-          <%= render :partial => "/layouts/profile_menu" %>
-
-          <li class="dropdown">
-            <a id="dropdown_profile_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-            <img class="nav_icons nav_settings" src="/images/settings_icon.png"></a> 
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_profile_icon">
-        <li><a tabindex="-1" href="/users/edit">ACCOUNT SETTINGS</a></li>
-        <li><%= link_to('LOGOUT', destroy_user_session_path, :method => :delete) %></li>
-      </ul>        
-          </li>
-          <li class="divider-vertical"></li>
-                 <li> <a href="javascript:showPopup('popup-dialog_how_it_work');">HOW IT WORKS?</a></li>
-          <li>
-            <div class="honey_display">
-              <div style="display: inline-block;"><img src="/images/honey_currency_score.png"><span id="honey_balance_amount_menu"><%= format_num(current_user.honey_balance)%></span>
+            <li>
+              <%= link_to('LOGOUT', destroy_user_session_path, :method => :delete) %>
+            </li>
+          </ul>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <div class="honey_display">
+            <div style="display: inline-block;"><img src="/images/honey_currency_score.png"><span id="honey_balance_amount_menu"><%= format_num(current_user.honey_balance)%></span>
               <% if controller_name != "payments" %>
-                <div style="display: inline-block;"><a href="javascript:showPopup('popup-dialog_add_honey');"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a></div>
+              <div style="display: inline-block;">
+                <a href="javascript:showPopup('popup-dialog_add_honey');"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a>
+              </div>
               <% else %>
-                <div style="display: inline-block;"><a href="/payments/new"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a></div>
+              <div style="display: inline-block;">
+                <a href="/payments/new"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a>
+              </div>
               <% end %>
             </div>
-          </li>
-          <li>
-            <div class="help">
-              <a href="javascript:showPopup('popup-dialog_help');" ><div style="display: inline-block;">Need help? &nbsp;<img class="help_icon" src="/images/help.png"></a></div>
-           </li>   
-          <% if current_user.is_admin? %>
-            <li>
-              <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
-            </li>
+        </li>
+        <li>
+          <div class="help">
+            <a href="javascript:showPopup('popup-dialog_help');" >
+            <div style="display: inline-block;">
+              Need help? &nbsp;<img class="help_icon" src="/images/help.png">
+            </a>
+          </div>
+        </li>
+        <% if current_user.is_admin? %>
+        <li>
+          <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
+        </li>
 
-          <% end %>
-          
-        <% else %>
-          <li id="nav_login">
-            <a href="javascript:showPopup('popup-dialog_for_signin');" >LOGIN</a>
-          </li>
-           <li class="divider-vertical"></li>
-          <li id="nav_signup">
-            <a href="javascript:showPopup('popup-dialog_for_signup');" >SIGN UP</a>
-          </li>
-          <li class="divider-vertical"></li>
         <% end %>
+
+        <% else %>
+        <li id="nav_login">
+          <a href="javascript:showPopup('popup-dialog_for_signin');" >LOGIN</a>
+        </li>
+        <li class="divider-vertical"></li>
+        <li id="nav_signup">
+          <a href="javascript:showPopup('popup-dialog_for_signup');" >SIGN UP</a>
+        </li>
+        <% end %>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="javascript:showPopup('popup-dialog_how_it_work');">HOW IT WORKS?</a>
+        </li>
       </ul>
     </div>
   </div>
 </div>
 
 <% if user_signed_in? %>
-  <div>
-    <strong>Signed in as <%= current_user.first_name %></strong>
+<div>
+  <strong>Signed in as <%= current_user.first_name %></strong>
+</div>
+<% if current_user.free_honey_sendable? %>
+<div id="popup-dialog_for_free_honey" style="display:none;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <%= render :partial => "/free_honeys/new" %>
   </div>
-  <% if current_user.free_honey_sendable? %>
-    <div id="popup-dialog_for_free_honey" style="display:none;" class="popup-box-wrapper standard-popup">
-      <div id="dialog-content">
-        <%= render :partial => "/free_honeys/new" %>
-      </div>
-      <script language="JavaScript">
-        function submitAddHoney(){
-          $.ajax({
-            type : 'POST',
-            url : $("#popup-dialog_for_free_honey #add_honey").attr("action"),
-            data : $("#popup-dialog_for_free_honey #add_honey").serialize(),
-            dataType : 'script',
-            success: function(data) {}
-          });
+  <script language="JavaScript">
+    function submitAddHoney() {
+      $.ajax({
+        type : 'POST',
+        url : $("#popup-dialog_for_free_honey #add_honey").attr("action"),
+        data : $("#popup-dialog_for_free_honey #add_honey").serialize(),
+        dataType : 'script',
+        success : function(data) {
         }
-      </script>
-    </div>
-  <% end %>
+      });
+    }
+  </script>
+</div>
+<% end %>
 <% else %>
-  <div id="popup-dialog_for_signup" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
-    <div id="dialog-content">
-      <%= render :partial => "/devise/shared/signup_form", :locals => {:resource => User.new, :resource_name => "user", :show_cancel_link => true} %>
-    </div>
+<div id="popup-dialog_for_signup" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <%= render :partial => "/devise/shared/signup_form", :locals => {:resource => User.new, :resource_name => "user", :show_cancel_link => true} %>
   </div>
-  
-  <div id="popup-dialog_for_signin" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
-    <div id="dialog-content">
-      <%= render :partial => "/devise/shared/signin_form", :locals => {:resource => User.new, :resource_name => "user", :show_cancel_link => true} %>
-    </div>
+</div>
+
+<div id="popup-dialog_for_signin" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <%= render :partial => "/devise/shared/signin_form", :locals => {:resource => User.new, :resource_name => "user", :show_cancel_link => true} %>
   </div>
+</div>
 <% end %>
 <div id="popup-box-bg" style="display: none;"></div>
 
@@ -160,19 +182,18 @@
       <a href="/contact_us"><img class="help_img" src="/images/icon_email.png"><br/><br/>
       Email us</a>
     </div>
-
     </div>
   </div>
 </div>
 <% if current_user && controller_name != "payments" %>
-  <div id="popup-dialog_add_honey" style="display:none; width:0px; padding: 0px;" class="popup-box-wrapper standard-popup">
-    <div id="dialog-content">
-      <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 20px; width:590px; margin-left:160px;" >
-        <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
-        <%= render :partial => "/payments/add_honey_form" %>
-      </div>
+<div id="popup-dialog_add_honey" style="display:none; width:0px; padding: 0px;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 20px; width:590px; margin-left:160px;" >
+      <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
+      <%= render :partial => "/payments/add_honey_form" %>
     </div>
   </div>
+</div>
 <% end %>
 <%= render :partial => "/layouts/orders.html" if current_user %>
 
@@ -188,5 +209,7 @@
       <span>g</span>
     </div>
   </div>
-  <div class="underneath"><span>Please wait...</span></div>
+  <div class="underneath">
+    <span>Please wait...</span>
+  </div>
 </div>
