@@ -15,14 +15,13 @@ label{
       <li>Step 3</li>
   </ul>
 </div>
+
   <div class="email_info_fb">
   <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img class="fb-connect" src="/images/fb_login.png"></a>
   <p class="email_info_or">or</p>
   </div>
     <hr/>
 
-
-<%= render :partial => "steps", :locals => {:current_step => 1 } %>
 
 
 <div class="container">
