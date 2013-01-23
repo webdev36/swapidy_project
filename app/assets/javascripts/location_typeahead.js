@@ -269,16 +269,9 @@
 
   , blur: function (e) {
       var that = this
-      //var selectedValue = this.$element.attr('data-selectedValue') 
-      //setTimeout(function () { that.$element.attr('value', selectedValue) }, 250)
+      var selectedValue = this.$element.attr('data-selectedValue') 
+      setTimeout(function () { that.$element.attr('value', selectedValue) }, 750)
       setTimeout(function () { that.hide() }, 150)
-      setTimeout(function () { 
-        var val = that.$menu.find('.active').attr('data-value')
-        var selectedValue = that.$element.attr('data-selectedValue')
-        if(val != selectedValue) {
-          window.location = "/location/" + val
-        }
-      }, 500);
     }
 
   , click: function (e) {
