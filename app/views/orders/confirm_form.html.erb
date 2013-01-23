@@ -12,7 +12,7 @@ body{
 <div class="headings_pink">Confirm your details</div><br/>
 <p class="confirm_subheading">Please confirm the following information is correct.</p>
 
-<%= form_for(@order, :as => 'order', :url => "/orders/create") do |f| %>
+<%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
   <%= f.hidden_field :order_type %>
   <%= f.hidden_field :product_id %>
   <%= f.hidden_field :using_condition %>
@@ -89,7 +89,7 @@ body{
   <div>
     <label class="confirm_info_head">
       <div class="headings_pink"><div class="headings_pink">Shipping Information</div></div>
-      <a href="#" onclick="javascript:changeTo('/orders/shipping_info');" class="order_button_buy change" style="position:relative; bottom:30px; left:200px;">Change</a><br/>
+      <a href="#" onclick="switchToCheckoutStep('new_order', '/orders/shipping_info');" class="order_button_buy change" style="position:relative; bottom:30px; left:200px;">Change</a><br/>
     </label>
     <p>
       <%= @order.shipping_first_name %> <%= @order.shipping_last_name %><br />
@@ -116,11 +116,6 @@ body{
 <% end %>
 </div>
 <script>
-  function changeTo(new_url) {
-    $("#new_order").attr("action", new_url);
-    $("#new_order").submit();
-  }
-  
   $("#terms_of_service_checkbox").live("change", function() {
     if($(this).is(':checked')){
       $("#submit_button").prop('disabled', false);
@@ -128,7 +123,6 @@ body{
       $("#submit_button").prop('disabled', true);
     }
   });
-  
 </script>
 
 

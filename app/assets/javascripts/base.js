@@ -63,6 +63,11 @@ $(function() {
 
 });
 
+function switchToCheckoutStep(form_id, step_url) {
+  $("#" + form_id).attr("action", step_url);
+  $("#" + form_id).submit();
+}
+
 function display_guide() {
   //guiders
   //if(userLoggedIn && userViews == 1)

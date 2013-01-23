@@ -48,7 +48,7 @@ padding:20px;
 }
 
 .payment_button_sell{
-text-align: center;
+  text-align: center;
   background: #0099FF;
   color: white;
   font-size: 30px;
@@ -77,10 +77,11 @@ text-align: center;
   top:10px;
 
 }
+#progress_indicator li.active_step:hover,
 .payment_button_sell:hover{
   background: #00CCFF;
 }
-.payment_button_buy{
+.payment_button_buy {
   text-align: center;
   background: #fa3e6e;
   color: white;
@@ -132,8 +133,8 @@ text-align: center;
 	font-size:20px;
 }
 .shipping_footnote span{
-position:relative;
-bottom:5px;
+  position:relative;
+  bottom:5px;
 }
 .help{
   font-family:"myriad";

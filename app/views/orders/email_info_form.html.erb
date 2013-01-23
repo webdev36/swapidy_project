@@ -7,18 +7,14 @@ label{
   font-size: 20px;
 }
 </style>
-<div id="progress_indicator" class="three_steps">
-  <ul>
-      <li class="current"><strong>Step 1</strong></li>
-      <li>Step 2</li>
-      <li>Step 3</li>
-  </ul>
+
+<%= render :partial => "steps", :locals => {:current_step => 1 } %>
+
+<div class="email_info_fb">
+<a href="<%= user_omniauth_authorize_path(:facebook)%>"><img class="fb-connect" src="/images/Connect-fb.png"></a>
+<p class="email_info_or">or</p>
 </div>
-  <div class="email_info_fb">
-  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img class="fb-connect" src="/images/Connect-fb.png"></a>
-  <p class="email_info_or">or</p>
-  </div>
-    <hr/>
+  <hr/>
 
 <div class="container">
 <div class="email_info_container" style="float: left; width: 50%;">

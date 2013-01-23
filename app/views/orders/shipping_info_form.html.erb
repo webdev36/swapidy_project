@@ -4,13 +4,7 @@ body{
 }
 </style>
 
-<div id="progress_indicator" class="three_steps">
-  <ul>
-      <li>Step 1</li>
-      <li>Step 2</li>
-      <li class="current">Step 3</li>
-  </ul>
-</div>
+<%= render :partial => "steps", :locals => {:current_step => 3 } %>
 
 <div class="container">
 <div class="headings_pink">You're almost there...provide your shipping address<span>*</span></div>
