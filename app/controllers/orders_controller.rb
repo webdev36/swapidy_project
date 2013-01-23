@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
     @product = Product.find params[:product_id]
     (redirect_to "/"; return) unless @product
 
-    @order.using_condition = params[:using_condition] || params[:order][:using_condition]
+    @order.using_condition = params[:using_condition] || (params[:order] && params[:order][:using_condition])
     @order.honey_price = @product.price_for(@order.using_condition)
     
     session[:creating_order] = {:token_key => @order.generate_token_key, :product_id => @order.product_id, 
