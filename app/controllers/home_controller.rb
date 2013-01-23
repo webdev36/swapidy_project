@@ -1,14 +1,17 @@
 class HomeController < ApplicationController
 
-  layout 'application_with_slider', :only => [:index]
+  layout 'application_with_left_menu', :only => [:static_page, :contact_us]
+
   ADMIN_EMAILS = %w(adam@swapidy.com pulkit@swapidy.com)
 
   before_filter :require_login, :only => [:settings]
   
   def index
+    render "index", :layout => 'application_with_slider'
   end
   
   def transactions
+    render "transactions", :layout => 'application_with_slider'
   end
   
   def static_page
@@ -17,7 +20,7 @@ class HomeController < ApplicationController
   
   def contact_us
     unless verify_recaptcha()
-      @error_message = "Oh! It's error with reCAPTCHA!"
+      @error_message = "Please enter the valid CAPTCHA!"
       return
     end
     

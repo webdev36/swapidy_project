@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render :partial => "/layouts/title_and_link_resources" %>
+</head>
+<body>
+
+  <%= render :partial => "/layouts/header" %>
+  
+  <div class="content with_left_menu">
+    <div class="container">
+      <div class="span2" style="float:left; padding: auto 0px;">
+        <%= render :partial => "/layouts/left_menu" %>  
+      </div>
+      <div class="span10" style="float:right; padding: auto 0px;">
+        <%=yield %>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>

@@ -721,3 +721,18 @@ margin-left: 70px;}
 ul.location_typeahead li {
   text-align: left;
 }
+ul.left_menu {
+  position: absolute;
+  top: 65px;
+  text-align: right;
+}
+ul.left_menu li {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  color: whitesmoke;
+}
+ul.left_menu li a {
+  color: #1D95CB;
+}
+
+
