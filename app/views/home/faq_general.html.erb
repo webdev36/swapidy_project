@@ -41,11 +41,11 @@
 
   }); 
 </script>
-<div class="container" style="display:none;">
-  <h1 class="headings_pink">FAQ</h1>
+<div class="container" style="display:none; position:relative; bottom:230px;">
+  <div class="headings_pink">FAQ</div>
   <br/>
   <div class="faq_cat">
-    <h2 class="headings_pink">General FAQ</h2>
+    <div class="headings_pink">General FAQ</div><br/>
   </div>
   <dl class="faqs">
     <dt>
@@ -93,7 +93,7 @@
     </dd>
   </dl>
   <div class="faq_cat">
-    <h2 class="headings_pink">Buying FAQ</h2>
+    <div class="headings_pink">Buying FAQ</div><br/>
   </div>
   <dl class="faqs">
     <dt>
@@ -124,7 +124,7 @@
 
   </dl>
   <div class="faq_cat">
-    <h2 class="headings_pink">Selling FAQ</h2>
+    <div class="headings_pink">Selling FAQ</div><br/>
   </div>
   <dl class="faqs">
     <dt>
@@ -161,3 +161,4 @@
 
   </dl>
 </div>
+    <div ><%= render :partial => "/layouts/footer" %></div>

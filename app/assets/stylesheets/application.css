@@ -23,9 +23,13 @@
   font-family: "myriad-s";
   src: url('/myriad-s.otf') format("truetype");
 }
+html{
+  height: 100%;
+}
 body{
   padding-top: 0px;
   background: whitesmoke;
+  height: 100%;
 }
 .navbar .brand {
   display: inline-block;
@@ -201,8 +205,10 @@ max-width:none;
   left: 70px;
 }
 
+
 .footer {
   width:100%;
+  margin: 0 auto -4em;
   padding: 30px 0 30px 0;
   background-color: whitesmoke;
   text-align: center;
@@ -718,13 +724,27 @@ margin-left: 70px;}
   bottom:5px;
   height: 25px;
 }
+.left_menu{
+position: relative;
+}
+.left_menu a{
+ }
+.left_menu a:hover{
+  color:#38B4DE;
+  text-decoration: underline;
+}
 ul.location_typeahead li {
   text-align: left;
 }
 ul.left_menu {
-  position: absolute;
+  position: relative;
   top: 65px;
-  text-align: right;
+  right:100px;
+  text-align: left;
+  float: left;
+  width: 120px;
+    border-right: 1px solid #E5E5E5;
+    padding-right: 30px;
 }
 ul.left_menu li {
   padding-top: 4px;
@@ -732,7 +752,7 @@ ul.left_menu li {
   color: whitesmoke;
 }
 ul.left_menu li a {
-  color: #1D95CB;
+  color: #38B4DE;
 }
 
 

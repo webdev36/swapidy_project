@@ -4,6 +4,7 @@ body{
 }
 </style>
 <br/>
+<div style="position:relative; bottom:230px;">
 <div class='headings_pink'>Contact Us</div>
 <br/>
 <% if flash[:thank_message] %>
@@ -24,3 +25,6 @@ body{
   <% end %>
   <input type="submit" value="Submit" class="order_button_buy" style="width:200px; font-size:25px; font-family:'myriad-s';">
 </form>
+</div>
+
+    <%= render :partial => "/layouts/footer" %>
