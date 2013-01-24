@@ -641,10 +641,10 @@ label {
   font-family:"myriad-s";
 }
 .nav_notification{
-  height:25px;
-  position:relative;
-  bottom:4px;
-
+height: 25px;
+position: absolute;
+left: 0;
+bottom: 10px;
 }
 .nav_profile{
   height:25px;
@@ -674,12 +674,12 @@ label {
   background-color:white;
 }
 .notif_count{
-  color:#fa3e6e;
-  font-size:15px;
-  bottom:10px;
-  z-index:5000;
-  position:relative;
-  left:40px;
+color: #FA3E6E;
+font-size: 15px;
+bottom: 10px;
+z-index: 5000;
+position: relative;
+left: 12px;
 }
 .home_honey_symbol{
   position:relative;
@@ -784,14 +784,17 @@ border-radius: 2px;
 }
 
 .guiders_content {
-  position: relative;
+position: relative;
+overflow: hidden;
+padding: 10px;
 }
 
 .guiders_content h1 {
-  color: #FA3E6E;
+color: #FA3E6E;
 text-align:center;
 font-family:"myriad";
-  font-size: 25px;
+font-size: 25px;
+margin: 10px 0 0 0;
 }
 
 .guiders_content p {
