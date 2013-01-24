@@ -192,7 +192,10 @@ max-width:none;
 
 .content .container {
   padding-top: 70px;
-  min-height: 600px;
+}
+
+.min_height_containner {
+  min-height: 700px;  
 }
 
 .signup_field{
