@@ -50,7 +50,7 @@ body{
           <div>
             Your balance is enough to buy this product
             <% if current_user.payment_ready? %>
-              <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
+              <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="btn btn-success btn-mini">Get more Honey</a>
             <% else %>
               <% #<br/>Your payment has not verified. To get more Honey, please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>. %> 
             <% end %>
@@ -70,7 +70,7 @@ body{
           <div>
             <% if current_user.payment_ready? %>
               You would be charged $<%= format_num(current_user.extra_honey_for(@order)/100) %> (Exchange Rate: 100 Honey / $1 )
-              <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
+              <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="btn btn-success btn-mini">Get more Honey</a>
             <% else %>
               Your payment has not verified. Please edit <span class="edit_cc_info"><a href="javascript:open_in_new_tab('/users/edit#card_info_container');" >Card Information of your Profile</a>.  </span>
             <% end %>
