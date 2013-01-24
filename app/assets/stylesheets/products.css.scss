@@ -48,9 +48,7 @@ font-size:30px;
 }
 
 #product_container{
-  margin-left:100px;
-  margin-top:50px;
-  width:500px;
+  margin-top: 50px;
 }
 
 .show_button_buy,
@@ -124,28 +122,32 @@ font-size:30px;
   color: #38B4DE;
 }
 #product_text{
-  position:relative;
-  top:100px;
+  display: inline-block;
+  vertical-align: top;
+  min-height: 250px;
+  width: 300px;
 }
 .product_price{
-    color: #38B4DE;
+  padding-top: 70px;
+  color: #38B4DE;
+  text-align: left;
 }
 .product_title{
-    height: 45px;
-    overflow: hidden;
+  height: 45px;
+  overflow: hidden;
 }
 
 .product_desc{
   color:#737373;
 }
 .using_condition{
-    color: #38B4DE;
-    font-size:20px;
+  color: #38B4DE;
+  font-size:20px;
 }
 
 .product_show_image{
-  height:250px;
-  float:left;
+  height: 250px;
+  display: inline-block;
 }
 .buy_button{
   margin-left:380px;
@@ -154,17 +156,14 @@ font-size:30px;
  font-size:20px; 
 }
 .show_definitions{
-line-height:1.5;
-position:relative;
-left:600px;
-bottom:270px;
-width:200px;
-
-padding:20px;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-border-radius: 10px;
-background:whitesmoke;
+  display: inline-block;
+  line-height: 1.5;
+  width: 200px;
+  text-align: left;
+  padding: 0px 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 .show_definitions dt{
   font-size:20px;
@@ -172,7 +171,7 @@ background:whitesmoke;
   margin-bottom:10px;
 }
 .show_definitions dd{
-color:#666666;
-font-size:15px;
+  color:#666666;
+  font-size:15px;
   margin-bottom:20px;
 }

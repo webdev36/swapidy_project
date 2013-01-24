@@ -11,7 +11,6 @@ class HomeController < ApplicationController
   end
   
   def transactions
-    render "transactions", :layout => 'application_with_slider'
   end
   
   def static_page

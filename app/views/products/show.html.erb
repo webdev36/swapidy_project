@@ -4,16 +4,18 @@
   <form action="/orders/buy/<%= @product.id %>" method="post">
 <% end %>
     <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
-    <%= render :partial => "/products/detail_info"%>
-    <% if @error_message && !@error_message.blank? %>
-      <div class="alert alert-error" style=" position: relative; bottom:100px;left:280px; text-align:center; width:400px;"><%= @error_message %></div><br/>
-    <% end %>
-    <div style="text-align:center; position:relative; bottom:280px;" >
+    
+    <div class="show_container" style="text-align:center; width: 100%; display: block;">
+      <%= render :partial => "/products/detail_info"%>
+    </div>
+    <div style="text-align:center; width: 100%; display: block;">
+      <% if @error_message && !@error_message.blank? %>
+        <div class="alert alert-error" style="width: 400px; display: block; margin: 0 auto;"><%= @error_message %></div><br/>
+      <% end %>
       <% if (params["for"] && params["for"] == "sell") %>
         <input type="submit" value="Sell" class="show_button_sell" />
       <% else %>
-        <input type="submit" value="Buy" class="show_button_buy" style="  position:relative;
-  top:150px;"/>
+        <input type="submit" value="Buy" class="show_button_buy"/>
       <% end %>
     </div>
 </form>

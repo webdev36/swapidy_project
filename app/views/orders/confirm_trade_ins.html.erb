@@ -1,73 +1,82 @@
 <style type="text/css">
-body{
-  background: whitesmoke;
-  line-height: 1.5;
-}
+  body{
+    background: whitesmoke;
+    line-height: 1.5;
+  }
+  .headings_pink {
+    text-align: center;
+  }
 </style>
 
-<div class="headings_pink">Confirm your details</div>
-<br/>
-<p class="confirm_subheading">Please confirm the following information is correct.</p>
-
-<%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
-  <%= f.hidden_field :order_type %>
-  <%= f.hidden_field :product_id %>
-  <%= f.hidden_field :using_condition %>
-  <%= f.hidden_field :honey_price %>
-  <%= f.hidden_field :token_key %>
-
-  <br/>
-  <div class="confirm_container">
-  <div>
-    <label class="confirm_info_head"><%= @order.title %></label><br />
-    <img id="confirm_image" src="<%= @product.main_image_url(:large) %>">
-  </div>
+<div style="width: 100%; text-align: center; padding-top: 40px;">
   
+  <div class="headings_pink">Confirm your details</div>
   <br/>
+  <p class="confirm_subheading">Please confirm the following information is correct.</p>
+  
+  <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
+    <%= f.hidden_field :order_type %>
+    <%= f.hidden_field :product_id %>
+    <%= f.hidden_field :using_condition %>
+    <%= f.hidden_field :honey_price %>
+    <%= f.hidden_field :token_key %>
+  
+    <br/>
+    <div class="confirm_container">
+    <div>
+      <label class="confirm_info_head"><%= @order.title %></label><br />
+      <img id="confirm_image" src="<%= @product.main_image_url(:large) %>">
+    </div>
+    
+    <br/>
+  
+    <div id="email_label_info">
+      <%= render :partial => "email_label", :locals => {:user => current_user } %>
+    </div>
+  
+    <br/>
+    <div>
+      <label class="confirm_info_head">
+        <div class="headings_pink">Payment Information</div><br/>
+      </label>
+      <br />
+      <div>
+        <span>Current Balance:</span>
+        <%= format_num(current_user.honey_balance) %> Honey
+      </div>
+      <div>
+        <span>Product Price:</span>
+        <%= format_num(@product.honey_price) %> Honey
+      </div>
+      <div>
+        Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %> Honey after selling.
+        <br />You can use the honey to products in our marketplace.
+        <% if current_user.payment_ready? %>
+          <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="btn btn-success btn-mini">Get more Honey</a>
+        <% else %>
+          <br />Your payment has not verified. To get more Honey, please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');" class="order_link">Card Information of your Profile</a>.  
+        <% end %>
+      </div>
+    </div>
+    <br/>
+    <div id="shipping_label_info">
+      <%= render :partial => "shipping_label", :locals => {:order => @order} %>
+    </div>
+    <% has_agreement_before = current_user.has_same_order?(@order.order_type) %>
+    <div>
+      <label class="confirm_info_head"><div class="headings_pink">Terms of service</div></label>
+      <br />
+      <p>
+        <input id="terms_of_service_checkbox" type="checkbox" <% if has_agreement_before %>checked="checked"<% end %> /> 
+        <span>Check this box, you agree to our <a class="order_link" href="/terms" target="_blank">terms of service</a> <br/>and confirm that 
+          the item(s) you are selling have not been reported lost or stolen.</span>
+      </p>
+    </div>
+    <br/>
+    <input name="commit" onclick="showPageLoading();" id="submit_button" class="order_button_sell" style="width: 180px; height: 50px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
+  <% end %>
 
-  <div id="email_label_info">
-    <%= render :partial => "email_label", :locals => {:user => current_user } %>
-  </div>
-
-  <br/>
-  <div>
-    <label class="confirm_info_head">
-      <div class="headings_pink">Payment Information</div><br/>
-    </label>
-    <div>
-      <span>Current Balance:</span>
-      <%= format_num(current_user.honey_balance) %> Honey
-    </div>
-    <div>
-      <span>Product Price:</span>
-      <%= format_num(@product.honey_price) %> Honey
-    </div>
-    <div>
-      Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %> Honey after selling.
-      <br />You can use the honey to products in our marketplace.
-      <% if current_user.payment_ready? %>
-        <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
-      <% else %>
-        <br />Your payment has not verified. To get more Honey, please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');" class="order_link">Card Information of your Profile</a>.  
-      <% end %>
-    </div>
-  </div>
-  <br/>
-  <div id="shipping_label_info">
-    <%= render :partial => "shipping_label", :locals => {:order => @order} %>
-  </div>
-  <% has_agreement_before = current_user.has_same_order?(@order.order_type) %>
-  <div>
-    <label class="confirm_info_head"><div class="headings_pink">Terms of service</div></label>
-    <p>
-      <input id="terms_of_service_checkbox" type="checkbox" <% if has_agreement_before %>checked="checked"<% end %> /> 
-      <span>Check this box, you agree to our <a class="order_link" href="/terms" target="_blank">terms of service</a> and confirm that 
-        the item(s) you are selling have not been reported lost or stolen.</span>
-    </p>
-  </div>
-  <br/>
-  <input name="commit" onclick="showPageLoading();" id="submit_button" class="order_button_sell" style="width: 180px; height: 50px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
-<% end %>
+</div>
 
 <%= render :partial => "order_confirm_popups" %>
 
