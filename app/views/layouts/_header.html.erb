@@ -114,6 +114,13 @@
         <li id="nav_signup">
           <a href="javascript:showPopup('popup-dialog_for_signup');" >SIGN UP</a>
         </li>
+                        <li class="divider-vertical"></li>
+
+        <li>
+          <a href="javascript:showPopup('popup-dialog_what');" >WHAT IS&nbsp; <img src="/images/navbar_honey.png" style="position:relative; bottom:3px;">&nbsp;?</a>
+        </li> 
+                <li class="divider-vertical"></li>
+
         <% end %>
         <li>
           <a href="javascript:showPopup('popup-dialog_how_it_work');">HOW IT WORKS?</a>
@@ -169,6 +176,17 @@
     </div>
   </div>
 </div>
+
+<div id="popup-dialog_what" style="display:none; width: 300px; padding: 0px;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <div class="container" style=" width: 500px;background-color: white; border-radius: 10px; padding: 30px 30px; position:fixed; top:120px; margin-left:250px;" >
+      <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
+    <img class="what_honey" src="/images/what_honey.png">
+    <div class="what_content"><div class="headings_pink" style="margin-left:30px;">The honey virtual currency symbol.</div><br/> Swapidy will give you honey for your products and you can buy products with the honey.</div>
+    </div>
+  </div>
+</div>
+
 <div id="popup-dialog_help" style="display:none; width:300px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
     <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 30px; position:fixed; top:100px; line-height:1.5; text-align:center; width:500px; margin-left:260px;" >

@@ -624,8 +624,10 @@ a.login_forgot:hover {
   display: inline;
 }
 .sub_footer{
+  font-family: "myriad";
   color: #ffffff;
   font-size: 13px;
+  margin-left: 5px;
 }
 .sub_footer a{
   color:white;
