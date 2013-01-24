@@ -611,8 +611,15 @@ label {
   margin-left:30px;
   margin-bottom:50px;
 }
+.team_content a{
+  color:#38B4DE;
+}
+.team_content a:hover{
+  color:#38B4DE;
+  text-decoration:underline;
+}
 .team_container{
-  margin-top:30px;
+  margin-top:20px;
 }
 .team_role{
   font-family:"myriad-s";
@@ -621,6 +628,7 @@ label {
 .team_img{
   width:150px;
   float:left;
+  margin-top:30px;
 }
 .team_subheading{
   color:#38B4DE;
