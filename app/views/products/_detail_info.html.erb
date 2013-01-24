@@ -11,38 +11,44 @@ body{
   <div id="product_text">
     <div class="product_price">
       <% if @product.has_flawless_type? %>
-        <input type="radio" id="using_condition" name="using_condition" value="Flawless"></input>&nbsp;<%= @product.flaw_less_name %>
-        <span class="product_desc"><%= format_num(@product.honey_price)%> </span><span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-        <br/>
+      <div class="type">
+        <label for="flawless"><%= @product.flaw_less_name %></label>
+        <input type="radio" id="flawless" name="using_condition" style="display:none;" check="checked"/>
+      <span class="product_desc"><%= format_num(@product.honey_price)%> </span><span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+      </div>
       <% end %>
       <% if @product.has_good_type? %>
-        <input type="radio" id="using_condition" name="using_condition" value="Poor"></input> Good
+      <div class="type">
+        <label for="poor">Good</label>
+        <input type="radio" id="good" name="using_condition" value="Good" style="display:none;"/>
         <span class="product_desc"><%= format_num(@product.price_for_good_type)%> </span><span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-        <br/>
-      <% end %>
-      <% if @product.has_poor_type? %>
-        <input type="radio" id="using_condition" name="using_condition" value="Poor"></input> Poor
-        <span class="product_desc"><%= format_num(@product.price_for_poor_type)%> </span><span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-        <br/>
-      <% end %>
-    </div>	
-  </div>
-  <div class="show_definitions">
-    <dl>
-      <% if @product.has_flawless_type? %>
-        <dt><%= @product.flaw_less_name %></dt>
-        <dd>Doesn't show any use, like new.</dd>
-      <% end %>
-      <% if @product.has_good_type? %>
-        <dt>good</dt>
-        <dd>Normal signs of use.</dd>
-      <% end %>
-      <% if @product.has_poor_type? %>
-        <dt>poor</dt>
-        <dd>Damaged and/or does not turn on.</dd>
-      <% end %>
-    </dl>
-  </div>
-</div>
+      </div>
+        <% end %>
+        <% if @product.has_poor_type? %>
+        <div class="type">
+        <label for="three">Poor</label>
+          <input type="radio" id="three" name="using_condition" value="Poor" style="display:none;"/>
+          <span class="product_desc"><%= format_num(@product.price_for_poor_type)%> </span><span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+        </div>
+          <% end %>
+        </div>	
+      </div>
+      <div class="show_definitions">
+        <dl style="margin:0;">
+          <% if @product.has_flawless_type? %>
+          <dt><%= @product.flaw_less_name %></dt>
+          <div style="font-size:16px;">Doesn't show any use, like new.</div>
+          <% end %>
+          <% if @product.has_good_type? %>
+          <dt>Good</dt>
+          <div style="font-size:16px;">Normal signs of use.</div>
+          <% end %>
+          <% if @product.has_poor_type? %>
+          <dt>Poor</dt>
+          <div style="font-size:16px;">Damaged and/or does not turn on.</div>
+          <% end %>
+        </dl>
+      </div>
+    </div>
 
 

@@ -38,7 +38,15 @@
   opacity: 1;
 }
 .show_container{
-  font-family:"myriad", "myriad-s";
+font-family: "myriad", "myriad-s";
+text-align: center;
+width: 70%;
+display: block;
+margin: 25px auto;
+background: white;
+padding: 25px 0 0;
+border-radius: 5px;
+box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
 }
 .product_name{
 text-align:center; 
@@ -48,7 +56,7 @@ font-size:30px;
 }
 
 #product_container{
-  margin-top: 50px;
+margin: 35px 0 0 0;
 }
 
 .show_button_buy,
@@ -125,12 +133,15 @@ font-size:30px;
   display: inline-block;
   vertical-align: top;
   min-height: 250px;
-  width: 300px;
+  width: 160px;
 }
 .product_price{
-  padding-top: 70px;
+  padding-top: 35px;
   color: #38B4DE;
   text-align: left;
+}
+.product_price .type {
+margin:10px 0;
 }
 .product_title{
   height: 45px;
@@ -146,7 +157,6 @@ font-size:30px;
 }
 
 .product_show_image{
-  height: 250px;
   display: inline-block;
 }
 .buy_button{
@@ -168,7 +178,7 @@ font-size:30px;
 .show_definitions dt{
   font-size:20px;
   color:#fa3e6e;
-  margin-bottom:10px;
+  margin:5px 0;
 }
 .show_definitions dd{
   color:#666666;
