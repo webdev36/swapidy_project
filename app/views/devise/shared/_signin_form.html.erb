@@ -13,18 +13,20 @@
         <span class="add-on">E-mail</span>
         <%= f.email_field :email, :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %>
       </div>
-      <br/>
-      <div class="input-prepend">
+      <div class="input-prepend" style="padding-bottom: 5px;">
         <span class="add-on">Password</span>
         <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
       </div>
       <a href="#" onclick="submit_signin_form();" class="login_button">Sign in</a>
-      <div class="alert alert-error" style="display:none; width:245px; position:relative; bottom:-45px; left:120px;">Invalid username/password. </div>
+      <div style="display: inline-block;">
+        <div class="alert alert-error" style="display:none; width:255px; margin-left: 5px;">Invalid username/password. </div>
+        <% if controller_name != 'passwords' %>
+          <a href="<%= new_password_path(resource_name) %>" style="position: absolute; left: 160px; margin-top: -12px;" class="login_forgot">Forgot your password?</a>
+        <% end %>
+      </div>
     <% end %>
   </div>
-  <% if controller_name != 'passwords' %>
-    <a href="<%= new_password_path(resource_name) %>" class="login_forgot">Forgot your password?</a>
-  <% end %>
+
   <div class="login-footer">
     <p class="signup-link">
       Don't have a login? <a rel="internal silent" href="javascript:showPopup('popup-dialog_for_signup');">Sign Up.</a>

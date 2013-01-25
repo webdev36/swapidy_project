@@ -442,8 +442,6 @@ h2{
 }
 
 .login_button{
-  position: absolute;
-  top: 120px;
   font-size: 18px;
   line-height: 23px;
   min-width: 50px;
@@ -476,16 +474,10 @@ h2{
 .login_button:hover{
   background-color:#F9006E;
 }
-.login_forgot{
-  position: absolute;
-  top: 420px;
-  left: 190px;
-}
 a.login_forgot{
   color: #1c8bc5;
   font-family: "myriad";
   font-size: 15px;
-
 }
 a.login_forgot:hover {
   color: #1c8bc5;

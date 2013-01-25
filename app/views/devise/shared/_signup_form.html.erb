@@ -17,14 +17,14 @@
         <span class="add-on signup_add-on">Password</span>
         <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
       </div>
-      <div class="input-prepend">
+      <div class="input-prepend" style="padding-bottom: 5px;">
         <span class="add-on signup_add-on">Confirm Password</span>
         <%= f.password_field :password_confirmation, :class => "span2", :id => "prependedInput"  %>
       </div>
-      <div style="top: 135px; display: block;">
-        <a href="#" onclick="submit_signup_form();" class="login_button" style="width: 65px; margin-top: 15px;">Sign up</a>
+      <a href="#" onclick="submit_signup_form();" class="login_button">Sign up</a>
+      <div style="display: inline-block;">
         <% unless resource.errors.empty? %>
-          <div class="alert alert-error" style="width:245px; position:relative; bottom:-5px; left:120px;"> <%= raw resource.errors.full_messages.first %>. </span>
+          <div class="alert alert-error" style="width:245px; margin-left: 5px; padding-top: 4px;"> <%= raw resource.errors.full_messages.first %>. </div>
         <% end %>
       </div>
     <% end %>

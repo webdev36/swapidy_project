@@ -11,8 +11,7 @@
   <%= render :partial => "/devise/shared/stripe_card_form", :locals => {:submit_form => "add_honey_form", :field_prefix => "payment_", :f => f, :user => @payment}%>
   <br />
   <% unless @payment.errors.empty? %>
-    <div style="color: red;"><%= raw @payment.errors.full_messages.join(".<br/>") %></div>
-    <br/>
+    <div class="alert alert-error" style="text-align: center;"><%= raw @payment.errors.full_messages.first %></div>
   <% end %>
 
   <div>
