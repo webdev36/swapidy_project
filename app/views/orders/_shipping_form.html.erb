@@ -25,6 +25,7 @@
   <% end %>
 
   <div id='shipping_address_form' class='address_form_content'>
+  <div class="field_col_1">  
     <div>
       <label for='shipping_first_name'>First name</label><br/>
       <input id="order_shipping_first_name" name="order[shipping_first_name]" size="30" type="text" value="<%= order.shipping_first_name %>">
@@ -44,7 +45,8 @@
       <label class='optional' for='shipping_street_name2'>Address Line 2 (optional)</label><br/>
       <input id="order_shipping_optional_address" name="order[shipping_optional_address]" size="30" type="text" value="<%= order.shipping_optional_address %>">
     </div>
-
+</div>
+  <div class="field_col_2">
     <div>
       <label for='shipping_city'>City</label><br/>
       <input id="order_shipping_city" name="order[shipping_city]" size="30" type="text" value="<%= order.shipping_city %>">
@@ -67,8 +69,9 @@
 
   </div>
   
-  
   <input name='commit' class='order_button_sell' style='width: 206px; height: 50px;' type='submit' value='<%= submit_title %>' />
+  </div>  
+
   <% if !order.errors.empty? || @error_message %>
     <span style='color: red;'><%= order.errors.full_messages.join('.') %> <%= @error_message if @error_message %></span>
   <% elsif @success_message %>

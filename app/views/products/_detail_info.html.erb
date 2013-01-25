@@ -13,21 +13,21 @@ body{
       <% if @product.has_flawless_type? %>
       <div class="type">
         <label for="flawless"><%= @product.flaw_less_name %></label>
-        <input type="radio" id="flawless" name="using_condition" style="display:none;" check="checked"/>
+        <input type="radio" id="flawless" name="using_condition" check="checked"/>
       <span class="product_desc"><%= format_num(@product.honey_price)%> </span><span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
       </div>
       <% end %>
       <% if @product.has_good_type? %>
       <div class="type">
-        <label for="poor">Good</label>
-        <input type="radio" id="good" name="using_condition" value="Good" style="display:none;"/>
+        <label for="good">Good</label>
+        <input type="radio" id="good" name="using_condition" value="Good"/>
         <span class="product_desc"><%= format_num(@product.price_for_good_type)%> </span><span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
       </div>
         <% end %>
         <% if @product.has_poor_type? %>
         <div class="type">
-        <label for="three">Poor</label>
-          <input type="radio" id="three" name="using_condition" value="Poor" style="display:none;"/>
+        <label for="poor">Poor</label>
+          <input type="radio" id="three" name="using_condition" value="Poor"/>
           <span class="product_desc"><%= format_num(@product.price_for_poor_type)%> </span><span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
         </div>
           <% end %>

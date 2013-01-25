@@ -393,7 +393,9 @@ margin-bottom:30px;
 .thumbnail .box .product_price {
   padding-top: 5px;
   font-size: 15px;
+  width:300px;
 }
+
 .thumbnail .box .button_for_buy,
 .thumbnail .box .button_for_sell {
   padding-right: 5px;
@@ -596,11 +598,13 @@ label {
   margin-top:30px;
   pointer:cursor;
 }
+
 .hiw_img{
   position:relative;
   bottom:50px;
   height:250px;
 }
+
 .team_content{
   font-family:"myriad";
   color:#666;
@@ -611,6 +615,7 @@ label {
   margin-left:30px;
   margin-bottom:50px;
 }
+
 .team_content a{
   color:#38B4DE;
 }
@@ -698,7 +703,7 @@ left: 12px;
   padding: 4px 12px;
   width: 500px;
   z-index: 100000005 !important;
-  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:"myriad";
   
   /* Shadow */
   -moz-box-shadow: 0 0px 8px #111;

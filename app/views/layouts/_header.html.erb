@@ -15,6 +15,12 @@
         <li id="nav_login">
           <a href="javascript:showPopup('popup-dialog_for_free_honey');" >GET FREE HONEY</a>
         </li>
+                <li class="divider-vertical"></li>
+                <script type="text/javascript">
+                $(".nav_notification").css({"position": "absolute",
+"left": "0",
+"bottom": "0px");
+                </script>
         <% end %>
         <li class="dropdown" id="notification_menu" >
           <%= render :partial => "/layouts/notifications_menu" %>
@@ -95,7 +101,7 @@
           <div class="help">
             <a href="javascript:showPopup('popup-dialog_help');" >
             <div style="display: inline-block;">
-              Need help? &nbsp;<img class="help_icon" src="/images/help.png">
+             Questions? &nbsp;<img class="help_icon" src="/images/help.png">
             </a>
           </div>
         </li>
@@ -193,7 +199,7 @@
             <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
     <div class="help_unit help_1">
       <img class="help_img"src="/images/icon_call.png"><br/><br/>
-      Call Us Now:<br/> 1855-SWAPIDY
+      Call Us Now:<br/> 650-691-3674
     </div>  
     <div class="help_unit help_2">
       <a href="/contact_us"><img class="help_img" src="/images/icon_email.png"><br/><br/>
