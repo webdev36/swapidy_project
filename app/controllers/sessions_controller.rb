@@ -1,5 +1,13 @@
 class SessionsController < Devise::SessionsController
   
+  def new
+    respond_to do |format|
+      format.html {
+        redirect_to "/"
+      }
+    end    
+  end
+
   def create
     session[:signed_in_via_facebook] = nil
     if(params[:login_to_order].nil? || params[:login_to_order].blank?)

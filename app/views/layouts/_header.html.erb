@@ -12,15 +12,10 @@
 
         <% if user_signed_in? %>
         <% if current_user.free_honey_sendable? %>
-        <li id="nav_login">
-          <a href="javascript:showPopup('popup-dialog_for_free_honey');" >GET FREE HONEY</a>
-        </li>
-                <li class="divider-vertical"></li>
-                <script type="text/javascript">
-                $(".nav_notification").css({"position": "absolute",
-"left": "0",
-"bottom": "0px");
-                </script>
+          <li id="nav_login">
+            <a href="javascript:showPopup('popup-dialog_for_free_honey');" >GET FREE HONEY</a>
+          </li>
+          <li class="divider-vertical"></li>
         <% end %>
         <li class="dropdown" id="notification_menu" >
           <%= render :partial => "/layouts/notifications_menu" %>
