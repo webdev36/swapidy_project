@@ -12,7 +12,7 @@
 
 
 <div>
-  <input type='submit' value='Update'>
+  <input class="update_button_buy" type='submit' value='Update'>
   <% if !user.errors.empty? || @error_message %>
     <span style='color: red;'><%= user.errors.full_messages.join('.') %> <%= @error_message if @error_message %></span>
   <% elsif @success_message %>

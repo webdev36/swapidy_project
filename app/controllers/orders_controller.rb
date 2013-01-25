@@ -101,7 +101,7 @@ class OrdersController < ApplicationController
   
   def change_shipping_info
     if @order.valid? && @order.shipping_address_valid?
-      @success_message = "Your shipping address have changed successfully!"
+      @success_message = "Your shipping address has been updated successfully!"
       @changed_content = render_to_string(:partial => "/orders/shipping_label", :locals => {:order => @order})
     end
     @return_content = render_to_string(:partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Change"})
