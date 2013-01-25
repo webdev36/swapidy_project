@@ -85,7 +85,7 @@ class Order < ActiveRecord::Base
     return result
   end
   
-  def create_new_stamp
+  def create_new_stamp(is_send_label = true)
     if Rails.env == 'production'
       stamp = is_order? ? create_shipping_order : create_shipping_label
     else
@@ -101,7 +101,11 @@ class Order < ActiveRecord::Base
     new_stamp.stamps_tx_id = stamp[:stamps_tx_id]
     new_stamp.url = stamp[:url]
     new_stamp.status = "pending"
-    return new_stamp if new_stamp.save
+    if new_stamp.save
+      new_stamp.send_email_to_customer if is_send_label
+      return new_stamp
+    end
+    return nil
   end
   
   def shipping_fullname
@@ -141,12 +145,13 @@ class Order < ActiveRecord::Base
   def create_notification_to_reminder
     return unless self.is_trade_ins?
     
+    new_stamp = self.create_new_stamp(false)
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "#{product.title} - Reminder"
     notification.description = "Trade-ins: #{self.product.title} - #{self.honey_price} Honey - Reminder" 
     notification.save
-    
-    OrderNotifier.reminder(self).deliver
+
+    OrderNotifier.reminder(self, new_stamp).deliver
   end
     
   def create_notification_to_cancel

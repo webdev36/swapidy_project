@@ -1,6 +1,10 @@
 # RailsAdmin config file. Generated on December 26, 2012 10:58
 # See github.com/sferik/rails_admin for more informations
 require Rails.root.join('lib', 'rails_admin_resend.rb')
+require Rails.root.join('lib', 'rails_admin_reminder_order.rb')
+require Rails.root.join('lib', 'rails_admin_decline_order.rb')
+require Rails.root.join('lib', 'rails_admin_complete_order.rb')
+require Rails.root.join('lib', 'rails_admin_cancel_order.rb')
   
 RailsAdmin.config do |config|
 
@@ -82,7 +86,7 @@ RailsAdmin.config do |config|
   module RailsAdmin
     module Config
       module Actions
-        class Resend < RailsAdmin::Config::Actions::Base
+        class Reminder < RailsAdmin::Config::Actions::Base
           RailsAdmin::Config::Actions.register(self)
         end
         class Complete < RailsAdmin::Config::Actions::Base
@@ -94,7 +98,7 @@ RailsAdmin.config do |config|
         class Decline < RailsAdmin::Config::Actions::Base
           RailsAdmin::Config::Actions.register(self)
         end
-        class Reminder < RailsAdmin::Config::Actions::Base
+        class Resend < RailsAdmin::Config::Actions::Base
           RailsAdmin::Config::Actions.register(self)
         end
       end
