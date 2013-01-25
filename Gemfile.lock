@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/bradphelan/wkhtmltopdf-heroku.git
-  revision: ad9f8e5f83fe769fcdaa13c42a1c087c972cbb89
+  remote: git://github.com/camdez/wkhtmltopdf-heroku.git
+  revision: 09f42e0fd9cf98361343738ccd7fdf6395df7dd0
   specs:
-    wkhtmltopdf-heroku (1.0.0)
+    wkhtmltopdf-heroku (0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -88,7 +88,6 @@ GEM
       builder (>= 2.1.2)
     haml (3.1.7)
     hashie (1.2.0)
-    highline (1.6.15)
     hike (1.2.1)
     httparty (0.10.0)
       multi_json (~> 1.0)
@@ -97,8 +96,6 @@ GEM
     httpi (0.7.9)
       rack
     i18n (0.6.1)
-    inline (0.1.0)
-      highline (>= 1.4.0)
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
@@ -268,7 +265,6 @@ DEPENDENCIES
   devise
   haml
   httpi (= 0.7.9)
-  inline
   mailcatcher
   memcachier
   multi_json (~> 1.0)
