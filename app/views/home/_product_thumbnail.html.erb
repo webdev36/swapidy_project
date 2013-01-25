@@ -5,13 +5,29 @@
     <div>
       <div class="product_price">
         <% if product.has_flawless_type? %>
-          <div class="flawless_type <%= product.price_range_class(product.honey_price) %>">&nbsp;<%= product.flaw_less_name %>:<%= format_num(product.honey_price) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"></div>
+          <% if product.for_buy %>
+            <div class="price_item flawless_type <%= product.price_range_class(product.honey_price) %>">
+              <%= product.flaw_less_name %>:
+              <%= format_num(product.honey_price) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png">
+            </div>
+          <% else %>
+            <div class="price_item flawless_type <%= product.price_range_class(product.honey_price) %>">
+              <div class="price_title"><%= product.flaw_less_name %>:</div>
+              <div class="price_value"><%= format_num(product.honey_price) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"></div>
+            </div>
+          <% end %>
         <% end %>
         <% if product.has_good_type? %>
-          <div class="good_type <%= product.price_range_class(product.price_for_good_type) %>">Good: <%= format_num(product.price_for_good_type) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"> </div>
+          <div class="price_item good_type <%= product.price_range_class(product.price_for_good_type) %>">
+            <div class="price_title">Good:</div>
+            <div class="price_value"><%= format_num(product.price_for_good_type) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"></div>
+          </div>
         <% end %>
         <% if product.has_poor_type? %>
-          <div class="poor_type <%= product.price_range_class(product.price_for_poor_type) %>">Poor: <%= format_num(product.price_for_poor_type) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"> </div>
+          <div class="price_item poor_type <%= product.price_range_class(product.price_for_poor_type) %>">
+            <div class="price_title">Poor:</div>
+            <div class="price_value"><%= format_num(product.price_for_poor_type) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"></div>
+          </div>
         <% end %>
       </div>
       <div class="button_for_buy">
