@@ -88,6 +88,7 @@ GEM
       builder (>= 2.1.2)
     haml (3.1.7)
     hashie (1.2.0)
+    highline (1.6.15)
     hike (1.2.1)
     httparty (0.10.0)
       multi_json (~> 1.0)
@@ -96,6 +97,8 @@ GEM
     httpi (0.7.9)
       rack
     i18n (0.6.1)
+    inline (0.1.0)
+      highline (>= 1.4.0)
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
@@ -265,6 +268,7 @@ DEPENDENCIES
   devise
   haml
   httpi (= 0.7.9)
+  inline
   mailcatcher
   memcachier
   multi_json (~> 1.0)
