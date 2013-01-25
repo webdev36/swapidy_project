@@ -135,7 +135,7 @@ margin: 35px 0 0 0;
   display: inline-block;
   vertical-align: top;
   min-height: 250px;
-  width: 160px;
+  width: 180px;
 }
 .product_price{
   padding-top: 35px;
@@ -143,8 +143,27 @@ margin: 35px 0 0 0;
   text-align: left;
 }
 .product_price .type {
-margin:10px 0;
+  display: block;
+  margin: 10px 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
 }
+
+.product_price .selected img {
+  height: 30px;
+}
+
+.product_price .selected .product_desc,
+.product_price .selected label {
+  color: white;
+}
+.product_price .selected {
+  background-color: #0088cc;
+  color: white;
+  border-radius: 5px;
+}
+
 .product_title{
   height: 45px;
   overflow: hidden;

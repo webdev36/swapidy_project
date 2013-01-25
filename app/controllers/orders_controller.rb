@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
     if @order.using_condition.nil? || !Product::USING_CONDITIONS.values.include?(@order.using_condition) || @order.honey_price.nil?
       @error_message = "You need to select at least one of the conditions!"
       params["for"] = params[:order_type] && params[:order_type] == Order::TYPES[:order] ? "buy" : "sell"
+      params["using_condition"] = @order.using_condition
       render "/products/show"
       return
     end
