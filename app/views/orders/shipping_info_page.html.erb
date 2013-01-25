@@ -5,12 +5,12 @@ body{
 </style>
 
 <%= render :partial => "steps", :locals => {:current_step => 3 } %>
-<div class="container" style="background: white;width: 85%;margin: 25px auto; padding: 60px;box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);"
+<div class="container" style="background: white;width: 85%;margin: 25px auto; padding: 40px;box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); height:390px; border-radius: 5px;"
 <div style="width: 100%; padding-top: 40px;">
   <div class="headings_pink">You're almost there...provide your shipping address<span>*</span></div>
   <br/>
   <label class="confirm_info_head"><%= @order.title %></label><br />
-  <img id="confirm_image" src="<%= @product.main_image_url(:large) %>" style="padding-top: 40px; padding-bottom: 0px;" />
+  <img id="before_confirm_image" src="<%= @product.main_image_url(:large) %>" style="padding-top: 40px; padding-bottom: 0px;" />
     
   <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; width:220px; margin: 0 auto; padding-bottom: 20px;">
     <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />

@@ -11,10 +11,14 @@
 	font-size:20px;
 }
 #confirm_image{
+  margin-left:280px;
 	padding-top:30px;
 	padding-bottom:30px;
 }
-
+#before_confirm_image{
+    padding-top:30px;
+  padding-bottom:30px;
+}
 
 table{
 	color:#666;
@@ -36,7 +40,7 @@ text-align: center;
   text-decoration: none;
   padding: 8px 15px;
   padding-bottom:10px;
-  font-family:"myriad-s";
+  font-family:"myriad";
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 4px;
   -webkit-transition: all 0.3s ease-out;
@@ -115,11 +119,10 @@ font-family:"myriad";
 }
 
 .confirm_info_head{
-	font-family:"myriad";
+	font-family:"myriad-s";
 	color:#38B4DE;
-	text-align:left;
+	text-align:center;
 	font-size:25px;
-	width:500px;
 }
 .change{
 	font-family:"myriad";
@@ -176,7 +179,7 @@ color:#fa3e6e;
   font-weight: 700;
   font-size: 30px;
   text-decoration: none;
-  font-family: "Lato", Calibri, Arial, sans-serif;
+  font-family: "myriad";
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 4px;
   width: 100px;
@@ -238,4 +241,21 @@ margin-right:60px;
   padding:0px;
   margin-top:20px;
   font-family:"myriad";
+}
+
+.address_form_content{
+  position:relative;
+  bottom:200px;
+  right:50px;
+}
+.field_col_2{
+  position:relative;
+  left:260px;
+  bottom:255px;
+  border-left: 1px solid #E5E5E5;
+  padding-left:30px;
+}
+.shipping_footnote{
+  position:relative;
+  bottom:450px;
 }

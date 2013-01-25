@@ -7,7 +7,6 @@
     
     <div class="show_container">
       <%= render :partial => "/products/detail_info"%>
-    </div>
     <div style="text-align:center; width: 100%; display: block;">
       <% if @error_message && !@error_message.blank? %>
         <div class="alert alert-error" style="width: 400px; display: block; margin: 0 auto;"><%= @error_message %></div><br/>
@@ -19,3 +18,4 @@
       <% end %>
     </div>
 </form>
+    </div>
