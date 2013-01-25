@@ -1,18 +1,18 @@
 <div id="login_container">
   <a class="close-popup" onclick="hidePopup();" style="position:relative; top:30px; right:95px;" href="#" title="Cancel">Cancel</a>
   <img id="login_circle" src="/images/freehoney_rectangle.png" style="top: 338.5px; display: block;">
-  <div id="login_form">
+  <div style="position: absolute; top: 180px; width: 440px; text-align: center;">
     <%= form_for(@free_honey, :as => "free_honey", :url => "/free_honeys/create", :html => {:id => "add_honey"}) do |f| %>
       <div class="free_honey_info">
-        <p >Invite your friends by entering their email below. If they join, you'll receive 100 FREE honey (only 3 invites allowed - limited time only).</p>
+        <p>Invite your friends by entering their email below. If they join, you'll receive 100 FREE honey (only 3 invites allowed - limited time only).</p>
         <p style="text-align:center;">You have <%= current_user.remain_inviation_count %> invites left.</p>
       </div>
       <% if current_user.free_honey_sendable? %>
         <div class="email_invite">
           <input id="emails" name="emails" size="30" type="text" placeholder="E-mail address"value="" />
-          <div style="position:relative; top:10px;">
+          <div style="padding-top: 15px;">
+            <% if @error_messages %><div class="alert alert-error" style="width: 390px; left: 20px; position: relative;"><%= @error_messages %></div><% end %>
             <a href="#" onclick="submitAddHoney();" class="email_invite_button">Invite</a>
-            <% if @error_messages %><br/><span style="color: red;"><%= @error_messages %></span><% end %>
           </div>
         </div>
       <% end %>
