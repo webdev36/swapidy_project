@@ -8,12 +8,12 @@ body{
   <div style="display: inline-block; vertical-align: top;">
     <img class="product_show_image" src="<%= @product.main_image_url(:large) %>">  
   </div>
-  <div id="product_text">
+  <div id="product_text" <% if @product.for_buy %> style="width: 330px;" <% end %>>
     <div class="product_price">
       <% @using_condition = (params[:using_condition] || "").blank? ? "Flawless" : params[:using_condition] %>
       <input type="hidden" name="using_condition" id="using_condition" value="<%= @using_condition %>" >
       <% if @product.has_flawless_type? %>
-        <div class="type <% if @using_condition == "Flawless" %>selected<% end %>">
+        <div class="type <% if @using_condition == "Flawless" %>selected<% end %>" <% if @product.for_buy %> style="width: 300px;" <% end %> >
           <label for="Flawless"><%= @product.flaw_less_name %></label>
           <span class="product_desc"><%= format_num(@product.honey_price)%> </span>
           <% if @using_condition == "Flawless" %>
@@ -47,22 +47,24 @@ body{
       <% end %>
     </div>	
   </div>
-  <div class="show_definitions">
-    <dl style="margin:0;">
-      <% if @product.has_flawless_type? %>
-        <dt><%= @product.flaw_less_name %></dt>
-        <div style="font-size:16px;">Doesn't show any use, like new.</div>
-      <% end %>
-      <% if @product.has_good_type? %>
-        <dt>Good</dt>
-        <div style="font-size:16px;">Normal signs of use.</div>
-      <% end %>
-      <% if @product.has_poor_type? %>
-        <dt>Poor</dt>
-        <div style="font-size:16px;">Damaged and/or does not turn on.</div>
-      <% end %>
-    </dl>
-  </div>
+  <% if @product.for_sell %>
+    <div class="show_definitions">
+      <dl style="margin:0;">
+        <% if @product.has_flawless_type? %>
+          <dt><%= @product.flaw_less_name %></dt>
+          <div style="font-size:16px;">Doesn't show any use, like new.</div>
+        <% end %>
+        <% if @product.has_good_type? %>
+          <dt>Good</dt>
+          <div style="font-size:16px;">Normal signs of use.</div>
+        <% end %>
+        <% if @product.has_poor_type? %>
+          <dt>Poor</dt>
+          <div style="font-size:16px;">Damaged and/or does not turn on.</div>
+        <% end %>
+      </dl>
+    </div>
+  <% end %>
 </div>
 <script>
   $("#product_container .type").live("click", function(){

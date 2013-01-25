@@ -393,7 +393,8 @@ margin-bottom:30px;
 .thumbnail .box .product_price {
   padding-top: 5px;
   font-size: 15px;
-  width:300px;
+  width: 100%;
+  text-align: center;
 }
 
 .thumbnail .box .button_for_buy,
@@ -404,6 +405,25 @@ margin-bottom:30px;
 .thumbnail .box .button_for_sell .btn,
 .thumbnail .box .button_for_buy .btn {
   width: 75px;  
+}
+.thumbnail .box .product_price {
+  text-align: center;
+}
+.thumbnail .box .product_price .price_item {
+  display: block;
+  width: 100%;
+}
+.thumbnail .box .product_price .price_item .price_title {
+  display: inline-block;
+  width: 40%;
+  padding: 0px;
+  text-align: left;
+}
+.thumbnail .box .product_price .price_item .price_value {
+  width: 55%;
+  display: inline-block;
+  padding: 0px;
+  text-align: right;
 }
 
 label {
