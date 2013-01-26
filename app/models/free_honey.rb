@@ -6,8 +6,9 @@ class FreeHoney < ActiveRecord::Base
    
   STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3}
   validates :receiver_honey_amount, :status, :expired_date, :token_key, :presence => true
-  validates :receiver_email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i}#, :message => "Invalid email address"
+  validates :receiver_email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :message => "Invalid email address"}
   validate :user_with_right_email?
+  validates_uniqueness_of :receiver_email, :message => "Sorry, this email has been submitted before."
   
   before_validation :check_receiver_email
   before_validation :generate_token_key
@@ -119,15 +120,19 @@ class FreeHoney < ActiveRecord::Base
     
     def user_with_right_email?
       if (receiver_email || "").empty?
-        errors.add(:receiver_email, "or Receiver User could not be blank") 
+        errors.add(:receiver_email, "or Receiver User could not be blank.") 
         return false
       end
       if receiver && receiver.email != receiver_email 
-        errors.add(:receiver_email, "is not #{receiver.full_name}'s email: #{receiver.email}")
+        errors.add(:receiver_email, "Invalid Sender #{receiver.full_name}'s email: #{receiver.email}.")
         return false
       end
       if sender && sender.email == receiver_email 
-        errors.add(:receiver_email, "is the same to sender (#{receiver.full_name}'s email: #{receiver.email})")
+        errors.add(:receiver_email, "NOT allow send to your email #{receiver.email}.")
+        return false
+      end
+      if receiver_email && User.where(:email => self.receiver_email).exists?
+        errors.add(:receiver_email, "Email Address has signed up before.") 
         return false
       end
       return true

@@ -9,7 +9,7 @@
       </div>
       <% if current_user.free_honey_sendable? %>
         <div class="email_invite">
-          <input id="emails" name="emails" size="30" type="text" placeholder="E-mail address"value="" />
+          <input id="email" name="email" size="30" type="text" placeholder="E-mail address"value="" />
           <div style="padding-top: 15px;">
             <% if @error_messages %><div class="alert alert-error" style="width: 390px; left: 20px; position: relative;"><%= @error_messages %></div><% end %>
             <% if @success_message %><div class="alert alert-success" style="width: 390px; left: 20px; position: relative;"><%= @success_message %></div><% end %>

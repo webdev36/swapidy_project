@@ -3,7 +3,7 @@ class FreeHoneysController < ApplicationController
   before_filter :require_login, :only => :create
 
   def create
-    if(params[:emails] == "") 
+    if(params[:email] == "") 
       @free_honey = FreeHoney.new
       respond_to do |format|
         format.js {
@@ -13,25 +13,14 @@ class FreeHoneysController < ApplicationController
       end
       return
     end
-    emails = params[:emails].split(";") if params[:emails] && !params[:emails].blank?
-
-    begin
-      FreeHoney.transaction do
-        emails.each do |email|
-          @free_honey = FreeHoney.new(:receiver_email => email)
-          @free_honey.sender = current_user
-          if @free_honey.valid?
-            @free_honey.save
-            @success_message = "Well done! you successfully send Free Honey message."
-          else
-            raise "#{@free_honey.errors.full_messages.join(". ")}"
-          end
-        end
-        @free_honey = FreeHoney.new
-      end
-    rescue Exception => e
-      @error_messages = e.message
-      @free_honey = FreeHoney.new(:receiver_email => params[:emails])
+    
+    @free_honey = FreeHoney.new(:receiver_email => params[:email] )
+    @free_honey.sender = current_user
+    if @free_honey.valid?
+      @free_honey.save
+      @success_message = "Well done! you successfully send Free Honey message."
+    else
+      @error_messages = @free_honey.errors.messages[@free_honey.errors.messages.keys.last].last
     end
 
     respond_to do |format|
