@@ -22,6 +22,7 @@ class FreeHoneysController < ApplicationController
           @free_honey.sender = current_user
           if @free_honey.valid?
             @free_honey.save
+            @success_message = "Well done! you successfully send Free Honey message."
           else
             raise "#{@free_honey.errors.full_messages.join(". ")}"
           end

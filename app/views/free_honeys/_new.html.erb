@@ -12,7 +12,14 @@
           <input id="emails" name="emails" size="30" type="text" placeholder="E-mail address"value="" />
           <div style="padding-top: 15px;">
             <% if @error_messages %><div class="alert alert-error" style="width: 390px; left: 20px; position: relative;"><%= @error_messages %></div><% end %>
+            <% if @success_message %><div class="alert alert-success" style="width: 390px; left: 20px; position: relative;"><%= @success_message %></div><% end %>
             <a href="#" onclick="submitAddHoney();" class="email_invite_button">Invite</a>
+          </div>
+        </div>
+      <% elsif @success_message %>
+        <div class="email_invite">
+          <div style="padding-top: 15px;">
+            <div class="alert alert-success" style="width: 390px; left: 20px; position: relative;"><%= @success_message %></div>
           </div>
         </div>
       <% end %>
