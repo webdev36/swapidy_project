@@ -7,6 +7,12 @@ module CardInfo
     #attr_accessible :card_type, :card_name, :card_expired_month, :card_expired_year, :card_last_four_number  
   end
   
+  def has_card_info?
+    return false if (card_type || "").blank? && (card_last_four_number || "").blank? && 
+        (card_expired_month || "").blank? && (card_expired_year || "").blank? && (card_type || "").blank?
+    return true
+  end
+  
   def card_info_in_hash
     return {:card_type => self.card_type,
             :card_name => self.card_name,

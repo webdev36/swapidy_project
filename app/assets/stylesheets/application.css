@@ -514,12 +514,6 @@ a.login_forgot:hover {
   padding-left: 20px;
   padding-right: 20px;
 }
-
-.email_invite{
-  position: relative;
-  bottom:60px;
-  left:30px;
-
 .email_invite input[type="text"]{
   height: 40px;
   width: 300px;
