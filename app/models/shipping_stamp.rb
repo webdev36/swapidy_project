@@ -5,7 +5,7 @@ class ShippingStamp < ActiveRecord::Base
   
   belongs_to :order
   
-  after_create :send_email_to_customer
+  #after_create :send_email_to_customer
   
   
   def send_email_to_customer

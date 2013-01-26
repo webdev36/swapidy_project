@@ -1,30 +1,30 @@
 
-  <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
-  <input id="order_token_key" name="order[token_key]" type="hidden" value="<%= order.token_key %>">
-  <input id="order_using_condition" name="order[using_condition]" type="hidden" value="<%= order.using_condition %>">
-  <input id="order_honey_price" name="order[honey_price]" type="hidden" value="<%= order.honey_price %>">
-  <input id="order_order_type" name="order[order_type]" type="hidden" value="<%= order.order_type %>">
-  <input id="order_product_id" name="order[product_id]" type="hidden" value="<%= order.product_id %>">
-  
-  <% if order.candidate_addresses && !order.candidate_addresses.empty? %>
-    <div id='candidate_addresses_container' >
-      <br />
-      <b class='alert alert-error'>There are <%= order.candidate_addresses.size == 1 ? 'an address' : '#{order.candidate_addresses.size} addresses'%> 
-      would be exactly your address.</b><br/>
-      <% order.candidate_addresses.each_with_index do |address, index|%>
-        <%= index + 1 %>. <%= address[:address1]%> 
-                          <% if address[:address2] && !address[:address2].blank? %> (Address2: <%= address[:address2] %>) <% end %>
-                          - <%= address[:city] %> - <%= address[:state] %> - <%= address[:zip_code] %>
-        <a href='#' class='select_candidate_address' data-address='<%= address[:address1]%>' data-optional_address='<%= address[:address2]%>'
-          data-city='<%= address[:city]%>' data-state='<%= address[:state]%>' 
-          data-zip_code='<%= address[:zip_code]%>' data-zip_code_add_on='<%= address[:zip_code_add_on]%>'
-        >Select</a><br />
-      <% end %>
-      <br />
-    </div>
-  <% end %>
+<input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
+<input id="order_token_key" name="order[token_key]" type="hidden" value="<%= order.token_key %>">
+<input id="order_using_condition" name="order[using_condition]" type="hidden" value="<%= order.using_condition %>">
+<input id="order_honey_price" name="order[honey_price]" type="hidden" value="<%= order.honey_price %>">
+<input id="order_order_type" name="order[order_type]" type="hidden" value="<%= order.order_type %>">
+<input id="order_product_id" name="order[product_id]" type="hidden" value="<%= order.product_id %>">
 
-  <div id='shipping_address_form' class='address_form_content'>
+<% if order.candidate_addresses && !order.candidate_addresses.empty? %>
+  <div id='candidate_addresses_container' >
+    <br />
+    <b class='alert alert-error'>There are <%= order.candidate_addresses.size == 1 ? 'an address' : '#{order.candidate_addresses.size} addresses'%> 
+    would be exactly your address.</b><br/>
+    <% order.candidate_addresses.each_with_index do |address, index|%>
+      <%= index + 1 %>. <%= address[:address1]%> 
+                        <% if address[:address2] && !address[:address2].blank? %> (Address2: <%= address[:address2] %>) <% end %>
+                        - <%= address[:city] %> - <%= address[:state] %> - <%= address[:zip_code] %>
+      <a href='#' class='select_candidate_address' data-address='<%= address[:address1]%>' data-optional_address='<%= address[:address2]%>'
+        data-city='<%= address[:city]%>' data-state='<%= address[:state]%>' 
+        data-zip_code='<%= address[:zip_code]%>' data-zip_code_add_on='<%= address[:zip_code_add_on]%>'
+      >Select</a><br />
+    <% end %>
+    <br />
+  </div>
+<% end %>
+
+<div id='shipping_address_form' class='address_form_content'>
   <div class="field_col_1">  
     <div>
       <label for='shipping_first_name'>First name</label><br/>
@@ -45,7 +45,7 @@
       <label class='optional' for='shipping_street_name2'>Address Line 2 (optional)</label><br/>
       <input id="order_shipping_optional_address" name="order[shipping_optional_address]" size="30" type="text" value="<%= order.shipping_optional_address %>">
     </div>
-</div>
+  </div>
   <div class="field_col_2">
     <div>
       <label for='shipping_city'>City</label><br/>
@@ -66,14 +66,13 @@
       <input id="order_shipping_zip_code_add_on" name="order[shipping_zip_code_add_on]" type="hidden" value="<%= order.shipping_zip_code_add_on %>">
       <input id="order_is_candidate_address" name="order[is_candidate_address]" type="hidden" value="<%= order.is_candidate_address %>">
     </div>
-
+    <input name='commit' class='order_button_sell' style='width: 220px; height: 50px; margin-top: 5px;' type='submit' value='<%= submit_title %>' />
   </div>
-  
-  <input name='commit' class='order_button_sell' style='width: 206px; height: 50px; position:relative; left:290px; bottom:250px;' type='submit' value='<%= submit_title %>' />
-  </div>  
-
   <% if !order.errors.empty? || @error_message %>
-    <span style='color: red;'><%= order.errors.full_messages.join('.') %> <%= @error_message if @error_message %></span>
+    <div class="alert alert-error" style="width: 492px;"><%= order.errors.full_messages.join('.') %> <%= @error_message if @error_message %></div>
   <% elsif @success_message %>
-    <span style='color: pink;'><%= @success_message %></span>
+    <div class="alert alert-success" style="width: 492px;"><%= @success_message %></div>
   <% end %>
+
+</div>  
+

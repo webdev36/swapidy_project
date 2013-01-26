@@ -12,9 +12,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           redirect_to :controller => "/orders", :action => :new, :method => :post, :product_id => session[:creating_order][:product_id], :using_condition => session[:creating_order][:using_condition], :order_type => session[:creating_order][:order_type]
         else
           sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+          check_to_display_guide
         end
         set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
-        check_to_display_guide
       else
         session[:signed_in_via_facebook] = nil
         session["devise.facebook_data"] = request.env["omniauth.auth"]

@@ -1,5 +1,5 @@
 
-<div id="popup-dialog_email_form" style="display:none; width:0px; padding: 0px; position: fixed; top: 55px;" class="popup-box-wrapper standard-popup">
+<div id="popup-dialog_email_form" style="display:none; width:0px; padding: 0px; position: fixed; top: 60px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
     <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 20px; width:590px; margin-left:160px;" >
       <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
@@ -13,13 +13,13 @@
   </div>
 </div>
 
-<div id="popup-dialog_shipping_form" style="display:none; height:290px; padding: 0px; position: fixed; top: 15px;" class="popup-box-wrapper standard-popup">
+<div id="popup-dialog_shipping_form" style="display:none; height:290px; padding: 0px; position: fixed; top: 60px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
-    <div class="container" style="background-color: white; border-radius: 10px; height:280px; padding: 30px 20px; width:590px; margin-left:160px;" >
+    <div class="container" style="background-color: white; border-radius: 10px; height:280px; padding: 30px 20px; width:540px; margin-left:160px;" >
       <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
       <div class="render_form">
-        <form accept-charset="UTF-8" action="/orders/change_shipping_info" class="new_order nonConfirmForm" id="popup_new_order" method="post">
-          <div style="position:relative; top:200px; left:100px;"><%= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Update"} %></div>
+        <form accept-charset="UTF-8" action="/orders/change_shipping_info" class="new_order nonConfirmForm" id="popup_new_order" method="post" style="padding-left: 15px;">
+          <%= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Update"} %>
         </form>
       </div>
     </div>

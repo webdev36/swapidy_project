@@ -15,7 +15,8 @@ module Stamps
       end
 
       response = client.request :tns, web_method do
-        http.headers = { "SoapAction" => formatted_soap_action(web_method) }
+        http.headers.delete("SOAPAction")
+        #http.headers = { "SoapAction" => formatted_soap_action(web_method) }
         soap.namespace = 'tns'
         soap.element_form_default = :qualified
         soap.env_namespace = 'soap'

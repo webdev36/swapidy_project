@@ -20,17 +20,13 @@ module RailsAdmin
         
         register_instance_option :controller do
           Proc.new do
-            #@objects = Order.where("id in (?)", params[:bulk_ids])
-            @objects = [@object]
- 
-            # Update field statues to :declined
-            @objects.each do |order|
-              if order.is_trade_ins? || order.status ==  Order::STATUES[:pending]
-                order.create_notification_to_reminder
-              end
+            if @object.is_trade_ins? || @object.status ==  Order::STATUES[:pending]
+              @object.create_notification_to_reminder
+              flash[:success] = "#{@model_config.label} successfully reminder!"
+            else
+              flash[:error] = "Only Trade-Ins could not be reminder!" 
             end
  
-            flash[:success] = "#{@model_config.label} successfully reminder."
             redirect_to back_or_index
           end
         end
