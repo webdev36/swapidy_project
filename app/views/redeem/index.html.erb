@@ -1,15 +1,7 @@
-<h2>Redeem Free Honey</h2>
+<h2 class="headings_pink_edit">Redeem Free Honey</h2>
 <br />
 
-<%= form_for(@redeem_code, :url => "/redeem/confirm") do |f| %>
-  <% unless @redeem_code.errors.full_messages.empty? %>
-    <div style="color: red;">
-      <% @redeem_code.errors.full_messages.each do |message| %>
-        <%= message %><br/>
-      <% end %>
-    </div>
-    <br/>
-  <% end %>
+<%= form_for(@redeem_code, :as => "user", :url => "/users/redeem") do |f| %>
   <div>
     <%= f.label :code %><br/>
     <%= f.text_field :code %><br/>
@@ -19,8 +11,23 @@
     <%= f.label :email %><br/>
     <%= f.email_field :email %><br/>
   </div>
-  
+      
   <div>
-    <%= f.submit "Redeem" %>
+    <%= f.label :password %><br/>
+    <%= f.password_field :password %><br/>
+  </div>
+      
+  <div>
+    <%= f.label :password_confirmation %><br/>
+    <%= f.password_field :password_confirmation %><br/>
+  </div>
+
+  <div>
+    <%= f.submit "Redeem", :class => "show_button_buy" %>
+    <% unless @redeem_code.errors.full_messages.empty? %>
+      <span class="alert alert-error">
+        <%= @redeem_code.errors.full_messages.join(". ") %>
+      </span>
+    <% end %>
   </div>
 <% end %>
