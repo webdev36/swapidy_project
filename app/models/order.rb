@@ -70,7 +70,7 @@ class Order < ActiveRecord::Base
   
   def shipping_address_valid?
     unless ZipCode::ZIPCODES[self.shipping_zip_code]
-      errors.add(:shipping_zip_code, "has not supported. Please select another value!")
+      errors.add(:shipping_zip_code, "is not supported. Please select another value!")
       return false
     end
     
