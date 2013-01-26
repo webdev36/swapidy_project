@@ -287,7 +287,7 @@ h2{
 
 #login_form{
   position: absolute;
-  top: 290px;
+  top: 250px;
   left: 40px;
 }
 #login_form .add-on {
@@ -518,7 +518,7 @@ a.login_forgot:hover {
 }
 .email_invite{
   position: relative;
-  bottom:60px;
+  bottom:80px;
   left:30px;
 }
 .email_invite input[type="text"]{
@@ -535,7 +535,7 @@ a.login_forgot:hover {
   background: #fa3e6e;
   color: white;
   font-family: "myriad-s";
-  margin-left: 130px;
+  margin-left: 110px;
   font-weight: 700;
   text-decoration: none;
   font-family: "myriad";
