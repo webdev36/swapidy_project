@@ -243,21 +243,25 @@ margin-right:60px;
 }
 
 .address_form_content{
-  position:relative;
-  bottom:200px;
-  right:50px;
+
 }
+
+.field_col_1{
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 30px;
+}
+
 .field_col_2{
-  position:relative;
-  left:260px;
-  bottom:255px;
+  vertical-align: top;
+  display: inline-block;
   border-left: 1px solid #E5E5E5;
   padding-left:30px;
 }
+
 .shipping_footnote{
-  position:relative;
-  bottom:450px;
 }
+
 .update_button_buy{
   text-align: center;
   background: #fa3e6e;
