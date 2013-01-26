@@ -25,7 +25,7 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Retrieve plan: #{Stripe.api_key}"
     begin
-      Stripe.api_key = payment_public_key
+      Stripe.api_key = StripeGateway.payment_public_key
       plan = Stripe::Plan.retrieve(STRIPE_PLAN_ID)
       return plan.amount.to_i / 100
     rescue Exception => e
@@ -38,7 +38,7 @@ module StripeGateway
   # create card token related to the Payment Plan in Stripe.com
   def create_payment_card_token logger = nil
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
-    Stripe.api_key = payment_public_key
+    Stripe.api_key = StripeGateway.payment_public_key
     @logger.info "Public key: #{Stripe.api_key}"
     @logger.info "Card_info: #{self.card_number}"
     begin
@@ -49,7 +49,6 @@ module StripeGateway
           :exp_year => self.card_expired_year,
           :cvc => self.card_cvc
         },
-        :amount => 1,
         :currency => "usd"
       )
     rescue Stripe::CardError => e
@@ -67,7 +66,7 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Create customer: #{self.email}"
     begin
-      Stripe.api_key = payment_secure_key
+      Stripe.api_key = StripeGateway.payment_secure_key
       customer_params = {:description => self.email, :card => self.new_stripe_card_token}
       return Stripe::Customer.create(customer_params)
     rescue Exception => e
@@ -82,7 +81,7 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Cancel customer: #{self.email}"
     begin
-      Stripe.api_key = payment_secure_key
+      Stripe.api_key = StripeGateway.payment_secure_key
       cu = Stripe::Customer.retrieve(self.stripe_customer_id) rescue nil
       cu.cancel_subscription if cu
     rescue Exception => e
@@ -98,7 +97,7 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Reactive customer: #{self.email}"
     begin
-      Stripe.api_key = payment_secure_key
+      Stripe.api_key = StripeGateway.payment_secure_key
       cu = Stripe::Customer.retrieve(self.stripe_customer_id) rescue nil
       #cu.create_subscription({:prorate => true, :card => self.stripe_card_token, :plan => STRIPE_PLAN_ID, :trial_end => get_next_trial_time.to_i}) if cu
       cu.update_subscription({:prorate => true, :plan => STRIPE_PLAN_ID, :trial_end => get_next_trial_time.to_i}) if cu
@@ -113,7 +112,7 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Update customer: #{self.email}"
     begin
-      Stripe.api_key = payment_secure_key
+      Stripe.api_key = StripeGateway.payment_secure_key
       cu = Stripe::Customer.retrieve(self.stripe_customer_id)
       cu.description = self.email
       cu.card = self.new_stripe_card_token
@@ -132,7 +131,7 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Delete customer: #{params[:email]}"
     begin
-      Stripe.api_key = payment_secure_key
+      Stripe.api_key = StripeGateway.payment_secure_key
       cu = Stripe::Customer.retrieve(self.stripe_customer_id)
       cu.delete
     rescue Exception => e
@@ -146,7 +145,7 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Charge customer: #{payment.user.email}"
     begin
-      Stripe.api_key = payment_secure_key
+      Stripe.api_key = StripeGateway.payment_secure_key
       charge = Stripe::Charge.create(
         :amount => (payment.amount * 100).to_i, # amount in cents
         :currency => "usd",
@@ -176,7 +175,7 @@ module StripeGateway
     return unless payment && payment.user
     @logger.info "Refund customer: #{payment.user.email}"
     begin
-      Stripe.api_key = payment_public_key
+      Stripe.api_key = StripeGateway.payment_public_key
       charge = Stripe::Charge.retrieve(payment.payment_charge_id)
       charge.refund(:amount => (payment.amount*100).to_i) # amount in cents
     rescue Exception => e
@@ -189,7 +188,7 @@ module StripeGateway
     @logger = logger ? logger : Logger.new("log/strip_gateway.log")
     @logger.info "Get charge for customer: #{customer.email}"
     begin
-      Stripe.api_key = payment_public_key
+      Stripe.api_key = StripeGateway.payment_public_key
       charges = Stripe::Charge.all(:customer => customer.stripe_customer_id)
       @logger.info "Charges class: #{charges.class.name}"
       if charges.count > 0

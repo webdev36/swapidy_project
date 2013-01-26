@@ -110,7 +110,7 @@
       cvc: form.find('#payment_new_card_cvc').val(),
       exp_month: form.find('#payment_new_card_expired_month').val(),
       exp_year: form.find('#payment_new_card_expired_year').val()
-    }, 100, function(status, response) {
+    }, function(status, response) {
       if (response.error) {
         $("#add_honey_form #cardInfoValidate").show();
         $("#add_honey_form #cardInfoValidate .payment-errors").html(response.error.message);
