@@ -30,12 +30,12 @@ body{
         <%= f.hidden_field :shipping_country %>
         
         <div class="payment_product_info">
-          <label style="color:#38B4DE; font-size:20px; font-family:'myriad-s'";><%= @order.title %></label><br />
+          <label style="color:#38B4DE; font-size:25px; font-family:'myriad-s'";><%= @order.title %></label><br />
           <div class="payment_product_image">
             <img  src="<%= @product.main_image_url(:large) %>">
           </div>
 
-      <div class="payment_after_selling" style="font-size:20px; color:#666; position:absolute; top:280px; left:370px; ">  
+      <div class="payment_after_selling" style="font-size:20px; color:#666; position:relative;">  
         <div>
           <label style="color:#38b4de; font-family:'myriad-s'">Current Balance:</label>
           <%= format_num(current_user.honey_balance) %> <img class="payment_currency" src="/images/honey_20px.png">
@@ -60,7 +60,7 @@ body{
           <br/>
 
     
- <input name="commit" class="payment_button_sell" type="submit" value="Continue" style="position:relative; top:180px;"/>        <% else %>
+ <input name="commit" class="payment_button_sell" type="submit" value="Continue" style="position:relative; top:50px;"/>        <% else %>
           <div>
             <label>You need to extra Honey:</label>
             <%= format_num(current_user.extra_honey_for(@order)) %> Honey

@@ -651,7 +651,7 @@ a.login_forgot:hover {
     font-size: 25px;
 
 }
-.vote_count{
+.vote_count{f
   font-family: "myriad-b";
   font-size: 35px;
   color: #fa3e6e;
@@ -665,12 +665,14 @@ a.login_forgot:hover {
 .vote_container{
 margin-left: 70px;}
 .darkoverlay {
+  position:fixed;
+  top:-150px;
+  padding-top: 0px;
   background-color: rgba(0, 0, 0, 0.4);
   border: medium none;
   box-shadow: none;
   -webkit-border-radius: 20px;
   border-radius: 20px;
-  margin:auto;
   height: 280px;
   padding-bottom: 20px;
 }
