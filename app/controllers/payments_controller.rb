@@ -9,6 +9,14 @@ class PaymentsController < ApplicationController
   end
 
   def new
+    @payment = PaymentTransaction.new(params[:payment]) rescue PaymentTransaction.new
+    @payment.amount = params[:payment][:amount].gsub(",", "").to_i rescue nil
+    @payment.honey_money = params[:payment][:honey_money].gsub(",", "").to_i rescue nil
+    respond_to do |format|
+      format.js {
+        @return_content = render_to_string(:partial => "/payments/add_honey_form")
+      }
+    end
   end
   
   def edit_card
@@ -24,18 +32,21 @@ class PaymentsController < ApplicationController
       end
       return
     end
-
-    @payment.card_type = current_user.card_type
-    @payment.card_expired_year = current_user.card_expired_year
-    @payment.card_expired_month = current_user.card_expired_month
-    @payment.card_name = current_user.card_name
-    @payment.card_last_four_number = current_user.card_last_four_number
-
-    @payment.new_card_expired_year = current_user.card_expired_year
-    @payment.new_card_expired_month = current_user.card_expired_month
-    @payment.new_card_name = current_user.card_name
-    @payment.new_card_number = "xxxx-xxxx-xxxx-#{current_user.card_last_four_number}" unless (current_user.card_last_four_number || "").blank?
-
+    
+    unless @payment.has_card_info?
+      @payment.card_type = current_user.card_type
+      @payment.card_expired_year = current_user.card_expired_year
+      @payment.card_expired_month = current_user.card_expired_month
+      @payment.card_name = current_user.card_name
+      @payment.card_last_four_number = current_user.card_last_four_number
+    end
+    unless @payment.new_card_info
+      @payment.new_card_expired_year = current_user.card_expired_year
+      @payment.new_card_expired_month = current_user.card_expired_month
+      @payment.new_card_name = current_user.card_name
+      @payment.new_card_number = "xxxx-xxxx-xxxx-#{current_user.card_last_four_number}" unless (current_user.card_last_four_number || "").blank?
+    end
+    
     respond_to do |format|
       format.js {
         @return_content = render_to_string(:partial => "/payments/edit_card_form")

@@ -22,7 +22,7 @@
       cvc: form.find('#<%= field_prefix %>new_card_cvc').val(),
       exp_month: form.find('#<%= field_prefix %>new_card_expired_month').val(),
       exp_year: form.find('#<%= field_prefix %>new_card_expired_year').val()
-    }, 100, function(status, response) {
+    }, function(status, response) {
       if (response.error) {
         form.find("#cardInfoValidate").show();
         // re-enable the submit button

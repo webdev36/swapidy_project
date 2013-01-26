@@ -511,22 +511,15 @@ a.login_forgot:hover {
   font-size: 20px;
   line-height: 1.5;
   text-align: justify;
-  position: relative;
-  width: 400px;
-  right:20px;
-  bottom: 80px;
-}
-.email_invite{
-  position: relative;
-  bottom:80px;
-  left:30px;
+
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .email_invite input[type="text"]{
   height: 40px;
-  width:300px;
+  width: 300px;
 }
-.email_invite_button{
-
+.email_invite_button {
   font-size: 18px;
   line-height: 23px;
   min-width: 50px;
@@ -535,13 +528,11 @@ a.login_forgot:hover {
   background: #fa3e6e;
   color: white;
   font-family: "myriad-s";
-  margin-left: 110px;
   font-weight: 700;
   text-decoration: none;
   font-family: "myriad";
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 4px;
-  width: 60px;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
