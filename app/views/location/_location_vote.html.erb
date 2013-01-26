@@ -4,6 +4,6 @@
   <br>
   <img class="vote_button" src="<%= @last_vote && @last_vote.location == location_name ? "/images/vote_after.png" : "/images/vote.png"%>" data-location="<%= location_name %>">
   <% if @last_vote && @last_vote.location == location_name %>
-    <br/><span>Thank You!</span>
+    <br/><span style="font-size:20px; font-family:'myriad';">Thank You!</span>
   <% end %>
 </div>

@@ -45,19 +45,19 @@
     return false;
   }
 </script>
-<div id="card_info_container" class="span12" style="margin-left: 0px;">
-  <div class="headings_pink_edit">Card Information</div>
+<div id="card_info_container" class="span12" style="margin-left: 0px; font-family:'myriad'; font-size:20px;">
+  <div class="headings_pink_edit">Credit Card Information</div>
   <%= f.hidden_field :card_name %>
   <%= f.hidden_field :card_last_four_number %>
   <%= f.hidden_field :card_expired_month %>
   <%= f.hidden_field :card_expired_year %>
 
   <div>
-    <strong>Edit Card Information</strong><br/>
+    <span style="color:#38B4DE; font-size:20px;">Edit Credit Card Information</span>
     (leave blank if you don't want to change it)
-  </div>
+  </div><br/>
   <div>
-    <%= f.label :card_name %><br />
+     <span style="color:#666; font-size:20px; font-family:'myriad';">Name on card</span><br />
     <%= f.text_field :new_card_name, :size => 20 %>
   </div>
   <div>
@@ -65,12 +65,12 @@
     <%= f.text_field :new_card_number, :size => 20, :class => "card-number" %>
   </div>
   <div>
-    <%= f.label :card_expired_date %><br />
+     <span style="color:#666; font-size:20px; font-family:'myriad';">Card Expiration</span><br />
     <%= f.select :new_card_expired_month, month_options, {:prompt => 'Month', :class => "card-expiry-year"} %>
     <%= f.select :new_card_expired_year, year_options, {:prompt => 'Year', :class => "card-expiry-year"} %>
   </div>
   <div>
-    <%= f.label :card_cvc %><br />
+    <span style="color:#666; font-size:20px; font-family:'myriad';">Card CVC (See back of card)</span><br />
     <%= f.text_field :new_card_cvc, :size => 20, :class => "card-cvc" %>
     <%= f.hidden_field :new_stripe_card_token %>
     <%= f.hidden_field :new_card_type %>

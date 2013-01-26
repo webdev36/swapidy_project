@@ -267,7 +267,7 @@ h2{
 .login_or {
   position: absolute;
   top: 248px;
-  left: 150px;
+  left: 225px;
   font-family: "myriad";
 }
 .login_or span {
@@ -389,7 +389,7 @@ h2{
   color: #fa3e6e;
   font-size: 30px;
   line-height: 1.5;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 .honey_display{
   position: fixed;
@@ -519,6 +519,7 @@ a.login_forgot:hover {
 .email_invite{
   position: relative;
   bottom:60px;
+  left:30px;
 }
 .email_invite input[type="text"]{
   height: 40px;
@@ -680,6 +681,7 @@ margin-left: 70px;}
   border-radius: 20px;
   margin:auto;
   height: 280px;
+  padding-bottom: 20px;
 }
 #popup-dialog_add_honey{
   position: fixed;

@@ -1,3 +1,10 @@
+<style type="text/css">
+label{
+  color:#38B4DE;
+  font-size: 20px;
+}
+</style>
+
 <%= form_for(@payment, :as => 'payment', :url => "/payments/create", :html => {:id => "add_honey_form"}) do |f| %>
   <%= f.hidden_field :amount %>
   <%= f.hidden_field :honey_money %>
@@ -14,26 +21,26 @@
   <%= f.hidden_field :new_card_expired_month %>
   <%= f.hidden_field :new_card_expired_year %>
   
-  <h2>Confirm Honey money to buy</h2>
+  <div class="headings_pink">Confirm your payment details</div><br/>
   <div>
-    <label>Amount:</label><br/>
+    <label>Dollar Amount:</label><br/>
     <strong>$<%= format_num(@payment.amount, 2) %></strong>
   </div>
   <div>
-    <label>Honey money amount:</label><br/>
-    <strong><%= format_num(@payment.honey_money) %> Honey</strong>
+    <label>Honey amount:</label><br/>
+    <%= format_num(@payment.honey_money) %> Honey
   </div>
   <br/>
   <div>
-    <span>Your current balance is:</span>
-    <span><b><%= format_num(current_user.honey_balance) %> Honey</b></span><br />
-    <span>After payment, your balance will be:</span>
-    <span><b><%= format_num(@payment.honey_money + current_user.honey_balance) %> Honey</b></span>
+    <span style="color:#666; font-size:20px; font-family:'myriad-s'">Your current balance is:</span>
+    <span style="color:#666; font-size:20px; font-family:'myriad-s'"><%= format_num(current_user.honey_balance) %> Honey</span><br /><br/>
+    <span style="color:#666; font-size:20px; font-family:'myriad-s'">After payment, your balance will be:</span>
+    <span style="color:#666; font-size:20px; font-family:'myriad-s'"><%= format_num(@payment.honey_money + current_user.honey_balance) %> Honey</span>
   </div>
   <br/>
   <%= render :partial => "/shared/card_info", :locals => {:card => @payment.new_card_info ? @payment.new_card_info : @payment.card_info_in_hash }%>
   <br/>
   <div>
-    <a href="#" class="show_button_buy" onclick="showPageLoading(); submit_add_honey_form();" style="color:white; font-family:'myriad'; position:relative; top:10px; font-size:25px; margin-left:230px; padding:10px;">Do payment</a>
+    <a href="#" class="show_button_buy" onclick="showPageLoading(); submit_add_honey_form();" style="color:white; font-family:'myriad'; position:relative; top:10px; font-size:25px; margin-left:230px; padding:10px;">Pay Now</a>
   </div>    
 <% end %>
