@@ -1,4 +1,32 @@
 <style type="text/css">
+.content {
+width: 100%;
+height: 500px;
+overflow: hidden;
+position: relative;
+z-index: 0;
+top: 90px;
+margin-top: -30px;
+height: 75%;
+}
+.content .container {
+width: 100%;
+height: 10px;
+position: relative;
+top: 0;
+padding:0;
+height: 100%;
+min-height: 500px;
+background: black;
+}
+.content .image-container {
+  position: absolute;
+z-index: 80;
+height: 100%;
+width: 100%;
+overflow: hidden;
+}
+
 .add-on {
   height: 27px;
   font-size:16px;
@@ -24,10 +52,22 @@ position: relative;
 bottom:30px;
 right:130px;
 }
+.footer {
+width: 100%;
+margin: 0 auto;
+padding: 30px 0;
+background-color: whiteSmoke;
+text-align: center;
+height: 180px;
+overflow: hidden;
+}
 </style>
-<div class="container">
-  <img src="/images/redeem/bg.jpg" style="">
-<div style="position: absolute; background:white; top: 20%;left:40%;  -webkit-border-radius: 10px;
+<div class="image-container">
+  <img src="/images/redeem/bg.jpg" style="position: relative;
+max-width: none;
+margin-left: -955px;
+left: 50%;">
+<div id="reedem-box" style="position: absolute; background:white; -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px; padding-top:40px; padding-bottom:30px; width:370px;">
 <div class="headings_pink_edit" style="text-align: center;">Redeem Free Honey</div>
@@ -67,3 +107,23 @@ border-radius: 10px; padding-top:40px; padding-bottom:30px; width:370px;">
 <% end %>
 </div>
 </div>
+
+<script>
+$(function() {
+
+
+redeem();
+$(window).on('resize', function() {
+  redeem();
+});
+
+function redeem() {
+  $('#reedem-box').css({
+    left: $(window).width() / 2 - $('#reedem-box').width() / 2,
+    top: $(window).height() / 2 - $('#reedem-box').height() / 2 - $('.navbar-fixed-top').height()
+  });
+}
+
+});
+
+</script>
