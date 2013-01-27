@@ -47,7 +47,7 @@ class FreeHoney < ActiveRecord::Base
     self.save
 
     self.receiver.update_attribute(:honey_balance, (self.receiver.honey_balance || 0.00) + self.receiver_honey_amount)
-    receiver_notification = Notification.new(:title => "Free #{self.receiver_honey_amount} Honey Received")
+    receiver_notification = Notification.new(:title => "#{self.receiver_honey_amount} FREE Honey Promo")
     receiver_notification.user = self.receiver
     receiver_notification.description = "Free #{self.receiver_honey_amount} Honey receipted"
     receiver_notification.save
