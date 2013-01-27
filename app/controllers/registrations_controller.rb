@@ -100,7 +100,7 @@ class RegistrationsController < Devise::RegistrationsController
       UserNotifier.signup_greeting(resource).deliver
       sign_up(resource_name, resource)
       
-      receiver_notification = Notification.new(:title => "Free #{existed_redeem.honey_amount} Honey Received")
+      receiver_notification = Notification.new(:title => "#{existed_redeem.honey_amount} FREE Honey Redeemed")
       receiver_notification.user = resource
       receiver_notification.description = "Free #{existed_redeem.honey_amount} Honey receipted"
       receiver_notification.save
