@@ -1,7 +1,7 @@
 class RedeemCode < ActiveRecord::Base
-  attr_accessible :code, :user_id, :expired_date, :honey_amount, :email, :status
+  attr_accessible :code, :user_id, :expired_date, :honey_amount, :email, :password, :password_confirmation, :status
   
-  attr_accessor :email
+  attr_accessor :email, :password, :password_confirmation
   
   has_many :users
   
@@ -19,26 +19,34 @@ class RedeemCode < ActiveRecord::Base
   end
   
   def redeemable?
-    errors.add(:email, "could not be blank") if self.email.nil? || self.email.blank?
-    return false unless errors.empty?
+    existed_code = RedeemCode.find_by_code self.code
+    unless existed_code
+      self.errors.add(:code, "is invalid") 
+      return false
+    end
     
-    if self.status != STATUES[:pending]
-      errors.add(:email, "Code has been used before")
+    if existed_code.expired? || existed_code.status != STATUES[:pending]
+      self.errors.add(:code, "has been expired")
       return false
     end
-    if expired?
-      errors.add(:code, "is expired")
-      return false
-    end
+
     if User.where(:email => self.email).exists?
-      errors.add(:email, "has signed up before")
+      self.errors.add(:email, "has been signed up before")
       return false
     end
-    return true
+    
+    new_user = User.new(:email => self.email, :password => self.password, :password_confirmation => self.password_confirmation)
+    unless new_user.valid?
+      new_user.errors.keys.each do |key|
+        self.errors.add(key, new_user.errors[key].last)
+      end
+      return false
+    end    
+    return existed_code
   end
   
   def redeem
-    user = User.signup_user(:email => email)
+    user = User.signup_user(:email => email, :password => self.password, :password_confirmation => self.password_confirmation)
     user.honey_balance = (user.honey_balance || 0.00) + self.honey_amount
     user.redeem_code = self
     user.save
@@ -48,7 +56,7 @@ class RedeemCode < ActiveRecord::Base
     receiver_notification.description = "Free #{self.honey_amount} Honey receipted"
     receiver_notification.save
     UserNotifier.redeem_completed(self, user).deliver
-    return true
+    return user
   end
   
   private
@@ -57,7 +65,7 @@ class RedeemCode < ActiveRecord::Base
       SwapidySetting.get('REDEEM-DEFAULT_EXPIRED_DAYS') rescue 7
     end
     def default_honey
-      SwapidySetting.get('REDEEM-DEFAULT_HONEY') rescue 50.00
+      SwapidySetting.get('REDEEM-DEFAULT_HONEY') rescue 500.00
     end
   
     def generate_fields

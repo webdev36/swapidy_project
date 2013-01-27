@@ -5,6 +5,7 @@ Swapidy::Application.routes.draw do
                                       :registrations => "registrations", 
                                       :omniauth_callbacks => "users/omniauth_callbacks"} do
     match "/users/sign_out" => "sessions#destroy"
+    match "/users/redeem" => "registrations#redeem"
   end
 
   #match 'auth/:provider/callback', to: 'users/omniauth_callbacks#create'
@@ -65,9 +66,6 @@ Swapidy::Application.routes.draw do
   match "/free_honeys/create" => "free_honeys#create", :method => :post
   resources :free_honeys
   
-  
-  match "/redeem/success" => "redeem#success", :method => :get
-  match "/redeem/confirm" => "redeem#confirm", :method => :post
   match "/redeem" => "redeem#index", :method => :get
   resources :redeem
 

@@ -72,7 +72,7 @@ Swapidy::Application.configure do
                                   :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
                                 }
                               }
-  config.action_mailer.default_url_options = { :host => 'swapidy-test.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'swapidy.com' }
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)

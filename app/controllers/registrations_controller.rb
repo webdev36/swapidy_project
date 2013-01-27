@@ -89,4 +89,27 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
   
+  def redeem
+    @redeem_code = RedeemCode.new(params[:user])
+    existed_redeem = @redeem_code.redeemable?
+    if existed_redeem
+      build_resource
+      resource.redeem_code = existed_redeem
+      resource.honey_balance = existed_redeem.honey_amount
+      resource.save
+      UserNotifier.signup_greeting(resource).deliver
+      sign_up(resource_name, resource)
+      
+      receiver_notification = Notification.new(:title => "Free #{existed_redeem.honey_amount} Honey Received")
+      receiver_notification.user = resource
+      receiver_notification.description = "Free #{existed_redeem.honey_amount} Honey receipted"
+      receiver_notification.save
+      UserNotifier.redeem_completed(existed_redeem, resource).deliver
+    
+      check_to_display_guide
+      redirect_to "/"
+    else
+      render "/redeem/index"
+    end
+  end
 end

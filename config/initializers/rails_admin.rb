@@ -564,6 +564,7 @@ RailsAdmin.config do |config|
     end
     update do
       field :status
+      field :honey_amount
       #field :expired_date
     end
   end
