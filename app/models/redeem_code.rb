@@ -51,9 +51,9 @@ class RedeemCode < ActiveRecord::Base
     user.redeem_code = self
     user.save
     
-    receiver_notification = Notification.new(:title => "Free #{self.honey_amount} Honey Received")
+    receiver_notification = Notification.new(:title => "#{self.honey_amount} FREE Honey Promo")
     receiver_notification.user = user
-    receiver_notification.description = "Free #{self.honey_amount} Honey receipted"
+    receiver_notification.description = "#{self.honey_amount} FREE Honey Redeemed"
     receiver_notification.save
     UserNotifier.redeem_completed(self, user).deliver
     return user
