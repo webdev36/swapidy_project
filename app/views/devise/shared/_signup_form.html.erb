@@ -21,7 +21,7 @@
         <span class="add-on signup_add-on">Confirm Password</span>
         <%= f.password_field :password_confirmation, :class => "span2", :id => "prependedInput"  %>
       </div>
-      <a href="#" onclick="submit_signup_form();" class="login_button">Sign up</a>
+      <a href="#" onclick="submit_signup_form();" class="login_button" style="position:relative; top:20px;">Sign up</a>
       <div style="display: inline-block;">
         <% unless resource.errors.empty? %>
           <div class="alert alert-error" style="width:245px; margin-left: 5px; padding-top: 4px;"> <%= raw resource.errors.full_messages.first %>. </div>

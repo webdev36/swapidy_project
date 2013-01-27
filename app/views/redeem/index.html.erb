@@ -1,29 +1,62 @@
+<style type="text/css">
+.add-on {
+  height: 27px;
+  font-size:16px;
+  font-family: "myriad-s";
+  width: 135px;
+  padding-top: 11px;
+}
+#prependedInput{
+  height: 30px;
+  width: 150px;
+  font-family: "myriad";
+}
+.show_button_buy{
+font-size: 25px;
+width: 150px;
+height: 50px;
+margin-left: 80px;
+margin-top: 40px;
 
-<h2 class="headings_pink_edit">Redeem Free Honey</h2>
+}
+.alert{
+position: relative;
+bottom:30px;
+right:130px;
+}
+</style>
+<div class="container">
+  <img src="/images/redeem/bg.jpg" style="">
+<div style="position: absolute; background:white; top: 20%;left:40%;  -webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px; padding-top:40px; padding-bottom:30px; width:370px;">
+<div class="headings_pink_edit" style="text-align: center;">Redeem Free Honey</div>
 <br />
-
+<div style="position:relative; left:40px;">
 <%= form_for(@redeem_code, :as => "user", :url => "/users/redeem") do |f| %>
-  <div>
-    <%= f.label :code %><br/>
-    <%= f.text_field :code %><br/>
+  <div class="input-prepend" style="padding-bottom: 10px;">
+    <span class="add-on">Code</span>
+    <%= f.text_field :code, :class => "span2", :placeholder => "Your Redeem Code", :id => "prependedInput" %><br/>
   </div>
       
-  <div>
-    <%= f.label :email %><br/>
-    <%= f.email_field :email %><br/>
+  <div class="input-prepend" style="padding-bottom: 10px;">
+  <span class="add-on">E-mail</span>
+    <%= f.email_field :email , :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %><br/>
   </div>
       
-  <div>
-    <%= f.label :password %><br/>
-    <%= f.password_field :password %><br/>
+  <div class="input-prepend" style="padding-bottom: 10px;">
+<span class="add-on">Password</span>
+    <%= f.password_field :password, :class => "span2", :id => "prependedInput" %><br/>
   </div>
       
-  <div>
-    <%= f.label :password_confirmation %><br/>
-    <%= f.password_field :password_confirmation %><br/>
-  </div>
+  <div class="input-prepend" style="padding-bottom: 10px;">
+        <span class="add-on signup_add-on">Confirm Password</span>
+        <%= f.password_field :password_confirmation, :class => "span2", :id => "prependedInput"  %>
+      </div>
 
   <div>
+    </div>
+
     <%= f.submit "Redeem", :class => "show_button_buy" %>
     <% unless @redeem_code.errors.full_messages.empty? %>
       <span class="alert alert-error">
@@ -32,3 +65,5 @@
     <% end %>
   </div>
 <% end %>
+</div>
+</div>

@@ -265,15 +265,16 @@ h2{
 }
 
 .login_or {
+  color: red;
   position: absolute;
-  top: 248px;
+  top: 245px;
   left: 225px;
   font-family: "myriad";
 }
 .login_or span {
   color:#666666;
   font-family: Helvetica, sans-serif;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 #fb_login{
@@ -287,18 +288,18 @@ h2{
 
 #login_form{
   position: absolute;
-  top: 250px;
+  top: 280px;
   left: 40px;
 }
 #login_form .add-on {
-  height: 23.5px;
-  font-size:14px;
+  height: 35.5px;
+  font-size:16px;
   font-family: "myriad-s";
   width: 150px;
   padding-top: 10px;
 }
 #login_form #prependedInput{
-  height: 30px;
+  height: 37.5px;
   width: 200px;
   font-family: "myriad";
 }
@@ -449,7 +450,6 @@ h2{
   text-align: center;
   background: #fa3e6e;
   color: white;
-  font-weight: 700;
   text-decoration: none;
   font-family: "myriad";
   border: 1px solid rgba(0,0,0,0.15);
@@ -494,7 +494,7 @@ a.login_forgot:hover {
 .signup-footer {
   font-family: "myriad";
   position: absolute;
-  top: 210px;
+  top: 250px;
   left: 100px;
   color: #6f6d65;
   font-size: 16px;

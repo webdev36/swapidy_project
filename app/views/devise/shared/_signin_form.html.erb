@@ -3,7 +3,7 @@
   <% if show_cancel_link %>
     <a class="close-popup" onclick="hidePopup();" style="position:relative; top:30px; right:95px;" href="#" title="Cancel">Cancel</a>
   <% end %>
-  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_login" src="/images/fb_login.png"></a>
+  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img id="fb_login" src="/images/fb_login.png"></a><br/><br/>
   <p class="login_or">
     <span>or</span>
   </p>
@@ -12,11 +12,11 @@
       <div class="input-prepend">
         <span class="add-on">E-mail</span>
         <%= f.email_field :email, :class => "span2", :placeholder => "E-mail address", :id => "prependedInput" %>
-      </div>
+      </div><br/>
       <div class="input-prepend" style="padding-bottom: 5px;">
         <span class="add-on">Password</span>
         <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
-      </div>
+      </div><br/>
       <a href="#" onclick="submit_signin_form();" class="login_button">Sign in</a>
       <div style="display: inline-block;">
         <div class="alert alert-error" style="display:none; width:255px; margin-left: 5px;">Invalid username/password. </div>

@@ -4,7 +4,9 @@
 body{
 	background: whitesmoke;
 }
-
+ul{
+	 list-style:none;
+}
 .wrapper{
 	position: relative;
 	bottom:250px;
@@ -13,6 +15,12 @@ body{
 .team_container, .headings_pink, .team_subheading{
 	position: relative;
 	bottom:180px;
+}
+.team_subheading{
+z-index: -1;
+}
+a{
+	z-index: 2;
 }
 .ei-slider{
 	height: auto;
@@ -25,12 +33,12 @@ body{
 }
 .ei-slider{
 	position: relative;
-	width: 100%;
+	width: 96.3%;
 	height: 400px;
 	margin: 0 auto;
 }
 .ei-slider-loading{
-	width: 100%;
+	width: 95%;
 	height: 100%;
 	position: absolute;
 	top: 0px;
@@ -42,7 +50,7 @@ body{
 	line-height: 400px;
 }
 .ei-slider-large{
-	height: 100%;
+	height: 95%;
 	width: 100%;
 	position:relative;
 	overflow: hidden;
@@ -60,9 +68,16 @@ body{
 }
 .ei-title{
 	position: absolute;
-	right: 50%;
-	margin-right: 13%;
-	top: 30%;
+	left:0px;
+	top:0px;
+	color:white;
+	font-size: 20px;
+	background-color: rgba(0, 0, 0, 0.4);
+ 	border: medium none;
+  	box-shadow: none;
+  	-webkit-border-radius: 20px;
+  	padding: 20px;
+  	font-family: 'myriad-s';
 }
 .ei-title h2, .ei-title h3{
 	text-align: right;
@@ -70,14 +85,14 @@ body{
 .ei-title h2{
 	font-size: 40px;
 	line-height: 50px;
-	font-family: 'Playfair Display', serif;
+	font-family: 'myriad-s';
 	font-style: italic;
 	color: #b5b5b5;
 }
 .ei-title h3{
 	font-size: 70px;
 	line-height: 70px;
-	font-family: 'Open Sans Condensed', sans-serif;
+	font-family: 'myriad';
 	text-transform: uppercase;
 	color: #000;
 }
@@ -188,48 +203,50 @@ body{
 						<li>
                             <img src="/images/team/images/large/6.jpg" alt="image06"/>
                             <div class="ei-title">
+                            	Swapidy's HQ in Mountain View, CA
                             </div>
                         </li>
                         <li>
-                            <img src="/images/team/images/large/1.jpg" alt="image01" />
-                            <div class="ei-title">
+                            <img src="/images/team/images/large/7.jpg" alt="image01" />
+                            <div class="ei-title">Pulkit (left) and Adam (right) scheming to take over the world
                             </div>
                         </li>
                         <li>
-                            <img src="/images/team/images/large/2.jpg" alt="image02" />
-                            <div class="ei-title">
+                            <img src="/images/team/images/large/1.jpg" alt="image02" />
+                            <div class="ei-title"> Peanut analyzing some TPS reports
+
                             </div>
                         </li>
                         <li>
-                            <img src="/images/team//images/large/3.jpg" alt="image03"/>
-                            <div class="ei-title">
+                            <img src="/images/team//images/large/2.jpg" alt="image03"/>
+                            <div class="ei-title">#NoSleep
                             </div>
                         </li>
                         <li>
-                            <img src="/images/team/images/large/4.jpg" alt="image04"/>
-                            <div class="ei-title">
+                            <img src="/images/team/images/large/3.jpg" alt="image04"/>
+                            <div class="ei-title">Peanut's HQ
                             </div>
                         </li>
                         <li>
-                            <img src="/images/team/images/large/5.jpg" alt="image05"/>
-                            <div class="ei-title">
+                            <img src="/images/team/images/large/4.jpg" alt="image05"/>
+                            <div class="ei-title">Just finished building a bridge... time to build 100 more
                             </div>
                         </li>
                         <li>
-                            <img src="/images/team/images/large/7.jpg" alt="image07"/>
-                            <div class="ei-title">
+                            <img src="/images/team/images/large/5.jpg" alt="image07"/>
+                            <div class="ei-title"> Typical startup junk food
                             </div>
                         </li>
                     </ul><!-- ei-slider-large -->
-                    <ul class="ei-slider-thumbs">
+                    <ul class="ei-slider-thumbs" style="position:relative; left:23px;">
                         <li class="ei-slider-element">Current</li>
-						<li><a href="#">Slide 6</a><img src="/images/team/thumbs/6.jpg" alt="thumb06" /></li>
-                        <li><a href="#">Slide 1</a><img src="/images/team/thumbs/1.jpg" alt="thumb01" /></li>
-                        <li><a href="#">Slide 2</a><img src="/images/team/thumbs/2.jpg" alt="thumb02" /></li>
-                        <li><a href="#">Slide 3</a><img src="/images/team/thumbs/3.jpg" alt="thumb03" /></li>
-                        <li><a href="#">Slide 4</a><img src="/images/team/thumbs/4.jpg" alt="thumb04" /></li>
-                        <li><a href="#">Slide 5</a><img src="/images/team/thumbs/5.jpg" alt="thumb05" /></li>
-                        <li><a href="#">Slide 7</a><img src="/images/team/thumbs/7.jpg" alt="thumb07" /></li>
+						<li><a href="#">Slide 6</a><img src="/images/team/images/thumbs/6.jpg" alt="thumb06" /></li>
+                        <li><a href="#">Slide 1</a><img src="/images/team/images/thumbs/1.jpg" alt="thumb01" /></li>
+                        <li><a href="#">Slide 2</a><img src="/images/team/images/thumbs/2.jpg" alt="thumb02" /></li>
+                        <li><a href="#">Slide 3</a><img src="/images/team/images/thumbs/3.jpg" alt="thumb03" /></li>
+                        <li><a href="#">Slide 4</a><img src="/images/team/images/thumbs/4.jpg" alt="thumb04" /></li>
+                        <li><a href="#">Slide 5</a><img src="/images/team/images/thumbs/5.jpg" alt="thumb05" /></li>
+                        <li><a href="#">Slide 7</a><img src="/images/team/images/thumbs/7.jpg" alt="thumb07" /></li>
                     </ul><!-- ei-slider-thumbs -->
                 </div><!-- ei-slider -->
             </div><!-- wrapper -->
@@ -248,25 +265,24 @@ body{
             });
         </script>
 
-<div id="team_container" class="container" style="position:relative; bottom:100px;">
+<div id="team_container" class="container" style="position:relative; bottom:80px;">
 	<div class="headings_pink">Meet the Founding Team</div>
-
 	<div class="team_subheading" >Adam Ahmad - CEO & Co-Founder</div>
 	<div class="team_container">
-	<img class="team_img" src="/images/adam.png">
-	<p class="team_content ">18-year-old, former uPenn student. Started his first business  at  the  age 11 making open source PSP software. Also created open source software for the iPhone, which had revenues in the six figures. eBay Powerseller that has sold 50,000+ products online. Founded NoteDex Inc, a tablet PC Hardware Company and Swapidy Inc. Loves go kart racing and fast cars, yet sold his Mustang for Swapidy.<br/>Follow him on twitter at <a href="http://twitter.com/theswapdaddy" target="_blank">@theswapdaddy</a>.</p><br/>
+	<img class="team_img" src="/images/adam.png" style="position:relative; bottom:20px;">
+	<div class="team_content ">18-year-old, former uPenn student. Started his first business  at  the  age 11 making open source PSP software. Also created open source software for the iPhone, which had revenues in the six figures. eBay Powerseller that has sold 50,000+ products online. Founded NotêDex Inc, a tablet PC Hardware Company and Swapidy Inc. Loves go kart racing and fast cars, yet sold his Mustang for Swapidy.<br/>Follow him on twitter <a href="http://twitter.com/theswapdaddy" target="_blank">@theswapdaddy</a>.</div><br/>
 	</div>
 	<div class="team_subheading">Pulkit Jaiswal - CTO & Co-Founder</div>
 	<div class="team_container">
 
 	<img class="team_img" src="/images/pulkit.png"><br/>
 
-	<p class="team_content">Pulkit is a 19-year old serial entrepreneur, innovator and futurist. He is a former Stanford student and has previously worked on projects on autonomous unmanned aerial vehicles, medical diagnostic devices, e-commerce and education reform. When he was 18, he invented an algorithm to associate viral DNA with electronic signatures in order to diagnose diseases real time. His focus is on solving real world, non- trivial problems. He also kicks ass in racketball.<br/>Follow him on twitter at <a href="http://twitter.com/theswapdaddy" target="_blank">@PulkitJaiswl</a>.</p><br/>
+	<div class="team_content">Pulkit is a 19-year old serial entrepreneur, innovator and futurist. He is a former Stanford student and has previously worked on projects on autonomous unmanned aerial vehicles, medical diagnostic devices, e-commerce and education reform. When he was 18, he invented an algorithm to associate viral DNA with electronic signatures in order to diagnose diseases real time. His focus is on solving real world, non- trivial problems. He also kicks ass in racketball.<br/>Follow him on twitter <a href="http://twitter.com/theswapdaddy" target="_blank">@PulkitJaiswl</a>.</div><br/>
 </div>
 	<div class="team_subheading" id="peanut">Peanut - CSB (Chief Stress Buster) </div>
 	<div class="team_container">
-	<img class="team_img" src="/images/peanut.jpeg"><br/>
-	<p class="team_content">10 week old energy monster that helps manage stress throughout the day. He worked at an animal shelter and managed to direct his peers to stay happy and healthy before he was recruited by Swapidy.</p> 
+	<img class="team_img" src="/images/peanut.jpg" style="position:relative; bottom:10px"><br/>
+	<div class="team_content">10 week old energy monster that helps manage stress throughout the day. He worked at an animal shelter and managed to direct his peers to stay happy and healthy before he was recruited by Swapidy.</div> 
 </div>
 </div>
 </div>
