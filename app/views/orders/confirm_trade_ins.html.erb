@@ -10,7 +10,7 @@
   
   <div class="headings_pink">Confirm your details</div>
   
-  <p class="confirm_subheading">Please confirm the following information is correct.</p>
+  <p class="confirm_subheading">Please confirm the following information.</p>
   
   <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
     <%= f.hidden_field :order_type %>
@@ -47,7 +47,7 @@
       </div>
       <div>
         Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %> Honey after selling.
-        <br />You can use the honey to products in our marketplace.
+        <br />You can use the honey to buy products in our marketplace.
         <% if current_user.payment_ready? %>
           <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="btn btn-success btn-mini">Get more Honey</a>
         <% else %>
