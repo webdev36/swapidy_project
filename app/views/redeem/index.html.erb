@@ -1,4 +1,7 @@
 <style type="text/css">
+body{
+  background: whitesmoke;
+}
 .add-on {
 height: 27px;
 font-size:16px;
@@ -20,14 +23,14 @@ margin-top: 40px;
 }
 
 </style>
-  
-<div class="content" style="width:100%; height:570px; position: relative; z-index: 0; min-height:570px; background-repeat:no-repeat; background-position: 0px 0px; top: 41px; left: 0px;">
-  <div style="position:absolute;width:100%;height:100%;overflow:hidden;">
-   <img src="images/redeem/bg.jpg" />
-  </div>
+<div class="body" style="max-height:800px;" id='redeem_bg'>
+  <div class="content" style="width:100%; max-height:800px; position: relative; z-index: 0; min-height:570px; background-repeat:no-repeat; background-position: 0px 0px; top: 41px; left: 0px;">
+    <div style="position:absolute; width:100%;overflow:hidden; ";>
+    <img src="images/redeem/bg.jpg">
+    </div>
 
-  <div class="container min_height_containner">
-    <div id="reedem-box" style="background-image:url(/images/white_bg.png); -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding-top:40px; padding-bottom:30px; width:370px; margin: 0 auto;position:relative;">
+    <div class="container min_height_containner">
+    <div id="reedem-box" style="background-image:url(/images/white_bg.png); -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding-top:40px; padding-bottom:30px; width:370px; margin: -20px auto;position:relative;">
       <div class="headings_pink_edit" style="text-align: center;">Redeem Free Honey</div>
       <div style="position:relative; left:35px;">
         <%= form_for(@redeem_code, :as => "user", :url => "/users/redeem") do |f| %>
@@ -60,11 +63,25 @@ margin-top: 40px;
             <%= f.submit "Redeem", :class => "show_button_buy" %>
           <% end %>
           
-        </div>
+      </div>
       <% end %>
+
     </div>
-  </div>
-
 </div>
-<div style="position:relative; top:50px;"><%= render :partial => "/layouts/footer.html" %></div>
+ <div style="relative;"><%= render :partial => "/layouts/footer.html" %></div>
 
+<script type="text/javascript">
+ sliderHeight();
+$(window).on('resize', function() {
+    sliderHeight();
+  });
+
+  function sliderHeight() {
+    var slideHeight = parseInt($(window).height() - $('.navbar-fixed-top').height() - $('.navbar-fixed-top').height(), 10);
+    if(slideHeight >= 700) {
+        slideHeight = 700;
+    }
+    $('#redeem_bg').css({height: slideHeight});
+  }
+
+  </script>
