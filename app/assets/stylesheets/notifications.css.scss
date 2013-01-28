@@ -91,13 +91,16 @@
   cursor:pointer;
 }
 .core-side{
-  background: none repeat scroll 0 0 #FDFDFD;
   height: 100%;
-  left: 360px;
+  left: 325px;
   right: 0;
   top: 141px;
   position: absolute;
-  width: 70%;
+}
+.core-side-content{
+  background: none repeat scroll 0 0 #FDFDFD;
+  padding-right: 35px;
+  padding-left: 35px;
 }
 .core-side .tab-content {
    min-height: 600px;
@@ -105,7 +108,10 @@
 .nav_text{
   margin-left: 50px;
 }
-.content .footer .container {
+.content .core-side .footer .container {
   padding-top: 0px;
+  width: 100%;
+}
+.content .core-side .footer {
   width: 100%;
 }

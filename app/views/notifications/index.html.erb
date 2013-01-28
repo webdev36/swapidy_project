@@ -12,17 +12,19 @@
         </ul>
       </div>
     </div>
-    <div class="core-side"> 
-      <div class="headings_pink">Your notifications</div>
-      <br />  
-      <div class="tab-content">
-        <div class="tab-pane active" id="unread">
-          <br/>
-          <%= render :partial => "/notifications/list", :locals => {:for_item => :new} %>
-        </div>
-        <div class="tab-pane" id="all_notifications">
-          <br/>
-          <%= render :partial => "/notifications/list", :locals => {:for_item => :all} %>
+    <div class="core-side">
+      <div class="core-side-content">
+        <div class="headings_pink">Your notifications</div>
+        <br />  
+        <div class="tab-content">
+          <div class="tab-pane active" id="unread">
+            <br/>
+            <%= render :partial => "/notifications/list", :locals => {:for_item => :new} %>
+          </div>
+          <div class="tab-pane" id="all_notifications">
+            <br/>
+            <%= render :partial => "/notifications/list", :locals => {:for_item => :all} %>
+          </div>
         </div>
       </div>
       <%= render :partial => "/layouts/footer.html" %>

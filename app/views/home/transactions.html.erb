@@ -16,21 +16,23 @@
         </ul>
       </div>
     </div> 
-    <div class="core-side"> 
-      <div class="headings_pink">Transactions</div>
-      <br />
-      <div class="tab-content">
-        <div class="tab-pane active" id="all_trans">
-          <br/>
-          <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :all_trans} %>
-        </div>
-        <div class="tab-pane" id="trade_ins">
-          <br/>
-          <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :trade_ins} %>
-        </div>
-        <div class="tab-pane" id="orders">
-          <br/>
-          <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :orders} %>
+    <div class="core-side">
+      <div class="core-side-content">
+        <div class="headings_pink">Transactions</div>
+        <br />
+        <div class="tab-content">
+          <div class="tab-pane active" id="all_trans">
+            <br/>
+            <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :all_trans} %>
+          </div>
+          <div class="tab-pane" id="trade_ins">
+            <br/>
+            <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :trade_ins} %>
+          </div>
+          <div class="tab-pane" id="orders">
+            <br/>
+            <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :orders} %>
+          </div>
         </div>
       </div>
       <%= render :partial => "/layouts/footer.html" %>
