@@ -26,10 +26,13 @@ border-radius: 10px;">
       <b><%= @user.email %> </b><br/>
       <br/>
       <b><%= @user.password %></b><br/>
+      As soon as you login with the credentials above by clicking <a href="http://www.swapidy.com">HERE</a>, make sure to change your password in Account Settings.  
       <br/>
-      <% end %>
+      <br/>
+      <% else %>
 			Get started by clicking <a href="http://www.swapidy.com">HERE</a>. We'll show you how everything works as soon as you login :D<br/>
-			<br/>
+      <% end %>
+			
 			Cheerio,<br/>
 			<br/>
 			<a href="http://www.twitter.com/theswapdaddy" style="color:#666666;"><b>@TheSwapDaddy</b></a><br/>
