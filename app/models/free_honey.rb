@@ -120,7 +120,7 @@ class FreeHoney < ActiveRecord::Base
     
     def user_with_right_email?
       if (receiver_email || "").empty?
-        errors.add(:receiver_email, "or Receiver User could not be blank.") 
+        errors.add(:receiver_email, "or Invite email can't be blank.") 
         return false
       end
       if receiver && receiver.email != receiver_email 
@@ -128,11 +128,11 @@ class FreeHoney < ActiveRecord::Base
         return false
       end
       if sender && sender.email == receiver_email 
-        errors.add(:receiver_email, "NOT allow send to your email #{receiver.email}.")
+        errors.add(:receiver_email, "Sorry, you can't send invites to yourself. #{receiver.email}.")
         return false
       end
       if receiver_email && User.where(:email => self.receiver_email).exists?
-        errors.add(:receiver_email, "Email Address has signed up before.") 
+        errors.add(:receiver_email, "That email address has signed up already.") 
         return false
       end
       return true
