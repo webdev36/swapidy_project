@@ -6,8 +6,9 @@ class UserNotifier < ActionMailer::Base
   #
   #   en.authentication_notifier.user_activation.subject
   #
-  def signup_greeting(user)
+  def signup_greeting(user, mode = :normal_signup)
     @user = user
+    @need_password = (mode == :free_honey_signup)
     mail :to => @user.email, :subject => "Welcome to Swapidy"
   end
   

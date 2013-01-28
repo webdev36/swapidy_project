@@ -47,13 +47,13 @@ class User < ActiveRecord::Base
     ""
   end
   
-  def self.signup_user user_attributes
+  def self.signup_user user_attributes, mode = :normal_signup
     user = User.new(user_attributes)
     if user.password.nil? || user.password.blank?
       user.password = user.password_confirmation = Devise.friendly_token[0,8]
     end  
     user.save
-    UserNotifier.signup_greeting(user).deliver
+    UserNotifier.signup_greeting(user, mode).deliver
     return user
   end
 

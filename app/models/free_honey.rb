@@ -39,7 +39,7 @@ class FreeHoney < ActiveRecord::Base
   def confirm
     return false unless able_to_confirm?
     if self.receiver.nil?
-      self.receiver = User.signup_user(:email => self.receiver_email)
+      self.receiver = User.signup_user({:email => self.receiver_email}, :free_honey_signup)
     end
     self.status = STATUES[:completed] 
     self.sender_honey_amount = default_reward_honey
