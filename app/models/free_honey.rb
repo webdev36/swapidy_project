@@ -132,7 +132,7 @@ class FreeHoney < ActiveRecord::Base
         return false
       end
       if receiver_email && User.where(:email => self.receiver_email).exists?
-        errors.add(:receiver_email, "Email Address has signed up before.") 
+        errors.add(:receiver_email, "That email address has signed up already.") 
         return false
       end
       return true
