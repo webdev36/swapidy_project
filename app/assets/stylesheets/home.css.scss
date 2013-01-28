@@ -484,7 +484,6 @@ label {
 }
 
 .big-checkbox + label {
-  padding: 8px;
   line-height: 20px;
   margin-bottom: -3px;
   display: inline-block;
@@ -492,7 +491,6 @@ label {
 
 .big-checkbox:checked + label:after {
   font-size: 28px;
-  left: 6px;
 }
 
 .option-set {
