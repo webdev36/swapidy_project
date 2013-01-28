@@ -18,7 +18,7 @@ class FreeHoneysController < ApplicationController
     @free_honey.sender = current_user
     if @free_honey.valid?
       @free_honey.save
-      @success_message = "Well done! you successfully send Free Honey message."
+      @success_message = "Well done! You successfully sent FREE Honey."
     else
       @error_messages = @free_honey.errors.messages[@free_honey.errors.messages.keys.last].last
     end
