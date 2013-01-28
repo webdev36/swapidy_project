@@ -1,59 +1,34 @@
-<style type="text/css">
-
-.nav-tabs a{
-width: 300px;
- color:#666;
-  font-size: 20px;
-  font-family: "myriad-s";
-padding: 17px 19px;
-}
-
-.nav-tabs a:hover{
-cursor:pointer;}
-.core-side{
-  background: none repeat scroll 0 0 #FDFDFD;
-    height: 100%;
-    left: 360px;
-    right: 0;
-    top: 141px;
-    position: absolute;
-    width: 70%;
-
-  }
-.nav_text{
-  margin-left: 50px;
-}
-  </style>
-
-
-<div class="side-bar">
-
-<div class="tabbable tabs-left">
-  <ul class="nav nav-tabs" style="position: relative;">
-    <li class="active">
-      <a href="#unread" data-toggle="tab"><img src="/images/icon_new_events.png" style="height:40px; width:40px; margin-right:40px;">New events</a>
-    </li>
-    <li class="">
-      <a href="#all_notifications" data-toggle="tab"><img src="/images/icon_all_events.png" style="height:40px; width:40px; margin-right:40px;">All events</a>
-    </li>
-  </ul>
-</div>
-</div>
-<div class="core-side"> 
-<div class="headings_pink">Your notifications</div>
-<br />  
-  <div class="tab-content">
-    <div class="tab-pane active" id="unread">
-      <br/>
-      <%= render :partial => "/notifications/list", :locals => {:for_item => :new} %>
+<div class="content">
+  <div class="container">
+    <div class="side-bar">
+      <div class="tabbable tabs-left">
+        <ul class="nav nav-tabs" style="position: relative;">
+          <li class="active">
+            <a href="#unread" data-toggle="tab"><img src="/images/icon_new_events.png" style="height:40px; width:40px; margin-right:40px;">New events</a>
+          </li>
+          <li class="">
+            <a href="#all_notifications" data-toggle="tab"><img src="/images/icon_all_events.png" style="height:40px; width:40px; margin-right:40px;">All events</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="tab-pane" id="all_notifications">
-      <br/>
-      <%= render :partial => "/notifications/list", :locals => {:for_item => :all} %>
+    <div class="core-side"> 
+      <div class="headings_pink">Your notifications</div>
+      <br />  
+      <div class="tab-content">
+        <div class="tab-pane active" id="unread">
+          <br/>
+          <%= render :partial => "/notifications/list", :locals => {:for_item => :new} %>
+        </div>
+        <div class="tab-pane" id="all_notifications">
+          <br/>
+          <%= render :partial => "/notifications/list", :locals => {:for_item => :all} %>
+        </div>
+      </div>
+      <%= render :partial => "/layouts/footer.html" %>
     </div>
   </div>
 </div>
-
 
 <script language="JavaScript">
   $('.new_notification_row').live("mouseover", function(){
@@ -65,7 +40,10 @@ cursor:pointer;}
       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       url : '/notifications/' + id + '/hide',
       dataType : 'script',
-      success: function(data) { $('#new_notification_' + id).removeClass("new_notification_row"); }
+      success: function(data) { 
+        $('#all_notifications #new_notification_' + id).removeClass("new_notification_row");
+        $('#unread #new_notification_' + id).removeClass("new_notification_row"); 
+      }
     });
     return false;
   });

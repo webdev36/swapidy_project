@@ -1,76 +1,39 @@
-<style type="text/css">
 
-.nav-tabs a{
-width: 300px;
- color:#666;
-  font-size: 20px;
-  font-family: "myriad-s";
-padding: 17px 19px;
-}
-
-.nav-tabs a:hover{
-cursor:pointer;}
-.core-side{
-  background: none repeat scroll 0 0 #FDFDFD;
-    height: 100%;
-    left: 360px;
-    right: 0;
-    top: 141px;
-    position: absolute;
-    width: 70%;
-
-  }
-.nav_text{
-  margin-left: 50px;
-}
-  </style>
-
-<doctype html>
-<html>
-<head>
-  <title>Transactions</title>
-  <style type="text/css">
-   
-  </style>
-</head>
-<body>
-<div class="container">
-<div class="side-bar">
-  <div class="tabbable tabs-left">
-  <ul class="nav nav-tabs" style="position: relative; ">
-    <li class="tab active">
-      <a href="#all_trans" data-toggle="tab"><img src="/images/all_transactions_icon.png"><span class='nav_text'>All transactions</span></a>
-    </li>
-    <li class="tab">
-      <a href="#trade_ins" data-toggle="tab"><img src="/images/icon_honey_trans.png">&nbsp;&nbsp;<span class='nav_text'>Trade-ins</span></a>
-    </li>
-    <li class="tab">
-      <a href="#orders" data-toggle="tab"><img src="/images/orders_icon.png"><span class='nav_text'>Orders</span></a>
-    </li>
-  </ul>
-</div>
-</div> 
-<div class="core-side"> 
-<div class="headings_pink">Transactions</div>
-<br />
-
-  <div class="tab-content">
-    <div class="tab-pane active" id="all_trans">
-      <br/>
-      <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :all_trans} %>
-    </div>
-    <div class="tab-pane" id="trade_ins">
-      <br/>
-      <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :trade_ins} %>
-    </div>
-    <div class="tab-pane" id="orders">
-      <br/>
-      <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :orders} %>
+<div class="content">
+  <div class="container">
+    <div class="side-bar">
+      <div class="tabbable tabs-left">
+        <ul class="nav nav-tabs" style="position: relative; ">
+          <li class="tab active">
+            <a href="#all_trans" data-toggle="tab"><img src="/images/all_transactions_icon.png"><span class='nav_text'>All transactions</span></a>
+          </li>
+          <li class="tab">
+            <a href="#trade_ins" data-toggle="tab"><img src="/images/icon_honey_trans.png">&nbsp;&nbsp;<span class='nav_text'>Trade-ins</span></a>
+          </li>
+          <li class="tab">
+            <a href="#orders" data-toggle="tab"><img src="/images/orders_icon.png"><span class='nav_text'>Orders</span></a>
+          </li>
+        </ul>
+      </div>
+    </div> 
+    <div class="core-side"> 
+      <div class="headings_pink">Transactions</div>
+      <br />
+      <div class="tab-content">
+        <div class="tab-pane active" id="all_trans">
+          <br/>
+          <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :all_trans} %>
+        </div>
+        <div class="tab-pane" id="trade_ins">
+          <br/>
+          <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :trade_ins} %>
+        </div>
+        <div class="tab-pane" id="orders">
+          <br/>
+          <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :orders} %>
+        </div>
+      </div>
+      <%= render :partial => "/layouts/footer.html" %>
     </div>
   </div>
 </div>
-
-</div>
-</body>
-</html>
- 

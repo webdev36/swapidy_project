@@ -109,7 +109,7 @@ class RegistrationsController < Devise::RegistrationsController
       check_to_display_guide
       redirect_to "/"
     else
-      render "/redeem/index"
+      render "/redeem/index", :layout => "application_with_bg_contain"
     end
   end
 end

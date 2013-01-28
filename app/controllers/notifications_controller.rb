@@ -1,7 +1,8 @@
 class NotificationsController < ApplicationController
   
   before_filter :require_login
-  
+  layout 'application_with_bg_contain'
+
   def index
   end
 

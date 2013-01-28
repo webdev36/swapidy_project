@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
     redirect_to request.protocol + "www." + request.host_with_port + request.fullpath if !/^www/.match(request.host) if Rails.env == 'production'
   end
   
+  def page_title(title)
+    @page_title = title
+  end
   
   #unless Rails.application.config.consider_all_requests_local
     #rescue_from Exception, :with => :render_not_found
