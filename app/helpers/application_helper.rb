@@ -1,5 +1,9 @@
 module ApplicationHelper
   
+  def page_title
+    @page_title && !@page_title.blank? ? @page_title : "Swapidy"
+  end
+  
   def display_guide?
     if session[:need_to_display_guide]
       session[:need_to_display_guide] = nil

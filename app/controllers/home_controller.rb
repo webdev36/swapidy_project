@@ -11,6 +11,8 @@ class HomeController < ApplicationController
   end
   
   def transactions
+    page_title "Transactions"
+    render "transactions", :layout => 'application_with_bg_contain'
   end
   
   def static_page

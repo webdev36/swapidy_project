@@ -78,3 +78,34 @@
 #notification_menu .dropdown-menu .clear_all {
   color: red;
 }
+
+/* For side-bar screens */
+.nav-tabs a{
+  width: 300px;
+  color:#666;
+  font-size: 20px;
+  font-family: "myriad-s";
+  padding: 17px 19px;
+}
+.nav-tabs a:hover{
+  cursor:pointer;
+}
+.core-side{
+  background: none repeat scroll 0 0 #FDFDFD;
+  height: 100%;
+  left: 360px;
+  right: 0;
+  top: 141px;
+  position: absolute;
+  width: 70%;
+}
+.core-side .tab-content {
+   min-height: 600px;
+}
+.nav_text{
+  margin-left: 50px;
+}
+.content .footer .container {
+  padding-top: 0px;
+  width: 100%;
+}
