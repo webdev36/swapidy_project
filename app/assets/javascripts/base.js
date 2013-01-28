@@ -153,7 +153,7 @@ function display_guide() {
   attachTo: ".honey_display",
   buttons: [{ name: "Close" },
     { name: "Next" }],
-  description: "<img src='/images/honey_20px_grey.png'> is our honey currency symbol. This box shows how much Honey currency you have. If you click on the plus sign, you can add Honey to your account.",
+  description: "<img src='/images/honey_20px_grey.png'> is our Honey currency symbol. This box shows how much Honey currency you have. If you click on the plus sign, you can add Honey to your account.",
   id: "sixth",
   next: "seventh",
   position: '9',
