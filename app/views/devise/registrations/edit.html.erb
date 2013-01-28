@@ -12,11 +12,13 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
   
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+  <% unless session[:signed_in_via_facebook] %>
+    <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, :autocomplete => "off" %></div>
+  
+    <div><%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %></div>
+  <% end %>
 
   <br />
   <%= render :partial => "/devise/shared/stripe_card_form", :locals => {:submit_form => "edit_profile", :field_prefix => "user_", :f => f, :user => resource}%>
