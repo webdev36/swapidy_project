@@ -47,11 +47,11 @@
       </div>
       <div>
         Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %> Honey after selling.
-        <br />You can use the honey to buy products in our marketplace.
+        <br />You can use the Honey to buy products in our marketplace.
         <% if current_user.payment_ready? %>
           <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="btn btn-success btn-mini">Get more Honey</a>
         <% else %>
-          <br />Your payment has not been verified. To get more Honey, please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');" class="order_link">Card Information of your Profile</a>.  
+          <br />Your payment has not been verified. To get more Honey, please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');" class="order_link">card information in your profile</a>.  
         <% end %>
       </div>
     </div>
