@@ -1,4 +1,3 @@
-
 $(function() {
 
   var container = $('#container');
@@ -91,7 +90,7 @@ function display_guide() {
   guiders.createGuider({
   buttons: [{ name: "Close" },
     { name: "Next" }],
-  description: "Hello new user, welcome to Swapidy! We'll tell you everything you need to get started step by step.",
+  description: "Welcome to Swapidy! We'll tell you everything you need to get started step by step.",
   id: "first",
   next: "second",
   overlay: true,
@@ -154,11 +153,11 @@ function display_guide() {
   attachTo: ".honey_display",
   buttons: [{ name: "Close" },
     { name: "Next" }],
-  description: "<img src='/images/honey_20px_grey.png'> is our honey currency symbol. This box shows how much honey currency you have. If you click on the plus sign, you can add honey to your account.",
+  description: "<img src='/images/honey_20px_grey.png'> is our honey currency symbol. This box shows how much Honey currency you have. If you click on the plus sign, you can add Honey to your account.",
   id: "sixth",
   next: "seventh",
   position: '9',
-  title: "Add honey to your account",
+  title: "Add Honey to your account",
   overlay: true,
   width:500
   });
