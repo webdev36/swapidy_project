@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     return name.blank? ? "MY ACTIVITY" : name
   end
   
+  def blank_name?
+    [first_name, last_name].compact.join(" ").strip.blank?
+  end
+  
   def name_in_email
     return first_name.humanize if first_name && !first_name.blank?
     return last_name.humanize if last_name && !last_name.blank?
