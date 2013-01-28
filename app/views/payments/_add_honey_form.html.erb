@@ -1,17 +1,17 @@
 <%= form_for(@payment, :as => 'payment', :url => "/payments/edit_card", :html => {:id => "add_honey_form"}) do |f| %>
   <br/>
   <div class="headings_pink_edit">
-    How much honey would you like to purchase?
+    How much Honey would you like to purchase?
   </div>
   <div>
     <div class="dollar_conversion">
       <span class="icon_dollar">$&nbsp;</span><%= f.text_field :amount,  :autocomplete => "off", :class =>'dollar_textbox', :placeholder => 'Enter dollar amount' %><span class="payment_equal">=</span>
     </div>
     <div class="honey_conversion"><img class="icon_honey_conversion" src="/images/honey_30px.png">&nbsp;
-      <%= f.text_field :honey_money,  :autocomplete => "off", :class =>'honey_textbox', :placeholder => 'Enter honey amount' %>
+      <%= f.text_field :honey_money,  :autocomplete => "off", :class =>'honey_textbox', :placeholder => 'Enter Honey amount' %>
     </div>
   </div>
-  <div class="error_message alert alert-error" style="text-align: center; display: none;">Please enter valid amounts!</div>  
+  <div class="error_message alert alert-error" style="text-align: center; display: none;">Please enter valid amounts.</div>  
   <a href="#" id="add_honey_submit" class="show_button_buy submit_button" style="color:white; font-family:'myriad'; position:relative; top:10px; font-size:25px; margin-left:230px; padding:10px;"> Continue</a>
   <br />
 <% end %>
