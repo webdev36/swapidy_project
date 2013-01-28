@@ -37,19 +37,23 @@ class User < ActiveRecord::Base
     return name.blank? ? "MY ACTIVITY" : name
   end
   
+  def blank_name?
+    [first_name, last_name].compact.join(" ").strip.blank?
+  end
+  
   def name_in_email
     return first_name.humanize if first_name && !first_name.blank?
     return last_name.humanize if last_name && !last_name.blank?
     ""
   end
   
-  def self.signup_user user_attributes
+  def self.signup_user user_attributes, mode = :normal_signup
     user = User.new(user_attributes)
     if user.password.nil? || user.password.blank?
       user.password = user.password_confirmation = Devise.friendly_token[0,8]
     end  
     user.save
-    UserNotifier.signup_greeting(user).deliver
+    UserNotifier.signup_greeting(user, mode).deliver
     return user
   end
 

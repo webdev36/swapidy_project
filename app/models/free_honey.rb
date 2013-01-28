@@ -39,7 +39,7 @@ class FreeHoney < ActiveRecord::Base
   def confirm
     return false unless able_to_confirm?
     if self.receiver.nil?
-      self.receiver = User.signup_user(:email => self.receiver_email)
+      self.receiver = User.signup_user({:email => self.receiver_email}, :free_honey_signup)
     end
     self.status = STATUES[:completed] 
     self.sender_honey_amount = default_reward_honey
@@ -69,12 +69,20 @@ class FreeHoney < ActiveRecord::Base
     return true
   end
   
-  def receiver_title
-    receiver ? "#{receiver.full_name} <#{receiver.email}>" : receiver_email
+  def receiver_title(mode = :full_name)
+    if mode.to_s == "full_name"
+      return receiver && !receiver.blank_name? ? "#{receiver.full_name} <#{receiver.email}>" : receiver_email  
+    else
+      return receiver_email  
+    end
   end
   
-  def sender_title
-    sender ? "#{sender.full_name} <#{sender.email}>" : "Swapidy"
+  def sender_title(mode = :full_name)
+    if mode.to_s == "full_name"
+      return sender && !sender.blank_name? ? "#{sender.full_name} <#{sender.email}>" : "Swapidy"
+    else
+      return sender ? sender.email : "Swapidy"
+    end
   end
     
   def create_notifications

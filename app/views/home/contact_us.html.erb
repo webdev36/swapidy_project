@@ -1,48 +1,39 @@
--<script type="text/javascript">
- 
- $(document).ready(function(){
-   
-$('.container').fadeIn(1000);
-  
-});
-
-</script> 
 <style type="text/css">
-
-body{
-  background:whitesmoke;
-}
+  body{
+    background:whitesmoke;
+  }
 </style>
-  <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
-  <script type="text/javascript">
+
+<script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
   $(document).ready(function(){
-  $('#jobs_container').fadeIn(1000);
-  $('#jobs_content').fadeIn(1000);
-});
+    $('.container').fadeIn(1000);
+    $('#jobs_container').fadeIn(1000);
+    $('#jobs_content').fadeIn(1000);
+  });
 </script>
 
 <div class="container" style="display:none;">
-<div style="position:relative; bottom:230px;">
-<div class='headings_pink'>Contact Us</div>
-<br/>
-<% if flash[:thank_message] %>
-<p style="color: pink;"><%= flash[:thank_message] %></p>
-<% end %>
-<form action="/send_contact" method="post">
-  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
-  Email:<br/>
-  <input type="text" name="contact[email]" id="contact_email" value="<%= params[:contact] ? params[:contact][:email] : ""%>" /><br/>
-  Subject:<br/>
-  <input type="text" name="contact[subject]" id="contact_subject" value="<%= params[:contact] ? params[:contact][:subject] : ""%>"><br/>
-  Message:<br/>
-  <textarea type="text" name="contact[message]" id="contact_message" style="height:200px;"><%= params[:contact] ? params[:contact][:message] : ""%></textarea>
-  <br/>
-  <%= recaptcha_tags %><br/>
-  <% if @error_message %>
-    <p style="color: red;"><%= @error_message %></p>
-  <% end %>
-  <input type="submit" value="Submit" class="order_button_buy" style="width:200px; font-size:25px; font-family:'myriad-s';">
-</form>
-</div>
-
+  <div style="position:relative; bottom:230px;">
+    <div class='headings_pink'>Contact Us</div>
+    <br/>
+    <% if flash[:thank_message] %>
+      <div class="alert alert-success" style="width:350px;"><%= flash[:thank_message] %></div>
+    <% end %>
+    <form action="/send_contact" method="post">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
+      Email:<br/>
+      <input type="text" name="contact[email]" id="contact_email" value="<%= params[:contact] ? params[:contact][:email] : ""%>" /><br/>
+      Subject:<br/>
+      <input type="text" name="contact[subject]" id="contact_subject" value="<%= params[:contact] ? params[:contact][:subject] : ""%>"><br/>
+      Message:<br/>
+      <textarea type="text" name="contact[message]" id="contact_message" style="height:200px;"><%= params[:contact] ? params[:contact][:message] : ""%></textarea>
+      <br/>
+      <%= recaptcha_tags %><br/>
+      <% if @error_message %>
+        <div class="alert alert-error" style="width:350px;"><%= @error_message %></div>
+      <% end %>
+      <input type="submit" value="Submit" class="order_button_buy" style="width:200px; font-size:25px; font-family:'myriad-s';">
+    </form>
+  </div>
 </div>
