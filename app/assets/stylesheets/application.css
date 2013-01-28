@@ -245,6 +245,9 @@ h2{
 
 .s_category{
   color:#fa3e6e;
+  font-family: "myriad-s";
+  margin-top: 21px;
+  margin-bottom: 25px;
 }
 .cat_choose{
   color: #fa3e6e;
@@ -570,7 +573,7 @@ a.login_forgot:hover {
 .navbar_icon_location{
   height:25px;
   position: relative;
-  right:25px;
+  right:30px;
   bottom: 7px;
 }
 .product_desc{
@@ -668,7 +671,7 @@ margin-left: 70px;}
   position:fixed;
   top:-150px;
   padding-top: 0px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   border: medium none;
   box-shadow: none;
   -webkit-border-radius: 20px;

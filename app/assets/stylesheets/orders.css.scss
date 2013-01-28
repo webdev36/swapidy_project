@@ -142,6 +142,7 @@ a.change:hover {
 a.order_link{
   color:#38B4DE;
   cursor:pointer;
+  text-decoration:underline;
 }
 a.order_link:hover{
   text-decoration:underline;
@@ -262,6 +263,8 @@ padding-bottom:60px;
 }
 
 .shipping_footnote{
+position:relative;
+bottom:50px;
 }
 
 .update_button_buy{

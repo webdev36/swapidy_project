@@ -41,7 +41,7 @@
               <div class="attr_filter_column <%= attr.applied_for_models_filter %>">
                 <div class="option-set" data-group="cat_attr_<%= attr.id %>">
                   <div style="float:left; min-width: 130px;">
-                    <h3 class="s_category" style="color:#38B4DE; font-size:18px;"><%= attr.title %></h3>
+                    <div class="s_category" style="color:#38B4DE; font-size:18px;"><%= attr.title %></div>
                     <div class="attr_filter_column_items" >
                       <% attr.attributes_in_models.each do |attr_value_with_models| %>
                         <div style="display: block; min-width: 100px;" class="attr_filter <%= "attr_filter_model_all_for_buying" if attr_value_with_models[3] > 0 %> <%= "attr_filter_model_all_for_selling" if attr_value_with_models[4] > 0 %> <%= attr_value_with_models[2].map{|model_attribute| model_attribute.filter_content}.join(" ") %>" >
@@ -62,7 +62,7 @@
             <div id="price_range_filter" class="attr_filter_column <%= category.price_range_model_filters %>">
               <div class="option-set" data-group="cat_attr_price_range">
                 <div style="float:left; min-width: 140px;">
-                  <h3 class="s_category" style="color:#38B4DE; font-size:18px;">Price</h3>
+                  <div class="s_category" style="color:#38B4DE; font-size:18px;">Price</div>
                   <div class="attr_filter_column_items" >
                     <% Product::PRICE_RANGES.keys.each do |key| %>
                       <div style="display:block; min-width: 120px;" class="attr_filter <%= category.price_range_model_filters(key) %>" >

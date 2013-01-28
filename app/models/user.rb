@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   
   def full_name
     name = [first_name, last_name].compact.join(" ").strip
-    return name.blank? ? "PROFILE" : name
+    return name.blank? ? "MY ACTIVITY" : name
   end
   
   def name_in_email
