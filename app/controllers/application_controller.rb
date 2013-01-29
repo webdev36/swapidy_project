@@ -5,7 +5,12 @@ class ApplicationController < ActionController::Base
   before_filter :prepaire_add_honey
   
   def check_uri
-    redirect_to request.protocol + "www." + request.host_with_port + request.fullpath if !/^www/.match(request.host) if Rails.env == 'production'
+    return unless Rails.env == 'production'
+    if !/^www/.match(request.host)
+      redirect_to "https://www." + request.host_with_port + request.fullpath 
+    elsif !request.ssl?
+      redirect_to :protocol => "https://"
+    end
   end
   
   def page_title(title)
