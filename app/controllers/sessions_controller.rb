@@ -31,7 +31,7 @@ class SessionsController < Devise::SessionsController
       end
 
       if user_signed_in?
-        check_to_display_guide
+        #check_to_display_guide
         redirect_to :controller => :orders, :action => :new, :method => :post, :product_id => params[:product_id], :using_condition => params[:using_condition], :order_type => params[:order_type]
       else
         @signin_failure = true
