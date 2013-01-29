@@ -1,16 +1,13 @@
 class PasswordsController < Devise::PasswordsController
   
-  def create
-    self.resource = resource_class.send_reset_password_instructions(resource_params)
-    if successfully_sent?(resource)
-      redirect_to "/password_success"
-    else
-      respond_with(resource)
-    end
+  def sent_resetpass
+    render "change_password"
   end
 
-  def change_password
-
+  
+  protected
+  
+  def after_sending_reset_password_instructions_path_for(resource_name)
+    "/sent_resetpass"
   end
-
 end
