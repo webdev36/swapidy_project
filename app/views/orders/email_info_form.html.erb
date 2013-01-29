@@ -1,14 +1,19 @@
 <style type="text/css">
 body{
   background: whitesmoke;
-  line-height: 1.5;
 }
 label{
   color:#666;
   font-size: 20px;
 }
+
 </style>
-<div id="progress_indicator" class="three_steps">
+
+
+
+<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-4.jpg); -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+
+  <div id="progress_indicator" class="three_steps">
   <ul>
       <li class="current">Step 1</li>
       <li>Step 2</li>
@@ -16,17 +21,10 @@ label{
   </ul>
 </div>
 
-  <div class="email_info_fb">
-  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img class="fb-connect" src="/images/fb_login.png"></a>
-  <p class="email_info_or">or</p>
-  </div>
-    <hr/>
 
-
-
-<div class="container" style="position:relative; bottom:70px;">
+<div class="container">
 <div class="email_info_container" style="float: left; width: 50%;" >
-  <div class="headings_pink cat_choose">Sign in</div><br/>
+  <div class="headings_pink cat_choose" style="color:white; font-family:'myriad';">Sign in</div><br/>
   <% @user = resource || User.new unless @user %>
   <%= form_for(@user || resource, :as => "user", :url => session_path(@user), :method => :post) do |f| %>
     <% if @signin_failure %>
@@ -41,21 +39,23 @@ label{
     <input type="hidden" name="using_condition" value="<%= @order.using_condition %>" />
     <input type="hidden" name="honey_price" value="<%= @order.honey_price %>" />
     
-    <div><label for="user_email">Email</label><br />
-    <input id="user_email" name="user[email]" size="30" type="email" value="" /></div>
-  
-    <div><label for="user_password">Password</label><br />
-    <input id="user_password" name="user[password]" size="30" type="password" /></div>
+    <div>
+    <input id="user_email" name="user[email]" size="30" type="email" value="" placeholder="E-mail" style="background-color:#ECECEC; height:30px; margin-bottom:10px;" /></div>
+    <div>
+    <input id="user_password" name="user[password]" size="30" type="password" placeholder="Password" style="background-color:#ECECEC; height:30px;"/></div>
   
     <div style="margin:0px; margin-top:90px;">
       <input name="commit" class="show_button_buy" style="width: 130px; height: 50px; padding: 8px 15px;" type="submit" value="Sign in" />
     </div>
   <% end %>
+    <div class="email_info_fb">
+  <a href="<%= user_omniauth_authorize_path(:facebook)%>"><img class="fb-connect" src="/images/fb_connect.png"></a>
+  </div>
 </div>
 
-<div class="email_signup_container"style="float: right; width: 50%;">
-  <div class="headings_pink cat_choose">Don't have an account? Sign up now!</div><br/>
-  <p class="product_desc">We'll use this email address to send you shipping details and progress updates every step of the way.</p>
+<div class="email_signup_container"style="float: right; width: 50%; ">
+  <div class="headings_pink cat_choose" style="color:white; line-height:1.5; font-family:'myriad';">Don't have an account? Sign up now!</div><br/>
+  <p class="product_desc" style="color:white;">We'll use this email address to send you shipping details and progress updates every step of the way.</p>
   <%= form_for(@user || resource, :as => "user", :url => registration_path(@user), :method => :post) do |f| %>
     <input type="hidden" name="login_to_order" value="1" />
     <input type="hidden" name="product_id" value="<%= @product.id %>" />
@@ -70,16 +70,13 @@ label{
       </div>
     <% end %>
       
-    <div><%= f.label :email %></div>
-    <%= f.email_field :email %>
+    <%= f.email_field :email, :class =>"email_textfield", :placeholder =>"E-mail" %><br/>
+    <%= f.password_field :password, :class =>"email_textfield", :placeholder =>"Password"  %><br/>
   
-    <div><%= f.label :password %></div>
-    <%= f.password_field :password %>
   
-    <div><%= f.label :password_confirmation %></div>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, :class =>"email_textfield", :placeholder =>"Confirm Password"  %>
     <div>
-      <input name="commit" class="show_button_sell" style="width: 130px; color:white; font-size:20px; font-family:'myriad';height:50px; padding: 8px 15px;" type="submit" value="Sign up" />
+      <input name="commit" class="show_button_buy" style="width: 130px; color:white; font-size:20px; font-family:'myriad';height:50px; padding: 8px 15px; position:relative; top:20px;" type="submit" value="Sign up" />
     </div>
   <% end %>
 </div>
