@@ -12,10 +12,10 @@
 
 
 <div>
-  <input class="update_button_buy" type='submit' value='Update'>
   <% if !user.errors.empty? || @error_message %>
-    <span class="alert alert-error"><%= user.errors.full_messages.join('.') %> <%= @error_message if @error_message %></span>
+    <div class="alert alert-error"><%= user.errors.full_messages.join('.') %> <%= @error_message if @error_message %></div>
   <% elsif @success_message %>
-    <span class="alert alert-success"><%= @success_message %></span>
+    <div class="alert alert-success"><%= @success_message %></div>
   <% end %>
+  <input class="update_button_buy" type='submit' value='Update'>
 </div>

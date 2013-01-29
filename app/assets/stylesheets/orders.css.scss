@@ -443,9 +443,9 @@ box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 
 .thank_head{
  font-family:"myriad";
-color:white;
-position:absolute;
-top:0px;
+  color:white;
+  position:absolute;
+  top:0px;
   background-color: rgba(0, 0, 0, 0.6);
   border: medium none;
   box-shadow: none;
@@ -457,14 +457,13 @@ top:0px;
 
 }
 .shipping_product_info{
-  position:relative;
-  bottom:60px;
   font-family:'myriad-s';
   font-size:20px;
   color:#38B4DE;
-  }
+  padding-bottom: 15px;
+}
 .show_product_image{  
-z-index:2;
+  z-index:2;
   background-color: rgba(0, 0, 0, 0.6);
   border: medium none;
   box-shadow: none;
@@ -472,11 +471,11 @@ z-index:2;
   border-radius: 20px 20px 0px 0px;
   height: 280px;
   padding-bottom: 20px;
-position:absolute;
-top:50px;
-margin: 0px auto 0px auto;
-margin-left:220px;
-width:500px;
+  position:absolute;
+  top:50px;
+  margin: 0px auto 0px auto;
+  margin-left:220px;
+  width:500px;
 }
 .show_product_img{
   margin-left:150px;

@@ -8,7 +8,6 @@
   background: #fa3e6e;
   border-radius: 10px 10px 0px 0px;
   padding:5px 0px 0px 5px;
-
 }
 </style>
 <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
@@ -36,7 +35,7 @@
   </div>
 <% end %>
 
-<div id='shipping_address_form' class='address_form_content' style="position:relative; bottom:90px; right:20px;">
+<div id='shipping_address_form' class='address_form_content'>
   <div class="field_col_1">  
     <div>
       <div class="label" for='shipping_first_name'>First name</div><br/>
@@ -58,7 +57,7 @@
       <input id="order_shipping_optional_address" name="order[shipping_optional_address]" size="30" type="text" value="<%= order.shipping_optional_address %>">
     </div>
   </div>
-  <div class="field_col_2" style="position:relative; left:240px; bottom:250px;">
+  <div class="field_col_2">
     <div>
       <div class="label" for='shipping_city'>City</div><br/>
       <input id="order_shipping_city" name="order[shipping_city]" size="30" type="text" value="<%= order.shipping_city %>">
@@ -81,10 +80,15 @@
     <input name='commit' class='order_button_buy' type='submit' value='<%= submit_title %>' />
   </div>
   <% if !order.errors.empty? || @error_message %>
-    <div class="alert alert-error" style="width: 492px;"><%= order.errors.full_messages.join('.') %> <%= @error_message if @error_message %></div>
+    <div class="alert alert-error" style="width: 492px;"><%= order.errors.full_messages.first %></div>
   <% elsif @success_message %>
     <div class="alert alert-success" style="width: 492px;"><%= @success_message %></div>
   <% end %>
-
+  
+  <% if @order.is_trade_ins? %>
+    <div class="shipping_footnote"><span>*</span>This info will be used to generate a free shipping label to send your product to us.</div>
+  <% else %>
+    <div class="shipping_footnote"><span>*</span>This info will be used to generate a free shipping label to send the product to you.</div>
+  <% end %>
 </div>  
 

@@ -1,30 +1,17 @@
 
-<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-2.png); -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;">
-
-<%= render :partial => "steps", :locals => {:current_step => 3 } %>
-
-<div class="container">
-  <div class="headings_pink shipping_form_head">Shipping Address<span>*</span></div>
- <div class="shipping_form_image"> 
-    <img id="before_confirm_image" src="<%= @product.main_image_url(:large) %>" style="padding-top: 40px; padding-bottom: 0px;" /></div>
-<div class="shipping_form_container">
-<div style="width: 100%; padding-top: 40px;">
-  <br/>
-  <div class="shipping_product_info"><%= @order.title %></div><br />    
-  <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; padding: 45px 0px 20px;">
-    <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
-    <%= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Continue"} %>
-  </form>
-  
-  <% if @order.is_trade_ins? %>
-   <p class="shipping_footnote"><span>*</span>This info will be used to generate a free shipping label to send your product to us.</p>
-  <% else %>
-   <p class="shipping_footnote"><span>*</span>This info will be used to generate a free shipping label to send the product to you.</p>
-  <% end %>
-</div>
-</div>
-</div>
+<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-2.png); -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+  <%= render :partial => "steps", :locals => {:current_step => 3 } %>
+  <div class="container">
+    <div class="headings_pink shipping_form_head">Shipping Address<span>*</span></div>
+    <div class="shipping_form_image"><img id="before_confirm_image" src="<%= @product.main_image_url(:large) %>" style="padding-top: 40px; padding-bottom: 0px;" /></div>
+    <div class="shipping_form_container">
+      <div style="width: 100%; margin-left: -30px;">
+        <div class="shipping_product_info"><%= @order.title %></div>  
+        <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; padding: 15px 0px 20px;">
+          <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
+          <%= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Continue"} %>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
