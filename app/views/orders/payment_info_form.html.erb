@@ -63,7 +63,7 @@ body{
     
  <input name="commit" class="payment_button_sell" type="submit" value="Continue" style="position:relative; top:250px;"/>        <% else %>
           <div>
-            Your honey balance is not enough. You need
+            Your Honey balance is not enough. You need
             <%= format_num(current_user.extra_honey_for(@order)) %> Honey to buy this product.
           </div>
           <div>
