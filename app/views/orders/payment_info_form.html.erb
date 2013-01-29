@@ -1,13 +1,16 @@
-<style type="text/css">
-body{
-  background: whitesmoke;
-}
-</style>
+
+<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-2.png); -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;">
 
 <%= render :partial => "steps", :locals => {:current_step => 2 } %>
-
-<div class="container"  style="background: white;width: 85%;margin: 25px auto; padding: 60px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); border-radius: 5px; height:400px;">
-<div class="headings_pink">Payment Information</div><br/>
+<div class="container">
+  <div class="headings_pink payment_info_heading">Payment Information</div>
+     <div class="payment_product_image">
+            <img  class="payment_product_img" src="<%= @product.main_image_url(:large) %>">
+          </div>
+<div class="payment_container">
 
 <div id="checkout_content" class="payment_editing_block">
   <div class="payment_group_contents">
@@ -29,27 +32,20 @@ body{
         <%= f.hidden_field :shipping_zip_code %>
         <%= f.hidden_field :shipping_country %>
         
-        <div class="payment_product_info">
-          <label style="color:#38B4DE; font-size:25px; font-family:'myriad-s'";><%= @order.title %></label><br />
-          <div class="payment_product_image">
-            <img  src="<%= @product.main_image_url(:large) %>">
-          </div>
+        <br/><div class="payment_product_info">
+          <%= @order.title %><br /><br/>
 
-      <div class="payment_after_selling" style="font-size:20px; color:#666; width:540px; position:relative; bottom:250px; left:150px;  ">  
-        <div>
-          <label style="color:#38b4de; font-family:'myriad-s'">Current Balance:</label>
-          <%= format_num(current_user.honey_balance) %> <img class="payment_currency" src="/images/honey_20px.png">
+          <label style="color:#666">Current Balance:</label>
+          <span style="color:#666; font-family:'myriad'"><%= format_num(current_user.honey_balance) %> </span><img class="payment_currency" src="/images/honey_20px_grey.png">
         </div>
-          <br/>
-        <div>
-          <label style="color:#38b4de; font-size:20px; font-family:'myriad-s'">Product Price:</label>
-          <%= format_num(@order.honey_price) %> <img class="payment_currency" src="/images/honey_20px.png">
+        <div style="position:relative; bottom:20px;">
+          <label style="color:#666; font-family:'myriad';">Product Price:</label><span style="color:#666; font-family:'myriad'; font-size:20px;">&nbsp;<%= format_num(@order.honey_price) %> </span><img class="payment_currency" src="/images/honey_20px_grey.png">
         </div>
           <br/>
         <% if current_user.extra_honey_for(@order) <= 0 %>
-          <div>
+          <div >
             <br/>
-            Your balance is enough to buy this product
+            <span style="font-size:20px; position:relative; bottom:50px;">Your balance is enough to buy this product.</span>
             <% if current_user.payment_ready? %>
               <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="order_button_sell" style="font-size:20px; position:relative; left:20px;">Get more Honey</a>
             <% else %>
@@ -61,7 +57,7 @@ body{
           <br/>
 
     
- <input name="commit" class="payment_button_sell" type="submit" value="Continue" style="position:relative; top:250px;"/>        <% else %>
+ <input name="commit" class="product_button_buy" type="submit" value="Continue" style="position:relative; bottom:100px; right:60px;"/>        <% else %>
           <div>
             Your honey balance is not enough. You need
             <%= format_num(current_user.extra_honey_for(@order)) %> Honey to buy this product.
@@ -80,5 +76,6 @@ body{
       <% end %>
     </div>
   </div>
+</div>
 </div>
 </div>

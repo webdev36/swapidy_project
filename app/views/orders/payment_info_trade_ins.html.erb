@@ -1,21 +1,20 @@
-<style type="text/css">
-body{
-  background: whitesmoke;
-}
-label{
-  color:#38B4DE;
-  font-size: 15px;
-}
-#checkout_content{
-  color:#666;
-}
 
-</style>
+<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-2.png); -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;">
 
-<%= render :partial => "steps", :locals => {:current_step => 2 } %>
+ <%= render :partial => "steps", :locals => {:current_step => 2 } %>
 
-<div class="container" style="background: white;width: 85%;margin: 25px auto; padding: 60px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); border-radius: 5px;">
-<div class="headings_pink">Payment Information</div>
+
+<div class="container">
+
+<div class="headings_pink payment_info_heading">Payment Information</div>
+<div class="payment_product_image">
+      <img class="payment_product_img" src="<%= @product.main_image_url(:large) %>">
+</div>
+<div class="payment_container">
+
 <br/>
 <div id="checkout_content" class="payment_editing_block">
   <div class="payment_group_contents">
@@ -38,23 +37,18 @@ label{
         <%= f.hidden_field :shipping_country %>
         
         <div class="payment_product_info">
-          <label><%= @order.title %></label><br />
-          <div class="payment_product_image">
-            <img src="<%= @product.main_image_url(:large) %>">
-          </div>
+          <%= @order.title %><br />
         </div>
 
-        <div class="payment_after_selling">
-          <label>After selling, you get:</label>
-          <span style="font-size:20px;"><%= format_num(@order.honey_price) %></span> <img class="payment_currency" src="/images/honey_20px.png"><br/>
+        <div class="product_after_selling" style="font-size:19px; width:500px;">
+          After selling, you get:
+          <span><%= format_num(@order.honey_price) %></span> <img class="payment_currency" src="/images/honey_20px_grey.png">
           <br/>
-        <div class="payment_selling_info">
-          Your balance would increase to <%= format_num(current_user.honey_balance + (@order.honey_price || 0)) %>&nbsp;<img class="payment_currency" src="/images/honey_20px.png"> after selling.
+          Your balance would increase to <%= format_num(current_user.honey_balance + (@order.honey_price || 0)) %>&nbsp;<img class="payment_currency" src="/images/honey_20px_grey.png"> after selling.
           <br />You could use this Honey to buy products!
-        </div>
         
         <br/>
-        <input name="commit" class="payment_button_sell" type="submit" value="Continue" />
+        <input name="commit" class="product_button_buy" type="submit" value="Continue" />
       <% end %>
     </div>
   </div>
@@ -62,4 +56,5 @@ label{
 </div>
         </div>
 
-
+</div>
+</div>

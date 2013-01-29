@@ -1,19 +1,22 @@
 <style type="text/css">
-body{
-  background: whitesmoke;
+  body{
+    background: whitesmoke;
     line-height: 1.5;
-    color: #666;
-    font-size: 20px;
   }
-.confirm_head{
-  text-align: left;
-}
-</style>
 
-<div style="width: 100%; background: white; margin: 25px auto; padding: 60px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); border-radius: 5px;">
-   
-  <div class="headings_pink">Confirm your details</div><br/>
-  <p class="confirm_subheading">Please confirm that the following information is correct.</p>
+</style>
+<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-2.png); -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;">
+
+<div class="container">
+      <div class="headings_pink confirm_head_info">Confirm Your Details</div>
+      <div class="confirm_image_container">
+      <img id="confirm_image" src="<%= @product.main_image_url(:large) %>"></div>
+<div class="confirm_container">
+  
+  <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
   
   <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
     <%= f.hidden_field :order_type %>
@@ -29,20 +32,20 @@ body{
   
     <br/>
     <div>
-      <label class="confirm_info_head"><%= @order.title %></label><br />
-      <img id="confirm_image"  src="<%= @product.main_image_url(:large) %>">
-    </div>
-    
-    <br/>
-    <div id="email_label_info">
+      <div class="confirm_info_head">You are buying: <%= @order.title %></div><br />    
+
+    <div id="email_label_info" style="position:relative; bottom:90px;">
       <%= render :partial => "email_label", :locals => {:user => current_user} %>
     </div>
     <br/>
-    <div>
-      <label class="confirm_info_head">
-        <div class="headings_pink">Payment Information</div>
-      </label>
+    <div id="shipping_label_info">
+      <%= render :partial => "shipping_label", :locals => {:order => @order} %>
+    </div>
+
+    <div class="confirm_payment_container">
+        <div class="headings_pink" style="font-size:20px; position:relative; bottom:310px;">Payment Information</div>
       <br />
+       <div style="position:relative; bottom:320px;">
       <div>
         <span>Current Balance:</span>
         <%= format_num(current_user.honey_balance) %> Honey
@@ -50,32 +53,13 @@ body{
       <div>
         <span>Product Price:</span>
         <%= format_num(@product.honey_price) %> Honey
-      </div>
-      <% if current_user.extra_honey_for(@product) <= 0 %>
-        <div>
-          <i>Your balance is enough to buy this product without additional charge!</I>
-        </div>
-      <% else %>
-        <div>
-          <span>You need to purchase extra Honey to buy:</span>
-          <%= format_num(current_user.extra_honey_for(@product)) %> Honey<br/>
-          Amount owed: $<%= format_num(current_user.extra_honey_for(@product)/100) %> (Exchange Rate: 100 Honey / $1 )
-          <% if current_user.payment_ready? %>
-            <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="btn btn-mini">Get more Honey</a>
-          <% else %>
-            <br />Your payment has not been verified. To get more Honey, please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>.  
-          <% end %>
-        </div>
-      <% end %>
+      </div>      
     </div>
     <br/>
-    <div id="shipping_label_info">
-      <%= render :partial => "shipping_label", :locals => {:order => @order} %>
-    </div>
+    
     <% has_agreement_before = current_user.has_same_order?(@order.order_type) %>
-    <div>
-      <label class="confirm_info_head"><div class="headings_pink">Terms of Service</div></label>
-      <br />
+    <div style="position:relative; bottom:330px;">
+      <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:80px;">Terms of Service</div></label>
       <p>
         <input id="terms_of_service_checkbox" type="checkbox" <% if has_agreement_before %>checked="checked"<% end %> /> 
         <span>Check this box, you agree to our <a class="order_link">terms of service</a> and confirm that 
@@ -83,9 +67,8 @@ body{
       </p>
     </div>
     <br/>
-    <input name="commit" onclick="showPageLoading();" id="submit_button" class="order_button_sell" style="width: 180px; height: 50px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
+    <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" style="margin-top:20px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
   
   <% end %>
 </div>
 <%= render :partial => "order_confirm_popups" %>
-
