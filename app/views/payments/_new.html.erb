@@ -96,11 +96,17 @@
     form.find("#cardInfoValidate").hide();
     
     // do nothing if users don't enter Card information
-    if(form.find('#payment_new_card_name').val() == form.find('#payment_card_name').val() && 
-        form.find('#payment_new_card_number').val() == 'xxxx-xxxx-xxxx-' + form.find('#payment_card_last_four_number').val() && 
-        form.find('#payment_new_card_cvc').val() == '' &&
-        form.find('#payment_new_card_expired_month').val() == form.find('#payment_card_expired_month').val() && 
-        form.find('#payment_new_card_expired_year').val() == form.find('#payment_card_expired_year').val()) {
+    // do nothing if users don't enter Card information
+    var has_changed = false;
+    var field_names = ["name", "number", "cvc", "expired_month", "expired_year"];
+    for(i = 0; i < field_names.length; i++) {
+      var obj = form.find('#payment_new_card_' + field_names[i]);
+      if($(obj).attr('value') != $(obj).attr('edit-data')) {
+        has_changed = true;
+      }
+    }
+
+    if(!has_changed) {
       submit_add_honey_form();
       return true;
     }
