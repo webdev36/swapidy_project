@@ -182,6 +182,9 @@ RailsAdmin.config do |config|
   end
 
   config.model CategoryAttribute do
+      object_label_method do
+        :to_s
+      end
   #   # Found associations:
        configure :category, :belongs_to_association 
   #     configure :product_model_attributes, :has_many_association   #   # Found columns:

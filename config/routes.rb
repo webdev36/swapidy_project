@@ -7,6 +7,7 @@ Swapidy::Application.routes.draw do
                                       :passwords =>"passwords"} do
     match "/users/sign_out" => "sessions#destroy"
     match "/users/redeem" => "registrations#redeem"
+    match "/users/password" => "passwords#create"
     match "/password_success" => "passwords#change_password"
   end
 

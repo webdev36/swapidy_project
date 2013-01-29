@@ -13,7 +13,7 @@
         <% if user_signed_in? %>
         <% if current_user.free_honey_sendable? %>
           <li id="nav_login">
-            <a href="javascript:showPopup('popup-dialog_for_free_honey');" >GET FREE HONEY</a>
+            <a href="javascript:refresh_free_honey_form();" >GET FREE HONEY</a>
           </li>
           <li class="divider-vertical"></li>
         <% end %>
@@ -83,7 +83,7 @@
             <div style="display: inline-block;"><img src="/images/honey_currency_score.png"><span id="honey_balance_amount_menu"><%= format_num(current_user.honey_balance)%></span>
               <% if controller_name != "payments" %>
               <div style="display: inline-block;">
-                <a href="javascript:showPopup('popup-dialog_add_honey');"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a>
+                <a href="javascript:refresh_add_honey_form();"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a>
               </div>
               <% else %>
               <div style="display: inline-block;">
@@ -109,11 +109,11 @@
 
         <% else %>
         <li id="nav_login">
-          <a href="javascript:showPopup('popup-dialog_for_signin');" >LOG IN</a>
+          <a href="javascript:refresh_signin_form();" >LOG IN</a>
         </li>
         <li class="divider-vertical"></li>
         <li id="nav_signup">
-          <a href="javascript:showPopup('popup-dialog_for_signup');" >SIGN UP</a>
+          <a href="javascript:refresh_signup_form();" >SIGN UP</a>
         </li>
                         <li class="divider-vertical"></li>
 
@@ -141,6 +141,7 @@
     <%= render :partial => "/free_honeys/new" %>
   </div>
   <script language="JavaScript">
+
     function submitAddHoney() {
       $.ajax({
         type : 'POST',
@@ -150,6 +151,13 @@
         success : function(data) {
         }
       });
+    }
+
+    function refresh_free_honey_form() {
+      $('#popup-dialog_for_free_honey #email').attr('value', '');
+      $('#popup-dialog_for_free_honey .alert-error').hide();
+      $('#popup-dialog_for_free_honey .alert-success').hide();
+      showPopup('popup-dialog_for_free_honey');
     }
   </script>
 </div>
@@ -231,3 +239,17 @@
     <span>Please wait...</span>
   </div>
 </div>
+
+<script>
+  function refresh_signin_form() {
+    $('#popup-dialog_for_signin #prependedInput').attr('value', '');
+    $('#popup-dialog_for_signin .alert-error').hide();
+    showPopup('popup-dialog_for_signin');
+  }
+
+  function refresh_signup_form() {
+    $('#popup-dialog_for_signup #prependedInput').attr('value', '');
+    $('#popup-dialog_for_signup .alert-error').hide();
+    showPopup('popup-dialog_for_signup');
+  }
+</script>
