@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  before_filter :check_uri #deployed on swapidy.com
+  #before_filter :check_uri #deployed on swapidy.com
   before_filter :prepaire_add_honey
   
   def check_uri
