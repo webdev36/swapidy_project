@@ -21,23 +21,23 @@ class HomeController < ApplicationController
   
   def contact_us
     unless verify_recaptcha()
-      @error_message = "Please enter the valid CAPTCHA!"
+      @error_message = "Please enter the text correctly."
       return
     end
     
     @contact = params[:contact]
     if @contact.nil? || (@contact[:email] || "").blank? || (@contact[:subject] || "").blank? || (@contact[:message] || "").blank?
-      @error_message = "You have to enter all fields!"
+      @error_message = "You have to enter all of the fields."
       return
     end
     
     unless @contact[:email].match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i)
-      @error_message = "Please enter valid email!"
+      @error_message = "Please enter a valid email."
       return      
     end
 
     ADMIN_EMAILS.each {|email| UserNotifier.contact_us(email, @contact).deliver }
-    flash[:thank_message] = "Thank you for sending contact to us!"
+    flash[:thank_message] = "Thank you for contacting us. We'll respond within 24 hours."
 
     redirect_to "/contact_us"
   end
