@@ -6,7 +6,7 @@ body{
 
 <%= render :partial => "steps", :locals => {:current_step => 2 } %>
 
-<div class="container"  style="background: white;width: 85%;margin: 25px auto; padding: 60px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); border-radius: 5px;">
+<div class="container"  style="background: white;width: 85%;margin: 25px auto; padding: 60px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); border-radius: 5px; height:400px;">
 <div class="headings_pink">Payment Information</div><br/>
 
 <div id="checkout_content" class="payment_editing_block">
@@ -35,7 +35,7 @@ body{
             <img  src="<%= @product.main_image_url(:large) %>">
           </div>
 
-      <div class="payment_after_selling" style="font-size:20px; color:#666; position:relative;">  
+      <div class="payment_after_selling" style="font-size:20px; color:#666; width:540px; position:relative; bottom:250px; left:150px;  ">  
         <div>
           <label style="color:#38b4de; font-family:'myriad-s'">Current Balance:</label>
           <%= format_num(current_user.honey_balance) %> <img class="payment_currency" src="/images/honey_20px.png">
@@ -48,9 +48,10 @@ body{
           <br/>
         <% if current_user.extra_honey_for(@order) <= 0 %>
           <div>
+            <br/>
             Your balance is enough to buy this product
             <% if current_user.payment_ready? %>
-              <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="btn btn-success btn-mini">Get more Honey</a>
+              <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="order_button_sell" style="font-size:20px; position:relative; left:20px;">Get more Honey</a>
             <% else %>
               <% #<br/>Your payment has not been verified. To get more Honey, please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>. %> 
             <% end %>
@@ -60,17 +61,17 @@ body{
           <br/>
 
     
- <input name="commit" class="payment_button_sell" type="submit" value="Continue" style="position:relative; top:50px;"/>        <% else %>
+ <input name="commit" class="payment_button_sell" type="submit" value="Continue" style="position:relative; top:250px;"/>        <% else %>
           <div>
-            <label>You need to extra Honey:</label>
-            <%= format_num(current_user.extra_honey_for(@order)) %> Honey
+            Your honey balance is not enough. You need
+            <%= format_num(current_user.extra_honey_for(@order)) %> Honey to buy this product.
           </div>
           <div>
             <% if current_user.payment_ready? %>
               You would be charged $<%= format_num(current_user.extra_honey_for(@order)/100) %> (Exchange Rate: 100 Honey / $1 )
-              <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="btn btn-success btn-mini">Get more Honey</a>
+              <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="order_button_sell">Get more Honey</a>
             <% else %>
-              Your payment has not been verified. Please edit <span class="edit_cc_info"><a href="javascript:open_in_new_tab('/users/edit#card_info_container');" >Card Information of your Profile</a>.  </span>
+              <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="order_button_sell" style="position:relative; top:58px; left:150px; font-size:20px;">Get more Honey</a>
             <% end %>
           </div>
           <br/>

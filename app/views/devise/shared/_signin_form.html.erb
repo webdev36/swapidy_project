@@ -17,11 +17,11 @@
         <span class="add-on">Password</span>
         <%= f.password_field :password, :class => "span2", :id => "prependedInput"  %>
       </div><br/>
-      <a href="#" onclick="submit_signin_form();" class="login_button">Sign in</a>
-      <div style="display: inline-block;">
-        <div class="alert alert-error" style="display:none; width:255px; margin-left: 5px;">Invalid username/password. </div>
+      <a href="#" onclick="submit_signin_form();" class="login_button" style="position:relative; top:15px;">Sign in</a>
+      <div style="display: inline-block; ">
+        <div class="alert alert-error" style="display:none; width:255px; margin-left: 5px; position:absolute; top:130px;">Invalid username/password. </div>
         <% if controller_name != 'passwords' %>
-          <a href="<%= new_password_path(resource_name) %>" style="position: absolute; left: 160px; margin-top: -12px;" class="login_forgot">Forgot your password?</a>
+          <a href="<%= new_password_path(resource_name) %>" style="position: absolute; left: 160px;" class="login_forgot">Forgot your password?</a>
         <% end %>
       </div>
     <% end %>

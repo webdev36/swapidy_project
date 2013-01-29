@@ -70,7 +70,7 @@ class Order < ActiveRecord::Base
   
   def shipping_address_valid?
     unless ZipCode::ZIPCODES[self.shipping_zip_code]
-      errors.add(:shipping_zip_code, "is not supported. Please select another value!")
+      errors.add(:shipping_zip_code, "is not supported with Swapidy's services. Please try later.")
       return false
     end
     
@@ -78,7 +78,7 @@ class Order < ActiveRecord::Base
     result = verify_shipping_address
     #return true if is_candidate_address && !result && candidate_addresses && !candidate_addresses.empty? 
     if !result && candidate_addresses && !candidate_addresses.empty? 
-      errors.add(:shipping_address, "is confused with nearly same addresses. Need confirm again to make sure!") 
+      errors.add(:shipping_address, "is not confirmed with the shipping service accurately. Please confirm before continuing.") 
     elsif !result
       errors.add(:shipping_address, "could not be found") 
     end
@@ -157,11 +157,11 @@ class Order < ActiveRecord::Base
   def create_notification_to_cancel
     notification = self.notifications.new(:user_id => self.user.id)
     if self.is_trade_ins? 
-      notification.title = "#{product.title} - Cancelled"
-      notification.description = "Trade-Ins: #{self.product.title} - #{self.honey_price} Honey - Cancelled" 
+      notification.title = "#{product.title} - Canceled"
+      notification.description = "Trade-Ins: #{self.product.title} - #{self.honey_price} Honey - Canceled" 
     else
-      notification.title = "#{product.title} - Cancelled"
-      notification.description = "Order: #{self.product.title} - #{self.honey_price} Honey - Cancelled" 
+      notification.title = "#{product.title} - Canceled"
+      notification.description = "Order: #{self.product.title} - #{self.honey_price} Honey - Canceled" 
     end
     notification.save
     
@@ -173,10 +173,10 @@ class Order < ActiveRecord::Base
     notification = self.notifications.new(:user_id => self.user.id)
     if self.is_trade_ins? 
       notification.title = "Product verified"
-      notification.description = "Trade-ins: #{self.product.title} (#{self.honey_price} Honey) is verified successfully." 
+      notification.description = "Trade-ins: #{self.product.title} (#{self.honey_price} Honey) has been verified successfully." 
     else
-      notification.title = "Order is completed"
-      notification.description = "Order: completed with the product #{self.product.title} and #{self.honey_price} Honey" 
+      notification.title = "Order is complete"
+      notification.description = "Your order is complete #{self.product.title} and #{self.honey_price} Honey" 
     end 
     notification.save
     

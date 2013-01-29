@@ -54,11 +54,6 @@ body{
       <% if current_user.extra_honey_for(@product) <= 0 %>
         <div>
           <i>Your balance is enough to buy this product without additional charge!</I>
-          <% if current_user.payment_ready? %>
-            <a href="#" onclick="javascript:open_in_new_tab('/payments/new');" class="btn btn-success btn-mini">Get more Honey</a>
-          <% else %>
-            <br />Your payment has not been verified. To get more Honey, please edit <a style="color:#38b4de; text-decoration:underline;" href="javascript:open_in_new_tab('/users/edit#card_info_container');">card information in your profile</a>.  
-          <% end %>
         </div>
       <% else %>
         <div>
