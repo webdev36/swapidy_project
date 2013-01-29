@@ -3,13 +3,14 @@ body{
   background: whitesmoke;
 }
 </style>
-<div class="product_name" style="width: 100%"><%= @product.title %></div>
+
+
+
+<div class="product_name"><%= @product.title %></div>
 <div id="product_container" style="width: 100%">
-  <div style="display: inline-block; vertical-align: top;">
-    <img class="product_show_image" src="<%= @product.main_image_url(:large) %>">  
-  </div>
+
   <div id="product_text" <% if @product.for_buy %> style="width: 330px;" <% end %>>
-    <div class="product_price">
+    <div class="product_price" style="position:relative; bottom:40px;">
       <% @using_condition = (params[:using_condition] || "").blank? ? "Flawless" : params[:using_condition] %>
       <input type="hidden" name="using_condition" id="using_condition" value="<%= @using_condition %>" >
       <% if @product.has_flawless_type? %>

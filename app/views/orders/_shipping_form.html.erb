@@ -1,4 +1,16 @@
+<style type="text/css">
+.label{
+  font-family: 'myriad';
+  font-size: 14px;
+  width: 215px;
+  color: #fff;
+  text-align: center;
+  background: #fa3e6e;
+  border-radius: 10px 10px 0px 0px;
+  padding:5px 0px 0px 5px;
 
+}
+</style>
 <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
 <input id="order_token_key" name="order[token_key]" type="hidden" value="<%= order.token_key %>">
 <input id="order_using_condition" name="order[using_condition]" type="hidden" value="<%= order.using_condition %>">
@@ -24,36 +36,36 @@
   </div>
 <% end %>
 
-<div id='shipping_address_form' class='address_form_content'>
+<div id='shipping_address_form' class='address_form_content' style="position:relative; bottom:90px; right:20px;">
   <div class="field_col_1">  
     <div>
-      <label for='shipping_first_name'>First name</label><br/>
+      <div class="label" for='shipping_first_name'>First name</div><br/>
       <input id="order_shipping_first_name" name="order[shipping_first_name]" size="30" type="text" value="<%= order.shipping_first_name %>">
     </div>
 
     <div>
-      <label for='shipping_last_name'>Last name</label><br/>
+      <div class="label" for='shipping_last_name'>Last name</div><br/>
       <input id="order_shipping_last_name" name="order[shipping_last_name]" size="30" type="text" value="<%= order.shipping_last_name %>">
     </div>
 
     <div>
-      <label for='shipping_address'>Address Line 1</label><br/>
+      <div class="label" for='shipping_address'>Address Line 1</div><br/>
       <input id="order_shipping_address" name="order[shipping_address]" size="30" type="text" value="<%= order.shipping_address %>">
     </div>
 
     <div>
-      <label class='optional' for='shipping_street_name2'>Address Line 2 (optional)</label><br/>
+      <div class='label optional' for='shipping_street_name2'>Address Line 2 (optional)</div><br/>
       <input id="order_shipping_optional_address" name="order[shipping_optional_address]" size="30" type="text" value="<%= order.shipping_optional_address %>">
     </div>
   </div>
-  <div class="field_col_2">
+  <div class="field_col_2" style="position:relative; left:240px; bottom:250px;">
     <div>
-      <label for='shipping_city'>City</label><br/>
+      <div class="label" for='shipping_city'>City</div><br/>
       <input id="order_shipping_city" name="order[shipping_city]" size="30" type="text" value="<%= order.shipping_city %>">
     </div>
 
     <div style='display: block;'>
-      <label for='shipping_state'>State</label><br/>
+      <div class="label" for='shipping_state'>State</div><br/>
       <select id="order_shipping_state" name="order[shipping_state]">
         <% us_subregions.each do |option| %>
           <option value='<%= option[1] %>' <%= "selected" if order.shipping_state && order.shipping_state == option[1] %>><%= option[0] %></option>
@@ -61,12 +73,12 @@
       </select>
     </div>
     <div>
-      <label for='shipping_zipcode'>Zip Code</label><br/>
+      <div class="label" for='shipping_zipcode'>Zip Code</div><br/>
       <input id="order_shipping_zip_code" name="order[shipping_zip_code]" size="30" type="text" value="<%= order.shipping_zip_code %>">
       <input id="order_shipping_zip_code_add_on" name="order[shipping_zip_code_add_on]" type="hidden" value="<%= order.shipping_zip_code_add_on %>">
       <input id="order_is_candidate_address" name="order[is_candidate_address]" type="hidden" value="<%= order.is_candidate_address %>">
     </div>
-    <input name='commit' class='order_button_sell' style='width: 220px; height: 50px; margin-top: 5px;' type='submit' value='<%= submit_title %>' />
+    <input name='commit' class='order_button_buy' type='submit' value='<%= submit_title %>' />
   </div>
   <% if !order.errors.empty? || @error_message %>
     <div class="alert alert-error" style="width: 492px;"><%= order.errors.full_messages.join('.') %> <%= @error_message if @error_message %></div>

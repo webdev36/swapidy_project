@@ -5,12 +5,18 @@
   }
 
 </style>
+<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-2.png); -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;">
 
-<div style="background: white;width: 85%;margin: 25px auto; padding: 60px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); border-radius: 5px;">
+<div class="container">
+      <div class="headings_pink confirm_head_info">Confirm Your Details</div>
+      <div class="confirm_image_container">
+      <img id="confirm_image" src="<%= @product.main_image_url(:large) %>"></div>
+<div class="confirm_container">
   
-  <div class="headings_pink">Confirm Your Details</div>
-  
-  <p class="confirm_subheading">Please confirm that the following information.</p>
+  <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
   
   <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
     <%= f.hidden_field :order_type %>
@@ -20,27 +26,24 @@
     <%= f.hidden_field :token_key %>
   
     <br/>
-    <div class="confirm_container">
-    <div>
-      <div class="confirm_info_head">Product: <%= @order.title %></div><br />
-      <img id="confirm_image" src="<%= @product.main_image_url(:large) %>">
-    </div>
-    
-    <br/>
-  
-    <div id="email_label_info">
+      <div class="confirm_info_head">You are selling: <%= @order.title %></div><br />
+
+    <div id="email_label_info" style="position:relative; bottom:90px;">
       <%= render :partial => "email_label", :locals => {:user => current_user } %>
     </div>
   
     <br/>
     <div>
-      <label class="confirm_info_head">
-        <div class="headings_pink">Payment Information</div><br/>
-      </label>
-      <div>
+         <div id="shipping_label_info">
+      <%= render :partial => "shipping_label", :locals => {:order => @order} %>
+    </div>
+    <div class="confirm_payment_contianer">
+        <div class="headings_pink" style="font-size:20px">Payment Information</div><br/>
+      <div style="position:relative; bottom:20px;">  
+        <div>
         <span>Current Balance:</span>
         <%= format_num(current_user.honey_balance) %> Honey
-      </div>
+        </div>
       <div>
         <span>Product Price:</span>
         <%= format_num(@product.honey_price) %> Honey
@@ -48,32 +51,25 @@
       <div>
         Your balance would increase to <%= format_num(current_user.honey_balance + (@product.honey_price || 0)) %> Honey after selling.
         <br />You can use the Honey to buy products in our marketplace.
-        <% if current_user.payment_ready? %>
-          <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="btn btn-success btn-mini">Get more Honey</a>
-        <% else %>
-          <br />Your payment has not been verified. To get more Honey, please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');" class="order_link">card information in your profile</a>.  
-        <% end %>
       </div>
     </div>
+  </div>
     <br/>
-    <div id="shipping_label_info">
-      <%= render :partial => "shipping_label", :locals => {:order => @order} %>
-    </div>
+  </div>
     <% has_agreement_before = current_user.has_same_order?(@order.order_type) %>
-    <div>
-      <label class="confirm_info_head"><div class="headings_pink">Terms of Service</div></label>
-      <br />
-      <p>
+    <div style="position:relative; bottom:350px;">
+      <div class="headings_pink" style="font-size:20px;">Terms of Service</div>
+      <p >
         <input id="terms_of_service_checkbox" type="checkbox" <% if has_agreement_before %>checked="checked"<% end %> /> 
         <span>Check this box, you agree to our <a class="order_link" href="/terms" target="_blank">terms of service</a> and confirm that 
           the item(s) you are selling have not been reported lost or stolen.</span>
       </p>
     </div>
     <br/>
-    <input name="commit" onclick="showPageLoading();" id="submit_button" class="order_button_sell" style="width: 180px; height: 50px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
+    <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Confirm" />
   <% end %>
 
 </div>
 
 <%= render :partial => "order_confirm_popups" %>
-
+</div>
