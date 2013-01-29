@@ -1,5 +1,9 @@
-
-<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-2.png); -webkit-background-size: cover;
+<style type="text/css">
+body{
+  background: whitesmoke;
+}
+</style>
+<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-2.jpg); -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;">
@@ -46,11 +50,6 @@
           <div >
             <br/>
             <span style="font-size:20px; position:relative; bottom:50px;">Your balance is enough to buy this product.</span>
-            <% if current_user.payment_ready? %>
-              <a href="#" onclick="javascript:showPopup('popup-dialog_add_honey');" class="order_button_sell" style="font-size:20px; position:relative; left:20px;">Get more Honey</a>
-            <% else %>
-              <% #<br/>Your payment has not been verified. To get more Honey, please edit <a href="javascript:open_in_new_tab('/users/edit#card_info_container');">Card Information of your Profile</a>. %> 
-            <% end %>
           </div>
           </div>
           <br/>
