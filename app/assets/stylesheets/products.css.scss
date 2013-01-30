@@ -92,9 +92,7 @@ margin: 35px 0 0 0;
       0 0 4px 1px rgba(0,0,0,0.2); 
 
   text-decoration: none;
-  text-shadow: 0 1px rgba(255,255,255,0.7);  
-position:relative;
-bottom:80px;
+  text-shadow: 0 1px rgba(255,255,255,0.7);
 }
 .show_button_buy:hover {
   background-color: #F9006E;
@@ -117,8 +115,7 @@ bottom:80px;
 #product_text{
   display: inline-block;
   vertical-align: top;
-  min-height: 250px;
-  width: 200px;
+  min-height: 150px;
 }
 .product_price{
   color: #38B4DE;
@@ -243,7 +240,8 @@ top:0px;
 
 }
 .payment_editing_block{
-  width:400px;
+  width:440px;
+  margin-right: -10px;
 }
 .payment_product_info{
   position:relative;
