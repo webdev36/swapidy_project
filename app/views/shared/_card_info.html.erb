@@ -1,17 +1,29 @@
+<style type="text/css">
+label{
+	color: #C8C8C8;
+}
+</style>
 
-<div>
+<div style="background:url('/images/cc_template_confirm.png'); background-repeat:no-repeat; height:360px;">
+<div style="margin-left:30px; position:relative; top:30px; color:white; font-family:'halter';">
+	<div>
+  		<label>Card Number</label><br />
+  		xxxx-xxxx-xxxx-<%= card[:card_last_four_number] %>
+	</div>
+	<div>	
+	  <label>Expiration Date</label><br />
+  <%= card[:card_expired_date].strftime("%B %Y") if card[:card_expired_date] %>
+  	</div>
+	<div>
   <label>Name on card</label><br />
   <%= card[:card_name] %>
-</div>
-<div>
+	</div>
+	<div>
   <label>Card Type</label><br />
   <%= card[:card_type] %>
-</div>
-<div>
-  <label>Card Number</label><br />
-  xxxx-xxxx-xxxx-<%= card[:card_last_four_number] %>
-</div>
-<div>
-  <label>Expiration Date</label><br />
-  <%= card[:card_expired_date].strftime("%B %Y") if card[:card_expired_date] %>
+	</div>
+
+
+
+	</div>
 </div>

@@ -32,7 +32,7 @@
   <% end %>
 
   <div>
-    <input type="button" value="Update" style="display: inline-block;" class="show_button_buy" onclick="javascript:edit_profile_card_validate();" />
+    <input type="button" value="Update" style="margin-top:40px;" class="show_button_buy" onclick="javascript:edit_profile_card_validate();" />
     <div style="display: inline-block;">
       <% unless resource.errors.empty? %>
         <div class="alert alert-error" style="width:245px; margin-left: 5px; padding-top: 4px;"> <%= raw resource.errors.full_messages.first %>. </div>

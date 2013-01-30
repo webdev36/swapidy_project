@@ -13,7 +13,10 @@
   font-family: "myriad-s";
   src: url('/myriad-s.otf') format("truetype");
 }
-
+@font-face {
+  font-family: "halter";
+  src: url('/halter.ttf') format("truetype");
+}
 #iphone{
 	height:350px;
 	width:350px;
@@ -24,7 +27,7 @@
 	width:550px;
 }
 .container{
-  font-family:"myriad";
+  font-family:"myriad", "myriad-s";
 }
 
 a:visited 

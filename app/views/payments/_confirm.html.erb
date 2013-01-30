@@ -1,10 +1,10 @@
 <style type="text/css">
 label{
   color:#38B4DE;
-  font-size: 20px;
+  font-size: 16px;
 }
 </style>
-
+<div style="height:420px">
 <%= form_for(@payment, :as => 'payment', :url => "/payments/create", :html => {:id => "add_honey_form"}) do |f| %>
   <%= f.hidden_field :amount %>
   <%= f.hidden_field :honey_money %>
@@ -22,26 +22,31 @@ label{
   <%= f.hidden_field :new_card_expired_year %>
   
   <div class="headings_pink">Confirm Your Payment Details</div><br/>
+<div style="float:left; font-family:'myriad-s';">  
   <div>
-    <label>Dollar Amount:</label><br/>
-    <strong>$<%= format_num(@payment.amount, 2) %></strong>
+    <label style="color:#666; font-family:'myriad-s';">Dollar Amount:</label>
+    $<%= format_num(@payment.amount, 2) %>
   </div>
   <div>
-    <label>Honey amount:</label><br/>
+    <label style="color:#666; font-family:'myriad-s';">Honey amount:</label>
     <%= format_num(@payment.honey_money) %> Honey
   </div>
-  <br/>
-  <div>
-    <span style="color:#666; font-size:20px; font-family:'myriad-s'">Your current balance is:</span>
-    <span style="color:#666; font-size:20px; font-family:'myriad-s'"><%= format_num(current_user.honey_balance) %> Honey</span><br /><br/>
-    <span style="color:#666; font-size:20px; font-family:'myriad-s'">After payment, your balance will be:</span>
-    <span style="color:#666; font-size:20px; font-family:'myriad-s'"><%= format_num(@payment.honey_money + current_user.honey_balance) %> Honey</span>
+</div>
+  <div style="float:left; margin-left:50px; font-family:'myriad-s;">
+    <span style="color:#666; font-size:16px; font-family:'myriad-s'">Your current balance is:</span>
+    <span style="color:#666; font-size:16px; font-family:'myriad-s'"><%= format_num(current_user.honey_balance) %> Honey</span><br />
+    <span style="color:#666; font-size:16px; font-family:'myriad-s'">After payment, your balance will be:</span>
+    <span style="color:#666; font-size:16px; font-family:'myriad-s'"><%= format_num(@payment.honey_money + current_user.honey_balance) %> Honey</span>
   </div>
   <br/>
-  <%= render :partial => "/shared/card_info", :locals => {:card => @payment.new_card_info ? @payment.new_card_info : @payment.card_info_in_hash }%>
+
+
+ <div style="height:400px; margin-top:40px; margin-left:50px;">
+  <%= render :partial => "/shared/card_info", :locals => {:card => @payment.new_card_info ? @payment.new_card_info : @payment.card_info_in_hash }%></div>
   <br/>
   <div>
-    <a href="#" id="back_submit" onclick="submit_back_form('/payments/edit_card');" style="color:#1D95CB; position:relative; top:10px; padding:10px;">Back</a>
-    <a href="#" class="show_button_buy submit_button" onclick="showPageLoading(); submit_add_honey_form();" style="color:white; font-family:'myriad'; position:relative; top:10px; font-size:25px; padding:10px;">Pay Now</a>
+    <a href="#" id="back_submit" class="show_button_buy"onclick="submit_back_form('/payments/edit_card');" style="position:relative; bottom:120px;">Back</a>
+    <a href="#" class="show_button_buy submit_button" onclick="showPageLoading(); submit_add_honey_form();" style="position:relative; bottom:120px; left:10px;">Pay Now</a>
   </div>    
 <% end %>
+</div>

@@ -7,15 +7,14 @@
   <%= f.hidden_field :card_name %>
   <%= f.hidden_field :card_expired_month %>
   <%= f.hidden_field :card_expired_year %>
-
-  <%= render :partial => "/devise/shared/stripe_card_form", :locals => {:submit_form => "add_honey_form", :field_prefix => "payment_", :f => f, :user => @payment}%>
-  <br />
+<div style="position:relative; top:40px;">
+  <%= render :partial => "/devise/shared/stripe_card_form", :locals => {:submit_form => "add_honey_form", :field_prefix => "payment_", :f => f, :user => @payment}%></div>
   <% unless @payment.errors.empty? %>
     <div class="alert alert-error" style="text-align: center;"><%= raw @payment.errors.full_messages.first %></div>
   <% end %>
 
   <div>
-    <a href="#" id="back_submit" onclick="submit_back_form('/payments/new');" style="color:#1D95CB; position:relative; top:10px; padding:10px;"> Back</a>
-    <a href="#" id="edit_card_submit" class="show_button_buy submit_button" style="color:white; font-family:'myriad'; position:relative; top:10px; font-size:25px; padding:10px;"> Continue</a>
+    <a href="#" id="back_submit" class="show_button_buy" onclick="submit_back_form('/payments/new');" style="position:relative; top:20px;"> Back</a>
+    <a href="#" id="edit_card_submit" class="show_button_buy submit_button" style="position:relative; top:20px; left:10px;"> Continue</a>
   </div>
 <% end %>
