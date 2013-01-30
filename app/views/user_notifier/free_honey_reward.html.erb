@@ -17,7 +17,7 @@ border-radius: 10px;">
 <div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">
 	<b>Good Day <%= @free_honey.sender.name_in_email %>,</b><br/>
 <br/>
-You have received <%= @free_honey.sender_honey_amount %> Honey for FREE on Swapidy because <%= @free_honey.receiver_title %> accepted your invitation to join.<br/>
+You have received <%= number_with_delimiter(@free_honey.sender_honey_amount) %> Honey for FREE on Swapidy because <%= @free_honey.receiver_title %> accepted your invitation to join.<br/>
 <br/>
 What are you waiting for? Go and spend that sweet, sweet Honey! 
 <br/>

@@ -17,15 +17,15 @@ border-radius: 10px;">
 <div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">
 	<b>Good Day <%= @user.name_in_email %>,</b><br />
 <br/>
-You just purchased <%= @payment.honey_money %> Honey for $<%= @payment.amount %>. 
+You just purchased <%= number_with_delimiter(@payment.honey_money) %> Honey for $<%= number_with_delimiter(@payment.amount) %>. 
 Our Honey bees have added their Honey into your account so you can buy the products you want.<br/>
 <br/>
 Here are the details of your purchase:<br/>
 <br/>
 <b>Honey purchased:<br />
-<%= @payment.honey_money %> Honey<br />
+<%= number_with_delimiter(@payment.honey_money) %> Honey<br />
 Charged amount:<br />
-$<%= @payment.amount %><br />
+$<%= number_with_delimiter(@payment.amount) %><br />
 Your current balance is:<br />
 <%= @user.honey_balance %> Honey<br />
 <br />

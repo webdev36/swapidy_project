@@ -17,7 +17,7 @@ border-radius: 10px;">
 
 <div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">Good Day <%= @user.name_in_email %>,<br />
 <br />
-Our systems have detected that you haven't shipped out your <%= @order.product.title %> for the <%= @order.honey_price %> we gave you. 
+Our systems have detected that you haven't shipped out your <%= @order.product.title %> for the <%= number_with_delimiter(@order.honey_price) %> we gave you. 
 Our Honey bees are getting really worked up about this. We like to make sure they're happy, otherwise they use their stingers and boy do they hurt!<br />
 <br />
 Please ship at your earliest convenience so that we can ship any products that you may have ordered.<br />

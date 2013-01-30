@@ -10,7 +10,7 @@
   <% end %>
 </p>
 <p><i>Condition</i>: <strong><%= @order.using_condition %></strong></p>
-<p><strong><i>Price</i>: <%= @product.honey_price %> Honey</strong></p>
+<p><strong><i>Price</i>: <%= number_with_delimiter(@product.honey_price) %> Honey</strong></p>
 
 <h2>Shipping from</h2>
 <p>

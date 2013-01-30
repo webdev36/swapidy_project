@@ -18,7 +18,7 @@ border-radius: 10px;">
 <div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">
 	Good Day <%= @user.name_in_email %>,<br/>
 <br/>
-You just bought <%= @order.product.title %> for <%= @order.honey_price %> Honey. 
+You just bought <%= @order.product.title %> for <%= number_with_delimiter(@order.honey_price) %> Honey. 
 We will be sending out your item(s) shortly.<br/>
 <br/>
 If you have any "Pending" trade-ins, please make sure to send those in right away 

@@ -36,7 +36,7 @@
             <td><%= order.is_trade_ins? ? "Sell" : "Buy" %></td>
           <% end %>
           <td><%= order.title %></td>
-          <td><%= order.honey_price %></td>
+          <td><%= number_with_delimiter(order.honey_price) %></td>
           <td><%= order.status_title %></td>
           <td><%= order.created_at.strftime("%H:%M %b %d, %Y") %></td>
         </tr>
