@@ -20,6 +20,9 @@ label{
   <%= f.hidden_field :new_card_name %>
   <%= f.hidden_field :new_card_expired_month %>
   <%= f.hidden_field :new_card_expired_year %>
+  <% if (params[:reload_payment_order_info] && params[:reload_payment_order_info] == "true") %>
+    <input type="hidden" name="reload_payment_order_info" value="true" />
+  <% end %>
   
   <div class="headings_pink">Confirm Your Payment Details</div><br/>
 <div style="float:left; font-family:'myriad-s';">  

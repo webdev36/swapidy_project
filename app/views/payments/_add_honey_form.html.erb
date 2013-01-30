@@ -11,6 +11,9 @@
   <%= f.hidden_field :new_card_name %>
   <%= f.hidden_field :new_card_expired_month %>
   <%= f.hidden_field :new_card_expired_year %>
+  <% if (params[:reload_payment_order_info] && params[:reload_payment_order_info] == "true") %>
+    <input type="hidden" name="reload_payment_order_info" value="true" />
+  <% end %>
   <br/>
   <div class="headings_pink_edit">
     How much Honey would you like to purchase?

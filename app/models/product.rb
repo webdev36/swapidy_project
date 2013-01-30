@@ -35,6 +35,7 @@ class Product < ActiveRecord::Base
                       
   scope :price_range, lambda { |key| {:conditions => PRICE_RANGE_SQLS[key]} }
   
+  before_save :set_category
   after_save :expired_fragment_caches
   after_destroy :expired_fragment_caches
 
@@ -124,6 +125,10 @@ class Product < ActiveRecord::Base
     ActionController::Base.new.expire_fragment("homepage_product_thumb_#{self.id}") rescue nil
   end
   
+  def set_category
+    self.category = self.product_model.category if self.product_model
+  end
+  
   def weight_lb
     product_model.weight_lb
   end
@@ -170,12 +175,16 @@ class Product < ActiveRecord::Base
       field :honey_price
       field :price_for_good_type
       field :price_for_poor_type
+      field :for_sell
+      field :for_buy
     end
     update do
       field :title
       field :honey_price
       field :price_for_good_type
       field :price_for_poor_type
+      field :for_sell
+      field :for_buy
       field :images
       field :product_attributes
     end

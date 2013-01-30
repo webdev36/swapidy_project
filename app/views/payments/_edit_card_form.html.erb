@@ -9,6 +9,7 @@
   <%= f.hidden_field :card_expired_year %>
 <div style="position:relative; top:40px;">
   <%= render :partial => "/devise/shared/stripe_card_form", :locals => {:submit_form => "add_honey_form", :field_prefix => "payment_", :f => f, :user => @payment}%></div>
+
   <% unless @payment.errors.empty? %>
     <div class="alert alert-error" style="text-align: center;"><%= raw @payment.errors.full_messages.first %></div>
   <% end %>

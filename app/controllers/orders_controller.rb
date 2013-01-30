@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  before_filter :require_login, :only => [:payment_info, :shipping_info, :confirm, :create]
+  before_filter :require_login, :only => [:payment_info, :shipping_info, :confirm, :create, :reload_payment_order_info]
   before_filter :set_order_product, :only => [:email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
   
   def new
@@ -22,11 +22,33 @@ class OrdersController < ApplicationController
     end
     
     if user_signed_in?
-      render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_form"
+      render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
     else
       @user = User.new
       render "email_info_form"
     end
+  end
+  
+  def reload_payment_order_info
+    Rails.logger.info "1"
+    @order = Order.new(:order_type => params[:order_type], :product_id => params[:product_id].to_i )
+    Rails.logger.info "2"
+    @product = Product.find params[:product_id]
+    Rails.logger.info "3"
+    (redirect_to "/"; return) unless @product
+    Rails.logger.info "4"
+    @order.using_condition = params[:using_condition] || (params[:order] && params[:order][:using_condition])
+    Rails.logger.info "5"
+    @order.honey_price = @product.price_for(@order.using_condition)
+    Rails.logger.info "6"
+    
+    respond_to do |format|
+      format.js {
+        Rails.logger.info "7"
+        @return_content = render_to_string(:partial => "/orders/payment_info_form")
+      }
+    end
+    Rails.logger.info "8"
   end
   
   def email_info
@@ -34,7 +56,7 @@ class OrdersController < ApplicationController
   end
   
   def payment_info
-    render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_form"
+    render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
   end
 
   def shipping_info
@@ -42,7 +64,7 @@ class OrdersController < ApplicationController
       @order.enter_from_last_address if @order.shipping_address_blank?
       render "shipping_info_page"
     else
-      render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_form"
+      render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
     end
   end
   
