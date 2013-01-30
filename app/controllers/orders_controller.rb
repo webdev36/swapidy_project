@@ -30,25 +30,17 @@ class OrdersController < ApplicationController
   end
   
   def reload_payment_order_info
-    Rails.logger.info "1"
     @order = Order.new(:order_type => params[:order_type], :product_id => params[:product_id].to_i )
-    Rails.logger.info "2"
     @product = Product.find params[:product_id]
-    Rails.logger.info "3"
     (redirect_to "/"; return) unless @product
-    Rails.logger.info "4"
     @order.using_condition = params[:using_condition] || (params[:order] && params[:order][:using_condition])
-    Rails.logger.info "5"
     @order.honey_price = @product.price_for(@order.using_condition)
-    Rails.logger.info "6"
     
     respond_to do |format|
       format.js {
-        Rails.logger.info "7"
         @return_content = render_to_string(:partial => "/orders/payment_info_form")
       }
     end
-    Rails.logger.info "8"
   end
   
   def email_info
@@ -125,6 +117,8 @@ class OrdersController < ApplicationController
     if @order.valid? && @order.shipping_address_valid?
       @success_message = "Your shipping address has been updated successfully!"
       @changed_content = render_to_string(:partial => "/orders/shipping_label", :locals => {:order => @order})
+    elsif @order.candidate_addresses && !@order.candidate_addresses.empty?
+      @candidate_content = render_to_string(:partial => "/orders/candidate_address_form", :locals => {:order => @order})
     end
     @return_content = render_to_string(:partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Change"})
   end

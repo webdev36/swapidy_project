@@ -1,4 +1,15 @@
-$("#popup-dialog_shipping_form .render_form form").html("<%= raw escape_javascript(@return_content) %>");
-<% if @changed_content %>
-  $("#shipping_label_info").html("<%= raw escape_javascript(@changed_content) %>");
+<% if params[:step] && params[:step] == "3"%>
+  <% if @success_message %>
+    $("#new_order").removeClass("new_order").submit();
+  <% end %>
+  $(".container #new_order .render_form").html("<%= raw escape_javascript(@return_content) %>");
+<% else %>
+  $("#popup-dialog_shipping_form .render_form form").html("<%= raw escape_javascript(@return_content) %>");
+  <% if @changed_content %>
+    $("#shipping_label_info").html("<%= raw escape_javascript(@changed_content) %>");
+  <% end %>
+<% end %>
+<% if @candidate_content %>
+  $("#popup-dialog_candidate_address_form .render_form").html("<%= raw escape_javascript(@candidate_content) %>");
+  showPopup('popup-dialog_candidate_address_form');
 <% end %>

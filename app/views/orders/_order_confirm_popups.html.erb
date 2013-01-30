@@ -26,7 +26,41 @@
   </div>
 </div>
 
+<div id="popup-dialog_candidate_address_form" style="display:none; height:320px; padding: 0px; position: fixed; top: 60px;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <div class="container" style="background-color: white; border-radius: 10px; height:340px; padding: 30px 20px; width:540px; margin-left:160px;" >
+      <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
+      <div class="render_form">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+  $(".select_candidate_address").live("click", function() {
+    $("#popup_new_order #order_shipping_address").attr("value", $(this).attr("data-address"));
+    $("#popup_new_order #order_shipping_optional_address").attr("value", $(this).attr("data-optional_address"));
+    $("#popup_new_order #order_shipping_city").attr("value", $(this).attr("data-city"));
+    $("#popup_new_order #order_shipping_state").attr("value", $(this).attr("data-state"));
+    $("#popup_new_order #order_shipping_zip_code").attr("value", $(this).attr("data-zip_code"));
+    $("#popup_new_order #order_shipping_zip_code_add_on").attr("value", $(this).attr("data-zip_code_add_on"));
+    $("#popup_new_order #order_is_candidate_address").attr("value", true);
+    $("#shipping_address_form .alert").hide();
+    showPopup("popup-dialog_shipping_form");
+  });
+  
+  function continue_with_address(){
+    $("#popup_new_order #order_is_candidate_address").attr("value", true);
+    showPopup("popup-dialog_shipping_form");
+    $("#popup_new_order").submit();
+  }
+
+  $("#popup_new_order input").live("change", function() {
+    $("#popup_new_order #order_is_candidate_address").attr("value", false);
+    $("#popup_new_order .alert").hide();
+  });
+
   $("#terms_of_service_checkbox").live("change", function() {
     if($(this).is(':checked')){
       $("#submit_button").prop('disabled', false);

@@ -74,10 +74,17 @@ class Order < ActiveRecord::Base
       return false
     end
     
-    return true if Rails.env != 'production'
     result = verify_shipping_address
+    
+    #for testing only
+    #if Rails.env == 'production'
+    #else
+    #  result = self.is_candidate_address && self.is_candidate_address.to_s == "true"
+    #  self.candidate_addresses = [{:address1 => "2310 ROCK ST APT (Range 52 - 55)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 56 - 59)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"}] unless result
+    #end
     #return true if is_candidate_address && !result && candidate_addresses && !candidate_addresses.empty? 
-    if !result && candidate_addresses && !candidate_addresses.empty? 
+    if !result && self.candidate_addresses && !self.candidate_addresses.empty? 
       errors.add(:shipping_address, "is not confirmed with the shipping service accurately. Please confirm before continuing.") 
     elsif !result
       errors.add(:shipping_address, "could not be found") 

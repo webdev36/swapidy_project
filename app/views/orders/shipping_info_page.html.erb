@@ -13,9 +13,60 @@ body{
         <div class="shipping_product_info"><%= @order.title %></div>  
         <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; padding: 15px 0px 20px;">
           <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
-          <%= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Continue"} %>
+          <div class="render_form">
+            <%= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Continue"} %>
+          </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<div id="popup-dialog_candidate_address_form" style="display:none; height:320px; padding: 0px; position: fixed; top: 60px;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <div class="container" style="background-color: white; border-radius: 10px; height:340px; padding: 30px 20px; width:540px; margin-left:160px;" >
+      <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
+      <div class="render_form">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(".container .new_order").submit(function() {
+    if($(this).hasClass("new_order")) {
+      $.ajax({
+        type : 'POST',
+        url : "/orders/change_shipping_info?step=3",
+        data : $(this).serialize(),
+        dataType : 'script',
+        success: function(data) {}
+      });
+      return false;
+    }else{
+      return true;
+    }
+  });
+  
+  $(".select_candidate_address").live("click", function() {
+    $("#order_shipping_address").attr("value", $(this).attr("data-address"));
+    $("#order_shipping_optional_address").attr("value", $(this).attr("data-optional_address"));
+    $("#order_shipping_city").attr("value", $(this).attr("data-city"));
+    $("#order_shipping_state").attr("value", $(this).attr("data-state"));
+    $("#order_shipping_zip_code").attr("value", $(this).attr("data-zip_code"));
+    $("#order_shipping_zip_code_add_on").attr("value", $(this).attr("data-zip_code_add_on"));
+    $("#order_is_candidate_address").attr("value", true);
+    $("#new_order").removeClass("new_order").submit();
+  });
+  
+  function continue_with_address(){
+    $("#new_order").removeClass("new_order").submit();
+  }
+
+  $(".form_element input").live("change", function() {
+    $("#continue_button").show();
+    $("#candidate_addresses_container").hide();
+    $("#order_is_candidate_address").attr("value", false);
+  });
+</script>
