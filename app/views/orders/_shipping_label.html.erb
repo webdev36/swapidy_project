@@ -1,25 +1,40 @@
-
-  <div class="headings_pink" style="font-size:20px;" style="font-size:16px;">Shipping Details</div>
-  <a  href="javascript:showPopup('popup-dialog_shipping_form');" class="order_button_buy change" style="position:relative; bottom:30px; left:20px;">Change</a>
+<div class="headings_pink" style="font-size:20px;" style="font-size:16px;">Shipping Details</div>
+<a href="javascript:reload_shipping_address_form();" class="order_button_buy change" style="position:relative; bottom:30px; left:20px;">Change</a>
 <div style="position:relative; bottom:20px;">
-<p>
-  <%= order.shipping_first_name %> <%= order.shipping_last_name %><br />
-  <%= order.shipping_address %><br />
-  <%= order.shipping_optional_address %>
-  <%= order.shipping_city %><br />
-  <%= order.shipping_state %>,&nbsp;<%= order.shipping_zip_code %><br />
-  <%= order.shipping_zip_code_add_on %><br />
-</p>
-
-<input id="order_shipping_first_name" name="order[shipping_first_name]" type="hidden" value="<%= order.shipping_first_name %>">
-<input id="order_shipping_last_name" name="order[shipping_last_name]" type="hidden" value="<%= order.shipping_last_name %>">
-<input id="order_shipping_address" name="order[shipping_address]" type="hidden" value="<%= order.shipping_address %>">
-<input id="order_shipping_optional_address" name="order[shipping_optional_address]" type="hidden" value="<%= order.shipping_optional_address %>">
-<input id="order_shipping_city" name="order[shipping_city]" type="hidden" value="<%= order.shipping_city %>">
-<input id="order_shipping_state" name="order[shipping_state]" type="hidden" value="<%= order.shipping_state %>">
-<input id="order_shipping_zip_code" name="order[shipping_zip_code]" type="hidden" value="<%= order.shipping_zip_code %>">
-<input id="order_shipping_country" name="order[shipping_country]" type="hidden" value="US">
-<input id="order_shipping_zip_code_add_on" name="order[shipping_zip_code_add_on]" type="hidden" value="<%= order.shipping_zip_code_add_on %>">
-<input id="order_is_candidate_address" name="order[is_candidate_address]" type="hidden" value="<%= order.is_candidate_address %>">
-
+  <p>
+    <%= order.shipping_first_name %> <%= order.shipping_last_name %><br />
+    <%= order.shipping_address %><br />
+    <%= order.shipping_optional_address %>
+    <%= order.shipping_city %><br />
+    <%= order.shipping_state %>,&nbsp;<%= order.shipping_zip_code %><br />
+    <%= order.shipping_zip_code_add_on %><br />
+  </p>
+  <input id="order_shipping_first_name" name="order[shipping_first_name]" type="hidden" value="<%= order.shipping_first_name %>">
+  <input id="order_shipping_last_name" name="order[shipping_last_name]" type="hidden" value="<%= order.shipping_last_name %>">
+  <input id="order_shipping_address" name="order[shipping_address]" type="hidden" value="<%= order.shipping_address %>">
+  <input id="order_shipping_optional_address" name="order[shipping_optional_address]" type="hidden" value="<%= order.shipping_optional_address %>">
+  <input id="order_shipping_city" name="order[shipping_city]" type="hidden" value="<%= order.shipping_city %>">
+  <input id="order_shipping_state" name="order[shipping_state]" type="hidden" value="<%= order.shipping_state %>">
+  <input id="order_shipping_zip_code" name="order[shipping_zip_code]" type="hidden" value="<%= order.shipping_zip_code %>">
+  <input id="order_shipping_country" name="order[shipping_country]" type="hidden" value="US">
+  <input id="order_shipping_zip_code_add_on" name="order[shipping_zip_code_add_on]" type="hidden" value="<%= order.shipping_zip_code_add_on %>">
+  <input id="order_is_candidate_address" name="order[is_candidate_address]" type="hidden" value="<%= order.is_candidate_address %>">
 </div>
+
+<script>
+  function reload_shipping_address_form(){
+    $("#popup-dialog_shipping_form #order_shipping_first_name").attr('value', $("#new_order #order_shipping_first_name").attr('value'));
+    $("#popup-dialog_shipping_form #order_shipping_last_name").attr('value', $("#new_order #order_shipping_last_name").attr('value'));
+    $("#popup-dialog_shipping_form #order_shipping_address").attr('value', $("#new_order #order_shipping_address").attr('value'));
+    $("#popup-dialog_shipping_form #order_shipping_optional_address").attr('value', $("#new_order #order_shipping_optional_address").attr('value'));
+    $("#popup-dialog_shipping_form #order_shipping_city").attr('value', $("#new_order #order_shipping_city").attr('value'));
+    $("#popup-dialog_shipping_form #order_shipping_state").attr('value', $("#new_order #order_shipping_state").attr('value'));
+    $("#popup-dialog_shipping_form #order_shipping_country").attr('value', $("#new_order #order_shipping_country").attr('value'));
+    $("#popup-dialog_shipping_form #order_shipping_zip_code_add_on").attr('value', $("#new_order #order_shipping_zip_code_add_on").attr('value'));
+    $("#popup-dialog_shipping_form #order_shipping_zip_code").attr('value', $("#new_order #order_shipping_zip_code").attr('value'));
+    $("#popup-dialog_shipping_form #order_is_candidate_address").attr('value', $("#new_order #order_is_candidate_address").attr('value'));
+    $("#popup-dialog_shipping_form input.order_button_buy").attr('value', "Update");
+    showPopup('popup-dialog_shipping_form');
+    $("#popup-dialog_shipping_form .alert").hide();
+  }
+</script>

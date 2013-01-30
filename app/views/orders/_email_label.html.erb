@@ -1,7 +1,16 @@
-
-  <div class="headings_pink" style="font-size:20px;">Contact Email</div>
-  <a href="javascript:showPopup('popup-dialog_email_form');" class="order_button_buy change" >Change</a>
+<div class="headings_pink" style="font-size:20px;">Contact Email</div>
+<a href="javascript:reload_email_change_form();" class="order_button_buy change" >Change</a>
 <div style="width:210px; position:relative; bottom:20px;">  
-All emails about your order will be sent here:
-<p><%= user.email %></p>
+  All emails about your order will be sent here:
+  <p><%= user.email %></p>
 </div>
+<script>
+  function reload_email_change_form() {
+    $("#popup-dialog_email_form form input[email]").attr("value", "<%= current_user.email %>");
+    <% unless session[:signed_in_via_facebook] %>
+    $("#popup-dialog_email_form form input[password]").attr("value", "");
+    <% end %>
+    $("#popup-dialog_email_form form .alert").hide();
+    showPopup('popup-dialog_email_form');
+  }
+</script>
