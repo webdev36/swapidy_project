@@ -124,7 +124,7 @@
 
         <% end %>
         <li>
-          <a href="javascript:showPopup('popup-dialog_how_it_work');">HOW IT WORKS</a>
+          <a href="javascript:refresh_how_it_works();">HOW IT WORKS</a>
         </li>
       </ul>
     </div>
@@ -252,4 +252,11 @@
     $('#popup-dialog_for_signup .alert-error').hide();
     showPopup('popup-dialog_for_signup');
   }
+  function refresh_how_it_works() {
+    $("#popup-dialog_how_it_work .hiw_steps").each(function(){
+      $(this).hide();
+    });
+    showPopup('popup-dialog_how_it_work')
+  }
+  
 </script>
