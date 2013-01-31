@@ -14,19 +14,18 @@ Swapidy::Application.routes.draw do
 
   match "/for_sell" => "home#index", :method => :get, :show => "for_sell"
   match "/for_buy" => "home#index", :method => :get, :show => "for_buy"
-  match "/about" => "home#static_page", :method => :get, :content => "about"
-  match "/faq_general" => "home#static_page", :method => :get, :content => "faq_general"
-  match "/faq_buying" => "home#static_page", :method => :get, :content => "faq_buying"
-  match "/faq_selling" => "home#static_page", :method => :get, :content => "faq_selling"
-  match "/team" => "home#static_page", :method => :get, :content => "team"
-  match "/how_it_works" => "home#static_page", :method => :get, :content => "how_it_works"
-  match "/jobs" => "home#static_page", :method => :get, :content => "jobs"
-  match "/team" => "home#static_page", :method => :get, :content => "team"
-  match "/terms" => "home#static_page", :method => :get, :content => "terms"
-  match "/privacy" => "home#static_page", :method => :get, :content => "privacy"
+  match "/about" => "home#static_page", :method => :get, :content => "about", :page_title => "About Us"
+  match "/faq_general" => "home#static_page", :method => :get, :content => "faq_general", :page_title => "FAQ"
+  match "/faq_buying" => "home#static_page", :method => :get, :content => "faq_buying", :page_title => "FAQ"
+  match "/faq_selling" => "home#static_page", :method => :get, :content => "faq_selling", :page_title => "FAQ"
+  match "/how_it_works" => "home#static_page", :method => :get, :content => "how_it_works", :page_title => "How it Works"
+  match "/jobs" => "home#static_page", :method => :get, :content => "jobs", :page_title => "Jobs"
+  match "/team" => "home#static_page", :method => :get, :content => "team", :page_title => "Our Team" 
+  match "/terms" => "home#static_page", :method => :get, :content => "terms", :page_title => "Terms of Service"
+  match "/privacy" => "home#static_page", :method => :get, :content => "privacy", :page_title => "Privacy Policy"
 
   match "/send_contact" => "home#contact_us", :method => :post
-  match "/contact_us" => "home#static_page", :method => :get, :content => "contact_us"
+  match "/contact_us" => "home#static_page", :method => :get, :content => "contact_us", :page_title => "Contact Us"
 
   match "/error_not_found" => "home#static_page", :method => :get, :content => "/error_pages/404"
   

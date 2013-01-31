@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
     end
     
     if user_signed_in?
+      page_title "Payment Information"
       render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
     else
       @user = User.new
@@ -48,14 +49,17 @@ class OrdersController < ApplicationController
   end
   
   def payment_info
+    page_title "Payment Information"
     render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
   end
 
   def shipping_info
     if current_user.could_order?(@order)
       @order.enter_from_last_address if @order.shipping_address_blank?
+      page_title "Shipping Address"
       render "shipping_info_page"
     else
+      page_title "Payment Information"
       render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
     end
   end
@@ -64,6 +68,7 @@ class OrdersController < ApplicationController
     if @order.valid? && @order.shipping_address_valid?
       render @order.is_trade_ins? ? "confirm_trade_ins" : "confirm_form"
     else
+      page_title "Shipping Address"
       render "shipping_info_page"
     end
   end
@@ -83,18 +88,20 @@ class OrdersController < ApplicationController
         redirect_to "/orders/#{@order.id}"
       rescue Exception => e
         @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
+        page_title "Confirm Your Details"
         render "confirm_form"
       end
     else
+      page_title "Confirm Your Details"
       render "confirm_form"
     end
   end
-  
+
   def show
     @order = Order.find params[:id]
     render @order.is_trade_ins? ? "show_trade_ins" : "show_order"
   end
-  
+
   def change_email
     @user = User.find current_user.id
     @user.email = params[:user][:email]
@@ -110,9 +117,8 @@ class OrdersController < ApplicationController
       @changed_content = render_to_string(:partial => "/orders/email_label", :locals => {:user => @user})
     end 
     @return_content = render_to_string(:partial => "/orders/change_email_form", :locals => {:user => @user})
-    Rails.logger.info @return_content
   end
-  
+
   def change_shipping_info
     if @order.valid? && @order.shipping_address_valid?
       @success_message = "Your shipping address has been updated successfully!"
