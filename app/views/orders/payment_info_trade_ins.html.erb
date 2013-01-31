@@ -46,12 +46,12 @@ body{
         </div>
 
         <div class="product_after_selling" style="font-size:19px; width:500px;">
-          After selling, you get:
+          <img src="/images/check_mark.png">&nbsp;After selling, you get:
           <span><%= format_num(@order.honey_price) %></span> <img class="payment_currency" src="/images/honey_20px_grey.png">
           <br/>
 
-          Your balance will increase to <%= format_num(current_user.honey_balance + (@order.honey_price || 0)) %>&nbsp;<img class="payment_currency" src="/images/honey_20px_grey.png"> after selling.
-          <br />You could use this Honey to buy products in the marketplace.
+          <img src="/images/check_mark.png">&nbsp;Your balance will increase to <%= format_num(current_user.honey_balance + (@order.honey_price || 0)) %>&nbsp;<img class="payment_currency" src="/images/honey_20px_grey.png"> after selling.
+          <br /><img src="/images/check_mark.png">&nbsp;You could use this Honey to buy products in the marketplace.
         <br/>
         <input name="commit" class="product_button_buy" type="submit" value="Continue" style="position:relative; bottom:20px;" />
       <% end %>

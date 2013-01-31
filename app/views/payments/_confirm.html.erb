@@ -36,9 +36,9 @@ label{
   </div>
 </div>
   <div style="float:left; margin-left:50px; font-family:'myriad-s;">
-    <span style="color:#666; font-size:16px; font-family:'myriad-s'">Your current balance is:</span>
+    <span style="color:#666; font-size:16px; font-family:'myriad-s'"><img src="/images/check_mark.png">&nbsp;Your current balance is:</span>
     <span style="color:#666; font-size:16px; font-family:'myriad-s'"><%= format_num(current_user.honey_balance) %> Honey</span><br />
-    <span style="color:#666; font-size:16px; font-family:'myriad-s'">After payment, your balance will be:</span>
+    <span style="color:#666; font-size:16px; font-family:'myriad-s'"><img src="/images/check_mark.png">&nbsp;After payment, your balance will be:</span>
     <span style="color:#666; font-size:16px; font-family:'myriad-s'"><%= format_num(@payment.honey_money + current_user.honey_balance) %> Honey</span>
   </div>
   <br/>

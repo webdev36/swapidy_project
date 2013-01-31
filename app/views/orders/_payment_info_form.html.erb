@@ -14,7 +14,7 @@
   <%= f.hidden_field :shipping_zip_code %>
   <%= f.hidden_field :shipping_country %>
   
-  <div class="payment_product_info">
+  <div class="payment_product_info"><br/>
     <%= @order.title %><br /><br />
     <label style="color:#666; padding-top: 10px;">Current Balance:</label>
     <span style="color:#666; font-family:'myriad'"><%= format_num(current_user.honey_balance) %> </span><img class="payment_currency" src="/images/honey_20px_grey.png">
@@ -36,9 +36,8 @@
     <div>
       <% if current_user.payment_ready? %>
         You would be charged $<%= format_num(current_user.extra_honey_for(@order)/100) %> (Exchange Rate: 100 Honey / $1 )
-      <% end %>
+      <% end %><br/>
     </div>
-    <br/>
     <a href="/" class="show_button_buy buy_cancel">Cancel</a>
     <a href="#" onclick="javascript:refresh_add_honey_form();" style="font-size:20px;" class="order_button_sell">Get more Honey</a>
   <% end %>
