@@ -688,7 +688,9 @@ RailsAdmin.config do |config|
      end
      edit do
        field :order_type
-       field :status
+       field :status do
+         read_only true
+       end
        field :product
        field :product_title
        field :weight_lb
