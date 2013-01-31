@@ -1,5 +1,5 @@
 <div id='candidate_addresses_container' >
-  <div class='alert alert-error'>There are <%= order.candidate_addresses.size == 1 ? 'an address' : "#{order.candidate_addresses.size} addresses" %> would be exactly your address.</div>
+  <div class='alert alert-error'>The following<%= order.candidate_addresses.size == 1 ? 'an address' : "#{order.candidate_addresses.size} addresses" %> are in the correct format for the shipping service.</div>
   <% order.candidate_addresses.each_with_index do |address, index|%>
     <p>
       <%= index + 1 %>. <%= address[:address1]%> 
