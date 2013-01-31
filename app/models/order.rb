@@ -4,7 +4,7 @@ require 'zip_code'
 class Order < ActiveRecord::Base
   include StampsShippingGateway
   
-  attr_accessible :order_type, :status, :product_id, :honey_price, :using_condition, 
+  attr_accessible :order_type, :status, :product_id, :honey_price, :using_condition, :user_id,
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,
                   :shipping_city, :shipping_state, :shipping_zip_code, :shipping_country, :shipping_method,
                   :candidate_addresses, :shipping_zip_code_add_on, :is_candidate_address, :token_key, :email
@@ -187,7 +187,7 @@ class Order < ActiveRecord::Base
     end 
     notification.save
     
-    OrderNotifier.trade_ins_compelte(self).deliver if self.is_trade_ins?
+    OrderNotifier.trade_ins_complete(self).deliver if self.is_trade_ins?
   end
   
   def generate_product_title

@@ -122,7 +122,7 @@ class OrdersController < ApplicationController
     end
     @return_content = render_to_string(:partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Change"})
   end
-  
+
   private
 
     def set_order_product
