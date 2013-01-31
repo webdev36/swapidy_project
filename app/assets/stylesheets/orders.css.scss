@@ -475,7 +475,6 @@ box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   width:500px;
 }
 .show_product_image .show_product_img{
-margin-left:150px;
-margin-top:50px;
-max-height:200px;
+  margin: 0 auto;
+  display: block; /*--Since IMG is an inline element--*/
   }
