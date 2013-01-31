@@ -41,5 +41,12 @@ class HomeController < ApplicationController
 
     redirect_to "/contact_us"
   end
-
+  
+  def disconect_fb
+    session[:signed_in_via_facebook] = nil
+    @provider = current_user.user_providers.first
+    @provider.destroy if @provider
+    session[:disconnect_facebook] = true
+    redirect_to "/users/edit"
+   end
 end

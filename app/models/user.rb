@@ -172,5 +172,19 @@ class User < ActiveRecord::Base
     remain_inviation_count > 0 && self.created_at > 7.days.ago
   end
   
+  # def update_for_disconnect(params, *options)
+    # result = update_attributes(params, *options)
+    # result
+  # end
+  def update_for_disconnect(params, *options)
+
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+    update_attributes(params, *options)
+    self.assign_attributes(params, *options)
+    return self.valid?
+  end
 
 end
