@@ -80,7 +80,7 @@ class RegistrationsController < Devise::RegistrationsController
     if (update_result && session[:signed_in_via_facebook])
       if is_navigational_format?
         flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
-          :update_needs_confirmation : :updated
+         :update_needs_confirmation : :updated
         set_flash_message :notice, flash_key
         
       end
@@ -93,10 +93,8 @@ class RegistrationsController < Devise::RegistrationsController
         sign_in(resource_name, resource)
         redirect_to "/users/edit"
       else
-        
+       sign_in resource_name, resource, :bypass => true
       end
-      
-       
     else
       clean_up_passwords resource
       respond_with resource
