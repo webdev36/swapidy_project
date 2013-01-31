@@ -54,7 +54,7 @@
 
 <div id="card_info_container" class="span12" style="margin-left: 0px; font-family:'myriad'; font-size:20px; background:url('/images/cc_template.png'); background-repeat:no-repeat; height:400px;
 ">
-  <div class="headings_pink" style="position:relative; bottom:40px;">Provice Credit Card Information</div>
+  <div class="headings_pink" style="position:relative; bottom:40px;">Provide Credit Card Information</div>
   <% if user.has_card_info? %>
     <div class="cc_blank_message">(leave blank if you don't want to change it)</div><br/>
   <% end %>
@@ -82,7 +82,7 @@
     <%= f.text_field :new_card_name, :size => 20, :class => "cc_name_field", "edit-data" => user.new_card_name %>
   </div>
 
-  <div style="margin-left:590px; position:relative; bottom:75px;">
+  <div style="margin-left:590px; position:relative; bottom:35px;">
     <span style="color:#666; font-size:14px; font-family:'myriad-s';">Card CVC</span><br />
     <%= f.text_field :new_card_cvc, :size => 20, :class => "card-cvc", "edit-data" => "" %>
     <%= f.hidden_field :new_stripe_card_token %>
