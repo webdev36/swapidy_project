@@ -55,14 +55,10 @@ class OrderNotifier < ActionMailer::Base
     @order = order
     @product = order.product
     @shipping_stamp = shipping_stamp
-    mail :to => @user.email, :subject => "Order Reminder" do |format|
-      format.html # renders send_report.text.erb for body of email
-      format.pdf do
-        attachments["ShippingLabel_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
-          render_to_string(:pdf => "ShippingLabel_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb')
-        )
-      end
-    end
+    attachments["ShippingLabel_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
+      render_to_string(:pdf => "ShippingLabel_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb')
+    )
+    mail :to => @user.email, :subject => "Order Reminder"
   end
 
   def tracking_number(order)
