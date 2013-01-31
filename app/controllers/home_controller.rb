@@ -16,10 +16,13 @@ class HomeController < ApplicationController
   end
   
   def static_page
+    page_title params[:page_title]
     render params[:content]
   end
   
   def contact_us
+    
+    page_title "Contact Us"
     unless verify_recaptcha()
       @error_message = "Please enter the text correctly."
       return

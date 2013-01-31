@@ -1,13 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  #before_filter :check_uri #deployed on swapidy.com
+  before_filter :check_uri #deployed on swapidy.com
   before_filter :prepaire_add_honey
   
   def check_uri
     return unless Rails.env == 'production'
     if !/^www/.match(request.host)
-      redirect_to "http://www." + request.host_with_port + request.fullpath 
+      redirect_to request.protocol + "www." + request.host_with_port + request.fullpath 
       #redirect_to "https://www." + request.host_with_port + request.fullpath 
     #elsif !request.ssl?
     #  redirect_to :protocol => "https://"

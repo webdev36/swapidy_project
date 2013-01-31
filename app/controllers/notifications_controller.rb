@@ -4,6 +4,7 @@ class NotificationsController < ApplicationController
   layout 'application_with_bg_contain'
 
   def index
+    page_title "Notifications"
   end
 
   def refresh

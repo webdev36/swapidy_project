@@ -60,6 +60,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def edit
+    page_title "Settings"
     resource.new_card_expired_year = resource.card_expired_year
     resource.new_card_expired_month = resource.card_expired_month
     resource.new_card_name = resource.card_name
