@@ -179,7 +179,7 @@
 
 <div id="popup-dialog_how_it_work" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
-    <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 30px; position:fixed; top:20px;" >
+    <div class="container" style="background:url('/images/popup-bg.png') repeat; border-radius: 10px; padding: 30px 30px; position:fixed; top:20px;" >
       <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
       <%= render :partial => "/home/how_it_works" %>
     </div>
@@ -188,17 +188,17 @@
 
 <div id="popup-dialog_what" style="display:none; width: 300px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
-    <div class="container" style=" width: 500px;background-color: white; border-radius: 10px; padding: 30px 30px; position:fixed; top:120px; margin-left:250px;" >
+    <div class="container" style=" width: 500px;background:url('/images/popup-bg.png') repeat; border-radius: 10px; padding: 30px 30px; position:fixed; top:60px; margin-left:230px;" >
       <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
     <img class="what_honey" src="/images/what_honey.png">
-    <div class="what_content"><div class="headings_pink" style="margin-left:30px;">The Honey virtual currency symbol.</div><br/> Swapidy will give you Honey for your products and you can buy products with the Honey.</div>
+    <div class="what_content"><div class="headings_pink" style="margin-left:30px;">The Honey virtual currency symbol.</div><br/> <span class="alert alert-success">$1 = 10 Honey.</span><br/><br/>Swapidy will give you Honey for your products and you can buy products with the Honey.</div>
     </div>
   </div>
 </div>
 
 <div id="popup-dialog_help" style="display:none; width:300px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
-    <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 30px; position:fixed; top:100px; line-height:1.5; text-align:center; width:500px; margin-left:260px;" >
+    <div class="container" style="background:url('/images/popup-bg.png') repeat; border-radius: 10px; padding: 30px 30px; position:fixed; top:100px; line-height:1.5; text-align:center; width:500px; margin-left:260px;" >
             <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
     <div class="help_unit help_1">
       <img class="help_img"src="/images/icon_call.png"><br/><br/>
@@ -215,7 +215,7 @@
   <div id="popup-dialog_add_honey" style="display:none; width:0px; padding: 0px;" class="popup-box-wrapper standard-popup">
     <div id="dialog-content">
       <div class="container" style="background:url('/images/popup-bg.png'); background-repeat:repeat; border-radius: 10px; padding: 40px; width:690px; margin-left:160px;" >
-        <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
+        <a class="close-popup" style="position:relative; left:10px;" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
         <%= render :partial => "/payments/new" %>
       </div>
     </div>

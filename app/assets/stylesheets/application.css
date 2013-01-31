@@ -693,33 +693,50 @@ margin-left: 70px;}
   height: 40px;
 }
 .honey_conversion{
-  margin-left: 100px;
+  margin-left:90px;
   padding-top: 30px;
+  height: 200px;
 }
 .icon_dollar{
   font-size:30px;
+  margin-left: 100px;
+  margin-top: 30px;
   font-family: "myriad-s";
+  position: relative;
+  top:40px;
 }
 .dollar_textbox{
   height: 30px;
   width: 130px;
+  font-size: 40px;
+  margin-left: 40px;
+  position: relative;
+  top:90px;
 }
 .payment_equal{
-  margin-left: 30px;
+  margin-left: 60px;
   font-size: 30px;
+  position: relative;
+  top:40px;
 }
 .dollar_conversion{
   position: relative;
-  bottom:50px;
-  left:330px;
+  bottom:230px;
+  margin-left: 380px;
+  height: 200px;
+
 }
 .honey_textbox{
     height: 30px;
   width: 130px;
+  margin-left: 40px;
+  font-size: 40px;
+  position: relative;
+  top:60px;
+
 }
 .icon_honey_conversion{
-  position: relative;
-  bottom:5px;
+  margin-left: 100px;
   height: 25px;
 }
 .left_menu{
@@ -801,4 +818,7 @@ ul.left_menu li a {
   font-size: 16px;
   bottom:60px;
   left:420px;
+}
+.tab-pane active{
+  background:#38B4DE;
 }

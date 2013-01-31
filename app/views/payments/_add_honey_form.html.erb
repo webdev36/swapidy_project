@@ -15,18 +15,18 @@
     <input type="hidden" name="reload_payment_order_info" value="true" />
   <% end %>
   <br/>
-  <div class="headings_pink_edit">
+  <div class="headings_pink_edit" style="margin-left:50px;">
     How much Honey would you like to purchase?
   </div>
-  <div>
-    <div class="honey_conversion"><img class="icon_honey_conversion" src="/images/honey_30px.png">&nbsp;
+  <div style="height:250px;">
+    <div class="honey_conversion" style="background:url('/images/circle_200px_1.png') no-repeat;">
       <%= f.text_field :honey_money,  :autocomplete => "off", :class =>'honey_textbox', :placeholder => 'Enter Honey amount' %><span class="payment_equal">=</span>
     </div>
-    <div class="dollar_conversion">
-      <span class="icon_dollar">$&nbsp;</span><%= f.text_field :amount,  :autocomplete => "off", :class =>'dollar_textbox', :placeholder => 'Enter dollar amount' %>
+    <div class="dollar_conversion" style="background:url('/images/circle_200px_2.png') no-repeat;">
+      <%= f.text_field :amount,  :autocomplete => "off", :class =>'dollar_textbox', :placeholder => 'Enter dollar amount' %>
     </div>
   </div>
   <div class="error_message alert alert-error" style="text-align: center; display: none;">Please enter valid amounts.</div>  
-  <a href="#" id="add_honey_submit" class="show_button_buy submit_button" style="color:white; font-family:'myriad'; position:relative; top:10px; font-size:25px; margin-left:250px; padding:10px;"> Continue</a>
+  <a href="#" id="add_honey_submit" class="show_button_buy submit_button" style="color:white; font-family:'myriad'; position:relative; top:10px; font-size:25px; margin-left:280px; padding:10px;"> Continue</a>
   <br />
 <% end %>
