@@ -64,37 +64,36 @@ class RegistrationsController < Devise::RegistrationsController
     resource.new_card_expired_year = resource.card_expired_year
     resource.new_card_expired_month = resource.card_expired_month
     resource.new_card_name = resource.card_name
-    resource.new_card_number = "xxxx-xxxx-xxxx-#{resource.card_last_four_number}" unless (resource.card_last_four_number || "").blank?
+    unless (resource.card_last_four_number || "").blank?
+      resource.new_card_cvc = "xxx"
+      resource.new_card_number = "xxxx-xxxx-xxxx-#{resource.card_last_four_number}" 
+    end
   end
   
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
-    if session[:signed_in_via_facebook]
+    if session[:signed_in_via_facebook] || params[:update_credit_card]
       update_result =  resource.update_without_password(resource_params)
     elsif session[:disconnect_facebook]
       update_result =  resource.update_for_disconnect(resource_params)
-      Rails.logger.info "test update result #{update_result.to_s}"
     else
       update_result =  resource.update_with_password(resource_params)
     end
-    if (update_result && session[:signed_in_via_facebook])
-      if is_navigational_format?
-        flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
-         :update_needs_confirmation : :updated
-        set_flash_message :notice, flash_key
-        
-      end
-      sign_in resource_name, resource, :bypass => true
-      respond_with resource, :location => after_update_path_for(resource)
-    elsif(session[:disconnect_facebook])
-      if update_result
+    if update_result
+      if session[:disconnect_facebook]
         session[:disconnect_facebook] = nil
-        flash[:update_account_notice] = "Update success"
         sign_in(resource_name, resource)
-        redirect_to "/users/edit"
       else
-       sign_in resource_name, resource, :bypass => true
+        sign_in resource_name, resource, :bypass => true
+      end 
+      flash[:update_account_notice] = "Your information has successfully been changed"
+      if params[:update_credit_card]
+        redirect_to "/users/edit?update_credit_card=true"  
+      elsif params[:update_user_settings]
+        redirect_to "/users/edit?update_user_settings=true" 
+      else
+        redirect_to "/users/edit"
       end
     else
       clean_up_passwords resource

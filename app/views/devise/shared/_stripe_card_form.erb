@@ -13,6 +13,7 @@
 
       if($(obj).attr('value') != $(obj).attr('edit-data')) {
         has_changed = true;
+        //alert(field_names[i]);
       }
     }
 
@@ -84,7 +85,7 @@
 
   <div style="margin-left:590px; position:relative; bottom:75px;">
     <span style="color:#666; font-size:14px; font-family:'myriad-s';">Card CVC</span><br />
-    <%= f.text_field :new_card_cvc, :size => 20, :class => "card-cvc", "edit-data" => "" %>
+    <%= f.text_field :new_card_cvc, :size => 20, :class => "card-cvc", "edit-data" => user.new_card_cvc %>
     <%= f.hidden_field :new_stripe_card_token %>
     <%= f.hidden_field :new_card_type %>
     <%= f.hidden_field :new_card_last_four_number %>

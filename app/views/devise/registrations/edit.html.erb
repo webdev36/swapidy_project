@@ -3,10 +3,10 @@
     <div class="side-bar">
       <div class="tabbable tabs-left">
         <ul class="nav nav-tabs" style="position: relative; ">
-          <li class="tab">
+          <li class="tab <%= "active" if params[:update_user_settings] %>">
             <a href="#user_setting" data-toggle="tab"><span class='nav_text'>User settings</span></a>
           </li>
-          <li class="tab">
+          <li class="tab <%= "active" if params[:update_credit_card] %>">
             <a href="#stripe_card" data-toggle="tab"><span class='nav_text'>Credit card information</span></a>
           </li>
         </ul>
@@ -14,17 +14,25 @@
     </div> 
     <div class="core-side">
       <div class="core-side-content">
-    
         <div class="tab-content">
-          <div class="tab-pane active" id="user_setting">
+          <div class="tab-pane active" id="user_setting" <%= "style='display:none;'" unless params[:update_user_settings] %> >
             <br/>
             <%= render :partial => "/devise/registrations/user_setting"%>
           </div>
-          <div class="tab-pane" id="stripe_card">
+          <div class="tab-pane" id="stripe_card" <%= "style='display:none;'" unless params[:update_credit_card] %> >
             <br/>
             <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :id => "edit_profile" }) do |f| %>
 	            <%= render :partial => "/devise/shared/stripe_card_form",:locals => {:submit_form => "edit_profile",:field_prefix => "user_", :f => f, :user => resource}%>
-    		<% end %>
+        	    
+              <% if params[:update_credit_card] && !resource.errors.empty? %>
+                <div class="alert alert-error" style="width: 207px;"> <%= raw resource.errors.full_messages.first %>. </div>
+              <% end %>
+              <% if params[:update_credit_card] && flash[:update_account_notice] %>
+                <div class="alert alert-success" style="width: 207px;"> <%= raw flash[:update_account_notice] %>. </div>
+              <% end %>
+        	    <input type="button" value="Update" class="show_button_buy" onclick="javascript:edit_profile_card_validate();" />
+        	    <input type="hidden" name="update_credit_card" value="true" />
+        		<% end %>
           </div>
         </div>
       </div>

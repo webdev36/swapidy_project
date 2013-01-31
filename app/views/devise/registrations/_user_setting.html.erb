@@ -1,6 +1,6 @@
 <div class="headings_pink_edit">Update Your Information</div>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :id => "edit_profile" }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :id => "user_setting" }) do |f| %>
   <%#= devise_error_messages! %>
   
   <div><%= f.label :first_name %><br />
@@ -23,22 +23,19 @@
   <% unless (session[:signed_in_via_facebook] || session[:disconnect_facebook]) %>
     <div>
       <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password %>
+    <%= f.password_field :current_password, :style => "margin-bottom: 20px;" %>
     </div>
   <% end %>
   
-
-
   <div>
-    <input type="button" value="Update" style="margin-top:40px;" class="show_button_buy" onclick="javascript:edit_profile_card_validate();" />
-    <div style="display: inline-block;">
-      <% unless resource.errors.empty? %>
-        <div class="alert alert-error" style="width:245px; margin-left: 5px; padding-top: 4px;"> <%= raw resource.errors.full_messages.first %>. </div>
-      <% end %>
-      <% if flash[:update_account_notice] %>
-        <div class="alert alert-success" style="width:245px; margin-left: 5px; padding-top: 4px;"> <%= raw flash[:update_account_notice] %>. </div>
-      <% end %>
-    </div>
+    <% if params[:update_user_settings] && !resource.errors.empty? %>
+      <div class="alert alert-error" style="width: 207px;"> <%= raw resource.errors.full_messages.first %>. </div>
+    <% end %>
+    <% if params[:update_user_settings] && flash[:update_account_notice] %>
+      <div class="alert alert-success" style="width: 207px;"> <%= raw flash[:update_account_notice] %>. </div>
+    <% end %>
+    <input type="submit" value="Update" class="show_button_buy"/>
+    <input type="hidden" name="update_user_settings" value="true" />
   </div>
 <% end %>
 		

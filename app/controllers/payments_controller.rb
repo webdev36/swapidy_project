@@ -44,7 +44,10 @@ class PaymentsController < ApplicationController
       @payment.new_card_expired_year = current_user.card_expired_year
       @payment.new_card_expired_month = current_user.card_expired_month
       @payment.new_card_name = current_user.card_name
-      @payment.new_card_number = "xxxx-xxxx-xxxx-#{current_user.card_last_four_number}" unless (current_user.card_last_four_number || "").blank?
+      unless (current_user.card_last_four_number || "").blank?
+        @payment.new_card_number = "xxxx-xxxx-xxxx-#{current_user.card_last_four_number}"
+        @payment.new_card_cvc = "xxx"
+      end
     end
     
     respond_to do |format|
