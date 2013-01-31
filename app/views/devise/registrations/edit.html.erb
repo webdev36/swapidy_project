@@ -3,10 +3,10 @@
     <div class="side-bar">
       <div class="tabbable tabs-left">
         <ul class="nav nav-tabs" style="position: relative; ">
-          <li class="tab <%= "active" if params[:update_user_settings] %>">
+          <li id="li_user_setting" class="tab">
             <a href="#user_setting" data-toggle="tab"><span class='nav_text'><img src="/images/icon_user_setting.png">&nbsp;User settings</span></a>
           </li>
-          <li class="tab <%= "active" if params[:update_credit_card] %>">
+          <li id="li_stripe_card" class="tab">
             <a href="#stripe_card" data-toggle="tab"><span class='nav_text'><img src="/images/icon_cc.png">&nbsp;Credit card information</span></a>
           </li>
         </ul>
@@ -15,11 +15,11 @@
     <div class="core-side">
       <div class="core-side-content">
         <div class="tab-content">
-          <div class="tab-pane active" id="user_setting" <%= "style='display:none;'" unless params[:update_user_settings] %> >
+          <div class="tab-pane active" id="user_setting">
             <br/>
             <%= render :partial => "/devise/registrations/user_setting"%>
           </div>
-          <div class="tab-pane" id="stripe_card" <%= "style='display:none;'" unless params[:update_credit_card] %> >
+          <div class="tab-pane" id="stripe_card">
             <br/>
             <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :id => "edit_profile" }) do |f| %>
 	            <%= render :partial => "/devise/shared/stripe_card_form",:locals => {:submit_form => "edit_profile",:field_prefix => "user_", :f => f, :user => resource}%>
@@ -40,3 +40,10 @@
     </div>
   </div>
 </div>
+<script>
+  <% if params[:update_credit_card] %>
+    $('#li_stripe_card a').tab('show');
+  <% else %>
+    $('#li_user_setting a').tab('show');
+  <% end %>
+</script>
