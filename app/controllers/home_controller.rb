@@ -1,15 +1,22 @@
 class HomeController < ApplicationController
 
   layout 'application_with_left_menu', :only => [:static_page, :contact_us]
+  layout 'application_with_slider', :only => [:index]
 
   ADMIN_EMAILS = %w(adam@swapidy.com pulkit@swapidy.com)
 
   before_filter :require_login, :only => [:settings]
-  
-  def index
+
+  caches_page :index
+
+  def cached_index
     render "index", :layout => 'application_with_slider'
   end
   
+  def index
+    #render "index", :layout => 'application_with_slider'
+  end
+
   def transactions
     page_title "Transactions"
     render "transactions", :layout => 'application_with_bg_contain'
