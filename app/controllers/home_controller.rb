@@ -5,6 +5,8 @@ class HomeController < ApplicationController
   ADMIN_EMAILS = %w(adam@swapidy.com pulkit@swapidy.com)
 
   before_filter :require_login, :only => [:settings]
+
+  caches_page :index
   
   def index
     render "index", :layout => 'application_with_slider'
