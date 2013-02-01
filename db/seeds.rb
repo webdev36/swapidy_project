@@ -191,12 +191,12 @@ lines.each do |line|
     image.save
   end
   
-  if(["Macbook"].include?(parts[0].strip))
-    cat_attr = category.category_attributes.find_by_title "Year"
-    attr = model.product_model_attributes.where(:category_attribute_id => cat_attr.id, :value => parts[2].strip ).first
-    next unless attr
-    image = model.images.new(:sum_attribute_names => attr.value)
-    image.photo = File.open("#{Rails.root}/demo_data/images/#{parts.last.strip}")
-    image.save
-  end
+  #if(["Macbook"].include?(parts[0].strip))
+  #  cat_attr = category.category_attributes.find_by_title "Year"
+  #  attr = model.product_model_attributes.where(:category_attribute_id => cat_attr.id, :value => parts[2].strip ).first
+  #  next unless attr
+  #  image = model.images.new(:sum_attribute_names => attr.value)
+  #  image.photo = File.open("#{Rails.root}/demo_data/images/#{parts.last.strip}")
+  #  image.save
+  #end
 end
