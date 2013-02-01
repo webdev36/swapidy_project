@@ -7,15 +7,15 @@ class HomeController < ApplicationController
   before_filter :require_login, :only => [:settings]
 
   caches_page :cached_index
-  
-  def index
-    render "index", :layout => 'application_with_slider'
-  end
 
   def cached_index
     render "index", :layout => 'application_with_slider'
   end
   
+  def index
+    render "index", :layout => 'application_with_slider'
+  end
+
   def transactions
     page_title "Transactions"
     render "transactions", :layout => 'application_with_bg_contain'
