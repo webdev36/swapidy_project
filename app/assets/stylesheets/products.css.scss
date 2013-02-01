@@ -221,9 +221,9 @@ width:500px;
 
 }
 .payment_product_img{
-margin-left:140px;
-margin-top:50px;
-max-height:200px;
+  position: absolute;
+  top: 0; bottom:0; left: 0; right:0;
+  margin: auto;
 }
 .payment_info_heading{
 font-family:"myriad";

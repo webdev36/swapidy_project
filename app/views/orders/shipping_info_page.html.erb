@@ -7,7 +7,7 @@ body{
   <%= render :partial => "steps", :locals => {:current_step => 3 } %>
   <div class="container">
     <div class="headings_pink shipping_form_head">Shipping Address<span>*</span></div>
-    <div class="shipping_form_image"><img id="before_confirm_image" src="<%= @product.main_image_url(:large) %>" style="padding-top: 40px; padding-bottom: 0px;" /></div>
+    <div class="shipping_form_image"><img id="before_confirm_image" src="<%= @product.main_image_url(:large) %>" /></div>
     <div class="shipping_form_container">
       <div style="width: 500px; margin-left: -20px;">
         <div class="shipping_product_info"><%= @order.title %></div>  
