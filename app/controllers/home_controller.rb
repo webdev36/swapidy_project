@@ -6,9 +6,13 @@ class HomeController < ApplicationController
 
   before_filter :require_login, :only => [:settings]
 
-  caches_page :index
+  caches_page :cached_index
   
   def index
+    render "index", :layout => 'application_with_slider'
+  end
+
+  def cached_index
     render "index", :layout => 'application_with_slider'
   end
   
