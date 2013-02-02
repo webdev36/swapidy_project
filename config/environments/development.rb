@@ -40,5 +40,14 @@ Swapidy::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+  
+  config.paperclip_defaults = { :storage => :s3,
+                                :s3_credentials => {
+                                  :bucket => "swapidy",
+                                  :access_key_id => "AKIAJ5OIBCCRF6XXSB2A",
+                                  :secret_access_key => "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",
+                                },
+                                :s3_protocol => "https"
+                              }
 
 end
