@@ -117,16 +117,11 @@ ActiveRecord::Schema.define(:version => 20130202073038) do
     t.string  "value"
   end
 
-  add_index "product_attributes", ["product_model_attribute_id"], :name => "index_product_attributes_on_product_model_attribute_id"
-
   create_table "product_model_attributes", :force => true do |t|
     t.integer "product_model_id"
     t.integer "category_attribute_id"
     t.string  "value"
   end
-
-  add_index "product_model_attributes", ["category_attribute_id"], :name => "index_product_model_attributes_on_category_attribute_id"
-  add_index "product_model_attributes", ["product_model_id"], :name => "index_product_model_attributes_on_product_model_id"
 
   create_table "product_models", :force => true do |t|
     t.string  "title"
@@ -161,7 +156,7 @@ ActiveRecord::Schema.define(:version => 20130202073038) do
     t.integer  "item"
     t.string   "table"
     t.integer  "month",      :limit => 2
-    t.integer  "year",       :limit => 8
+    t.integer  "year",       :limit => 5
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
