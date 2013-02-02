@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130130162802) do
+ActiveRecord::Schema.define(:version => 20130202073038) do
 
   create_table "categories", :force => true do |t|
     t.string  "title"
@@ -30,14 +30,14 @@ ActiveRecord::Schema.define(:version => 20130130162802) do
     t.integer  "sender_id"
     t.integer  "receiver_id"
     t.string   "receiver_email"
-    t.integer  "sender_honey_amount",   :limit => 10
-    t.integer  "receiver_honey_amount", :limit => 10
+    t.integer  "sender_honey_amount"
+    t.integer  "receiver_honey_amount"
     t.string   "token_key"
     t.datetime "expired_date"
     t.integer  "status"
     t.datetime "completed_at"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "images", :force => true do |t|
@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(:version => 20130130162802) do
     t.integer  "order_type"
     t.integer  "user_id"
     t.integer  "status"
-    t.datetime "created_at",                                               :null => false
-    t.datetime "updated_at",                                               :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.string   "shipping_method"
     t.string   "shipping_first_name"
     t.string   "shipping_last_name"
@@ -86,29 +86,29 @@ ActiveRecord::Schema.define(:version => 20130130162802) do
     t.string   "shipping_state"
     t.string   "shipping_zip_code"
     t.string   "shipping_country"
-    t.integer  "honey_price",               :limit => 10, :default => 0
+    t.integer  "honey_price",               :default => 0
     t.string   "using_condition"
-    t.decimal  "weight_lb",                               :default => 1.0
+    t.decimal  "weight_lb",                 :default => 1.0
     t.string   "shipping_zip_code_add_on"
     t.string   "product_title"
   end
 
   create_table "payment_transactions", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "gateway",                             :default => 0
+    t.integer  "gateway",                            :default => 0
     t.string   "payment_charge_id"
     t.string   "payment_invoice_id"
     t.string   "payment_type"
     t.string   "status"
     t.decimal  "amount"
-    t.integer  "honey_money",           :limit => 10
+    t.integer  "honey_money"
     t.string   "card_name"
     t.string   "card_type"
     t.string   "card_expired_month",    :limit => 2
     t.string   "card_expired_year",     :limit => 4
     t.string   "card_last_four_number", :limit => 4
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
   end
 
   create_table "product_attributes", :force => true do |t|
@@ -117,11 +117,16 @@ ActiveRecord::Schema.define(:version => 20130130162802) do
     t.string  "value"
   end
 
+  add_index "product_attributes", ["product_model_attribute_id"], :name => "index_product_attributes_on_product_model_attribute_id"
+
   create_table "product_model_attributes", :force => true do |t|
     t.integer "product_model_id"
     t.integer "category_attribute_id"
     t.string  "value"
   end
+
+  add_index "product_model_attributes", ["category_attribute_id"], :name => "index_product_model_attributes_on_category_attribute_id"
+  add_index "product_model_attributes", ["product_model_id"], :name => "index_product_model_attributes_on_product_model_id"
 
   create_table "product_models", :force => true do |t|
     t.string  "title"
@@ -136,12 +141,15 @@ ActiveRecord::Schema.define(:version => 20130130162802) do
     t.string  "title"
     t.integer "user_id"
     t.integer "category_id"
-    t.integer "honey_price",         :limit => 10
+    t.integer "price_for_sell"
     t.integer "product_model_id"
-    t.boolean "for_buy",                           :default => true
-    t.boolean "for_sell",                          :default => true
-    t.integer "price_for_good_type", :limit => 10
-    t.integer "price_for_poor_type", :limit => 10
+    t.boolean "for_buy",             :default => true
+    t.boolean "for_sell",            :default => true
+    t.integer "price_for_good_sell"
+    t.integer "price_for_poor_sell"
+    t.integer "price_for_buy"
+    t.integer "price_for_good_buy"
+    t.integer "price_for_poor_buy"
   end
 
   add_index "products", ["category_id"], :name => "index_products_on_category_id"
@@ -152,8 +160,8 @@ ActiveRecord::Schema.define(:version => 20130130162802) do
     t.string   "username"
     t.integer  "item"
     t.string   "table"
-    t.integer  "month",      :limit => 2
-    t.integer  "year",       :limit => 5
+    t.integer  "month"
+    t.integer  "year",       :limit => 8
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
@@ -162,11 +170,11 @@ ActiveRecord::Schema.define(:version => 20130130162802) do
 
   create_table "redeem_codes", :force => true do |t|
     t.string   "code"
-    t.integer  "honey_amount", :limit => 10
+    t.integer  "honey_amount"
     t.datetime "expired_date"
     t.integer  "status"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "shipping_stamps", :force => true do |t|
