@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
 
-  attr_accessible :title, :honey_price, :product_model_id, :image_ids, :for_sell, :for_buy,
-                  :product_attribute_ids, :product_model_attribute_ids, :price_for_good_type, :price_for_poor_type
+  attr_accessible :title, :price_for_sell, :product_model_id, :image_ids, :for_sell, :for_buy,
+                  :product_attribute_ids, :product_model_attribute_ids, :price_for_good_sell, :price_for_poor_sell
   
   has_attached_file :image, :styles => {:thumb => "50x50>", :medium => "200x200>"}
   
@@ -24,7 +24,7 @@ class Product < ActiveRecord::Base
                   10000 => "7000 -> 10000",
                   19999 => "10000 -> 20000",
                   20000 => "Upper 20000"}
-  PRICE_FIELDS = %w(honey_price price_for_good_type price_for_poor_type)
+  PRICE_FIELDS = %w(price_for_sell price_for_good_sell price_for_poor_sell)
   PRICE_RANGE_SQLS = {3000 => PRICE_FIELDS.map{|f| "(#{f} > 0 AND #{f} <= 3000)"}.join(" OR "), 
                       5000 => PRICE_FIELDS.map{|f| "(#{f} >= 3000 AND #{f} <= 5000)"}.join(" OR "),
                       7000 => PRICE_FIELDS.map{|f| "(#{f} >= 5000 AND #{f} <= 7000)"}.join(" OR "),
@@ -40,9 +40,9 @@ class Product < ActiveRecord::Base
   after_destroy :expired_fragment_caches
 
   def price_for(using_condition)
-    return price_for_good_type if using_condition && using_condition == USING_CONDITIONS[:good]
-    return price_for_poor_type if using_condition && using_condition == USING_CONDITIONS[:poor]
-    return honey_price
+    return price_for_good_sell if using_condition && using_condition == USING_CONDITIONS[:good]
+    return price_for_poor_sell if using_condition && using_condition == USING_CONDITIONS[:poor]
+    return price_for_sell
   end
 
   def main_image_url(type)
@@ -50,13 +50,13 @@ class Product < ActiveRecord::Base
   end
   
   def has_flawless_type?
-    honey_price && honey_price > 0.0 rescue false
+    price_for_sell && price_for_sell > 0.0 rescue false
   end
   def has_poor_type?
-    price_for_poor_type && price_for_poor_type > 0.0 rescue false
+    price_for_poor_sell && price_for_poor_sell > 0.0 rescue false
   end
   def has_good_type?
-    price_for_good_type && price_for_good_type > 0.0 rescue false
+    price_for_good_sell && price_for_good_sell > 0.0 rescue false
   end
   
   def flaw_less_name
@@ -88,17 +88,17 @@ class Product < ActiveRecord::Base
     prices = PRICE_RANGES.keys.sort
     prices.each_with_index do |price, index|
       if index == 0
-        (result << "price_range_#{price}"; next) if honey_price && honey_price > 0 && honey_price <= price 
-        (result << "price_range_#{price}"; next) if price_for_good_type && price_for_good_type > 0 && price_for_good_type <= price 
-        (result << "price_range_#{price}"; next) if price_for_poor_type && price_for_poor_type > 0 && price_for_poor_type <= price 
+        (result << "price_range_#{price}"; next) if price_for_sell && price_for_sell > 0 && price_for_sell <= price 
+        (result << "price_range_#{price}"; next) if price_for_good_sell && price_for_good_sell > 0 && price_for_good_sell <= price 
+        (result << "price_range_#{price}"; next) if price_for_poor_sell && price_for_poor_sell > 0 && price_for_poor_sell <= price 
       elsif index < prices.size - 1
-        (result << "price_range_#{price}"; next) if honey_price && honey_price >= prices[index - 1] && honey_price <= price 
-        (result << "price_range_#{price}"; next) if price_for_good_type && price_for_good_type >= prices[index - 1] && price_for_good_type <= price 
-        (result << "price_range_#{price}"; next) if price_for_poor_type && price_for_poor_type >= prices[index - 1] && price_for_poor_type <= price
+        (result << "price_range_#{price}"; next) if price_for_sell && price_for_sell >= prices[index - 1] && price_for_sell <= price 
+        (result << "price_range_#{price}"; next) if price_for_good_sell && price_for_good_sell >= prices[index - 1] && price_for_good_sell <= price 
+        (result << "price_range_#{price}"; next) if price_for_poor_sell && price_for_poor_sell >= prices[index - 1] && price_for_poor_sell <= price
       else
-        (result << "price_range_#{price}"; next) if honey_price && honey_price >= price 
-        (result << "price_range_#{price}"; next) if price_for_good_type && price_for_good_type >= price 
-        (result << "price_range_#{price}"; next) if price_for_poor_type && price_for_poor_type >= price
+        (result << "price_range_#{price}"; next) if price_for_sell && price_for_sell >= price 
+        (result << "price_range_#{price}"; next) if price_for_good_sell && price_for_good_sell >= price 
+        (result << "price_range_#{price}"; next) if price_for_poor_sell && price_for_poor_sell >= price
       end
     end
     result.join(" ")
@@ -137,9 +137,9 @@ class Product < ActiveRecord::Base
     
     list do
       field :title
-      field :honey_price
-      field :price_for_good_type
-      field :price_for_poor_type
+      field :price_for_sell
+      field :price_for_good_sell
+      field :price_for_poor_sell
       field :for_sell
       field :for_buy
       field :category
@@ -148,9 +148,9 @@ class Product < ActiveRecord::Base
     end
     export do
       field :title
-      field :honey_price
-      field :price_for_good_type
-      field :price_for_poor_type
+      field :price_for_sell
+      field :price_for_good_sell
+      field :price_for_poor_sell
       field :for_sell
       field :for_buy
       field :category
@@ -162,9 +162,9 @@ class Product < ActiveRecord::Base
       field :category
       field :product_model
       field :title
-      field :honey_price
-      field :price_for_good_type
-      field :price_for_poor_type
+      field :price_for_sell
+      field :price_for_good_sell
+      field :price_for_poor_sell
       field :images
       field :product_attributes
     end
@@ -172,17 +172,17 @@ class Product < ActiveRecord::Base
     create do
       field :product_model
       field :title
-      field :honey_price
-      field :price_for_good_type
-      field :price_for_poor_type
+      field :price_for_sell
+      field :price_for_good_sell
+      field :price_for_poor_sell
       field :for_sell
       field :for_buy
     end
     update do
       field :title
-      field :honey_price
-      field :price_for_good_type
-      field :price_for_poor_type
+      field :price_for_sell
+      field :price_for_good_sell
+      field :price_for_poor_sell
       field :for_sell
       field :for_buy
       field :images
