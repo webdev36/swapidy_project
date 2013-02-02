@@ -17,8 +17,10 @@ class Order < ActiveRecord::Base
 
   attr_accessor :candidate_addresses, :is_candidate_address, :token_key, :email
 
-  belongs_to :product
   belongs_to :user
+  
+  has_many :order_products
+  has_many :products, :through => :order_products
 
   has_many :shipping_stamps, :order => "created_at desc"
   has_many :notifications, :as => :notify_object, :class_name => "Notification"
@@ -47,14 +49,6 @@ class Order < ActiveRecord::Base
     order_type && order_type == TYPES[:order]
   end
   
-  def title
-    result = self.product_title if self.product_title && !self.product_title.blank? 
-    result = self.product.title if result.nil? && self.product && !self.product.title.blank?
-    result = "#{self.product.category.title} #{self.product.product_model.title}" if result.nil? && self.product && self.product.product_model
-    return "#{result} (#{product.flaw_less_name})" if is_order?
-    "#{result} (#{using_condition})"
-  end
-  
   def status_title
     return "Completed" if self.status && self.status == STATUES[:completed]
     return "Declined" if self.status && self.status == STATUES[:declined] 
@@ -74,14 +68,24 @@ class Order < ActiveRecord::Base
       return false
     end
     
-    result = verify_shipping_address
-    
     #for testing only
     #if Rails.env == 'production'
+      result = verify_shipping_address
     #else
     #  result = self.is_candidate_address && self.is_candidate_address.to_s == "true"
     #  self.candidate_addresses = [{:address1 => "2310 ROCK ST APT (Range 52 - 55)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
-    #                            {:address1 => "2310 ROCK ST APT (Range 56 - 59)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"}] unless result
+    #                            {:address1 => "2310 ROCK ST APT (Range 56 - 59)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 60 - 65)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 66 - 69)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 70 - 75)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 76 - 79)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 80 - 85)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 86 - 89)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 90 - 95)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 46 - 49)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 40 - 45)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 36 - 39)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 30 - 35)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"}] unless result
     #end
     #return true if is_candidate_address && !result && candidate_addresses && !candidate_addresses.empty? 
     if !result && self.candidate_addresses && !self.candidate_addresses.empty? 

@@ -4,8 +4,6 @@ body{
 }
 </style>
 
-
-
 <div class="product_name"><%= @product.title %></div>
 <div id="product_container" style="width: 100%">
 
@@ -16,7 +14,7 @@ body{
       <% if @product.has_flawless_type? %>
         <div class="type <% if @using_condition == "Flawless" %>selected<% end %>" <% if @product.for_buy %> style="width: 300px;" <% end %> >
           <label for="Flawless"><%= @product.flaw_less_name %></label>
-          <span class="product_desc"><%= format_num(@product.honey_price)%> </span>
+          <span class="product_desc"><%= format_num(@product.price_for_sell)%> </span>
           <% if @using_condition == "Flawless" %>
             <span class="show_honey_symbol"><img src="/images/honey_currency_score.png"></span>
           <% else %>
@@ -27,7 +25,7 @@ body{
       <% if @product.has_good_type? %>
         <div class="type <% if @using_condition == "Good" %> selected <% end %>">
           <label for="Good">Good</label>
-          <span class="product_desc"><%= format_num(@product.price_for_good_type)%> </span>
+          <span class="product_desc"><%= format_num(@product.price_for_good_sell)%> </span>
           <% if @using_condition == "Good" %>
             <span class="show_honey_symbol"><img src="/images/honey_currency_score.png"></span>
           <% else %>
@@ -38,7 +36,7 @@ body{
       <% if @product.has_poor_type? %>
         <div class="type<% if @using_condition == "Pood" %> selected <% end %>">
           <label for="Poor">Poor</label>
-          <span class="product_desc"><%= format_num(@product.price_for_poor_type)%> </span>
+          <span class="product_desc"><%= format_num(@product.price_for_poor_sell)%> </span>
           <% if @using_condition == "Poor" %>
             <span class="show_honey_symbol"><img src="/images/honey_currency_score.png"></span>
           <% else %>

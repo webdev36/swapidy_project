@@ -1,0 +1,21 @@
+<div id="product_items">
+  <% if cart_products_empty? %>
+    <div>Empty Shopping Cart</div>  
+  <% else %>
+    <div>
+      <div class="sell_display" style="position:absolute; left:0px; width: 500px;" >
+        <% cart_products[:sell].each do |order_product| %>
+          <%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product} %>
+        <% end %>
+      </div>
+      <div style="position:absolute; left:50%; margin-left:-100px; width: 200px; text-align: center; top: 30px; font-size: 35px;">$350</div>
+      <div class="buy_display" style="position:absolute; right:0px; width: 500px; text-align: right;" >
+        <% cart_products[:buy].each do |order_product| %>
+          <%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product}%>
+        <% end %>
+      </div>
+    </div>
+    <a href="#" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>
+  <% end %>
+</div>
+

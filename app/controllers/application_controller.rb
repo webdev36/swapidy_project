@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   
   before_filter :check_uri #deployed on swapidy.com
   before_filter :prepaire_add_honey
+  before_filter :set_cart_products
   
   def check_uri
     return unless Rails.env == 'production'
@@ -18,13 +19,13 @@ class ApplicationController < ActionController::Base
     @page_title = title
   end
   
-  #unless Rails.application.config.consider_all_requests_local
+  unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => :render_not_found
     rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
     rescue_from ActionController::RoutingError, :with => :render_not_found
     rescue_from ActionController::UnknownController, :with => :render_not_found
     rescue_from ActionController::UnknownAction, :with => :render_not_found
-  #end
+  end
   
   def require_login
     unless user_signed_in?
@@ -47,6 +48,20 @@ class ApplicationController < ActionController::Base
   
   def check_to_display_guide
     session[:need_to_display_guide] = true if current_user && current_user.sign_in_count <= 3
+  end
+
+  #return array of OrderProduct instance
+  def set_cart_products
+    #for testing only
+    session[:cart_products] = {
+      :sell => Product.for_sell.limit(3).map{|p| {:product_id => p.id, :price => p.price_for_sell, :using_condition => "Flawless"} }, 
+      :buy => Product.for_buy.limit(3).map{|p| {:product_id => p.id, :price => p.price_for_buy, :using_condition => "Flawless"} }
+    } unless session[:cart_products]
+    #session[:cart_products] = {:sell => [], :buy => []} unless session[:cart_products] 
+  end
+  
+  def clear_cart_products
+    session[:cart_products] = nil
   end
 
   private
