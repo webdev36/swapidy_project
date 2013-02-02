@@ -14,6 +14,7 @@ Everytime you pull, make sure you run the db initialization script: rake swapidy
 If you don't see any js function getting executed, you should run rake assets:precompile
 
 [1/2/13 10:31:05 PM] Thanh Hai (Viet - Scrum2B): I create another branch: master-dev
+
 [1/2/13 11:06:13 PM] Thanh Hai (Viet - Scrum2B): Hi all, I explain about the git branches in GitHUb
 [1/2/13 11:06:20 PM] Thanh Hai (Viet - Scrum2B): there are 3 branches:
 [1/2/13 11:06:26 PM] Thanh Hai (Viet - Scrum2B): 1. develop
