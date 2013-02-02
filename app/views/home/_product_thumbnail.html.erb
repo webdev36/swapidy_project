@@ -3,39 +3,22 @@
     <div class="product_title" style="color:#fa3e6e; font-family:'myriad-s'; font-size:15px;" title="<%= product.title %>"><%= product.title %></div>
     <div class="product_image thumbnail"><img title="<%= product.title %>" src="<%= product.main_image_url(:thumb) %>"></div>
     <div>
-      <div class="product_price">
-        <% if product.has_flawless_type? %>
-          <% if product.for_buy %>
-            <div class="price_item flawless_type <%= product.price_range_class(product.honey_price) %>">
-              <%= product.flaw_less_name %>:
-              <%= format_num(product.honey_price) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png">
-            </div>
-          <% else %>
-            <div class="price_item flawless_type <%= product.price_range_class(product.honey_price) %>">
-              <div class="price_title"><%= product.flaw_less_name %>:</div>
-              <div class="price_value"><%= format_num(product.honey_price) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"></div>
-            </div>
-          <% end %>
-        <% end %>
-        <% if product.has_good_type? %>
-          <div class="price_item good_type <%= product.price_range_class(product.price_for_good_type) %>">
-            <div class="price_title">Good:</div>
-            <div class="price_value"><%= format_num(product.price_for_good_type) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"></div>
-          </div>
-        <% end %>
-        <% if product.has_poor_type? %>
-          <div class="price_item poor_type <%= product.price_range_class(product.price_for_poor_type) %>">
-            <div class="price_title">Poor:</div>
-            <div class="price_value"><%= format_num(product.price_for_poor_type) %>&nbsp;<img class="home_honey_symbol" src="/images/honey_15px_blue.png"></div>
-          </div>
-        <% end %>
-      </div>
-      <div class="button_for_buy">
+      <div class="button_for_sell" id= "button_block">
+        <a href="/products/<%= product.id %>?for=sell" class="btn btn-primary"title="Sell now: <%= product.title %>">Sell</a>
         <a href="/products/<%= product.id %>?for=buy" class="btn btn-primary" title="Buy now: <%= product.title %>">Buy</a>
       </div>
-      <div class="button_for_sell">
-        <a href="/products/<%= product.id %>?for=sell" class="btn btn-primary"title="Sell now: <%= product.title %>">Sell</a>
-      </div>
+  
     </div>
   </div>
 </div>
+<style>
+	div #button_block{
+		display: inline-block;
+	}
+	div #button_block a{
+	width: 50px;
+	}
+	div #button_block a{
+		display: inline-block
+	}
+</style>
