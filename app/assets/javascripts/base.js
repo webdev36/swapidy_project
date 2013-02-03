@@ -62,7 +62,13 @@ $(function() {
 
 
 });
-
+function show_hide_price_popup(popup_id){
+  if($('#' + popup_id).hasClass('hidden_filter')){
+    $('#' + popup_id).removeClass('hidden_filter');
+  }else{
+    $('#' + popup_id).addClass('hidden_filter');
+  }
+}
 function switchToCheckoutStep(form_id, step_url) {
   $("#" + form_id).attr("action", step_url);
   $("#" + form_id).submit();
