@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(:version => 20130202103654) do
     t.string   "shipping_state"
     t.string   "shipping_zip_code"
     t.string   "shipping_country"
-    t.integer  "honey_price"
+    t.integer  "honey_price",               :default => 0
     t.string   "using_condition"
     t.decimal  "weight_lb",                 :default => 1.0
     t.string   "shipping_zip_code_add_on"
