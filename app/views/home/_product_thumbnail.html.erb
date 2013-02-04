@@ -4,7 +4,7 @@
     <div class="product_image thumbnail"><img title="<%= product.title %>" src="<%= product.main_image_url(:thumb) %>"></div>
     <div>
       <div class="button_for_sell dropdown" id= "button_block">
-          <a href="javascript:select_price();"style="width: 30px; float: left;" onclick="show_hide_price_popup('popup_selling_price_<%= product.id %>');" class=" btn btn-primary dropdown-toggle select-price "title="Sell now: <%= product.title %>" data-toggle="dropdown">Sell</a>
+          <a style="width: 30px; float: left;" onclick="show_hide_price_popup('popup_selling_price_<%= product.id %>');" class=" btn btn-primary dropdown-toggle select-price "title="Sell now: <%= product.title %>" data-toggle="dropdown">Sell</a>
           <div id="popup_selling_price_<%= product.id %>" class="popup_select_price for_selling_price">
             <% if product.has_flawless_type? %>
               <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
@@ -27,8 +27,10 @@
                 <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
               </div>
             <% end %>
+         	 </div>
           </div>
-          <a style="width: 30px; float: right;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary" title="Buy now: <%= product.title %>">Buy</a>
+          <div class="button_for_buy dropdown" id="button_block">
+          <a  style="width: 30px; float: right;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary" title="Buy now: <%= product.title %>">Buy</a>
           <div id="popup_buying_price_<%= product.id %>" class="popup_select_price for_buying_price">
             <% if product.price_for_buy && product.price_for_buy > 0 %>
               <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_buy %>" product-using_condition="Flawless" >

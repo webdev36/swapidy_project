@@ -67,7 +67,7 @@ $(function() {
 		beforeSend : function(xhr) {
         xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
       	},
-      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
+      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition')+ '&for_buying='+$(this).attr('for_buying')+ '&for_sell= '+ $(this).attr('for_selling'),
 		type: 'POST',
 		dataType: 'script', 
 		success:function(){
