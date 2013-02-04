@@ -27,9 +27,7 @@
                 <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
               </div>
             <% end %>
-         	 </div>
           </div>
-          <div class="button_for_buy dropdown" id="button_block">
           <a  style="width: 30px; float: right;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary" title="Buy now: <%= product.title %>">Buy</a>
           <div id="popup_buying_price_<%= product.id %>" class="popup_select_price for_buying_price">
             <% if product.price_for_buy && product.price_for_buy > 0 %>
