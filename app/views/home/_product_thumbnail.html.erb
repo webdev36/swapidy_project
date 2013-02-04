@@ -28,7 +28,7 @@
               </div>
             <% end %>
           </div>
-          <a  style="width: 30px; float: right;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary" title="Buy now: <%= product.title %>">Buy</a>
+          <a  style="width: 30px; float: right;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary dropdown-toggle select-price" title="Buy now: <%= product.title %> "data-toggle="dropdown">Buy</a>
           <div id="popup_buying_price_<%= product.id %>" class="popup_select_price for_buying_price">
             <% if product.price_for_buy && product.price_for_buy > 0 %>
               <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_buy %>" product-using_condition="Flawless" >
