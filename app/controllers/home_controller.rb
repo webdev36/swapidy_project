@@ -53,8 +53,10 @@ class HomeController < ApplicationController
     redirect_to "/users/edit"
    end
    
-   def swap_product
-     session[:cart_products] = cart_products.save
+   def swap_product 
+     add_cart_product(:type => params[:type],:price => params[:price],:product_id => params[:product_id],:using_condition => params[:condition])
+     respond_to do |format|
+      format.js {  }
    end 
     
 end

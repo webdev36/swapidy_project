@@ -67,7 +67,8 @@ class ApplicationController < ActionController::Base
   end
   
   def add_cart_product cart_params
-    if cart_params[:type] && cart_params[:type] == "sell"
+    Rails.logger.info "params cart #{cart_params.to_s}"
+    if cart_params[:type] && cart_params[:type].to_s == "sell"
        cart_products[:sell] << {:product_id => cart_params[:product_id], :price => cart_params[:price], :using_condition => cart_params[:using_condition]}
     else
       cart_products[:buy] << {:product_id => cart_params[:product_id], :price => cart_params[:price], :using_condition => cart_params[:using_condition]}
