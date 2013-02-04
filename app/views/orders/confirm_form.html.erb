@@ -9,15 +9,10 @@
 
 <div class="container">
   <div class="headings_pink confirm_head_info">Confirm Your Details</div>
-  <div class="confirm_image_container"><img id="confirm_image" src="<%= @product.main_image_url(:large) %>"></div>
+  <div class="confirm_image_container"><img id="confirm_image" src="<%= cart_products[:sell].first.product.main_image_url(:large) %>"></div>
   <div class="confirm_container">
     <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
     <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
-      <%= f.hidden_field :order_type %>
-      <%= f.hidden_field :product_id %>
-      <%= f.hidden_field :using_condition %>
-      <%= f.hidden_field :honey_price %>
-      <%= f.hidden_field :token_key %>
     
       <% unless @order.errors.empty? %>
         <%= raw @order.errors.full_messages.join(".<br/>") %>
@@ -26,7 +21,7 @@
   
       <br/>
       <div>
-        <div class="confirm_info_head">You are buying: <%= @order.title %></div><br />
+        <div class="confirm_info_head">You are buying: </div><br />
         <div id="email_label_info" style="position:relative; bottom:90px;">
           <%= render :partial => "email_label", :locals => {:user => current_user} %>
         </div>
@@ -45,12 +40,12 @@
             </div>
             <div>
               <span>Product Price:</span>
-              <%= format_num(@product.price_for_buy) %> Honey
+              <%= format_num(cart_amount) %> Honey
             </div>      
           </div>
           <br/>
     
-          <% has_agreement_before = current_user.has_same_order?(@order.order_type) %>
+          <% has_agreement_before = !current_user.last_order.nil? %>
           <div style="position:relative; bottom:330px;">
             <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:80px;">Terms of Service</div></label>
             <p>
@@ -59,7 +54,7 @@
             </p>
           </div>
           <br/>
-          <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" style="margin-top:20px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
+          <input name="commit" onclick="alert('Under contruction');" id="submit_button" class="confirm_button_buy" style="margin-top:20px;" type="button" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
   
         <% end %>
       </div>

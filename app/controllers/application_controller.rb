@@ -53,12 +53,18 @@ class ApplicationController < ActionController::Base
 
   def cart_products
     session[:cart_products] = {:sell => [], :buy => []} if session[:cart_products].nil?
-    
     {:sell => session[:cart_products][:sell].map {|obj_hash| OrderProduct.new(obj_hash)},
      :buy => session[:cart_products][:buy].map {|obj_hash| OrderProduct.new(obj_hash)}
     }
   end
-
+  
+  def cart_amount
+    amount = 0
+    cart_products[:buy].each {|order_product| amount += order_product.price }
+    cart_products[:sell].each {|order_product| amount -= order_product.price }
+    return amount
+  end 
+  
   def add_cart_product cart_params
     session[:cart_products] = {:sell => [], :buy => []} if session[:cart_products].nil?
     
