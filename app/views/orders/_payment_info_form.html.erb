@@ -13,7 +13,7 @@
     <span style="color:#666; font-family:'myriad'"><%= format_num(current_user.honey_balance) %> </span><img class="payment_currency" src="/images/honey_20px_grey.png">
   </div>
   <div style="position:relative; bottom:20px;">
-    <label style="color:#666; font-family:'myriad';">Product Price:</label><span style="color:#666; font-family:'myriad'; font-size:20px;">&nbsp;<%= format_num(@order.honey_price) %> </span><img class="payment_currency" src="/images/honey_20px_grey.png">
+    <label style="color:#666; font-family:'myriad';">Product Price:</label><span style="color:#666; font-family:'myriad'; font-size:20px;">&nbsp;<%= format_num(cart_amount) %> </span><img class="payment_currency" src="/images/honey_20px_grey.png">
   </div>
   <% if current_user.extra_honey_for(cart_amount) <= 0 %>
     <div >

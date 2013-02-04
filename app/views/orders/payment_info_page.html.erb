@@ -27,7 +27,6 @@ body{
       type : 'POST',
       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       url : '/orders/reload_payment_order_info',
-      data: "order_type=<%= params[:order_type]%>&product_id=<%= params[:product_id]%>&using_condition=<%= params[:using_condition]%>",
       dataType : 'script',
       success: function(data) {}
     });
