@@ -120,11 +120,8 @@
     $('#s3slider').css({height: slideHeight});
   }
   
-  var for_what = "for_selling";
-  
   function get_filter_options() {
     var filters = {};
-    filters["for_what"] = ['.' + for_what];
     
     $("#container_" + current_category_id + ' .attribute_filter input').each(function(index) {
       var $src = $(this);

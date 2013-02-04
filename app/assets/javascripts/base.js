@@ -65,16 +65,16 @@ $(function() {
 	$.ajax({
 		url : url_select_price,
 		beforeSend : function(xhr) {
-        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+        	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
       	},
-      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition')+ '&for_buying='+$(this).attr('for_buying')+ '&for_sell= '+ $(this).attr('for_selling'),
+      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
 		type: 'POST',
 		dataType: 'script', 
 		success:function(){
-			 // location.reload();
-			}
-		});
-  	});
+			 //location.reload();
+		}
+	});
+  });
 });
 
 var current_popup_id = "";

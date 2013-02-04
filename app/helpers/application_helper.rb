@@ -6,6 +6,8 @@ module ApplicationHelper
   
   #return array of OrderProduct instance
   def cart_products
+    session[:cart_products] = {:sell => [], :buy => []} if session[:cart_products].nil?
+    
     {:sell => session[:cart_products][:sell].map {|obj_hash| OrderProduct.new(obj_hash)},
      :buy => session[:cart_products][:buy].map {|obj_hash| OrderProduct.new(obj_hash)}
     }

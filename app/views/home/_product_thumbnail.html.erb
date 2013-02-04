@@ -4,54 +4,59 @@
     <div class="product_image thumbnail"><img title="<%= product.title %>" src="<%= product.main_image_url(:thumb) %>"></div>
     <div>
       <div class="button_for_sell dropdown" id= "button_block">
-          <a style="width: 30px; float: left;" onclick="show_hide_price_popup('popup_selling_price_<%= product.id %>');" class=" btn btn-primary dropdown-toggle select-price "title="Sell now: <%= product.title %>" data-toggle="dropdown">Sell</a>
-          <div id="popup_selling_price_<%= product.id %>" class="popup_select_price for_selling_price">
-            <% if product.has_flawless_type? %>
-              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
-                <label for="Flawless"><%= product.flaw_less_name %></label>
-                <span class="product_desc"><%= format_num(product.price_for_sell)%> </span>
-                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-              </div>
-            <% end %>
-            <% if product.has_good_type? %>
-              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" >
-                <label for="Good">Good</label>
-                <span class="product_desc"><%= format_num(product.price_for_good_sell)%> </span>
-                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-              </div>
-            <% end %>
-            <% if product.has_poor_type? %>
-              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_poor_sell %>" product-using_condition="Poor" >
-                <label for="Poor">Poor</label>
-                <span class="product_desc"><%= format_num(product.price_for_poor_sell)%> </span>
-                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-              </div>
-            <% end %>
-          </div>
-          <a  style="width: 30px; float: right;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary" title="Buy now: <%= product.title %>">Buy</a>
-          <div id="popup_buying_price_<%= product.id %>" class="popup_select_price for_buying_price">
-            <% if product.price_for_buy && product.price_for_buy > 0 %>
-              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_buy %>" product-using_condition="Flawless" >
-                <label for="Flawless"><%= product.flaw_less_name %></label>
-                <span class="product_desc"><%= format_num(product.price_for_buy)%> </span>
-                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-              </div>
-            <% end %>
-            <% if product.price_for_good_buy && product.price_for_good_buy > 0 %>
-              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_good_buy %>" product-using_condition="Good" >
-                <label for="Good">Good</label>
-                <span class="product_desc"><%= format_num(product.price_for_good_buy)%> </span>
-                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-              </div>
-            <% end %>
-            <% if product.price_for_poor_buy && product.price_for_poor_buy > 0  %>
-              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_poor_buy %>" product-using_condition="Poor" >
-                <label for="Poor">Poor</label>
-                <span class="product_desc"><%= format_num(product.price_for_poor_buy)%> </span>
-                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-              </div>
-            <% end %>
-          </div>
+	        <% if (product.has_flawless_sell?||product.has_poor_sell?||product.has_good_sell?)%>
+	          <a style="width: 30px; float: left;" onclick="show_hide_price_popup('popup_selling_price_<%= product.id %>');" class=" btn btn-primary dropdown-toggle select-price "title="Sell now: <%= product.title %>" data-toggle="dropdown">Sell</a>
+	          <div id="popup_selling_price_<%= product.id %>" class="popup_select_price for_selling_price" style= "width: 105px">
+	            <% if product.has_flawless_sell? %>
+	              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
+	                <label for="Flawless" ><%= product.flaw_less_name %></label>
+	                <span class="product_desc"><%= format_num(product.price_for_sell)%> </span>
+	                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+	              </div>
+	            <% end %>
+	            <% if product.has_good_sell? %>
+	              <div class="price_type" product-id= "<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" type= "sell" >
+	                <label for="Good">Good</label>
+	                <span class="product_desc"><%= format_num(product.price_for_good_sell)%> </span>
+	                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+	              </div>
+	            <% end %>
+	            <% if product.has_poor_sell? %>
+	              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_poor_sell %>" product-using_condition="Poor" type= "sell" >
+	                <label for="Poor">Poor</label>
+	                <span class="product_desc"><%= format_num(product.price_for_poor_sell)%> </span>
+	                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+	              </div>
+	            <% end %>
+	          </div>
+          <% end %>
+          <% if (product.has_flawless_buy?||product.has_poor_buy?||product.has_good_buy?)%>
+	          <a style="width: 30px; float: right;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary dropdown-toggle select-price" title="Buy now: <%= product.title %> "data-toggle="dropdown">Buy</a>
+	          <div id="popup_buying_price_<%= product.id %>" class="popup_select_price for_buying_price">
+	            <% if product.has_flawless_buy?%>
+	              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_buy %>" product-using_condition="Flawless" type= "buy" >
+	                <label for="Flawless"><%= product.flaw_less_name %></label>
+	                <span class="product_desc"><%= format_num(product.price_for_buy)%> </span>
+	                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+	              </div>
+	            <% end %>
+	            <% if product.has_good_buy? %>
+	              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_good_buy %>" product-using_condition="Good" type= "buy" >
+	                <label for="Good">Good</label>
+	                <span class="product_desc"><%= format_num(product.price_for_good_buy)%> </span>
+	                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+	              </div>
+	            <% end %>
+	            <% if product.has_poor_buy? %>
+	              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_poor_buy %>" product-using_condition="Poor" type= "buy" >
+	                <label for="Poor">Poor</label>
+	                <span class="product_desc"><%= format_num(product.price_for_poor_buy)%> </span>
+	                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+	              </div>
+	            <% end %>
+	          </div>
+	        <%end%>
+          
       </div>
     </div>
   </div>
@@ -64,6 +69,18 @@
   background-color: black;
   opacity: 0.85;
   display:none;
+}
+.price_type{
+	
+}
+.price_type label {
+	font-size: 13px;
+}
+.price_type span {
+	font-size :12px;
+}
+.price_type span img {
+	height: 10px;
 }
 </style>
 

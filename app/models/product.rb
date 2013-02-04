@@ -49,14 +49,24 @@ class Product < ActiveRecord::Base
     main_image.photo.url(type)
   end
   
-  def has_flawless_type?
+  def has_flawless_sell?
     price_for_sell && price_for_sell > 0.0 rescue false
   end
-  def has_poor_type?
+  def has_poor_sell?
     price_for_poor_sell && price_for_poor_sell > 0.0 rescue false
   end
-  def has_good_type?
+  def has_good_sell?
     price_for_good_sell && price_for_good_sell > 0.0 rescue false
+  end
+  
+  def has_flawless_buy?
+    price_for_buy && price_for_buy > 0.0 rescue false
+  end
+  def has_poor_buy?
+   price_for_poor_buy && price_for_poor_buy > 0.0 rescue false
+  end
+  def has_good_buy?
+    price_for_good_buy && price_for_good_buy > 0.0 rescue false
   end
   
   def flaw_less_name
@@ -123,6 +133,10 @@ class Product < ActiveRecord::Base
     ActionController::Base.new.expire_fragment("homepage_category_#{self.product_model.category.id}") rescue nil
     ActionController::Base.new.expire_fragment("homepage_product_container_category_#{self.product_model.category.id}") rescue nil
     ActionController::Base.new.expire_fragment("homepage_product_thumb_#{self.id}") rescue nil
+  end
+  
+  def for_buy?
+    self.has_flawless_buy || self.has_poor_buy || self.has_good_buy
   end
   
   def set_category
