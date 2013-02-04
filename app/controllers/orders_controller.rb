@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   def new
     if user_signed_in?
       page_title "Payment Information"
-      render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
+      render "payment_info_page"
     else
       @user = User.new
       render "email_info_form"
