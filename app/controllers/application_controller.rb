@@ -62,9 +62,9 @@ class ApplicationController < ActionController::Base
   def add_cart_product cart_params
     session[:cart_products] = {:sell => [], :buy => []} if session[:cart_products].nil?
     
-    if cart_params[:type] && cart_params[:type].to_s == "sell"
+    if cart_params[:type] && cart_params[:type] == "sell"
       session[:cart_products][:sell] << {:product_id => cart_params[:product_id], :price => cart_params[:price], :using_condition => cart_params[:using_condition]}
-    elsif cart_params[:type] && cart_params[:type].to_s == "buy"
+    elsif cart_params[:type] && cart_params[:type] == "buy"
       session[:cart_products][:buy] << {:product_id => cart_params[:product_id], :price => cart_params[:price], :using_condition => cart_params[:using_condition]}
     end
      Rails.logger.info "session cart #{session[:cart_products].to_s}"
