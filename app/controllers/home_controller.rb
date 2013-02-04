@@ -52,4 +52,9 @@ class HomeController < ApplicationController
     session[:disconnect_facebook] = true
     redirect_to "/users/edit"
    end
+   
+   def swap_product
+     session[:cart_products] = cart_products.save
+   end 
+    
 end

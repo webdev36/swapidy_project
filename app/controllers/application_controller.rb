@@ -50,6 +50,12 @@ class ApplicationController < ActionController::Base
     session[:need_to_display_guide] = true if current_user && current_user.sign_in_count <= 3
   end
 
+  def cart_products
+    {:sell => session[:cart_products][:sell].map {|obj_hash| OrderProduct.new(obj_hash)},
+     :buy => session[:cart_products][:buy].map {|obj_hash| OrderProduct.new(obj_hash)}
+    }
+  end
+  
   #return array of OrderProduct instance
   def set_cart_products
     #for testing only
@@ -58,6 +64,15 @@ class ApplicationController < ActionController::Base
       :buy => Product.for_buy.limit(3).map{|p| {:product_id => p.id, :price => p.price_for_buy, :using_condition => "Flawless"} }
     } unless session[:cart_products]
     #session[:cart_products] = {:sell => [], :buy => []} unless session[:cart_products] 
+  end
+  
+  def add_cart_product cart_params
+    if cart_params[:type] && cart_params[:type] == "sell"
+       cart_products[:sell] << {:product_id => cart_params[:product_id], :price => cart_params[:price], :using_condition => cart_params[:using_condition]}
+    else
+      cart_products[:buy] << {:product_id => cart_params[:product_id], :price => cart_params[:price], :using_condition => cart_params[:using_condition]}
+    end
+    
   end
   
   def clear_cart_products

@@ -71,6 +71,7 @@ Swapidy::Application.routes.draw do
   match "/redeem" => "redeem#index", :method => :get
   resources :redeem
   match "/home/disconect_fb" => "home#disconect_fb"
+  match "/home/swap_product" => "home#swap_product"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
