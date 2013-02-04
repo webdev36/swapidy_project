@@ -71,7 +71,7 @@ $(function() {
 		type: 'POST',
 		dataType: 'script', 
 		success:function(){
-			 // location.reload();
+			 location.reload();
 			}
 		});
   	});
