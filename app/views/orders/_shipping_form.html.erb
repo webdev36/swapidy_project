@@ -11,11 +11,6 @@
 }
 </style>
 <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
-<input id="order_token_key" name="order[token_key]" type="hidden" value="<%= order.token_key %>">
-<input id="order_using_condition" name="order[using_condition]" type="hidden" value="<%= order.using_condition %>">
-<input id="order_honey_price" name="order[honey_price]" type="hidden" value="<%= order.honey_price %>">
-<input id="order_order_type" name="order[order_type]" type="hidden" value="<%= order.order_type %>">
-<input id="order_product_id" name="order[product_id]" type="hidden" value="<%= order.product_id %>">
 
 <div id='shipping_address_form' class='address_form_content'>
   <div class="field_col_1">  
@@ -67,10 +62,6 @@
     <div class="alert alert-success" style="width: 492px;"><%= @success_message %></div>
   <% end %>
   
-  <% if @order.is_trade_ins? %>
-    <div class="shipping_footnote"><span>*</span>This info will be used to generate a free shipping label to send your product to us.</div>
-  <% else %>
-    <div class="shipping_footnote"><span>*</span>This info will be used to generate a free shipping label to send the product to you.</div>
-  <% end %>
+  <div class="shipping_footnote"><span>*</span>This info will be used to generate a free shipping label to send your products between you and us.</div>
 </div>  
 

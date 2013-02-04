@@ -1,10 +1,4 @@
 <%= form_for(@order, :as => 'order', :url => "/orders/shipping_info", :html => {:id => "new_order"}) do |f| %>
-  <%= f.hidden_field :order_type %>
-  <%= f.hidden_field :product_id %>
-  <%= f.hidden_field :token_key %>
-  <%= f.hidden_field :using_condition %>
-  <%= f.hidden_field :honey_price %>
-
   <%= f.hidden_field :shipping_first_name %>
   <%= f.hidden_field :shipping_last_name %>
   <%= f.hidden_field :shipping_address %>
@@ -15,14 +9,13 @@
   <%= f.hidden_field :shipping_country %>
   
   <div class="payment_product_info"><br/>
-    <%= @order.title %><br /><br />
     <label style="color:#666; padding-top: 10px;">Current Balance:</label>
     <span style="color:#666; font-family:'myriad'"><%= format_num(current_user.honey_balance) %> </span><img class="payment_currency" src="/images/honey_20px_grey.png">
   </div>
   <div style="position:relative; bottom:20px;">
     <label style="color:#666; font-family:'myriad';">Product Price:</label><span style="color:#666; font-family:'myriad'; font-size:20px;">&nbsp;<%= format_num(@order.honey_price) %> </span><img class="payment_currency" src="/images/honey_20px_grey.png">
   </div>
-  <% if current_user.extra_honey_for(@order) <= 0 %>
+  <% if current_user.extra_honey_for(cart_amount) <= 0 %>
     <div >
       <br/>
       <span style="font-size:20px;">Your balance is enough to buy this product.</span>
@@ -31,11 +24,11 @@
   <% else %>
     <div>
       Your Honey balance is not enough. You need
-      <%= format_num(current_user.extra_honey_for(@order)) %> Honey to buy this product.
+      <%= format_num(current_user.extra_honey_for(cart_amount)) %> Honey to buy this product.
     </div>
     <div>
       <% if current_user.payment_ready? %>
-        You would be charged $<%= format_num(current_user.extra_honey_for(@order)/100) %> (Exchange Rate: 100 Honey / $1 )
+        You would be charged $<%= format_num(current_user.extra_honey_for(cart_amount)/100) %> (Exchange Rate: 100 Honey / $1 )
       <% end %><br/>
     </div>
     <a href="/" class="show_button_buy buy_cancel">Cancel</a>

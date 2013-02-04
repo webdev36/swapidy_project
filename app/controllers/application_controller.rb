@@ -56,6 +56,13 @@ class ApplicationController < ActionController::Base
     }
   end
   
+  def cart_amount
+    amount = 0
+    cart_products[:buy].each {|order_product| amount += order_product.price }
+    cart_products[:sell].each {|order_product| amount -= order_product.price }
+    return amount
+  end 
+  
   #return array of OrderProduct instance
   def set_cart_products
     #for testing only

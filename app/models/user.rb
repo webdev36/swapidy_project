@@ -85,14 +85,14 @@ class User < ActiveRecord::Base
   end
 
   
-  def could_order? order
-    order.is_trade_ins? || extra_honey_for(order.product) <= 0
+  def could_order? amount
+    amount <= 0 || extra_honey_for(amount) <= 0
   end
   
-  def extra_honey_for product
-    return 0 if product.honey_price.nil? || product.honey_price == 0 || (self.honey_balance && self.honey_balance >= product.honey_price)
-    return product.honey_price if self.honey_balance.nil?
-    return product.honey_price - self.honey_balance 
+  def extra_honey_for amount
+    return 0 if amount.nil? || amount == 0 || (self.honey_balance && self.honey_balance.to_i >= amount)
+    return amount if self.honey_balance.nil?
+    return amount - self.honey_balance 
   end
   
   def payment_ready?
@@ -150,14 +150,8 @@ class User < ActiveRecord::Base
     end
   end
   
-  def last_order(order_type = Order::TYPES[:order])
-    last_same_order = (order_type == Order::TYPES[:order]) ? self.orders.to_buy.limit(1).first : self.orders.to_sell.limit(1).first
-    return last_same_order if last_same_order
+  def last_order
     return self.orders.limit(1).first
-  end
-  
-  def has_same_order?(order_type = Order::TYPES[:order])
-    (order_type == Order::TYPES[:order]) ? self.orders.to_buy.exists? : self.orders.to_sell.exists?
   end
   
   def remain_inviation_count
