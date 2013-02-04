@@ -16,7 +16,13 @@ module ApplicationHelper
   def cart_products_empty?
     cart_products[:sell].empty? && cart_products[:buy].empty?
   end
-  
+
+  def cart_amount
+    amount = 0
+    cart_products[:buy].each {|order_product| amount += order_product.price }
+    cart_products[:sell].each {|order_product| amount -= order_product.price }
+    return amount
+  end 
   
   def display_guide?
     if session[:need_to_display_guide]

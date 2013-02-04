@@ -56,10 +56,10 @@ class HomeController < ApplicationController
    def swap_product 
      add_cart_product(:type => params[:type],:price => params[:price],:product_id => params[:product_id],:using_condition => params[:condition])
      respond_to do |format|
-      format.js {  
+       format.js {  
          @return_content = render_to_string(:partial => "/home/shopping_cart")
-         }
-      end
+       }
+     end
    end 
     
 end
