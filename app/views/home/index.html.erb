@@ -27,7 +27,7 @@
   </div>
 <% end %>
 
-<% Category.limit(1).each do |category| %>
+<% Category.all.each do |category| %>
     <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 20px;">
       <div class="headings_pink_edit" style="text-align: center;padding-top: 50px; padding-bottom: 0px; margin-bottom: 0px;">Choose your model</div>
       <div style="display: block;padding:0 0 30px;">
@@ -91,9 +91,9 @@
           <div class="product_container">
             <div id="products" class="isotope" style="">
               <% category.products.each do |product| %>
-                <%# cache("homepage_product_thumb_#{product.id}") do %>
+                <% cache("homepage_product_thumb_#{product.id}") do %>
                   <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>
-                <%# end %>
+                <% end %>
               <% end %>
             </div>
           </div>
