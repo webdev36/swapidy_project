@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       #redirect_to "https://www." + request.host_with_port + request.fullpath 
     #elsif !request.ssl?
     #  redirect_to :protocol => "https://"
-    end
+    #end
   end
   
   def page_title(title)
