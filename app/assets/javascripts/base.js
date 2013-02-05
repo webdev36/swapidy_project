@@ -59,7 +59,24 @@ $(function() {
   .mouseout(function(){
     $(this).attr("src",'/images/settings_icon.png');
   });
-
+  $(".see_more_sell").toggle(function(){
+	$(".sell_display").css("overflow","visible");
+	$(".sell_display").css("height","auto");
+	$(this).text("Hide")
+  },function(){
+		$(".sell_display").css("overflow","hidden");
+		$(".sell_display").css("height","100px");
+		$(this).text("Show All")
+	});
+  $(".see_more_buy").toggle(function(){
+	$(".buy_display").css("overflow","visible");
+	$(".buy_display").css("height","auto");
+	$(this).text("Hide")
+  },function(){
+		  $(".buy_display").css("overflow","hidden");
+  		  $(".buy_display").css("height","100px");
+  		  $(this).text("Show All")
+	  });
   $('.box .popup_select_price .price_type').live('click', function(){
   	var url_select_price = '/home/swap_product';
 	$.ajax({

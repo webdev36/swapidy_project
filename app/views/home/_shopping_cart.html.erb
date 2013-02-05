@@ -2,18 +2,29 @@
   <% if cart_products_empty? %>
     <div>Empty Shopping Cart</div>  
   <% else %>
-    <div>
-      <div class="sell_display" style="position:absolute; left:0px; width: 500px;" >
-        <% cart_products[:sell].last(5).each do |order_product|%>
+    <div style="position: relative">
+    	<% if cart_products[:sell].count > 5 %>
+        <a class="btn btn-primary dropdown-toggle see_more_sell" data-toggle="dropdown" href="#">
+			Show All
+	   	<span class="caret"></span>
+ 		 </a>
+      	<%end%>
+      <% if cart_products[:buy].count > 5 %>
+	    <a class="btn btn-primary dropdown-toggle see_more_buy" data-toggle="dropdown" href="#">
+			Show All
+	   		<span class="caret"></span>
+		 </a>
+      <%end%>
+      <div class="sell_display" style="position:absolute; left:0px; width: 500px;height: 100px; overflow: hidden" >
+        <% cart_products[:sell].each do |order_product|%>
           <%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product} %>
         <% end %>
-        
       </div>
       <div style="position:absolute; left:50%; margin-left:-100px; width: 200px; text-align: center; top: 30px; font-size: 35px;">
         $<%= format_num(cart_amount) %>
       </div>
-      <div class="buy_display" style="position:absolute; right:0px; width: 500px; text-align: right;" >
-        <% cart_products[:buy].last(5).each do |order_product| %>
+      <div class="buy_display" style="position:absolute; right:0px; width: 500px; text-align: right;height: 100px; overflow:hidden" >
+        <% cart_products[:buy].each do |order_product| %>
           <%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product}%>
         <% end %>
       </div>
@@ -21,4 +32,16 @@
     <a href="/orders/new" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>
   <% end %>
 </div>
+<style>
+	.see_more_sell{
+		position: absolute;
+		top: 50px;
+		left: 480px;
+	}
+	.see_more_buy{
+		position:absolute;
+		top: 50px;
+		right: 480px;
+	}
+</style>
 
