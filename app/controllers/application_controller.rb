@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
   def check_uri
     #session[:cart_products] = {:sell => [], :buy => []}
     
-    return unless Rails.env == 'production'
-    if !/^www/.match(request.host)
-      redirect_to request.protocol + "www." + request.host_with_port + request.fullpath 
+    #return unless Rails.env == 'production'
+    #if !/^www/.match(request.host)
+    #  redirect_to request.protocol + "www." + request.host_with_port + request.fullpath 
       #redirect_to "https://www." + request.host_with_port + request.fullpath 
     #elsif !request.ssl?
     #  redirect_to :protocol => "https://"
