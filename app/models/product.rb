@@ -139,6 +139,10 @@ class Product < ActiveRecord::Base
     self.has_flawless_buy || self.has_poor_buy || self.has_good_buy
   end
   
+   def for_sell?
+    self.has_flawless_sell || self.has_poor_sell || self.has_good_sell
+  end
+  
   def set_category
     self.category = self.product_model.category if self.product_model
   end

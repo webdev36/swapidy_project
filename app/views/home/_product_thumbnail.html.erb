@@ -1,37 +1,45 @@
-<div class="item thumbnail product_filter_model_<%= product.product_model.id %> <%= product.gen_attribute_filter_ids %> <%= "for_buying" if product.for_buy %> <%= "for_selling" if product.for_sell %>">
+<div class="item thumbnail product_filter_model_<%= product.product_model.id %> <%= product.gen_attribute_filter_ids %>">
   <div class="box">
     <div class="product_title" style="color:#fa3e6e; font-family:'myriad-s'; font-size:15px;" title="<%= product.title %>"><%= product.title %></div>
     <div class="product_image thumbnail"><img title="<%= product.title %>" src="<%= product.main_image_url(:thumb) %>"></div>
     <div>
       <div class="button_for_sell dropdown" id= "button_block">
-	        <% if (product.has_flawless_sell?||product.has_poor_sell?||product.has_good_sell?)%>
-	          <a style="width: 30px; float: left;" onclick="show_hide_price_popup('popup_selling_price_<%= product.id %>');" class=" btn btn-primary dropdown-toggle select-price "title="Sell now: <%= product.title %>" data-toggle="dropdown">Sell</a>
-	          <div id="popup_selling_price_<%= product.id %>" class="popup_select_price for_selling_price" style= "width: 105px">
-	            <% if product.has_flawless_sell? %>
-	              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
-	                <label for="Flawless" ><%= product.flaw_less_name %></label>
-	                <span class="product_desc"><%= format_num(product.price_for_sell)%> </span>
-	                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-	              </div>
-	            <% end %>
-	            <% if product.has_good_sell? %>
-	              <div class="price_type" product-id= "<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" type= "sell" >
-	                <label for="Good">Good</label>
-	                <span class="product_desc"><%= format_num(product.price_for_good_sell)%> </span>
-	                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-	              </div>
-	            <% end %>
-	            <% if product.has_poor_sell? %>
-	              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_poor_sell %>" product-using_condition="Poor" type= "sell" >
-	                <label for="Poor">Poor</label>
-	                <span class="product_desc"><%= format_num(product.price_for_poor_sell)%> </span>
-	                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
-	              </div>
-	            <% end %>
+	        <% if product.for_sell%>
+		        <%if !product.for_buy%>
+		          <a style="width: 80px;" onclick="show_hide_price_popup('popup_selling_price_<%= product.id %>');" class=" btn btn-primary dropdown-toggle select-price "title="Sell now: <%= product.title %>" data-toggle="dropdown">Sell</a>
+		        <%else%>
+		          <a style="width: 30px; float: left;" onclick="show_hide_price_popup('popup_selling_price_<%= product.id %>');" class=" btn btn-primary dropdown-toggle select-price "title="Sell now: <%= product.title %>" data-toggle="dropdown">Sell</a>
+		        <%end%>
+		          <div id="popup_selling_price_<%= product.id %>" class="popup_select_price for_selling_price" style= "width: 105px">
+		            <% if product.has_flawless_sell? %>
+		              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
+		                <label for="Flawless" ><%= product.flaw_less_name %></label>
+		                <span class="product_desc"><%= format_num(product.price_for_sell)%> </span>
+		                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+		              </div>
+		            <% end %>
+		            <% if product.has_good_sell? %>
+		              <div class="price_type" product-id= "<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" type= "sell" >
+		                <label for="Good">Good</label>
+		                <span class="product_desc"><%= format_num(product.price_for_good_sell)%> </span>
+		                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+		              </div>
+		            <% end %>
+		            <% if product.has_poor_sell? %>
+		              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_poor_sell %>" product-using_condition="Poor" type= "sell" >
+		                <label for="Poor">Poor</label>
+		                <span class="product_desc"><%= format_num(product.price_for_poor_sell)%> </span>
+		                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+		              </div>
+		          <% end %>
 	          </div>
           <% end %>
-          <% if (product.has_flawless_buy?||product.has_poor_buy?||product.has_good_buy?)%>
-	          <a style="width: 30px; float: right;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary dropdown-toggle select-price" title="Buy now: <%= product.title %> "data-toggle="dropdown">Buy</a>
+          <% if product.for_buy%>
+          <% if !product.for_sell%>
+	          <a style="width: 80px;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary dropdown-toggle select-price" title="Buy now: <%= product.title %> "data-toggle="dropdown">Buy</a>
+	      <%else%>
+	      <a style="width: 30px; float: right;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary dropdown-toggle select-price" title="Buy now: <%= product.title %> "data-toggle="dropdown">Buy</a>
+	      <%end%>
 	          <div id="popup_buying_price_<%= product.id %>" class="popup_select_price for_buying_price">
 	            <% if product.has_flawless_buy?%>
 	              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_buy %>" product-using_condition="Flawless" type= "buy" >
@@ -86,4 +94,3 @@
 
 <script type="text/javascript">
 </script>
-
