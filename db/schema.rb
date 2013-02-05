@@ -24,8 +24,6 @@ ActiveRecord::Schema.define(:version => 20130202103654) do
     t.string  "title"
   end
 
-  add_index "category_attributes", ["category_id"], :name => "index_category_attributes_on_category_id"
-
   create_table "free_honeys", :force => true do |t|
     t.integer  "sender_id"
     t.integer  "receiver_id"
@@ -140,8 +138,6 @@ ActiveRecord::Schema.define(:version => 20130202103654) do
     t.decimal "weight_lb",   :default => 1.0
   end
 
-  add_index "product_models", ["category_id"], :name => "index_product_models_on_category_id"
-
   create_table "products", :force => true do |t|
     t.string  "title"
     t.integer "user_id"
@@ -157,21 +153,16 @@ ActiveRecord::Schema.define(:version => 20130202103654) do
     t.integer "price_for_poor_buy"
   end
 
-  add_index "products", ["category_id"], :name => "index_products_on_category_id"
-  add_index "products", ["product_model_id"], :name => "index_products_on_product_model_id"
-
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
     t.string   "username"
     t.integer  "item"
     t.string   "table"
     t.integer  "month",      :limit => 2
-    t.integer  "year",       :limit => 5
+    t.integer  "year",       :limit => 8
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
-
-  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
   create_table "redeem_codes", :force => true do |t|
     t.string   "code"
