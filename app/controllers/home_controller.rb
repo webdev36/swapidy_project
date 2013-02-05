@@ -61,5 +61,8 @@ class HomeController < ApplicationController
        }
      end
    end 
-    
+   def del_product
+     Rails.logger.info "test #{session[:cart_products].to_s}"
+    session[:cart_products].find(:conditions => { :max_order_product_id => params[:cart_param]}) 
+    end
 end
