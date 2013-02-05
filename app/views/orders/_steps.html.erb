@@ -3,7 +3,7 @@
     <% (1..3).to_a.each do |step| %>
       <% if step < current_step && step == 2 %>
         <li class="active_step">
-          <a href="#" onclick="switchToCheckoutStep('new_order', '/orders/<%= @order.is_order? ? "buy" : "sell" %>/<%= @order.product_id %>');" >Step <%= step %></a>
+          <a href="#" onclick="switchToCheckoutStep('new_order', '/orders/new');" >Step <%= step %></a>
         </li>
       <% else %>
         <li <% if step == current_step %> class="current" <% end %> >

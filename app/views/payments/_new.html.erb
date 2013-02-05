@@ -48,7 +48,7 @@
       type : 'POST',
       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       url : '/payments/new',
-<% if (params[:controller] == "orders" && params[:action] == "new" && @order && @order.is_order?)%>      
+<% if (params[:controller] == "orders" && params[:action] == "new")%>      
       data: "reload_payment_order_info=true",
 <% end %>
       dataType : 'script',

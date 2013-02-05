@@ -60,9 +60,40 @@ $(function() {
     $(this).attr("src",'/images/settings_icon.png');
   });
 
-
+  $('.box .popup_select_price .price_type').live('click', function(){
+  	var url_select_price = '/home/swap_product';
+	$.ajax({
+		url : url_select_price,
+		beforeSend : function(xhr) {
+        	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+      	},
+      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
+		type: 'POST',
+		dataType: 'script', 
+		success:function(){
+			 //location.reload();
+		}
+	});
+  });
 });
 
+var current_popup_id = "";
+function show_hide_price_popup(popup_id){
+  if($('#' + popup_id).hasClass('active')){
+    $('#' + popup_id).removeClass('active');
+    $('#' + popup_id).hide();
+    current_popup_id = "";
+  }else{
+  	if(current_popup_id != ""){
+  	$('#' + current_popup_id).hide();
+  	}
+    $('#' + popup_id).addClass('active');
+    $('#' + popup_id).show();
+    current_popup_id = popup_id;
+  }
+}
+
+	
 function switchToCheckoutStep(form_id, step_url) {
   $("#" + form_id).attr("action", step_url);
   $("#" + form_id).submit();

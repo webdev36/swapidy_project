@@ -20,7 +20,6 @@
               <% current_user.orders.to_buy.not_completed.each_with_index do |order, index| %>
                 <tr>
                   <td><%= index + 1 %></td>
-                  <td><%= order.title %></td>
                   <td><%= order.honey_price %> honey</td>
                   <td><%= order.status_title %></td>
                   <td><%= order.created_at.strftime("%H:%M %b %d, %Y") %></td>
@@ -57,7 +56,6 @@
         <% current_user.orders.to_sell.not_completed.each_with_index do |order, index| %>
           <tr>
             <td><%= index + 1 %></td>
-            <td><%= order.title %></td>
             <td><%= order.honey_price %> honey</td>
             <td><%= order.status_title %></td>
             <td><%= order.created_at.strftime("%H:%M %b %d, %Y") %></td>

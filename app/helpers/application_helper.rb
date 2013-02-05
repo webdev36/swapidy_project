@@ -4,6 +4,26 @@ module ApplicationHelper
     @page_title && !@page_title.blank? ? @page_title : "Swapidy"
   end
   
+  #return array of OrderProduct instance
+  def cart_products
+    session[:cart_products] = {:sell => [], :buy => []} if session[:cart_products].nil?
+    
+    {:sell => session[:cart_products][:sell].map {|obj_hash| OrderProduct.new(obj_hash)},
+     :buy => session[:cart_products][:buy].map {|obj_hash| OrderProduct.new(obj_hash)}
+    }
+  end
+  
+  def cart_products_empty?
+    cart_products[:sell].empty? && cart_products[:buy].empty?
+  end
+
+  def cart_amount
+    amount = 0
+    cart_products[:buy].each {|order_product| amount += order_product.price }
+    cart_products[:sell].each {|order_product| amount -= order_product.price }
+    return amount
+  end 
+  
   def display_guide?
     if session[:need_to_display_guide]
       session[:need_to_display_guide] = nil

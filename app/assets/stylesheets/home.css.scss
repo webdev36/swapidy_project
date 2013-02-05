@@ -371,7 +371,7 @@ margin-bottom:30px;
   width: 160px;
   height: 285px;
   border: 0px;
-  overflow:hidden;
+ // overflow:hidden;
   margin:10px;
 }
 
@@ -916,3 +916,16 @@ text-decoration:underline;
   text-align:center;
 }
 
+#shopping_cart {
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  width: 100%;
+  height: 100px;
+  opacity: 0.95;
+  background-image: url(/images/white_bg.png);
+  z-index: 10000;
+  border-bottom-color: whiteSmoke;
+  border-bottom-width: 2px;
+  border-bottom-style: double;
+}

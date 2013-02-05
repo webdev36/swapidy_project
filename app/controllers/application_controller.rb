@@ -5,27 +5,28 @@ class ApplicationController < ActionController::Base
   before_filter :prepaire_add_honey
   
   def check_uri
-    return
-    #return unless Rails.env == 'production'
-    #if !/^www/.match(request.host)
-      #redirect_to request.protocol + "www." + request.host_with_port + request.fullpath 
+    #session[:cart_products] = {:sell => [], :buy => []}
+    
+    return unless Rails.env == 'production'
+    if !/^www/.match(request.host)
+      redirect_to request.protocol + "www." + request.host_with_port + request.fullpath 
       #redirect_to "https://www." + request.host_with_port + request.fullpath 
     #elsif !request.ssl?
     #  redirect_to :protocol => "https://"
-    #end
+    end
   end
   
   def page_title(title)
     @page_title = title
   end
   
-  #unless Rails.application.config.consider_all_requests_local
+  unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => :render_not_found
     rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
     rescue_from ActionController::RoutingError, :with => :render_not_found
     rescue_from ActionController::UnknownController, :with => :render_not_found
     rescue_from ActionController::UnknownAction, :with => :render_not_found
-  #end
+  end
   
   def require_login
     unless user_signed_in?
@@ -48,6 +49,35 @@ class ApplicationController < ActionController::Base
   
   def check_to_display_guide
     session[:need_to_display_guide] = true if current_user && current_user.sign_in_count <= 3
+  end
+
+  def cart_products
+    session[:cart_products] = {:sell => [], :buy => []} if session[:cart_products].nil?
+    {:sell => session[:cart_products][:sell].map {|obj_hash| OrderProduct.new(obj_hash)},
+     :buy => session[:cart_products][:buy].map {|obj_hash| OrderProduct.new(obj_hash)}
+    }
+  end
+  
+  def cart_amount
+    amount = 0
+    cart_products[:buy].each {|order_product| amount += order_product.price }
+    cart_products[:sell].each {|order_product| amount -= order_product.price }
+    return amount
+  end 
+  
+  def add_cart_product cart_params
+    session[:cart_products] = {:sell => [], :buy => []} if session[:cart_products].nil?
+    
+    if cart_params[:type] && cart_params[:type] == "sell"
+      session[:cart_products][:sell] << {:product_id => cart_params[:product_id], :price => cart_params[:price], :using_condition => cart_params[:using_condition]}
+    elsif cart_params[:type] && cart_params[:type] == "buy"
+      session[:cart_products][:buy] << {:product_id => cart_params[:product_id], :price => cart_params[:price], :using_condition => cart_params[:using_condition]}
+    end
+     Rails.logger.info "session cart #{session[:cart_products].to_s}"
+  end
+  
+  def clear_cart_products
+    session[:cart_products] = nil
   end
 
   private

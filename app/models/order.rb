@@ -4,27 +4,25 @@ require 'zip_code'
 class Order < ActiveRecord::Base
   include StampsShippingGateway
   
-  attr_accessible :order_type, :status, :product_id, :honey_price, :using_condition, :user_id,
+  attr_accessible :status, :user_id,
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,
                   :shipping_city, :shipping_state, :shipping_zip_code, :shipping_country, :shipping_method,
                   :candidate_addresses, :shipping_zip_code_add_on, :is_candidate_address, :token_key, :email
 
-  validates :order_type, :status, :presence => true
   validates :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_city, :shipping_state, 
             :shipping_zip_code, :shipping_country, :presence => true
 
-  validates :using_condition, :presence => {:message => "You need to select at least one of the conditions!"}
-
   attr_accessor :candidate_addresses, :is_candidate_address, :token_key, :email
 
-  belongs_to :product
   belongs_to :user
+  
+  has_many :order_products
+  has_many :products, :through => :order_products
 
   has_many :shipping_stamps, :order => "created_at desc"
   has_many :notifications, :as => :notify_object, :class_name => "Notification"
   after_create :create_notification
 
-  TYPES = {:trade_ins => 0, :order => 1}
   STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3, :confirmed_to_ship => 4}
   SHIPPING_METHODS = {:box => "box", :usps => "usps", :fedex => "fedex"}
 
@@ -33,27 +31,9 @@ class Order < ActiveRecord::Base
                             :fedex => "Prepaid FedEx Shipping Label"}
 
   after_create :adjust_current_balance
-  before_validation :generate_product_title
 
-  scope :to_sell, :conditions => {:order_type => TYPES[:trade_ins]}
-  scope :to_buy, :conditions => {:order_type => TYPES[:order]}
   scope :not_completed, :conditions => ["status != ?", STATUES[:completed]]
   
-  def is_trade_ins?
-    order_type && order_type == TYPES[:trade_ins]
-  end
-  
-  def is_order?
-    order_type && order_type == TYPES[:order]
-  end
-  
-  def title
-    result = self.product_title if self.product_title && !self.product_title.blank? 
-    result = self.product.title if result.nil? && self.product && !self.product.title.blank?
-    result = "#{self.product.category.title} #{self.product.product_model.title}" if result.nil? && self.product && self.product.product_model
-    return "#{result} (#{product.flaw_less_name})" if is_order?
-    "#{result} (#{using_condition})"
-  end
   
   def status_title
     return "Completed" if self.status && self.status == STATUES[:completed]
@@ -74,15 +54,26 @@ class Order < ActiveRecord::Base
       return false
     end
     
-    result = verify_shipping_address
-    
     #for testing only
-    #if Rails.env == 'production'
-    #else
+    if Rails.env == 'production'
+      result = verify_shipping_address
+    else
+      result = true
     #  result = self.is_candidate_address && self.is_candidate_address.to_s == "true"
     #  self.candidate_addresses = [{:address1 => "2310 ROCK ST APT (Range 52 - 55)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
-    #                            {:address1 => "2310 ROCK ST APT (Range 56 - 59)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"}] unless result
-    #end
+    #                            {:address1 => "2310 ROCK ST APT (Range 56 - 59)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 60 - 65)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 66 - 69)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 70 - 75)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 76 - 79)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 80 - 85)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 86 - 89)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 90 - 95)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 46 - 49)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 40 - 45)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 36 - 39)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
+    #                            {:address1 => "2310 ROCK ST APT (Range 30 - 35)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"}] unless result
+    end
     #return true if is_candidate_address && !result && candidate_addresses && !candidate_addresses.empty? 
     if !result && self.candidate_addresses && !self.candidate_addresses.empty? 
       errors.add(:shipping_address, "is not confirmed with the shipping service accurately. Please confirm before continuing.") 
@@ -126,21 +117,18 @@ class Order < ActiveRecord::Base
     return html
   end
   
+  def honey_price
+    return 0
+  end
+  
   def create_notification
     notification = self.notifications.new(:user_id => self.user.id)
-    if self.is_trade_ins?
-      notification.title = "#{product.title} - Processing"
-      notification.description = "Trade-ins: created for #{self.product.title}, #{self.honey_price} Honey" 
-    else
-      notification.title = "#{product.title} Processing"
-      notification.description = "Order: created for #{self.product.title}, #{self.honey_price} Honey" 
-    end 
+    notification.title = "Order Processing"
+    notification.description = "Created for products, #{self.honey_price} Honey" 
     notification.save
   end
     
   def create_notification_to_decline
-    return unless self.is_trade_ins?
-    
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "#{product.title} - Declined"
     notification.description = "Trade-ins: #{self.product.title} - #{self.honey_price} Honey - Declined" 
@@ -150,8 +138,6 @@ class Order < ActiveRecord::Base
   end
   
   def create_notification_to_reminder
-    return unless self.is_trade_ins?
-    
     new_stamp = self.create_new_stamp(false)
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "#{product.title} - Reminder"
@@ -207,7 +193,7 @@ class Order < ActiveRecord::Base
   end
   
   def enter_from_last_address
-    last_one = self.user.last_order(self.order_type)
+    last_one = self.user.last_order
     if last_one
       self.shipping_first_name = last_one.shipping_first_name
       self.shipping_last_name = last_one.shipping_last_name
