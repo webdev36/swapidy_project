@@ -135,12 +135,12 @@ class Product < ActiveRecord::Base
     ActionController::Base.new.expire_fragment("homepage_product_thumb_#{self.id}") rescue nil
   end
   
-  def for_buy?
-    self.has_flawless_buy || self.has_poor_buy || self.has_good_buy
+  def for_buys?
+    self.has_flawless_buy? || self.has_poor_buy? || self.has_good_buy?
   end
   
-   def for_sell?
-    self.has_flawless_sell || self.has_poor_sell || self.has_good_sell
+   def for_sells?
+    self.has_flawless_sell? || self.has_poor_sell? || self.has_good_sell?
   end
   
   def set_category

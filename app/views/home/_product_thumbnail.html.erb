@@ -4,8 +4,8 @@
     <div class="product_image thumbnail"><img title="<%= product.title %>" src="<%= product.main_image_url(:thumb) %>"></div>
     <div>
       <div class="button_for_sell dropdown" id= "button_block">
-	        <% if product.for_sell%>
-		        <%if !product.for_buy%>
+	        <% if product.for_sells?%>
+		        <%if !product.for_buys?%>
 		          <a style="width: 80px;" onclick="show_hide_price_popup('popup_selling_price_<%= product.id %>');" class=" btn btn-primary dropdown-toggle select-price "title="Sell now: <%= product.title %>" data-toggle="dropdown">Sell</a>
 		        <%else%>
 		          <a style="width: 30px; float: left;" onclick="show_hide_price_popup('popup_selling_price_<%= product.id %>');" class=" btn btn-primary dropdown-toggle select-price "title="Sell now: <%= product.title %>" data-toggle="dropdown">Sell</a>
@@ -34,8 +34,8 @@
 		          <% end %>
 	          </div>
           <% end %>
-          <% if product.for_buy%>
-          <% if !product.for_sell%>
+          <% if product.for_buys?%>
+          <% if !product.for_sells?%>
 	          <a style="width: 80px;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary dropdown-toggle select-price" title="Buy now: <%= product.title %> "data-toggle="dropdown">Buy</a>
 	      <%else%>
 	      <a style="width: 30px; float: right;" onclick="show_hide_price_popup('popup_buying_price_<%= product.id %>');" class="btn btn-primary dropdown-toggle select-price" title="Buy now: <%= product.title %> "data-toggle="dropdown">Buy</a>
