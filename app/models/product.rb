@@ -14,8 +14,10 @@ class Product < ActiveRecord::Base
   has_many :product_attributes, :dependent => :destroy
   has_many :product_model_attributes, :through => :product_attributes
   
-  scope :for_buy, :conditions => {:for_buy => true}
-  scope :for_sell, :conditions => {:for_sell => true}
+  scope :for_buy, :conditions => ["swap_type = 0 OR swap_type = 2"]
+  scope :for_sell, :conditions => ["swap_type = 0 OR swap_type = 1"]
+  
+  SWAP_TYPES = {0 => "Sell and Buy", 1 => "Sell", 2 => "Buy"}
   
   USING_CONDITIONS = {:poor => "Poor", :good => "Good", :flawless => "Flawless"}
   PRICE_RANGES = {3000 => "Below 3000", 
@@ -35,7 +37,7 @@ class Product < ActiveRecord::Base
                       
   scope :price_range, lambda { |key| {:conditions => PRICE_RANGE_SQLS[key]} }
   
-  before_save :set_category
+  before_save :set_auto_value_fields
   after_save :expired_fragment_caches
   after_destroy :expired_fragment_caches
 
@@ -69,8 +71,15 @@ class Product < ActiveRecord::Base
     price_for_good_buy && price_for_good_buy > 0.0 rescue false
   end
   
-  def flaw_less_name
-    for_buy ? "Brand new with warranty" : "Flawless"
+  def flaw_less_name(for_type = :for_sell)
+    for_type == :for_buy ? "Brand new with warranty" : "Flawless"
+  end
+  
+  def sell_prices
+    "#{has_flawless_sell? ? price_for_sell: "-" }/#{has_good_sell? ? price_for_good_sell : "-"}/#{has_poor_sell? ? price_for_poor_sell : "-"}"
+  end
+  def buy_prices
+    "#{has_flawless_buy? ? price_for_buy: "-" }/#{has_good_buy? ? price_for_good_buy : "-"}/#{has_poor_buy? ? price_for_poor_buy : "-"}"
   end
   
   def main_image
@@ -143,69 +152,13 @@ class Product < ActiveRecord::Base
     self.has_flawless_sell? || self.has_poor_sell? || self.has_good_sell?
   end
   
-  def set_category
+  def set_auto_value_fields
     self.category = self.product_model.category if self.product_model
+    self.swap_type = (for_buys? && for_sells?) ? 0 : (for_sells? ? 1 : 2)
   end
   
   def weight_lb
     product_model.weight_lb
-  end
-  
-  rails_admin do
-    
-    list do
-      field :title
-      field :price_for_sell
-      field :price_for_good_sell
-      field :price_for_poor_sell
-      field :for_sell
-      field :for_buy
-      field :category
-      field :product_model
-      field :images
-    end
-    export do
-      field :title
-      field :price_for_sell
-      field :price_for_good_sell
-      field :price_for_poor_sell
-      field :for_sell
-      field :for_buy
-      field :category
-      field :product_model
-      field :images
-      field :product_model_attributes
-    end
-    show do
-      field :category
-      field :product_model
-      field :title
-      field :price_for_sell
-      field :price_for_good_sell
-      field :price_for_poor_sell
-      field :images
-      field :product_attributes
-    end
-    edit do; end
-    create do
-      field :product_model
-      field :title
-      field :price_for_sell
-      field :price_for_good_sell
-      field :price_for_poor_sell
-      field :for_sell
-      field :for_buy
-    end
-    update do
-      field :title
-      field :price_for_sell
-      field :price_for_good_sell
-      field :price_for_poor_sell
-      field :for_sell
-      field :for_buy
-      field :images
-      field :product_attributes
-    end
   end
 
 end

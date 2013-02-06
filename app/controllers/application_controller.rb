@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :prepaire_add_honey
   
   def check_uri
-    #session[:cart_products] = {:sell => [], :buy => []}
+    #clear_cart_products
     
     return unless Rails.env == 'production'
     if !/^www/.match(request.host)
@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
     @payment.card_expired_month = current_user.card_expired_month
     @payment.card_name = current_user.card_name
     
-    @free_honey = FreeHoney.new if current_user.free_honey_sendable?
+    @free_honey = FreeHoney.new if current_user.free_money_sendable?
   end
   
   def check_to_display_guide
@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
   end
 
   def cart_products
-    session[:cart_products] = {:sell => [], :buy => []} if session[:cart_products].nil?
+    session[:cart_products] = {:sell => [], :buy => [], :max_order_product_id => 0} if session[:cart_products].nil?
     {:sell => session[:cart_products][:sell].map {|obj_hash| OrderProduct.new(obj_hash)},
      :buy => session[:cart_products][:buy].map {|obj_hash| OrderProduct.new(obj_hash)}
     }
@@ -65,9 +65,9 @@ class ApplicationController < ActionController::Base
     return amount
   end 
   
-   def add_cart_product cart_params
+  def add_cart_product cart_params
     session[:cart_products] = {:sell => [], :buy => [], :max_order_product_id => 0} if session[:cart_products].nil?
-   session[:cart_products][:max_order_product_id] = (session[:cart_products][:max_order_product_id] || 0) + 1
+    session[:cart_products][:max_order_product_id] = (session[:cart_products][:max_order_product_id] || 0) + 1
     if cart_params[:type] && cart_params[:type] == "sell"
       session[:cart_products][:sell] << {:product_id => cart_params[:product_id], :price => cart_params[:price], :using_condition => cart_params[:using_condition], :order_product_id => session[:cart_products][:max_order_product_id]}
     elsif cart_params[:type] && cart_params[:type] == "buy"

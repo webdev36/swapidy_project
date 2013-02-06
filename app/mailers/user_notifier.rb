@@ -8,35 +8,29 @@ class UserNotifier < ActionMailer::Base
   #
   def signup_greeting(user, mode = :normal_signup)
     @user = user
-    @need_password = (mode == :free_honey_signup)
+    @need_password = (mode == :free_money_signup)
     mail :to => @user.email, :subject => "Welcome to Swapidy"
   end
-  
-  def honey_purchase(payment)
-    @user = payment.user
-    @payment = payment
-    mail :to => @user.email, :subject => "Honey Purchase"
-  end
 
-  def free_honey_sent(free_honey)
+  def free_money_sent(free_honey)
     @free_honey = free_honey
-    mail :to => @free_honey.receiver_email, :subject => "Free Honey"
+    mail :to => @free_honey.receiver_email, :subject => "Free Money"
   end
   
-  def free_honey_completed(free_honey)
+  def free_money_completed(free_honey)
     @free_honey = free_honey
-    mail :to => @free_honey.receiver_email, :subject => "Free Honey Received"
+    mail :to => @free_honey.receiver_email, :subject => "Free Money Received"
   end
   
-  def free_honey_reward(free_honey)
+  def free_money_reward(free_honey)
     @free_honey = free_honey
-    mail :to =>@free_honey.sender.email, :subject => "Free Honey Reward"
+    mail :to =>@free_honey.sender.email, :subject => "Free Money Reward"
   end
   
   def redeem_completed(redeem_code, user)
     @redeem_code = redeem_code
     @user = user
-    mail :to => @user.email, :subject => "Free Honey Received"
+    mail :to => @user.email, :subject => "Free Money Received"
   end
   
   def contact_us(admin_email, contact)

@@ -4,7 +4,7 @@ require 'zip_code'
 class Order < ActiveRecord::Base
   include StampsShippingGateway
   
-  attr_accessible :status, :user_id,
+  attr_accessible :status, :user_id, :balance_amount,
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,
                   :shipping_city, :shipping_state, :shipping_zip_code, :shipping_country, :shipping_method,
                   :candidate_addresses, :shipping_zip_code_add_on, :is_candidate_address, :token_key, :email
@@ -21,7 +21,10 @@ class Order < ActiveRecord::Base
 
   has_many :shipping_stamps, :order => "created_at desc"
   has_many :notifications, :as => :notify_object, :class_name => "Notification"
+  
+  before_save  :calc_balance_amount
   after_create :create_notification
+  after_create :adjust_current_balance
 
   STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3, :confirmed_to_ship => 4}
   SHIPPING_METHODS = {:box => "box", :usps => "usps", :fedex => "fedex"}
@@ -30,7 +33,6 @@ class Order < ActiveRecord::Base
                             :usps => "Prepaid USPS Shipping Label", 
                             :fedex => "Prepaid FedEx Shipping Label"}
 
-  after_create :adjust_current_balance
 
   scope :not_completed, :conditions => ["status != ?", STATUES[:completed]]
   
@@ -117,31 +119,27 @@ class Order < ActiveRecord::Base
     return html
   end
   
-  def honey_price
-    return 0
-  end
-  
   def create_notification
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "Order Processing"
-    notification.description = "Created for products, #{self.honey_price} Honey" 
+    notification.description = "Created for products, #{self.balance_amount} Honey" 
     notification.save
   end
     
   def create_notification_to_decline
     notification = self.notifications.new(:user_id => self.user.id)
-    notification.title = "#{product.title} - Declined"
-    notification.description = "Trade-ins: #{self.product.title} - #{self.honey_price} Honey - Declined" 
+    notification.title = "Order Declined"
+    notification.description = "Order - #{self.balance_amount} Honey - Declined" 
     notification.save
     
     OrderNotifier.product_declined(self).deliver
   end
   
   def create_notification_to_reminder
-    new_stamp = self.create_new_stamp(false)
+    #new_stamp = self.create_new_stamp(false)
     notification = self.notifications.new(:user_id => self.user.id)
-    notification.title = "#{product.title} - Reminder"
-    notification.description = "Trade-ins: #{self.product.title} - #{self.honey_price} Honey - Reminder" 
+    notification.title = "Order Reminder"
+    notification.description = "Order - $#{self.balance_amount} - Reminder" 
     notification.save
 
     OrderNotifier.reminder(self, new_stamp).deliver
@@ -150,11 +148,11 @@ class Order < ActiveRecord::Base
   def create_notification_to_cancel
     notification = self.notifications.new(:user_id => self.user.id)
     if self.is_trade_ins? 
-      notification.title = "#{product.title} - Canceled"
-      notification.description = "Trade-Ins: #{self.product.title} - #{self.honey_price} Honey - Canceled" 
+      notification.title = "Order Canceled"
+      notification.description = "Order - $#{self.balance_amount} - Canceled" 
     else
-      notification.title = "#{product.title} - Canceled"
-      notification.description = "Order: #{self.product.title} - #{self.honey_price} Honey - Canceled" 
+      notification.title = "Order Canceled"
+      notification.description = "Order - $#{self.balance_amount} - Canceled" 
     end
     notification.save
     
@@ -166,14 +164,14 @@ class Order < ActiveRecord::Base
     notification = self.notifications.new(:user_id => self.user.id)
     if self.is_trade_ins? 
       notification.title = "Product verified"
-      notification.description = "Trade-ins: #{self.product.title} (#{self.honey_price} Honey) has been verified successfully." 
+      notification.description = "Order ($#{self.balance_amount}) has been verified successfully." 
     else
       notification.title = "Order is complete"
-      notification.description = "Your order is complete #{self.product.title} and #{self.honey_price} Honey" 
+      notification.description = "Your order ($#{self.balance_amount}) is completed." 
     end 
     notification.save
     
-    OrderNotifier.trade_ins_complete(self).deliver if self.is_trade_ins?
+    OrderNotifier.order_complete(self).deliver
   end
   
   def generate_product_title
@@ -208,6 +206,14 @@ class Order < ActiveRecord::Base
       return false
     end
   end
+  
+  def calc_balance_amount
+    amount = 0
+    self.order_products.for_sell.each {|order_product| amount += order_product.price }
+    self.order_products.for_buy.each {|order_product| amount -= order_product.price }
+    self.balance_amount = amount
+    return amount
+  end
     
   def generate_token_key
     self.token_key = Digest::MD5.hexdigest "#{SecureRandom.hex(20)}-order-#{DateTime.now.to_s}"
@@ -217,11 +223,7 @@ class Order < ActiveRecord::Base
   private
   
     def adjust_current_balance
-      if self.is_trade_ins?
-        self.user.update_attribute :honey_balance, ((self.user.honey_balance || 0) + self.honey_price)
-      else
-        self.user.update_attribute :honey_balance, ((self.user.honey_balance || 0) - self.honey_price)
-      end
+      self.user.update_attribute :balance_amount, ((self.user.balance_amount || 0) + self.balance_amount)
     end
 
     def create_test_stamp
