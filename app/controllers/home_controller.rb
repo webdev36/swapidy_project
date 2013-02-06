@@ -61,5 +61,14 @@ class HomeController < ApplicationController
        }
      end
    end 
-    
+   def del_product
+    #a = session[:cart_products].where(:order_product_id => params[:order_product_id]).first
+    a = session[:cart_products].scoped(:conditions => { :order_product_id => params[:order_product_id] })
+    Rails.logger.info "test #{a.to_s}"
+     respond_to do |format|
+       format.js {  
+         @return_content = render_to_string(:partial => "/home/shopping_cart")
+       }
+     end
+    end
 end
