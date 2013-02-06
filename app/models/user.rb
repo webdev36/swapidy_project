@@ -86,7 +86,8 @@ class User < ActiveRecord::Base
 
   
   def could_order? amount
-    amount <= 0 || extra_money_for(amount) <= 0
+    return true
+    #amount <= 0 || extra_money_for(amount) <= 0
   end
   
   def extra_money_for amount

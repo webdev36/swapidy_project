@@ -3,6 +3,7 @@ require 'zip_code'
 
 class Order < ActiveRecord::Base
   include StampsShippingGateway
+  include CardInfo
   
   attr_accessible :status, :user_id, :balance_amount,
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,

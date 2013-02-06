@@ -43,9 +43,18 @@
             <div>
               <span>Products balance amount:</span>
               $<%= format_num(cart_amount) %>
-            </div>      
+            </div>
+            <% if current_user.extra_money_for(cart_amount) > 0 %>
+            <div>
+              Your money balance is not enough.
+              You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %>
+              <input type="button" value="Add Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="alert('Under contruction');" />
+            </div>
+            <% end %>
           </div>
+          
           <br/>
+    
     
           <% has_agreement_before = !current_user.last_order.nil? %>
           <div style="position:relative; bottom:330px;">
