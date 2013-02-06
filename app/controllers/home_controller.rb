@@ -62,15 +62,18 @@ class HomeController < ApplicationController
      end
    end 
    def del_product
-   Rails.logger.info session[:cart_products][:sell].map{|x| x[:order_product_id]}.join(", ")
-   index = session[:cart_products][:sell].index{|x| x[:order_product_id].to_s == params[:order_id].to_s}
-   session[:cart_products][:sell].delete_at(index)
-   Rails.logger.info "test index1 #{session[:cart_products][:sell].to_s}"
-    #Rails.logger.info "test index #{session[:cart_products][:sell].delete_at(index).to_s}"
-   respond_to do |format|
-       format.js {  
-        @return_content = render_to_string(:partial => "/home/shopping_cart")
-       }
+   index_for_sell = session[:cart_products][:sell].index{|x| x[:order_product_id].to_i == params[:order_id].to_i}
+   if index_for_sell && index_for_sell.to_i >= 0
+     session[:cart_products][:sell].delete_at(index_for_sell)
+    Rails.logger.info "test index1 #{session[:cart_products]}"
+   else 
+     index_for_buy = session[:cart_products][:buy].index{|x| x[:order_product_id].to_i == params[:order_id].to_i}
+     session[:cart_products][:buy].delete_at(index_for_buy)
    end
+    respond_to do |format|
+        format.js {  
+         @return_content = render_to_string(:partial => "/home/shopping_cart")
+        }
+    end
  end
 end
