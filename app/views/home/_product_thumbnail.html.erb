@@ -43,7 +43,7 @@
 	          <div id="popup_buying_price_<%= product.id %>" class="popup_select_price for_buying_price">
 	            <% if product.has_flawless_buy?%>
 	              <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_buy %>" product-using_condition="Flawless" type= "buy" >
-	                <label for="Flawless"><%= product.flaw_less_name %></label>
+	                <label for="Flawless"><%= product.flaw_less_name(:for_buy) %></label>
 	                <span class="product_desc"><%= format_num(product.price_for_buy)%> </span>
 	                <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
 	              </div>
@@ -74,9 +74,25 @@
   position: absolute;
   width: 150px;
   top: 39px;
-  background-color: black;
-  opacity: 0.85;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+      font-family: "myriad-s";
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+     -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
   display:none;
+  cursor: pointer;
+  z-index: 5000;
 }
 .price_type{
 	

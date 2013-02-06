@@ -11,7 +11,6 @@ class PaymentsController < ApplicationController
   def new
     @payment = PaymentTransaction.new(params[:payment]) rescue PaymentTransaction.new
     @payment.amount = params[:payment][:amount].gsub(",", "").to_i rescue nil
-    @payment.honey_money = params[:payment][:honey_money].gsub(",", "").to_i rescue nil
     respond_to do |format|
       format.js {
         @return_content = render_to_string(:partial => "/payments/add_honey_form")
@@ -22,9 +21,8 @@ class PaymentsController < ApplicationController
   def edit_card
     @payment = PaymentTransaction.new(params[:payment])
     @payment.amount = params[:payment][:amount].gsub(",", "").to_i rescue nil
-    @payment.honey_money = params[:payment][:honey_money].gsub(",", "").to_i rescue nil
     
-    if(@payment.honey_money != @payment.amount * RATIO)
+    if(@payment.amount.nil? || @payment.amount <= 0)
       respond_to do |format|
         format.js {
           @return_content = render_to_string(:partial => "/payments/add_honey_form")
@@ -60,7 +58,6 @@ class PaymentsController < ApplicationController
   def confirm
     @payment = PaymentTransaction.new(params[:payment])
     @payment.amount = params[:payment][:amount].gsub(",", "").to_i rescue nil
-    @payment.honey_money = params[:payment][:honey_money].gsub(",", "").to_i rescue nil
 
     @payment.user = current_user
     if @payment.valid? && @payment.payment_valid?
@@ -74,7 +71,6 @@ class PaymentsController < ApplicationController
   def create
     @payment = PaymentTransaction.new(params[:payment])
     @payment.amount = params[:payment][:amount].gsub(",", "").to_i rescue nil
-    @payment.honey_money = @payment.amount * RATIO
     @payment.user = current_user
     
     unless (@payment.new_stripe_card_token || "").blank? && @payment.new_card_name == @payment.card_name && 
@@ -91,7 +87,7 @@ class PaymentsController < ApplicationController
 
     begin
       PaymentTransaction.transaction do
-        current_user.honey_balance = (current_user.honey_balance || 0) + @payment.honey_money
+        current_user.balance_amount = (current_user.balance_amount || 0) + @payment.balance_amount
         unless current_user.save
           @payment.errors.add(:card, "is not valid")
           respond_to do |format|
@@ -111,7 +107,7 @@ class PaymentsController < ApplicationController
           @payment.card_last_four_number = current_user.card_last_four_number
           raise "Error to save transaction" unless @payment.save
         
-          Notification.purchase_honey_notify(@payment)
+          #Notification.purchase_honey_notify(@payment)
           #redirect_to "/payments/#{@payment.id}"
           respond_to do |format|
             format.js {

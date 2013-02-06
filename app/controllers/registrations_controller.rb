@@ -107,14 +107,14 @@ class RegistrationsController < Devise::RegistrationsController
     if existed_redeem
       build_resource
       resource.redeem_code = existed_redeem
-      resource.honey_balance = existed_redeem.honey_amount
+      resource.balance_amount = existed_redeem.amount
       resource.save
       UserNotifier.signup_greeting(resource).deliver
       sign_up(resource_name, resource)
       
-      receiver_notification = Notification.new(:title => "#{existed_redeem.honey_amount} FREE Honey Promo")
+      receiver_notification = Notification.new(:title => "#{existed_redeem.amount} FREE Money Promo")
       receiver_notification.user = resource
-      receiver_notification.description = "#{existed_redeem.honey_amount} FREE Honey Redeemed"
+      receiver_notification.description = "#{existed_redeem.amount} FREE Money Redeemed"
       receiver_notification.save
       UserNotifier.redeem_completed(existed_redeem, resource).deliver
     

@@ -52,9 +52,6 @@ class OrdersController < ApplicationController
   
   def create
     if @order.valid? && @order.shipping_address_valid? && current_user.could_order?(cart_amount)
-      #@order.weight_lb = @order.order_product.weight_lb
-      @order.weight_lb = 1
-      #@order.using_condition = @product.using_condition
       begin
         Order.transaction do
           @order.save

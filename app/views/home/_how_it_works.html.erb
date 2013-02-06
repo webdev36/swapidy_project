@@ -1,54 +1,23 @@
 <script type="text/javascript">
   $(document).ready(function() {
-    //$('#all').fadeIn(1000);
-    $('.hiw_a').hide();
-    $('.b1').hide();
-    $('.b2').hide();
-    $('.b3').hide();
-    $('.s1').hide();
-    $('.s2').hide();
-    $('.s3').hide();
-    // Hide all DDs inside .faqs
-    $('#heading_for_buy').click(function() {
-      $(this).next().slideToggle('normal');
-      $('#heading_for_sell').next().hide();
-      // Toggle dd when the respective dt is clicked
-        $(".b1").fadeIn(2000);
-        $(".b2").delay(1000).fadeIn(1000);
-        $(".b3").delay(2000).fadeIn(1000);
-    });
-    $('#heading_for_sell').click(function() {
-      $(this).next().slideToggle('normal');
-      $('#heading_for_buy').next().hide();
-      // Toggle dd when the respective dt is clicked
-        $(".s1").fadeIn(2000);
-        $(".s2").delay(1000).fadeIn(1000);
-        $(".s3").delay(2000).fadeIn(1000);
-    });
+        $('.s1').hide();
+        $('.s2').hide();
+        $('.s3').hide();
+        $(".s1").delay(1000).fadeIn(1000);
+        $(".s2").delay(2000).fadeIn(1000);
+        $(".s3").delay(3000).fadeIn(1000);
   }); 
 </script>
 
 <style type="text/css">
-  .hiw_heading{
-    text-align: center;
-        text-decoration: underline;
 
-  }
-  .hiw_heading:hover{
-    text-decoration: underline;
-  }
-  .hiw_heading:hover {
-    cursor: pointer
   }
 
 </style>
 
 <div id="all">
   <div class="headings_pink" style="text-align:center;">How it Works</div>
-  <div class="hiw_heading" id="heading_for_sell" onclick="scrollOnClick(150); return false;" style="cursor: pointer;">
-    I want to sell my product.
-  </div>
-<div class="hiw_steps hiw_a">
+
   <div class="hiw_step hiw_1 s1">
     <img class="hiw_img"src="/images/hiw_s_s1.png"><br/>
             Choose the product(s) you want to swap.
@@ -57,13 +26,12 @@
   <div class="hiw_step hiw_2 s2">
     <img class="hiw_img"src="/images/hiw_s_s2.png"><br/>
             Pay the difference.
-
   </div>
   <div class="hiw_step hiw_3 s3">
     <img class="hiw_img"src="/images/hiw_s_s3.png"><br/>
            Swap your products within 48 hours* with no extra costs.
-
   </div>
-</div>
+
+  *
 
 </div>
