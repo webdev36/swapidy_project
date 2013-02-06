@@ -11,15 +11,6 @@ class ShippingStamp < ActiveRecord::Base
   
   #after_create :send_email_to_customer
   
-  
-  #def send_email_to_customer
-  #  if self.order.is_trade_ins?
-  #    OrderNotifier.confirm_to_sell(self.order, self).deliver
-  #  else
-  #    OrderNotifier.confirm_to_buy(self.order, self).deliver
-  #  end
-  #end
-  
   def self.create_from_stamp_api order, order_stamp
       new_stamp = order.shipping_stamps.new
       new_stamp.integrator_tx_id = order_stamp[:integrator_tx_id]

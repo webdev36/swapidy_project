@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
   
   def payment_info
     page_title "Payment Information"
-    render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
+    render "payment_info_page"
   end
 
   def shipping_info
@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
       render "shipping_info_page"
     else
       page_title "Payment Information"
-      render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
+      render "payment_info_page"
     end
   end
   

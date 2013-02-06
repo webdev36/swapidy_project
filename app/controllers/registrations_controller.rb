@@ -53,6 +53,7 @@ class RegistrationsController < Devise::RegistrationsController
       end
       
       @user_for_register = true
+      @order = Order.new
       render "/orders/email_info_form"
     end
   end

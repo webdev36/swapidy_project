@@ -139,13 +139,8 @@ class Order < ActiveRecord::Base
     
   def create_notification_to_cancel
     notification = self.notifications.new(:user_id => self.user.id)
-    if self.is_trade_ins? 
-      notification.title = "Order Canceled"
-      notification.description = "Order - #{balance_amount_label} - Canceled" 
-    else
-      notification.title = "Order Canceled"
-      notification.description = "Order - #{balance_amount_label} - Canceled" 
-    end
+    notification.title = "Order Canceled"
+    notification.description = "Order - #{balance_amount_label} - Canceled" 
     notification.save
     
     OrderNotifier.order_cancel(self).deliver
@@ -154,13 +149,8 @@ class Order < ActiveRecord::Base
   
   def create_notification_to_complete
     notification = self.notifications.new(:user_id => self.user.id)
-    if self.is_trade_ins? 
-      notification.title = "Product verified"
-      notification.description = "Order ($#{balance_amount_label}) has been verified successfully." 
-    else
-      notification.title = "Order is complete"
-      notification.description = "Your order ($#{balance_amount_label}) is completed." 
-    end 
+    notification.title = "Order is complete"
+    notification.description = "Your order ($#{balance_amount_label}) is completed." 
     notification.save
     
     OrderNotifier.order_complete(self).deliver
