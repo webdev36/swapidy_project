@@ -1,11 +1,11 @@
 class FreeHoney < ActiveRecord::Base
-  attr_accessible :completed_at, :receiver_email, :expired_date, :sender_honey_amount, :receiver_honey_amount, :status, :token_key, :receiver_id, :sender_id
+  attr_accessible :completed_at, :receiver_email, :expired_date, :sender_amount, :receiver_amount, :status, :token_key, :receiver_id, :sender_id
   
   belongs_to :receiver, :foreign_key => "receiver_id", :class_name => "User"
   belongs_to :sender, :foreign_key => "sender_id", :class_name => "User"
    
   STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3}
-  validates :receiver_honey_amount, :status, :expired_date, :token_key, :presence => true
+  validates :receiver_amount, :status, :expired_date, :token_key, :presence => true
   validates :receiver_email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :message => "Invalid email address"}
   validate :user_with_right_email?
   validates_uniqueness_of :receiver_email, :message => "Sorry, this email has been submitted before."
@@ -39,28 +39,28 @@ class FreeHoney < ActiveRecord::Base
   def confirm
     return false unless able_to_confirm?
     if self.receiver.nil?
-      self.receiver = User.signup_user({:email => self.receiver_email}, :free_honey_signup)
+      self.receiver = User.signup_user({:email => self.receiver_email}, :free_signup)
     end
     self.status = STATUES[:completed] 
-    self.sender_honey_amount = default_reward_honey
+    self.sender_amount = default_reward_honey
     self.completed_at = Time.now
     self.save
 
-    self.receiver.update_attribute(:honey_balance, (self.receiver.honey_balance || 0.00) + self.receiver_honey_amount)
-    receiver_notification = Notification.new(:title => "#{self.receiver_honey_amount} FREE Honey Promo")
+    self.receiver.update_attribute(:balance_amount, (self.receiver.balance_amount || 0.00) + self.receiver_amount)
+    receiver_notification = Notification.new(:title => "#{self.receiver_amount} FREE Honey Promo")
     receiver_notification.user = self.receiver
-    receiver_notification.description = "#{self.receiver_honey_amount} FREE Honey Redeemed"
+    receiver_notification.description = "#{self.receiver_amount} FREE Honey Redeemed"
     receiver_notification.save
-    UserNotifier.free_honey_completed(self).deliver
+    UserNotifier.free_completed(self).deliver
 
     #create_reward_and_bonus
     if self.sender
-      self.sender.update_attribute(:honey_balance, (self.sender.honey_balance || 0.00) + self.sender_honey_amount)
+      self.sender.update_attribute(:balance_amount, (self.sender.balance_amount || 0.00) + self.sender_amount)
       sender_notification = Notification.new(:title => "Free Honey Reward")
       sender_notification.user = self.sender
-      sender_notification.description = "Free #{self.sender_honey_amount} Honey Reward: #{receiver_title} accepted your invitation}"
+      sender_notification.description = "Free #{self.sender_amount} Honey Reward: #{receiver_title} accepted your invitation}"
       sender_notification.save
-      UserNotifier.free_honey_reward(self).deliver 
+      UserNotifier.free_money_reward(self).deliver 
     end
     
     other_free_honey = FreeHoney.pending.where(:receiver_email => self.receiver_email).where("id != #{self.id}").each do |other_one|
@@ -94,12 +94,12 @@ class FreeHoney < ActiveRecord::Base
     end
     
     if receiver
-      receiver_notification = Notification.new(:title => "Free #{self.receiver_honey_amount} Honey Invitation")
+      receiver_notification = Notification.new(:title => "Free #{self.receiver_amount} Honey Invitation")
       receiver_notification.user = self.receiver
-      receiver_notification.description = "Free #{self.receiver_honey_amount} Honey: sent from #{sender_title}"
+      receiver_notification.description = "Free #{self.receiver_amount} Honey: sent from #{sender_title}"
       receiver_notification.save
     end
-    UserNotifier.free_honey_sent(self).deliver
+    UserNotifier.free_money_sent(self).deliver
   end
 
   private
@@ -122,8 +122,8 @@ class FreeHoney < ActiveRecord::Base
         self.receiver = ( User.find_by_email(self.receiver_email) if self.receiver_email && self.receiver.nil? ) rescue nil
       end 
       self.receiver_email = self.receiver.email if self.receiver && (self.receiver_email || "").blank?
-      self.receiver_honey_amount = default_receiver_honey unless self.receiver_honey_amount
-      self.sender_honey_amount = default_reward_honey unless self.sender_honey_amount
+      self.receiver_amount = default_receiver_honey unless self.receiver_amount
+      self.sender_amount = default_reward_honey unless self.sender_amount
     end
     
     def user_with_right_email?

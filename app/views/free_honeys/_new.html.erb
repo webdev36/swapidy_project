@@ -7,7 +7,7 @@
         <p>Invite your friends by entering their email below. If they join, you'll receive 100 FREE honey (only 3 invites allowed - limited time only).</p>
         <p style="text-align:center;">You have <%= current_user.remain_inviation_count %> invites left.</p>
       </div>
-      <% if current_user.free_honey_sendable? %>
+      <% if current_user.free_money_sendable? %>
         <div class="email_invite">
           <input id="email" name="email" size="30" type="text" placeholder="E-mail address"value="" />
           <div style="padding-top: 15px;">

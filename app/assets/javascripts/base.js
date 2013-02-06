@@ -77,6 +77,25 @@ $(function() {
   		  $(".buy_display").css("height","100px");
   		  $(this).text("Show All")
 	  });
+  $(".del-product").live('click',function(){		
+		var url_ajax = '/home/del_product';
+		var order_product_id = $(this).attr('order_product_id')
+		alert(order_product_id);
+		$.ajax({
+			url : url_ajax,
+			beforeSend : function(xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+          	},
+			type: "POST",
+			data: 'order_product_id ='+ order_product_id,
+			dataType:'script',
+			success :function(){
+				 
+			}
+		});
+	}); 
+   	  
+	  
   $('.box .popup_select_price .price_type').live('click', function(){
   	var url_select_price = '/home/swap_product';
 	$.ajax({

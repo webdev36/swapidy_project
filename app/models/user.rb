@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :address, 
-                  :honey_balance, :sign_in_count,
+                  :balance_amount, :sign_in_count,
                   :stripe_customer_id, :stripe_card_token, :stripe_coupon, :card_number, :card_cvc
   attr_accessible :code, :new_card_number, :new_card_cvc, :new_card_type, :new_card_name, :new_card_expired_month, :new_card_expired_year, :new_card_last_four_number, :new_stripe_card_token
   
@@ -86,13 +86,13 @@ class User < ActiveRecord::Base
 
   
   def could_order? amount
-    amount <= 0 || extra_honey_for(amount) <= 0
+    amount <= 0 || extra_money_for(amount) <= 0
   end
   
-  def extra_honey_for amount
-    return 0 if amount.nil? || amount == 0 || (self.honey_balance && self.honey_balance.to_i >= amount)
-    return amount if self.honey_balance.nil?
-    return amount - self.honey_balance 
+  def extra_money_for amount
+    return 0 if amount.nil? || amount == 0 || (self.balance_amount && self.balance_amount.to_i >= amount)
+    return amount if self.balance_amount.nil?
+    return amount - self.balance_amount 
   end
   
   def payment_ready?
@@ -162,7 +162,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  def free_honey_sendable?
+  def free_money_sendable?
     remain_inviation_count > 0 && self.created_at > 7.days.ago
   end
   

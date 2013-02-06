@@ -9,7 +9,9 @@
 
 <div class="container">
   <div class="headings_pink confirm_head_info">Confirm Your Details</div>
-  <div class="confirm_image_container"><img id="confirm_image" src="<%= cart_products[:sell].first.product.main_image_url(:large) %>"></div>
+  <div class="confirm_image_container">
+  	<%= render :partial => "/orders/order_product_images" %>
+  </div>
   <div class="confirm_container">
     <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
     <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
@@ -36,11 +38,11 @@
           <div style="position:relative; bottom:320px;">
             <div>
               <span>Current Balance:</span>
-              <%= format_num(current_user.honey_balance) %> Honey
+              $<%= format_num(current_user.balance_amount) %>
             </div>
             <div>
-              <span>Product Price:</span>
-              <%= format_num(cart_amount) %> Honey
+              <span>Products balance amount:</span>
+              $<%= format_num(cart_amount) %>
             </div>      
           </div>
           <br/>
@@ -54,7 +56,7 @@
             </p>
           </div>
           <br/>
-          <input name="commit" onclick="alert('Under contruction');" id="submit_button" class="confirm_button_buy" style="margin-top:20px;" type="button" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
+          <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" style="margin-top:20px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
   
         <% end %>
       </div>

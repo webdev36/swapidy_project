@@ -15,7 +15,7 @@
 	   		<span class="caret"></span>
 		 </a>
       <%end%>
-      <div class="sell_display" style="position:absolute; left:0px; width: 500px;height: 100px; overflow: hidden" >
+      <div class="sell_display" style="background: url(/images/white_bg.png) ;position:absolute; left:0px; width: 500px;height: 100px; overflow: hidden" >
         <% cart_products[:sell].each do |order_product|%>
           <%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product} %>
         <% end %>
@@ -23,7 +23,7 @@
       <div style="position:absolute; left:50%; margin-left:-100px; width: 200px; text-align: center; top: 30px; font-size: 35px;">
         $<%= format_num(cart_amount) %>
       </div>
-      <div class="buy_display" style="position:absolute; right:0px; width: 500px; text-align: right;height: 100px; overflow:hidden" >
+      <div class="buy_display" style="background: url(/images/white_bg.png) ;position:absolute; right:0px; width: 500px; text-align: right;height: 100px; overflow:hidden" >
         <% cart_products[:buy].each do |order_product| %>
           <%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product}%>
         <% end %>
@@ -36,12 +36,12 @@
 	.see_more_sell{
 		position: absolute;
 		top: 50px;
-		left: 480px;
+		left: 500px;
 	}
 	.see_more_buy{
 		position:absolute;
 		top: 50px;
-		right: 480px;
+		right: 500px;
 	}
 </style>
 

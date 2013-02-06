@@ -8,14 +8,14 @@ class Notification < ActiveRecord::Base
   scope :unread, :conditions => {:has_read => false}
   scope :be_read, :conditions => {:has_read => true}
   
-  def self.purchase_honey_notify(payment)
-    notification = Notification.new(:title => "#{number_format(payment.honey_money)} Honey Purchased")
-    notification.notify_object = payment
-    notification.user = payment.user
-    notification.description = "#{number_format(payment.honey_money)} Honey Purchased with $#{payment.amount} at #{payment.created_at.strftime("%H:%M %b %d, %Y")}"
-    notification.save
-    UserNotifier.honey_purchase(payment).deliver
-  end
+#  def self.purchase_honey_notify(payment)
+#    notification = Notification.new(:title => "#{number_format(payment.honey_money)} Honey Purchased")
+#    notification.notify_object = payment
+#    notification.user = payment.user
+#    notification.description = "#{number_format(payment.honey_money)} Honey Purchased with $#{payment.amount} at #{payment.created_at.strftime("%H:%M %b %d, %Y")}"
+#    notification.save
+#    UserNotifier.honey_purchase(payment).deliver
+#  end
   
   def self.number_format(numer_value)
     result = ""
