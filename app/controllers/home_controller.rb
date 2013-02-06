@@ -69,13 +69,18 @@ class HomeController < ApplicationController
      end
    end 
    def del_product
-    #a = session[:cart_products].where(:order_product_id => params[:order_product_id]).first
-    a = session[:cart_products].scoped(:conditions => { :order_product_id => params[:order_product_id] })
-    Rails.logger.info "test #{a.to_s}"
-     respond_to do |format|
-       format.js {  
+   index_for_sell = session[:cart_products][:sell].index{|x| x[:order_product_id].to_i == params[:order_id].to_i}
+   if index_for_sell && index_for_sell.to_i >= 0
+     session[:cart_products][:sell].delete_at(index_for_sell)
+    Rails.logger.info "test index1 #{session[:cart_products]}"
+   else 
+     index_for_buy = session[:cart_products][:buy].index{|x| x[:order_product_id].to_i == params[:order_id].to_i}
+     session[:cart_products][:buy].delete_at(index_for_buy)
+   end
+    respond_to do |format|
+        format.js {  
          @return_content = render_to_string(:partial => "/home/shopping_cart")
-       }
-     end
+        }
     end
+ end
 end

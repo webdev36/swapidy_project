@@ -78,16 +78,8 @@
           </ul>
         </li>
         <li class="divider-vertical"></li>
-        <li>
-          <div class="honey_display">
-            <div style="display: inline-block;">
-              <img src="/images/honey_currency_score.png">
-              <span id="honey_balance_amount_menu"><%= format_num(current_user.balance_amount)%></span>
-              <!-- div style="display: inline-block;">
-                <a href="javascript:refresh_add_honey_form();"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a>
-              </div-->
-            </div>
-        </li>
+
+
         <li>
           <div class="help">
             <a href="javascript:showPopup('popup-dialog_help');" >
@@ -170,7 +162,7 @@
 
 <div id="popup-dialog_how_it_work" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
-    <div class="container" style="background:url('/images/popup-bg.png') repeat; border-radius: 10px; padding: 30px 30px; position:fixed; top:20px;" >
+    <div class="container" style="background:url('/images/popup-bg.png') repeat; border-radius: 10px; padding: 30px 30px; position:fixed; top:20px; height:400px;" >
       <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
       <%= render :partial => "/home/how_it_works" %>
     </div>

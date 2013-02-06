@@ -6,23 +6,21 @@ class OrderNotifier < ActionMailer::Base
   #
   #   en.authentication_notifier.user_activation.subject
   #
-  def confirm_to_sell(order, shipping_stamp, host_with_port = "http://www.swapidy.com")
+  def start_processing(order, host_with_port = "https://www.swapidy.com")
     @user = order.user
     @order = order
-    @product = order.product
-    @shipping_stamp = shipping_stamp
     @host_with_port = host_with_port
-    mail :to => @user.email, :subject => "Shipping Label" do |format|
+    mail :to => @user.email, :subject => "Order processing" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
-        attachments["ShippingLabel_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
-          render_to_string(:pdf => "ShippingLabel_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb')
+        attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
+          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb')
         )
       end
     end
   end
   
-  def confirm_to_buy(order, shipping_stamp, host_with_port = "http://www.swapidy.com")
+  def confirm_to_buy(order, shipping_stamp, host_with_port = "https://www.swapidy.com")
     @host_with_port = host_with_port
     @user = order.user
     @order = order

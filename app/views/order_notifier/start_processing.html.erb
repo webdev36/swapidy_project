@@ -15,21 +15,21 @@ border-radius: 10px;">
 		<br/>
 		<br/>
 
-<div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">Good Day <%= @user.name_in_email %>,<br />
-<br />
-We have determined that your <%= @order.product.title %> does not meet our standards for the swap that you made on Swapidy.<br />
-<br />
-At Swapidy, we try to maintain our quality of products to match the described conditions and in this case 
-we can't accept the product in the condition received.<br />
-<br />
-We will be sending the product back to you and you should receive it within 3-5 business days. 
-Any difference that was paid will be refunded back to your card within 3-5 business days as well.<br />
-<br />
-Sorry for any inconveniences!<br />
-<br />
-If you have any questions, please email support@swapidy.com. Make sure to mention your name and your email. 
-We will answer your questions within 12-24 hours or less.<br />
-<br />
+<div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">Good Day <%= @user.name_in_email %>,<br/>
+<br/>
+Congrats! You're getting in exchange for products. 
+<br/>
+Your ordered products info are the attached files.
+<% if @order.order_products.for_sell.count > 0 && @order.order_products.for_buy.count > 0 %>
+  Your Shipping order, Tracking number and instruction will be sent later via email.
+<% elsif @order.order_products.for_sell.count > 0 %>
+  Your Shipping order and instruction will be sent later via email.<br/>
+<% elsif @order.order_products.for_sell.count > 0 %>
+  Your Tracking number and instruction will be sent later via email.
+<% end %>
+
+If you have any questions, please email honey@swapidy.com. Make sure to mention your name and your email. We will answer your questions within 12-24 hours or less.<br/>
+<br/>
 Cheerio,<br/>
 <br/>
 	<a href="http://www.twitter.com/theswapdaddy" style="color:#666;"><strong>@TheSwapDaddy</strong></a><br/>

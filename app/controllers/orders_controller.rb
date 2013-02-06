@@ -54,10 +54,23 @@ class OrdersController < ApplicationController
     if @order.valid? && @order.shipping_address_valid? && current_user.could_order?(cart_amount)
       begin
         Order.transaction do
-          @order.save
-          @shipping_stamp = @order.create_new_stamp
+          session[:cart_products][:sell].each do |obj_hash|
+            @order.order_products.new(:product_id => obj_hash[:product_id], 
+                                      :price => obj_hash[:price], 
+                                      :using_condition => obj_hash[:using_condition], 
+                                      :sell_or_buy => "sell")
+          end
+          session[:cart_products][:buy].each do |obj_hash|
+            @order.order_products.new(:product_id => obj_hash[:product_id], 
+                                      :price => obj_hash[:price], 
+                                      :using_condition => obj_hash[:using_condition], 
+                                      :sell_or_buy => "buy")
+          end
+          if @order.save
+            OrderNotifier.start_processing(@order).deliver
+            clear_cart_products 
+          end
         end
-        session[:creating_order] = nil
         redirect_to "/orders/#{@order.id}"
       rescue Exception => e
         @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")

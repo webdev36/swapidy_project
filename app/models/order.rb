@@ -85,27 +85,19 @@ class Order < ActiveRecord::Base
     return result
   end
   
-  def create_new_stamp(is_send_label = true)
+  def create_new_stamps
     if Rails.env == 'production'
-      stamp = is_order? ? create_shipping_order : create_shipping_label
+      stamp = create_shipping_order
+      buy_stamp = ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "buy"))
+      
+      stamp = create_shipping_label
+      sell_stamp = ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "sell"))
     else
       stamp = create_test_stamp
     end
-    new_stamp = shipping_stamps.new
-    new_stamp.integrator_tx_id = stamp[:integrator_tx_id]
-    new_stamp.tracking_number = stamp[:tracking_number]
-    new_stamp.service_type = stamp[:rate][:service_type]
-    new_stamp.rate_amount = stamp[:rate][:amount]
-    new_stamp.package_type = stamp[:rate][:package_type] 
-    new_stamp.due_date = stamp[:rate][:ship_date]
-    new_stamp.stamps_tx_id = stamp[:stamps_tx_id]
-    new_stamp.url = stamp[:url]
-    new_stamp.status = "pending"
-    if new_stamp.save
-      new_stamp.send_email_to_customer if is_send_label
-      return new_stamp
-    end
-    return nil
+    
+    #send_stamp_to_customer(buy_stamp, sell_stamp)
+    return true
   end
   
   def shipping_fullname
@@ -122,14 +114,14 @@ class Order < ActiveRecord::Base
   def create_notification
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "Order Processing"
-    notification.description = "Created for products, #{self.balance_amount} Honey" 
+    notification.description = "Order processing: #{balance_amount_label}" 
     notification.save
   end
-    
+  
   def create_notification_to_decline
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "Order Declined"
-    notification.description = "Order - #{self.balance_amount} Honey - Declined" 
+    notification.description = "Order - #{balance_amount_label} - Declined" 
     notification.save
     
     OrderNotifier.product_declined(self).deliver
@@ -139,7 +131,7 @@ class Order < ActiveRecord::Base
     #new_stamp = self.create_new_stamp(false)
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "Order Reminder"
-    notification.description = "Order - $#{self.balance_amount} - Reminder" 
+    notification.description = "Order - #{balance_amount_label} - Reminder" 
     notification.save
 
     OrderNotifier.reminder(self, new_stamp).deliver
@@ -149,10 +141,10 @@ class Order < ActiveRecord::Base
     notification = self.notifications.new(:user_id => self.user.id)
     if self.is_trade_ins? 
       notification.title = "Order Canceled"
-      notification.description = "Order - $#{self.balance_amount} - Canceled" 
+      notification.description = "Order - #{balance_amount_label} - Canceled" 
     else
       notification.title = "Order Canceled"
-      notification.description = "Order - $#{self.balance_amount} - Canceled" 
+      notification.description = "Order - #{balance_amount_label} - Canceled" 
     end
     notification.save
     
@@ -164,10 +156,10 @@ class Order < ActiveRecord::Base
     notification = self.notifications.new(:user_id => self.user.id)
     if self.is_trade_ins? 
       notification.title = "Product verified"
-      notification.description = "Order ($#{self.balance_amount}) has been verified successfully." 
+      notification.description = "Order ($#{balance_amount_label}) has been verified successfully." 
     else
       notification.title = "Order is complete"
-      notification.description = "Your order ($#{self.balance_amount}) is completed." 
+      notification.description = "Your order ($#{balance_amount_label}) is completed." 
     end 
     notification.save
     
@@ -221,6 +213,14 @@ class Order < ActiveRecord::Base
   end
   
   private
+  
+    def balance_amount_label
+      if calc_balance_amount > 0 
+        return "Get $#{calc_balance_amount}" 
+      else
+        return "Charged $#{-(calc_balance_amount)}"
+      end
+    end
   
     def adjust_current_balance
       self.user.update_attribute :balance_amount, ((self.user.balance_amount || 0) + self.balance_amount)

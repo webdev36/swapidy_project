@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130206061606) do
+ActiveRecord::Schema.define(:version => 20130206102456) do
 
   create_table "categories", :force => true do |t|
     t.string  "title"
@@ -195,8 +195,9 @@ ActiveRecord::Schema.define(:version => 20130206061606) do
     t.string   "stamps_tx_id"
     t.string   "url",              :limit => 1000
     t.string   "status"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
+    t.string   "sell_or_buy",                      :default => "sell"
   end
 
   create_table "swapidy_settings", :force => true do |t|
