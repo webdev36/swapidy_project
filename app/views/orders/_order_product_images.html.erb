@@ -1,0 +1,16 @@
+<% if cart_products_empty? %>
+<div>Empty Shopping Cart</div>  
+<% else %>
+<div style="position: relative">
+  <div class="sell_display" style="float:left; width: 45%;overflow: hidden" >
+    <% cart_products[:sell].each do |order_product|%>
+      <img style=" max-width: 80px; max-height: 80px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" />
+    <% end %>
+  </div>
+  <div class="buy_display" style="float:right; width: 45%; text-align: right; overflow:hidden" >
+    <% cart_products[:buy].each do |order_product| %>
+      <img style=" max-width: 80px; max-height: 80px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" />
+    <% end %>
+  </div>
+</div>
+<% end %>

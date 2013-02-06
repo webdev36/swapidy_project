@@ -1,5 +1,5 @@
 class RedeemCode < ActiveRecord::Base
-  attr_accessible :code, :user_id, :expired_date, :honey_amount, :email, :password, :password_confirmation, :status
+  attr_accessible :code, :user_id, :expired_date, :amount, :email, :password, :password_confirmation, :status
   
   attr_accessor :email, :password, :password_confirmation
   
@@ -8,7 +8,7 @@ class RedeemCode < ActiveRecord::Base
   STATUES = {:pending => 0, :completed => 1, :cancelled => 2}
   scope :pending, :conditions => {:status => STATUES[:pending]}
   
-  validates :honey_amount, :status, :expired_date, :code, :presence => true
+  validates :amount, :status, :expired_date, :code, :presence => true
   validates_uniqueness_of :code
   #validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i}#, :message => "Invalid email address"
   
@@ -47,13 +47,13 @@ class RedeemCode < ActiveRecord::Base
   
   def redeem
     user = User.signup_user(:email => email, :password => self.password, :password_confirmation => self.password_confirmation)
-    user.honey_balance = (user.honey_balance || 0.00) + self.honey_amount
+    user.balance_amount = (user.balance_amount || 0.00) + self.amount
     user.redeem_code = self
     user.save
     
-    receiver_notification = Notification.new(:title => "#{self.honey_amount} FREE Honey Promo")
+    receiver_notification = Notification.new(:title => "#{self.amount} FREE Honey Promo")
     receiver_notification.user = user
-    receiver_notification.description = "#{self.honey_amount} FREE Honey Redeemed"
+    receiver_notification.description = "#{self.amount} FREE Honey Redeemed"
     receiver_notification.save
     UserNotifier.redeem_completed(self, user).deliver
     return user
@@ -78,7 +78,7 @@ class RedeemCode < ActiveRecord::Base
       end
       self.status = STATUES[:pending] unless self.status
       self.expired_date = (DateTime.now + default_expired_days.days) unless self.expired_date
-      self.honey_amount = default_honey if self.honey_amount.nil? || self.honey_amount == 0.0
+      self.amount = default_honey if self.amount.nil? || self.amount == 0.0
     end
 
 end

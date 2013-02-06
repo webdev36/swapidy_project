@@ -8,8 +8,8 @@ body{
 <%= render :partial => "steps", :locals => {:current_step => 2 } %>
 <div class="container">
   <div class="headings_pink payment_info_heading">Payment Information</div>
-  <div class="payment_product_image">
-    <img  class="payment_product_img" src="<%= cart_products[:sell].first.product.main_image_url(:large) %>">
+  <div class="confirm_image_container">
+  	<%= render :partial => "/orders/order_product_images" %>
   </div>
   <div class="payment_container">
     <div id="checkout_content" class="payment_editing_block">
