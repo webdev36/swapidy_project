@@ -24,7 +24,7 @@ Please click here to create your account:
   http://www.swapidy.com/free_honeys/confirm?token=<%= @free_honey.token_key %>
 </a><br/>
 <br/>
-You will get <%= @free_honey.receiver_honey_amount %> for joining... free of charge!<br/>
+You will get <%= number_with_delimiter(@free_honey.receiver_amount) %> for joining... free of charge!<br/>
 <br/> 
 Cheerio,<br/>
 <br/>

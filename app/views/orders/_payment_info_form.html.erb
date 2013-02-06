@@ -27,7 +27,6 @@
       You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %>
       <br/>
     </div>
-    <a href="/" class="show_button_buy buy_cancel">Cancel</a>
-    <a href="#" onclick="javascript:refresh_add_honey_form();" style="font-size:20px;" class="order_button_sell">Get more Honey</a>
+    <input name="commit" class="product_button_buy" type="submit" value="Continue" style="right:60px;"/>
   <% end %>
 <% end %>
