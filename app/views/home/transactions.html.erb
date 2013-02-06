@@ -7,12 +7,6 @@
           <li class="tab active">
             <a href="#all_trans" data-toggle="tab"><img src="/images/all_transactions_icon.png"><span class='nav_text'>All transactions</span></a>
           </li>
-          <li class="tab">
-            <a href="#trade_ins" data-toggle="tab"><img src="/images/icon_honey_trans.png">&nbsp;&nbsp;<span class='nav_text'>Trade-ins</span></a>
-          </li>
-          <li class="tab">
-            <a href="#orders" data-toggle="tab"><img src="/images/orders_icon.png"><span class='nav_text'>Orders</span></a>
-          </li>
         </ul>
       </div>
     </div> 
@@ -23,15 +17,7 @@
         <div class="tab-content">
           <div class="tab-pane active" id="all_trans">
             <br/>
-            <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :all_trans} %>
-          </div>
-          <div class="tab-pane" id="trade_ins">
-            <br/>
-            <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :trade_ins} %>
-          </div>
-          <div class="tab-pane" id="orders">
-            <br/>
-            <%= render :partial => "/shared/order_timeline", :locals => {:for_item => :orders} %>
+            <%= render :partial => "/shared/order_timeline" %>
           </div>
         </div>
       </div>
