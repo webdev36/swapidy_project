@@ -15,7 +15,7 @@
   .faq_cat{
         color: #38B4DE;
         font-size: 20px;
-        font-family: "myriad-s";
+        font-family: "myriad-s";  
         margin-bottom: 10px;
         cursor: pointer;
         text-decoration: underline;
@@ -37,7 +37,7 @@
       $(this).next().slideToggle('normal');
       // Toggle dd when the respective dt is clicked
     });
-    $('.faqs').hide();
+   
     // Hide all DDs inside .faqs
     $('.faq_cat').hover(function() {
       $(this).addClass('hover')
@@ -53,9 +53,6 @@
 <div class="container" style="display:none; position:relative; bottom:230px;">
   <div class="headings_pink">FAQ</div>
   <br/>
-  <div class="faq_cat">
-    - General FAQ<br/>
-  </div>
   <dl class="faqs">
     <dt>
       Can I use Swapidy anywhere?
