@@ -59,23 +59,29 @@ $(function() {
   .mouseout(function(){
     $(this).attr("src",'/images/settings_icon.png');
   });
-  $(".see_more_sell").toggle(function(){
+  
+  $(".see_more_sell ").toggle(function(){
 	$(".sell_display").css("overflow","visible");
 	$(".sell_display").css("height","auto");
-	$(this).text("Hide")
+	$('dropdow_item').css("-webkit-transform","180deg");
+	//$(this).text("Hide")
   },function(){
 		$(".sell_display").css("overflow","hidden");
 		$(".sell_display").css("height","100px");
-		$(this).text("Show All")
+		//$(this).text("Show All")
+		//$('sell_display').addClass('hide_item');
+
+
 	});
+	
   $(".see_more_buy").toggle(function(){
 	$(".buy_display").css("overflow","visible");
 	$(".buy_display").css("height","auto");
-	$(this).text("Hide")
+	//$(this).text("Hide")
   },function(){
 		  $(".buy_display").css("overflow","hidden");
   		  $(".buy_display").css("height","100px");
-  		  $(this).text("Show All")
+  		  //$(this).text("Show All")
 	  });
   $(".del-product").live('click',function(){		
 		var url_ajax = '/home/del_product';
