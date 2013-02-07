@@ -63,7 +63,7 @@ $(function() {
   $(".see_more_sell ").toggle(function(){
 	$(".sell_display").css("overflow","visible");
 	$(".sell_display").css("height","auto");
-	$('dropdow_item').css("-webkit-transform","180deg");
+	//$('dropdow_item').css("-webkit-transform","180deg");
 	//$(this).text("Hide")
   },function(){
 		$(".sell_display").css("overflow","hidden");
