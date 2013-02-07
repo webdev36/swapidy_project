@@ -26,40 +26,33 @@ class CategoryAttribute < ActiveRecord::Base
   
   def applied_for_models_filter
     class_types = []
-    total_count_for_buy = 0
-    total_count_for_sell = 0
+    total_count = 0
     product_model_attributes.each do |model_attr|
-      class_types << "attr_filter_model_#{model_attr.product_model.id}_for_buying" if model_attr.count_for_buy > 0
-      class_types << "attr_filter_model_#{model_attr.product_model.id}_for_selling" if model_attr.count_for_sell > 0
+      class_types << "attr_filter_model_#{model_attr.product_model.id}" if model_attr.products.count > 0
       
-      total_count_for_buy += model_attr.count_for_buy
-      total_count_for_sell += model_attr.count_for_sell
+      total_count += model_attr.products.count
     end 
     
-    class_types << "attr_filter_model_all_for_buying" if total_count_for_buy > 0
-    class_types << "attr_filter_model_all_for_selling" if total_count_for_sell > 0
+    class_types << "attr_filter_model_all" if total_count > 0
     class_types.uniq.join(" ")
   end
   
   def attributes_in_models
     attribute_values = {}
     attribute_titles = {}
-    for_buy_attributes = {}
-    for_sell_attributes = {}
+    attributes = {}
     self.product_model_attributes.each do |attribute|
       attribute_titles.merge! attribute.gen_fitler_id => attribute.value
       
       if attribute_values[attribute.gen_fitler_id]
         attribute_values[attribute.gen_fitler_id] << attribute
-        for_buy_attributes[attribute.gen_fitler_id] += attribute.count_for_buy
-        for_sell_attributes[attribute.gen_fitler_id] += attribute.count_for_sell
+        attributes[attribute.gen_fitler_id] += attribute.products.count
       else
-        for_buy_attributes.merge! attribute.gen_fitler_id => attribute.count_for_buy
-        for_sell_attributes.merge! attribute.gen_fitler_id => attribute.count_for_sell
+        attributes.merge! attribute.gen_fitler_id => attribute.products.count
         attribute_values.merge! attribute.gen_fitler_id => [attribute]
       end
     end
-    return attribute_values.keys.reject{|key| (for_buy_attributes[key] + for_sell_attributes[key]) == 0 }.map{|key| [key, attribute_titles[key], attribute_values[key], for_buy_attributes[key], for_sell_attributes[key]] }
+    return attribute_values.keys.reject{|key| attributes[key] == 0 }.map{|key| [key, attribute_titles[key], attribute_values[key], attributes[key]] }
   end
 
   after_save :expired_fragment_caches

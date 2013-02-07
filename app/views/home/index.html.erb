@@ -5,8 +5,7 @@
 <% cache("homepage_available_categories", :expires_in => 1.hour) do %>
   <div id="product_type" style="display:none;">
     <div class="headings_pink" style="text-align:center;">
-      <div id="sell_message" style="display:none; text-align:center;"><span >What do you want to trade today?</span><br/><span class="motto_sub">Choose your product you want to buy or sell</span></div>
-      <div id="buy_message" style="display:none; text-align:center;"><span style="text-align:center" >What do you want to buy today?</span><br/><span class="motto_sub">Click a product to buy what you desire</span></div>
+      <div style="text-align:center;"><span >What do you want to trade today?</span><br/><span class="motto_sub">Choose your product you want to buy or sell</span></div>
     </div>
     <div id="slider-code" class="span12">
       <a class="left carousel-control buttons prev">&lsaquo;</a>
@@ -35,7 +34,7 @@
         <ul id="product_models" class="nav nav-pills" style="position: relative;">
           <li class="product_model active" id="filter_model_all"><a>All models</a></li>
           <% category.product_models.each do |product_model| %>
-            <li class="product_model <%= "model_for_buying" if product_model.for_buy? %> <%= "model_for_selling" if product_model.for_sell? %>" id="filter_model_<%= product_model.id %>"><a><%= product_model.title %></a></li>
+            <li class="product_model" id="filter_model_<%= product_model.id %>"><a><%= product_model.title %></a></li>
           <% end %>
         </ul>
         <% cache("homepage_category_#{category.id}_filter_attr") do %>
@@ -47,7 +46,7 @@
                     <div class="s_category" style="color:#38B4DE; font-size:18px;"><%= attr.title %></div>
                     <div class="attr_filter_column_items" >
                       <% attr.attributes_in_models.each do |attr_value_with_models| %>
-                        <div style="display: block; min-width: 100px;" class="attr_filter <%= "attr_filter_model_all_for_buying" if attr_value_with_models[3] > 0 %> <%= "attr_filter_model_all_for_selling" if attr_value_with_models[4] > 0 %> <%= attr_value_with_models[2].map{|model_attribute| model_attribute.filter_content}.join(" ") %>" >
+                        <div style="display: block; min-width: 100px;" class="attr_filter <%= "attr_filter_model_all" if attr_value_with_models[3] > 0 %> <%= attr_value_with_models[2].map{|model_attribute| model_attribute.filter_content}.join(" ") %>" >
                           <div style="display: inline-block; line-height: 30px;" >
                             <input type="checkbox" id="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>" class="regular-checkbox big-checkbox"
                                 attr-filter-option='<%= attr_value_with_models[0] %>' />
@@ -82,19 +81,20 @@
               </div>
             </div>
             
-            <div id="order_type_filter" class="attr_filter_column">
-              <div class="option-set" data-group="cat_attr_price_range">
+            <div id="order_type_filter" class="attr_filter_column attr_filter_model_all <%= category.product_models.map{|m| m.model_filter_field }.join(" ") %>">
+              <div class="option-set" data-group="cat_attr_order_type">
                 <div style="float:left; min-width: 140px;">
                   <div class="s_category" style="color:#38B4DE; font-size:18px;">Sell/Buy</div>
                   <div class="attr_filter_column_items" >
-                    <% ["sell", "buy", "sell_and_buy"].each do |key| %>
-                      <div style="display:block; min-width: 120px;" class="attr_filter attr_filter_model_all_for_selling" >
+                  	<% order_types = {"sell" => "Sell", "buy" => "Buy", "both" => "Sell or Buy" }%>
+                    <% ["sell", "buy", "both"].each do |key| %>
+                      <div style="display:block; min-width: 120px;" class="attr_filter attr_filter_model_all <%= category.product_models.map{|m| m.model_filter_field }.join(" ") %>" >
                         <div style="display: inline-block; line-height: 30px;" >
                           <input type="checkbox" id="checkbox-<%= category.id%>-<%= key%>" class="regular-checkbox big-checkbox"
                               attr-filter-option="<%= key%>" />
                           <label for="checkbox-<%= category.id%>-<%= key%>"></label>
                         </div>
-                        <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 0px;"><%= key%></div>
+                        <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 0px;"><%= order_types[key]%></div>
                       </div>
                     <% end %>
                   </div>  
@@ -195,11 +195,7 @@
   }
      
   $('#buttons a').click(function() {
-    if($(this).attr('id') == "button_sell"){
-      showScreenToSell();
-    }else{
-      showScreenToBuy();
-    }
+    showScreenToSell();
     $('div#product_type').fadeIn(600);
     $.scrollTo($('div#product_type'), 400);
     showIsoTope();
@@ -225,7 +221,7 @@
 
      $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
      $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
-     $("#container_" + current_category_id + " .attr_" + current_model_id + "_" + for_what).removeClass("hidden_filter");
+     $("#container_" + current_category_id + " .attr_" + current_model_id).removeClass("hidden_filter");
 
      $("#container_" + current_category_id).fadeIn(600);
      $.scrollTo($("#container_" + current_category_id), 400);
@@ -238,7 +234,7 @@
      $("#container_" + current_category_id + " .product_model").removeClass("active");
      
      current_model_id = $(this).attr("id");
-     $("#container_" + current_category_id + " .attr_" + current_model_id + "_" + for_what).removeClass("hidden_filter");
+     $("#container_" + current_category_id + " .attr_" + current_model_id).removeClass("hidden_filter");
      $("#container_" + current_category_id + " #" + current_model_id).addClass("active");
      showIsoTope();
   });
@@ -301,19 +297,9 @@
     // $(".attr_filter_model_all_for_buying").removeClass("hidden_filter")
   // }
   function showScreenToSell() {
-    for_what = "for_selling";
-    $("#sell_message").show();
-    $("#buy_message").hide();
-    $('li.product_model').not('#filter_model_all').hide();
-    $('li.model_for_selling').show();
-    $(".thumbnail .box .button_for_buy").show();
-    $(".thumbnail .box .button_for_sell").show();
-    $(".product_search_container .nav-pills").each(function(index) {
-      $(this).addClass("models_for_sell").removeClass("models_for_buy");
-    });
-    $(".all_using_condition_filter").addClass("option-set").show();
-    $(".attr_filter_model_all_for_buying").not(".attr_filter_model_all_for_selling").addClass("hidden_filter");
-    $(".attr_filter_model_all_for_selling").removeClass("hidden_filter")
+    $('li.product_model').show();
+    $(".thumbnail .box").show();
+    $(".attr_filter_model_all").removeClass("hidden_filter")
   }
   
   function centerIsotypeImages(){
