@@ -3,12 +3,12 @@
     <div style="width: 100%; text-align: center; padding-top: 40px;"> <span class="headings_pink">Empty Shopping Cart</span></div>  
   <% else %>
     <div style="position: relative">
-    	<% if cart_products[:sell].count > 5 %>
+      <% if cart_products[:sell].count > 5 %>
         <a class="dropdown-toggle see_more_sell dropdow_item" data-toggle="dropdown" href="#"></a>
-      	<%end%>
+      <% end %>
       <% if cart_products[:buy].count > 5 %>
 	    <a class="dropdown-toggle see_more_buy dropdow_item" data-toggle="dropdown" href="#"></a>
-      <%end%>
+      <% end %>
       <div class="sell_display" style="background: url(/images/white_bg.png) ;position:absolute; left:0px; width: 500px;height: 100px; overflow: hidden" >
         <% cart_products[:sell].each do |order_product|%>
           <%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product} %>
