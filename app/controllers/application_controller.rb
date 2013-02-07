@@ -1,11 +1,18 @@
 class ApplicationController < ActionController::Base
+  
   protect_from_forgery
+  
   
   before_filter :check_uri #deployed on swapidy.com
   before_filter :prepaire_add_honey
   
   def check_uri
+<<<<<<< HEAD
     #clear_cart_products
+=======
+
+    clear_cart_products
+>>>>>>> 63e971c... Fix issue about invalid cache
     
     return unless Rails.env == 'production'
     if !/^www/.match(request.host)
@@ -15,7 +22,53 @@ class ApplicationController < ActionController::Base
     #  redirect_to :protocol => "https://"
     end
   end
+
+  def cart_products
+    Rails.logger.info session[:cart_products]
+    
+    session[:cart_products] = {:sell => [], :buy => [], :max_order_product_id => 0} if session[:cart_products].nil?
+    {:sell => session[:cart_products][:sell].map {|obj_hash| 
+                order_product = OrderProduct.new(obj_hash)
+                order_product.product = Product.find order_product.product_id
+                order_product
+              },
+     :buy => session[:cart_products][:buy].map {|obj_hash| 
+                order_product = OrderProduct.new(obj_hash)
+                order_product.product = Product.find order_product.product_id
+                order_product
+             }
+    }
+  end
   
+  def cart_amount
+    amount = 0
+    cart_products[:buy].each {|order_product| amount += order_product.price }
+    cart_products[:sell].each {|order_product| amount -= order_product.price }
+    return amount
+  end 
+  
+  def add_cart_product cart_params
+    session[:cart_products] = {:sell => [], :buy => [], :max_order_product_id => 0} if session[:cart_products].nil?
+    session[:cart_products][:max_order_product_id] = (session[:cart_products][:max_order_product_id] || 0) + 1
+    if cart_params[:type] && cart_params[:type] == "sell"
+      session[:cart_products][:sell] << {:product_id => cart_params[:product_id].to_i, :price => cart_params[:price].to_i, :using_condition => cart_params[:using_condition], :order_product_id => session[:cart_products][:max_order_product_id]}
+    elsif cart_params[:type] && cart_params[:type] == "buy"
+      session[:cart_products][:buy] << {:product_id => cart_params[:product_id].to_i, :price => cart_params[:price].to_i, :using_condition => cart_params[:using_condition], :order_product_id => session[:cart_products][:max_order_product_id]}
+    end
+    Rails.logger.info "session cart #{session[:cart_products].to_s}"
+  end
+  
+  def cart_products_empty?
+    return true unless session[:cart_products] 
+    return false if session[:cart_products][:sell] && !session[:cart_products][:sell].empty?
+    return false if session[:cart_products][:buy] && !session[:cart_products][:buy].empty?
+    return true
+  end
+  
+  def clear_cart_products
+    session[:cart_products] = nil
+  end 
+    
   def page_title(title)
     @page_title = title
   end
@@ -49,35 +102,6 @@ class ApplicationController < ActionController::Base
   
   def check_to_display_guide
     session[:need_to_display_guide] = true if current_user && current_user.sign_in_count <= 3
-  end
-
-  def cart_products
-    session[:cart_products] = {:sell => [], :buy => [], :max_order_product_id => 0} if session[:cart_products].nil?
-    {:sell => session[:cart_products][:sell].map {|obj_hash| OrderProduct.new(obj_hash)},
-     :buy => session[:cart_products][:buy].map {|obj_hash| OrderProduct.new(obj_hash)}
-    }
-  end
-  
-  def cart_amount
-    amount = 0
-    cart_products[:buy].each {|order_product| amount += order_product.price }
-    cart_products[:sell].each {|order_product| amount -= order_product.price }
-    return amount
-  end 
-  
-  def add_cart_product cart_params
-    session[:cart_products] = {:sell => [], :buy => [], :max_order_product_id => 0} if session[:cart_products].nil?
-    session[:cart_products][:max_order_product_id] = (session[:cart_products][:max_order_product_id] || 0) + 1
-    if cart_params[:type] && cart_params[:type] == "sell"
-      session[:cart_products][:sell] << {:product_id => cart_params[:product_id].to_i, :price => cart_params[:price].to_i, :using_condition => cart_params[:using_condition], :order_product_id => session[:cart_products][:max_order_product_id]}
-    elsif cart_params[:type] && cart_params[:type] == "buy"
-      session[:cart_products][:buy] << {:product_id => cart_params[:product_id].to_i, :price => cart_params[:price].to_i, :using_condition => cart_params[:using_condition], :order_product_id => session[:cart_products][:max_order_product_id]}
-    end
-    Rails.logger.info "session cart #{session[:cart_products].to_s}"
-  end
-  
-  def clear_cart_products
-    session[:cart_products] = nil
   end
 
   private
