@@ -6,10 +6,11 @@ class ApplicationController < ActionController::Base
   
   def check_uri
 
+    #clear_cart_products
+    
     #return unless Rails.env == 'production'
     #if !/^www/.match(request.host)
-      #redirect_to request.protocol + "www." + request.host_with_port + request.fullpath 
-
+    #  redirect_to request.protocol + "www." + request.host_with_port + request.fullpath 
       #redirect_to "https://www." + request.host_with_port + request.fullpath 
     #elsif !request.ssl?
     #  redirect_to :protocol => "https://"
@@ -21,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
   
   unless Rails.application.config.consider_all_requests_local
-    rescue_from Exception, :with => :render_not_found
+    #rescue_from Exception, :with => :render_not_found
     rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
     rescue_from ActionController::RoutingError, :with => :render_not_found
     rescue_from ActionController::UnknownController, :with => :render_not_found

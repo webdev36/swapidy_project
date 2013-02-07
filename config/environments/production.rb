@@ -33,7 +33,7 @@ Swapidy::Application.configure do
   #config.force_ssl = true
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+  config.log_level = :debug
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
@@ -44,7 +44,7 @@ Swapidy::Application.configure do
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
   config.cache_store = :dalli_store, "dev1.ec2.memcachier.com:11211", 
-                       {:username => "5df586", :password => "e95cb1b917a130f11c83"}
+                       {:username => "32b055", :password => "61f65f2973ecf0c90c2c"}
                        #ENV["MEMCACHIER_SERVERS"].split(","),
                        #{:username => ENV["MEMCACHIER_USERNAME"], :password => ENV["MEMCACHIER_PASSWORD"]}
 
@@ -66,14 +66,23 @@ Swapidy::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  #config.paperclip_defaults = { :storage => :s3,
-  #                              :s3_credentials => {
-  #                                :bucket => ENV['S3_BUCKET_NAME'],
-  #                                :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-  #                                :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-  #                              }
-  #                            }
+  config.paperclip_defaults = { :storage => :s3,
+                                :s3_credentials => {
+                                  :bucket => ENV['S3_BUCKET_NAME'],
+                                  :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+                                  :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+                                }
+                              }
   config.action_mailer.default_url_options = { :host => 'swapidy.com' }
+
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => ENV['SENDGRID_USERNAME'],
+    :password       => ENV['SENDGRID_PASSWORD'],
+    :domain         => 'swapidy.com'
+  }
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
