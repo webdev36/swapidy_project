@@ -67,7 +67,7 @@ $(function() {
 	//$(this).text("Hide")
   },function(){
 		$(".sell_display").css("overflow","hidden");
-		$(".sell_display").css("height","100px");
+		$(".sell_display").css("height","120px");
 		//$(this).text("Show All")
 		//$('sell_display').addClass('hide_item');
 
@@ -80,7 +80,7 @@ $(function() {
 	//$(this).text("Hide")
   },function(){
 	  $(".buy_display").css("overflow","hidden");
-	  $(".buy_display").css("height","100px");
+	  $(".buy_display").css("height","120px");
 	  //$(this).text("Show All")
   });
   $(".del-product").live('click',function(){		
