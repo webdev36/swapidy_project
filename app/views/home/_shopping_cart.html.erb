@@ -3,16 +3,12 @@
     <div>Empty Shopping Cart</div>  
   <% else %>
     <div style="position: relative">
-    	<% if cart_products[:sell].count > 5 %>
-        <a class="btn btn-primary dropdown-toggle see_more_sell" data-toggle="dropdown" href="#">
-			Show All
-	   	<span class="caret"></span>
+    	<% if cart_products[:sell].count. > 5 %>
+        <a class="dropdown-toggle see_more_sell dropdow_item" data-toggle="dropdown" href="#">
  		 </a>
       	<%end%>
       <% if cart_products[:buy].count > 5 %>
-	    <a class="btn btn-primary dropdown-toggle see_more_buy" data-toggle="dropdown" href="#">
-			Show All
-	   		<span class="caret"></span>
+	    <a class="dropdown-toggle see_more_buy dropdow_item" data-toggle="dropdown" href="#">
 		 </a>
       <%end%>
       <div class="sell_display" style="background: url(/images/white_bg.png) ;position:absolute; left:0px; width: 500px;height: 100px; overflow: hidden" >
@@ -43,5 +39,34 @@
 		top: 50px;
 		right: 500px;
 	}
+	.dropdow_item{
+		position:absolute;
+		display: inline-block;
+		width: 0;
+		height: 0;
+		vertical-align: top;
+		border-top: 10px solid black;
+		border-right: 10px solid transparent;
+		border-left: 10px solid transparent;
+		margin-top:40px;
+		-moz-transform:rotate(0deg);
+  		-webkit-transform:rotate(0deg);
+	}
+	
+	.hide_item{
+	display: block;
+	top: 10px;
+	right:-7px;
+	width: 10px;
+	height: 10px;
+	vertical-align: top;
+	border-top: 10px solid black;
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent;
+	margin-top:40px;
+ 	-moz-transform:rotate(-45deg);
+  	-webkit-transform:rotate(180deg);
+}
+
 </style>
 
