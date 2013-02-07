@@ -1,9 +1,9 @@
 <div id="product_items">
   <% if cart_products_empty? %>
-    <div>Empty Shopping Cart</div>  
+    <div style="width: 100%; text-align: center; padding-top: 40px;"> <span class="headings_pink">Empty Shopping Cart</span></div>  
   <% else %>
     <div style="position: relative">
-    	<% if cart_products[:sell].count. > 5 %>
+    	<% if cart_products[:sell].count > 5 %>
         <a class="dropdown-toggle see_more_sell dropdow_item" data-toggle="dropdown" href="#">
  		 </a>
       	<%end%>
