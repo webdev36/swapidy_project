@@ -69,7 +69,7 @@ class HomeController < ApplicationController
         session[:cart_products][:sell].delete_at(index_for_sell)
       else
         index_for_buy = session[:cart_products][:buy].index{|x| x[:order_product_id].to_i == params[:order_id].to_i}
-        session[:cart_products][:buy].delete_at(index_for_buy) if index_for_sell && index_for_sell.to_i >= 0
+        session[:cart_products][:buy].delete_at(index_for_buy) if index_for_buy && index_for_buy.to_i >= 0
       end
     end
     respond_to do |format|
