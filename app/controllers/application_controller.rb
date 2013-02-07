@@ -7,13 +7,6 @@ class ApplicationController < ActionController::Base
   before_filter :prepaire_add_honey
   
   def check_uri
-<<<<<<< HEAD
-    #clear_cart_products
-=======
-
-    clear_cart_products
->>>>>>> 63e971c... Fix issue about invalid cache
-    
     return unless Rails.env == 'production'
     if !/^www/.match(request.host)
       redirect_to request.protocol + "www." + request.host_with_port + request.fullpath 
