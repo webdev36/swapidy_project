@@ -4,12 +4,10 @@
   <% else %>
     <div style="position: relative">
     	<% if cart_products[:sell].count > 5 %>
-        <a class="dropdown-toggle see_more_sell dropdow_item" data-toggle="dropdown" href="#">
- 		 </a>
+        <a class="dropdown-toggle see_more_sell dropdow_item" data-toggle="dropdown" href="#"></a>
       	<%end%>
       <% if cart_products[:buy].count > 5 %>
-	    <a class="dropdown-toggle see_more_buy dropdow_item" data-toggle="dropdown" href="#">
-		 </a>
+	    <a class="dropdown-toggle see_more_buy dropdow_item" data-toggle="dropdown" href="#"></a>
       <%end%>
       <div class="sell_display" style="background: url(/images/white_bg.png) ;position:absolute; left:0px; width: 500px;height: 100px; overflow: hidden" >
         <% cart_products[:sell].each do |order_product|%>
@@ -25,7 +23,7 @@
         <% end %>
       </div>
     </div>
-    <a href="/orders/new" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>
+    <a href="javascript:goto_checkout();" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>
   <% end %>
 </div>
 <style>

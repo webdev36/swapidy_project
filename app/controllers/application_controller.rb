@@ -49,7 +49,6 @@ class ApplicationController < ActionController::Base
     elsif cart_params[:type] && cart_params[:type] == "buy"
       session[:cart_products][:buy] << {:product_id => cart_params[:product_id].to_i, :price => cart_params[:price].to_i, :using_condition => cart_params[:using_condition], :order_product_id => session[:cart_products][:max_order_product_id]}
     end
-    Rails.logger.info "session cart #{session[:cart_products].to_s}"
   end
   
   def cart_products_empty?

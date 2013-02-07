@@ -79,10 +79,10 @@ $(function() {
 	$(".buy_display").css("height","auto");
 	//$(this).text("Hide")
   },function(){
-		  $(".buy_display").css("overflow","hidden");
-  		  $(".buy_display").css("height","100px");
-  		  //$(this).text("Show All")
-	  });
+	  $(".buy_display").css("overflow","hidden");
+	  $(".buy_display").css("height","100px");
+	  //$(this).text("Show All")
+  });
   $(".del-product").live('click',function(){		
 		var url_ajax = '/home/del_product';
 		var order_product_id = $(this).attr('order_product_id');
@@ -135,6 +135,23 @@ function show_hide_price_popup(popup_id){
   }
 }
 
+function goto_checkout(){
+   sell_count = 0;
+   $("#product_items .sell_display .cart_product_thumb").each(function(){
+   	sell_count += 1;
+   });
+   
+   buy_count = 0;
+   $("#product_items .buy_display .cart_product_thumb").each(function(){
+   	buy_count += 1;
+   });
+   if(buy_count == 0 || sell_count == 0) {
+   	 alert("You have not selected any sell/buy products");
+   }else{
+   	 window.location = "/orders/new";	
+   }
+   
+}
 	
 function switchToCheckoutStep(form_id, step_url) {
   $("#" + form_id).attr("action", step_url);

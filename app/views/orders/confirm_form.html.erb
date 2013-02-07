@@ -41,8 +41,14 @@
               $<%= format_num(current_user.balance_amount) %>
             </div>
             <div>
-              <span>Products balance amount:</span>
-              $<%= format_num(cart_amount) %>
+            <% if cart_amount < 0 %>
+			  <span>You will get:</span>
+			  $<%= format_num(-cart_amount) %>
+			<% else %>
+			  <span>You will be substructed:</span>
+              $<%= format_num(cart_amount) %> 
+			<% end %>
+			
             </div>
             <% if current_user.extra_money_for(cart_amount) > 0 %>
             <div>
