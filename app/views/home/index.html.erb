@@ -1,7 +1,11 @@
+<div id="shopping_cart" <% if cart_products_empty? %> style="display:none;" <% end %> >
+  <%= render :partial => "/home/shopping_cart" %>
+</div>  
+    
 <% cache("homepage_available_categories", :expires_in => 1.hour) do %>
   <div id="product_type" style="display:none;">
     <div class="headings_pink" style="text-align:center;">
-      <div id="sell_message" style="display:none; text-align:center;"><span >What do you want to sell today?</span><br/><span class="motto_sub">Click your product to get paid on the spot</span></div>
+      <div id="sell_message" style="display:none; text-align:center;"><span >What do you want to trade today?</span><br/><span class="motto_sub">Choose your product you want to buy or sell</span></div>
       <div id="buy_message" style="display:none; text-align:center;"><span style="text-align:center" >What do you want to buy today?</span><br/><span class="motto_sub">Click a product to buy what you desire</span></div>
     </div>
     <div id="slider-code" class="span12">
@@ -116,11 +120,8 @@
     $('#s3slider').css({height: slideHeight});
   }
   
-  var for_what = "for_selling";
-  
   function get_filter_options() {
     var filters = {};
-    filters["for_what"] = ['.' + for_what];
     
     $("#container_" + current_category_id + ' .attribute_filter input').each(function(index) {
       var $src = $(this);
@@ -264,28 +265,28 @@
     }
   });
   
-  function showScreenToBuy() {
-    $("#sell_message").hide();
-    $("#buy_message").show();
-    $('li.product_model').not('#filter_model_all').hide();
-    $('li.model_for_buying').show();
-    for_what = "for_buying";
-    $(".thumbnail .box .button_for_buy").show();
-    $(".thumbnail .box .button_for_sell").hide();
-    $(".product_search_container .nav-pills").each(function(index) {
-      $(this).addClass("models_for_buy").removeClass("models_for_sell");
-    });
-    $(".all_using_condition_filter").removeClass("option-set").hide();
-    $(".attr_filter_model_all_for_selling").not(".attr_filter_model_all_for_buying").addClass("hidden_filter");
-    $(".attr_filter_model_all_for_buying").removeClass("hidden_filter")
-  }
+  // function showScreenToBuy() {
+    // $("#sell_message").hide();
+    // $("#buy_message").show();
+    // $('li.product_model').not('#filter_model_all').hide();
+    // $('li.model_for_buying').show();
+    // for_what = "for_buying";
+    // $(".thumbnail .box .button_for_buy").show();
+    // $(".thumbnail .box .button_for_sell").hide();
+    // $(".product_search_container .nav-pills").each(function(index) {
+      // $(this).addClass("models_for_buy").removeClass("models_for_sell");
+    // });
+    // $(".all_using_condition_filter").removeClass("option-set").hide();
+    // $(".attr_filter_model_all_for_selling").not(".attr_filter_model_all_for_buying").addClass("hidden_filter");
+    // $(".attr_filter_model_all_for_buying").removeClass("hidden_filter")
+  // }
   function showScreenToSell() {
     for_what = "for_selling";
     $("#sell_message").show();
     $("#buy_message").hide();
     $('li.product_model').not('#filter_model_all').hide();
     $('li.model_for_selling').show();
-    $(".thumbnail .box .button_for_buy").hide();
+    $(".thumbnail .box .button_for_buy").show();
     $(".thumbnail .box .button_for_sell").show();
     $(".product_search_container .nav-pills").each(function(index) {
       $(this).addClass("models_for_sell").removeClass("models_for_buy");
@@ -315,10 +316,6 @@
   $(function() {
     <% if params[:show] && params[:show] == "for_sell" %>
       showScreenToSell();
-      $('div#product_type').fadeIn(600);
-      $.scrollTo($('div#product_type'), 400);
-    <% elsif params[:show] && params[:show] == "for_buy" %>
-      showScreenToBuy();
       $('div#product_type').fadeIn(600);
       $.scrollTo($('div#product_type'), 400);
     <% end %>

@@ -40,7 +40,7 @@ class RegistrationsController < Devise::RegistrationsController
         if resource.active_for_authentication?
           set_flash_message :notice, :signed_up if is_navigational_format?
           sign_in(resource_name, resource)
-          redirect_to :controller => :orders, :action => :new, :method => :post, :product_id => params[:product_id], :using_condition => params[:using_condition], :order_type => params[:order_type]
+          redirect_to :controller => :orders, :action => :new, :method => :post
           UserNotifier.signup_greeting(resource).deliver
           #check_to_display_guide
           return
@@ -53,8 +53,7 @@ class RegistrationsController < Devise::RegistrationsController
       end
       
       @user_for_register = true
-      @order = Order.new(:order_type => params[:order_type], :using_condition => params[:using_condition])
-      @product = Product.find params[:product_id]
+      @order = Order.new
       render "/orders/email_info_form"
     end
   end
@@ -107,14 +106,14 @@ class RegistrationsController < Devise::RegistrationsController
     if existed_redeem
       build_resource
       resource.redeem_code = existed_redeem
-      resource.honey_balance = existed_redeem.honey_amount
+      resource.balance_amount = existed_redeem.amount
       resource.save
       UserNotifier.signup_greeting(resource).deliver
       sign_up(resource_name, resource)
       
-      receiver_notification = Notification.new(:title => "#{existed_redeem.honey_amount} FREE Honey Promo")
+      receiver_notification = Notification.new(:title => "#{existed_redeem.amount} FREE Money Promo")
       receiver_notification.user = resource
-      receiver_notification.description = "#{existed_redeem.honey_amount} FREE Honey Redeemed"
+      receiver_notification.description = "#{existed_redeem.amount} FREE Money Redeemed"
       receiver_notification.save
       UserNotifier.redeem_completed(existed_redeem, resource).deliver
     

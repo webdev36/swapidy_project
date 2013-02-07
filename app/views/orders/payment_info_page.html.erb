@@ -8,8 +8,8 @@ body{
 <%= render :partial => "steps", :locals => {:current_step => 2 } %>
 <div class="container">
   <div class="headings_pink payment_info_heading">Payment Information</div>
-  <div class="payment_product_image">
-    <img  class="payment_product_img" src="<%= @product.main_image_url(:large) %>">
+  <div class="confirm_image_container">
+  	<%= render :partial => "/orders/order_product_images" %>
   </div>
   <div class="payment_container">
     <div id="checkout_content" class="payment_editing_block">
@@ -27,7 +27,6 @@ body{
       type : 'POST',
       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       url : '/orders/reload_payment_order_info',
-      data: "order_type=<%= params[:order_type]%>&product_id=<%= params[:product_id]%>&using_condition=<%= params[:using_condition]%>",
       dataType : 'script',
       success: function(data) {}
     });

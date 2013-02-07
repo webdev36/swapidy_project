@@ -7,10 +7,12 @@ body{
   <%= render :partial => "steps", :locals => {:current_step => 3 } %>
   <div class="container">
     <div class="headings_pink shipping_form_head">Shipping Address<span>*</span></div>
-    <div class="shipping_form_image"><img id="before_confirm_image" src="<%= @product.main_image_url(:large) %>" /></div>
-    <div class="shipping_form_container">
+    <div class="confirm_image_container">
+	  <%= render :partial => "/orders/order_product_images" %>
+	</div>
+	<div class="shipping_form_container">
       <div style="width: 500px; margin-left: -20px;">
-        <div class="shipping_product_info"><%= @order.title %></div>  
+        <div class="shipping_product_info"></div>  
         <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; padding: 15px 0px 20px;">
           <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
           <div class="render_form">

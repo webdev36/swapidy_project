@@ -59,10 +59,83 @@ $(function() {
   .mouseout(function(){
     $(this).attr("src",'/images/settings_icon.png');
   });
+  
+  $(".see_more_sell ").toggle(function(){
+	$(".sell_display").css("overflow","visible");
+	$(".sell_display").css("height","auto");
+	$('dropdow_item').css("-webkit-transform","180deg");
+	//$(this).text("Hide")
+  },function(){
+		$(".sell_display").css("overflow","hidden");
+		$(".sell_display").css("height","100px");
+		//$(this).text("Show All")
+		//$('sell_display').addClass('hide_item');
 
 
+	});
+	
+  $(".see_more_buy").toggle(function(){
+	$(".buy_display").css("overflow","visible");
+	$(".buy_display").css("height","auto");
+	//$(this).text("Hide")
+  },function(){
+		  $(".buy_display").css("overflow","hidden");
+  		  $(".buy_display").css("height","100px");
+  		  //$(this).text("Show All")
+	  });
+  $(".del-product").live('click',function(){		
+		var url_ajax = '/home/del_product';
+		var order_product_id = $(this).attr('order_product_id');
+		$.ajax({
+			url :url_ajax,
+			beforeSend : function(xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+          	},
+			type: "POST",
+			data: 'order_id=' + order_product_id,
+			dataType:'script',
+			success :function(){
+				 
+			}
+		});
+		return false;
+	}); 
+   	  
+	  
+  $('.box .popup_select_price .price_type').live('click', function(){
+  	var url_select_price = '/home/swap_product';
+	$.ajax({
+		url : url_select_price,
+		beforeSend : function(xhr) {
+        	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+      	},
+      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
+		type: 'POST',
+		dataType: 'script', 
+		success:function(){
+			 //location.reload();
+		}
+	});
+  });
 });
 
+var current_popup_id = "";
+function show_hide_price_popup(popup_id){
+  if($('#' + popup_id).hasClass('active')){
+    $('#' + popup_id).removeClass('active');
+    $('#' + popup_id).hide();
+    current_popup_id = "";
+  }else{
+  	if(current_popup_id != ""){
+  	$('#' + current_popup_id).hide();
+  	}
+    $('#' + popup_id).addClass('active');
+    $('#' + popup_id).show();
+    current_popup_id = popup_id;
+  }
+}
+
+	
 function switchToCheckoutStep(form_id, step_url) {
   $("#" + form_id).attr("action", step_url);
   $("#" + form_id).submit();

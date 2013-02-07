@@ -28,11 +28,6 @@ label{
   <% @user = resource || User.new unless @user %>
   <%= form_for(@user || resource, :as => "user", :url => session_path(@user), :method => :post) do |f| %>
     <input type="hidden" name="login_to_order" value="1" />
-    <input type="hidden" name="product_id" value="<%= @product.id %>" />
-    <input type="hidden" name="token_key" value="<%= @order.token_key %>" />
-    <input type="hidden" name="order_type" value="<%= @order.order_type %>" />
-    <input type="hidden" name="using_condition" value="<%= @order.using_condition %>" />
-    <input type="hidden" name="honey_price" value="<%= @order.honey_price %>" />
     
     <div><input id="user_email" name="user[email]" size="30" type="email" value="" placeholder="E-mail" style="background-color:#ECECEC; height:30px; margin-bottom:10px;" /></div>
     <div><input id="user_password" name="user[password]" size="30" type="password" placeholder="Password" style="background-color:#ECECEC; height:30px;"/></div>
@@ -56,12 +51,7 @@ label{
   <p class="product_desc" style="color:white;">We'll use this email address to send you shipping details and progress updates every step of the way.</p>
   <%= form_for(@user || resource, :as => "user", :url => registration_path(@user), :method => :post) do |f| %>
     <input type="hidden" name="login_to_order" value="1" />
-    <input type="hidden" name="product_id" value="<%= @product.id %>" />
-    <input type="hidden" name="token_key" value="<%= @order.token_key %>" />
-    <input type="hidden" name="order_type" value="<%= @order.order_type %>" />
-    <input type="hidden" name="using_condition" value="<%= @order.using_condition %>" />
-    <input type="hidden" name="honey_price" value="<%= @order.honey_price %>" />
-
+    
     <%= f.email_field :email, :class =>"email_textfield", :placeholder =>"E-mail" %><br/>
     <%= f.password_field :password, :class =>"email_textfield", :placeholder =>"Password"  %><br/>
     <%= f.password_field :password_confirmation, :class =>"email_textfield", :placeholder =>"Confirm Password"  %>

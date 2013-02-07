@@ -9,15 +9,12 @@
 
 <div class="container">
   <div class="headings_pink confirm_head_info">Confirm Your Details</div>
-  <div class="confirm_image_container"><img id="confirm_image" src="<%= @product.main_image_url(:large) %>"></div>
+  <div class="confirm_image_container">
+  	<%= render :partial => "/orders/order_product_images" %>
+  </div>
   <div class="confirm_container">
     <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
     <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
-      <%= f.hidden_field :order_type %>
-      <%= f.hidden_field :product_id %>
-      <%= f.hidden_field :using_condition %>
-      <%= f.hidden_field :honey_price %>
-      <%= f.hidden_field :token_key %>
     
       <% unless @order.errors.empty? %>
         <%= raw @order.errors.full_messages.join(".<br/>") %>
@@ -26,7 +23,7 @@
   
       <br/>
       <div>
-        <div class="confirm_info_head">You are buying: <%= @order.title %></div><br />
+        <div class="confirm_info_head">You are buying: </div><br />
         <div id="email_label_info" style="position:relative; bottom:90px;">
           <%= render :partial => "email_label", :locals => {:user => current_user} %>
         </div>
@@ -41,16 +38,25 @@
           <div style="position:relative; bottom:320px;">
             <div>
               <span>Current Balance:</span>
-              <%= format_num(current_user.honey_balance) %> Honey
+              $<%= format_num(current_user.balance_amount) %>
             </div>
             <div>
-              <span>Product Price:</span>
-              <%= format_num(@product.honey_price) %> Honey
-            </div>      
+              <span>Products balance amount:</span>
+              $<%= format_num(cart_amount) %>
+            </div>
+            <% if current_user.extra_money_for(cart_amount) > 0 %>
+            <div>
+              Your money balance is not enough.
+              You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %>
+              <input type="button" value="Add Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="alert('Under contruction');" />
+            </div>
+            <% end %>
           </div>
+          
           <br/>
     
-          <% has_agreement_before = current_user.has_same_order?(@order.order_type) %>
+    
+          <% has_agreement_before = !current_user.last_order.nil? %>
           <div style="position:relative; bottom:330px;">
             <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:80px;">Terms of Service</div></label>
             <p>

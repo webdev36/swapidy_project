@@ -1,0 +1,78 @@
+<h1>Order Number: <%= @order.id %> </h1>
+<p>Created at: <%= @order.created_at %></p>
+<br/>
+
+<% sell_amount = 0 %>
+<% if @order.order_products.for_sell.count > 0 %>
+<h2>Trade-in items: </h2>
+<table border="1">
+  <tr>
+    <td>No.</td>
+    <td>Product</td>
+    <td>Model</td>
+    <td>Condition</td>
+    <td>Price</td>
+  </tr>
+<% @order.order_products.for_sell.each_with_index do |order_product, index| %>
+  <% sell_amount += order_product.price %>
+  <tr>
+    <td><%= index + 1%></td>
+    <td><%= order_product.product.title %></td>
+    <td><%= order_product.product.product_model.title %></td>
+    <td><%= order_product.using_condition %></td>
+    <td style="text-align: right;">$<%= number_with_delimiter(order_product.price) %></td>
+  </tr>
+<% end %>
+  <tr>
+    <td style="text-align: right;" colspan="4">Total selling price</td>
+    <td style="text-align: right;">$<%= number_with_delimiter(sell_amount) %></td>
+  <tr>
+</table>
+<% end %>
+
+<% buy_amount = 0 %>  
+<% if @order.order_products.for_buy.count > 0 %>
+<h2>Order items: </h2>
+<table border="1">
+  <tr>
+    <td>No.</td>
+    <td>Product</td>
+    <td>Model</td>
+    <td>Condition</td>
+    <td>Price</td>
+  </tr>
+<% amount = 0 %>  
+<% @order.order_products.for_buy.each_with_index do |order_product, index| %>
+  <% buy_amount += order_product.price %>
+  <tr>
+    <td><%= index + 1%></td>
+    <td><%= order_product.product.title %></td>
+    <td><%= order_product.product.product_model.title %></td>
+    <td><%= order_product.using_condition %></td>
+    <td style="text-align: right;">$<%= number_with_delimiter(order_product.price) %></td>
+  </tr>
+<% end %>
+  <tr>
+    <td style="text-align: right;" colspan="4">Total selling price</td>
+    <td style="text-align: right;">$<%= number_with_delimiter(buy_amount) %></td>
+  <tr>
+</table>
+<% end %>
+
+<% if buy_amount > sell_amount %>
+<h2>You will be charged: $<%= number_with_delimiter(buy_amount - sell_amount) %></h2>
+<% else %>
+<h2>You would get: $<%= number_with_delimiter(sell_amount - buy_amount) %></h2>
+<% end %>
+<br/>
+
+<h2>Your Shipping Address</h2>
+<p>
+  <%= @order.shipping_first_name %> <%= @order.shipping_last_name %><br />
+  <%= @order.shipping_address %><br />
+  <%= @order.shipping_optional_address %>
+  <%= @order.shipping_city %><br />
+  <%= @order.shipping_state %><br />
+  <%= @order.shipping_zip_code %><br />
+  <%= @order.shipping_country %><br />
+</p>
