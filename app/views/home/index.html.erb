@@ -81,6 +81,26 @@
                 </div>
               </div>
             </div>
+            
+            <div id="order_type_filter" class="attr_filter_column">
+              <div class="option-set" data-group="cat_attr_price_range">
+                <div style="float:left; min-width: 140px;">
+                  <div class="s_category" style="color:#38B4DE; font-size:18px;">Sell/Buy</div>
+                  <div class="attr_filter_column_items" >
+                    <% ["sell", "buy", "sell_and_buy"].each do |key| %>
+                      <div style="display:block; min-width: 120px;" class="attr_filter attr_filter_model_all_for_selling" >
+                        <div style="display: inline-block; line-height: 30px;" >
+                          <input type="checkbox" id="checkbox-<%= category.id%>-<%= key%>" class="regular-checkbox big-checkbox"
+                              attr-filter-option="<%= key%>" />
+                          <label for="checkbox-<%= category.id%>-<%= key%>"></label>
+                        </div>
+                        <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 0px;"><%= key%></div>
+                      </div>
+                    <% end %>
+                  </div>  
+                </div>
+              </div>
+            </div>
 
           </div>
         <% end %>
