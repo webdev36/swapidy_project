@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   
   def check_uri
 
-    clear_cart_products
-    
     #return unless Rails.env == 'production'
     #if !/^www/.match(request.host)
     #  redirect_to request.protocol + "www." + request.host_with_port + request.fullpath 
