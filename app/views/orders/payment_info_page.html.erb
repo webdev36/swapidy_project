@@ -6,9 +6,9 @@ body{
 <div class="content" style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-2.jpg); -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
 
 <%= render :partial => "steps", :locals => {:current_step => 2 } %>
-<div class="container">
+<div class="container" style="position: relative; z-index: 500">
   <div class="headings_pink payment_info_heading">Payment Information</div>
-  <div class="confirm_image_container">
+  <div class="confirm_image_container" style="position: absolute;top: 80px;width: 480px;left: 215px;-webkit-border-radius: 20px;padding: 10px;">
   	<%= render :partial => "/orders/order_product_images" %>
   </div>
   <div class="payment_container">
@@ -32,3 +32,11 @@ body{
     });
   }
 </script>
+<style>
+
+	.payment_container{
+		position: absolute;
+		left: 215px;
+		z-index: 2000;
+	}
+</style>
