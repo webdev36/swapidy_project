@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130206102456) do
+ActiveRecord::Schema.define(:version => 20130213034214) do
 
   create_table "categories", :force => true do |t|
     t.string  "title"
@@ -73,21 +73,21 @@ ActiveRecord::Schema.define(:version => 20130206102456) do
   create_table "order_products", :force => true do |t|
     t.integer  "order_id"
     t.integer  "product_id"
-    t.integer  "price"
-    t.string   "using_condition", :default => "Flawless"
-    t.string   "sell_or_buy",     :default => "buy"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.decimal  "price",           :precision => 10, :scale => 2
+    t.string   "using_condition",                                :default => "Flawless"
+    t.string   "sell_or_buy",                                    :default => "buy"
+    t.datetime "created_at",                                                             :null => false
+    t.datetime "updated_at",                                                             :null => false
     t.string   "product_title"
-    t.decimal  "weight_lb",       :default => 1.0
+    t.decimal  "weight_lb",                                      :default => 1.0
   end
 
   create_table "orders", :force => true do |t|
     t.integer  "product_id"
     t.integer  "user_id"
     t.integer  "status"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
     t.string   "shipping_method"
     t.string   "shipping_first_name"
     t.string   "shipping_last_name"
@@ -97,26 +97,26 @@ ActiveRecord::Schema.define(:version => 20130206102456) do
     t.string   "shipping_state"
     t.string   "shipping_zip_code"
     t.string   "shipping_country"
-    t.integer  "balance_amount"
+    t.decimal  "balance_amount",            :precision => 10, :scale => 2
     t.string   "using_condition"
     t.string   "shipping_zip_code_add_on"
   end
 
   create_table "payment_transactions", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "gateway",                            :default => 0
+    t.integer  "gateway",                                                           :default => 0
     t.string   "payment_charge_id"
     t.string   "payment_invoice_id"
     t.string   "payment_type"
     t.string   "status"
-    t.decimal  "amount"
+    t.decimal  "amount",                             :precision => 10, :scale => 2
     t.string   "card_name"
     t.string   "card_type"
     t.string   "card_expired_month",    :limit => 2
     t.string   "card_expired_year",     :limit => 4
     t.string   "card_last_four_number", :limit => 4
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.datetime "created_at",                                                                       :null => false
+    t.datetime "updated_at",                                                                       :null => false
   end
 
   create_table "product_attributes", :force => true do |t|
@@ -220,18 +220,18 @@ ActiveRecord::Schema.define(:version => 20130206102456) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "profile_name"
-    t.string   "email",                                   :default => "",    :null => false
-    t.string   "encrypted_password",                      :default => "",    :null => false
+    t.string   "email",                                                                  :default => "",    :null => false
+    t.string   "encrypted_password",                                                     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                           :default => 0
+    t.integer  "sign_in_count",                                                          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
+    t.datetime "created_at",                                                                                :null => false
+    t.datetime "updated_at",                                                                                :null => false
     t.string   "card_type"
     t.string   "card_name"
     t.string   "card_expired_month",         :limit => 2
@@ -243,9 +243,9 @@ ActiveRecord::Schema.define(:version => 20130206102456) do
     t.string   "card_last_four_number"
     t.string   "stripe_coupon"
     t.string   "stripe_customer_card_token"
-    t.decimal  "balance_amount",                          :default => 0.0
+    t.decimal  "balance_amount",                          :precision => 10, :scale => 2, :default => 0.0
     t.string   "provider_image"
-    t.boolean  "is_admin",                                :default => false
+    t.boolean  "is_admin",                                                               :default => false
     t.integer  "redeem_code_id"
   end
 

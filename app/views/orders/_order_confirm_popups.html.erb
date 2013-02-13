@@ -37,6 +37,16 @@
   </div>
 </div>
 
+
+<div id="popup-dialog_add_honey" style="display:none; width:0px; padding: 0px;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <div class="container" style="background:url('/images/popup-bg.png'); background-repeat:repeat; border-radius: 10px; padding: 40px; width:690px; margin-left:160px;" >
+      <a class="close-popup" style="position:relative; left:10px;" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
+      <%= render :partial => "/orders/edit_card_form", :locals => {:card_info => current_user} %>
+    </div>
+  </div>
+</div>
+
 <script>
   $(".select_candidate_address").live("click", function() {
     $("#popup_new_order #order_shipping_address").attr("value", $(this).attr("data-address"));
@@ -90,4 +100,8 @@
     });
     return false;
   });
+
+	function refresh_add_honey_form() {
+		showPopup('popup-dialog_add_honey')
+  }
 </script>

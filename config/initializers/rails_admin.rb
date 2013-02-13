@@ -671,7 +671,7 @@ RailsAdmin.config do |config|
     
     list do
       field :status
-      field :honey_price
+      field :balance_amount
       field :user
       field :shipping_fullname
       field :shipping_address
@@ -681,7 +681,7 @@ RailsAdmin.config do |config|
     end
     export do
       field :status
-      field :honey_price
+      field :balance_amount
       field :user
       field :shipping_fullname
       field :shipping_address
@@ -691,7 +691,7 @@ RailsAdmin.config do |config|
     end
     show do
       field :status
-      field :honey_price
+      field :balance_amount
       field :user
       field :shipping_fullname
       field :shipping_address

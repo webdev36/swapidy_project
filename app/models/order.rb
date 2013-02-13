@@ -25,7 +25,7 @@ class Order < ActiveRecord::Base
   
   before_save  :calc_balance_amount
   after_create :create_notification
-  after_create :adjust_current_balance
+  #after_create :adjust_current_balance
 
   STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3, :confirmed_to_ship => 4}
   SHIPPING_METHODS = {:box => "box", :usps => "usps", :fedex => "fedex"}
@@ -58,10 +58,10 @@ class Order < ActiveRecord::Base
     end
     
     #for testing only
-    if Rails.env == 'production'
+    #if Rails.env == 'production'
       result = verify_shipping_address
-    else
-      result = true
+    #else
+    #  result = true
     #  result = self.is_candidate_address && self.is_candidate_address.to_s == "true"
     #  self.candidate_addresses = [{:address1 => "2310 ROCK ST APT (Range 52 - 55)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
     #                            {:address1 => "2310 ROCK ST APT (Range 56 - 59)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
@@ -76,7 +76,7 @@ class Order < ActiveRecord::Base
     #                            {:address1 => "2310 ROCK ST APT (Range 40 - 45)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
     #                            {:address1 => "2310 ROCK ST APT (Range 36 - 39)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"},
     #                            {:address1 => "2310 ROCK ST APT (Range 30 - 35)", :address2 => "", :city => "MOUNTAIN VIEW", :state => "CA", :zip_code => "94043"}] unless result
-    end
+    #end
     #return true if is_candidate_address && !result && candidate_addresses && !candidate_addresses.empty? 
     if !result && self.candidate_addresses && !self.candidate_addresses.empty? 
       errors.add(:shipping_address, "is not confirmed with the shipping service accurately. Please confirm before continuing.") 
@@ -203,6 +203,15 @@ class Order < ActiveRecord::Base
     return self.token_key
   end
   
+  def adjust_current_balance(new_balance_amount = nil)
+    if new_balance_amount
+      self.user.update_attribute :balance_amount, new_balance_amount
+    else
+      self.user.update_attribute :balance_amount, ((self.user.balance_amount || 0) + self.balance_amount)
+    end
+  end
+
+
   private
   
     def balance_amount_label
@@ -213,10 +222,6 @@ class Order < ActiveRecord::Base
       end
     end
   
-    def adjust_current_balance
-      self.user.update_attribute :balance_amount, ((self.user.balance_amount || 0) + self.balance_amount)
-    end
-
     def create_test_stamp
       { :integrator_tx_id => self.id,
         :tracking_number => "9405511201080126838437",

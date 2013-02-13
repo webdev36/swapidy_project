@@ -1,7 +1,5 @@
 <%= form_for(@payment, :as => 'payment', :url => "/payments/confirm", :html => {:id => "add_honey_form"}) do |f| %>
 
-  <%= f.hidden_field :amount %>
-  <%= f.hidden_field :honey_money %>
   <%= f.hidden_field :card_type %>
   <%= f.hidden_field :card_last_four_number %>
   <%= f.hidden_field :card_name %>

@@ -1,14 +1,17 @@
 module ImportExcelProduct
 
   INDEXES = {:title => 0,
-             :honey_price => 1,
-             :price_for_good_type => 2,
-             :price_for_poor_type => 3,
-             :category => 4,
-             :product_model => 5,
-             :weight_lb => 6
+             :price_for_sell => 1,
+             :price_for_good_sell => 2,
+             :price_for_poor_sell => 3,
+             :price_for_buy => 4,
+             :price_for_good_buy => 5,
+             :price_for_poor_buy => 6,
+             :category => 7,
+             :product_model => 8,
+             :weight_lb => 9
             }
-  PROPERTY_START_INDEX = 7
+  PROPERTY_START_INDEX = 10
   
   def self.import_from_textline(textline, headers, for_buying = true, logger = nil)
     
