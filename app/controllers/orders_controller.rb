@@ -31,14 +31,14 @@ class OrdersController < ApplicationController
   end
 
   def shipping_info
-    if current_user.could_order?(cart_amount)
+    #if current_user.could_order?(cart_amount)
       @order.enter_from_last_address if @order.shipping_address_blank?
       page_title "Shipping Address"
       render "shipping_info_page"
-    else
-      page_title "Payment Information"
-      render "payment_info_page"
-    end
+    #else
+    #  page_title "Payment Information"
+    #  render "payment_info_page"
+    #end
   end
   
   def confirm
