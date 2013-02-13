@@ -11,12 +11,12 @@
       <ul class="nav pull-right nav_header" role="navigation" style="margin-right: -160px;">
 
         <% if user_signed_in? %>
-        <% if current_user.free_money_sendable? %>
-          <li id="nav_login">
-            <a href="javascript:refresh_free_honey_form();" >GET FREE CASH</a>
-          </li>
-          <li class="divider-vertical"></li>
-        <% end %>
+	        <% if current_user.free_money_sendable? %>
+	          <li id="nav_login">
+	            <a href="javascript:refresh_free_honey_form();" >GET FREE CASH</a>
+	          </li>
+	          <li class="divider-vertical"></li>
+	        <% end %>
         <li class="dropdown" id="notification_menu" >
           <%= render :partial => "/layouts/notifications_menu" %>
         </li>
@@ -89,10 +89,9 @@
           </div>
         </li>
         <% if current_user.is_admin? %>
-        <li>
-          <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
-        </li>
-
+	        <li>
+	          <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
+	        </li>
         <% end %>
 
         <% else %>
@@ -103,8 +102,7 @@
         <li id="nav_signup">
           <a href="javascript:refresh_signup_form();" >SIGN UP</a>
         </li>
-                        <li class="divider-vertical"></li>
-
+        <li class="divider-vertical"></li>
         <% end %>
         <li>
           <a href="javascript:refresh_how_it_works();">HOW IT WORKS</a>

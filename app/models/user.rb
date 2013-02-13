@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
 
   has_many :orders, :order => "created_at desc, status asc"
   has_many :user_providers
+  has_many :payments, :class_name => "PaymentTransaction", :order => "created_at desc, updated_at desc"
+
   
   has_many :notifications, :order => "created_at desc, updated_at desc"
   has_many :free_honey_invitations, :foreign_key => "sender_id", :class_name => "FreeHoney", :order => "created_at desc, updated_at desc"
@@ -86,8 +88,7 @@ class User < ActiveRecord::Base
 
   
   def could_order? amount
-    return true
-    #amount <= 0 || extra_money_for(amount) <= 0
+    amount <= 0 || extra_money_for(amount) <= 0 || has_card_info?
   end
   
   def extra_money_for amount

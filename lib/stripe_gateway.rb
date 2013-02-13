@@ -150,7 +150,7 @@ module StripeGateway
         :amount => (payment.amount * 100).to_i, # amount in cents
         :currency => "usd",
         :customer => payment.user.stripe_customer_id, #use card_token_id or customer_id
-        :description => "Charge for #{payment.honey_money} Honey"
+        :description => "Charge $#{payment.amount}"
       )
       @logger.info "Payment result: #{charge.to_s}"
       if charge.paid
