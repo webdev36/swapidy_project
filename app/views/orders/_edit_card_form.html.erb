@@ -1,0 +1,13 @@
+<%= form_for(card_info, :as => "user", :url => registration_path("user"), :html => { :method => :put, :id => "card_edit_form" }) do |f| %>
+  <%= render :partial => "/devise/shared/stripe_card_form",:locals => {:submit_form => "card_edit_form",:field_prefix => "user_", :f => f, :user => card_info}%>
+  
+  <% if params[:update_credit_card] && !card_info.errors.empty? %>
+    <div class="alert alert-error" style="width: 207px;"> <%= raw card_info.errors.full_messages.first %>. </div>
+  <% end %>
+  <% if params[:update_credit_card] && flash[:update_account_notice] %>
+    <div class="alert alert-success" style="width: 207px;"> <%= raw flash[:update_account_notice] %>. </div>
+  <% end %>
+  <input type="button" value="Update" class="show_button_buy" onclick="javascript:card_edit_form_card_validate();" />
+  <input type="hidden" name="update_credit_card" value="true" />
+<% end %>
+
