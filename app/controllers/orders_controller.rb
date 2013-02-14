@@ -86,6 +86,7 @@ class OrdersController < ApplicationController
             end
           end
           if @order.save && @order.adjust_current_balance(new_balance_amount)
+            @order.create_new_stamps
             OrderNotifier.start_processing(@order).deliver
             clear_cart_products 
           end

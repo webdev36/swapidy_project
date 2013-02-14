@@ -87,18 +87,19 @@ class Order < ActiveRecord::Base
   end
   
   def create_new_stamps
-    if Rails.env == 'production'
-      stamp = create_shipping_order
-      buy_stamp = ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "buy"))
-      
-      stamp = create_shipping_label
-      sell_stamp = ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "sell"))
-    else
-      stamp = create_test_stamp
+    if self.order_products.for_buy.count > 0
+      weight_total = 0
+      self.order_products.for_buy.each { |order_product| weight_total += order_product.weight_lb }
+      stamp = create_stamp(weight_total, :for_buy)
+      ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "buy"))
     end
     
-    #send_stamp_to_customer(buy_stamp, sell_stamp)
-    return true
+    if self.order_products.for_sell.count > 0
+      weight_total = 0
+      self.order_products.for_sell.each { |order_product| weight_total += order_product.weight_lb }
+      stamp = create_stamp(weight_total, :for_sell)
+      ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "sell"))
+    end
   end
   
   def shipping_fullname
