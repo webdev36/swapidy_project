@@ -59,7 +59,31 @@ $(function() {
   .mouseout(function(){
     $(this).attr("src",'/images/settings_icon.png');
   });
-  
+   $('.media_pando').mouseover(function(){
+    $(this).attr("src",'/images/media/1_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/media/1.png');
+  });
+    $('.media_hn').mouseover(function(){
+    $(this).attr("src",'/images/media/4_hover.jpg');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/media/4.jpg');
+  });
+
+  $('.media_patch').mouseover(function(){
+    $(this).attr("src",'/images/media/2_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/media/2.png');
+  });
+   $('.media_technori').mouseover(function(){
+    $(this).attr("src",'/images/media/3_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/media/3.png');
+  });
   $(".see_more_sell ").toggle(function(){
 	$(".sell_display").css("overflow","visible");
 	$(".sell_display").css("height","auto");

@@ -1,4 +1,5 @@
 class OrderNotifier < ActionMailer::Base
+
   default :from => "\"#{SITE_NAME}\"<system@#{ROOT_URI}>"
 
   # Subject can be set in your I18n file at config/locales/en.yml
