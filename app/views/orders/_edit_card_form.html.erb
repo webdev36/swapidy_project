@@ -1,4 +1,4 @@
-<%= form_for(card_info, :as => "user", :url => registration_path("user"), :html => { :method => :put, :id => "card_edit_form" }) do |f| %>
+<%= form_for(card_info, :as => "user", :url => registration_path("user"), :html => { :method => :put, :id => "card_edit_form", :style => "margin-top:25px;" }) do |f| %>
   <%= render :partial => "/devise/shared/stripe_card_form",:locals => {:submit_form => "card_edit_form",:field_prefix => "user_", :f => f, :user => card_info}%>
   
   <% if params[:update_credit_card] && !card_info.errors.empty? %>

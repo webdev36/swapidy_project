@@ -1,5 +1,5 @@
 class OrderProduct < ActiveRecord::Base
-  attr_accessible :order_id, :product_id, :sell_or_buy, :price, :using_condition
+  attr_accessible :order_id, :product_id, :sell_or_buy, :price, :using_condition, :weight_lb
 
   attr_accessible :order_product_id #for session only
   attr_accessor :order_product_id #for session
@@ -11,6 +11,8 @@ class OrderProduct < ActiveRecord::Base
   belongs_to :product
   belongs_to :order
   
+  before_save :generate_auto_fields
+
   def for_buy?
     sell_or_buy && sell_or_buy == "buy"
   end
@@ -24,6 +26,11 @@ class OrderProduct < ActiveRecord::Base
     result = "#{self.product.category.title} #{self.product.product_model.title}" if result.nil? && self.product && self.product.product_model
     return "#{result} (#{product.flaw_less_name})" if for_buy?
     "#{result} (#{using_condition})"
+  end
+  
+  def generate_auto_fields
+    self.product_title = self.title
+    self.weight_lb = self.product.weight_lb
   end
 
 end

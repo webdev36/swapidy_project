@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(:version => 20130213034214) do
     t.integer  "user_id"
     t.integer  "status"
 
-    t.datetime "created_at",                                               :null => false
-    t.datetime "updated_at",                                               :null => false
+    t.datetime "created_at",                                                                :null => false
+    t.datetime "updated_at",                                                                :null => false
     t.string   "shipping_method"
     t.string   "shipping_first_name"
     t.string   "shipping_last_name"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20130213034214) do
     t.string   "shipping_zip_code"
     t.string   "shipping_country"
 
-    t.decimal  "balance_amount",            :precision => 10, :scale => 2
+    t.decimal  "balance_amount",            :precision => 10, :scale => 2, :default => 0.0
     t.string   "using_condition"
     t.string   "shipping_zip_code_add_on"
   end
