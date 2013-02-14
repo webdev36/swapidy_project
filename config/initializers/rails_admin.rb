@@ -224,8 +224,7 @@ RailsAdmin.config do |config|
        configure :payment_invoice_id, :string 
        configure :payment_type, :string 
        configure :status, :string 
-       configure :amount, :decimal 
-       configure :honey_money, :decimal 
+       configure :amount, :decimal
        configure :card_name, :string 
        configure :card_type, :string 
        configure :card_expired_month, :string 
@@ -332,13 +331,13 @@ RailsAdmin.config do |config|
     configure :address, :string 
     configure :stripe_customer_id, :string 
     configure :card_last_four_number, :string 
-    configure :honey_balance, :decimal 
+    configure :balance_amount, :decimal 
     configure :is_admin, :boolean
     list do
       field :full_name
       field :email
       field :is_admin
-      field :honey_balance
+      field :balance_amount
       field :last_sign_in_at
     end
     export do; end
@@ -347,7 +346,7 @@ RailsAdmin.config do |config|
       field :last_name
       field :email
       field :is_admin
-      field :honey_balance
+      field :balance_amount
       field :address
       field :card_type
       field :card_name
@@ -360,7 +359,7 @@ RailsAdmin.config do |config|
       field :full_name
       field :email
       field :is_admin
-      field :honey_balance
+      field :balance_amount
       field :address
     end
     create do; end
@@ -452,7 +451,7 @@ RailsAdmin.config do |config|
 
       field :status
       field :code
-      field :honey_amount
+      field :amount
       field :expired_date
       field :users
       field :created_at
@@ -461,7 +460,7 @@ RailsAdmin.config do |config|
     export do
       field :status
       field :code
-      field :honey_amount
+      field :amount
       field :expired_date
       field :users
       field :created_at
@@ -470,7 +469,7 @@ RailsAdmin.config do |config|
     show do
       field :status
       field :code
-      field :honey_amount
+      field :amount
       field :expired_date
       field :users
       field :created_at
@@ -478,12 +477,12 @@ RailsAdmin.config do |config|
     end
     create do
       field :code
-      field :honey_amount
+      field :amount
       #field :expired_date
     end
     update do
       field :status
-      field :honey_amount
+      field :amount
       #field :expired_date
     end
   end
@@ -500,29 +499,29 @@ RailsAdmin.config do |config|
       field :status
       field :receiver_title
       field :sender_title
-      field :receiver_honey_amount
+      field :receiver_amount
       #field :expired?
       field :expired_date
       field :completed_at
-      field :sender_honey_amount
+      field :sender_amount
       field :created_at
     end
     export do
       field :status
       field :receiver_title
       field :sender_title
-      field :receiver_honey_amount
+      field :receiver_amount
       field :expired_date
       field :completed_at
-      field :sender_honey_amount
+      field :sender_amount
       field :created_at
     end
     show do
       field :status
       field :receiver_title
       field :sender_title
-      field :receiver_honey_amount
-      field :sender_honey_amount
+      field :receiver_amount
+      field :sender_amount
       field :token_key
       field :created_at
       field :expired?
@@ -532,8 +531,8 @@ RailsAdmin.config do |config|
     create do
       field :receiver_email
       field :receiver
-      field :receiver_honey_amount
-      field :sender_honey_amount
+      field :receiver_amount
+      field :sender_amount
       #field :expired_date
     end
     update do
