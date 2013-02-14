@@ -1,17 +1,17 @@
 module ImportExcelProduct
 
   INDEXES = {:title => 0,
-             :price_for_sell => 1,
-             :price_for_good_sell => 2,
-             :price_for_poor_sell => 3,
-             :price_for_buy => 4,
-             :price_for_good_buy => 5,
-             :price_for_poor_buy => 6,
-             :category => 7,
-             :product_model => 8,
-             :weight_lb => 9
+             :price => 1,
+             :price_for_good => 2,
+             :price_for_poor => 3,
+             #:price_for_buy => 4,
+             #:price_for_good_buy => 5,
+             #:price_for_poor_buy => 6,
+             :category => 4,
+             :product_model => 5,
+             :weight_lb => 6
             }
-  PROPERTY_START_INDEX = 10
+  PROPERTY_START_INDEX = 7
   
   def self.import_from_textline(textline, headers, for_buying = true, logger = nil)
     
@@ -29,15 +29,20 @@ module ImportExcelProduct
     model = category.product_models.create(:title => columns[INDEXES[:product_model]], :weight_lb => columns[INDEXES[:weight_lb]].to_i) unless model
     logger.info "model: #{model.id} - #{model.title}"
 
-    product = Product.where(:title => columns[INDEXES[:title]], :for_sell => !for_buying, :for_buy => for_buying).first
+    product = Product.where(:title => columns[INDEXES[:title]]).first
     return product if product
 
-    product = Product.new(:title => columns[INDEXES[:title]], 
-                          :honey_price => (columns[INDEXES[:honey_price]].to_f rescue nil),
-                          :price_for_good_type => (columns[INDEXES[:price_for_good_type]].to_f rescue nil),
-                          :price_for_poor_type => (columns[INDEXES[:price_for_poor_type]].to_f rescue nil),
-                          :for_sell => !for_buying,
-                          :for_buy => for_buying)
+    product = Product.new(:title => columns[INDEXES[:title]])
+    if for_buying
+      product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
+      product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
+      product.price_for_poor_buy = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
+    else
+      product.price_for_sell = (columns[INDEXES[:price]].to_f rescue nil)
+      product.price_for_good_sell = (columns[INDEXES[:price_for_good]].to_f rescue nil)
+      product.price_for_poor_sell = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
+    end
+    
     product.category = category
     product.product_model = model
     
