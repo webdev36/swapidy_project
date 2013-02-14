@@ -13,7 +13,17 @@
     <span style="color:#666; font-family:'myriad'"><%= format_num(current_user.balance_amount) %> </span><img class="payment_currency" src="/images/honey_20px_grey.png">
   </div>
   <div style="position:relative; bottom:20px;">
-    <label style="color:#666; font-family:'myriad';">Product Price:</label><span style="color:#666; font-family:'myriad'; font-size:20px;">&nbsp;<%= format_num(cart_amount) %> </span><img class="payment_currency" src="/images/honey_20px_grey.png">
+  	<% if cart_amount < 0 %>
+	  <label style="color:#666; font-family:'myriad';">You will get:</label>
+	  <span style="color:#666; font-family:'myriad'; font-size:20px;">
+	  	$<%= format_num(-cart_amount) %> 
+	  </span>
+	<% else %>
+	  <label style="color:#666; font-family:'myriad';">You will be substructed:</label>
+	  <span style="color:#666; font-family:'myriad'; font-size:20px;">
+	  	$<%= format_num(cart_amount) %> 
+	  </span>
+	<% end %>
   </div>
   <% if current_user.extra_money_for(cart_amount) <= 0 %>
     <div >

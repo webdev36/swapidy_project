@@ -120,6 +120,11 @@ class Product < ActiveRecord::Base
         (result << "price_range_#{price}"; next) if price_for_poor_sell && price_for_poor_sell >= price
       end
     end
+    
+    result << "sell" if for_sells?
+    result << "buy" if for_buys?
+    result << "both" if for_sells? || for_buys?
+    
     result.join(" ")
   end
   

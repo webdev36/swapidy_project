@@ -22,9 +22,13 @@ class ProductModel < ActiveRecord::Base
   end
   
   def price_range_filter_content(range)
-    result = ""
-    result += " attr_filter_model_#{self.id}_for_buying" if self.products.for_buy.price_range(range).count > 0
+    result = " "
+    result += model_filter_field if self.products.price_range(range).count > 0
     return result
+  end
+  
+  def model_filter_field
+    "attr_filter_model_#{self.id}"
   end
   
   def main_image

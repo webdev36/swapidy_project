@@ -59,15 +59,39 @@ $(function() {
   .mouseout(function(){
     $(this).attr("src",'/images/settings_icon.png');
   });
-  
+   $('.media_pando').mouseover(function(){
+    $(this).attr("src",'/images/media/1_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/media/1.png');
+  });
+    $('.media_hn').mouseover(function(){
+    $(this).attr("src",'/images/media/4_hover.jpg');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/media/4.jpg');
+  });
+
+  $('.media_patch').mouseover(function(){
+    $(this).attr("src",'/images/media/2_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/media/2.png');
+  });
+   $('.media_technori').mouseover(function(){
+    $(this).attr("src",'/images/media/3_hover.png');
+  })
+  .mouseout(function(){
+    $(this).attr("src",'/images/media/3.png');
+  });
   $(".see_more_sell ").toggle(function(){
 	$(".sell_display").css("overflow","visible");
 	$(".sell_display").css("height","auto");
-	$('dropdow_item').css("-webkit-transform","180deg");
+	//$('dropdow_item').css("-webkit-transform","180deg");
 	//$(this).text("Hide")
   },function(){
 		$(".sell_display").css("overflow","hidden");
-		$(".sell_display").css("height","100px");
+		$(".sell_display").css("height","120px");
 		//$(this).text("Show All")
 		//$('sell_display').addClass('hide_item');
 
@@ -79,10 +103,10 @@ $(function() {
 	$(".buy_display").css("height","auto");
 	//$(this).text("Hide")
   },function(){
-		  $(".buy_display").css("overflow","hidden");
-  		  $(".buy_display").css("height","100px");
-  		  //$(this).text("Show All")
-	  });
+	  $(".buy_display").css("overflow","hidden");
+	  $(".buy_display").css("height","120px");
+	  //$(this).text("Show All")
+  });
   $(".del-product").live('click',function(){		
 		var url_ajax = '/home/del_product';
 		var order_product_id = $(this).attr('order_product_id');
@@ -135,6 +159,23 @@ function show_hide_price_popup(popup_id){
   }
 }
 
+function goto_checkout(){
+   sell_count = 0;
+   $("#product_items .sell_display .cart_product_thumb").each(function(){
+   	sell_count += 1;
+   });
+   
+   buy_count = 0;
+   $("#product_items .buy_display .cart_product_thumb").each(function(){
+   	buy_count += 1;
+   });
+   if(buy_count == 0 || sell_count == 0) {
+   	 alert("You have not selected any sell/buy products");
+   }else{
+   	 window.location = "/orders/new";	
+   }
+   
+}
 	
 function switchToCheckoutStep(form_id, step_url) {
   $("#" + form_id).attr("action", step_url);

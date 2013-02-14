@@ -41,32 +41,42 @@
               $<%= format_num(current_user.balance_amount) %>
             </div>
             <div>
-              <span>Products balance amount:</span>
-              $<%= format_num(cart_amount) %>
+            <% if cart_amount < 0 %>
+						  <span>You will get:</span>
+						  $<%= format_num(-cart_amount) %>
+						<% else %>
+						  <span>You will be substructed:</span>
+			        $<%= format_num(cart_amount) %> 
+						<% end %>
+			
             </div>
-            <% if current_user.extra_money_for(cart_amount) > 0 %>
+            <% if current_user.extra_money_for(cart_amount) > 0 && current_user.has_card_info? %>
             <div>
               Your money balance is not enough.
               You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %>
-              <input type="button" value="Add Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="alert('Under contruction');" />
+              <input type="button" value="Change Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="refresh_add_honey_form();" />
             </div>
             <% end %>
           </div>
           
-          <br/>
-    
-    
-          <% has_agreement_before = !current_user.last_order.nil? %>
-          <div style="position:relative; bottom:330px;">
-            <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:80px;">Terms of Service</div></label>
-            <p>
-              <input id="terms_of_service_checkbox" type="checkbox" <% if has_agreement_before %>checked="checked"<% end %> /> 
-              <span>By checking this box, you agree to our <a class="order_link" href="/terms">terms of service</a></span>
-            </p>
-          </div>
-          <br/>
-          <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" style="margin-top:20px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
-  
+          <% if current_user.extra_money_for(cart_amount) > 0 && !current_user.has_card_info? %>
+            <div style="position:relative; bottom:330px;">
+              Your money balance is not enough.
+              You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %>
+              <input type="button" value="Add Credit Card" class="order_button_buy" style="margin-left: 125px; margin-top: 20px;"  onclick="refresh_add_honey_form();" />
+            </div>
+          <% else %>
+	          <% has_agreement_before = !current_user.last_order.nil? %>
+	          <div style="position:relative; bottom:300px;">
+	            <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:80px;">Terms of Service</div></label>
+	            <p>
+	              <input id="terms_of_service_checkbox" type="checkbox" <% if has_agreement_before %>checked="checked"<% end %> /> 
+	              <span>By checking this box, you agree to our <a class="order_link" href="/terms">terms of service</a></span>
+	            </p>
+	          </div>
+	          <br/>
+	          <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" style="margin-top:60px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
+ 					<% end %> 
         <% end %>
       </div>
       <%= render :partial => "order_confirm_popups" %>

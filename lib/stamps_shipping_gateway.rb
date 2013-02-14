@@ -72,20 +72,18 @@ module StampsShippingGateway
     return
   end
 
-  def create_shipping_label
+  def create_stamp(weigth_lb, for_type = :for_sell)
     client_address = get_client_address
-    return create_shipping_stamp(client_address[:address], get_company_address)
-  end
-  
-  def create_shipping_order
-    client_address = get_client_address
-    return create_shipping_stamp( get_company_address, 
-                                  client_address[:address])
+    if for_type == :for_sell
+      return create_shipping_stamp(weigth_lb, client_address[:address], get_company_address)
+    else
+      return create_shipping_stamp(weigth_lb, get_company_address, client_address[:address])
+    end
   end
   
   private
   
-    def create_shipping_stamp(from_address, to_address)
+    def create_shipping_stamp(weight_lb, from_address, to_address)
       @logger = Logger.new("log/stamps_shipping.log")
       
       package = { :from_zip_code => from_address[:zip_code],

@@ -31,18 +31,19 @@ class OrdersController < ApplicationController
   end
 
   def shipping_info
-    if current_user.could_order?(cart_amount)
+    #if current_user.could_order?(cart_amount)
       @order.enter_from_last_address if @order.shipping_address_blank?
       page_title "Shipping Address"
       render "shipping_info_page"
-    else
-      page_title "Payment Information"
-      render "payment_info_page"
-    end
+    #else
+    #  page_title "Payment Information"
+    #  render "payment_info_page"
+    #end
   end
   
   def confirm
     if @order.valid? && @order.shipping_address_valid?
+      current_user.copy_to_new_card
       render "confirm_form"
     else
       page_title "Shipping Address"
@@ -66,7 +67,26 @@ class OrdersController < ApplicationController
                                       :using_condition => obj_hash[:using_condition], 
                                       :sell_or_buy => "buy")
           end
-          if @order.save
+          if current_user.extra_money_for(cart_amount) > 0
+            @payment = current_user.payments.new(:amount => cart_amount)
+            if current_user.create_payment_charge(@payment)
+              @payment.card_type = current_user.card_type
+              @payment.card_expired_year = current_user.card_expired_year
+              @payment.card_expired_month = current_user.card_expired_month
+              @payment.card_name = current_user.card_name
+              @payment.card_last_four_number = current_user.card_last_four_number
+              unless @payment.save
+                Rails.logger.info "Error to save payment transaction"
+                raise "Error to save payment transaction" 
+              end
+              new_balance_amount = 0
+            else
+              Rails.logger.info "has failure to charge the credit card"
+              raise "has failure to charge the credit card"
+            end
+          end
+          if @order.save && @order.adjust_current_balance(new_balance_amount)
+            @order.create_new_stamps
             OrderNotifier.start_processing(@order).deliver
             clear_cart_products 
           end
@@ -75,10 +95,12 @@ class OrdersController < ApplicationController
       rescue Exception => e
         @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
         page_title "Confirm Your Details"
+        current_user.copy_to_new_card
         render "confirm_form"
       end
     else
       page_title "Confirm Your Details"
+      current_user.copy_to_new_card
       render "confirm_form"
     end
   end
@@ -124,6 +146,5 @@ class OrdersController < ApplicationController
       @order.shipping_country = "US"
       redirect_to "/" if cart_products[:sell].empty? && cart_products[:buy].empty?
     end
-
     
 end
