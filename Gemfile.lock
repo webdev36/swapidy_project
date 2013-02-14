@@ -272,7 +272,6 @@ DEPENDENCIES
   omniauth-facebook
   paperclip
   pg
-  rails (= 3.2.11)
   rails_admin
   recaptcha
   rmagick
