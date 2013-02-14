@@ -60,26 +60,20 @@ class RegistrationsController < Devise::RegistrationsController
   
   def edit
     page_title "Settings"
-    resource.new_card_expired_year = resource.card_expired_year
-    resource.new_card_expired_month = resource.card_expired_month
-    resource.new_card_name = resource.card_name
-    unless (resource.card_last_four_number || "").blank?
-      resource.new_card_cvc = "xxx"
-      resource.new_card_number = "xxxx-xxxx-xxxx-#{resource.card_last_four_number}" 
-    end
+    resource.copy_to_new_card
   end
   
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
     if session[:signed_in_via_facebook] || params[:update_credit_card]
-      update_result =  resource.update_without_password(resource_params)
+      @update_result =  resource.update_without_password(resource_params)
     elsif session[:disconnect_facebook]
-      update_result =  resource.update_for_disconnect(resource_params)
+      @update_result =  resource.update_for_disconnect(resource_params)
     else
-      update_result =  resource.update_with_password(resource_params)
+      @update_result =  resource.update_with_password(resource_params)
     end
-    if update_result
+    if @update_result
       if session[:disconnect_facebook]
         session[:disconnect_facebook] = nil
         sign_in(resource_name, resource)
@@ -88,7 +82,15 @@ class RegistrationsController < Devise::RegistrationsController
       end 
       flash[:update_account_notice] = "Your information has successfully been changed"
       if params[:update_credit_card]
-        redirect_to "/users/edit?update_credit_card=true"  
+        respond_to do |format|
+          format.html {
+            redirect_to "/users/edit?update_credit_card=true"
+          }
+          format.js {
+            @return_content = render_to_string(:partial => "/orders/edit_card_form", :locals => {:card_info => current_user})
+          }
+        end
+          
       elsif params[:update_user_settings]
         redirect_to "/users/edit?update_user_settings=true" 
       else
@@ -96,7 +98,14 @@ class RegistrationsController < Devise::RegistrationsController
       end
     else
       clean_up_passwords resource
-      respond_with resource
+      respond_to do |format|
+        format.html {
+          respond_with resource
+        }
+        format.js {
+          @return_content = render_to_string(:partial => "/orders/edit_card_form", :locals => {:card_info => current_user})
+        }
+      end
     end
   end
   

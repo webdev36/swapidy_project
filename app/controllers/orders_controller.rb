@@ -43,6 +43,7 @@ class OrdersController < ApplicationController
   
   def confirm
     if @order.valid? && @order.shipping_address_valid?
+      current_user.copy_to_new_card
       render "confirm_form"
     else
       page_title "Shipping Address"
@@ -85,6 +86,7 @@ class OrdersController < ApplicationController
             end
           end
           if @order.save && @order.adjust_current_balance(new_balance_amount)
+            @order.create_new_stamps
             OrderNotifier.start_processing(@order).deliver
             clear_cart_products 
           end
@@ -93,10 +95,12 @@ class OrdersController < ApplicationController
       rescue Exception => e
         @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
         page_title "Confirm Your Details"
+        current_user.copy_to_new_card
         render "confirm_form"
       end
     else
       page_title "Confirm Your Details"
+      current_user.copy_to_new_card
       render "confirm_form"
     end
   end
@@ -142,6 +146,5 @@ class OrdersController < ApplicationController
       @order.shipping_country = "US"
       redirect_to "/" if cart_products[:sell].empty? && cart_products[:buy].empty?
     end
-
     
 end
