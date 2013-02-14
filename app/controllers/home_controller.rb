@@ -7,13 +7,8 @@ class HomeController < ApplicationController
 
   before_filter :require_login, :only => [:settings]
 
-
   def index
     render "index", :layout => 'application_with_slider'
-  end
-  
-  def index
-    #render "index", :layout => 'application_with_slider'
   end
 
   def transactions
