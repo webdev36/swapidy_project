@@ -43,5 +43,15 @@ module CardInfo
       nil
     end
   end
+  
+  def copy_to_new_card
+    self.new_card_expired_year = self.card_expired_year
+    self.new_card_expired_month = self.card_expired_month
+    self.new_card_name = self.card_name
+    unless (self.card_last_four_number || "").blank?
+      self.new_card_cvc = "xxx"
+      self.new_card_number = "xxxx-xxxx-xxxx-#{self.card_last_four_number}" 
+    end
+  end
 
 end
