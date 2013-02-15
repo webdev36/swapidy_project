@@ -125,6 +125,22 @@
 
 <script language="JavaScript">
   
+  $('#slider-code').tinycarousel({display: 2});
+  
+  sliderHeight();
+
+  $(window).on('resize', function() {
+    sliderHeight();
+  });
+
+  function sliderHeight() {
+    var slideHeight = parseInt($(window).height() - $('.navbar-fixed-top').height() - $('.navbar-fixed-top').height(), 10);
+    if(slideHeight >= 700) {
+        slideHeight = 700;
+    }
+    $('#s3slider').css({height: slideHeight});
+  }
+  
   function get_filter_options() {
     var filters = {};
     filters["for_what"] = ['.' + for_what];
@@ -295,8 +311,8 @@
 
   function showScreenToSell() {
     for_what = "for_selling";
-    $("#sell_message").hide();
-    $("#buy_message").show();
+    $("#sell_message").show();
+    $("#buy_message").hide();
     
     $('#checkout_button').hide();
     $('#done_button').show();
