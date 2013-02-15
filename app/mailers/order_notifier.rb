@@ -1,4 +1,5 @@
 class OrderNotifier < ActionMailer::Base
+
   default :from => "\"#{SITE_NAME}\"<system@#{ROOT_URI}>"
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -7,6 +8,7 @@ class OrderNotifier < ActionMailer::Base
   #   en.authentication_notifier.user_activation.subject
   #
   def start_processing(order, host_with_port = "https://www.swapidy.com")
+
     @user = order.user
     @order = order
     @host_with_port = host_with_port

@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20130213034214) do
     t.integer  "product_id"
     t.integer  "user_id"
     t.integer  "status"
+
     t.datetime "created_at",                                                                :null => false
     t.datetime "updated_at",                                                                :null => false
     t.string   "shipping_method"
@@ -95,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20130213034214) do
     t.string   "shipping_state"
     t.string   "shipping_zip_code"
     t.string   "shipping_country"
+
     t.decimal  "balance_amount",            :precision => 10, :scale => 2, :default => 0.0
     t.string   "using_condition"
     t.string   "shipping_zip_code_add_on"
