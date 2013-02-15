@@ -6,8 +6,8 @@
 	 	  <button class="prev" style="width: 30px;position: absolute;top:50px;left: 20px">&lt;&lt;</button>
 	 	  <button class="next" style="width: 30px;position: absolute;top: 50px;left: 350px;">&gt;&gt;</button>
  	  <% end %>
-      <div class= "sell_display " style=" height:120px; position:absolute; left:0px; width: 500px;margin: 5px 0 5px 100px;" >
-       	<ul>
+      <div class= "sell_display" style=" height:120px; float: left; left:0px; width: 500px; margin: 5px 0 5px 100px;" >
+       	<ul style="position: none;">
         <% cart_products[:sell].each do |order_product|%>
        		<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product} %>
         <% end %>
@@ -20,8 +20,8 @@
       <button class="prev_buy" style="width: 30px;top: 50px;right: 410px;position: absolute">&lt;&lt;</button>
  	 	  <button class="next_buy"style="width: 30px;top: 50px;right: 80px;position: absolute">&gt;&gt;</button>
     <% end %>
-      <div class="buy_display" style="left:900px !important ;top:-130px; height: 130px" >
-       <ul>
+      <div class="buy_display" style=" float:right; height: 130px; margin: 5px 110px 5px 0px;" >
+       <ul style="position: none;">
       	<% cart_products[:buy].each do |order_product| %>
         		<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product}%>
       	<% end %>
