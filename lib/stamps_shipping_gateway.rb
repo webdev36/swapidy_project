@@ -11,11 +11,11 @@ module StampsShippingGateway
   DUE_DAYS_NUMBER = 2
 
   def verify_shipping_address
-    @logger = Logger.new("log/stamps_shipping.log")
-    @logger.info "-------- check address: #{Time.now}------"
+    #@logger = Logger.new("log/stamps_shipping.log")
+    #@logger.info "-------- check address: #{Time.now}------"
     address = get_client_address
-    @logger.info address
-    @logger.info "-------- END ------"
+    #@logger.info address
+    #@logger.info "-------- END ------"
     return true if address[:address_match]
     self.candidate_addresses = address[:candidate_addresses][:address] if address[:candidate_addresses]
     return true if address[:city_state_zip_ok] && is_candidate_address && is_candidate_address.to_s == "true"
@@ -23,22 +23,22 @@ module StampsShippingGateway
   end
 
   def purchase_postage
-    @logger = Logger.new("log/stamps_shipping.log")
-    @logger.info "-------- purchase_postage: #{Time.now}------"
+    #@logger = Logger.new("log/stamps_shipping.log")
+    #@logger.info "-------- purchase_postage: #{Time.now}------"
     
     current_account = Stamps.account
-    @logger.info current_account
+    #@logger.info current_account
     
     current_control_total = current_account[:postage_balance][:control_total].to_f rescue 0.0
     result = Stamps.purchase_postage(:amount => PURCHASE_AMOUNT, :control_total => current_control_total)
     
-    @logger.info result
-    @logger.info "-------- END ------"
+    #@logger.info result
+    #@logger.info "-------- END ------"
   end
 
   def test_shipping
-    @logger = Logger.new("log/stamps_shipping.log")
-    @logger.info "-------- #{Time.now}------"
+    #@logger = Logger.new("log/stamps_shipping.log")
+    #@logger.info "-------- #{Time.now}------"
     
     to_address = get_company_address
     
@@ -61,14 +61,14 @@ module StampsShippingGateway
     
     
     from_address = Stamps.clean_address(:address => { :full_name => 'Swapidy client', :address1 => '5420 Belmont Ct.', :city => 'Libertyville', :state => 'IL', :zip_code  => '60048' })
-    @logger.info "from_address[:address]: #{from_address}"
-    @logger.info "from_address[:address_match]: #{from_address[:address_match]}"
-    @logger.info "from_address[:city_state_zip_ok]: #{from_address[:city_state_zip_ok]}"
-    @logger.info "from_address[:candidate_addresses]: #{from_address[:candidate_addresses] ? "true": "false"}"
+    #@logger.info "from_address[:address]: #{from_address}"
+    #@logger.info "from_address[:address_match]: #{from_address[:address_match]}"
+    #@logger.info "from_address[:city_state_zip_ok]: #{from_address[:city_state_zip_ok]}"
+    #@logger.info "from_address[:candidate_addresses]: #{from_address[:candidate_addresses] ? "true": "false"}"
     
-    @logger.info("---")
+    #@logger.info("---")
     create_shipping_stamp(from_address[:address], to_address)
-    @logger.info "-------- END ------"
+    #@logger.info "-------- END ------"
     return
   end
 
@@ -84,7 +84,7 @@ module StampsShippingGateway
   private
   
     def create_shipping_stamp(weight_lb, from_address, to_address)
-      @logger = Logger.new("log/stamps_shipping.log")
+      #@logger = Logger.new("log/stamps_shipping.log")
       
       package = { :from_zip_code => from_address[:zip_code],
                   :to_zip_code   => to_address[:zip_code], 

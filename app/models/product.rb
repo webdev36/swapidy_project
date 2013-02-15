@@ -26,16 +26,24 @@ class Product < ActiveRecord::Base
                   10000 => "7000 -> 10000",
                   19999 => "10000 -> 20000",
                   20000 => "Upper 20000"}
-  PRICE_FIELDS = %w(price_for_sell price_for_good_sell price_for_poor_sell)
-  PRICE_RANGE_SQLS = {3000 => PRICE_FIELDS.map{|f| "(#{f} > 0 AND #{f} <= 3000)"}.join(" OR "), 
-                      5000 => PRICE_FIELDS.map{|f| "(#{f} >= 3000 AND #{f} <= 5000)"}.join(" OR "),
-                      7000 => PRICE_FIELDS.map{|f| "(#{f} >= 5000 AND #{f} <= 7000)"}.join(" OR "),
-                      10000 => PRICE_FIELDS.map{|f| "(#{f} >= 7000 AND #{f} <= 10000)"}.join(" OR "),
-                      19999 => PRICE_FIELDS.map{|f| "(#{f} >= 10000 AND #{f} <= 20000)"}.join(" OR "),
-                      20000 => PRICE_FIELDS.map{|f| "#{f} >= 20000"}.join(" OR ")
-                      }
-                      
-  scope :price_range, lambda { |key| {:conditions => PRICE_RANGE_SQLS[key]} }
+  SELL_PRICE_FIELDS = %w(price_for_sell price_for_good_sell price_for_poor_sell)
+  SELL_PRICE_RANGE_SQLS = {3000 => SELL_PRICE_FIELDS.map{|f| "(#{f} > 0 AND #{f} <= 3000)"}.join(" OR "), 
+                          5000 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 3000 AND #{f} <= 5000)"}.join(" OR "),
+                          7000 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 5000 AND #{f} <= 7000)"}.join(" OR "),
+                          10000 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 7000 AND #{f} <= 10000)"}.join(" OR "),
+                          19999 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 10000 AND #{f} <= 20000)"}.join(" OR "),
+                          20000 => SELL_PRICE_FIELDS.map{|f| "#{f} >= 20000"}.join(" OR ")
+                          }
+  BUY_PRICE_FIELDS = %w(price_for_buy price_for_good_buy price_for_poor_buy)
+  BUY_PRICE_RANGE_SQLS = {3000 => BUY_PRICE_FIELDS.map{|f| "(#{f} > 0 AND #{f} <= 3000)"}.join(" OR "), 
+                          5000 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 3000 AND #{f} <= 5000)"}.join(" OR "),
+                          7000 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 5000 AND #{f} <= 7000)"}.join(" OR "),
+                          10000 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 7000 AND #{f} <= 10000)"}.join(" OR "),
+                          19999 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 10000 AND #{f} <= 20000)"}.join(" OR "),
+                          20000 => BUY_PRICE_FIELDS.map{|f| "#{f} >= 20000"}.join(" OR ")
+                          }
+                          
+  scope :price_range, lambda { |key, for_what| {:conditions => for_what && for_what == :for_sell ? SELL_PRICE_RANGE_SQLS[key] : BUY_PRICE_RANGE_SQLS[key]} }
   
   before_save :set_auto_value_fields
   after_save :expired_fragment_caches
