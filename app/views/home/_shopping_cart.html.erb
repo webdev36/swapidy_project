@@ -20,7 +20,7 @@
          <button class="prev_buy" style="width: 30px;top: 50px;right: 410px;position: absolute"><<</button>
  	  	 <button class="next_buy"style="width: 30px;top: 50px;right: 80px;position: absolute">>></button>
        <%end%>
-      <div class="buy_display" style="height:120px;left:900px !important ;top:-130px; height: 130px" >
+      <div class="buy_display" style="left:900px !important ;top:-130px; height: 130px" >
          <ul>
         	<% cart_products[:buy].each do |order_product| %>
           		<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product}%>
@@ -74,12 +74,18 @@
 	$(function() {
      $('.sell_display').jCarouselLite({
         btnNext: ".next",
-        btnPrev: ".prev"
+        btnPrev: ".prev",
+         visible: 3,
+          scroll: 2,
+          speed: 500
 	 });
 	 
 	$('.buy_display').jCarouselLite({
         btnNext: ".next_buy	",
-        btnPrev: ".prev_buy"
+        btnPrev: ".prev_buy",
+         visible: 3,
+          scroll: 2,
+          speed: 500
 	 });
 
 	});
