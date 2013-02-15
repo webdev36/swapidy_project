@@ -1,24 +1,30 @@
 <div id="shopping_cart" <% if cart_products_empty? %> style="display:none;" <% end %> >
   <%= render :partial => "/home/shopping_cart" %>
-  <script language="JavaScript">
-    $(function() {
-	    $('.sell_display').jCarouselLite({
-	      btnNext: ".next",
-	      btnPrev: ".prev",
-	      visible: 3,
-	      scroll: 2,
-	      speed: 500
-	    });
-	    $('.buy_display').jCarouselLite({
-	      btnNext: ".next_buy	",
-	      btnPrev: ".prev_buy",
-	      visible: 3,
-	      scroll: 2,
-	      speed: 500
-	    });
-	  });
-  </script>
 </div>  
+<script language="JavaScript">
+  $(function() {
+  	display_checkout_sliders();
+  });
+
+	function display_checkout_sliders(){
+		$('.sell_display').jCarouselLite({
+      btnNext: ".next",
+      btnPrev: ".prev",
+      visible: 3,
+      scroll: 2,
+      speed: 500
+    });
+    $('.buy_display').jCarouselLite({
+      btnNext: ".next_buy	",
+      btnPrev: ".prev_buy",
+      visible: 3,
+      scroll: 2,
+      speed: 500
+    });
+
+	}
+</script>
+
     
 <% cache("homepage_available_categories", :expires_in => 1.hour) do %>
   <div id="product_type" style="display:none;">
