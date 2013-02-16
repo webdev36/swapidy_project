@@ -44,7 +44,7 @@ Swapidy::Application.configure do
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
   config.cache_store = :dalli_store, "dev1.ec2.memcachier.com:11211", 
-                       {:username => "32b055", :password => "61f65f2973ecf0c90c2c"}
+                       {:username => "8f14c9", :password => "cbe195323e99b2310ab1"}
                        #ENV["MEMCACHIER_SERVERS"].split(","),
                        #{:username => ENV["MEMCACHIER_USERNAME"], :password => ENV["MEMCACHIER_PASSWORD"]}
 
