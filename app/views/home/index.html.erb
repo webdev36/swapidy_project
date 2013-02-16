@@ -1,7 +1,18 @@
 <div id="shopping_cart" <% if cart_products_empty? %> style="display:none;" <% end %> >
   <%= render :partial => "/home/shopping_cart" %>
 </div>  
-    
+<div class="hero-unit">
+      <div style="hero-unit-content">
+          <div class="hero_title">Swap your stuff instantly.</div>
+          <p class="hero_info">
+            Get an offer on your product and exchange it with something you want.
+          </p>
+          <p class="hero_info">
+No transaction fees. No shipping costs. Just trade up.          
+          </p>
+          </div>
+      </div>
+</div>    
 <% cache("homepage_available_categories", :expires_in => 1.hour) do %>
   <div id="product_type" style="display:none;">
     <div class="headings_pink" style="text-align:center;">
