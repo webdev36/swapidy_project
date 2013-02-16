@@ -21,7 +21,7 @@ body{
     </div>
   </div>
 </div>
-<script>
+<script language="JavaScript">
   function reload_payment_order_info() {
     $.ajax({
       type : 'POST',
@@ -31,6 +31,25 @@ body{
       success: function(data) {}
     });
   }
+  
+  $(function() {
+  	order_sliders();
+  });
+
+	function order_sliders(){
+	$('.order_sell_display').jCarouselLite({
+      btnNext: ".next",
+      btnPrev: ".prev",
+      visible: 1,
+      speed: 500
+    });
+    $('.order_buy_display').jCarouselLite({
+      btnNext: ".next_buy	",
+      btnPrev: ".prev_buy",
+      visible: 1,
+      speed: 500
+    });
+	}
 </script>
 <style>
 
