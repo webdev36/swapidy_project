@@ -1,70 +1,33 @@
-<div id="product_items" style="height: 150px">
+<div id="product_items" style="height: 130px;">
   <% if cart_products_empty? %>
     <div style="width: 100%; text-align: center; padding-top: 40px;"> <span class="headings_pink">Empty Shopping Cart</span></div>  
   <% else %>
-    <div style="position: relative">
-      <% if cart_products[:sell].count > 5 %>
-        <a class="dropdown-toggle see_more_sell dropdow_item" data-toggle="dropdown" href="#"></a>
-      <% end %>
-      <% if cart_products[:buy].count > 5 %>
-	    <a class="dropdown-toggle see_more_buy dropdow_item" data-toggle="dropdown" href="#"></a>
-      <% end %>
-      <div class="sell_display" style="background: url(/images/white_bg.png) ;position:absolute; left:0px; width: 500px;height: 120px; overflow: hidden" >
+  	<% if cart_products[:sell].count > 3 %>
+	 	  <button class="prev" style="width: 30px;position: absolute;top:50px;left: 20px">&lt;&lt;</button>
+	 	  <button class="next" style="width: 30px;position: absolute;top: 50px;left: 350px;">&gt;&gt;</button>
+ 	  <% end %>
+      <div class= "sell_display" style=" height:120px; float: left; left:0px; width: 500px; margin: 5px 0 5px 100px;" >
+       	<ul style="position: none;">
         <% cart_products[:sell].each do |order_product|%>
-          <%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product} %>
+       		<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product} %>
         <% end %>
+        </ul>
       </div>
       <div style="position:absolute; left:50%; margin-left:-100px; width: 200px; text-align: center; top: 30px; font-size: 35px;">
         $<%= format_num(cart_amount) %>
       </div>
-      <div class="buy_display" style="background: url(/images/white_bg.png) ;position:absolute; right:0px; width: 500px; text-align: right;height: 120px; overflow:hidden" >
-        <% cart_products[:buy].each do |order_product| %>
-          <%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product}%>
-        <% end %>
+    <% if cart_products[:buy].count > 3 %>
+      	  <button class="prev_buy" style="width: 30px;top: 50px;right: 410px;position: absolute">&lt;&lt;</button>
+ 	 	  <button class="next_buy"style="width: 30px;top: 50px;right: 80px;position: absolute">&gt;&gt;</button>
+    <% end %>
+      <div class="buy_display" style=" float:right; height: 130px; margin: 5px 110px 5px 0px;" >
+       <ul style="position: none;">
+      	<% cart_products[:buy].each do |order_product| %>
+        		<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product}%>
+      	<% end %>
+       </ul>
       </div>
-    </div>
-    <a href="javascript:goto_checkout();" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>
+      <a id="done_button" href="javascript:showScreenToBuy();" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Done</a>
+      <a id="checkout_button" href="javascript:goto_checkout();" style="display: none; height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>
   <% end %>
 </div>
-<style>
-	.see_more_sell{
-		position: absolute;
-		top: 50px;
-		left: 500px;
-	}
-	.see_more_buy{
-		position:absolute;
-		top: 50px;
-		right: 500px;
-	}
-	.dropdow_item{
-		position:absolute;
-		display: inline-block;
-		width: 0;
-		height: 0;
-		vertical-align: top;
-		border-top: 10px solid black;
-		border-right: 10px solid transparent;
-		border-left: 10px solid transparent;
-		margin-top:40px;
-		-moz-transform:rotate(0deg);
-  		-webkit-transform:rotate(0deg);
-	}
-	
-	.hide_item{
-	display: block;
-	top: 10px;
-	right:-7px;
-	width: 10px;
-	height: 10px;
-	vertical-align: top;
-	border-top: 10px solid black;
-	border-right: 10px solid transparent;
-	border-left: 10px solid transparent;
-	margin-top:40px;
- 	-moz-transform:rotate(-45deg);
-  	-webkit-transform:rotate(180deg);
-}
-
-</style>
-

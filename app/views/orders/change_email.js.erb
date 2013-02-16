@@ -2,3 +2,4 @@ $("#popup-dialog_email_form .render_form form").html("<%= raw escape_javascript(
 <% if @changed_content %>
   $("#email_label_info").html("<%= raw escape_javascript(@changed_content) %>");
 <% end %>
+order_sliders();

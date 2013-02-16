@@ -4,6 +4,7 @@
   <% end %>
   $(".container #new_order .render_form").html("<%= raw escape_javascript(@return_content) %>");
 <% else %>
+  order_sliders();
   $("#popup-dialog_shipping_form .render_form form").html("<%= raw escape_javascript(@return_content) %>");
   <% if @changed_content %>
     $("#shipping_label_info").html("<%= raw escape_javascript(@changed_content) %>");
