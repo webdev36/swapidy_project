@@ -920,6 +920,10 @@ text-decoration:underline;
   font-weight: bold;
   font-size: 20px;
   color: white;
+  border-bottom-right-radius: 7px;
+  border-top-right-radius: 7px;
+  padding-right: 10px;
+  z-index: 10;
 }
 
 .popup_select_price {
