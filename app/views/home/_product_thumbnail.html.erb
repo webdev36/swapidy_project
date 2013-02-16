@@ -22,22 +22,19 @@
     <% if product.has_flawless_sell? %>
       <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
         <label for="Flawless" ><%= product.flaw_less_name %></label>
-        <span class="product_desc"><%= format_num(product.price_for_sell)%> </span>
-        <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+        <span class="product_desc">$<%= format_num(product.price_for_sell)%></span>
       </div>
     <% end %>
     <% if product.has_good_sell? %>
       <div class="price_type" product-id= "<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" type= "sell" >
         <label for="Good">Good</label>
-        <span class="product_desc"><%= format_num(product.price_for_good_sell)%> </span>
-        <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+        <span class="product_desc">$<%= format_num(product.price_for_good_sell)%> </span>
       </div>
     <% end %>
     <% if product.has_poor_sell? %>
       <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_poor_sell %>" product-using_condition="Poor" type= "sell" >
         <label for="Poor">Poor</label>
-        <span class="product_desc"><%= format_num(product.price_for_poor_sell)%> </span>
-        <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+        <span class="product_desc">$<%= format_num(product.price_for_poor_sell)%> </span>
       </div>
   	<% end %>
   </div>
@@ -48,22 +45,19 @@
     <% if product.has_flawless_buy?%>
       <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_buy %>" product-using_condition="Flawless" type= "buy" >
         <label for="Flawless"><%= product.flaw_less_name(:for_buy) %></label>
-        <span class="product_desc"><%= format_num(product.price_for_buy)%> </span>
-        <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+        <span class="product_desc">$<%= format_num(product.price_for_buy)%> </span>
       </div>
     <% end %>
     <% if product.has_good_buy? %>
       <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_good_buy %>" product-using_condition="Good" type= "buy" >
         <label for="Good">Good</label>
-        <span class="product_desc"><%= format_num(product.price_for_good_buy)%> </span>
-        <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+        <span class="product_desc">$<%= format_num(product.price_for_good_buy)%> </span>
       </div>
     <% end %>
     <% if product.has_poor_buy? %>
       <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_poor_buy %>" product-using_condition="Poor" type= "buy" >
         <label for="Poor">Poor</label>
-        <span class="product_desc"><%= format_num(product.price_for_poor_buy)%> </span>
-        <span class="show_honey_symbol"><img src="/images/honey_20px_grey.png"></span>
+        <span class="product_desc">$<%= format_num(product.price_for_poor_buy)%> </span>
       </div>
     <% end %>
   </div>

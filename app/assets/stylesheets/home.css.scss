@@ -950,23 +950,13 @@ text-decoration:underline;
   cursor: pointer;
 }
 .price_type{
-  z-index: 5000;
-  height:40px;
-  font-size:18px;
+  text-align: center;
+  padding: 5px;
 }
 .price_type:hover{
   background: #38B4DE;
 }
-.price_type label {
-  font-size: 13px;
-  z-index: 5000;
-
-}
+.price_type label,
 .price_type span {
-  font-size :12px;
-  z-index: 5000;
-
-}
-.price_type span img {
-  height: 10px;
+  font-size :13px;
 }
