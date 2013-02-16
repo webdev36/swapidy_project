@@ -5,13 +5,14 @@
   $(function() {
   	display_checkout_sliders();
   });
-
+ if ($('#announcementList').find('li').length >= 3) {
 	function display_checkout_sliders(){
 		$('.sell_display').jCarouselLite({
       btnNext: ".next",
       btnPrev: ".prev",
-      visible: 3,
+      visible: 3, 
       scroll: 2,
+      circular: false,
       speed: 500
     });
     $('.buy_display').jCarouselLite({
@@ -19,9 +20,10 @@
       btnPrev: ".prev_buy",
       visible: 3,
       scroll: 2,
+      circular: false,
       speed: 500
     });
-
+}
 	}
 </script>
 
