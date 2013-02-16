@@ -35,6 +35,22 @@
   </p>
 </div>
 
+<a id="product_scrollup_link" style="display: none;" href="#" onclick="$.scrollTo($('div#product_type'), 400);">Choose another product</a>
+<script>
+	$(document).ready(function(){
+	  $(window).scroll(function(){
+		  // get the height of #wrap
+		  var h = 800;
+		  var y = $(window).scrollTop();
+		  if( y > (h*0.75) ){
+		   $("#product_scrollup_link").fadeIn("slow");
+		  } else {
+		   $('#product_scrollup_link').fadeOut('slow');
+		  }
+	  });
+	});
+</script>
+
 <% cache("homepage_available_categories", :expires_in => 1.hour) do %>
   <div id="product_type" style="display:none;">
     <div class="headings_pink" style="text-align:center;">
