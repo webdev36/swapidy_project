@@ -216,7 +216,7 @@ left:50%;
   margin: 0 auto -4em;
   padding: 30px 0 30px 0;
   background-color: whitesmoke;
-  height:180px;
+  height:220px;
   overflow:hidden;
 }
 #footer_info{
@@ -865,10 +865,10 @@ ul.left_menu li a {
 }
 #mcts1 
 {
-    width:400px;
-    height:162px;
+    width:490px;
+    height:130px;
     margin: 0 auto;
-    padding:20px 30px;
+    padding:5px 5px;
     border:1px solid #dedcb4;
     background:#f0efdd url(loading.gif) no-repeat 50% 50%;
     box-shadow: 0px 2px 6px #DDDDDD;
@@ -897,8 +897,8 @@ ul.left_menu li a {
     color:#696F5B;
     white-space:normal;
     padding:20px;
-    width:740px;
-    height:164px;
+    width:490px;
+    height:130px;
     background-color:White;
     border-radius:6px;
 }
@@ -909,8 +909,8 @@ ul.left_menu li a {
     padding-left:40px;
     padding-right:20px;
     font:normal 12px/14px Verdana;
-    width:220px;
-    height:164px;
+    width:280px;
+    height:144px;
     overflow:auto;
 }
 #mcts1 .each img 
@@ -946,4 +946,44 @@ ul.left_menu li a {
    -webkit-user-select: none;
    -o-user-select: none;
    user-select: none;
+}
+
+        
+/*---------built-in navigation bullets--------*/
+
+/* Note: the navBullets won't be available when the "scrollByEachThumb" option was set to false in the Javascript.*/
+#mcts1 .navBullets
+{
+    /*display:none;*/ /*set it display:none when you don't need it*/
+  display:block;
+  cursor:pointer;
+  /*Specify its position that is relative to the div#mcts1 */
+  position:absolute;
+  bottom:-46px;
+  left:360px;
+  width:80px;height:20px;
+  z-index:5;
+}
+/* Below defines the style of each bullet*/
+#mcts1 .navBullets a 
+{
+    display:inline-block;
+    width:13px; height:13px;
+    background:transparent url(bullet.png) no-repeat 0 0;
+    float:left;overflow:hidden;vertical-align:middle;cursor:pointer;
+    margin-right:6px;/*margin-right determines the distance between each bullets*/
+}
+#mcts1 .navBullets a:hover {background-position:0 -13px;}
+#mcts1 .navBullets .active {background-position:0 -26px;}
+#mcts1 .navBullets a.active:hover {background-position:0 -26px;}
+
+
+/* --------- Others ------- */
+#mcts1
+{
+  transform: translate3d(0,0,0);
+    -ms-transform:translate3d(0,0,0);
+    -moz-transform:translate3d(0,0,0);
+    -o-transform:translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
 }

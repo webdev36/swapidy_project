@@ -1,16 +1,24 @@
 <% if cart_products_empty? %>
 <div>Empty Shopping Cart</div>  
 <% else %>
-<div style="position: relative">
-  <div class="sell_display" style="float:left; width: 45%;overflow: hidden" >
-    <% cart_products[:sell].each do |order_product|%>
-      <img style=" max-width: 80px; max-height: 80px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" />
-    <% end %>
+ <div>
+	  <button class="prev" style="width: 30px;position: absolute;top:185px;left: 20px;">&lt;&lt;</button>
+	  <button class="next" style="width: 30px;position: absolute;top: 185px;left: 80px;">&gt;&gt;</button>
+  <div class="order_sell_display" style="float:left; width: 45%;overflow: hidden;left: 50px !important;top: 40px" >
+  	<ul>
+		<% cart_products[:sell].each do |order_product|%>
+	    	<li style="height:120px;width: 120px"> <img style=" max-width: 100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" /> </li>
+   		<% end %>
+    </ul>
   </div>
-  <div class="buy_display" style="float:right; width: 45%; text-align: right; overflow:hidden" >
-    <% cart_products[:buy].each do |order_product| %>
-      <img style=" max-width: 80px; max-height: 80px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" />
-    <% end %>
+	  <button class="prev_buy" style="width: 30px;top: 185px;right: 110px;position: absolute">&lt;&lt;</button>
+	  <button class="next_buy"style="width: 30px;top: 185px;right: 50px;position: absolute">&gt;&gt;</button>
+  <div class="order_buy_display" style="float:right; width: 45%; text-align: right; overflow:hidden;left: -50px !important;top: 40px" >
+  	<ul>
+    	<% cart_products[:buy].each do |order_product| %>
+    		<li style="height: 120px;width: 120px"> <img style=" max-width:100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" /></li>
+    	<% end %>
+    </ul>
   </div>
-</div>
+ </div>
 <% end %>

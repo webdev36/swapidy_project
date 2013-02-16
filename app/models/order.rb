@@ -1,5 +1,4 @@
 require 'stamps_shipping_gateway'
-require 'zip_code'
 
 class Order < ActiveRecord::Base
   include StampsShippingGateway
@@ -52,10 +51,6 @@ class Order < ActiveRecord::Base
   end
   
   def shipping_address_valid?
-    unless ZipCode::ZIPCODES[self.shipping_zip_code]
-      errors.add(:shipping_zip_code, "is not supported with Swapidy's services. Please try later.")
-      return false
-    end
     
     #for testing only
     #if Rails.env == 'production'
