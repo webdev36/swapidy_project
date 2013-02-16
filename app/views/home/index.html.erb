@@ -25,7 +25,6 @@
 	}
 </script>
 
-    
 <% cache("homepage_available_categories", :expires_in => 1.hour) do %>
   <div id="product_type" style="display:none;">
     <div class="headings_pink" style="text-align:center;">
@@ -130,11 +129,33 @@
 <% end %>
 
 <script language="JavaScript">
-  
-  $('#slider-code').tinycarousel({display: 2});
-  
-  sliderHeight();
 
+  var for_what = "for_selling";
+  var current_category_id = "";
+  var current_model_id = "filter_model_all";
+  
+  //$(document).ready(function() {
+    $('#slider-code').tinycarousel({display: 2});
+    sliderHeight();
+	  showScreenToSell();
+	  current_category_id = "cat_<%= Category.first.id %>";
+    $("#container_" + current_category_id).hide();
+    $("#" + current_category_id).removeClass("select").addClass("blur");
+    $('div#product_type').fadeIn(600);
+
+    current_model_id = "filter_model_all";
+    $("#" + current_category_id).addClass("select");
+
+    $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
+    $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
+    $("#container_" + current_category_id + " .attr_" + current_model_id + '_' + for_what).removeClass("hidden_filter");
+
+    $("#container_" + current_category_id).fadeIn(600);
+    
+    $.scrollTo($('div#product_type'), 400);
+    showIsoTope();
+  //});
+  
   $(window).on('resize', function() {
     sliderHeight();
   });
@@ -208,9 +229,6 @@
     $.scrollTo($('div#product_type'), 400);
     showIsoTope();
   });
-  
-  var current_category_id = "";
-  var current_model_id = "filter_model_all";
 
   $('#product_type .cat_item').live('click', function() {
      
@@ -288,8 +306,6 @@
       }
     }
   });
-  
-  for_what = "for_selling";
 
   function showScreenToBuy() {
     for_what = "for_buying";
