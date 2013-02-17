@@ -24,7 +24,7 @@
       <div class="buy_display" style=" float:right; height: 130px; margin: 5px 110px 5px 0px;" >
        <ul style="position: none;">
       	<% cart_products[:buy].each do |order_product| %>
-        		<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product}%>
+        	<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product}%>
       	<% end %>
        </ul>
       </div>
