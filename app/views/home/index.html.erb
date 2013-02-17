@@ -64,7 +64,7 @@
 	});
 </script>
 
-<% cache("homepage_available_categories", :expires_in => 1.hour) do %>
+<%# cache("homepage_available_categories", :expires_in => 1.hour) do %>
   <div id="product_type" style="display:none;">
     <div class="headings_pink" style="text-align:center;">
       <div style="text-align:center;">
@@ -79,7 +79,7 @@
         <ul class="overview" style="width: 1560px;">
           <% Category.all.each_with_index do |category, index| %>
             <li id="cat_<%= category.id %>" class="item category span3" >
-              <img class="cat_item" alt="<%= category.title %>" style="height: 200px; width: auto;" src="<%= category.main_image_url(:medium) %>">
+              <img class="cat_item" alt="<%= category.title %>" style="height: 160px; width: auto;" src="<%= category.main_image_url(:medium) %>">
               <div style="display:block;">
                 <%= category.title %>
               </div>
@@ -90,7 +90,7 @@
       <a class="left carousel-control buttons next">&rsaquo;</a>
     </div>
   </div>
-<% end %>
+<%# end %>
 
 <% Category.all.each do |category| %>
     <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 20px;">
