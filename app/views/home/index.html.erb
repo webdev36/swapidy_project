@@ -64,7 +64,7 @@
 	});
 </script>
 
-<%# cache("homepage_available_categories", :expires_in => 1.hour) do %>
+<% cache("homepage_available_categories", :expires_in => 1.hour) do %>
   <div id="product_type" style="display:none;">
     <div class="headings_pink" style="text-align:center;">
       <div style="text-align:center;">
@@ -90,7 +90,7 @@
       <a class="left carousel-control buttons next">&rsaquo;</a>
     </div>
   </div>
-<%# end %>
+<% end %>
 
 <% Category.all.each do |category| %>
     <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 20px;">
@@ -373,7 +373,32 @@
     }
   });
 
+	function gotoCheckout(){
+	   var sell_count = $('#shopping_cart').find('.sell_display li').length;
+	   var buy_count = $('#shopping_cart').find('.buy_display li').length;
+	   
+	   if(buy_count == 0) {
+	   	 alert("You have not selected any products to buy");
+	   }else if(sell_count == 0){
+	   	 alert("You have not selected any products to sell");
+	   }else{
+	   	 window.location = "/orders/new";	
+	   }
+	}
+
   function showScreenToBuy() {
+  	var sell_count = $('#shopping_cart').find('.sell_display li').length;
+	  if(sell_count == 0) {
+	   	alert("You have not selected any products to sell");
+	   	if(for_what == "for_buying") {
+	   		showScreenToSell();
+		   	$('div#product_type').fadeIn(600);
+		    $.scrollTo($('div#product_type'), 400);
+		    showIsoTope();	
+	   	}
+	   	return;
+	  }
+
     for_what = "for_buying";
     $("#sell_message").hide();
     $("#buy_message").show();

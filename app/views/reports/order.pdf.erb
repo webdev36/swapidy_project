@@ -4,14 +4,14 @@
 
 <% sell_amount = 0 %>
 <% if @order.order_products.for_sell.count > 0 %>
-<h2>Trade-in items: </h2>
-<table border="1">
+<h2>Trade-in products:</h2>
+<table border="1" width="100%">
   <tr>
-    <td>No.</td>
-    <td>Product</td>
-    <td>Model</td>
-    <td>Condition</td>
-    <td>Price</td>
+    <td width="40px" style="text-align: center;">No.</td>
+    <td style="text-align: center;">Product</td>
+    <td width="120px" style="text-align: center;">Model</td>
+    <td width="80px" style="text-align: center;">Condition</td>
+    <td width="100px" style="text-align: center;">Price</td>
   </tr>
 <% @order.order_products.for_sell.each_with_index do |order_product, index| %>
   <% sell_amount += order_product.price %>
@@ -24,7 +24,7 @@
   </tr>
 <% end %>
   <tr>
-    <td style="text-align: right;" colspan="4">Total selling price</td>
+    <td style="text-align: right;" colspan="4">Total</td>
     <td style="text-align: right;">$<%= number_with_delimiter(sell_amount) %></td>
   <tr>
 </table>
@@ -32,14 +32,14 @@
 
 <% buy_amount = 0 %>  
 <% if @order.order_products.for_buy.count > 0 %>
-<h2>Order items: </h2>
-<table border="1">
+<h2>Ordered products:</h2>
+<table border="1" width="100%">
   <tr>
-    <td>No.</td>
-    <td>Product</td>
-    <td>Model</td>
-    <td>Condition</td>
-    <td>Price</td>
+    <td width="40px" style="text-align: center;">No.</td>
+    <td style="text-align: center;">Product</td>
+    <td width="120px" style="text-align: center;">Model</td>
+    <td width="80px" style="text-align: center;">Condition</td>
+    <td width="100px" style="text-align: center;">Price</td>
   </tr>
 <% amount = 0 %>  
 <% @order.order_products.for_buy.each_with_index do |order_product, index| %>
@@ -53,19 +53,17 @@
   </tr>
 <% end %>
   <tr>
-    <td style="text-align: right;" colspan="4">Total selling price</td>
+    <td style="text-align: right;" colspan="4">Total</td>
     <td style="text-align: right;">$<%= number_with_delimiter(buy_amount) %></td>
   <tr>
 </table>
-
 <% end %>
 
 <% if buy_amount > sell_amount %>
 <h2>You will be charged: $<%= number_with_delimiter(buy_amount - sell_amount) %></h2>
 <% else %>
-<h2>You would get: $<%= number_with_delimiter(sell_amount - buy_amount) %></h2>
+<h2>Your remaining balance: $<%= number_with_delimiter(sell_amount - buy_amount) %></h2>
 <% end %>
-<br/>
 
 <h2>Your Shipping Address</h2>
 <p>
@@ -75,11 +73,16 @@
   <%= @order.shipping_city %><br />
   <%= @order.shipping_state %><br />
   <%= @order.shipping_zip_code %><br />
-  <%= @order.shipping_country %><br />
+  <%= @order.shipping_country %>
 </p>
 
 <h2>Shipping Label</h2>
-<i>(Next page)</i>
+<p>
+	Your shipping label is on the next page.
+	Print it out and affix it on top of the package with your trade-in products. 
+	Simply drop it off at any USPS location or your mailbox if it fits.<br/>
+	Note: Ship your product(s) as soon as possible to avoid delay in receiving your order
+</p>
 
 <div style="width:100%; page-break-before: always; height: 60px; border-style:solid; border-width: 1px; border-color: black; border-bottom: none;">
   <img src="<%= File.expand_path(Rails.root) %>/public/images/swapidy_logo.png" style="height: 50px; padding: 5px;">

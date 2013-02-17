@@ -5,12 +5,12 @@
     <div>
       <% if product.for_sells? %>
 		    <div class="dropdown button_for_sell" id= "button_block">
-          <a style="width: 80px;" popup_id="popup_selling_price_<%= product.id %>" class=" btn btn-primary dropdown-toggle select-price" title="Sell now: <%= product.title %>" data-toggle="dropdown">Sell</a>
+          <a style="width: 80px;" popup_id="popup_selling_price_<%= product.id %>" class="btn btn-primary select-price" title="Sell now: <%= product.title %>">Sell</a>
         </div>
       <% end %>
       <% if product.for_buys? %>
         <div class="dropdown button_for_buy" id= "button_block">
-          <a style="width: 80px;" popup_id="popup_buying_price_<%= product.id %>" class="btn btn-primary dropdown-toggle select-price" title="Buy now: <%= product.title %>" data-toggle="dropdown">Buy</a>
+          <a style="width: 80px;" popup_id="popup_buying_price_<%= product.id %>" class="btn btn-primary select-price" title="Buy now: <%= product.title %>">Buy</a>
         </div>
       <% end %>
     </div>

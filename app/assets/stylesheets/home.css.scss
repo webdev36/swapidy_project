@@ -497,11 +497,15 @@ label {
 .product_model a:hover{
   color:#666;
 }
-.models_for_buy li.active a {
+.button_for_buy .btn {
   background-color: #fa3e6e !important;
+  background-image: -moz-linear-gradient(top, rgb(247, 105, 142), #fa3e6e);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(247, 105, 142)), to(#fa3e6e));
+  background-image: -webkit-linear-gradient(top, rgb(247, 105, 142), #fa3e6e);
+  background-image: -o-linear-gradient(top, rgb(247, 105, 142), #fa3e6e);
+  background-image: linear-gradient(to bottom, rgb(247, 105, 142), #fa3e6e);
 } 
-
-.models_for_sell li.active a {
+.button_for_sell .btn {
   background-color: #38B4DE !important;
 }
 
