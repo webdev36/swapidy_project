@@ -906,11 +906,14 @@ text-decoration:underline;
 }
 
 .del-product{
-  background: url(/assets/close-popup.png) no-repeat;
+  background: url(/assets/delete.png) no-repeat;
   float:right;
-  height: 28px;
-  width: 28px;
+  height: 20px;
+  width: 20px;
   //padding:2px 5px;
+  position:relative;
+  right:20px;
+  bottom:10px;
 }
 
 #product_scrollup_link {

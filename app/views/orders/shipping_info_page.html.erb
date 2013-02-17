@@ -1,13 +1,12 @@
 <style type="text/css">
 body{
-  background: whitesmoke;
-}
+background: url('/bg.png');}
 </style>
-<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/white_bg.png); -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+<div class="content " style="height:700px;">
   <%= render :partial => "steps", :locals => {:current_step => 3 } %>
   <div class="container">
     <div class="headings_pink shipping_form_head">Shipping Address<span>*</span></div>
-    <div class="confirm_image_container"style="padding: 20px 25px 20px 20px;position: absolute;left: 125px;top: 150px;height: 390px;">
+    <div class="confirm_image_container"style="padding: 20px 25px 20px 20px; height: 390px; position:absolute; top:240px;">
 	  <%= render :partial => "/orders/order_product_images" %>
 	</div>
 	<div class="shipping_form_container">

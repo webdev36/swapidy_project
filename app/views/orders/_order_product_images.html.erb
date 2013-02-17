@@ -2,8 +2,8 @@
 <div>Empty Shopping Cart</div>  
 <% else %>
  <div>
-	  <button class="prev" style="width: 30px;position: absolute;top:185px;left: 20px;">&lt;&lt;</button>
-	  <button class="next" style="width: 30px;position: absolute;top: 185px;left: 80px;">&gt;&gt;</button>
+	  <button class="prev product_button_buy" style="width: 30px;position: absolute;top:185px;left: 20px;">&lt;</button>
+	  <button class="next product_button_buy" style="width: 30px;position: absolute;top: 185px;left: 80px;">&gt;</button>
   <div class="order_sell_display" style="float:left; width: 45%;overflow: hidden;left: 50px !important;top: 40px" >
   	<ul>
 		<% cart_products[:sell].each do |order_product|%>
@@ -11,8 +11,8 @@
    		<% end %>
     </ul>
   </div>
-	  <button class="prev_buy" style="width: 30px;top: 185px;right: 110px;position: absolute">&lt;&lt;</button>
-	  <button class="next_buy"style="width: 30px;top: 185px;right: 50px;position: absolute">&gt;&gt;</button>
+	  <button class="prev_buy product_button_buy" style="width: 30px;top: 185px;right: 110px;position: absolute;">&lt;</button>
+	  <button class="next_buy product_button_buy"style="width: 30px;top: 185px;right: 50px;position: absolute">&gt;</button>
   <div class="order_buy_display" style="float:right; width: 45%; text-align: right; overflow:hidden;left: -50px !important;top: 40px" >
   	<ul>
     	<% cart_products[:buy].each do |order_product| %>

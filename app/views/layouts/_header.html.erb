@@ -4,6 +4,10 @@
       <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
       
       <ul class="nav pull-right nav_header" role="navigation" style="margin-right: -160px;">
+        <li>
+          <a href="javascript:refresh_how_it_works();">HOW IT WORKS</a>
+        </li>
+                    <li class="divider-vertical"></li>
 
         <% if user_signed_in? %>
 	        <% if current_user.free_money_sendable? %>
@@ -83,6 +87,7 @@
             </a>
           </div>
         </li>
+
         <% if current_user.is_admin? %>
 	        <li>
 	          <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
@@ -99,9 +104,7 @@
         </li>
         <li class="divider-vertical"></li>
         <% end %>
-        <li>
-          <a href="javascript:refresh_how_it_works();">HOW IT WORKS</a>
-        </li>
+      
       </ul>
     </div>
   </div>
