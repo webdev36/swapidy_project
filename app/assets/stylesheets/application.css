@@ -849,7 +849,7 @@ ul.left_menu li a {
   text-decoration: underline;
 }
 #media{
-  width:400px;
+  width:100%;
   float: left;
   margin-left: 140px;
 }
@@ -865,10 +865,9 @@ ul.left_menu li a {
 }
 #mcts1 
 {
-    width:490px;
-    height:130px;
+    width:550px;
+    height:180px;
     margin: 0 auto;
-    padding:5px 5px;
     border:1px solid #dedcb4;
     background:#f0efdd url(loading.gif) no-repeat 50% 50%;
     box-shadow: 0px 2px 6px #DDDDDD;
@@ -897,8 +896,8 @@ ul.left_menu li a {
     color:#696F5B;
     white-space:normal;
     padding:20px;
-    width:490px;
-    height:130px;
+    width:520px;
+    height:170px;
     background-color:White;
     border-radius:6px;
 }
@@ -948,6 +947,7 @@ ul.left_menu li a {
    user-select: none;
 }
 
+
         
 /*---------built-in navigation bullets--------*/
 
@@ -986,4 +986,39 @@ ul.left_menu li a {
     -moz-transform:translate3d(0,0,0);
     -o-transform:translate3d(0,0,0);
     -webkit-transform: translate3d(0,0,0);
+}
+
+#index_head{
+  height:270px;
+  position: absolute;
+  top:80px;
+  line-height: 1.5;
+}
+
+#index_bg{
+  height: 310px;
+    width: 100%;
+  background: url('/bg.png') repeat;
+  border-bottom: 1px solid #ccc;
+
+}
+
+.index_text{
+  width: 400px;
+}
+
+.index_img{
+  height: 30px;
+}
+.index_bullets{
+  color:#333;
+  font-size: 18px;
+  font-family: 'myriad-s';
+}
+.index_success{
+  float:left;
+  width: 400px;
+  position:relative;
+  bottom:200px;
+  left:500px;
 }

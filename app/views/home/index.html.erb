@@ -27,12 +27,38 @@
 	}
 </script>
 
-<div style="text-align:center; <%= "padding-top: 130px;" unless cart_products_empty? %> ">
-  <div class="headings_pink" style="text-align:center;">Heading</div>
-  <div style="text-align:center;">Tagline</div>
-  <p>
-    <a class="btn btn-primary btn-large">Learn more</a>
-  </p>
+  <div id="index_head" style="text-align:left; <%= "padding-top: 110px;" unless cart_products_empty? %> ">
+  <div class="index_text">  
+    <div class="headings_pink" style="text-align:left;">Swap your stuff instantly.</div>
+       <div style="text-align:left; font-size:20px;">Get an offer on your product and exchange it with something you want.</div>
+       <div class="index_bullets"><img style="height:30px; margin-bottom:5px;" src="/images/index_head/1.png">&nbsp;Get paid instantly<br/><img class="index_img" src="/images/index_head/2.png">&nbsp;Faster than ebay.<br/><img class="index_img" style="margin-bottom:5px;" src="/images/index_head/3.png">&nbsp;No transaction fees. No shipping costs.
+       </div>
+
+    <div class="index_success">
+      <span style="font-size:20px">Recent Trades</span>
+        <div id="mcts1">
+            <div class="each">
+                <img src="/images/testimonials/1.png" style="height:150px;" />
+                <div class="content">
+                </div>
+            </div>
+            <div class="each">
+<img src="/images/testimonials/1.png" style="height:150px;" />                <div class="content">
+                </div>
+            </div>
+            <div class="each">
+<img src="/images/testimonials/1.png" style="height:150px; " />                <div class="content">
+               
+                </div>
+            </div>
+            <div class="each">
+<img src="/images/testimonials/1.png" style="height:150px; " />                <div class="content">
+
+                </div>
+            </div>
+        </div>  
+    </div>
+  </div>
 </div>
 
 <a id="product_scrollup_link" style="display: none;" href="#" onclick="$.scrollTo($('div#product_type'), 400);">Choose another product</a>
