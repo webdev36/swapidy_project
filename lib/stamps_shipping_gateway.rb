@@ -23,8 +23,8 @@ module StampsShippingGateway
   end
 
   def purchase_postage
-    #@logger = Logger.new("log/stamps_shipping.log")
-    #@logger.info "-------- purchase_postage: #{Time.now}------"
+    @logger = Logger.new("log/stamps_shipping.log")
+    @logger.info "-------- purchase_postage: #{Time.now}------"
     
     current_account = Stamps.account
     #@logger.info current_account
@@ -33,7 +33,7 @@ module StampsShippingGateway
     result = Stamps.purchase_postage(:amount => PURCHASE_AMOUNT, :control_total => current_control_total)
     
     #@logger.info result
-    #@logger.info "-------- END ------"
+    @logger.info "-------- END ------"
   end
 
   def test_shipping
@@ -83,9 +83,7 @@ module StampsShippingGateway
   
   private
   
-    def create_shipping_stamp(weight_lb, from_address, to_address)
-      #@logger = Logger.new("log/stamps_shipping.log")
-      
+    def create_shipping_stamp(weight_lb, from_address, to_address)      
       package = { :from_zip_code => from_address[:zip_code],
                   :to_zip_code   => to_address[:zip_code], 
                   :weight_lb     => weight_lb, 
@@ -100,26 +98,19 @@ module StampsShippingGateway
                 }
   
       rates = Stamps.get_rates(package)
-      if !rates_valid?(rates) 
-        if rates[:errors].first == INSUFFICIENT_POSTAGE_ERROR
+      
+      stamp = Stamps.create!(:transaction_id  => (self.id || (Order.last.id + 1)).to_s, :rate => package, :to => to_address, :from => from_address)
+      
+      unless valid_stamp?(stamp)
+        if stamp[:errors].first == INSUFFICIENT_POSTAGE_ERROR
           purchase_postage
           sleep(8) #Sleep 8s to wait Stamps.com for payment
-          rates = Stamps.get_rates(package)
-          raise rates[:errors] if !rates_valid?(rates)
+          stamp = Stamps.create!(:transaction_id  => (self.id || (Order.last.id + 1)).to_s, :rate => package, :to => to_address, :from => from_address)
+          raise stamp[:errors] unless valid_stamp?(stamp)
         else
-          raise rates[:errors]
+          raise stamp[:errors]
         end
-      end
-      
-      stamp = Stamps.create!(:transaction_id  => (self.id || (Order.last.id + 1)).to_s,
-                             #:tracking_number => '',
-                             :rate => package, 
-                             :to => to_address, 
-                             :from => from_address
-                           )
-                           
-      Rails.logger.info "stamp.class.name: #{stamp.class.name}"
-      raise stamp[:errors] if !stamp.class.name == "Hash" && stamp[:valid?].nil? && stamp[:valid?] == false && stamp[:errors]
+      end                     
       return stamp
     end
   
@@ -142,11 +133,8 @@ module StampsShippingGateway
                                                   :zip_code  => shipping_zip_code })
     end
     
-    def rates_valid? rates
-      return false if rates.class.name != "Array" &&
-          !rates[:valid?].nil? && 
-          (rates[:valid?].class.name == "Boolean" && rates[:valid?] == false) && 
-          rates[:errors]
+    def valid_stamp? stamps
+      return false if stamps.class.name != "Array" && !stamps[:valid?].nil? && stamps[:valid?].to_s == "false" && stamps[:errors]
       return true 
     end
 
