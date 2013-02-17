@@ -242,7 +242,7 @@ text-align: center;
 
 #product_type{
   position:relative;
-  bottom:50px;
+  bottom:30px;
   font-family:"myriad";
   position: relative;
   margin-bottom: 20px;
@@ -926,6 +926,8 @@ text-decoration:underline;
   border-top-left-radius: 7px;
   padding-left: 10px;
   z-index: 10;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5),0 0 0 1px rgba(0, 0, 0, 0.2);
+
 }
 
 .popup_select_price {
