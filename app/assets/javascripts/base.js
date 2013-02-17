@@ -88,23 +88,16 @@ $(function() {
 });
 
 function goto_checkout(){
-   sell_count = 0;
-   $("#product_items .sell_display .cart_product_thumb").each(function(){
-   	sell_count += 1;
-   });
+   var sell_count = $('#shopping_cart').find('.sell_display li').length;
+   var buy_count = $('#shopping_cart').find('.buy_display li').length;
    
-   buy_count = 0;
-   $("#product_items .buy_display .cart_product_thumb").each(function(){
-   	buy_count += 1;
-   });
    if(buy_count == 0 || sell_count == 0) {
    	 alert("You have not selected any sell/buy products");
    }else{
    	 window.location = "/orders/new";	
    }
-   
 }
-	
+
 function switchToCheckoutStep(form_id, step_url) {
   $("#" + form_id).attr("action", step_url);
   $("#" + form_id).submit();

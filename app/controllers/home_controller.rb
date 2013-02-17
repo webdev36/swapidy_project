@@ -56,6 +56,7 @@ class HomeController < ApplicationController
 
   def swap_product
     add_cart_product(:type => params[:type],:price => params[:price],:product_id => params[:product_id],:using_condition => params[:condition])
+    @changed_type = params[:type] && params[:type] == "sell" ? :sell : :buy 
     respond_to do |format|
       format.js {
         @return_content = render_to_string(:partial => "/home/shopping_cart")
@@ -68,9 +69,13 @@ class HomeController < ApplicationController
       index_for_sell = session[:cart_products][:sell].index{|x| x[:order_product_id].to_i == params[:order_id].to_i}
       if index_for_sell && index_for_sell.to_i >= 0
         session[:cart_products][:sell].delete_at(index_for_sell)
+        @changed_type = :sell
       else
         index_for_buy = session[:cart_products][:buy].index{|x| x[:order_product_id].to_i == params[:order_id].to_i}
-        session[:cart_products][:buy].delete_at(index_for_buy) if index_for_buy && index_for_buy.to_i >= 0
+        if index_for_buy && index_for_buy.to_i >= 0
+          session[:cart_products][:buy].delete_at(index_for_buy) 
+          @changed_type = :buy
+        end
       end
     end
     respond_to do |format|

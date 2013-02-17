@@ -1,8 +1,10 @@
-<div id="product_items" style="height: 130px;">
-  <% if cart_products_empty? %>
+<% if cart_products_empty? %>
+  <div id="product_items" style="height: 130px;">
     <div style="width: 100%; text-align: center; padding-top: 40px;"> <span class="headings_pink">Empty Shopping Cart</span></div>
     <a href="#" onclick="$('#shopping_cart').fadeOut('slow');" style="height: 20px; top: 70px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Close</a>
-  <% else %>
+  </div>
+<% else %>
+  <div id="product_items" style="height: 130px;">
   	<% if cart_products[:sell].count > 3 %>
 	 	  <button class="prev" style="width: 30px;position: absolute;top:50px;left: 20px">&lt;&lt;</button>
 	 	  <button class="next" style="width: 30px;position: absolute;top: 50px;left: 350px;">&gt;&gt;</button>
@@ -13,9 +15,6 @@
        		<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product} %>
         <% end %>
         </ul>
-      </div>
-      <div style="position:absolute; left:50%; margin-left:-100px; width: 200px; text-align: center; top: 30px; font-size: 35px;">
-        $<%= format_num(cart_amount) %>
       </div>
     <% if cart_products[:buy].count > 3 %>
       <button class="prev_buy" style="width: 30px;top: 50px;right: 410px;position: absolute">&lt;&lt;</button>
@@ -28,7 +27,10 @@
       	<% end %>
        </ul>
       </div>
-      <a id="done_button" href="javascript:showScreenToBuy();" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Done</a>
-      <a id="checkout_button" href="javascript:goto_checkout();" style="display: none; height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>
-  <% end %>
-</div>
+	</div>
+	<div style="position:absolute; left:50%; margin-left:-100px; width: 200px; text-align: center; top: 30px; font-size: 35px;">
+	  $<%= format_num(cart_amount) %>
+	</div>
+	<a id="done_button" href="javascript:showScreenToBuy();" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Done</a>
+	<a id="checkout_button" href="javascript:goto_checkout();" style="display: none; height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>
+<% end %>

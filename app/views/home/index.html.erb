@@ -1,4 +1,4 @@
-<div id="shopping_cart" <% if cart_products_empty? %> style="display:none;" <% end %> >
+<div id="shopping_cart" <% if cart_products_empty? %> style="display:none;height: 130px;" <% end %> >
   <%= render :partial => "/home/shopping_cart" %>
 </div>
 <script language="JavaScript">
@@ -23,22 +23,26 @@
 	});
 			
 	function display_checkout_sliders(){
-		$('.sell_display').jCarouselLite({
-      btnNext: ".next",
-      btnPrev: ".prev",
-      visible: 3, 
-      scroll: 1,
-      circular: false,
-      speed: 500
-    });
-    $('.buy_display').jCarouselLite({
-      btnNext: ".next_buy	",
-      btnPrev: ".prev_buy",
-      visible: 3,
-      scroll: 1,
-      circular: false,
-      speed: 500
-    });
+		if ($('#shopping_cart').find('.sell_display li').length >= 1) {
+			$('#shopping_cart .sell_display').jCarouselLite({
+	      btnNext: ".next",
+	      btnPrev: ".prev",
+	      visible: 3, 
+	      scroll: 1,
+	      circular: false,
+	      speed: 500
+	    });
+	  }
+	  if ($('#shopping_cart').find('.buy_display li').length >= 1) {
+	    $('#shopping_cart .buy_display').jCarouselLite({
+	      btnNext: ".next_buy	",
+	      btnPrev: ".prev_buy",
+	      visible: 3,
+	      scroll: 1,
+	      circular: false,
+	      speed: 500
+	    });
+	  }
 	}
 </script>
 
