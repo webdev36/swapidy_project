@@ -83,91 +83,9 @@ $(function() {
   })
   .mouseout(function(){
     $(this).attr("src",'/images/media/3.png');
-  });
-  $(".see_more_sell ").toggle(function(){
-	$(".sell_display").css("overflow","visible");
-	$(".sell_display").css("height","auto");
-	//$('dropdow_item').css("-webkit-transform","180deg");
-	//$(this).text("Hide")
-  },function(){
-		$(".sell_display").css("overflow","hidden");
-		$(".sell_display").css("height","120px");
-		//$(this).text("Show All")
-		//$('sell_display').addClass('hide_item');
+  });  	
 
-
-	});
-	
-  $(".see_more_buy").toggle(function(){
-	$(".buy_display").css("overflow","visible");
-	$(".buy_display").css("height","auto");
-	//$(this).text("Hide")
-  },function(){
-	  $(".buy_display").css("overflow","hidden");
-	  $(".buy_display").css("height","120px");
-	  //$(this).text("Show All")
-  });
-  $(".del-product").live('click',function(){		
-		var url_ajax = '/home/del_product';
-		var order_product_id = $(this).attr('order_product_id');
-		$.ajax({
-			url :url_ajax,
-			beforeSend : function(xhr) {
-            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-          	},
-			type: "POST",
-			data: 'order_id=' + order_product_id,
-			dataType:'script',
-			success :function(){
-				 
-			}
-		});
-		return false;
-	}); 
-   	  
-	  
-  $('.popup_select_price .price_type').live('click', function(){
-  	var url_select_price = '/home/swap_product';
-		$.ajax({
-			url : url_select_price,
-			beforeSend : function(xhr) {
-	        	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-	      	},
-	      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
-			type: 'POST',
-			dataType: 'script', 
-			success:function(){
-				 //location.reload();
-			}
-		});
-  });
-  
-  $(".button_for_buy a, .button_for_sell a").live("click", function(){
-  	var popup_id = $(this).attr("popup_id");
-  	var $isotope_item = $(this).parent().parent().parent().parent(); 
-  	new_left = $isotope_item.position().left + 16;
-  	new_top = $isotope_item.position().top + 250;
-  	
-  	$('#' + popup_id).css({"left": new_left + 'px', "top": new_top + 'px'});
-  	$('#' + popup_id).css({"opacity": '1', "-webkit-transform": 'none', "transform": 'none', 'display': 'block'});
-  	$('#' + popup_id).removeClass('isotope-item');
-  	$('#' + popup_id).removeClass('isotope-hidden');
-  	if($('#' + popup_id).hasClass('active')){
-	    $('#' + popup_id).removeClass('active');
-	    $('#' + popup_id).hide();
-	    current_popup_id = "";
-	  }else{
-	  	if(current_popup_id != ""){
-	  		$('#' + current_popup_id).hide();
-	  	}
-	    $('#' + popup_id).addClass('active');
-	    $('#' + popup_id).show();
-	    current_popup_id = popup_id;
-	  }
-  });
 });
-
-var current_popup_id = "";
 
 function goto_checkout(){
    sell_count = 0;

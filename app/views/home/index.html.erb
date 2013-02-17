@@ -1,11 +1,27 @@
 <div id="shopping_cart" <% if cart_products_empty? %> style="display:none;" <% end %> >
   <%= render :partial => "/home/shopping_cart" %>
-</div>  
+</div>
 <script language="JavaScript">
   $(function() {
-  	display_checkout_sliders();
-  });
- if ($('#announcementList').find('li').length >= 3) {
+		display_checkout_sliders();
+	});
+	
+	$(".del-product").live('click', function(){
+		var url_ajax = '/home/del_product';
+		var order_product_id = $(this).attr('order_product_id');
+		$.ajax({
+			url :url_ajax,
+			beforeSend : function(xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+          	},
+			type: "POST",
+			data: 'order_id=' + order_product_id,
+			dataType:'script',
+			success :function(){}
+		});
+		return false;
+	});
+			
 	function display_checkout_sliders(){
 		$('.sell_display').jCarouselLite({
       btnNext: ".next",
@@ -23,7 +39,6 @@
       circular: false,
       speed: 500
     });
-}
 	}
 </script>
 
@@ -185,14 +200,56 @@
   var for_what = "for_selling";
   var current_category_id = "";
   var current_model_id = "filter_model_all";
+  var current_popup_id = "";
+
+	$('.popup_select_price .price_type').live('click', function(){
+  	var url_select_price = '/home/swap_product';
+		$.ajax({
+			url : url_select_price,
+			beforeSend : function(xhr) {
+	        	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+	      	},
+	      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
+			type: 'POST',
+			dataType: 'script', 
+			success:function(){
+			}
+		});
+		$("#" + current_popup_id).removeClass('active');
+		$("#" + current_popup_id).hide();
+		current_popup_id = "";
+  });
   
-  //$(document).ready(function() {
-    $('#slider-code').tinycarousel({display: 2});
-    sliderHeight();
-	  showScreenToSell();
-    $('div#product_type').fadeIn(600);
-  //});
-  
+  $(".button_for_buy a, .button_for_sell a").live("click", function(){
+  	var popup_id = $(this).attr("popup_id");
+  	var $isotope_item = $(this).parent().parent().parent().parent(); 
+  	new_left = $isotope_item.position().left + 16;
+  	new_top = $isotope_item.position().top + 250;
+  	
+  	$('#' + popup_id).css({"left": new_left + 'px', "top": new_top + 'px'});
+  	$('#' + popup_id).css({"opacity": '1', "-webkit-transform": 'none', "transform": 'none', 'display': 'block'});
+  	$('#' + popup_id).removeClass('isotope-item');
+  	$('#' + popup_id).removeClass('isotope-hidden');
+  	if($('#' + popup_id).hasClass('active')){
+	    $('#' + popup_id).removeClass('active');
+	    $('#' + popup_id).hide();
+	    current_popup_id = "";
+	  }else{
+	  	if(current_popup_id != ""){
+	  		$('#' + current_popup_id).removeClass('active');
+	  		$('#' + current_popup_id).hide();
+	  	}
+	    $('#' + popup_id).addClass('active');
+	    $('#' + popup_id).show();
+	    current_popup_id = popup_id;
+	  }
+  });
+
+  $('#slider-code').tinycarousel({display: 2});
+  sliderHeight();
+  showScreenToSell();
+  $('div#product_type').fadeIn(600);
+
   $(window).on('resize', function() {
     sliderHeight();
   });
