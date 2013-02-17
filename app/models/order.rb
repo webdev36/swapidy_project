@@ -82,12 +82,12 @@ class Order < ActiveRecord::Base
   end
   
   def create_new_stamps
-    if self.order_products.for_buy.count > 0
-      weight_total = 0
-      self.order_products.for_buy.each { |order_product| weight_total += order_product.weight_lb }
-      stamp = create_stamp(weight_total, :for_buy)
-      ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "buy"))
-    end
+    #if self.order_products.for_buy.count > 0
+    #  weight_total = 0
+    #  self.order_products.for_buy.each { |order_product| weight_total += order_product.weight_lb }
+    #  stamp = create_stamp(weight_total, :for_buy)
+    #  ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "buy"))
+    #end
     
     if self.order_products.for_sell.count > 0
       weight_total = 0
