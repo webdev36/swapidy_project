@@ -149,10 +149,9 @@ $(function() {
   	new_top = $isotope_item.position().top + 250;
   	
   	$('#' + popup_id).css({"left": new_left + 'px', "top": new_top + 'px'});
-  	$('#' + popup_id).css({"opacity": '1', "-webkit-transform": 'none'});
+  	$('#' + popup_id).css({"opacity": '1', "-webkit-transform": 'none', "transform": 'none', 'display': 'block'});
   	$('#' + popup_id).removeClass('isotope-item');
   	$('#' + popup_id).removeClass('isotope-hidden');
-  	
   	if($('#' + popup_id).hasClass('active')){
 	    $('#' + popup_id).removeClass('active');
 	    $('#' + popup_id).hide();
