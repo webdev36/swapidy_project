@@ -32,7 +32,7 @@
 	</div>
 	<div style="position:absolute; left:50%; margin-left:-125px; min-width: 250px; text-align: center; top: 30px; font-size: 25px;">
 	  <% if cart_amount > 0 %>
-	  	<% if current_user.balance_amount > 0 %>
+	  	<% if current_user && current_user.balance_amount && current_user.balance_amount > 0 %>
 	    	You pay: $<%= format_num(cart_amount) %> - $<%= format_num(current_user.balance_amount) %>
 	  	<% else %>
 	  	  You pay: $<%= format_num(cart_amount) %>
