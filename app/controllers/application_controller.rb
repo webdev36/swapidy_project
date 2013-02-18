@@ -92,6 +92,23 @@ class ApplicationController < ActionController::Base
     return false if session[:cart_products][:buy] && !session[:cart_products][:buy].empty?
     return true
   end
+
+  def cart_products
+    #Rails.logger.info session[:cart_products]
+    
+    session[:cart_products] = {:sell => [], :buy => [], :max_order_product_id => 0} if session[:cart_products].nil?
+    {:sell => session[:cart_products][:sell].map {|obj_hash| 
+                order_product = OrderProduct.new(obj_hash)
+                order_product.product = Product.find order_product.product_id
+                order_product
+              },
+     :buy => session[:cart_products][:buy].map {|obj_hash| 
+                order_product = OrderProduct.new(obj_hash)
+                order_product.product = Product.find order_product.product_id
+                order_product
+             }
+    }
+  end
   
   def clear_cart_products
     session[:cart_products] = nil

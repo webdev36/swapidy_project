@@ -1,7 +1,15 @@
 <div id="shopping_cart" <% if cart_products_empty? %> style="display:none;height: 130px;" <% end %> >
+<<<<<<< HEAD
   <%= render :partial => "/home/shopping_cart" %>
 </div>
 
+=======
+  <img class="rope_left" src="/images/rope.png">
+<img class="rope_right" src="/images/rope.png">
+
+  <%= render :partial => "/home/shopping_cart" %>
+</div>
+>>>>>>> master
 <script language="JavaScript">
   $(function() {
 		display_checkout_sliders();
@@ -49,11 +57,14 @@
 
 <%= render :partial => "/home/index_head_guide" %>
 
+<<<<<<< HEAD
 <a id="sell_and_buy_message_guide" style="display: none;">
 	<span class="sell">You are currently selling. Click on Done on top once finished</span>
 	<span class="buy" style="display: none;">You are currently buying. Click on Checkout on top once finished</span>
 </a>
 
+=======
+>>>>>>> master
 <a id="product_scrollup_link" style="display: none;" href="#" onclick="$.scrollTo($('div#product_type'), 400);"><img src="/images/scrollup.png"></a>
 <script>
 	$(document).ready(function(){
@@ -481,4 +492,3 @@
   }
 
 </script>
-
