@@ -208,10 +208,10 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   require "omniauth-facebook"
   if Rails.env == 'production'
-    #Swqpidy
-    #config.omniauth :facebook, '570708872942807', 'ca704f5ff92707ff8980bb593d2116fa', :scope => 'email,user_birthday,user_location'
-    #Swqpidy Dev
-    config.omniauth :facebook, '414885091929741', 'a398333c0aef1d7152169168aaf6179a', :scope => 'email,user_birthday,user_location'
+    #Swapidy
+    config.omniauth :facebook, '570708872942807', 'ca704f5ff92707ff8980bb593d2116fa', :scope => 'email,user_birthday,user_location'
+    #Swapidy Dev
+    #config.omniauth :facebook, '414885091929741', 'a398333c0aef1d7152169168aaf6179a', :scope => 'email,user_birthday,user_location'
   else
     #Scrum2B
     config.omniauth :facebook, '259670540817916', '02d78fa483f86404570fe7a50965b319', :scope => 'email,user_birthday,user_location'
