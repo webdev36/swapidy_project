@@ -30,19 +30,21 @@ module ImportExcelProduct
     logger.info "model: #{model.id} - #{model.title}"
 
     product = Product.where(:title => columns[INDEXES[:title]]).first
-    return product if product
-
-    product = Product.new(:title => columns[INDEXES[:title]])
-    if for_buying
-      product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
-      product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
-      product.price_for_poor_buy = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
-    else
-      product.price_for_sell = (columns[INDEXES[:price]].to_f rescue nil)
-      product.price_for_good_sell = (columns[INDEXES[:price_for_good]].to_f rescue nil)
-      product.price_for_poor_sell = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
+    if product
+      if for_buying
+        product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
+        product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
+        product.price_for_poor_buy = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
+      else
+        product.price_for_sell = (columns[INDEXES[:price]].to_f rescue nil)
+        product.price_for_good_sell = (columns[INDEXES[:price_for_good]].to_f rescue nil)
+        product.price_for_poor_sell = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
+      end
+      product.save
+      return product
     end
     
+    product = Product.new(:title => columns[INDEXES[:title]])
     product.category = category
     product.product_model = model
     

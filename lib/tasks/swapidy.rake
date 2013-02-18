@@ -60,12 +60,16 @@ namespace :swapidy do
     
     task :remove_products => :environment do
       Product.all.each {|product| product.destroy }
+      Order.all.each {|o| o.destroy }
+      PaymentTransaction.all.each {|obj| obj.destroy }
+      ShippingStamp.all.each {|obj| obj.destroy }
     end
     
     desc "Insert products database from excel file"
     task :insert_products => :environment do
       logger = Logger.new("log/swapidy_tasks.log")
       begin
+        product_ids = []
         ["products_20130114_buy.csv", "products_20130114_sell.csv"].each do |file_name|
           logger.info file_name
           
@@ -84,9 +88,15 @@ namespace :swapidy do
             next if index == 0
             logger.info "line: #{line}"
             product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", logger) #rescue nil
+            product_ids << product.id if product
             logger.info product
           end
         end
+        
+        logger.info product_ids.to_s
+        del_products = Product.where("id not in (#{product_ids.join(',')})")
+        logger.info del_products.map{|p| p.id }.to_s
+        del_products.each {|p| p.destroy }
       rescue Exception => e
         logger.info e.message
       end

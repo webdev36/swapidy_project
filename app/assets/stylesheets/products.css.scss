@@ -53,16 +53,15 @@ box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 
 }
 .product_name{
-text-align:center; 
-font-family:"myriad-s"; 
-color:#38b4de;
-font-size:20px;
+  text-align:center; 
+  font-family:"myriad-s"; 
+  color:#38b4de;
+  font-size:20px;
 }
 
 #product_container{
-margin: 35px 0 0 0;
+  margin: 35px 0 0 0;
 }
-
 
 .show_button_sell {
   background: #0099FF;
@@ -70,8 +69,9 @@ margin: 35px 0 0 0;
 .show_button_sell:hover{
   background: #00CCFF;
 }
-.show_button_buy {
-  background: #fa3e6e;
+  
+.show_button_buy,
+.show_button_sell {
   color: white;
   font-size: 20px;
   text-decoration: none;
@@ -94,18 +94,15 @@ margin: 35px 0 0 0;
   text-decoration: none;
   text-shadow: 0 1px rgba(255,255,255,0.7);
 }
+.show_button_buy {
+  background: #fa3e6e;
+}
 .show_button_buy:hover {
   background-color: #F9006E;
 }
-.show_button_sell a {
-  color: white;
-}
-.show_button_sell a:hover {
-  color: white;
-}
-.show_button_buy a {
-  color: white;
-}
+.show_button_sell a,
+.show_button_sell a:hover,
+.show_button_buy a,
 .show_button_buy a:hover {
   color:white;
 }
