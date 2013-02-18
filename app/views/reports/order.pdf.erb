@@ -60,9 +60,9 @@
 <% end %>
 
 <% if buy_amount > sell_amount %>
-<h2>You will be charged: $<%= number_with_delimiter(buy_amount - sell_amount) %></h2>
+<h2>Difference paid: $<%= number_with_delimiter(buy_amount - sell_amount) %></h2>
 <% else %>
-<h2>Your remaining balance: $<%= number_with_delimiter(sell_amount - buy_amount) %></h2>
+<h2>Remaining balance: $<%= number_with_delimiter(sell_amount - buy_amount) %></h2>
 <% end %>
 
 <h2>Your Shipping Address</h2>
@@ -75,13 +75,15 @@
   <%= @order.shipping_zip_code %><br />
   <%= @order.shipping_country %>
 </p>
+<br/>
 
 <h2>Shipping Label</h2>
 <p>
 	Your shipping label is on the next page.
 	Print it out and affix it on top of the package with your trade-in products. 
 	Simply drop it off at any USPS location or your mailbox if it fits.<br/>
-	Note: Ship your product(s) as soon as possible to avoid delay in receiving your order
+	<br/>
+	<b>Note: Ship your product(s) as soon as possible to avoid delay in receiving your order</b>
 </p>
 
 <div style="width:100%; page-break-before: always; height: 60px; border-style:solid; border-width: 1px; border-color: black; border-bottom: none;">

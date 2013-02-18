@@ -410,8 +410,8 @@ h2{
 .help{
   position: fixed;
   padding: 5px;
-  right:0px;
-  top:120px;
+  right: 0px;
+  top: 50%;
   background: #fa3e6e;
   font-weight: bold;
   font-size: 20px;
