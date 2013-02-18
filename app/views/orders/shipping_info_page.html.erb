@@ -5,11 +5,11 @@ background: url('/bg.png');}
 <div class="content " style="height:700px;">
   <%= render :partial => "steps", :locals => {:current_step => 3 } %>
   <div class="container">
-    <div class="headings_pink shipping_form_head">Shipping Address<span>*</span></div>
-    <div class="confirm_image_container"style="padding: 20px 25px 20px 20px; height: 390px; position:absolute; top:240px;">
-	  <%= render :partial => "/orders/order_product_images" %>
-	</div>
-	<div class="shipping_form_container">
+  	<div class="headings_pink" style="position:relative; bottom:30px; left:330px;">Shipping Address<span>*</span></div>
+    <div class="confirm_image_container" style="padding: 20px 25px 20px 20px; height: 390px; position:absolute; top: 260px;">
+	  	<%= render :partial => "/orders/order_product_images" %>
+		</div>
+		<div class="shipping_form_container">
       <div style="width: 500px; margin-left: -20px;">
         <div class="shipping_product_info"></div>  
         <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; padding: 15px 0px 20px;">

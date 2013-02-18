@@ -6,7 +6,7 @@
 	  <button class="next product_button_buy" style="width: 30px;position: absolute;top: 60px;left: 0px;z-index: 1000">&gt;</button>
   <div class="order_sell_display" style="float:left; width: 45%;overflow: hidden;left: 30px !important;top: 40px" >
   	<ul>
-		<% cart_products[:sell].each do |order_product|%>
+		  <% cart_products[:sell].each do |order_product|%>
 	    	<li style="height:120px;width: 120px"> <img style=" max-width: 100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" /> </li>
    		<% end %>
     </ul>

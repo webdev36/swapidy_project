@@ -107,7 +107,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find params[:id]
-    render "show_order"
+    render "show_trade_ins"
   end
 
   def change_email
