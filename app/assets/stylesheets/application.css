@@ -1010,3 +1010,15 @@ ul.left_menu li a {
   bottom:200px;
   left:500px;
 }
+.rope_left{
+  position: fixed;
+  top:0px;
+  left: 40px;
+}
+
+.rope_right{
+    position: fixed;
+  top:0px;
+  right: 40px;
+  z-index: 10000;
+}
