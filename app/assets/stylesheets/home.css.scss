@@ -899,6 +899,7 @@ text-decoration:underline;
   height: 130px;
   opacity: 0.95;
   z-index:1000;
+
   background-image: url(/images/white_bg.png);
   border-bottom-color: whiteSmoke;
   border-bottom-width: 2px;
@@ -910,26 +911,14 @@ text-decoration:underline;
   float:right;
   height: 20px;
   width: 20px;
-  //padding:2px 5px;
-  position:relative;
-  right:20px;
-  bottom:10px;
+
 }
 
 #product_scrollup_link {
   position: fixed;
-  padding: 5px;
   right: 0px;
-  bottom: 20px;
-  background: #fa3e6e;
-  font-weight: bold;
-  font-size: 20px;
-  color: white;
-  border-bottom-left-radius: 7px;
-  border-top-left-radius: 7px;
-  padding-left: 10px;
+  bottom: 5px;
   z-index: 10;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5),0 0 0 1px rgba(0, 0, 0, 0.2);
 
 }
 

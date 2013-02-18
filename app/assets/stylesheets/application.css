@@ -409,23 +409,10 @@ h2{
 }
 .help{
   position: fixed;
-  padding: 5px;
   right:0px;
-  top:120px;
-  background: #fa3e6e;
-  font-weight: bold;
-  font-size: 20px;
-  color: white;
-  -webkit-border-top-left-radius: 10px;
-  -webkit-border-bottom-left-radius: 10px;
-  -moz-border-radius-topleft: 10px;
-  -moz-border-radius-bottomleft: 10px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  top:320px;
+  z-index: 5000;
 
-  -moz-box-shadow: 5px 5px 5px #888;
-  -webkit-box-shadow: 5px 5px 5px #888;
-  box-shadow: 5px 5px 5px #888;
 }
 .honey_display img{
   height:30px;

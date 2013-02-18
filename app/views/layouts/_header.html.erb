@@ -4,6 +4,10 @@
       <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
       
       <ul class="nav pull-right nav_header" role="navigation" style="margin-right: -160px;">
+        <li class="help">
+          <a href="javascript:showPopup('popup-dialog_help');" >
+          <img src="/images/questions.png"></a>
+        </li>  
         <li>
           <a href="javascript:refresh_how_it_works();">HOW IT WORKS</a>
         </li>
@@ -78,16 +82,6 @@
         </li>
         <li class="divider-vertical"></li>
 
-
-        <li>
-          <div class="help">
-            <a href="javascript:showPopup('popup-dialog_help');" >
-            <div style="display: inline-block;">
-             Questions? &nbsp;<img class="help_icon" src="/images/help.png">
-            </a>
-          </div>
-        </li>
-
         <% if current_user.is_admin? %>
 	        <li>
 	          <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
@@ -104,7 +98,6 @@
         </li>
         <li class="divider-vertical"></li>
         <% end %>
-      
       </ul>
     </div>
   </div>
