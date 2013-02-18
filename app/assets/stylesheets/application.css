@@ -977,17 +977,19 @@ ul.left_menu li a {
 }
 
 #index_head{
-  height:270px;
-  position: absolute;
-  top:80px;
-  line-height: 1.5;
+
+height: 270px;
+position: absolute;
+top: 70px;
+line-height: 1.5;
 }
 
 #index_bg{
-  height: 310px;
-    width: 100%;
-  background: url('/bg.png') repeat;
-  border-bottom: 1px solid #ccc;
+height: 310px;
+width: 100%;
+background: url("/bg.png") repeat;
+border-bottom: 1px solid #CCC;
+box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 
 }
 
@@ -1007,7 +1009,7 @@ ul.left_menu li a {
   float:left;
   width: 400px;
   position:relative;
-  bottom:200px;
+  bottom:210px;
   left:500px;
 }
 .rope_left{

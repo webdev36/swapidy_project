@@ -105,26 +105,14 @@ function display_guide() {
   title: "Welcome to Swapidy!"
   }).show();
 
-  guiders.createGuider({
-  attachTo: "#location_search",
-  buttons: [{ name: "Close" },
-    { name: "Next" }],
-  description: "Click on this tab to choose which location you're in.",
-  id: "second",
-  next: "third",
-  position: '6',
-  width:400,
-  title: "Where you at?",
-  overlay: true
-  });
   
   guiders.createGuider({
   attachTo: ".nav_notification",
   buttons: [{ name: "Close" },
     { name: "Next" }],
   description: "Anytime there's any new news with your transactions, you'll receive a notification here. ",
-  id: "third",
-  next: "fourth",
+  id: "second",
+  next: "third",
   position: '6',
   title: "All your notifications",
   width: 400,
@@ -136,8 +124,8 @@ function display_guide() {
   buttons: [{ name: "Close" },
     { name: "Next" }],
   description: "All of your transaction history will be displayed here. ",
-  id: "fourth",
-  next: "fifth",
+  id: "third",
+  next: "fourth",
   position: '6',
   title: "Everything you do goes here",
   width: 400,
@@ -149,26 +137,14 @@ function display_guide() {
   buttons: [{ name: "Close" },
     { name: "Next" }],
   description: "All of your account settings will be displayed here (name, password, credit card).",
-  id: "fifth",
-  next: "sixth",
+  id: "fourth",
+  next: "fifth",
   position: '6',
   title: "All your settings",
   width: 400,
   overlay: true
   });
 
-  guiders.createGuider({
-  attachTo: ".honey_display",
-  buttons: [{ name: "Close" },
-    { name: "Next" }],
-  description: "<img src='/images/honey_20px_grey.png'> is our Honey currency symbol. This box shows how much Honey currency you have. If you click on the plus sign, you can add Honey to your account.",
-  id: "sixth",
-  next: "seventh",
-  position: '9',
-  title: "Add Honey to your account",
-  overlay: true,
-  width:500
-  });
 
   guiders.createGuider({
   attachTo: ".sell_now",
@@ -182,7 +158,17 @@ function display_guide() {
   overlay: false
   });
 
-
+  guiders.createGuider({
+  attachTo: ".container",
+  buttons: [{ name: "Close" }],
+  description: "You're good to go!",
+  id: "seventh",
+  next: "eighth",
+  position: '6',
+  width:400,
+  title: "Start by choosing the products you want to sell followed by products you want to buy.",
+  overlay: false
+  });
 
   //}
   
