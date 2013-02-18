@@ -7,7 +7,10 @@
   <div class="order_sell_display" style="float:left; width: 45%;overflow: hidden;left: 30px !important;top: 100px" >
   	<ul id="mycarousel"  class="jcarousel-skin">
 		  <% cart_products[:sell].each do |order_product|%>
-	    	<li style="height:120px;width: 120px"> <img style=" max-width: 100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" /> </li>
+	    	<li style="height:120px;width: 120px" title="<%= order_product.title %> "> <img style=" max-width: 100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" /> 
+	    	<div class="cart_product_thumb hovergallery" data-hover="dropdown" data-delay="1000" style="display: inline-table; width: 95px;margin: 0 0 5px 0;" title="<%= order_product.title %> " >
+	    	<span> <%= order_product.using_condition %></span>
+	    		</li>
    		<% end %>
     </ul>
   </div>
@@ -16,7 +19,9 @@
   <div class="order_buy_display" style="float:right; width: 45%; text-align: right; overflow:hidden;left: -30px !important;top: 100px" >
   	<ul id="mycarousel"  class="jcarousel-skin">
     	<% cart_products[:buy].each do |order_product| %>
-    		<li style="height: 120px;width: 120px"> <img style=" max-width:100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" /></li>
+    		<li style="height: 120px;width: 120px"> <img style=" max-width:100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" />
+    			<span> <%= order_product.using_condition %></span>
+    		</li>
     	<% end %>
     </ul>
   </div>
