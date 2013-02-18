@@ -1,29 +1,12 @@
 class OrdersController < ApplicationController
 
   before_filter :require_login, :only => [:payment_info, :shipping_info, :confirm, :create, :reload_payment_order_info]
-  before_filter :set_order_product, :only => [:email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
-  
-  def new
-    @order = Order.new(:order_type => params[:order_type], :product_id => params[:product_id].to_i )
-    @product = Product.find params[:product_id]
-    (redirect_to "/"; return) unless @product
+  before_filter :set_order_product, :only => [:new, :email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
 
-    @order.using_condition = params[:using_condition] || (params[:order] && params[:order][:using_condition])
-    @order.honey_price = @product.price_for(@order.using_condition)
-    
-    session[:creating_order] = {:token_key => @order.generate_token_key, :product_id => @order.product_id, 
-                                :order_type => @order.order_type, :using_condition => @order.using_condition}
-    if @order.using_condition.nil? || !Product::USING_CONDITIONS.values.include?(@order.using_condition) || @order.honey_price.nil?
-      @error_message = "You need to select at least one of the conditions!"
-      params["for"] = params[:order_type] && params[:order_type] == Order::TYPES[:order] ? "buy" : "sell"
-      params["using_condition"] = @order.using_condition
-      render "/products/show"
-      return
-    end
-    
+  def new
     if user_signed_in?
       page_title "Payment Information"
-      render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
+      render "payment_info_page"
     else
       @user = User.new
       render "email_info_form"
@@ -31,12 +14,6 @@ class OrdersController < ApplicationController
   end
   
   def reload_payment_order_info
-    @order = Order.new(:order_type => params[:order_type], :product_id => params[:product_id].to_i )
-    @product = Product.find params[:product_id]
-    (redirect_to "/"; return) unless @product
-    @order.using_condition = params[:using_condition] || (params[:order] && params[:order][:using_condition])
-    @order.honey_price = @product.price_for(@order.using_condition)
-    
     respond_to do |format|
       format.js {
         @return_content = render_to_string(:partial => "/orders/payment_info_form")
@@ -50,23 +27,24 @@ class OrdersController < ApplicationController
   
   def payment_info
     page_title "Payment Information"
-    render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
+    render "payment_info_page"
   end
 
   def shipping_info
-    if current_user.could_order?(@order)
+    #if current_user.could_order?(cart_amount)
       @order.enter_from_last_address if @order.shipping_address_blank?
       page_title "Shipping Address"
       render "shipping_info_page"
-    else
-      page_title "Payment Information"
-      render @order.is_trade_ins? ? "payment_info_trade_ins" : "payment_info_page"
-    end
+    #else
+    #  page_title "Payment Information"
+    #  render "payment_info_page"
+    #end
   end
   
   def confirm
     if @order.valid? && @order.shipping_address_valid?
-      render @order.is_trade_ins? ? "confirm_trade_ins" : "confirm_form"
+      current_user.copy_to_new_card
+      render "confirm_form"
     else
       page_title "Shipping Address"
       render "shipping_info_page"
@@ -74,32 +52,62 @@ class OrdersController < ApplicationController
   end
   
   def create
-    if @order.valid? && @order.shipping_address_valid? && current_user.could_order?(@order)
-      @order.weight_lb = @order.product.weight_lb
-
-      @order.honey_price = @product.honey_price
-      #@order.using_condition = @product.using_condition
+    if @order.valid? && @order.shipping_address_valid? && current_user.could_order?(cart_amount)
       begin
         Order.transaction do
-          @order.save
-          @shipping_stamp = @order.create_new_stamp
+          session[:cart_products][:sell].each do |obj_hash|
+            @order.order_products.new(:product_id => obj_hash[:product_id], 
+                                      :price => obj_hash[:price], 
+                                      :using_condition => obj_hash[:using_condition], 
+                                      :sell_or_buy => "sell")
+          end
+          session[:cart_products][:buy].each do |obj_hash|
+            @order.order_products.new(:product_id => obj_hash[:product_id], 
+                                      :price => obj_hash[:price], 
+                                      :using_condition => obj_hash[:using_condition], 
+                                      :sell_or_buy => "buy")
+          end
+          if current_user.extra_money_for(cart_amount) > 0
+            @payment = current_user.payments.new(:amount => cart_amount)
+            if current_user.create_payment_charge(@payment)
+              @payment.card_type = current_user.card_type
+              @payment.card_expired_year = current_user.card_expired_year
+              @payment.card_expired_month = current_user.card_expired_month
+              @payment.card_name = current_user.card_name
+              @payment.card_last_four_number = current_user.card_last_four_number
+              unless @payment.save
+                Rails.logger.info "Error to save payment transaction"
+                raise "Error to save payment transaction" 
+              end
+              new_balance_amount = 0
+            else
+              Rails.logger.info "has failure to charge the credit card"
+              raise "has failure to charge the credit card"
+            end
+          end
+          if @order.save && @order.adjust_current_balance(new_balance_amount)
+            @order.create_new_stamps
+            OrderNotifier.start_processing(@order).deliver
+            clear_cart_products 
+          end
         end
-        session[:creating_order] = nil
         redirect_to "/orders/#{@order.id}"
       rescue Exception => e
         @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
         page_title "Confirm Your Details"
+        current_user.copy_to_new_card
         render "confirm_form"
       end
     else
       page_title "Confirm Your Details"
+      current_user.copy_to_new_card
       render "confirm_form"
     end
   end
 
   def show
     @order = Order.find params[:id]
-    render @order.is_trade_ins? ? "show_trade_ins" : "show_order"
+    render "show_trade_ins"
   end
 
   def change_email
@@ -132,13 +140,11 @@ class OrdersController < ApplicationController
   private
 
     def set_order_product
-      @order = Order.new(params[:order])
+      @order = params[:order] ? Order.new(params[:order]) : Order.new
       @order.status = Order::STATUES[:pending]
       @order.user = current_user
       @order.shipping_country = "US"
-      @product = @order.product = Product.find(params[:order][:product_id])
-      @order.honey_price = @product.price_for(@order.using_condition)
-      redirect_to "/" if session[:creating_order].nil? || session[:creating_order][:token_key] != @order.token_key
+      redirect_to "/" if cart_products[:sell].empty? && cart_products[:buy].empty?
     end
-
+    
 end

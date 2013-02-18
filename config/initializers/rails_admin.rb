@@ -43,7 +43,7 @@ RailsAdmin.config do |config|
   #config.excluded_models = [Comment, Post]
 
   # Add models here if you want to go 'whitelist mode':
-  config.included_models = [Category, CategoryAttribute, Image, Order, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User, FreeHoney, RedeemCode, SwapidySetting, LocationVote ]
+  config.included_models = [Category, CategoryAttribute, Image, Order, OrderProduct, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User, FreeHoney, RedeemCode, SwapidySetting, LocationVote ]
 
   # Application wide tried label methods for models' instances
   # config.label_methods << :description # Default is [:name, :title]
@@ -185,11 +185,7 @@ RailsAdmin.config do |config|
       object_label_method do
         :to_s
       end
-  #   # Found associations:
        configure :category, :belongs_to_association 
-  #     configure :product_model_attributes, :has_many_association   #   # Found columns:
-  #     configure :id, :integer 
-  #     configure :category_id, :integer         # Hidden 
        configure :attribute_type, :string 
        configure :title, :string 
        configure :created_at, :datetime 
@@ -210,43 +206,12 @@ RailsAdmin.config do |config|
      create do; end
      update do; end
   end
-  # config.model Comment do
-  #   # Found associations:
-  #     configure :post, :belongs_to_association   #   # Found columns:
-  #     configure :id, :integer 
-  #     configure :commenter, :string 
-  #     configure :body, :text 
-  #     configure :post_id, :integer         # Hidden 
-  #     configure :created_at, :datetime 
-  #     configure :updated_at, :datetime   #   # Sections:
-  #   list do; end
-  #   export do; end
-  #   show do; end
-  #   edit do; end
-  #   create do; end
-  #   update do; end
-  # end
   config.model Image do
-  #   # Found associations:
        configure :for_object, :polymorphic_association   #   # Found columns:
-  #     configure :id, :integer 
-  #     configure :for_object_id, :integer         # Hidden 
-  #     configure :for_object_type, :string         # Hidden 
        configure :sum_attribute_names, :string 
-  #     configure :photo_file_name, :string         # Hidden 
-  #     configure :photo_content_type, :string         # Hidden 
-  #     configure :photo_file_size, :integer         # Hidden 
        configure :photo, :paperclip 
        configure :title, :string 
        configure :is_main, :boolean 
-  #     configure :created_at, :datetime 
-  #     configure :updated_at, :datetime   #   # Sections:
-  #   list do; end
-  #   export do; end
-  #   show do; end
-  #   edit do; end
-  #   create do; end
-  #   update do; end
   end
   
   config.model PaymentTransaction do
@@ -259,8 +224,7 @@ RailsAdmin.config do |config|
        configure :payment_invoice_id, :string 
        configure :payment_type, :string 
        configure :status, :string 
-       configure :amount, :decimal 
-       configure :honey_money, :decimal 
+       configure :amount, :decimal
        configure :card_name, :string 
        configure :card_type, :string 
        configure :card_expired_month, :string 
@@ -275,95 +239,64 @@ RailsAdmin.config do |config|
   #   create do; end
   #   update do; end
   end
-  # config.model Post do
-  #   # Found associations:
-  #     configure :user, :belongs_to_association   #   # Found columns:
-  #     configure :id, :integer 
-  #     configure :title, :string 
-  #     configure :content, :text 
-  #     configure :created_at, :datetime 
-  #     configure :updated_at, :datetime 
-  #     configure :user_id, :integer         # Hidden   #   # Sections:
-  #   list do; end
-  #   export do; end
-  #   show do; end
-  #   edit do; end
-  #   create do; end
-  #   update do; end
-  # end
   
   config.model ProductAttribute do
-  #   # Found associations:
-       configure :product, :belongs_to_association 
-       configure :product_model_attribute, :belongs_to_association   #   # Found columns:
-  #     configure :id, :integer 
-       configure :product_id, :integer         # Hidden 
-       configure :product_model_attribute_id, :integer         # Hidden 
-  #     configure :value, :string 
-  #     configure :created_at, :datetime 
-  #     configure :updated_at, :datetime   #   # Sections:
-     list do
-       filters [:product]
-       field :product
-       field :product_model_attribute
-     end
-     export do; end
-     show do
-       field :product
-       field :product_model_attribute
-     end
-     edit do
-       field :product
-       field :product_model_attribute
-     end
-     create do; end
-     update do; end
+  #    # Found associations:
+    configure :product, :belongs_to_association 
+    configure :product_model_attribute, :belongs_to_association   #   # Found columns:
+    configure :product_id, :integer         # Hidden 
+    configure :product_model_attribute_id, :integer         # Hidden 
+    list do
+      filters [:product]
+      field :product
+      field :product_model_attribute
+    end
+    export do; end
+    show do
+      field :product
+      field :product_model_attribute
+    end
+    edit do
+      field :product
+      field :product_model_attribute
+    end
+    create do; end
+    update do; end
   end
   config.model ProductModel do
-  #   # Found associations:
-       configure :category, :belongs_to_association 
-  #     configure :products, :has_many_association 
-       configure :product_model_attributes, :has_many_association 
-       configure :images, :has_many_association   #   # Found columns:
-  #     configure :id, :integer 
-  #     configure :title, :string 
-  #     configure :comment, :string 
-       configure :created_at, :datetime 
-       configure :updated_at, :datetime 
-  #     configure :category_id, :integer         # Hidden   #   # Sections:
-     list do
+    configure :category, :belongs_to_association 
+    configure :product_model_attributes, :has_many_association 
+    configure :images, :has_many_association   #   # Found columns:
+    configure :created_at, :datetime 
+    configure :updated_at, :datetime 
+    
+    list do
       field :title
       field :category
       field :images
       field :comment
-     end
-     export do; end
-     show do; end
-     update do
+    end
+    export do; end
+    show do; end
+    update do
       field :title
       field :product_model_attributes
       field :images
       field :comment
-     end
-     create do
+    end
+    create do
       field :title
       field :category
       field :product_model_attributes
       field :images
       field :comment
-     end
-     edit do; end
+    end
+    edit do; end
   end
   config.model ProductModelAttribute do
-  #   # Found associations:
-       configure :product_model, :belongs_to_association 
-       configure :category_attribute, :belongs_to_association   #   # Found columns:
-  #     configure :id, :integer 
-  #     configure :product_model_id, :integer         # Hidden 
-  #     configure :category_attribute_id, :integer         # Hidden 
-       configure :value, :string 
-  #     configure :created_at, :datetime 
-  #     configure :updated_at, :datetime   #   # Sections:
+    configure :product_model, :belongs_to_association 
+    configure :category_attribute, :belongs_to_association   #   # Found columns:
+    configure :value, :string 
     list do
       filters [:product_model, :category_attribute]
       field :product_model do 
@@ -375,64 +308,45 @@ RailsAdmin.config do |config|
       field :value
     end
      
-  #   export do; end
-  #   show do; end
-  #   edit do; end
-     create do; end
-     update do; end
+    create do; end
+    update do; end
   end
   config.model User do
-      object_label_method :email
-  #   # Found associations:
-  #     configure :orders, :has_many_association 
-  #     configure :trade_ins, :has_many_association 
-  #     configure :user_providers, :has_many_association   #   # Found columns:
-  #     configure :id, :integer 
-       configure :first_name, :string 
-       configure :last_name, :string 
-       configure :full_name, :string
-  #     configure :profile_name, :string 
-       configure :email, :string 
-       configure :password, :password         # Hidden 
-       configure :password_confirmation, :password         # Hidden 
-  #     configure :reset_password_token, :string         # Hidden 
-  #     configure :reset_password_sent_at, :datetime 
-  #     configure :remember_created_at, :datetime 
-       configure :sign_in_count, :integer 
-  #     configure :current_sign_in_at, :datetime 
-       configure :last_sign_in_at, :datetime 
-  #     configure :current_sign_in_ip, :string 
-  #     configure :last_sign_in_ip, :string 
-       configure :created_at, :datetime 
-       configure :updated_at, :datetime 
-       configure :card_type, :string 
-       configure :card_name, :string 
-       configure :card_expired_month, :string 
-       configure :card_expired_year, :string 
-       configure :card_expired_date, :date 
-  #     configure :card_postal_code, :string 
-       configure :address, :string 
-       configure :stripe_customer_id, :string 
-  #     configure :stripe_card_token, :string 
-       configure :card_last_four_number, :string 
-  #     configure :stripe_customer_card_token, :string 
-       configure :honey_balance, :decimal 
-  #     configure :provider_image, :string   #   # Sections:
-       configure :is_admin, :boolean
-     list do
+    object_label_method :email
+    configure :first_name, :string 
+    configure :last_name, :string 
+    configure :full_name, :string
+    configure :email, :string 
+    configure :password, :password         # Hidden 
+    configure :password_confirmation, :password         # Hidden 
+    configure :sign_in_count, :integer 
+    configure :last_sign_in_at, :datetime 
+    configure :created_at, :datetime 
+    configure :updated_at, :datetime 
+    configure :card_type, :string 
+    configure :card_name, :string 
+    configure :card_expired_month, :string 
+    configure :card_expired_year, :string 
+    configure :card_expired_date, :date 
+    configure :address, :string 
+    configure :stripe_customer_id, :string 
+    configure :card_last_four_number, :string 
+    configure :balance_amount, :decimal 
+    configure :is_admin, :boolean
+    list do
       field :full_name
       field :email
       field :is_admin
-      field :honey_balance
+      field :balance_amount
       field :last_sign_in_at
-     end
-     export do; end
-     show do
+    end
+    export do; end
+    show do
       field :first_name
       field :last_name
       field :email
       field :is_admin
-      field :honey_balance
+      field :balance_amount
       field :address
       field :card_type
       field :card_name
@@ -440,17 +354,18 @@ RailsAdmin.config do |config|
       field :card_last_four_number
       field :stripe_customer_id
       field :last_sign_in_at
-     end
-     update do
+    end
+    update do
       field :full_name
       field :email
       field :is_admin
-      field :honey_balance
+      field :balance_amount
       field :address
-     end
-     create do; end
-     edit do; end
+    end
+    create do; end
+    edit do; end
   end
+  
   # config.model UserProvider do
   #   # Found associations:
   #     configure :user, :belongs_to_association   #   # Found columns:
@@ -536,7 +451,7 @@ RailsAdmin.config do |config|
 
       field :status
       field :code
-      field :honey_amount
+      field :amount
       field :expired_date
       field :users
       field :created_at
@@ -545,7 +460,7 @@ RailsAdmin.config do |config|
     export do
       field :status
       field :code
-      field :honey_amount
+      field :amount
       field :expired_date
       field :users
       field :created_at
@@ -554,7 +469,7 @@ RailsAdmin.config do |config|
     show do
       field :status
       field :code
-      field :honey_amount
+      field :amount
       field :expired_date
       field :users
       field :created_at
@@ -562,12 +477,12 @@ RailsAdmin.config do |config|
     end
     create do
       field :code
-      field :honey_amount
+      field :amount
       #field :expired_date
     end
     update do
       field :status
-      field :honey_amount
+      field :amount
       #field :expired_date
     end
   end
@@ -584,29 +499,29 @@ RailsAdmin.config do |config|
       field :status
       field :receiver_title
       field :sender_title
-      field :receiver_honey_amount
+      field :receiver_amount
       #field :expired?
       field :expired_date
       field :completed_at
-      field :sender_honey_amount
+      field :sender_amount
       field :created_at
     end
     export do
       field :status
       field :receiver_title
       field :sender_title
-      field :receiver_honey_amount
+      field :receiver_amount
       field :expired_date
       field :completed_at
-      field :sender_honey_amount
+      field :sender_amount
       field :created_at
     end
     show do
       field :status
       field :receiver_title
       field :sender_title
-      field :receiver_honey_amount
-      field :sender_honey_amount
+      field :receiver_amount
+      field :sender_amount
       field :token_key
       field :created_at
       field :expired?
@@ -616,8 +531,8 @@ RailsAdmin.config do |config|
     create do
       field :receiver_email
       field :receiver
-      field :receiver_honey_amount
-      field :sender_honey_amount
+      field :receiver_amount
+      field :sender_amount
       #field :expired_date
     end
     update do
@@ -626,14 +541,122 @@ RailsAdmin.config do |config|
     end
   end
   
-  config.model Order do
-    configure :order_type do
-      read_only true
-      pretty_value do
-        util = bindings[:object]
-        util.order_type == Order::TYPES[:order] ? "Order" : "Trade-Ins"
+  config.model Product do
+    
+    configure :swap_type, :enum do
+      enum do
+        Product::SWAP_TYPES.keys.map {|key| [Product::SWAP_TYPES[key], key]}
       end
     end
+    list do
+      filters [:swap_type]
+      field :title
+      field :swap_type
+      field :sell_prices
+      field :buy_prices
+      field :category
+      field :product_model
+      field :images
+    end
+    export do
+      field :title
+      field :swap_type
+      field :price_for_sell
+      field :price_for_good_sell
+      field :price_for_poor_sell
+      field :price_for_buy
+      field :price_for_good_buy
+      field :price_for_poor_buy
+      field :category
+      field :product_model
+      field :images
+      field :product_model_attributes
+    end
+    show do
+      field :category
+      field :product_model
+      field :title
+      field :swap_type
+      field :price_for_sell
+      field :price_for_good_sell
+      field :price_for_poor_sell
+      field :price_for_buy
+      field :price_for_good_buy
+      field :price_for_poor_buy
+      field :images
+      field :product_attributes
+    end
+    edit do; end
+    create do
+      field :product_model
+      field :title
+      field :price_for_sell
+      field :price_for_good_sell
+      field :price_for_poor_sell
+      field :price_for_buy
+      field :price_for_good_buy
+      field :price_for_poor_buy
+    end
+    update do
+      field :title
+      field :price_for_sell
+      field :price_for_good_sell
+      field :price_for_poor_sell
+      field :price_for_buy
+      field :price_for_good_buy
+      field :price_for_poor_buy
+      field :images
+      field :product_attributes
+    end
+  end
+
+  config.model OrderProduct do
+    configure :using_condition, :enum do
+      enum do
+        Product::USING_CONDITIONS.keys.map {|key| [Product::USING_CONDITIONS[key], Product::USING_CONDITIONS[key]]}
+      end
+    end
+    configure :sell_or_buy do
+      read_only true
+    end
+    list do
+      field :sell_or_buy
+      field :using_condition
+      field :price
+      field :product
+      field :user
+    end
+    export do
+      field :sell_or_buy
+      field :product_title
+      field :weight_lb
+      field :using_condition
+      field :price
+      field :user
+    end
+    show do
+      field :sell_or_buy
+      field :product
+      field :weight_lb
+      field :using_condition
+      field :price
+      field :user
+    end
+    edit do
+      field :sell_or_buy
+      field :status do
+        read_only true
+      end
+      field :product
+      field :product_title
+      field :weight_lb
+      field :using_condition
+      field :price
+      
+      field :user
+    end
+  end  
+  config.model Order do
     
     configure :status, :enum do
       pretty_value do
@@ -644,71 +667,54 @@ RailsAdmin.config do |config|
         [['Pending, waiting for arrival', Order::STATUES[:pending]], ['Completed', Order::STATUES[:completed]], ['Declined', Order::STATUES[:declined]]]
       end
     end
-    configure :using_condition, :enum do
-      enum do
-        Product::USING_CONDITIONS.keys.map {|key| [Product::USING_CONDITIONS[key], Product::USING_CONDITIONS[key]]}
-      end
-    end
     
     list do
-       field :order_type
-       field :status
-       field :title
-       field :honey_price
-       field :user
-     end
-     export do
-       field :order_type
-       field :status
-       field :product_title
-       field :weight_lb
-       field :using_condition
-       field :honey_price
-       
-       field :user
-       field :shipping_fullname
-       field :shipping_address
-       field :shipping_city
-       field :shipping_state
-       field :shipping_zip_code
-     end
-     show do
-       field :order_type
-       field :status
-       field :product_title
-       field :weight_lb
-       field :using_condition
-       field :honey_price
-       field :product
-       
-       field :user
-       field :shipping_fullname
-       field :shipping_full_address
-       field :shipping_stamps
-     end
-     edit do
-       field :order_type
-       field :status do
-         read_only true
-       end
-       field :product
-       field :product_title
-       field :weight_lb
-       field :using_condition
-       field :honey_price
-       
-       field :user
-       field :shipping_first_name
-       field :shipping_last_name
-       field :shipping_address
-       field :shipping_city
-       field :shipping_state, :enum do
-         enum do 
-           Carmen::Country.named('United States').subregions.collect { |sr| [sr.name, sr.code] }
-         end
-       end
-       field :shipping_zip_code
-     end
+      field :status
+      field :balance_amount
+      field :user
+      field :shipping_fullname
+      field :shipping_address
+      field :shipping_city
+      field :shipping_state
+      field :shipping_zip_code
+    end
+    export do
+      field :status
+      field :balance_amount
+      field :user
+      field :shipping_fullname
+      field :shipping_address
+      field :shipping_city
+      field :shipping_state
+      field :shipping_zip_code
+    end
+    show do
+      field :status
+      field :balance_amount
+      field :user
+      field :shipping_fullname
+      field :shipping_address
+      field :shipping_city
+      field :shipping_state
+      field :shipping_zip_code
+    end
+    edit do
+      field :status do
+        read_only true
+      end
+      
+      field :user
+      field :shipping_first_name
+      field :shipping_last_name
+      field :shipping_address
+      field :shipping_city
+      field :shipping_state, :enum do
+        enum do 
+          Carmen::Country.named('United States').subregions.collect { |sr| [sr.name, sr.code] }
+        end
+      end
+      field :shipping_zip_code
+    end
   #   create do; end
   #   update do; end
   end

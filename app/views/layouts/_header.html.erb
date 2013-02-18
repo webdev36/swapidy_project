@@ -2,21 +2,24 @@
   <div class="navbar-inner">
     <div class="container">
       <a class="brand" href="/"><img src="/images/swapidy_logo.png" style="height:50px"></a>
-      <ul class="nav pull-left">
-        <li>
-          <%= render :partial => "/layouts/locations" %>
-        </li>
-      </ul>
-
+      
       <ul class="nav pull-right nav_header" role="navigation" style="margin-right: -160px;">
+        <li class="help">
+          <a href="javascript:showPopup('popup-dialog_help');" >
+          <img src="/images/questions.png"></a>
+        </li>  
+        <li>
+          <a href="javascript:refresh_how_it_works();">HOW IT WORKS</a>
+        </li>
+                    <li class="divider-vertical"></li>
 
         <% if user_signed_in? %>
-        <% if current_user.free_honey_sendable? %>
-          <li id="nav_login">
-            <a href="javascript:refresh_free_honey_form();" >GET FREE HONEY</a>
-          </li>
-          <li class="divider-vertical"></li>
-        <% end %>
+	        <% if current_user.free_money_sendable? %>
+	          <li id="nav_login">
+	            <a href="javascript:refresh_free_honey_form();" >GET FREE CASH</a>
+	          </li>
+	          <li class="divider-vertical"></li>
+	        <% end %>
         <li class="dropdown" id="notification_menu" >
           <%= render :partial => "/layouts/notifications_menu" %>
         </li>
@@ -78,33 +81,11 @@
           </ul>
         </li>
         <li class="divider-vertical"></li>
-        <li>
-          <div class="honey_display">
-            <div style="display: inline-block;"><img src="/images/honey_currency_score.png"><span id="honey_balance_amount_menu"><%= format_num(current_user.honey_balance)%></span>
-              <% if controller_name != "payments" %>
-              <div style="display: inline-block;">
-                <a href="javascript:refresh_add_honey_form();"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a>
-              </div>
-              <% else %>
-              <div style="display: inline-block;">
-                <a href="/payments/new"><img class="honey_currency_plus" src="/images/honey_currency_plus.png"></a>
-              </div>
-              <% end %>
-            </div>
-        </li>
-        <li>
-          <div class="help">
-            <a href="javascript:showPopup('popup-dialog_help');" >
-            <div style="display: inline-block;">
-             Questions? &nbsp;<img class="help_icon" src="/images/help.png">
-            </a>
-          </div>
-        </li>
-        <% if current_user.is_admin? %>
-        <li>
-          <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
-        </li>
 
+        <% if current_user.is_admin? %>
+	        <li>
+	          <%= link_to('ADMIN', rails_admin_path, :method => :get) %>
+	        </li>
         <% end %>
 
         <% else %>
@@ -115,17 +96,8 @@
         <li id="nav_signup">
           <a href="javascript:refresh_signup_form();" >SIGN UP</a>
         </li>
-                        <li class="divider-vertical"></li>
-
-        <li>
-          <a href="javascript:showPopup('popup-dialog_what');" >WHAT IS HONEY?</a>
-        </li> 
-                <li class="divider-vertical"></li>
-
+        <li class="divider-vertical"></li>
         <% end %>
-        <li>
-          <a href="javascript:refresh_how_it_works();">HOW IT WORKS</a>
-        </li>
       </ul>
     </div>
   </div>
@@ -135,7 +107,7 @@
 <div>
   <strong>Signed in as <%= current_user.first_name %></strong>
 </div>
-<% if current_user.free_honey_sendable? %>
+<% if current_user.free_money_sendable? %>
 <div id="popup-dialog_for_free_honey" style="display:none;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
     <%= render :partial => "/free_honeys/new" %>
@@ -179,22 +151,13 @@
 
 <div id="popup-dialog_how_it_work" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
-    <div class="container" style="background:url('/images/popup-bg.png') repeat; border-radius: 10px; padding: 30px 30px; position:fixed; top:20px;" >
+    <div class="container" style="background:url('/images/popup-bg.png') repeat; border-radius: 10px; padding: 30px 30px; position:fixed; top:20px; height:400px;" >
       <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
       <%= render :partial => "/home/how_it_works" %>
     </div>
   </div>
 </div>
 
-<div id="popup-dialog_what" style="display:none; width: 300px; padding: 0px;" class="popup-box-wrapper standard-popup">
-  <div id="dialog-content">
-    <div class="container" style=" width: 500px;background:url('/images/popup-bg.png') repeat; border-radius: 10px; padding: 30px 30px; position:fixed; top:60px; margin-left:230px;" >
-      <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
-    <img class="what_honey" src="/images/what_honey.png">
-    <div class="what_content"><div class="headings_pink" style="margin-left:30px;">The Honey virtual currency symbol.</div><br/> <span class="alert alert-success">$1 = 10 Honey</span><br/><br/>Swapidy will give you Honey for your products and you can buy products with the Honey.</div>
-    </div>
-  </div>
-</div>
 
 <div id="popup-dialog_help" style="display:none; width:300px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
@@ -211,17 +174,17 @@
     </div>
   </div>
 </div>
-<% if current_user && controller_name != "payments" %>
+<!-- % if current_user && controller_name != "payments" %>
   <div id="popup-dialog_add_honey" style="display:none; width:0px; padding: 0px;" class="popup-box-wrapper standard-popup">
     <div id="dialog-content">
       <div class="container" style="background:url('/images/popup-bg.png'); background-repeat:repeat; border-radius: 10px; padding: 40px; width:690px; margin-left:160px;" >
         <a class="close-popup" style="position:relative; left:10px;" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
-        <%= render :partial => "/payments/new" %>
+        <%#= render :partial => "/payments/new" %>
       </div>
     </div>
   </div>
-<% end %>
-<%= render :partial => "/layouts/orders.html" if current_user %>
+<!--% end %-->
+<%#= render :partial => "/layouts/orders.html" if current_user %>
 
 <div id="page_loading_animation" style="display: none;">
   <div class="wrapper">
@@ -260,3 +223,4 @@
   }
   
 </script>
+

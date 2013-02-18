@@ -32,11 +32,10 @@ class SessionsController < Devise::SessionsController
 
       if user_signed_in?
         #check_to_display_guide
-        redirect_to :controller => :orders, :action => :new, :method => :post, :product_id => params[:product_id], :using_condition => params[:using_condition], :order_type => params[:order_type]
+        redirect_to :controller => :orders, :action => :new, :method => :post
       else
         @signin_failure = true
-        @order = Order.new(:order_type => params[:order_type], :using_condition => params[:using_condition])
-        @product = Product.find params[:product_id]
+        @order = Order.new()
         render "/orders/email_info_form"
       end
     end

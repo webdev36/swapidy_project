@@ -23,6 +23,8 @@ Swapidy::Application.routes.draw do
   match "/team" => "home#static_page", :method => :get, :content => "team", :page_title => "Our Team" 
   match "/terms" => "home#static_page", :method => :get, :content => "terms", :page_title => "Terms of Service"
   match "/privacy" => "home#static_page", :method => :get, :content => "privacy", :page_title => "Privacy Policy"
+  
+  match "/testimonials" => "home#static_page", :method => :get, :content => "testimonials", :page_title => "Testimonials"
 
   match "/send_contact" => "home#contact_us", :method => :post
   match "/contact_us" => "home#static_page", :method => :get, :content => "contact_us", :page_title => "Contact Us"
@@ -48,8 +50,6 @@ Swapidy::Application.routes.draw do
   match "/orders/confirm" => "orders#confirm", :method => :post
   match "/orders/create" => "orders#create", :method => :post
   match "/orders/complete" => "orders#complete", :method => :get
-  match "/orders/buy/:product_id" => "orders#new", :method => :post, :order_type => Order::TYPES[:order]
-  match "/orders/sell/:product_id" => "orders#new", :method => :post, :order_type => Order::TYPES[:trade_ins]
   match "/orders/change_email" => "orders#change_email", :method => :post
   match "/orders/change_shipping_info" => "orders#change_shipping_info", :method => :post
   match "/orders/reload_payment_order_info" => "orders#reload_payment_order_info", :method => :post
@@ -71,6 +71,8 @@ Swapidy::Application.routes.draw do
   match "/redeem" => "redeem#index", :method => :get
   resources :redeem
   match "/home/disconect_fb" => "home#disconect_fb"
+  match "/home/swap_product" => "home#swap_product"
+  match "/home/del_product" => "home#del_product"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

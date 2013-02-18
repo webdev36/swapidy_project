@@ -7,9 +7,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   
       if @user
         session[:signed_in_via_facebook] = true
-        if session[:creating_order]
+        if session[:cart_products]
           sign_in @user, :event => :authentication #this will throw if @user is not activated
-          redirect_to :controller => "/orders", :action => :new, :method => :post, :product_id => session[:creating_order][:product_id], :using_condition => session[:creating_order][:using_condition], :order_type => session[:creating_order][:order_type]
+          redirect_to :controller => "/orders", :action => :new, :method => :post
         else
           #sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
           sign_in @user, :event => :authentication

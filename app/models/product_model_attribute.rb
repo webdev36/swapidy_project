@@ -21,8 +21,8 @@ class ProductModelAttribute < ActiveRecord::Base
   
   def filter_content
     result = ""
-    result += " attr_filter_model_#{self.product_model.id}_for_buying" if count_for_buy > 0
-    result += " attr_filter_model_#{self.product_model.id}_for_selling" if count_for_sell > 0
+    result += " attr_filter_model_#{self.product_model.id}_for_selling" if self.products.for_sell.count > 0
+    result += " attr_filter_model_#{self.product_model.id}_for_buying" if self.products.for_buy.count > 0
     return result
   end
   

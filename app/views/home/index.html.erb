@@ -1,8 +1,80 @@
+<div id="shopping_cart" <% if cart_products_empty? %> style="display:none;height: 130px;" <% end %> >
+  <img class="rope_left" src="/images/rope.png">
+<img class="rope_right" src="/images/rope.png">
+
+  <%= render :partial => "/home/shopping_cart" %>
+</div>
+<script language="JavaScript">
+  $(function() {
+		display_checkout_sliders();
+	});
+	
+	$(".del-product").live('click', function(){
+		var url_ajax = '/home/del_product';
+		var order_product_id = $(this).attr('order_product_id');
+		$.ajax({
+			url :url_ajax,
+			beforeSend : function(xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+          	},
+			type: "POST",
+			data: 'order_id=' + order_product_id,
+			dataType:'script',
+			success :function(){}
+		});
+		return false;
+	});
+			
+	function display_checkout_sliders(){
+		if ($('#shopping_cart').find('.sell_display li').length >= 1) {
+			$('#shopping_cart .sell_display').jCarouselLite({
+	      btnNext: ".next",
+	      btnPrev: ".prev",
+	      visible: 3, 
+	      scroll: 1,
+	      circular: false,
+	      speed: 500
+	    });
+	  }
+	  if ($('#shopping_cart').find('.buy_display li').length >= 1) {
+	    $('#shopping_cart .buy_display').jCarouselLite({
+	      btnNext: ".next_buy	",
+	      btnPrev: ".prev_buy",
+	      visible: 3,
+	      scroll: 1,
+	      circular: false,
+	      speed: 500
+	    });
+	  }
+	}
+</script>
+
+<%= render :partial => "/home/index_head_guide" %>
+
+<a id="product_scrollup_link" style="display: none;" href="#" onclick="$.scrollTo($('div#product_type'), 400);"><img src="/images/scrollup.png"></a>
+<script>
+	$(document).ready(function(){
+	  $(window).scroll(function(){
+		  // get the height of #wrap
+		  var h = 800;
+		  var y = $(window).scrollTop();
+		  if( y > (h*0.75) ){
+		   $("#product_scrollup_link").fadeIn("slow");
+		  } else {
+		   $('#product_scrollup_link').fadeOut('slow');
+		  }
+	  });
+	});
+</script>
+
 <% cache("homepage_available_categories", :expires_in => 1.hour) do %>
   <div id="product_type" style="display:none;">
     <div class="headings_pink" style="text-align:center;">
-      <div id="sell_message" style="display:none; text-align:center;"><span >What do you want to sell today?</span><br/><span class="motto_sub">Click your product to get paid on the spot</span></div>
-      <div id="buy_message" style="display:none; text-align:center;"><span style="text-align:center" >What do you want to buy today?</span><br/><span class="motto_sub">Click a product to buy what you desire</span></div>
+      <div style="text-align:center;">
+      	<span >What do you want to trade today?</span><br/>
+      	<span id="sell_message" class="motto_sub">Choose your product you want to sell</span>
+      	<span style="display:none;" id="buy_message" class="motto_sub">Choose your product you want to buy</span>
+      </div>
     </div>
     <div id="slider-code" class="span12">
       <a class="left carousel-control buttons prev">&lsaquo;</a>
@@ -10,7 +82,7 @@
         <ul class="overview" style="width: 1560px;">
           <% Category.all.each_with_index do |category, index| %>
             <li id="cat_<%= category.id %>" class="item category span3" >
-              <img class="cat_item" alt="<%= category.title %>" style="height: 200px; width: auto;" src="<%= category.main_image_url(:medium) %>">
+              <img class="cat_item" alt="<%= category.title %>" style="height: 160px; width: auto;" src="<%= category.main_image_url(:medium) %>">
               <div style="display:block;">
                 <%= category.title %>
               </div>
@@ -64,7 +136,7 @@
                   <div class="s_category" style="color:#38B4DE; font-size:18px;">Price</div>
                   <div class="attr_filter_column_items" >
                     <% Product::PRICE_RANGES.keys.each do |key| %>
-                      <div style="display:block; min-width: 120px;" class="attr_filter <%= category.price_range_model_filters(key) %>" >
+                      <div style="display:block; min-width: 120px;" class="attr_filter attr_<%= category.price_range_model_filters(key) %>" >
                         <div style="display: inline-block; line-height: 30px;" >
                           <input type="checkbox" id="checkbox-<%= category.id%>-price-range-<%= key %>" class="regular-checkbox big-checkbox"
                               attr-filter-option="price_range_<%= key %>" />
@@ -77,15 +149,15 @@
                 </div>
               </div>
             </div>
-
+          
           </div>
         <% end %>
       </div>
       <div style="display: block;">
         <div class="isotop_empty_message" style="display: none;">Sorry, there is no such product.</div>
-        <%# cache("homepage_product_container_category_#{category.id}", :expires_in => 1.hour) do %>
+        <% cache("homepage_product_container_category_#{category.id}", :expires_in => 1.hour) do %>
           <div class="product_container">
-            <div id="products" class="isotope" style="">
+            <div id="products" class="isotope" style="padding-bottom: 150px;">
               <% category.products.each do |product| %>
                 <% cache("homepage_product_thumb_#{product.id}") do %>
                   <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>
@@ -93,16 +165,65 @@
               <% end %>
             </div>
           </div>
-        <%# end %>
+        <% end %>
       </div>
     </div>
 <% end %>
 
 <script language="JavaScript">
 
-  $('#slider-code').tinycarousel({display: 2});
+  var for_what = "for_selling";
+  var current_category_id = "";
+  var current_model_id = "filter_model_all";
+  var current_popup_id = "";
 
+	$('.popup_select_price .price_type').live('click', function(){
+  	var url_select_price = '/home/swap_product';
+		$.ajax({
+			url : url_select_price,
+			beforeSend : function(xhr) {
+	        	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+	      	},
+	      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
+			type: 'POST',
+			dataType: 'script', 
+			success:function(){
+			}
+		});
+		$("#" + current_popup_id).removeClass('active');
+		$("#" + current_popup_id).fadeOut('slow');
+		current_popup_id = "";
+  });
+  
+  $(".button_for_buy a, .button_for_sell a").live("click", function(){
+  	var popup_id = $(this).attr("popup_id");
+  	var $isotope_item = $(this).parent().parent().parent().parent(); 
+  	new_left = $isotope_item.position().left + 16;
+  	new_top = $isotope_item.position().top + 250;
+  	
+  	$('#' + popup_id).css({"left": new_left + 'px', "top": new_top + 'px'});
+  	$('#' + popup_id).css({"opacity": '1', "-webkit-transform": 'none', "transform": 'none', 'display': 'block'});
+  	$('#' + popup_id).removeClass('isotope-item');
+  	$('#' + popup_id).removeClass('isotope-hidden');
+  	if($('#' + popup_id).hasClass('active')){
+	    $('#' + popup_id).removeClass('active');
+	    $('#' + popup_id).hide();
+	    current_popup_id = "";
+	  }else{
+	  	if(current_popup_id != ""){
+	  		$('#' + current_popup_id).removeClass('active');
+	  		$('#' + current_popup_id).hide();
+	  	}
+	    $('#' + popup_id).addClass('active');
+	    $('#' + popup_id).show();
+	    current_popup_id = popup_id;
+	  }
+  });
+
+  $('#slider-code').tinycarousel({display: 2});
   sliderHeight();
+  showScreenToSell();
+  $('div#product_type').fadeIn(600);
 
   $(window).on('resize', function() {
     sliderHeight();
@@ -115,8 +236,6 @@
     }
     $('#s3slider').css({height: slideHeight});
   }
-  
-  var for_what = "for_selling";
   
   function get_filter_options() {
     var filters = {};
@@ -174,18 +293,11 @@
   }
      
   $('#buttons a').click(function() {
-    if($(this).attr('id') == "button_sell"){
-      showScreenToSell();
-    }else{
-      showScreenToBuy();
-    }
+    showScreenToSell();
     $('div#product_type').fadeIn(600);
     $.scrollTo($('div#product_type'), 400);
     showIsoTope();
   });
-  
-  var current_category_id = "";
-  var current_model_id = "filter_model_all";
 
   $('#product_type .cat_item').live('click', function() {
      
@@ -193,23 +305,28 @@
        return;
      }
      
-     if(current_category_id != "") {
-       $("#container_" + current_category_id).hide();
-       $("#" + current_category_id).removeClass("select").addClass("blur");
-       current_model_id = "filter_model_all";
-     }
+     unselectCurrentCategory();
 
      current_category_id = $(this).parent().attr("id");
      $("#" + current_category_id).addClass("select");
 
      $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
      $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
-     $("#container_" + current_category_id + " .attr_" + current_model_id + "_" + for_what).removeClass("hidden_filter");
+     $("#container_" + current_category_id + " .attr_" + current_model_id + '_' + for_what).removeClass("hidden_filter");
 
      $("#container_" + current_category_id).fadeIn(600);
      $.scrollTo($("#container_" + current_category_id), 400);
      showIsoTope();
   });
+  
+  function unselectCurrentCategory(){
+  	if(current_category_id != "") {
+       $("#container_" + current_category_id).hide();
+       $("#" + current_category_id).removeClass("select").addClass("blur");
+       current_model_id = "filter_model_all";
+       current_category_id = "";
+     }
+  }
   
   $('.product_search_container .product_model').live('click', function() {
      $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
@@ -217,7 +334,7 @@
      $("#container_" + current_category_id + " .product_model").removeClass("active");
      
      current_model_id = $(this).attr("id");
-     $("#container_" + current_category_id + " .attr_" + current_model_id + "_" + for_what).removeClass("hidden_filter");
+     $("#container_" + current_category_id + " .attr_" + current_model_id + '_' + for_what).removeClass("hidden_filter");
      $("#container_" + current_category_id + " #" + current_model_id).addClass("active");
      showIsoTope();
   });
@@ -231,7 +348,7 @@
     comboFilters = get_filter_options();
     $("#container_" + current_category_id + ' #products').isotope({ filter: comboFilters.join(', ') });
     
-    if ( !$("#container_" + current_category_id + ' #products').data('isotope').$filteredAtoms.length ) {
+    if ( !$("#container_" + current_category_id + ' #products').data('isotope') ) {
       $('.isotop_empty_message').fadeIn('slow');
     } else {
       $('.isotop_empty_message').fadeOut('fast');
@@ -263,36 +380,77 @@
       }
     }
   });
-  
+
+	function gotoCheckout(){
+	   var sell_count = $('#shopping_cart').find('.sell_display li').length;
+	   var buy_count = $('#shopping_cart').find('.buy_display li').length;
+	   
+	   if(buy_count == 0) {
+	   	 alert("You have not selected any products to buy");
+	   }else if(sell_count == 0){
+	   	 alert("You have not selected any products to sell");
+	   	 showScreenToSell();
+	   }else{
+	   	 window.location = "/orders/new";	
+	   }
+	}
+
   function showScreenToBuy() {
+  	var sell_count = $('#shopping_cart').find('.sell_display li').length;
+	  if(sell_count == 0) {
+	   	alert("You have not selected any products to sell");
+	   	if(for_what == "for_buying") {
+	   		showScreenToSell();
+	   	}
+	   	return;
+	  }
+
+    for_what = "for_buying";
     $("#sell_message").hide();
     $("#buy_message").show();
+    
+    $('#checkout_button').show();
+    $('#done_button').hide();
+    
     $('li.product_model').not('#filter_model_all').hide();
     $('li.model_for_buying').show();
-    for_what = "for_buying";
     $(".thumbnail .box .button_for_buy").show();
     $(".thumbnail .box .button_for_sell").hide();
     $(".product_search_container .nav-pills").each(function(index) {
       $(this).addClass("models_for_buy").removeClass("models_for_sell");
     });
-    $(".all_using_condition_filter").removeClass("option-set").hide();
+    
     $(".attr_filter_model_all_for_selling").not(".attr_filter_model_all_for_buying").addClass("hidden_filter");
-    $(".attr_filter_model_all_for_buying").removeClass("hidden_filter")
+    $(".attr_filter_model_all_for_buying").removeClass("hidden_filter");
+    
+    unselectCurrentCategory();
+    $('div#product_type').fadeIn(600);
+    $.scrollTo($('div#product_type'), 400);
+    
   }
+
   function showScreenToSell() {
     for_what = "for_selling";
     $("#sell_message").show();
     $("#buy_message").hide();
-    $('li.product_model').not('#filter_model_all').hide();
+    
+    $('#checkout_button').hide();
+    $('#done_button').show();
+    
+		$('li.product_model').not('#filter_model_all').hide();
     $('li.model_for_selling').show();
     $(".thumbnail .box .button_for_buy").hide();
     $(".thumbnail .box .button_for_sell").show();
     $(".product_search_container .nav-pills").each(function(index) {
       $(this).addClass("models_for_sell").removeClass("models_for_buy");
     });
-    $(".all_using_condition_filter").addClass("option-set").show();
+    $(".all_using_condition_filter").removeClass("option-set").hide();
     $(".attr_filter_model_all_for_buying").not(".attr_filter_model_all_for_selling").addClass("hidden_filter");
-    $(".attr_filter_model_all_for_selling").removeClass("hidden_filter")
+    $(".attr_filter_model_all_for_selling").removeClass("hidden_filter");
+  	
+  	unselectCurrentCategory();
+    $('div#product_type').fadeIn(600);
+    $.scrollTo($('div#product_type'), 400);
   }
   
   function centerIsotypeImages(){
@@ -312,15 +470,5 @@
     });
   }
 
-  $(function() {
-    <% if params[:show] && params[:show] == "for_sell" %>
-      showScreenToSell();
-      $('div#product_type').fadeIn(600);
-      $.scrollTo($('div#product_type'), 400);
-    <% elsif params[:show] && params[:show] == "for_buy" %>
-      showScreenToBuy();
-      $('div#product_type').fadeIn(600);
-      $.scrollTo($('div#product_type'), 400);
-    <% end %>
-  });
 </script>
+

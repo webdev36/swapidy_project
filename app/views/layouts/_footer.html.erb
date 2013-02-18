@@ -1,5 +1,11 @@
 <div class="footer">
   <div class="container">
+
+    <% if params[:controller] == "home" && params[:action] == "index"%>
+      <div id="footer_header">
+        <%= render :partial => "/layouts/testimonials"%>
+      </div>
+	  <% end %>
     <div id="footer_info">
       <ul>
       <li><a href="/about">About Us</a></li>
@@ -19,4 +25,6 @@
         <span style="color:#666">© Swapidy, Inc.</span>
     </div>
   </div>
+
+
 </div>

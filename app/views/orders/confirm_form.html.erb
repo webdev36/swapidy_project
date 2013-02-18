@@ -1,23 +1,19 @@
 <style type="text/css">
   body{
-    background: whitesmoke;
+    background: url('/bg.png');
     line-height: 1.5;
   }
-
 </style>
-<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-4.jpg); -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+<div class="content" >
 
-<div class="container">
-  <div class="headings_pink confirm_head_info">Confirm Your Details</div>
-  <div class="confirm_image_container"><img id="confirm_image" src="<%= @product.main_image_url(:large) %>"></div>
-  <div class="confirm_container">
+<div class="container" style="position: relative;">
+  <div class="headings_pink" style="margin-left: 340px;margin-top: -45px;">Confirm Your Details</div>
+  <div class="confirm_image_container" style="margin-top: -45px;">
+  	<%= render :partial => "/orders/order_product_images" %>
+  </div>
+  <div class="confirm_container" style="bottom: 235px;">
     <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
     <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
-      <%= f.hidden_field :order_type %>
-      <%= f.hidden_field :product_id %>
-      <%= f.hidden_field :using_condition %>
-      <%= f.hidden_field :honey_price %>
-      <%= f.hidden_field :token_key %>
     
       <% unless @order.errors.empty? %>
         <%= raw @order.errors.full_messages.join(".<br/>") %>
@@ -26,7 +22,7 @@
   
       <br/>
       <div>
-        <div class="confirm_info_head">You are buying: <%= @order.title %></div><br />
+        <div class="confirm_info_head">You are buying: </div><br />
         <div id="email_label_info" style="position:relative; bottom:90px;">
           <%= render :partial => "email_label", :locals => {:user => current_user} %>
         </div>
@@ -41,29 +37,68 @@
           <div style="position:relative; bottom:320px;">
             <div>
               <span>Current Balance:</span>
-              <%= format_num(current_user.honey_balance) %> Honey
+              $<%= format_num(current_user.balance_amount) %>
             </div>
             <div>
-              <span>Product Price:</span>
-              <%= format_num(@product.honey_price) %> Honey
-            </div>      
+            <% if cart_amount < 0 %>
+						  <span>You will get:</span>
+						  $<%= format_num(-cart_amount) %>
+						<% else %>
+						  <span>You will be substructed:</span>
+			        $<%= format_num(cart_amount) %> 
+						<% end %>
+			
+            </div>
+            <% if current_user.extra_money_for(cart_amount) > 0 && current_user.has_card_info? %>
+            <div>
+              Your money balance is not enough.
+              You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %>
+              <input type="button" value="Change Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="refresh_add_honey_form();" />
+            </div>
+            <% end %>
           </div>
-          <br/>
-    
-          <% has_agreement_before = current_user.has_same_order?(@order.order_type) %>
-          <div style="position:relative; bottom:330px;">
-            <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:80px;">Terms of Service</div></label>
-            <p>
-              <input id="terms_of_service_checkbox" type="checkbox" <% if has_agreement_before %>checked="checked"<% end %> /> 
-              <span>By checking this box, you agree to our <a class="order_link" href="/terms">terms of service</a></span>
-            </p>
-          </div>
-          <br/>
-          <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" style="margin-top:20px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
-  
+          
+          <% if current_user.extra_money_for(cart_amount) > 0 && !current_user.has_card_info? %>
+            <div style="position:relative; bottom:330px;">
+              Your money balance is not enough.
+              You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %>
+              <input type="button" value="Add Credit Card" class="order_button_buy" style="margin-left: 125px; margin-top: 20px;"  onclick="refresh_add_honey_form();" />
+            </div>
+          <% else %>
+	          <% has_agreement_before = !current_user.last_order.nil? %>
+	          <div style="position:relative; bottom:300px;">
+	            <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:80px;">Terms of Service</div></label>
+	            <p>
+	              <input id="terms_of_service_checkbox" type="checkbox" <% if has_agreement_before %>checked="checked"<% end %> /> 
+	              <span>By checking this box, you agree to our <a class="order_link" href="/terms">terms of service</a></span>
+	            </p>
+	          </div>
+	          <br/>
+	          <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" style="margin-top:60px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
+ 					<% end %> 
         <% end %>
       </div>
       <%= render :partial => "order_confirm_popups" %>
     </div>
   </div>
 </div>
+<script>
+	$(function() {
+  	order_sliders();
+  });
+
+	function order_sliders(){
+	$('.order_sell_display').jCarouselLite({
+      btnNext: ".next",
+      btnPrev: ".prev",
+      visible: 1,
+      speed: 500
+    });
+    $('.order_buy_display').jCarouselLite({
+      btnNext: ".next_buy	",
+      btnPrev: ".prev_buy",
+      visible: 1,
+      speed: 500
+    });
+	}
+</script>

@@ -62,6 +62,5 @@ module ApplicationHelper
   def shipping_method_options
     Order::SHIPPING_METHODS.keys.map{|key| [Order::SHIPPING_METHOD_NAMES[key], Order::SHIPPING_METHODS[key]] }
   end
-
   
 end

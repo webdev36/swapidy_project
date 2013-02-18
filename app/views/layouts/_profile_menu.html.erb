@@ -6,7 +6,8 @@
     <% else %>
       <img class="nav_icons nav_profile" src="/images/profile_icon.png">
     <% end %>
-    <%= link_to(current_user.full_name.upcase, transactions_path, :method => :get) %>
+    <%= link_to(current_user.full_name.upcase, transactions_path, :method => :get) %>:$<%= format_num(current_user.balance_amount)%>
+
   </div>
 </li>
 <li class="divider-vertical"></li>

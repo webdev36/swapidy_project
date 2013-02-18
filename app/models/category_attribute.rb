@@ -28,10 +28,10 @@ class CategoryAttribute < ActiveRecord::Base
     class_types = []
     total_count_for_buy = 0
     total_count_for_sell = 0
+
     product_model_attributes.each do |model_attr|
       class_types << "attr_filter_model_#{model_attr.product_model.id}_for_buying" if model_attr.count_for_buy > 0
       class_types << "attr_filter_model_#{model_attr.product_model.id}_for_selling" if model_attr.count_for_sell > 0
-      
       total_count_for_buy += model_attr.count_for_buy
       total_count_for_sell += model_attr.count_for_sell
     end 
@@ -46,6 +46,7 @@ class CategoryAttribute < ActiveRecord::Base
     attribute_titles = {}
     for_buy_attributes = {}
     for_sell_attributes = {}
+
     self.product_model_attributes.each do |attribute|
       attribute_titles.merge! attribute.gen_fitler_id => attribute.value
       

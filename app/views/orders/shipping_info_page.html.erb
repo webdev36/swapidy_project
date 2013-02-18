@@ -1,16 +1,17 @@
 <style type="text/css">
 body{
-  background: whitesmoke;
-}
+background: url('/bg.png');}
 </style>
-<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-3.jpg); -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+<div class="content " style="height:700px;">
   <%= render :partial => "steps", :locals => {:current_step => 3 } %>
   <div class="container">
-    <div class="headings_pink shipping_form_head">Shipping Address<span>*</span></div>
-    <div class="shipping_form_image"><img id="before_confirm_image" src="<%= @product.main_image_url(:large) %>" /></div>
-    <div class="shipping_form_container">
+  	<div class="headings_pink" style="position:relative; bottom:30px; left:330px;">Shipping Address<span>*</span></div>
+    <div class="confirm_image_container" style="padding: 20px 25px 20px 20px; height: 390px; position:absolute; top: 260px;">
+	  	<%= render :partial => "/orders/order_product_images" %>
+		</div>
+		<div class="shipping_form_container">
       <div style="width: 500px; margin-left: -20px;">
-        <div class="shipping_product_info"><%= @order.title %></div>  
+        <div class="shipping_product_info"></div>  
         <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; padding: 15px 0px 20px;">
           <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
           <div class="render_form">
@@ -69,4 +70,23 @@ body{
     $("#candidate_addresses_container").hide();
     $("#order_is_candidate_address").attr("value", false);
   });
+    
+  $(function() {
+  	order_sliders();
+  });
+
+	function order_sliders(){
+	$('.order_sell_display').jCarouselLite({
+      btnNext: ".next",
+      btnPrev: ".prev",
+      visible: 1,
+      speed: 500
+    });
+    $('.order_buy_display').jCarouselLite({
+      btnNext: ".next_buy	",
+      btnPrev: ".prev_buy",
+      visible: 1,
+      speed: 500
+    });
+	}
 </script>

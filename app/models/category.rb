@@ -21,10 +21,13 @@ class Category < ActiveRecord::Base
   def price_range_model_filters(price_range_key = nil)
     html = ""
     if price_range_key.nil?
-      html = "attr_filter_model_all_for_buying "
+      html += "attr_filter_model_all_for_buying "
+      html += "attr_filter_model_all_for_selling "
       html += product_models.map{|model| "attr_filter_model_#{model.id}_for_buying"}.join(" ")
+      html += product_models.map{|model| "attr_filter_model_#{model.id}_for_selling"}.join(" ")
     elsif Product::PRICE_RANGES.keys.include?(price_range_key)
-      html += "attr_filter_model_all_for_buying " if products.for_buy.price_range(price_range_key).count > 0
+      html += "attr_filter_model_all_for_buying " if products.for_buy.price_range(price_range_key, :for_buy).count > 0
+      html += "attr_filter_model_all_for_selling " if products.for_sell.price_range(price_range_key, :for_sell).count > 0
       html += product_models.map{|model| model.price_range_filter_content(price_range_key) }.join(" ")
     end
     html

@@ -111,10 +111,11 @@ font-family:"myriad";
 .shipping_form_head{
 	font-family:"myriad-s";
 	color:#38B4DE;
-  position:relative; bottom:80px;
 	text-align:center;
 	font-size:25px;
   line-height:1.5;
+  position:absolute;
+  top:100px;
 }
 .confirm_info_head{
   font-family:"myriad-s";
@@ -162,7 +163,6 @@ color:#fa3e6e;
 
 }
 .thanks_subheading{
-  color:#38B4DE;
   font-size:25px;
 }
 .thanks_img{
@@ -315,7 +315,7 @@ height:30px;
 .shipping_form_container{
 position:relative;
 bottom:250px;
-left:150px;
+left:200px;
 width:450px; 
 height:350px;
 font-family: 'myriad', 'myriad-s';
@@ -372,9 +372,10 @@ border-radius: 0px 20px 20px 0px;
 box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 .confirm_image_container{
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: white;
+
   border: medium none;
-  box-shadow: none;
+box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   -webkit-border-radius: 20px;
   border-radius: 20px 0px 0px 20px;
   height: 490px;

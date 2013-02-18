@@ -6,69 +6,8 @@
 <body>
 
   <%= render :partial => "/layouts/header" %>
-
-  <div id="s3slider">
-    <div class="hero-unit">
-      <div style="hero-unit-content">
-        <div class="dark-overlay">
-          <div class="hero_title">Buy and sell instantly.</div>
-          <p class="hero_info">
-            <span>We buy your products for Honey.</span>
-            <a id="q_honey" href="javascript:showPopup('popup-dialog_what');" style="margin-left: -10px; right: 0px;"><img src="/images/q_honey.png"></a>
-            <span>You buy anything using Honey.</span>
-            <a id="q_honey" href="javascript:showPopup('popup-dialog_what');" style="margin-left: -10px; right: 0px;"><img src="/images/q_honey.png"></a>
-          </p>
-          <p class="hero_info">
-            It's never been so easy to buy and sell.
-          </p>
-          <div id="buttons">
-            <a href="#" id="button_sell" class="modern socle sell_now">Sell Now</a>
-            <a href="#" id="button_buy" class="modern socle buy_now">Buy Now</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <ul id="s3sliderContent">
-      <li class="s3sliderImage">
-        <img src="/images/sliders/slide-1.jpg">
-        <span></span>
-      </li>
-      <li class="s3sliderImage hide">
-        <img src="/images/sliders/slide-2.jpg">
-        <span></span>
-      </li>
-      <li class="s3sliderImage hide">
-        <img src="/images/sliders/slide-3.jpg">
-        <span></span>
-      </li>
-      <li class="s3sliderImage hide">
-        <img src="/images/sliders/slide-4.jpg">
-        <span></span>
-      </li>
-      <li class="s3sliderImage hide">
-        <img src="/images//sliders/slide-5.jpg">
-        <span></span>
-      </li>
-      <li class="s3sliderImage hide">
-        <img src="/images/sliders/slide-6.jpg">
-        <span></span>
-      </li>
-      <li class="s3sliderImage hide">
-        <img src="/images/sliders/slide-7.jpg">
-        <span></span>
-      </li>
-      <div class="clear s3sliderImage"></div>
-    </ul>
+  <div id="index_bg">
   </div>
-
-  <script language="JavaScript">
-  $(document).ready(function() { 
-   $('#s3slider').s3Slider({ 
-     timeOut: 3000
-   });
- });
-  </script>
-
   <div class="content">
     <div class="container">
       <%=yield %>
