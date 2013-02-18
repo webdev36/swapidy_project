@@ -1,9 +1,7 @@
 <div id="shopping_cart" <% if cart_products_empty? %> style="display:none;height: 130px;" <% end %> >
-  <img class="rope_left" src="/images/rope.png">
-<img class="rope_right" src="/images/rope.png">
-
   <%= render :partial => "/home/shopping_cart" %>
 </div>
+
 <script language="JavaScript">
   $(function() {
 		display_checkout_sliders();
@@ -51,6 +49,11 @@
 
 <%= render :partial => "/home/index_head_guide" %>
 
+<a id="sell_and_buy_message_guide" style="display: none;">
+	<span class="sell">You are currently selling. Click on Done on top once finished</span>
+	<span class="buy" style="display: none;">You are currently buying. Click on Checkout on top once finished</span>
+</a>
+
 <a id="product_scrollup_link" style="display: none;" href="#" onclick="$.scrollTo($('div#product_type'), 400);"><img src="/images/scrollup.png"></a>
 <script>
 	$(document).ready(function(){
@@ -60,8 +63,10 @@
 		  var y = $(window).scrollTop();
 		  if( y > (h*0.75) ){
 		   $("#product_scrollup_link").fadeIn("slow");
+		   $('#sell_and_buy_message_guide').fadeIn("slow");
 		  } else {
 		   $('#product_scrollup_link').fadeOut('slow');
+		   $('#sell_and_buy_message_guide').fadeOut("slow");
 		  }
 	  });
 	});
@@ -412,6 +417,9 @@
     $('#checkout_button').show();
     $('#done_button').hide();
     
+    $("#sell_and_buy_message_guide span.buy").show();
+    $("#sell_and_buy_message_guide span.sell").hide();
+    
     $('li.product_model').not('#filter_model_all').hide();
     $('li.model_for_buying').show();
     $(".thumbnail .box .button_for_buy").show();
@@ -436,6 +444,8 @@
     
     $('#checkout_button').hide();
     $('#done_button').show();
+    $("#sell_and_buy_message_guide span.buy").hide();
+    $("#sell_and_buy_message_guide span.sell").show();
     
 		$('li.product_model').not('#filter_model_all').hide();
     $('li.model_for_selling').show();

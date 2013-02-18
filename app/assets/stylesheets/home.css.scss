@@ -919,7 +919,16 @@ text-decoration:underline;
   right: 0px;
   bottom: 5px;
   z-index: 10;
+}
 
+#sell_and_buy_message_guide {
+  position: fixed;
+  right: 0px;
+  top: 192px;
+  padding:5px;
+  background-color: #fa3e6e;
+  border-bottom-left-radius: 10px;
+  z-index: 10;
 }
 
 .popup_select_price {
