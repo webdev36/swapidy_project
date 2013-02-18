@@ -302,11 +302,7 @@
        return;
      }
      
-     if(current_category_id != "") {
-       $("#container_" + current_category_id).hide();
-       $("#" + current_category_id).removeClass("select").addClass("blur");
-       current_model_id = "filter_model_all";
-     }
+     unselectCurrentCategory();
 
      current_category_id = $(this).parent().attr("id");
      $("#" + current_category_id).addClass("select");
@@ -319,6 +315,15 @@
      $.scrollTo($("#container_" + current_category_id), 400);
      showIsoTope();
   });
+  
+  function unselectCurrentCategory(){
+  	if(current_category_id != "") {
+       $("#container_" + current_category_id).hide();
+       $("#" + current_category_id).removeClass("select").addClass("blur");
+       current_model_id = "filter_model_all";
+       current_category_id = "";
+     }
+  }
   
   $('.product_search_container .product_model').live('click', function() {
      $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
@@ -381,6 +386,7 @@
 	   	 alert("You have not selected any products to buy");
 	   }else if(sell_count == 0){
 	   	 alert("You have not selected any products to sell");
+	   	 showScreenToSell();
 	   }else{
 	   	 window.location = "/orders/new";	
 	   }
@@ -392,9 +398,6 @@
 	   	alert("You have not selected any products to sell");
 	   	if(for_what == "for_buying") {
 	   		showScreenToSell();
-		   	$('div#product_type').fadeIn(600);
-		    $.scrollTo($('div#product_type'), 400);
-		    showIsoTope();	
 	   	}
 	   	return;
 	  }
@@ -417,9 +420,10 @@
     $(".attr_filter_model_all_for_selling").not(".attr_filter_model_all_for_buying").addClass("hidden_filter");
     $(".attr_filter_model_all_for_buying").removeClass("hidden_filter");
     
+    unselectCurrentCategory();
     $('div#product_type').fadeIn(600);
     $.scrollTo($('div#product_type'), 400);
-    showIsoTope();
+    
   }
 
   function showScreenToSell() {
@@ -440,6 +444,10 @@
     $(".all_using_condition_filter").removeClass("option-set").hide();
     $(".attr_filter_model_all_for_buying").not(".attr_filter_model_all_for_selling").addClass("hidden_filter");
     $(".attr_filter_model_all_for_selling").removeClass("hidden_filter");
+  	
+  	unselectCurrentCategory();
+    $('div#product_type').fadeIn(600);
+    $.scrollTo($('div#product_type'), 400);
   }
   
   function centerIsotypeImages(){

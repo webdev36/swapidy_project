@@ -5,6 +5,8 @@
   </div>
 <% else %>
   <div id="product_items" style="height: 130px;">
+  	<a style="position: absolute; left: 0; bottom: 50%; background-color: #38B4DE; padding: 5px;">Sell</a>
+  	<a style="position: absolute; right: 0; bottom: 50%; background-color: #fa3e6e; padding: 5px;">Buy</a>
   	<% if cart_products[:sell].count > 3 %>
 	 	  <button class="prev" style="width: 30px;position: absolute;top:50px;left: 20px">&lt;&lt;</button>
 	 	  <button class="next" style="width: 30px;position: absolute;top: 50px;left: 350px;">&gt;&gt;</button>
@@ -28,8 +30,16 @@
        </ul>
       </div>
 	</div>
-	<div style="position:absolute; left:50%; margin-left:-100px; width: 200px; text-align: center; top: 30px; font-size: 35px;">
-	  $<%= format_num(cart_amount) %>
+	<div style="position:absolute; left:50%; margin-left:-125px; min-width: 250px; text-align: center; top: 30px; font-size: 25px;">
+	  <% if cart_amount > 0 %>
+	  	<% if current_user && current_user.balance_amount && current_user.balance_amount > 0 %>
+	    	You pay: $<%= format_num(cart_amount) %> - $<%= format_num(current_user.balance_amount) %>
+	  	<% else %>
+	  	  You pay: $<%= format_num(cart_amount) %>
+	  	<% end %>
+	  <% else %>
+	  	You get: $<%= format_num(-cart_amount) %>
+	  <% end %>
 	</div>
 	<a id="done_button" href="javascript:showScreenToBuy();" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Done</a>
 	<a id="checkout_button" href="javascript:gotoCheckout();" style="display: none; height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>

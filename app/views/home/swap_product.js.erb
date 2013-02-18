@@ -10,3 +10,7 @@ $("#shopping_cart").html("<%= raw escape_javascript(@return_content) %>");
   <% end %>
   display_checkout_sliders();
 <% end %>
+if(for_what == "for_buying"){
+  $('#checkout_button').show();
+  $('#done_button').hide();
+}
