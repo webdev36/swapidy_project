@@ -971,11 +971,11 @@ width: 100%;
   font-family: 'myriad-s';
 }
 .index_success{
-  float:left;
+  float: left;
   width: 400px;
   position:relative;
-  bottom:210px;
-  left:450px;
+  left: 500px !important;
+  bottom: 175px
 }
 .rope_left{
   position: fixed;
