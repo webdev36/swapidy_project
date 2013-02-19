@@ -141,7 +141,7 @@
                   <div class="s_category" style="color:#38B4DE; font-size:18px;">Price</div>
                   <div class="attr_filter_column_items" >
                     <% Product::PRICE_RANGES.keys.each do |key| %>
-                      <div style="display:block; min-width: 120px;" class="attr_filter attr_<%= category.price_range_model_filters(key) %>" >
+                      <div style="display:block; min-width: 120px;" class="attr_filter <%= category.price_range_model_filters(key) %>" >
                         <div style="display: inline-block; line-height: 30px;" >
                           <input type="checkbox" id="checkbox-<%= category.id%>-price-range-<%= key %>" class="regular-checkbox big-checkbox"
                               attr-filter-option="price_range_<%= key %>" />

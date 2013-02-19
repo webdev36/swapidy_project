@@ -2,25 +2,25 @@ module HomeHelper
   
   def cart_products_empty?
     return true unless session[:cart_products] 
-    return false if session[:cart_products][:sell] && !session[:cart_products][:sell].empty?
-    return false if session[:cart_products][:buy] && !session[:cart_products][:buy].empty?
+    return false if cart_products[:sell] && !cart_products[:sell].empty?
+    return false if cart_products[:buy] && !cart_products[:buy].empty?
     return true
   end
   
   def cart_products
-    Rails.logger.info session[:cart_products]
+    #Rails.logger.info session[:cart_products]
     
     session[:cart_products] = {:sell => [], :buy => [], :max_order_product_id => 0} if session[:cart_products].nil?
     {:sell => session[:cart_products][:sell].map {|obj_hash| 
                 order_product = OrderProduct.new(obj_hash)
-                order_product.product = Product.find order_product.product_id
-                order_product
-              },
+                order_product.product = Product.find order_product.product_id rescue nil
+                order_product.product ? order_product : nil 
+              }.compact,
      :buy => session[:cart_products][:buy].map {|obj_hash| 
                 order_product = OrderProduct.new(obj_hash)
-                order_product.product = Product.find order_product.product_id
-                order_product
-             }
+                order_product.product = Product.find order_product.product_id rescue nil
+                order_product.product ? order_product : nil
+             }.compact
     }
   end
   

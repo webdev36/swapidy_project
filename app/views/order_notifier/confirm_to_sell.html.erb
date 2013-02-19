@@ -1,7 +1,5 @@
 <div style="width:580px; margin:auto;">
-	<div style="background:#F2F2F2; margin-top:30px; padding:20px; -webkit-border-radius: 10px;
--moz-border-radius: 10px;
-border-radius: 10px;">
+	<div style="background:#F2F2F2; margin-top:30px; padding:20px; -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;">
 		<div style="float:left;">
 			<a href="https://www.swapidy.com" target="_blank"><img src="https://www.swapidy.com/images/email/swapidy_logo_email.png"></a>
 		</div>
@@ -17,7 +15,7 @@ border-radius: 10px;">
 
 <div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">Good Day <%= @user.name_in_email %>,<br/>
 <br/>
-Congrats! You're getting <%= number_with_delimiter(@order.balance_amount) %>&nbsp; in exchange for <%= @order.product.title %>. 
+Congrats! You're getting <%= number_with_delimiter(@order.calc_balance_amount) %>&nbsp; in exchange for some products.
 We're eagerly waiting to receive your items!<br/>
 <br/>
 Your shipping label is attached to this email. 
