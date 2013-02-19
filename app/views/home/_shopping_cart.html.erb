@@ -38,12 +38,13 @@
 	  	<% if current_user && current_user.balance_amount && current_user.balance_amount > 0 %>
 	    	You pay: $<%= format_num(cart_amount) %> - $<%= format_num(current_user.balance_amount) %>
 	  	<% else %>
-	  	  You pay: $<%= format_num(cart_amount) %>
+	  	<span class="show_result" style="display: none;">  You pay: $<%= format_num(cart_amount) %> </span>
 	  	<% end %>
 	  <% else %>
-	  	You get: $<%= format_num(-cart_amount) %>
+	  	<span class="show_result" style="display: none;">You get: $<%= format_num(-cart_amount) %></span>
 	  <% end %>
 	</div>
 	<a id="done_button" href="javascript:showScreenToBuy();" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_sell">Done</a>
 	<a id="checkout_button" href="javascript:gotoCheckout();" style="display: none; height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>
+	<a id="done_button_for_buy"  href="javascript:showScreenToTrade();" style="height: 20px; top: 60px; position: absolute;display:none; left: 50%; margin-left: -83px;" class="btn show_button_buy">Done</a>
 <% end %>
