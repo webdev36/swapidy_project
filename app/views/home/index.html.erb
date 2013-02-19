@@ -199,7 +199,7 @@
 		$("#" + current_popup_id).fadeOut('slow');
 		current_popup_id = "";
   });
-  $("#done_button").click(function(){
+  $("#done_button").live('click',function(){
   	$(".show_result").show();
   });
   
