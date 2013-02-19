@@ -199,6 +199,13 @@
 		$("#" + current_popup_id).fadeOut('slow');
 		current_popup_id = "";
   });
+  $("#done_button").click(function(){
+  	$(".show_result").show();
+  });
+  
+  $("#done_button_for_buy").live('click',function(){
+  	$(".show_result").show();
+  });
   
   $(".button_for_buy a, .button_for_sell a").live("click", function(){
   	var popup_id = $(this).attr("popup_id");
@@ -323,7 +330,7 @@
      $.scrollTo($("#container_" + current_category_id), 400);
      showIsoTope();
   });
-  
+ 
   function unselectCurrentCategory(){
   	if(current_category_id != "") {
        $("#container_" + current_category_id).hide();
@@ -469,7 +476,7 @@
     $.scrollTo($('div#product_type'), 400);
     
   }
-
+	
   function showScreenToSell() {
     for_what = "for_selling";
     $("#sell_message").show();
