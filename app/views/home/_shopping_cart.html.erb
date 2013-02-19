@@ -1,15 +1,15 @@
-<img class="rope_left" src="/images/rope.png">
-<img class="rope_right" src="/images/rope.png">
 
 <% if cart_products_empty? %>
-  <div id="product_items" style="height: 130px; min-width:600px;">
+  <div id="product_items" style="height: 130px; min-width:600px;   
+
+">
     <div style="width: 100%; text-align: center; padding-top: 40px;"> <span class="headings_pink">Empty Shopping Cart</span></div>
     <a href="#" onclick="$('#shopping_cart').fadeOut('slow');" style="height: 20px; top: 70px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Close</a>
   </div>
 <% else %>
   <div id="product_items" style="height: 130px;">
-  	<a style="position: absolute; left: 0; bottom: 50%; background-color: #38B4DE; padding: 5px;">Sell</a>
-  	<a style="position: absolute; right: 0; bottom: 50%; background-color: #fa3e6e; padding: 5px;">Buy</a>
+  	<a style="position: absolute; left: 0; bottom: 50%; background-color: #38B4DE; padding: 5px;">You are selling</a>
+  	<a style="position: absolute; right: 0; bottom: 50%; background-color: #fa3e6e; padding: 5px;">You are buying</a>
   	<% if cart_products[:sell].count > 3 %>
 	 	  <button class="prev" style="width: 30px;position: absolute;top:50px;left: 110px">&lt;&lt;</button>
 	 	  <button class="next" style="width: 30px;position: absolute;top: 50px;left: 480px;">&gt;&gt;</button>
