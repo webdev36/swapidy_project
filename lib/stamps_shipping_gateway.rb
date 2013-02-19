@@ -104,7 +104,7 @@ module StampsShippingGateway
       unless valid_stamp?(stamp)
         if stamp[:errors].first == INSUFFICIENT_POSTAGE_ERROR
           purchase_postage
-          sleep(8) #Sleep 8s to wait Stamps.com for payment
+          sleep(9) #Sleep 8s to wait Stamps.com for payment
           stamp = Stamps.create!(:transaction_id  => (self.id || (Order.last.id + 1)).to_s, :rate => package, :to => to_address, :from => from_address)
           raise stamp[:errors] unless valid_stamp?(stamp)
         else

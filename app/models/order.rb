@@ -187,7 +187,7 @@ class Order < ActiveRecord::Base
   end
   
   def calc_balance_amount
-    amount = 0
+    amount = 0.0
     self.order_products.for_sell.each {|order_product| amount += order_product.price }
     self.order_products.for_buy.each {|order_product| amount -= order_product.price }
     self.balance_amount = amount
@@ -212,9 +212,9 @@ class Order < ActiveRecord::Base
   
     def balance_amount_label
       if calc_balance_amount > 0 
-        return "Get $#{calc_balance_amount}" 
+        return "You get: $#{calc_balance_amount}" 
       else
-        return "Charged $#{-(calc_balance_amount)}"
+        return "You pay: $#{-(calc_balance_amount)}"
       end
     end
   
