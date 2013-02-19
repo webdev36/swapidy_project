@@ -11,6 +11,7 @@
     <td style="text-align: center;">Product</td>
     <td width="120px" style="text-align: center;">Model</td>
     <td width="80px" style="text-align: center;">Condition</td>
+    <td width="60px" style="text-align: center;">Weight</td>
     <td width="100px" style="text-align: center;">Price</td>
   </tr>
 <% @order.order_products.for_sell.each_with_index do |order_product, index| %>
@@ -20,6 +21,7 @@
     <td><%= order_product.product.title %></td>
     <td><%= order_product.product.product_model.title %></td>
     <td><%= order_product.using_condition %></td>
+    <td style="text-align: right;"><%= number_with_delimiter(order_product.weight_lb) %> lbs</td>
     <td style="text-align: right;">$<%= number_with_delimiter(order_product.price) %></td>
   </tr>
 <% end %>
@@ -39,6 +41,7 @@
     <td style="text-align: center;">Product</td>
     <td width="120px" style="text-align: center;">Model</td>
     <td width="80px" style="text-align: center;">Condition</td>
+    <td width="60px" style="text-align: center;">Weight</td>
     <td width="100px" style="text-align: center;">Price</td>
   </tr>
 <% amount = 0 %>  
@@ -49,6 +52,7 @@
     <td><%= order_product.product.title %></td>
     <td><%= order_product.product.product_model.title %></td>
     <td><%= order_product.using_condition %></td>
+    <td style="text-align: right;"><%= number_with_delimiter(order_product.weight_lb) %> lbs</td>
     <td style="text-align: right;">$<%= number_with_delimiter(order_product.price) %></td>
   </tr>
 <% end %>

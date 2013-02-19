@@ -1,7 +1,7 @@
 <li>
 	<div class="cart_product_thumb hovergallery" data-hover="dropdown" data-delay="1000" style="display: inline-table; width: 95px;margin: 0 0 5px 0;" title="<%= order_product.title %> " >
 		<a class="del-product" href="#" title="Delete" order_product_id="<%= order_product.order_product_id %>" ></a>
-		<img style=" max-width: 80px;max-height: 100px;position: absolute; top: 0;vertical-align: middle" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" />
+		<img style=" max-width: 80px;max-height: 100px;position: absolute; top: 0; vertical-align: middle;" src="<%= order_product.product.main_image_url(:thumb) if order_product.product %>" />
 		<span style="position: absolute; top: 100px;text-align: center;margin: 0 10px"> <%= order_product.using_condition %></span>
 	</div>
 </li>
