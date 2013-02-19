@@ -2,7 +2,7 @@
 <img class="rope_right" src="/images/rope.png">
 
 <% if cart_products_empty? %>
-  <div id="product_items" style="height: 130px;">
+  <div id="product_items" style="height: 130px; min-width:600px;">
     <div style="width: 100%; text-align: center; padding-top: 40px;"> <span class="headings_pink">Empty Shopping Cart</span></div>
     <a href="#" onclick="$('#shopping_cart').fadeOut('slow');" style="height: 20px; top: 70px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Close</a>
   </div>
