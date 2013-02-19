@@ -14,7 +14,7 @@
 	 	  <button class="prev" style="width: 30px;position: absolute;top:50px;left: 110px">&lt;&lt;</button>
 	 	  <button class="next" style="width: 30px;position: absolute;top: 50px;left: 480px;">&gt;&gt;</button>
  	  <% end %>
- 	  <% if cart_products[:sell].count == 1 %>
+ 	  <% if cart_products[:sell].count <= 1 %>
       	<div class= "sell_display step_sell_1">
       <%elsif cart_products[:sell].count == 2%>
       	 <div class= "sell_display step_sell_2">
@@ -31,12 +31,14 @@
       <button class="prev_buy" style="width: 30px;top: 50px;right: 480px;position: absolute">&lt;&lt;</button>
  	  <button class="next_buy"style="width: 30px;top: 50px;right: 120px;position: absolute">&gt;&gt;</button>
     <% end %>
-     <% if cart_products[:buy].count == 1 %>
+     <% if cart_products[:buy].count <= 1 %>
       <div class="buy_display step_buy_1">
        <% elsif cart_products[:buy].count == 2 %>
        <div class="buy_display step_buy_2">
        <% elsif cart_products[:buy].count >= 3 %>
        <div class="buy_display step_buy_3">
+       <%else%>
+       <div class="buy_display" style=" float:right; height: 130px; margin: 5px 110px 5px 0px;" >
        <%end%>
        <ul style="position: none;">
       	<% cart_products[:buy].each do |order_product| %>
@@ -67,6 +69,7 @@
 		margin: 5px 0px 5px -50px;
 		height:120px; 
 		float: left;
+		
 	}
 		.step_sell_2{
 		left: 25% !important;
@@ -87,19 +90,20 @@
 		left: 75% !important; 
 		margin: 5px 0px 5px -200px;
 		height:120px;
-		
+		top: 0px;
 	}
 	.step_buy_2 {
 		width: 190px !important; 
 		left: 75% !important; 
 		margin: 5px 0px 5px -280px;
 		height:120px;
-		
+		top: 0px;
 	}
 	.step_buy_3 {
 		width: 285px !important; 
 		left: 75% !important; 
 		margin: 5px 0px 5px -260px;
 		height:120px;
+		top: 0px;
 	}
 </style>
