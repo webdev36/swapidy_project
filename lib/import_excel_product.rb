@@ -40,14 +40,22 @@ module ImportExcelProduct
         product.price_for_good_sell = (columns[INDEXES[:price_for_good]].to_f rescue nil)
         product.price_for_poor_sell = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
       end
-      product.save
-      return product
+    else
+      product = Product.new(:title => columns[INDEXES[:title]])
+      product.category = category
+      product.product_model = model
     end
     
-    product = Product.new(:title => columns[INDEXES[:title]])
-    product.category = category
-    product.product_model = model
-    
+    if for_buying
+      product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
+      product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
+      product.price_for_poor_buy = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
+    else
+      product.price_for_sell = (columns[INDEXES[:price]].to_f rescue nil)
+      product.price_for_good_sell = (columns[INDEXES[:price_for_good]].to_f rescue nil)
+      product.price_for_poor_sell = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
+    end
+
     (PROPERTY_START_INDEX..(columns.size-1)).to_a.each do |column_index|
       next if columns[column_index].blank?
       logger.info "#{column_index}: #{headers[column_index]} - #{columns[column_index]}"

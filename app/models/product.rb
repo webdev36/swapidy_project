@@ -20,27 +20,27 @@ class Product < ActiveRecord::Base
   SWAP_TYPES = {0 => "Sell and Buy", 1 => "Sell", 2 => "Buy"}
   
   USING_CONDITIONS = {:poor => "Poor", :good => "Good", :flawless => "Flawless"}
-  PRICE_RANGES = {3000 => "Below 3000", 
-                  5000 => "3000 -> 5000",
-                  7000 => "5000 -> 7000",
-                  10000 => "7000 -> 10000",
-                  19999 => "10000 -> 20000",
-                  20000 => "Upper 20000"}
+  PRICE_RANGES = {300 => "Below 300", 
+                  500 => "300 -> 500",
+                  700 => "500 -> 700",
+                  1000 => "700 -> 1000",
+                  1999 => "1000 -> 2000",
+                  2000 => "Upper 2000"}
   SELL_PRICE_FIELDS = %w(price_for_sell price_for_good_sell price_for_poor_sell)
-  SELL_PRICE_RANGE_SQLS = {3000 => SELL_PRICE_FIELDS.map{|f| "(#{f} > 0 AND #{f} <= 3000)"}.join(" OR "), 
-                          5000 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 3000 AND #{f} <= 5000)"}.join(" OR "),
-                          7000 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 5000 AND #{f} <= 7000)"}.join(" OR "),
-                          10000 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 7000 AND #{f} <= 10000)"}.join(" OR "),
-                          19999 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 10000 AND #{f} <= 20000)"}.join(" OR "),
-                          20000 => SELL_PRICE_FIELDS.map{|f| "#{f} >= 20000"}.join(" OR ")
+  SELL_PRICE_RANGE_SQLS = {300 => SELL_PRICE_FIELDS.map{|f| "(#{f} > 0 AND #{f} <= 300)"}.join(" OR "), 
+                          500 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 300 AND #{f} <= 500)"}.join(" OR "),
+                          700 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 500 AND #{f} <= 700)"}.join(" OR "),
+                          1000 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 700 AND #{f} <= 1000)"}.join(" OR "),
+                          1999 => SELL_PRICE_FIELDS.map{|f| "(#{f} >= 1000 AND #{f} <= 2000)"}.join(" OR "),
+                          2000 => SELL_PRICE_FIELDS.map{|f| "#{f} >= 2000"}.join(" OR ")
                           }
   BUY_PRICE_FIELDS = %w(price_for_buy price_for_good_buy price_for_poor_buy)
-  BUY_PRICE_RANGE_SQLS = {3000 => BUY_PRICE_FIELDS.map{|f| "(#{f} > 0 AND #{f} <= 3000)"}.join(" OR "), 
-                          5000 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 3000 AND #{f} <= 5000)"}.join(" OR "),
-                          7000 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 5000 AND #{f} <= 7000)"}.join(" OR "),
-                          10000 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 7000 AND #{f} <= 10000)"}.join(" OR "),
-                          19999 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 10000 AND #{f} <= 20000)"}.join(" OR "),
-                          20000 => BUY_PRICE_FIELDS.map{|f| "#{f} >= 20000"}.join(" OR ")
+  BUY_PRICE_RANGE_SQLS = {300 => BUY_PRICE_FIELDS.map{|f| "(#{f} > 0 AND #{f} <= 300)"}.join(" OR "), 
+                          500 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 300 AND #{f} <= 500)"}.join(" OR "),
+                          700 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 500 AND #{f} <= 700)"}.join(" OR "),
+                          1000 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 700 AND #{f} <= 1000)"}.join(" OR "),
+                          1999 => BUY_PRICE_FIELDS.map{|f| "(#{f} >= 1000 AND #{f} <= 2000)"}.join(" OR "),
+                          2000 => BUY_PRICE_FIELDS.map{|f| "#{f} >= 2000"}.join(" OR ")
                           }
                           
   scope :price_range, lambda { |key, for_what| {:conditions => for_what && for_what == :for_sell ? SELL_PRICE_RANGE_SQLS[key] : BUY_PRICE_RANGE_SQLS[key]} }
