@@ -840,6 +840,7 @@ ul.left_menu li a {
   width:100%;
   float: left;
   margin-left: 140px;
+  margin-bottom: 50px;
 }
 .media_title{
   font-family:'myriad-s';
@@ -856,10 +857,7 @@ ul.left_menu li a {
     width:550px;
     height:180px;
     margin: 0 auto;
-    border:1px solid #dedcb4;
-    background:#f0efdd url(loading.gif) no-repeat 50% 50%;
-    box-shadow: 0px 2px 6px #DDDDDD;
-    border-radius:4px;
+    background: url(loading.gif) no-repeat 50% 50%;
     
     /* Do not alter the below settings */
     white-space:nowrap;
@@ -881,12 +879,10 @@ ul.left_menu li a {
 /*-------- style of user defined class ---------*/
 #mcts1 div.each 
 {
-    color:#696F5B;
     white-space:normal;
     padding:20px;
     width:520px;
     height:170px;
-    background-color:White;
     border-radius:6px;
 }
 
@@ -937,34 +933,6 @@ ul.left_menu li a {
 
 
         
-/*---------built-in navigation bullets--------*/
-
-/* Note: the navBullets won't be available when the "scrollByEachThumb" option was set to false in the Javascript.*/
-#mcts1 .navBullets
-{
-    /*display:none;*/ /*set it display:none when you don't need it*/
-  display:block;
-  cursor:pointer;
-  /*Specify its position that is relative to the div#mcts1 */
-  position:absolute;
-  bottom:-46px;
-  left:360px;
-  width:80px;height:20px;
-  z-index:5;
-}
-/* Below defines the style of each bullet*/
-#mcts1 .navBullets a 
-{
-    display:inline-block;
-    width:13px; height:13px;
-    background:transparent url(bullet.png) no-repeat 0 0;
-    float:left;overflow:hidden;vertical-align:middle;cursor:pointer;
-    margin-right:6px;/*margin-right determines the distance between each bullets*/
-}
-#mcts1 .navBullets a:hover {background-position:0 -13px;}
-#mcts1 .navBullets .active {background-position:0 -26px;}
-#mcts1 .navBullets a.active:hover {background-position:0 -26px;}
-
 
 /* --------- Others ------- */
 #mcts1
@@ -985,15 +953,13 @@ line-height: 1.5;
 }
 
 #index_bg{
-height: 310px;
+height: 290px;
 width: 100%;
-background: url("/bg.png") repeat;
-border-bottom: 1px solid #CCC;
-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+
 }
 
 .index_text{
-  width: 400px;
+  width: 430px;
 }
 
 .index_img{
@@ -1009,7 +975,7 @@ box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   width: 400px;
   position:relative;
   bottom:210px;
-  left:500px;
+  left:450px;
 }
 .rope_left{
   position: fixed;
