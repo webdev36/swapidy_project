@@ -11,6 +11,7 @@ $("#shopping_cart").html("<%= raw escape_javascript(@return_content) %>");
   display_checkout_sliders();
 <% end %>
 if(for_what == "for_buying"){
-  $('#checkout_button').show();
+  $('#done_button_for_buy').show();
   $('#done_button').hide();
+  $('#checkout_button').hide();
 }

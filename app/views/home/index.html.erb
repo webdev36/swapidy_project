@@ -399,6 +399,40 @@
 	   	 window.location = "/orders/new";	
 	   }
 	}
+	function showScreenToTrade(){
+		var sell_count = $('#shopping_cart').find('.sell_display li').length;
+	  if(sell_count == 0) {
+	   	alert("You have not selected any products to sell");
+	   	if(for_what == "for_buying") {
+	   		showScreenToSell();
+	   	}
+	   	return;
+	  }
+    for_what = "for_buying";
+    $("#sell_message").hide();
+    $("#buy_message").show();
+    $("#done_button_for_buy").hide();
+    $('#checkout_button').show();
+    $('#done_button').hide();
+    
+    $("#sell_and_buy_message_guide span.buy").show();
+    $("#sell_and_buy_message_guide span.sell").hide();
+    
+    $('li.product_model').not('#filter_model_all').hide();
+    $('li.model_for_buying').show();
+    $(".thumbnail .box .button_for_buy").show();
+    $(".thumbnail .box .button_for_sell").hide();
+    $(".product_search_container .nav-pills").each(function(index) {
+      $(this).addClass("models_for_buy").removeClass("models_for_sell");
+    });
+    
+    $(".attr_filter_model_all_for_selling").not(".attr_filter_model_all_for_buying").addClass("hidden_filter");
+    $(".attr_filter_model_all_for_buying").removeClass("hidden_filter");
+    
+    unselectCurrentCategory();
+    $('div#product_type').fadeIn(600);
+    $.scrollTo($('div#product_type'), 400);
+	}
 
   function showScreenToBuy() {
   	var sell_count = $('#shopping_cart').find('.sell_display li').length;
@@ -409,12 +443,11 @@
 	   	}
 	   	return;
 	  }
-
     for_what = "for_buying";
     $("#sell_message").hide();
     $("#buy_message").show();
-    
-    $('#checkout_button').show();
+    $("#done_button_for_buy").show();
+    $('#checkout_button').hide();
     $('#done_button').hide();
     
     $("#sell_and_buy_message_guide span.buy").show();
@@ -441,8 +474,8 @@
     for_what = "for_selling";
     $("#sell_message").show();
     $("#buy_message").hide();
-    
     $('#checkout_button').hide();
+    $("#done_button_for_buy").hide();
     $('#done_button').show();
     $("#sell_and_buy_message_guide span.buy").hide();
     $("#sell_and_buy_message_guide span.sell").show();
