@@ -10,12 +10,12 @@ class ApplicationController < ActionController::Base
 
     #clear_cart_products
     
-    #return unless Rails.env == 'production'
-    #if !/^www/.match(request.host)
-      #redirect_to "https://www." + request.host_with_port + request.fullpath 
-    #elsif !request.ssl?
-    #  redirect_to :protocol => "https://"
-    #end
+    return unless Rails.env == 'production'
+    if !/^www/.match(request.host)
+      redirect_to "https://www." + request.host_with_port + request.fullpath 
+    elsif !request.ssl?
+      redirect_to :protocol => "https://"
+    end
   end
 
   def cart_products
