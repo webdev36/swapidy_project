@@ -11,10 +11,16 @@
   	<a style="position: absolute; left: 0; bottom: 50%; background-color: #38B4DE; padding: 5px;">Sell</a>
   	<a style="position: absolute; right: 0; bottom: 50%; background-color: #fa3e6e; padding: 5px;">Buy</a>
   	<% if cart_products[:sell].count > 3 %>
-	 	  <button class="prev" style="width: 30px;position: absolute;top:50px;left: 20px">&lt;&lt;</button>
-	 	  <button class="next" style="width: 30px;position: absolute;top: 50px;left: 350px;">&gt;&gt;</button>
+	 	  <button class="prev" style="width: 30px;position: absolute;top:50px;left: 110px">&lt;&lt;</button>
+	 	  <button class="next" style="width: 30px;position: absolute;top: 50px;left: 480px;">&gt;&gt;</button>
  	  <% end %>
-      <div class= "sell_display" style=" height:120px; float: left; left:0px; width: 500px; margin: 5px 0 5px 100px;" >
+ 	  <% if cart_products[:sell].count == 1 %>
+      	<div class= "sell_display step_sell_1">
+      <%elsif cart_products[:sell].count == 2%>
+      	 <div class= "sell_display step_sell_2">
+      <%elsif cart_products[:sell].count >= 3%>
+      	 <div class= "sell_display step_sell_3">
+       <%end%>
        	<ul style="position: none;">
         <% cart_products[:sell].each do |order_product|%>
        		<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product} %>
@@ -22,10 +28,16 @@
         </ul>
       </div>
     <% if cart_products[:buy].count > 3 %>
-      <button class="prev_buy" style="width: 30px;top: 50px;right: 410px;position: absolute">&lt;&lt;</button>
- 	 	  <button class="next_buy"style="width: 30px;top: 50px;right: 80px;position: absolute">&gt;&gt;</button>
+      <button class="prev_buy" style="width: 30px;top: 50px;right: 480px;position: absolute">&lt;&lt;</button>
+ 	  <button class="next_buy"style="width: 30px;top: 50px;right: 120px;position: absolute">&gt;&gt;</button>
     <% end %>
-      <div class="buy_display" style=" float:right; height: 130px; margin: 5px 110px 5px 0px;" >
+     <% if cart_products[:buy].count == 1 %>
+      <div class="buy_display step_buy_1">
+       <% elsif cart_products[:buy].count == 2 %>
+       <div class="buy_display step_buy_2">
+       <% elsif cart_products[:buy].count >= 3 %>
+       <div class="buy_display step_buy_3">
+       <%end%>
        <ul style="position: none;">
       	<% cart_products[:buy].each do |order_product| %>
         	<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product}%>
@@ -48,3 +60,46 @@
 	<a id="checkout_button" href="javascript:gotoCheckout();" style="display: none; height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>
 	<a id="done_button_for_buy"  href="javascript:showScreenToTrade();" style="height: 20px; top: 60px; position: absolute;display:none; left: 50%; margin-left: -83px;" class="btn show_button_buy">Done</a>
 <% end %>
+<style>
+	.step_sell_1{
+		left: 25% !important;
+		width: 190px!important;
+		margin: 5px 0px 5px -50px;
+		height:120px; 
+		float: left;
+	}
+		.step_sell_2{
+		left: 25% !important;
+		width: 190px !important;
+		margin: 5px 0px 5px -50px;
+		height:120px; 
+		float: left;
+	}
+		.step_sell_3{
+		left: 25% !important;
+		width: 285px !important;
+		margin: 5px 0px 5px -130px;
+		height:120px; 
+		float: left;
+	}
+	.step_buy_1 {
+		width: 95px !important; 
+		left: 75% !important; 
+		margin: 5px 0px 5px -200px;
+		height:120px;
+		
+	}
+	.step_buy_2 {
+		width: 190px !important; 
+		left: 75% !important; 
+		margin: 5px 0px 5px -280px;
+		height:120px;
+		
+	}
+	.step_buy_3 {
+		width: 285px !important; 
+		left: 75% !important; 
+		margin: 5px 0px 5px -260px;
+		height:120px;
+	}
+</style>
