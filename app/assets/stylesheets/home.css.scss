@@ -896,6 +896,7 @@ text-decoration:underline;
   top: 60px;
   left: 0px;
   width: 100%;
+  min-width:500px;
   height: 130px;
   opacity: 0.95;
   z-index:1000;
@@ -923,12 +924,17 @@ text-decoration:underline;
 
 #sell_and_buy_message_guide {
   position: fixed;
-  right: 0px;
-  top: 192px;
+  left: 10px;
+  top: 292px;
   padding:5px;
   background-color: #fa3e6e;
-  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  border-bottom-right-radius: 10px;
   z-index: 10;
+  width:100px;
+    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.3);
+
 }
 
 .popup_select_price {

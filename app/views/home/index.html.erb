@@ -50,8 +50,8 @@
 <%= render :partial => "/home/index_head_guide" %>
 
 <a id="sell_and_buy_message_guide" style="display: none;">
-	<span class="sell">You are currently selling. Click on Done on top once finished</span>
-	<span class="buy" style="display: none;">You are currently buying. Click on Checkout on top once finished</span>
+	<span class="sell">You are currently choosing your products to swap. Click on "Swap for..." on top once finished</span>
+	<span class="buy" style="display: none;">You are currently choosing which products you want. Click on "Checkout" on top once finished</span>
 </a>
 
 <a id="product_scrollup_link" style="display: none;" href="#" onclick="$.scrollTo($('div#product_type'), 400);"><img src="/images/scrollup.png"></a>
@@ -76,9 +76,9 @@
   <div id="product_type" style="display:none;">
     <div class="headings_pink" style="text-align:center;">
       <div style="text-align:center;">
-      	<span >What do you want to trade today?</span><br/>
-      	<span id="sell_message" class="motto_sub">Choose your product you want to sell</span>
-      	<span style="display:none;" id="buy_message" class="motto_sub">Choose your product you want to buy</span>
+      	<span >What do you want to swap today?</span><br/>
+      	<span id="sell_message" class="motto_sub">Select what you have</span>
+      	<span style="display:none;" id="buy_message" class="motto_sub">Choose what you want</span>
       </div>
     </div>
     <div id="slider-code" class="span12">
@@ -159,7 +159,7 @@
         <% end %>
       </div>
       <div style="display: block;">
-        <div class="isotop_empty_message" style="display: none;">Sorry, there is no such product.</div>
+        <div class="isotop_empty_message" style="display: none;">Sorry, this product is not available.</div>
         <% cache("homepage_product_container_category_#{category.id}", :expires_in => 1.hour) do %>
           <div class="product_container">
             <div id="products" class="isotope" style="padding-bottom: 150px;">

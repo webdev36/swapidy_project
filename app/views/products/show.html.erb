@@ -1,36 +1,12 @@
-
-<div class="headings_pink show_info_heading">Choose your product's condition</div>
-
-<div class="content " style="position: absolute; width:100%; min-height:550px; height: 700px; background-repeat:no-repeat; background-position: 0px 0px; top: 60px; left: 0px; background-image:url(/images/checkout/bg-1.png); -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;">
-<div class="container">
-  <div class="show_product_image">
-    <img class="show_product_img" src="<%= @product.main_image_url(:large) %>">  
-  </div>
-
-<div class="checkout_stuff">
-<% if (params["for"] && params["for"] == "sell") %>
-  <form action="/orders/sell/<%= @product.id %>" method="post">
-<% else %>
-  <form action="/orders/buy/<%= @product.id %>" method="post">
-<% end %>
-    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
-    
-    <div class="show_container">
-      <%= render :partial => "/products/detail_info"%>
-    <div style="text-align:center; width: 100%; display: block;">
-      <% if @error_message && !@error_message.blank? %>
-        <div class="alert alert-error" style="width: 400px; display: block; margin: 0 auto;"><%= @error_message %></div><br/>
-      <% end %>
-      <% if (params["for"] && params["for"] == "sell") %>
-        <input type="submit" value="Sell" class="show_button_buy"  />
-      <% else %>
-        <input type="submit" value="Buy" class="show_button_buy"/>
-      <% end %>
-    </div>
-</form>
-    </div>
-  </div>
+<div class="content" >
+	<div class="container">
+	  <div class="show_product_image">
+	    <img class="show_product_img" src="<%= @product.main_image_url(:large) %>">  
+	  </div>
+		<div class="checkout_stuff">
+	    <div class="show_container">
+	      <%= render :partial => "/products/detail_info"%>
+	    </div>
+	  </div>
+	</div>
 </div>
