@@ -477,10 +477,25 @@ label {
 }
 
 .option-set {
-  display: inline-block!important;
-  width: 140px;
+  display: inline-block !important;
+  width: 120px;
   text-align: left;
   vertical-align: top;
+}
+.sub_frame {
+  float: left; 
+  min-width: 100px;
+}
+
+.big_width_filter .option-set {
+  width: 150px !important;
+}
+.big_width_filter .sub_frame {
+  width: 140px !important;
+}
+.attr_filter {
+  display: block; 
+  min-width: 90px;
 }
 .product_model{
   font-size: 20px;
