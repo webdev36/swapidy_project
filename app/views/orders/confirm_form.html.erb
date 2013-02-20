@@ -9,8 +9,11 @@
 <div class="container" style="position: relative;">
   <div class="headings_pink" style="margin-left: 340px;margin-top: -45px;">Confirm Your Details</div>
   <div class="confirm_image_container" style="margin-top: -45px;">
-  	<%= render :partial => "/orders/order_product_images" %>
+    <div style ="margin-top:100px;">
+  	 <%= render :partial => "/orders/order_product_images" %>
+    </div>
   </div>
+
   <div class="confirm_container" style="bottom: 235px;">
     <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
     <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
@@ -51,8 +54,8 @@
             </div>
             <% if current_user.extra_money_for(cart_amount) > 0 && current_user.has_card_info? %>
             <div>
-              Your money balance is not enough.
-              You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %>
+              
+              You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %><br/>
               <input type="button" value="Change Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="refresh_add_honey_form();" />
             </div>
             <% end %>

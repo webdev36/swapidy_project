@@ -977,6 +977,9 @@ width: 100%;
   left: 500px !important;
   bottom: 175px
 }
+.success_img{
+  height:130px;
+}
 .rope_left{
   position: fixed;
   top:0px;
