@@ -2,7 +2,7 @@
 <li class="dropdown">
   <div class="profile_info_nav">
     <% if current_user.provider_image && !current_user.provider_image.blank? %>
-      <img class="nav_icons nav_profile" src="<%= current_user.provider_image %>">
+      <img class="nav_icons nav_profile" src="<%= current_user.provider_image.gsub('http://', 'https://') %>">
     <% else %>
       <img class="nav_icons nav_profile" src="/images/profile_icon.png">
     <% end %>
