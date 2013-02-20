@@ -3,8 +3,11 @@
 </div>
 
 <script language="JavaScript">
-  <% unless cart_products_empty? %>
-	  $(function() {
+	<% if cart_products_empty? %>
+		var show_checkout_bar = false;
+  <% else %>
+  	var show_checkout_bar = true;
+    $(function() {
 			display_checkout_sliders();
 		});
 	<% end %>
@@ -26,6 +29,7 @@
 	});
 			
 	function display_checkout_sliders(){
+		show_checkout_bar = true;
 		if ($('#shopping_cart').find('.sell_display li').length >= 1) {
 			$('#shopping_cart .sell_display').jCarouselLite({
 	      btnNext: ".next",
@@ -56,12 +60,13 @@
 	<span class="buy" style="display: none;">You are currently choosing which products you want. Click on "Checkout" on top once finished</span>
 </a>
 
-<a id="product_scrollup_link" style="display: none;" href="#" onclick="$.scrollTo($('div#product_type'), 400);"><img src="/images/scrollup.png"></a>
+<a id="product_scrollup_link" style="display: none;" href="#" onclick="scrollToSelectCategory();"><img src="/images/scrollup.png"></a>
 <script>
+	
 	$(document).ready(function(){
 	  $(window).scroll(function(){
 		  // get the height of #wrap
-		  var h = 800;
+		  var h = 600;
 		  var y = $(window).scrollTop();
 		  if( y > (h*0.75) ){
 		   $("#product_scrollup_link").fadeIn("slow");
@@ -103,8 +108,8 @@
 <% end %>
 
 <% Category.all.each do |category| %>
-    <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none; padding-top: 20px;">
-      <div class="headings_pink_edit" style="text-align: center;padding-top: 50px; padding-bottom: 0px; margin-bottom: 0px;">Choose your model</div>
+    <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none;">
+      <div class="headings_pink_edit" style="text-align: center; padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">Choose your model</div>
       <div style="display: block;padding:0 0 30px;">
 
         <ul id="product_models" class="nav nav-pills" style="position: relative;">
@@ -237,15 +242,8 @@
 	
 	  $('#slider-code').tinycarousel({display: 2});
 	  //sliderHeight();
-	  showScreenToSell();
+	  showScreenToSell('not_scroll');
 	  $('div#product_type').fadeIn(600);
-	
-		$('#buttons a').click(function() {
-	    showScreenToSell();
-	    $('div#product_type').fadeIn(600);
-	    $.scrollTo($('div#product_type'), 400);
-	    showIsoTope();
-	  });
 	
 	  $('#product_type .cat_item').live('click', function() {
 	     
@@ -263,7 +261,7 @@
 	     $("#container_" + current_category_id + " .attr_" + current_model_id + '_' + for_what).removeClass("hidden_filter");
 	
 	     $("#container_" + current_category_id).fadeIn(600);
-	     $.scrollTo($("#container_" + current_category_id), 400);
+	     scrollToSelectModel();
 	     showIsoTope();
 	  });
 
@@ -321,6 +319,22 @@
   //  }
   //  $('#s3slider').css({height: slideHeight});
   //}
+	
+	function scrollToSelectCategory() {
+		if(show_checkout_bar){
+			$.scrollTo($('div#product_type'), 400, {offset: {top:-220, left:0}});
+		}else{
+			$.scrollTo($('div#product_type'), 400, {offset: {top:-80, left:0}});	
+		}
+	}
+	
+	function scrollToSelectModel() {
+		if(show_checkout_bar){
+			$.scrollTo($("#container_" + current_category_id), 400, {offset: {top:-200, left:0}});
+		}else{
+			$.scrollTo($("#container_" + current_category_id), 400, {offset: {top:-60, left:0}});
+		}
+	}
   
   function get_filter_options() {
     var filters = {};
@@ -406,7 +420,7 @@
 	   	 alert("You have not selected any products to buy");
 	   }else if(sell_count == 0){
 	   	 alert("You have not selected any products to sell");
-	   	 showScreenToSell();
+	   	 showScreenToSell('scroll');
 	   }else{
 	   	 window.location = "/orders/new";	
 	   }
@@ -416,7 +430,7 @@
 	  if(sell_count == 0) {
 	   	alert("You have not selected any products to sell");
 	   	if(for_what == "for_buying") {
-	   		showScreenToSell();
+	   		showScreenToSell('scroll');
 	   	}
 	   	return;
 	  }
@@ -443,7 +457,7 @@
     
     unselectCurrentCategory();
     $('div#product_type').fadeIn(600);
-    $.scrollTo($('div#product_type'), 400);
+    scrollToSelectCategory();
 	}
 
   function showScreenToBuy() {
@@ -451,7 +465,7 @@
 	  if(sell_count == 0) {
 	   	alert("You have not selected any products to sell");
 	   	if(for_what == "for_buying") {
-	   		showScreenToSell();
+	   		showScreenToSell('scroll');
 	   	}
 	   	return;
 	  }
@@ -478,11 +492,10 @@
     
     unselectCurrentCategory();
     $('div#product_type').fadeIn(600);
-    $.scrollTo($('div#product_type'), 400);
-    
+    scrollToSelectCategory();
   }
 	
-  function showScreenToSell() {
+  function showScreenToSell(scroll) {
     for_what = "for_selling";
     $("#sell_message").show();
     $("#buy_message").hide();
@@ -505,7 +518,10 @@
   	
   	unselectCurrentCategory();
     $('div#product_type').fadeIn(600);
-    $.scrollTo($('div#product_type'), 400);
+    if(scroll == 'scroll'){
+    	scrollToSelectCategory();	
+    }
+    
   }
   
   function centerIsotypeImages(){
