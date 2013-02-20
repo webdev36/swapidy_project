@@ -970,14 +970,13 @@ width: 100%;
   font-family: 'myriad-s';
 }
 .index_success{
-  float: left;
-  width: 400px;
+  width: 500px;
   position:relative;
-  left: 500px !important;
-  bottom: 175px
+  bottom: 175px;
+  margin-left: 500px;
+
 }
 .success_img{
-  height:130px;
 }
 .rope_left{
   position: fixed;
