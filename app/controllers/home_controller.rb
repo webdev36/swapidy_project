@@ -1,8 +1,7 @@
 class HomeController < ApplicationController
 
   layout 'application_with_left_menu', :only => [:static_page, :contact_us]
-  layout 'application_with_slider', :only => [:index]
-
+  
   ADMIN_EMAILS = %w(adam@swapidy.com pulkit@swapidy.com)
 
   before_filter :require_login, :only => [:settings]
@@ -22,22 +21,21 @@ class HomeController < ApplicationController
   end
 
   def contact_us
-
     page_title "Contact Us"
     unless verify_recaptcha()
       @error_message = "Please enter the text correctly."
-    return
+      return
     end
 
     @contact = params[:contact]
     if @contact.nil? || (@contact[:email] || "").blank? || (@contact[:subject] || "").blank? || (@contact[:message] || "").blank?
       @error_message = "You have to enter all of the fields."
-    return
+      return
     end
 
     unless @contact[:email].match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i)
       @error_message = "Please enter a valid email."
-    return
+      return
     end
 
     ADMIN_EMAILS.each {|email| UserNotifier.contact_us(email, @contact).deliver }

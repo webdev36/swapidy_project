@@ -55,8 +55,8 @@ class ApplicationController < ActionController::Base
   
   def cart_products_empty?
     return true unless session[:cart_products] 
-    return false if cart_products[:sell] && !cart_products[:sell].empty?
-    return false if cart_products[:buy] && !cart_products[:buy].empty?
+    return false if session[:cart_products][:sell] && !session[:cart_products][:sell].empty?
+    return false if session[:cart_products][:buy] && !session[:cart_products][:buy].empty?
     return true
   end
 
