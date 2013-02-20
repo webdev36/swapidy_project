@@ -274,6 +274,7 @@ RailsAdmin.config do |config|
       field :title
       field :category
       field :images
+      field :weight_lb
       field :comment
     end
     export do; end
@@ -283,6 +284,7 @@ RailsAdmin.config do |config|
       field :product_model_attributes
       field :images
       field :comment
+      field :weight_lb
     end
     create do
       field :title
@@ -290,6 +292,7 @@ RailsAdmin.config do |config|
       field :product_model_attributes
       field :images
       field :comment
+      field :weight_lb
     end
     edit do; end
   end
