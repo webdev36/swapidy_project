@@ -3,8 +3,8 @@
 <% else %>
 
  <div class="order_slider_sell">
-	  <button class="prev product_button_buy" style="width: 30px;position: absolute;top:30px;left: -125px;">&lt;</button>
-	  <button class="next product_button_buy" style="width: 30px;position: absolute;top: 30px;left: 25px;z-index: 1000">&gt;</button>
+	  <button class="prev product_button_buy" style="width: 30px;position: absolute;top:10px;left: -130px;">&lt;</button>
+	  <button class="next product_button_buy" style="width: 30px;position: absolute;top: 10px;left: 20px;z-index: 1000">&gt;</button>
   <div class="order_sell_display" style="width: 100%;margin: auto">
   	<ul id="mycarousel"  class="jcarousel-skin">
 		  <% cart_products[:sell].each do |order_product|%>
@@ -17,8 +17,8 @@
   </div>
   </div>
   <div class="order_slider_buy">
-	  <button class="prev_buy product_button_buy" style="width: 30px;top: 30px;right: 160px;position: absolute;z-index: 1000">&lt;</button>
-	  <button class="next_buy product_button_buy"style="width: 30px;top: 30px;right: 10px;position: absolute">&gt;</button>
+	  <button class="prev_buy product_button_buy" style="width: 30px;top: 10px;right: 150px;position: absolute;z-index: 1000">&lt;</button>
+	  <button class="next_buy product_button_buy"style="width: 30px;top: 10px;right: 20px;position: absolute">&gt;</button>
   	<div class="order_buy_display" style="width: 100%; text-align: right;margin:auto;" >
   	<ul id="mycarousel"  class="jcarousel-skin">
     	<% cart_products[:buy].each do |order_product| %>
@@ -40,7 +40,7 @@
 	.order_slider_sell{
 		position: relative;
 		height: 150px;
-		margin: 60px 0 0 0;
+		margin: 80px 0 0 0;
 		width: 200px;
 		float: left;
 		display:inline-block
@@ -48,7 +48,7 @@
 	.order_slider_buy{
 		position: relative;
 		height: 150px;
-		margin: 60px 0 0 0;
+		margin: 80px 0 0 0;
 		width: 200px;
 		float: right;
 		display:inline-block
