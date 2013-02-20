@@ -3,9 +3,11 @@
 </div>
 
 <script language="JavaScript">
-  $(function() {
-		display_checkout_sliders();
-	});
+  <% unless cart_products_empty? %>
+	  $(function() {
+			display_checkout_sliders();
+		});
+	<% end %>
 	
 	$(".del-product").live('click', function(){
 		var url_ajax = '/home/del_product';
@@ -182,72 +184,143 @@
   var current_model_id = "filter_model_all";
   var current_popup_id = "";
 
-	$('.popup_select_price .price_type').live('click', function(){
-  	var url_select_price = '/home/swap_product';
-		$.ajax({
-			url : url_select_price,
-			beforeSend : function(xhr) {
-	        	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-	      	},
-	      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
-			type: 'POST',
-			dataType: 'script', 
-			success:function(){
-			}
-		});
-		$("#" + current_popup_id).removeClass('active');
-		$("#" + current_popup_id).fadeOut('slow');
-		current_popup_id = "";
-  });
-  $("#done_button").live('click',function(){
-  	$(".show_result").show();
-  });
-  
-  $("#done_button_for_buy").live('click',function(){
-  	$(".show_result").show();
-  });
-  
-  $(".button_for_buy a, .button_for_sell a").live("click", function(){
-  	var popup_id = $(this).attr("popup_id");
-  	var $isotope_item = $(this).parent().parent().parent().parent(); 
-  	new_left = $isotope_item.position().left + 16;
-  	new_top = $isotope_item.position().top + 250;
-  	
-  	$('#' + popup_id).css({"left": new_left + 'px', "top": new_top + 'px'});
-  	$('#' + popup_id).css({"opacity": '1', "-webkit-transform": 'none', "transform": 'none', 'display': 'block'});
-  	$('#' + popup_id).removeClass('isotope-item');
-  	$('#' + popup_id).removeClass('isotope-hidden');
-  	if($('#' + popup_id).hasClass('active')){
-	    $('#' + popup_id).removeClass('active');
-	    $('#' + popup_id).hide();
-	    current_popup_id = "";
-	  }else{
-	  	if(current_popup_id != ""){
-	  		$('#' + current_popup_id).removeClass('active');
-	  		$('#' + current_popup_id).hide();
-	  	}
-	    $('#' + popup_id).addClass('active');
-	    $('#' + popup_id).show();
-	    current_popup_id = popup_id;
-	  }
+	$(document).ready(function() {
+		$('.popup_select_price .price_type').live('click', function(){
+	  	var url_select_price = '/home/swap_product';
+			$.ajax({
+				url : url_select_price,
+				beforeSend : function(xhr) {
+		        	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+		      	},
+		      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
+				type: 'POST',
+				dataType: 'script', 
+				success:function(){
+				}
+			});
+			$("#" + current_popup_id).removeClass('active');
+			$("#" + current_popup_id).fadeOut('slow');
+			current_popup_id = "";
+	  });
+	  $("#done_button").live('click',function(){
+	  	$(".show_result").show();
+	  });
+	  
+	  $("#done_button_for_buy").live('click',function(){
+	  	$(".show_result").show();
+	  });
+	  
+	  $(".button_for_buy a, .button_for_sell a").live("click", function(){
+	  	var popup_id = $(this).attr("popup_id");
+	  	var $isotope_item = $(this).parent().parent().parent().parent(); 
+	  	new_left = $isotope_item.position().left + 16;
+	  	new_top = $isotope_item.position().top + 250;
+	  	
+	  	$('#' + popup_id).css({"left": new_left + 'px', "top": new_top + 'px'});
+	  	$('#' + popup_id).css({"opacity": '1', "-webkit-transform": 'none', "transform": 'none', 'display': 'block'});
+	  	$('#' + popup_id).removeClass('isotope-item');
+	  	$('#' + popup_id).removeClass('isotope-hidden');
+	  	if($('#' + popup_id).hasClass('active')){
+		    $('#' + popup_id).removeClass('active');
+		    $('#' + popup_id).hide();
+		    current_popup_id = "";
+		  }else{
+		  	if(current_popup_id != ""){
+		  		$('#' + current_popup_id).removeClass('active');
+		  		$('#' + current_popup_id).hide();
+		  	}
+		    $('#' + popup_id).addClass('active');
+		    $('#' + popup_id).show();
+		    current_popup_id = popup_id;
+		  }
+	  });
+	
+	  $('#slider-code').tinycarousel({display: 2});
+	  //sliderHeight();
+	  showScreenToSell();
+	  $('div#product_type').fadeIn(600);
+	
+		$('#buttons a').click(function() {
+	    showScreenToSell();
+	    $('div#product_type').fadeIn(600);
+	    $.scrollTo($('div#product_type'), 400);
+	    showIsoTope();
+	  });
+	
+	  $('#product_type .cat_item').live('click', function() {
+	     
+	     if(current_category_id == $(this).parent().attr("id")){
+	       return;
+	     }
+	     
+	     unselectCurrentCategory();
+	
+	     current_category_id = $(this).parent().attr("id");
+	     $("#" + current_category_id).addClass("select");
+	
+	     $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
+	     $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
+	     $("#container_" + current_category_id + " .attr_" + current_model_id + '_' + for_what).removeClass("hidden_filter");
+	
+	     $("#container_" + current_category_id).fadeIn(600);
+	     $.scrollTo($("#container_" + current_category_id), 400);
+	     showIsoTope();
+	  });
+
+	  $('.product_search_container .product_model').live('click', function() {
+	     $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
+	     $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
+	     $("#container_" + current_category_id + " .product_model").removeClass("active");
+	     
+	     current_model_id = $(this).attr("id");
+	     $("#container_" + current_category_id + " .attr_" + current_model_id + '_' + for_what).removeClass("hidden_filter");
+	     $("#container_" + current_category_id + " #" + current_model_id).addClass("active");
+	     showIsoTope();
+	  });
+	
+	  $('.product_search_container input').live('change', function() {
+	     showIsoTope();
+	  });
+	  
+	  $('#product_type .viewport .category').live("mouseenter", function(){
+	    $src = $(this);
+	    $src.removeClass("blur").addClass("active");
+	    $('#product_type .viewport .category').not(".select").not($src).removeClass("active").addClass("blur");
+	  });
+	  
+	  $('#product_type .viewport .category').live("mouseleave", function(){
+	    $(this).removeClass("active");
+	    if(!$(this).hasClass("select")) {
+	      $(this).addClass("blur");
+	    }
+	  });
+	  
+	  $('#slider-code').live('mouseleave', function() {
+	    if(current_category_id == "") {
+	      $('#product_type .viewport .category').removeClass('active').removeClass('blur');
+	    }else{
+	      if(!$("#" + current_category_id).hasClass("select")) {
+	        $("#" + current_category_id).addClass("select");
+	      }
+	      if(!$("#" + current_category_id).hasClass("blur")) {
+	        $("#" + current_category_id).removeClass("blur");
+	      }
+	    }
+	  });
+
   });
 
-  $('#slider-code').tinycarousel({display: 2});
-  sliderHeight();
-  showScreenToSell();
-  $('div#product_type').fadeIn(600);
+  //$(window).on('resize', function() {
+  //  sliderHeight();
+  //});
 
-  $(window).on('resize', function() {
-    sliderHeight();
-  });
-
-  function sliderHeight() {
-    var slideHeight = parseInt($(window).height() - $('.navbar-fixed-top').height() - $('.navbar-fixed-top').height(), 10);
-    if(slideHeight >= 700) {
-        slideHeight = 700;
-    }
-    $('#s3slider').css({height: slideHeight});
-  }
+  //function sliderHeight() {
+  //  var slideHeight = parseInt($(window).height() - $('.navbar-fixed-top').height() - $('.navbar-fixed-top').height(), 10);
+  //  if(slideHeight >= 700) {
+  //      slideHeight = 700;
+  //  }
+  //  $('#s3slider').css({height: slideHeight});
+  //}
   
   function get_filter_options() {
     var filters = {};
@@ -303,34 +376,7 @@
     //alert(comboFilters);
     return comboFilters;
   }
-     
-  $('#buttons a').click(function() {
-    showScreenToSell();
-    $('div#product_type').fadeIn(600);
-    $.scrollTo($('div#product_type'), 400);
-    showIsoTope();
-  });
-
-  $('#product_type .cat_item').live('click', function() {
-     
-     if(current_category_id == $(this).parent().attr("id")){
-       return;
-     }
-     
-     unselectCurrentCategory();
-
-     current_category_id = $(this).parent().attr("id");
-     $("#" + current_category_id).addClass("select");
-
-     $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
-     $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
-     $("#container_" + current_category_id + " .attr_" + current_model_id + '_' + for_what).removeClass("hidden_filter");
-
-     $("#container_" + current_category_id).fadeIn(600);
-     $.scrollTo($("#container_" + current_category_id), 400);
-     showIsoTope();
-  });
- 
+   
   function unselectCurrentCategory(){
   	if(current_category_id != "") {
        $("#container_" + current_category_id).hide();
@@ -339,21 +385,6 @@
        current_category_id = "";
      }
   }
-  
-  $('.product_search_container .product_model').live('click', function() {
-     $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
-     $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
-     $("#container_" + current_category_id + " .product_model").removeClass("active");
-     
-     current_model_id = $(this).attr("id");
-     $("#container_" + current_category_id + " .attr_" + current_model_id + '_' + for_what).removeClass("hidden_filter");
-     $("#container_" + current_category_id + " #" + current_model_id).addClass("active");
-     showIsoTope();
-  });
-
-  $('.product_search_container input').live('change', function() {
-     showIsoTope();
-  });
   
   function showIsoTope(){
     $("#container_" + current_category_id + ' .product_container').fadeIn(600);
@@ -367,32 +398,6 @@
     }
   }
   
-  $('#product_type .viewport .category').live("mouseenter", function(){
-    $src = $(this);
-    $src.removeClass("blur").addClass("active");
-    $('#product_type .viewport .category').not(".select").not($src).removeClass("active").addClass("blur");
-  });
-  
-  $('#product_type .viewport .category').live("mouseleave", function(){
-    $(this).removeClass("active");
-    if(!$(this).hasClass("select")) {
-      $(this).addClass("blur");
-    }
-  });
-  
-  $('#slider-code').live('mouseleave', function() {
-    if(current_category_id == "") {
-      $('#product_type .viewport .category').removeClass('active').removeClass('blur');
-    }else{
-      if(!$("#" + current_category_id).hasClass("select")) {
-        $("#" + current_category_id).addClass("select");
-      }
-      if(!$("#" + current_category_id).hasClass("blur")) {
-        $("#" + current_category_id).removeClass("blur");
-      }
-    }
-  });
-
 	function gotoCheckout(){
 	   var sell_count = $('#shopping_cart').find('.sell_display li').length;
 	   var buy_count = $('#shopping_cart').find('.buy_display li').length;
