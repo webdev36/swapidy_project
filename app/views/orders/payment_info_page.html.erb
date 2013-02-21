@@ -1,20 +1,21 @@
 <style type="text/css">
 body{
-  background: url('/bg.png');
+  background: whitesmoke;
 }
 .content{
   height: 700px;
+  background: white;
 }
 </style>
 <div class="content" style="">
 
 <%= render :partial => "steps", :locals => {:current_step => 2 } %>
-<div class="container" style="position: relative;">
-  <div class="headings_pink" style="position:relative; bottom:30px; left:330px;">Payment Information</div>
+<div class="container" style="position: relative; height:700px;">
+  <div class="headings_pink" style="text-align:center;">Payment Information</div>
   <div class="confirm_image_container" style="position: absolute;top: 80px;width: 480px;left: 215px;-webkit-border-radius: 20px;padding: 10px;">
   	<%= render :partial => "/orders/order_product_images" %>
   </div>
-  <div class="payment_container">
+  <div class="payment_container" style="">
     <div id="checkout_content" class="payment_editing_block">
       <div class="payment_group_contents">
         <div id="payment_form" class="valid_form payout_form standard_form paypal" style="display: block;">
