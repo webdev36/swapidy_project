@@ -4,7 +4,6 @@ $("#shopping_cart").html("<%= raw escape_javascript(@return_content) %>");
   <% if @changed_type && @changed_type == :sell %>
 	  $("#product_items .sell_display").hide();
 	  $("#product_items .sell_display").fadeIn('slow');
-	  $(".show_result").show();
   <% elsif @changed_type && @changed_type == :buy %>
 	  $("#product_items .buy_display").hide();
 	  $("#product_items .buy_display").fadeIn('slow');

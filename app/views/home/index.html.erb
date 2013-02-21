@@ -475,12 +475,21 @@
 	   	}
 	   	return;
 	  }
+	var check_buying = $('#shopping_cart').find('.buy_display li').length;
+	if(check_buying == 0){
+		$('#text_buying').show();
+		$("#done_button_for_buy").hide();
+	}
+	if(check_buying > 0){
+		$('#text_buying').hide();
+		$("#done_button_for_buy").show();
+	}
     for_what = "for_buying";
     $("#sell_message").hide();
     $("#buy_message").show();
-    $("#done_button_for_buy").hide();
+   // $("#done_button_for_buy").show();
     $('#checkout_button').hide();
-    $('#text_buying').show();
+    
     $('#done_button').hide();
     
     $("#sell_and_buy_message_guide span.buy").show();
