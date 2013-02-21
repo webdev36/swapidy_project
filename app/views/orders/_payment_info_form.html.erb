@@ -21,7 +21,7 @@
 	<br />
 		  <label style="color:black; font-family:'myriad';">Total due today:</label>
 		  <span style="color:black; font-family:'myriad'; font-size:20px;">
-		  <% if current_user.extra_money_for(cart_amount) >= 0 %>
+		  <% if (current_user.balance_amount-cart_amount) >= 0 %>
 		  	$ 0
 		  <%else%>
 		  $<%=format_num (cart_amount-current_user.balance_amount)%> 
