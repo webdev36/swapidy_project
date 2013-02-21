@@ -4,7 +4,7 @@
   <div style="position: absolute; top: 180px; width: 440px; text-align: center;">
     <%= form_for(@free_honey, :as => "free_honey", :url => "/free_honeys/create", :html => {:id => "add_honey"}) do |f| %>
       <div class="free_honey_info">
-        <p>Invite your friends by entering their email below. If they join, you'll receive 100 FREE honey (only 3 invites allowed - limited time only).</p>
+        <p>Invite your friends by entering their email below. If they join, you'll receive $10 (only 3 invites allowed - limited time only).</p>
         <p style="text-align:center;">You have <%= current_user.remain_inviation_count %> invites left.</p>
       </div>
       <% if current_user.free_money_sendable? %>
