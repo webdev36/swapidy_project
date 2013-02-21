@@ -10,30 +10,23 @@
   
   <div class="payment_product_info"><br/>
     <label style="color:black; padding-top: 10px;">Current Balance:</label>
-    <span style="color:black; font-family:'myriad'">$ <%= format_num(current_user.balance_amount) %> </span>
+    <span style="color:black; font-family:'myriad'">$<%= format_num(current_user.balance_amount) %> </span>
   </div>
   <div class="payment_product_info">
   	<br/>
-  	<% if cart_amount < 0 %>
-		  <label style="color:black; font-family:'myriad';">You get:</label>
-		  <span style="color:black; font-family:'myriad'; font-size:20px;">
-		  	$ <%= format_num(-cart_amount) %> 
+  		  	<span style="color:black; font-family:'myriad'; font-size:20px;">
+	  		$<%= format_num(current_user.balance_amount) %> - $<%= format_num(cart_amount) %> =$<%=format_num (current_user.balance_amount-cart_amount)%> 
 		  </span>
-		<% else %>
-		  <label style="color:black; font-family:'myriad';">You pay:</label>
+	<br />
+	<br />
+		  <label style="color:black; font-family:'myriad';">Total due today:</label>
 		  <span style="color:black; font-family:'myriad'; font-size:20px;">
-		  	$ <%= format_num(cart_amount) %> 
+		  <% if current_user.extra_money_for(cart_amount) >= 0 %>
+		  	$ 0
+		  <%else%>
+		  $<%=format_num (cart_amount-current_user.balance_amount)%> 
 		  </span>
 		<% end %>
 	</div>	
-  <% if cart_amount > 0 && current_user.balance_amount && current_user.balance_amount < cart_amount %>
-	  <div class="payment_product_info">
-	  	<br/>
-			<label style="color:black; font-family:'myriad';">You will be charged:</label>
-	  	<span style="color:black; font-family:'myriad'; font-size:20px;">
-	  		$ <%= format_num(cart_amount) %> - $ <%= format_num(current_user.balance_amount) %>
-		  </span>
-		</div>
-  <% end %>
   <input name="commit" class="product_button_buy" type="submit" value="Continue" style="right:60px;"/>
 <% end %>
