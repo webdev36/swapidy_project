@@ -347,7 +347,7 @@ h2{
   background-color: transparent;
 }
 
-.profile_info_nav a.plusmoney_icon {
+.profile_info_nav a.plushoney_icon {
   color: red;
   text-decoration: none;
   text-shadow: 0 1px 0 #ffffff;
@@ -404,7 +404,7 @@ h2{
   line-height: 1.5;
   margin-bottom: 10px;
 }
-.money_display{
+.honey_display{
   color:red;
 }
 .help{
@@ -414,12 +414,12 @@ h2{
   z-index: 5000;
 
 }
-.money_display img{
+.honey_display img{
   height:30px;
   position: relative;
   bottom:3px;
 }
-.show_money_symbol{
+.show_honey_symbol{
   position: relative;
   bottom:3px;
 }
@@ -488,7 +488,7 @@ a.login_forgot:hover {
   color: #1c8bc5;
   text-decoration: underline;
 }
-.free_money_info{
+.free_honey_info{
   color: #666;
   font-size: 20px;
   line-height: 1.5;
@@ -657,20 +657,20 @@ margin-left: 70px;}
   height: 280px;
   padding-bottom: 20px;
 }
-#popup-dialog_add_money{
+#popup-dialog_add_honey{
   position: fixed;
   top: 70px;
   font-family: "myriad";
 }
-#popup-dialog_add_money_1{
+#popup-dialog_add_honey_1{
   position: fixed;
   top:160px;
   font-family: "myriad";
 }
-.get_money_text{
+.get_honey_text{
   height: 40px;
 }
-.money_conversion{
+.honey_conversion{
   margin-left:90px;
   padding-top: 30px;
   height: 200px;
@@ -704,7 +704,7 @@ margin-left: 70px;}
   height: 200px;
 
 }
-.money_textbox{
+.honey_textbox{
     height: 30px;
   width: 130px;
   margin-left: 40px;
@@ -713,7 +713,7 @@ margin-left: 70px;}
   top:60px;
 
 }
-.icon_money_conversion{
+.icon_honey_conversion{
   margin-left: 100px;
   height: 25px;
 }
@@ -807,7 +807,7 @@ ul.left_menu li a {
   position: relative;
   top:10px;
 }
-#q_money{
+#q_honey{
   position: relative;
   bottom:10px;
   right:15px;
@@ -973,7 +973,7 @@ width: 100%;
   width: 500px;
   position:relative;
   bottom: 175px;
-  margin-left: 500px;
+  margin-left: 470px;
 
 }
 .success_img{
