@@ -25,10 +25,10 @@ class SwapidySetting < ActiveRecord::Base
   end
   
   def self.init_default_titles
-    [["FREE_HONEY-DEFAULT_RECEIVER_HONEY", "50.0", "Float"],
-     ["FREE_HONEY-DEFAULT_REWARD_HONEY", "100.0", "Float"],
-     ["FREE_HONEY-DEFAULT_EXPIRED_DAYS", "7", "Number"],
-     ["REDEEM-DEFAULT_HONEY", "50.0", "Float"],
+    [["FREE_MONEY-DEFAULT_RECEIVER_MONEY", "50.0", "Float"],
+     ["FREE_MONEY-DEFAULT_REWARD_MONEY", "100.0", "Float"],
+     ["FREE_MONEY-DEFAULT_EXPIRED_DAYS", "7", "Number"],
+     ["REDEEM-DEFAULT_MONEY", "50.0", "Float"],
      ["REDEEM-DEFAULT_EXPIRED_DAYS", "7", "Number"]  ].each do |setting|
         SwapidySetting.create(:title => setting[0], :value => setting[1], :value_type => setting[2])   
    end

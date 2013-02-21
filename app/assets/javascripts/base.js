@@ -26,22 +26,15 @@ $(function() {
     hidePopup();
   });
   
-  //honey scoreboard
-  $('.honey_currency_plus').mouseover(function(){
-    $(this).attr("src",'/images/honey_currency_plus_hover.png');
-  })
-  .mouseout(function(){
-    $(this).attr("src",'/images/honey_currency_plus.png');
-  });
 
-    $('.nav_notification').mouseover(function(){
+  $('.nav_notification').mouseover(function(){
     $(this).attr("src",'/images/notification_icon_hover.png');
   })
   .mouseout(function(){
     $(this).attr("src",'/images/notification_icon.png');
   });
 
-    $('#profile_group').mouseover(function(){
+  $('#profile_group').mouseover(function(){
     $(this).attr("src",'/images/profile_icon_hover.png');
   })
   .mouseout(function(){

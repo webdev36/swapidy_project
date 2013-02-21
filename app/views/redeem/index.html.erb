@@ -25,13 +25,13 @@ margin-top: 40px;
 </style>
 <div class="body" style="max-height:800px;" id='redeem_bg'>
   <div class="content" style="width:100%; max-height:800px; position: relative; z-index: 0; min-height:570px; background-repeat:no-repeat; background-position: 0px 0px; top: 41px; left: 0px;">
-    <div style="position:absolute; width:100%;overflow:hidden; ";>
+    <div style="position:absolute; width:100%; overflow:hidden;">
     <img src="images/redeem/bg.jpg">
     </div>
 
     <div class="container min_height_containner">
     <div id="reedem-box" style="background-image:url(/images/white_bg.png); -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding-top:40px; padding-bottom:30px; width:370px; margin: -20px auto;position:relative;">
-      <div class="headings_pink_edit" style="text-align: center;">Redeem Free Honey</div>
+      <div class="headings_pink_edit" style="text-align: center;">Redeem Free Money</div>
       <div style="position:relative; left:35px;">
         <%= form_for(@redeem_code, :as => "user", :url => "/users/redeem") do |f| %>
           <div class="input-prepend" style="padding-bottom: 10px;">

@@ -12,19 +12,19 @@ class UserNotifier < ActionMailer::Base
     mail :to => @user.email, :subject => "Welcome to Swapidy"
   end
 
-  def free_money_sent(free_honey)
-    @free_honey = free_honey
-    mail :to => @free_honey.receiver_email, :subject => "Free Money"
+  def free_money_sent(free_money)
+    @free_money = free_money
+    mail :to => @free_money.receiver_email, :subject => "Free Money"
   end
   
-  def free_money_completed(free_honey)
-    @free_honey = free_honey
-    mail :to => @free_honey.receiver_email, :subject => "Free Money Received"
+  def free_money_completed(free_money)
+    @free_money = free_money
+    mail :to => @free_money.receiver_email, :subject => "Free Money Received"
   end
   
-  def free_money_reward(free_honey)
-    @free_honey = free_honey
-    mail :to =>@free_honey.sender.email, :subject => "Free Money Reward"
+  def free_money_reward(free_money)
+    @free_money = free_money
+    mail :to =>@free_money.sender.email, :subject => "Free Money Reward"
   end
   
   def redeem_completed(redeem_code, user)

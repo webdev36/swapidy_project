@@ -1,4 +1,4 @@
-$("#popup-dialog_add_honey .render_form").html("<%= raw escape_javascript(@return_content) %>");
+$("#popup-dialog_add_money .render_form").html("<%= raw escape_javascript(@return_content) %>");
 <% if @update_result %>
   $("#new_order").attr("action", "/orders/confirm");
   $("#new_order").submit();

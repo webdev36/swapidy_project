@@ -36,13 +36,13 @@ Swapidy::Application.routes.draw do
   
   resources :products
   
-  match "/payments/new" => "payments#new", :method => :post
-  match "/payments/confirm" => "payments#confirm", :method => :post
-  match "/payments/edit_card" => "payments#edit_card", :method => :post
-  resources :payments do 
-    post :create, :on => :member
-    post :show, :on => :member
-  end
+  #match "/payments/new" => "payments#new", :method => :post
+  #match "/payments/confirm" => "payments#confirm", :method => :post
+  #match "/payments/edit_card" => "payments#edit_card", :method => :post
+  #resources :payments do 
+  #  post :create, :on => :member
+  #  post :show, :on => :member
+  #end
   
   match "/orders/email_info" => "orders#email_info", :method => :post
   match "/orders/payment_info" => "orders#payment_info", :method => :post
@@ -62,11 +62,11 @@ Swapidy::Application.routes.draw do
   match "/notifications/:id/hide" => "notifications#hide", :method => :put
   resources :notifications
 
-  match "/free_honeys/confirm" => "free_honeys#confirm", :method => :get
-  match "/free_honeys/confirm_complete" => "free_honeys#confirm_complete", :method => :get
-  match "/free_honeys/invalid_token" => "free_honeys#invalid_token", :method => :get
-  match "/free_honeys/create" => "free_honeys#create", :method => :post
-  resources :free_honeys
+  match "/free_moneys/confirm" => "free_moneys#confirm", :method => :get
+  match "/free_moneys/confirm_complete" => "free_moneys#confirm_complete", :method => :get
+  match "/free_moneys/invalid_token" => "free_moneys#invalid_token", :method => :get
+  match "/free_moneys/create" => "free_moneys#create", :method => :post
+  #resources :free_moneys
   
   match "/redeem" => "redeem#index", :method => :get
   resources :redeem

@@ -1,9 +1,9 @@
 <div id="login_container">
   <a class="close-popup" onclick="hidePopup();" style="position:relative; top:30px; right:95px;" href="#" title="Cancel">Cancel</a>
-  <img id="login_circle" src="/images/freehoney_rectangle.png" style="top: 338.5px; display: block;">
+  <img id="login_circle" src="/images/free_money_rectangle.png" style="top: 338.5px; display: block;">
   <div style="position: absolute; top: 180px; width: 440px; text-align: center;">
-    <%= form_for(@free_honey, :as => "free_honey", :url => "/free_honeys/create", :html => {:id => "add_honey"}) do |f| %>
-      <div class="free_honey_info">
+    <%= form_for(@free_money, :as => "free_money", :url => "/free_moneys/create", :html => {:id => "add_money"}) do |f| %>
+      <div class="free_money_info">
         <p>Invite your friends by entering their email below. If they join, you'll receive $10 (only 3 invites allowed - limited time only).</p>
         <p style="text-align:center;">You have <%= current_user.remain_inviation_count %> invites left.</p>
       </div>
@@ -13,7 +13,7 @@
           <div style="padding-top: 15px;">
             <% if @error_messages %><div class="alert alert-error" style="width: 390px; left: 20px; position: relative;"><%= @error_messages %></div><% end %>
             <% if @success_message %><div class="alert alert-success" style="width: 390px; left: 20px; position: relative;"><%= @success_message %></div><% end %>
-            <a href="#" onclick="submitAddHoney();" class="email_invite_button">Invite</a>
+            <a href="#" onclick="submitAddMoney();" class="email_invite_button">Invite</a>
           </div>
         </div>
       <% elsif @success_message %>

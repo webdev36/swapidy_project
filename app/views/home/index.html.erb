@@ -10,6 +10,7 @@
     $(function() {
 			display_checkout_sliders();
 		});
+		$('#index_bg').css('height',170);
 	<% end %>
 	
 	$(".del-product").live('click', function(){
@@ -207,8 +208,12 @@
 			$("#" + current_popup_id).fadeOut('slow');
 			current_popup_id = "";
 	  });
-	  $("#done_button").live('click',function(){
-	  	$(".show_result").show();
+	  // $("#done_button").live('click',function(){
+	  	// $(".show_result").show();
+	  // });
+	  $("#close_shopping_cart").live('click',function(){
+	  	  $("#index_head").show();
+	  	  $('#index_bg').css('height',290);
 	  });
 	  
 	  $("#done_button_for_buy").live('click',function(){
@@ -473,7 +478,8 @@
     $("#sell_message").hide();
     $("#buy_message").show();
     $("#done_button_for_buy").hide();
-    $('#checkout_button').show();
+    $('#checkout_button').hide();
+    $('#text_buying').show();
     $('#done_button').hide();
     
     $("#sell_and_buy_message_guide span.buy").show();
@@ -502,6 +508,7 @@
     $('#checkout_button').hide();
     $("#done_button_for_buy").hide();
     $('#done_button').show();
+    $('#text_buying').hide();
     $("#sell_and_buy_message_guide span.buy").hide();
     $("#sell_and_buy_message_guide span.sell").show();
     

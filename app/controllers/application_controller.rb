@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   
   
   before_filter :check_uri #deployed on swapidy.com
-  before_filter :prepaire_add_honey
+  before_filter :prepaire_add_money
   
   def check_uri
     #clear_cart_products
@@ -82,8 +82,8 @@ class ApplicationController < ActionController::Base
     end  
   end
   
-  def prepaire_add_honey
-    #init new payment to add honey
+  def prepaire_add_money
+    #init new payment to add money
     return unless user_signed_in?
     @payment = PaymentTransaction.new()
     @payment.user = current_user
@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
     @payment.card_expired_month = current_user.card_expired_month
     @payment.card_name = current_user.card_name
     
-    @free_honey = FreeHoney.new if current_user.free_money_sendable?
+    @free_money = FreeHoney.new if current_user.free_money_sendable?
   end
   
   def check_to_display_guide

@@ -38,7 +38,7 @@
 </div>
 
 
-<div id="popup-dialog_add_honey" style="display:none; width:0px; padding: 0px;" class="popup-box-wrapper standard-popup">
+<div id="popup-dialog_add_money" style="display:none; width:0px; padding: 0px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">
     <div class="container" style="background:url('/images/popup-bg.png'); background-repeat:repeat; border-radius: 10px; padding: 40px; width:690px; margin-left:160px;" >
       <a class="close-popup" style="position:relative; left:10px;" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
@@ -103,7 +103,7 @@
     return false;
   });
 
-	$("#popup-dialog_add_honey #card_edit_form").submit(function(){
+	$("#popup-dialog_add_money #card_edit_form").submit(function(){
     $.ajax({
       type : 'POST',
       url : $(this).attr("action"),
@@ -114,7 +114,7 @@
     return false;
   });
   
-	function refresh_add_honey_form() {
-		showPopup('popup-dialog_add_honey')
+	function refresh_add_money_form() {
+		showPopup('popup-dialog_add_money')
   }
 </script>
