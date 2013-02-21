@@ -1,12 +1,16 @@
 <style type="text/css">
+
   body{
-    background: url('/bg.png');
+    background: whitesmoke;
     line-height: 1.5;
   }
+  .content{
+    background: white;
+  }
 </style>
-<div class="content" >
+<div class="content" style="height:550px;" >
 
-<div class="container" style="position: relative;">
+<div class="container" style="">
   <div class="headings_pink" style="margin-left: 340px;margin-top: -45px;">Confirm Your Details</div>
   <div class="confirm_image_container" style="margin-top: -45px;">
     <div style ="margin-top:100px;">
@@ -26,7 +30,7 @@
       <br/>
       <div>
        <br />
-        <div id="email_label_info" style="position:relative; bottom:90px;">
+        <div id="email_label_info" style="position:relative; bottom:60px;">
           <%= render :partial => "email_label", :locals => {:user => current_user} %>
         </div>
         <br/>
@@ -35,9 +39,9 @@
         </div>
 
         <div class="confirm_payment_container">
-          <div class="headings_pink" style="font-size:20px; position:relative; bottom:310px;">Payment Information</div>
+          <div class="headings_pink" style="font-size:20px; position:relative; bottom:270px;">Payment Information</div>
           <br />
-          <div style="position:relative; bottom:320px;">
+          <div style="position:relative; bottom:290px;">
             <div>
               <span>Current Balance:</span>
               $<%= format_num(current_user.balance_amount) %>
@@ -70,9 +74,10 @@
           <% else %>
 	          <% has_agreement_before = !current_user.last_order.nil? %>
 	          <div style="position:relative; bottom:300px;">
-	            <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:80px;">Terms of Service</div></label>
-	            <p>
-	              <input id="terms_of_service_checkbox" type="checkbox" <% if has_agreement_before %>checked="checked"<% end %> /> 
+	            <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:100px;">Terms of Service</div></label>
+	            <p><br/>
+	              <input id="terms_of_service_checkbox" type="checkbox" style="position:relative;
+                bottom:5px;"<% if has_agreement_before %>checked="checked"<% end %> />
 	              <span>By checking this box, you agree to our <a class="order_link" href="/terms">terms of service</a></span>
 	            </p>
 	          </div>

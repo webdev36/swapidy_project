@@ -322,10 +322,7 @@ font-family: 'myriad', 'myriad-s';
 text-align: center;
 display: block;
 margin: 250px auto;
-background: white;
-padding: 40px;
-border-radius: 0px 20px 20px 0px;
-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+
 }
 .shipping_form_image{
     background-color: rgba(0, 0, 0, 0.6);
@@ -359,7 +356,7 @@ top:0px;
   .confirm_container{
 position:relative;
 bottom:190px;
-left:150px;
+left:210px;
 width:450px; 
 height:450px;
 font-family: 'myriad', 'myriad-s';
@@ -367,28 +364,19 @@ display: block;
 margin: 250px auto;
 background: white;
 font-size:16px;
-padding: 20px 40px 40px 40px;
-border-radius: 0px 20px 20px 0px;
-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+
 }
 .confirm_image_container{
-  background-color: white;
-
-  border: medium none;
-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-  -webkit-border-radius: 20px;
-  border-radius: 20px 0px 0px 20px;
-  height: 490px;
-  padding-bottom: 20px;
+  
 position:absolute;
 top:130px;
 margin: 0px auto 0px auto;
 margin-left:0px;
-width:360px;
+width:450px;
 }
 #shipping_label_info{
   position:relative;
-  bottom:250px;
+  bottom:200px;
   left:250px;
 }
 .confirm_payment_contianer{
