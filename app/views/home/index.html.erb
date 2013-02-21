@@ -207,10 +207,12 @@
 			$("#" + current_popup_id).fadeOut('slow');
 			current_popup_id = "";
 	  });
-	  $("#done_button").live('click',function(){
-	  	$(".show_result").show();
+	  // $("#done_button").live('click',function(){
+	  	// $(".show_result").show();
+	  // });
+	  $("#close_shopping_cart").live('click',function(){
+	  	  $("#index_head").show();
 	  });
-	  
 	  $("#done_button_for_buy").live('click',function(){
 	  	$(".show_result").show();
 	  });
@@ -473,7 +475,8 @@
     $("#sell_message").hide();
     $("#buy_message").show();
     $("#done_button_for_buy").hide();
-    $('#checkout_button').show();
+    $('#checkout_button').hide();
+    $('#text_buying').show();
     $('#done_button').hide();
     
     $("#sell_and_buy_message_guide span.buy").show();

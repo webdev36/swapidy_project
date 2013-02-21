@@ -1,6 +1,7 @@
 $("#shopping_cart").html("<%= raw escape_javascript(@return_content) %>");
 <% unless cart_products_empty? %>
   $("#shopping_cart").show();
+  $("#index_head").hide();
   <% if @changed_type && @changed_type == :sell %>
 	  $("#product_items .sell_display").hide();
 	  $("#product_items .sell_display").fadeIn('slow');
