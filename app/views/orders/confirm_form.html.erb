@@ -63,7 +63,7 @@
           
           <% if current_user.extra_money_for(cart_amount) > 0 && !current_user.has_card_info? %>
             <div style="position:relative; bottom:330px;">
-              Your money balance is not enough.
+              Your balance is not enough.
               You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %>
               <input type="button" value="Add Credit Card" class="order_button_buy" style="margin-left: 125px; margin-top: 20px;"  onclick="refresh_add_honey_form();" />
             </div>
