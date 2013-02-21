@@ -29,7 +29,7 @@ module ImportExcelProduct
     model = category.product_models.create(:title => columns[INDEXES[:product_model]], :weight_lb => columns[INDEXES[:weight_lb]].to_i) unless model
     logger.info "model: #{model.id} - #{model.title}"
 
-    product = Product.where(:title => columns[INDEXES[:title]]).first
+    product = Product.where(:title => columns[INDEXES[:title]], :swap_type => for_buying ? 2 : 1).first
     if product
       if for_buying
         product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)

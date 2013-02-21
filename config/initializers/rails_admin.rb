@@ -552,7 +552,7 @@ RailsAdmin.config do |config|
       end
     end
     list do
-      filters [:swap_type]
+      filters [:swap_type, :title, :product_model]
       field :title
       field :swap_type
       field :sell_prices

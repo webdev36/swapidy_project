@@ -65,6 +65,15 @@ namespace :swapidy do
       ShippingStamp.all.each {|obj| obj.destroy }
     end
     
+    task :remove_compotype_products => :environment do
+      Product.where(:swap_type => 0).each {|o| 
+        o.price_for_buy = nil
+        o.price_for_good_buy = nil
+        o.price_for_poor_buy = nil
+        o.save
+      }
+    end
+    
     desc "Insert products database from excel file"
     task :insert_products => :environment do
       logger = Logger.new("log/swapidy_tasks.log")
