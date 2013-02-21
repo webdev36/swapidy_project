@@ -11,7 +11,7 @@ class OrderNotifier < ActionMailer::Base
     @user = order.user
     @order = order
     @host_with_port = host_with_port
-    mail :to => @user.email, :subject => "Order processing" do |format|
+    mail :to => @user.email, :subject => "Print Shipping Label" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
         attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
