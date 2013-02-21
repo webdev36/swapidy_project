@@ -11,8 +11,8 @@
 <div class="content" style="height:550px;" >
 
 <div class="container" style="">
-  <div class="headings_pink" style="margin-left: 340px;margin-top: -45px;">Confirm Your Details</div>
-  <div class="confirm_image_container" style="margin-top: -45px;">
+  <div class="headings_pink" style="margin-top:-45px;">Confirm Your Details</div>
+  <div class="confirm_image_container" style="margin-top: 49px;">
     <div style ="margin-top:100px;">
   	 <%= render :partial => "/orders/order_product_images" %>
     </div>
@@ -38,7 +38,7 @@
           <%= render :partial => "shipping_label", :locals => {:order => @order} %>
         </div>
 
-        <div class="confirm_payment_container">
+        <div class="confirm_payment_container" style="padding-top: 20px;">
           <div class="headings_pink" style="font-size:20px; position:relative; bottom:270px;">Payment Information</div>
           <br />
           <div style="position:relative; bottom:290px;">
@@ -60,7 +60,7 @@
             <div>
               
               You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %><br/>
-              <input type="button" value="Change Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="refresh_add_honey_form();" />
+              <input type="button" value="Change Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="refresh_add_money_form();" />
             </div>
             <% end %>
           </div>
@@ -69,7 +69,7 @@
             <div style="position:relative; bottom:330px;">
               Your balance is not enough.
               You would be charged $<%= format_num(current_user.extra_money_for(cart_amount)) %>
-              <input type="button" value="Add Credit Card" class="order_button_buy" style="margin-left: 125px; margin-top: 20px;"  onclick="refresh_add_honey_form();" />
+              <input type="button" value="Add Credit Card" class="order_button_buy" style="margin-left: 125px; margin-top: 20px;"  onclick="refresh_add_money_form();" />
             </div>
           <% else %>
 	          <% has_agreement_before = !current_user.last_order.nil? %>

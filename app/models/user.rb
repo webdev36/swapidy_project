@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 
   
   has_many :notifications, :order => "created_at desc, updated_at desc"
-  has_many :free_honey_invitations, :foreign_key => "sender_id", :class_name => "FreeHoney", :order => "created_at desc, updated_at desc"
+  has_many :free_money_invitations, :foreign_key => "sender_id", :class_name => "FreeHoney", :order => "created_at desc, updated_at desc"
 
   validate :validate_card_info
   
@@ -157,8 +157,8 @@ class User < ActiveRecord::Base
   end
   
   def remain_inviation_count
-    if self.free_honey_invitations.count < FreeHoney::MAX_COUNT
-      return FreeHoney::MAX_COUNT - self.free_honey_invitations.count
+    if self.free_money_invitations.count < FreeHoney::MAX_COUNT
+      return FreeHoney::MAX_COUNT - self.free_money_invitations.count
     else
       return 0
     end

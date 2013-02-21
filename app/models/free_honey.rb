@@ -39,31 +39,31 @@ class FreeHoney < ActiveRecord::Base
   def confirm
     return false unless able_to_confirm?
     if self.receiver.nil?
-      self.receiver = User.signup_user({:email => self.receiver_email}, :free_signup)
+      self.receiver = User.signup_user({:email => self.receiver_email}, :free_money_signup)
     end
     self.status = STATUES[:completed] 
-    self.sender_amount = default_reward_honey
+    self.sender_amount = default_reward_money
     self.completed_at = Time.now
     self.save
 
     self.receiver.update_attribute(:balance_amount, (self.receiver.balance_amount || 0.00) + self.receiver_amount)
-    receiver_notification = Notification.new(:title => "#{self.receiver_amount} FREE Honey Promo")
+    receiver_notification = Notification.new(:title => "#{self.receiver_amount} FREE Money Promo")
     receiver_notification.user = self.receiver
-    receiver_notification.description = "#{self.receiver_amount} FREE Honey Redeemed"
+    receiver_notification.description = "#{self.receiver_amount} FREE Money Redeemed"
     receiver_notification.save
-    UserNotifier.free_completed(self).deliver
+    UserNotifier.free_money_completed(self).deliver
 
     #create_reward_and_bonus
     if self.sender
       self.sender.update_attribute(:balance_amount, (self.sender.balance_amount || 0.00) + self.sender_amount)
-      sender_notification = Notification.new(:title => "Free Honey Reward")
+      sender_notification = Notification.new(:title => "Free Money Reward")
       sender_notification.user = self.sender
-      sender_notification.description = "Free #{self.sender_amount} Honey Reward: #{receiver_title} accepted your invitation}"
+      sender_notification.description = "Free #{self.sender_amount} Money Reward: #{receiver_title} accepted your invitation}"
       sender_notification.save
       UserNotifier.free_money_reward(self).deliver 
     end
     
-    other_free_honey = FreeHoney.pending.where(:receiver_email => self.receiver_email).where("id != #{self.id}").each do |other_one|
+    other_free_money = FreeHoney.pending.where(:receiver_email => self.receiver_email).where("id != #{self.id}").each do |other_one|
       other_one.update_attribute(:status => STATUES[:cancelled])
     end
     return true
@@ -87,16 +87,16 @@ class FreeHoney < ActiveRecord::Base
     
   def create_notifications
     if sender
-      sender_notification = Notification.new(:title => "Free Honey Sent")
+      sender_notification = Notification.new(:title => "Free Money Sent")
       sender_notification.user = self.sender
-      sender_notification.description = "Free Honey: sent to #{receiver_title} at #{self.created_at.strftime("%b %d, %Y")}"
+      sender_notification.description = "Free Money: sent to #{receiver_title} at #{self.created_at.strftime("%b %d, %Y")}"
       sender_notification.save
     end
     
     if receiver
-      receiver_notification = Notification.new(:title => "Free #{self.receiver_amount} Honey Invitation")
+      receiver_notification = Notification.new(:title => "Free #{self.receiver_amount} Money Invitation")
       receiver_notification.user = self.receiver
-      receiver_notification.description = "Free #{self.receiver_amount} Honey: sent from #{sender_title}"
+      receiver_notification.description = "Free #{self.receiver_amount} Money: sent from #{sender_title}"
       receiver_notification.save
     end
     UserNotifier.free_money_sent(self).deliver
@@ -105,15 +105,15 @@ class FreeHoney < ActiveRecord::Base
   private
   
     def default_expired_days
-      SwapidySetting.get('FREE_HONEY-DEFAULT_EXPIRED_DAYS') rescue 7
+      (SwapidySetting.get('FREE_MONEY-DEFAULT_EXPIRED_DAYS') || "7").to_i rescue 7
     end
     
-    def default_reward_honey  
-      SwapidySetting.get('FREE_HONEY-DEFAULT_REWARD_HONEY') rescue 100.0
+    def default_reward_money  
+      (SwapidySetting.get('FREE_MONEY-DEFAULT_REWARD_MONEY') || "10").to_f rescue 10.0
     end
     
-    def default_receiver_honey
-      SwapidySetting.get('FREE_HONEY-DEFAULT_RECEIVER_HONEY') rescue 50.0
+    def default_receiver_money
+      (SwapidySetting.get('FREE_MONEY-DEFAULT_RECEIVER_MONEY') || "5").to_f rescue 5.0
     end
   
     def check_receiver_email      
@@ -122,8 +122,8 @@ class FreeHoney < ActiveRecord::Base
         self.receiver = ( User.find_by_email(self.receiver_email) if self.receiver_email && self.receiver.nil? ) rescue nil
       end 
       self.receiver_email = self.receiver.email if self.receiver && (self.receiver_email || "").blank?
-      self.receiver_amount = default_receiver_honey unless self.receiver_amount
-      self.sender_amount = default_reward_honey unless self.sender_amount
+      self.receiver_amount = default_receiver_money unless self.receiver_amount
+      self.sender_amount = default_reward_money unless self.sender_amount
     end
     
     def user_with_right_email?

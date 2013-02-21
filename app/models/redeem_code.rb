@@ -51,9 +51,9 @@ class RedeemCode < ActiveRecord::Base
     user.redeem_code = self
     user.save
     
-    receiver_notification = Notification.new(:title => "#{self.amount} FREE Honey Promo")
+    receiver_notification = Notification.new(:title => "$#{self.amount} FREE Money Promo")
     receiver_notification.user = user
-    receiver_notification.description = "#{self.amount} FREE Honey Redeemed"
+    receiver_notification.description = "$#{self.amount} FREE Money Redeemed"
     receiver_notification.save
     UserNotifier.redeem_completed(self, user).deliver
     return user
@@ -62,10 +62,10 @@ class RedeemCode < ActiveRecord::Base
   private
 
     def default_expired_days
-      SwapidySetting.get('REDEEM-DEFAULT_EXPIRED_DAYS') rescue 7
+      (SwapidySetting.get('REDEEM-DEFAULT_EXPIRED_DAYS') || "7").to_i rescue 7
     end
-    def default_honey
-      SwapidySetting.get('REDEEM-DEFAULT_HONEY') rescue 500.00
+    def default_money
+      (SwapidySetting.get('REDEEM-DEFAULT_MONEY') || "50").to_f rescue 50.00
     end
   
     def generate_fields
@@ -74,11 +74,11 @@ class RedeemCode < ActiveRecord::Base
         string_charset = %w{A C D E F G H J K M N P Q R T V W X Y Z}
         number_code = (1..4).map{ number_charset.to_a[rand(number_charset.size)] }.join("")
         char_code = (1..2).map{ string_charset.to_a[rand(string_charset.size)] }.join("")
-        self.code = "SWEETHONEY#{number_code}#{char_code}"
+        self.code = "SWEETMONEY#{number_code}#{char_code}"
       end
       self.status = STATUES[:pending] unless self.status
       self.expired_date = (DateTime.now + default_expired_days.days) unless self.expired_date
-      self.amount = default_honey if self.amount.nil? || self.amount == 0.0
+      self.amount = default_money if self.amount.nil? || self.amount == 0.0
     end
 
 end

@@ -17,7 +17,7 @@ border-radius: 10px;">
 <div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">
 	<b>Good Day <%= @user.name_in_email %>,</b><br/>
 <br/>
-You just received <%= number_with_delimiter(@redeem_code.honey_amount) %> for FREE in your Swapidy account. With the money, you will be able to use it towards buying the latest products.<br/> 
+You just received $<%= number_with_delimiter(@redeem_code.amount) %> for FREE in your Swapidy account. With the money, you will be able to use it towards buying the latest products.<br/> 
 <br/>
 Log in to your account at <a href="https://www.swapidy.com">Swapidy</a> to use it now!
 <br/>
