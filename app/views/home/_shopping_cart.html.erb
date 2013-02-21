@@ -1,19 +1,18 @@
 <% if cart_products_empty? %>
   <div id="product_items" style="height: 130px; min-width:600px;">
     <div style="width: 100%; text-align: center; padding-top: 40px;"> <span class="headings_pink">Empty Shopping Cart</span></div>
-    <a href="#" onclick="$('#shopping_cart').fadeOut('slow'); show_checkout_bar = false;" style="height: 20px; top: 70px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy" id= "close_shopping_cart">Close</a>
+    <a href="#" onclick="$('#shopping_cart').fadeOut('slow'); show_checkout_bar = false;" style="height: 20px; top: 70px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy" id= "close_shopping_cart" >Close</a>
   </div>
 <% else %>
   	<a style="position: absolute; left: 0; bottom: 50%; background-color: #38B4DE; padding: 5px;">My old stuff</a>
   	<a style="position: absolute; right: 0; bottom: 50%; background-color: #fa3e6e; padding: 5px;">My new stuff</a>
- 	<% if cart_products[:sell].count <=1  %>
+ 	<% if cart_products[:sell].count <= 1%>
   	<div class= "checkout_bar_step1">
  	<% elsif cart_products[:sell].count == 2%>
  		<div class= "checkout_bar_step2">
  	<% else%>
  		<div class= "checkout_bar_step3">
 	<% end %>
-  
   	<% if cart_products[:sell].count > 3 %>
 	 	  <button class="prev" style="width: 30px;position: absolute;top:50px;left: 150px">&lt;&lt;</button>
 	 	  <button class="next" style="width: 30px;position: absolute;top: 50px;left: 480px;">&gt;&gt;</button>
