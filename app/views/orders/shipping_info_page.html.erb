@@ -11,9 +11,12 @@ body{
   <%= render :partial => "steps", :locals => {:current_step => 3 } %>
   <div class="container">
   	<div class="headings_pink" style="position:relative; bottom:30px; text-align:center;">Shipping Address<span>*</span></div>
+     <img class="circ_arrow1" src="/images/circular_arrow.png">
     <div class="confirm_image_container" style="position:absolute; top: 260px;width: 405px;height: 410px;">
 	  	<%= render :partial => "/orders/order_product_images" %>
 		</div>
+         <img class="r_circ_arrow1" src="/images/r_circular_arrow.png">
+
 		<div class="shipping_form_container">
       <div style="width: 500px; margin-left: -20px;">
         <div class="shipping_product_info"></div>  
