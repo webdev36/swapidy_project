@@ -1,15 +1,17 @@
 <div id='candidate_addresses_container' >
-  <div class='alert alert-error'>The following<%= order.candidate_addresses.size == 1 ? 'an address' : "#{order.candidate_addresses.size} addresses" %> are in the correct format for the shipping service.</div>
-  <% order.candidate_addresses.each_with_index do |address, index|%>
-    <p>
-      <%= index + 1 %>. <%= address[:address1]%> 
-                        <% if address[:address2] && !address[:address2].blank? %> (Address2: <%= address[:address2] %>) <% end %>
-                        - <%= address[:city] %> - <%= address[:state] %> - <%= address[:zip_code] %>
-      <a href='#' class='select_candidate_address btn' style="background: #fa3e6e;" data-address='<%= address[:address1]%>' data-optional_address='<%= address[:address2]%>'
-        data-city='<%= address[:city]%>' data-state='<%= address[:state]%>' 
-        data-zip_code='<%= address[:zip_code]%>' data-zip_code_add_on='<%= address[:zip_code_add_on]%>'
-      >Select</a>  
-    </p>
-  <% end %>
-  <input name='continue' class='order_button_buy' type='button' value='Continue' onclick="javascript:continue_with_address();" style="bottom: 0px; position: relative; left: 160px; margin-top: 40px;" />
+  <div class='alert alert-error'>The following <%= order.candidate_addresses.size == 1 ? 'an address' : "#{order.candidate_addresses.size} addresses" %> are in the correct format for the shipping service.</div>
+  <div style="height: 235px; overflow-y: scroll;" >
+    <% order.candidate_addresses.each_with_index do |address, index|%>
+      <p>
+        <%= index + 1 %>. <%= address[:address1]%> 
+                          <% if address[:address2] && !address[:address2].blank? %> (Address2: <%= address[:address2] %>) <% end %>
+                          - <%= address[:city] %> - <%= address[:state] %> - <%= address[:zip_code] %>
+        <a href='#' class='select_candidate_address btn' style="background: #fa3e6e;" data-address='<%= address[:address1]%>' data-optional_address='<%= address[:address2]%>'
+          data-city='<%= address[:city]%>' data-state='<%= address[:state]%>' 
+          data-zip_code='<%= address[:zip_code]%>' data-zip_code_add_on='<%= address[:zip_code_add_on]%>'
+        >Select</a>  
+      </p>
+    <% end %>
+  </div>
+  <input name='continue' class='order_button_buy' type='button' value='Continue' onclick="javascript:continue_with_address();" style="bottom: 0px; position: relative; left: 160px; margin-top: 20px;" />
 </div>

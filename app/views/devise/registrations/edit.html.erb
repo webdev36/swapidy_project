@@ -22,13 +22,15 @@
           <div class="tab-pane" id="stripe_card">
             <br/>
             <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :id => "edit_profile" }) do |f| %>
-	            <%= render :partial => "/devise/shared/stripe_card_form",:locals => {:submit_form => "edit_profile",:field_prefix => "user_", :f => f, :user => resource}%>
+	            <div class="headings_pink" style="position:relative; text-align: left;">Provide Credit Card Information</div>
+              
+              <%= render :partial => "/devise/shared/stripe_card_form",:locals => {:submit_form => "edit_profile",:field_prefix => "user_", :f => f, :user => resource}%>
         	    
               <% if params[:update_credit_card] && !resource.errors.empty? %>
-                <div class="alert alert-error" style="width: 207px;"> <%= raw resource.errors.full_messages.first %>. </div>
+                <div class="alert alert-error" style="width: 688px;"> <%= raw resource.errors.full_messages.first %>. </div>
               <% end %>
               <% if params[:update_credit_card] && flash[:update_account_notice] %>
-                <div class="alert alert-success" style="width: 207px;"> <%= raw flash[:update_account_notice] %>. </div>
+                <div class="alert alert-success" style="width: 688px;"> <%= raw flash[:update_account_notice] %>. </div>
               <% end %>
         	    <input type="button" value="Update" class="show_button_buy" onclick="javascript:edit_profile_card_validate();" />
         	    <input type="hidden" name="update_credit_card" value="true" />

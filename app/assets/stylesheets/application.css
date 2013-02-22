@@ -758,18 +758,15 @@ ul.left_menu li a {
 .cc_secure{
   margin-left: 480px;
   font-size: 12px;
-  color:white;
-  position:relative;
-  top:40px;
-
+  color: white;
+  position: relative;
+  top: 65px;
 }
 .cc_blank_message{
   position: relative;
-  color:#666;
+  color: white;
   font-style: italic;
   font-size: 16px;
-  bottom:60px;
-  left:420px;
 }
 .tab-pane active{
   background:#38B4DE;
