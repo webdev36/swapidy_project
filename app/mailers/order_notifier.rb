@@ -40,34 +40,33 @@ class OrderNotifier < ActionMailer::Base
   def order_cancel(order)
     @user = order.user
     @order = order
-    mail :to => @user.email, :subject => "Order Cancelled"
+    mail :to => @user.email, :subject => "Order #{@order.id} Cancelled"
   end
   
   def product_declined(order)
     @user = order.user
     @order = order
-    mail :to => @user.email, :subject => "Product Declined"
+    mail :to => @user.email, :subject => "Product Declined - Order #{@order.id}"
   end
   
   def reminder(order, shipping_stamp)
     @user = order.user
     @order = order
-    @product = order.product
     @shipping_stamp = shipping_stamp
     attachments["ShippingLabel_#{@order.id}_#{@shipping_stamp.id}.png"] = File.read(@shipping_stamp.url)
-    mail :to => @user.email, :subject => "Order Reminder"
+    mail :to => @user.email, :subject => "Order #{@order.id} Reminder"
   end
 
   def tracking_number(order)
     @user = order.user
     @order = order
-    mail :to => @user.email, :subject => "Tracking Number"
+    mail :to => @user.email, :subject => "Tracking Number - Order #{@order.id}"
   end
   
   def trade_ins_complete(order)
     @user = order.user
     @order = order
-    mail :to => @user.email, :subject => "Product verified"
+    mail :to => @user.email, :subject => "Product verified - Order #{@order.id}"
   end
 
 end

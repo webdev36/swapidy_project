@@ -98,7 +98,7 @@ class Order < ActiveRecord::Base
       else
         stamp = create_test_stamp
       end 
-      ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "sell"))
+      return ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "sell"))
     end
   end
   
@@ -123,17 +123,17 @@ class Order < ActiveRecord::Base
   def create_notification_to_decline
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "Order Declined"
-    notification.description = "Order - #{balance_amount_label} - Declined" 
+    notification.description = "Order - #{id} - Declined" 
     notification.save
     
     OrderNotifier.product_declined(self).deliver
   end
   
   def create_notification_to_reminder
-    #new_stamp = self.create_new_stamp(false)
+    new_stamp = self.create_new_stamps
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "Order Reminder"
-    notification.description = "Order - #{balance_amount_label} - Reminder" 
+    notification.description = "Order - #{id} - Reminder" 
     notification.save
 
     OrderNotifier.reminder(self, new_stamp).deliver
@@ -142,7 +142,7 @@ class Order < ActiveRecord::Base
   def create_notification_to_cancel
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "Order Canceled"
-    notification.description = "Order - #{balance_amount_label} - Canceled" 
+    notification.description = "Order - #{id} - Canceled" 
     notification.save
     
     OrderNotifier.order_cancel(self).deliver
@@ -151,11 +151,11 @@ class Order < ActiveRecord::Base
   
   def create_notification_to_complete
     notification = self.notifications.new(:user_id => self.user.id)
-    notification.title = "Order is complete"
-    notification.description = "Your order ($#{balance_amount_label}) is completed." 
+    notification.title = "Order Completed"
+    notification.description = "Order - #{id} - Completed." 
     notification.save
     
-    OrderNotifier.order_complete(self).deliver
+    OrderNotifier.trade_ins_complete(self).deliver
   end
   
   def generate_product_title
