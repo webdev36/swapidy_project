@@ -24,7 +24,7 @@
       <% if (current_user.balance_amount-cart_amount) >= 0 %>
 	  	  $0
 	    <% else %>
-  	    <%= number_to_currency(current_user.balance_amount - cart_amount) %> 
+  	    <%= number_to_currency((cart_amount)- current_user.balance_amount)%> 
   		<% end %>
 	  </span>
 	</div>	
