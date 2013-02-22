@@ -14,8 +14,8 @@ class Product < ActiveRecord::Base
   has_many :product_attributes, :dependent => :destroy
   has_many :product_model_attributes, :through => :product_attributes
   
-  scope :for_buy, :conditions => ["swap_type = 0 OR swap_type = 2"]
-  scope :for_sell, :conditions => ["swap_type = 0 OR swap_type = 1"]
+  scope :for_buy, :conditions => ["swap_type = 2"]
+  scope :for_sell, :conditions => ["swap_type = 1"]
   
   SWAP_TYPES = {0 => "Sell and Buy", 1 => "Sell", 2 => "Buy"}
   

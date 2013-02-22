@@ -986,63 +986,8 @@ width: 100%;
 }
 
 .rope_right{
-    position: fixed;
+  position: fixed;
   top:0px;
   right: 40px;
   z-index: 10000;
-}
-
-.circ_arrow{
-  height: 70px;
-  position: relative;
-  top:30px;
-  left:420px;
-}
-.r_circ_arrow{
-  height: 70px;
-  position: relative;
-  left: 180px;
-  bottom:80px;
- 
-}
-.old_stuff, .new_stuff{
-  margin-left: 60px;
-  color: white;
-  padding: 5px;
-  position: relative;
-  bottom: 20px;
-  border-radius: 5px;
-}
-.old_stuff{
-  background: #fa3e6e;
-}
-.new_stuff{
-  background: #38B4DE;
-}
-.circ_arrow1{
-  height: 70px;
-  position: relative;
-  left:160px;
-}
-.r_circ_arrow1{
-  height: 70px;
-  position: relative;
-  top:240px;
-  left: 20px;
-  bottom:80px;
- 
-}
-.circ_arrow2{
-  height: 70px;
-  position: relative;
-  left:180px;
-  top:50px;
-}
-.r_circ_arrow2{
-  height: 70px;
-  position: relative;
-  top:220px;
-  left: 40px;
-  bottom:70px;
- 
 }

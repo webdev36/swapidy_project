@@ -10,14 +10,11 @@ body{
 <div class="content " style="height:600px;">
   <%= render :partial => "steps", :locals => {:current_step => 3 } %>
   <div class="container">
-  	<div class="headings_pink" style="position:relative; bottom:30px; text-align:center;">Shipping Address<span>*</span></div>
-     <img class="circ_arrow1" src="/images/circular_arrow.png">
+    <div class="headings_pink" style="position:relative; bottom:30px; text-align:center;">Shipping Address<span>*</span></div>
     <div class="confirm_image_container" style="position:absolute; top: 260px;width: 405px;height: 410px;">
-	  	<%= render :partial => "/orders/order_product_images" %>
+	    <%= render :partial => "/orders/order_product_images" %>
 		</div>
-         <img class="r_circ_arrow1" src="/images/r_circular_arrow.png">
-
-		<div class="shipping_form_container">
+    <div class="shipping_form_container">
       <div style="width: 500px; margin-left: -20px;">
         <div class="shipping_product_info"></div>  
         <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; padding: 15px 0px 20px;">
@@ -88,13 +85,15 @@ body{
       btnNext: ".next",
       btnPrev: ".prev",
       visible: 1,
-      speed: 500
+      circular: false,
+      speed: 400
     });
     $('.order_buy_display').jCarouselLite({
       btnNext: ".next_buy	",
       btnPrev: ".prev_buy",
       visible: 1,
-      speed: 500
+      circular: false,
+      speed: 400
     });
 	}
 </script>

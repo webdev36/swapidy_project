@@ -20,19 +20,37 @@
 <% if product.for_sells? %>
 	<div id="popup_selling_price_<%= product.id %>" class="popup_select_price for_selling_price" style= "width: 155px">
     <% if product.has_flawless_sell? %>
-      <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
+      <div class="price_type"
+       data-toggle="popover" 
+       data-animation="true"
+       data-trigger="hover"
+       data-original-title="Flawless"
+       data-content="Looks like it's never been used"
+       product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
         <label for="Flawless" ><%= product.flaw_less_name %></label>
         <span class="product_desc">$<%= format_num(product.price_for_sell)%></span>
       </div>
     <% end %>
     <% if product.has_good_sell? %>
-      <div class="price_type" product-id= "<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" type= "sell" >
+      <div class="price_type"
+       data-toggle="popover" 
+       data-animation="true"
+       data-trigger="hover"
+       data-original-title="Good"
+       data-content="Visible signs of use"
+       product-id= "<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" type= "sell" >
         <label for="Good">Good</label>
         <span class="product_desc">$<%= format_num(product.price_for_good_sell)%> </span>
       </div>
     <% end %>
     <% if product.has_poor_sell? %>
-      <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_poor_sell %>" product-using_condition="Poor" type= "sell" >
+      <div class="price_type"
+       data-toggle="popover" 
+       data-animation="true"
+       data-trigger="hover"
+       data-original-title="Poor"
+       data-content="Doesn't turn on or has physical damage"
+       product-id="<%= product.id %>" product-price="<%= product.price_for_poor_sell %>" product-using_condition="Poor" type= "sell" >
         <label for="Poor">Poor</label>
         <span class="product_desc">$<%= format_num(product.price_for_poor_sell)%> </span>
       </div>
@@ -43,19 +61,37 @@
 <% if product.for_buys? %>
 	<div id="popup_buying_price_<%= product.id %>" class="popup_select_price for_buying_price">
     <% if product.has_flawless_buy?%>
-      <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_buy %>" product-using_condition="Flawless" type= "buy" >
+      <div class="price_type" 
+       data-toggle="popover" 
+       data-animation="true"
+       data-trigger="hover"
+       data-original-title="Brand new with warranty"
+       data-content="Sealed with manufacturers warranty"
+       product-id="<%= product.id %>" product-price="<%= product.price_for_buy %>" product-using_condition="Flawless" type= "buy" >
         <label for="Flawless"><%= product.flaw_less_name(:for_buy) %></label>
         <span class="product_desc">$<%= format_num(product.price_for_buy)%> </span>
       </div>
     <% end %>
     <% if product.has_good_buy? %>
-      <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_good_buy %>" product-using_condition="Good" type= "buy" >
+      <div class="price_type"
+       data-toggle="popover"
+       data-animation="true"
+       data-trigger="hover"
+       data-original-title="Good"
+       data-content="Visible signs of use"
+       product-id="<%= product.id %>" product-price="<%= product.price_for_good_buy %>" product-using_condition="Good" type= "buy" >
         <label for="Good">Good</label>
         <span class="product_desc">$<%= format_num(product.price_for_good_buy)%> </span>
       </div>
     <% end %>
     <% if product.has_poor_buy? %>
-      <div class="price_type" product-id="<%= product.id %>" product-price="<%= product.price_for_poor_buy %>" product-using_condition="Poor" type= "buy" >
+      <div class="price_type"
+       data-toggle="popover" 
+       data-animation="true"
+       data-trigger="hover"
+       data-original-title="Poor"
+       data-content="Doesn't turn on or has physical damage"
+       product-id="<%= product.id %>" product-price="<%= product.price_for_poor_buy %>" product-using_condition="Poor" type= "buy" >
         <label for="Poor">Poor</label>
         <span class="product_desc">$<%= format_num(product.price_for_poor_buy)%> </span>
       </div>

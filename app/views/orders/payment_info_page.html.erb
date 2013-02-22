@@ -12,18 +12,15 @@ body{
 <%= render :partial => "steps", :locals => {:current_step => 2 } %>
 <div class="" style="margin-top:30px;height:700px;">
   <div class="headings_pink" style="text-align:center;">Payment Information</div><br/>
- <img class="circ_arrow" src="/images/circular_arrow.png">
-
-  <div style="width: 480px;position:relative; left: 215px; bottom:100px;-webkit-border-radius: 20px;padding: 10px; height:100px;">
-  	<%= render :partial => "/orders/order_product_images" %> <img class="r_circ_arrow" src="/images/r_circular_arrow.png">
-
+ 
+  <div style="width: 480px;position:relative; left: 215px;-webkit-border-radius: 20px;padding: 10px; height:100px;">
+  	<%= render :partial => "/orders/order_product_images" %>
   </div>
 
-  <div class="payment_container" style="">
+  <div class="payment_container" style="bottom: 70px;">
     <div id="checkout_content" class="payment_editing_block">
       <div class="payment_group_contents">
         <div id="payment_form" class="valid_form payout_form standard_form paypal" style="display: block;">
-
           <%= render :partial => "/orders/payment_info_form"%>
         </div>
       </div>
@@ -50,12 +47,14 @@ body{
       btnNext: ".next",
       btnPrev: ".prev",
       visible: 1,
+      circular: false,
       speed: 500
     });
     $('.order_buy_display').jCarouselLite({
       btnNext: ".next_buy	",
       btnPrev: ".prev_buy",
       visible: 1,
+      circular: false,
       speed: 500
     });
 	}

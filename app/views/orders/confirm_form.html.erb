@@ -12,18 +12,9 @@
 
 <div class="container" style="">
   <div class="headings_pink" style="margin-left: 340px;margin-top: -45px;">Confirm Your Details</div>
-       <img class="circ_arrow2" src="/images/circular_arrow.png">
-
-  <div class="confirm_image_container" style="margin-top: -45px;">
-    
-
-    <div style ="margin-top:100px;">
-  	 <%= render :partial => "/orders/order_product_images" %>
-    </div>
+  <div class="confirm_image_container" style="margin-top:55px;">
+    <%= render :partial => "/orders/order_product_images" %>
   </div>
-         <img class="r_circ_arrow2" src="/images/r_circular_arrow.png">
-
-
   <div class="confirm_container" style="">
     <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
     <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
@@ -56,7 +47,7 @@
             <% if cart_amount < 0 %>
 						  <span>You will get:</span>
 						  $<%= format_num(-cart_amount) %>
-						<% else %>
+						<% elsif !(current_user.extra_money_for(cart_amount) > 0 && !current_user.has_card_info?)%>
 						  <span>You will be charged:</span>
 			        $<%= format_num(cart_amount) %> 
 						<% end %>

@@ -167,7 +167,10 @@
         <% end %>
       </div>
       <div style="display: block;">
-        <div class="isotop_empty_message" style="display: none;">Sorry, this product is not available.</div>
+        <div class="isotop_empty_message" style="display: none;">
+        	Sorry, this product is not available.
+        	<a href="/contact_us" style="color: #1D95CB">Contact us</a> so we can add it. 
+        </div>
         <% cache("homepage_product_container_category_#{category.id}", :expires_in => 1.hour) do %>
           <div class="product_container">
             <div id="products" class="isotope" style="padding-bottom: 150px;">
@@ -241,6 +244,7 @@
 		  	}
 		    $('#' + popup_id).addClass('active');
 		    $('#' + popup_id).show();
+		    $('#' + popup_id + ' .price_type').popover('hide');
 		    current_popup_id = popup_id;
 		  }
 	  });
@@ -410,7 +414,8 @@
     comboFilters = get_filter_options();
     $("#container_" + current_category_id + ' #products').isotope({ filter: comboFilters.join(', ') });
     
-    if ( !$("#container_" + current_category_id + ' #products').data('isotope') ) {
+    var item_count = $("#container_" + current_category_id + ' #products').find('.isotope-item').not('.isotope-hidden').length;
+    if ( item_count <= 0 ) {
       $('.isotop_empty_message').fadeIn('slow');
     } else {
       $('.isotop_empty_message').fadeOut('fast');
@@ -474,12 +479,21 @@
 	   	}
 	   	return;
 	  }
+	var check_buying = $('#shopping_cart').find('.buy_display li').length;
+	if(check_buying == 0){
+		$('#text_buying').show();
+		$("#done_button_for_buy").hide();
+	}
+	if(check_buying > 0){
+		$('#text_buying').hide();
+		$("#done_button_for_buy").show();
+	}
     for_what = "for_buying";
     $("#sell_message").hide();
     $("#buy_message").show();
-    $("#done_button_for_buy").hide();
+   // $("#done_button_for_buy").show();
     $('#checkout_button').hide();
-    $('#text_buying').show();
+    
     $('#done_button').hide();
     
     $("#sell_and_buy_message_guide span.buy").show();
