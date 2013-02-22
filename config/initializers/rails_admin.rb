@@ -666,11 +666,17 @@ RailsAdmin.config do |config|
         util.status_title
       end
       enum do
-        [['Pending, waiting for arrival', Order::STATUES[:pending]], ['Completed', Order::STATUES[:completed]], ['Declined', Order::STATUES[:declined]]]
+        [['Pending, waiting for arrival', Order::STATUES[:pending]], 
+         ['Reminder', Order::STATUES[:reminder]], 
+         ['Cancelled', Order::STATUES[:cancelled]], 
+         ['Confirmed to ship', Order::STATUES[:confirmed_to_ship]], 
+         ['Declined', Order::STATUES[:declined]],
+         ['Completed', Order::STATUES[:completed]]]
       end
     end
     
     list do
+      filters [:status, :user, :shipping_address, :shipping_city]
       field :status
       field :balance_amount
       field :user

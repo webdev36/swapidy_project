@@ -26,7 +26,7 @@ class Order < ActiveRecord::Base
   after_create :create_notification
   #after_create :adjust_current_balance
 
-  STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3, :confirmed_to_ship => 4}
+  STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3, :confirmed_to_ship => 4, :reminder => 5}
   SHIPPING_METHODS = {:box => "box", :usps => "usps", :fedex => "fedex"}
 
   SHIPPING_METHOD_NAMES = { :box => "A box and prepaid label", 
@@ -42,6 +42,7 @@ class Order < ActiveRecord::Base
     return "Declined" if self.status && self.status == STATUES[:declined] 
     return "Cancelled" if self.status && self.status == STATUES[:cancelled] 
     return "Confirmed, wait to ship" if self.status && self.status == STATUES[:confirmed_to_ship] 
+    return "Reminder" if self.status && self.status == STATUES[:reminder] 
     return "Pending, waiting for arrival"
   end
   
@@ -147,7 +148,7 @@ class Order < ActiveRecord::Base
     notification.title = "Order Reminder"
     notification.description = "Order - #{id} - Reminder" 
     notification.save
-
+  
     OrderNotifier.reminder(self, new_stamp).deliver
   end
     

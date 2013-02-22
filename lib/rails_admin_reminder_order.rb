@@ -22,11 +22,11 @@ module RailsAdmin
           Proc.new do
             if @object.status ==  Order::STATUES[:pending]
               @object.create_notification_to_reminder
+              @object.update_attribute(:status, Order::STATUES[:reminder])
               flash[:success] = "#{@model_config.label} successfully reminder!"
             else
               flash[:error] = "Only pending orders could be reminder!" 
             end
- 
             redirect_to back_or_index
           end
         end
