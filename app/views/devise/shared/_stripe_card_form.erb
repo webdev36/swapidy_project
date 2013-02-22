@@ -3,7 +3,9 @@
   Stripe.setPublishableKey('<%= StripeGateway.payment_public_key %>');
   function <%= submit_form %>_card_validate() {
     var form = $("#<%= submit_form %>");
-    form.find("#cardInfoValidate").hide();
+    form.find(".alert").each(function() {
+      $(this).hide();
+    });
     
     // do nothing if users don't enter Card information
     var has_changed = false;
@@ -24,6 +26,7 @@
 
     // given a valid form, submit the payment details to stripe
     //$(form['submit-button']).attr("disabled", "disabled")
+        
     Stripe.createToken({
       number: form.find('#<%= field_prefix %>new_card_number').val(),
       cvc: form.find('#<%= field_prefix %>new_card_cvc').val(),
@@ -34,7 +37,6 @@
         form.find("#cardInfoValidate").show();
         // re-enable the submit button
         //$(form['submit-button']).removeAttr("disabled")
-
         // show the error
         form.find(".payment-errors").html(response.error.message);
       } else {
@@ -53,21 +55,21 @@
   }
 </script>
 
-<div id="card_info_container" class="span12" style="margin-left: 0px; font-family:'myriad'; font-size:20px; background:url('/images/cc_template.png'); background-repeat:no-repeat; height:400px; width: 100%;">
-  <div class="headings_pink" style="position:relative; bottom:40px;">Provide Credit Card Information</div>
-  <% if user.has_card_info? %>
-    <div class="cc_blank_message">(leave blank if you don't want to change it)</div><br/>
-  <% end %>
+<div id="card_info_container" class="span12" style="margin-left: 0px; font-family:'myriad'; font-size:20px; background:url('/images/cc_template.png'); background-repeat:no-repeat; height:400px; width: 100%; line-height: 20px;">
   <div class="cc_secure">100% SECURE</div>
 
   <%= f.hidden_field :card_name %>
   <%= f.hidden_field :card_last_four_number %>
   <%= f.hidden_field :card_expired_month %>
   <%= f.hidden_field :card_expired_year %>
-
-
-    
-    <div style="margin-left:50px">
+  <div style="margin-left:50px">
+    <div class="cc_blank_message">
+      <% if user.has_card_info? %>
+      (leave blank if you don't want to change it)
+      <% else %>
+      &nbsp;
+      <% end %>
+    </div>
     <span style="color:white; font-size:14px; font-family:'myriad'; position:relative; top:10px;">Card Number</span><br />  
     <%= f.text_field :new_card_number, :size => 20, :class => "card-number", "edit-data" => user.new_card_number, :placeholder =>"Card Number", :class => "cc_number_field" %><br />
   </div>
@@ -89,8 +91,6 @@
     <%= f.hidden_field :new_card_type %>
     <%= f.hidden_field :new_card_last_four_number %>
   </div>
-  <div id="cardInfoValidate" style="display: none;">
-    <div class="payment-errors alert alert-error" style="text-align: center; width: 575px;"></div>
-  </div>
 </div>
+<div id="cardInfoValidate" class="payment-errors alert alert-error" style="display: none; text-align: center; width: 688px;"></div>
 

@@ -42,7 +42,7 @@
   <div id="dialog-content">
     <div class="container" style="background:url('/images/popup-bg.png'); background-repeat:repeat; border-radius: 10px; padding: 40px; width:690px; margin-left:160px;" >
       <a class="close-popup" style="position:relative; left:10px;" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
-      <div class="render_form">
+      <div class="render_form" style="margin-right: -20px; margin-left: -5px;">
       	<%= render :partial => "/orders/edit_card_form", :locals => {:card_info => current_user} %>
       </div>
     </div>
