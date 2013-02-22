@@ -10,17 +10,12 @@
   
   <div class="payment_product_info"><br/>
     <label style="color:black; padding-top: 10px;">Current Balance:</label>
-    <span style="color:black; font-family:'myriad'">$<%= format_num(current_user.balance_amount) %> </span>
+    <span style="color:black; font-family:'myriad'"><%= number_to_currency(current_user.balance_amount) %> </span>
   </div>
   <div class="payment_product_info">
   	<br/>
   	<span style="color:black; font-family:'myriad'; font-size:20px;">
-  		$<%= format_num(current_user.balance_amount) %> - $<%= format_num(cart_amount) %> = 
-			<% if current_user.balance_amount > cart_amount %>
-  		  $<%= format_num(current_user.balance_amount - cart_amount) %>
-  		<% else %>
-  		  -$<%= format_num(cart_amount - current_user.balance_amount) %>
-  		<% end %>	 
+  		<%= number_to_currency(current_user.balance_amount) %> - <%= number_to_currency(cart_amount) %> = <%= number_to_currency(current_user.balance_amount - cart_amount) %>
 	  </span>
 		<br />
 		<br />
@@ -29,7 +24,7 @@
       <% if (current_user.balance_amount-cart_amount) >= 0 %>
 	  	  $0
 	    <% else %>
-  	    -$<%= format_num(current_user.balance_amount - cart_amount) %> 
+  	    <%= number_to_currency(current_user.balance_amount - cart_amount) %> 
   		<% end %>
 	  </span>
 	</div>	

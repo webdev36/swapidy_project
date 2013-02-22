@@ -657,23 +657,10 @@ margin-left: 70px;}
   height: 280px;
   padding-bottom: 20px;
 }
-#popup-dialog_add_honey{
+#popup-dialog_add_money{
   position: fixed;
   top: 70px;
   font-family: "myriad";
-}
-#popup-dialog_add_honey_1{
-  position: fixed;
-  top:160px;
-  font-family: "myriad";
-}
-.get_honey_text{
-  height: 40px;
-}
-.honey_conversion{
-  margin-left:90px;
-  padding-top: 30px;
-  height: 200px;
 }
 .icon_dollar{
   font-size:30px;
@@ -703,19 +690,6 @@ margin-left: 70px;}
   margin-left: 380px;
   height: 200px;
 
-}
-.honey_textbox{
-    height: 30px;
-  width: 130px;
-  margin-left: 40px;
-  font-size: 40px;
-  position: relative;
-  top:60px;
-
-}
-.icon_honey_conversion{
-  margin-left: 100px;
-  height: 25px;
 }
 .left_menu{
 position: relative;
