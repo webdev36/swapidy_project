@@ -96,7 +96,7 @@ function display_guide() {
   next: "second",
   overlay: true,
   title: "Welcome to Swapidy!"
-  }).show();
+    }).show();
 
   
   guiders.createGuider({
@@ -143,15 +143,23 @@ function display_guide() {
   attachTo: "#nav_login",
   buttons: [{ name: "Close" },
     { name: "Next" }],
-  description: "You can get free cash by inviting up to 3 friends and making them use Swapdidy!",
+  description: "Get free cash by inviting upto 3 friends and making them use Swapidy.",
   id: "fifth",
   next: "sixth",
   position: '6',
   width:400,
-  title: "Invite your buddies for free cash!",
+  title: "Get free cash!",
   overlay: true
-  });
+    });
 
+  guiders.createGuider({
+  buttons: [{ name: "Close" }],
+  description: "You're all set to start using Swapidy. Start by selecting what you want to sell",
+  id: "sixth",
+  width:400,
+  title: "You're good to go!",
+  overlay: false
+    });
 
 
   //}
