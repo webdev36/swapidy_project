@@ -92,7 +92,12 @@ class Order < ActiveRecord::Base
     if self.order_products.for_sell.count > 0
       weight_total = 0
       self.order_products.for_sell.each { |order_product| weight_total += order_product.weight_lb }
-      stamp = create_stamp(weight_total, :for_sell)
+      #for testing only
+      if Rails.env == 'production'
+        stamp = create_stamp(weight_total, :for_sell)
+      else
+        stamp = create_test_stamp
+      end 
       ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "sell"))
     end
   end
@@ -226,7 +231,7 @@ class Order < ActiveRecord::Base
                   :package_type => "Package",
                   :ship_date => "2013-01-06"},
         :stamps_tx_id => "382c3dfb-5248-4755-9313-63cedfb6aed6",
-        :url => "#{File.expand_path(Rails.root)}/public/images/label-200.png"
+        :url => "#{File.expand_path(Rails.root)}/public/images/label_example.png"
       }
     end
 end
