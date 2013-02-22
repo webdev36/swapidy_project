@@ -15,7 +15,7 @@
   <div class="confirm_image_container" style="margin-top:55px;">
     <%= render :partial => "/orders/order_product_images" %>
   </div>
-  <div class="confirm_container" style="">
+  <div class="confirm_container" style="bottom: 220px;">
     <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
     <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
     
@@ -35,40 +35,34 @@
           <%= render :partial => "shipping_label", :locals => {:order => @order} %>
         </div>
 
-        <div class="confirm_payment_container" style="padding-top: 50px;">
+        <div class="confirm_payment_container" style="padding-top: 40px;">
           <div class="headings_pink" style="font-size:20px; position:relative; bottom:270px;">Payment Information</div>
           <br />
           <div style="position:relative; bottom:290px;">
-            <div style="padding-top: 10px;">
               <span>Current Balance:</span>
-              <%= number_to_currency(current_user.balance_amount) %>
-            </div>
-            <div style="padding-top: 10px;">
-	            <% if cart_amount < 0 %>
-							  <span>You will get:</span>
+              <%= number_to_currency(current_user.balance_amount) %><br/>
+              <% if cart_amount < 0 %>
+							  <span>You get:</span>
 							  <%= number_to_currency(-cart_amount) %>
-							<% elsif !(current_user.extra_money_for(cart_amount) > 0 && !current_user.has_card_info?)%>
-							  <span>You will be charged:</span>
-				        <%= number_to_currency(cart_amount) %> 
+							<% else %>
+							  <span>You pay:</span>
+				        <%= number_to_currency(cart_amount) %> <br /> 
 							<% end %>
-			      </div>
-            <% if current_user.extra_money_for(cart_amount) > 0 && current_user.has_card_info? %>
-	            <div>
-	              You would be charged <%= number_to_currency(current_user.extra_money_for(cart_amount)) %><br/>
+			      
+            	<% if current_user.extra_money_for(cart_amount) > 0 && current_user.has_card_info? %>
+	            	You would be charged: <%= number_to_currency(cart_amount) %> - <%= number_to_currency(current_user.balance_amount) %> = <%= number_to_currency(cart_amount - current_user.balance_amount) %>
+	            	<br/>
 	              <input type="button" value="Change Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="refresh_add_money_form();" />
-	            </div>
-	          <% end %>
-          </div>
+	          	<% elsif current_user.extra_money_for(cart_amount) > 0 && !current_user.has_card_info? %>
+	            	You would be charged: <%= number_to_currency(cart_amount) %> - <%= number_to_currency(current_user.balance_amount) %> = <%= number_to_currency(cart_amount - current_user.balance_amount) %>
+            	  <br/>
+	              <input type="button" value="Add Credit Card" class="order_button_buy" style="margin-left: 125px; margin-top: 20px;"  onclick="refresh_add_money_form();" />
+	          	<% end %>
+	        </div>
           
-          <% if current_user.extra_money_for(cart_amount) > 0 && !current_user.has_card_info? %>
-            <div style="position:relative; bottom:300px;">
-              Your balance is not enough.
-              You would be charged <%= number_to_currency(current_user.extra_money_for(cart_amount)) %>
-              <input type="button" value="Add Credit Card" class="order_button_buy" style="margin-left: 125px; margin-top: 20px;"  onclick="refresh_add_money_form();" />
-            </div>
-          <% else %>
+          <% unless current_user.extra_money_for(cart_amount) > 0 && !current_user.has_card_info? %>
 	          <% has_agreement_before = !current_user.last_order.nil? %>
-	          <div style="position:relative; bottom:300px;">
+	          <div style="position:relative; bottom:290px;">
 	            <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:100px;">Terms of Service</div></label>
 	            <p><br/>
 	              <input id="terms_of_service_checkbox" type="checkbox" style="position:relative;
