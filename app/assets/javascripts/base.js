@@ -140,28 +140,19 @@ function display_guide() {
 
 
   guiders.createGuider({
-  attachTo: ".sell_now",
-  buttons: [{ name: "Close" }],
-  description: "Start selling by clicking sell now and choosing the correct model.",
-  id: "seventh",
-  next: "eighth",
-  position: '12',
-  width:400,
-  title: "You're good to go!",
-  overlay: false
-  });
-
-  guiders.createGuider({
-  attachTo: ".container",
-  buttons: [{ name: "Close" }],
-  description: "You're good to go!",
-  id: "seventh",
-  next: "eighth",
+  attachTo: "#nav_login",
+  buttons: [{ name: "Close" },
+    { name: "Next" }],
+  description: "You can get free cash by inviting up to 3 friends and making them use Swapdidy!",
+  id: "fifth",
+  next: "sixth",
   position: '6',
   width:400,
-  title: "Start by choosing the products you want to sell followed by products you want to buy.",
-  overlay: false
+  title: "Invite your buddies for free cash!",
+  overlay: true
   });
+
+
 
   //}
   
