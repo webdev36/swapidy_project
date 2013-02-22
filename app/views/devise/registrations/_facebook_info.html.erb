@@ -2,7 +2,7 @@
 <% if current_user.user_providers.count > 0 %>
 	<div class= "avarta"><%= image_tag current_user.provider_image%></div><br />	
   <span>Your profile is now connected to facebook </span><br />
-	<a href="javascript:disconnect_facebook();" style="color: #000000;" class="disconnect"> Disconnect </a>
+	<a href="javascript:disconnect_facebook();" class="btn show_button_buy" style="width: 118px;height: 20px;margin-bottom: 20px;"> Disconnect </a>
 <% else %>
   <% if session[:disconnect_facebook]%>
     <span>You have disconnected Facebook, you could set new password in here</span>
