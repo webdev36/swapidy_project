@@ -10,7 +10,7 @@ class OrderNotifier < ActionMailer::Base
   def start_processing(order, host_with_port = "https://www.swapidy.com")
     @user = order.user
     @order = order
-    @host_with_port = host_with_port
+    @shipping_stamp = @order.shipping_stamps.for_sell.first
     mail :to => @user.email, :subject => "Print Shipping Label" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
