@@ -244,7 +244,24 @@
 		  	}
 		    $('#' + popup_id).addClass('active');
 		    $('#' + popup_id).show();
-		    $('#' + popup_id + ' .price_type').popover('hide');
+		    
+		    $('#' + popup_id + ' .price_type').each(function() {
+		    	if(new_left > 470){
+			    	if($(this).attr('data-placement') !== undefined){
+				      $(this).data('popover').options.placement = 'left';
+				    }else{
+				    	$(this).attr('data-placement', 'left');
+				    }
+			    }else{
+			    	if($(this).attr('data-placement') !== undefined){
+				    	$(this).data('popover').options.placement = 'right';
+				    }else{
+				    	$(this).attr('data-placement', 'right');
+				    }
+			    }
+			    $(this).popover();
+			  });
+		    	
 		    current_popup_id = popup_id;
 		  }
 	  });
@@ -414,6 +431,12 @@
     comboFilters = get_filter_options();
     $("#container_" + current_category_id + ' #products').isotope({ filter: comboFilters.join(', ') });
     
+    if(current_popup_id != '') {
+	    $('#' + current_popup_id).removeClass('active');
+	    $('#' + current_popup_id).hide();
+	    current_popup_id = "";
+	  }
+		    
     var item_count = $("#container_" + current_category_id + ' #products').find('.isotope-item').not('.isotope-hidden').length;
     if ( item_count <= 0 ) {
       $('.isotop_empty_message').fadeIn('slow');
