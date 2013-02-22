@@ -10,9 +10,9 @@
   	<a id="icon_buy" href="javascript:showScreenToBuy();" title="Add Buy" style="position: absolute;top:80px;width: 40px;height: 30px;right: 20px"><img src="/images/add-buy.ico" /></a>
  	<% if cart_products[:sell].count <= 1 %>
   	<div class= "checkout_bar_step1">
- 	<% elsif cart_products[:sell].count == 2%>
+ 	<% elsif cart_products[:sell].count == 2 %>
  		<div class= "checkout_bar_step2">
- 	<% else%>
+ 	<% else %>
  		<div class= "checkout_bar_step3">
 	<% end %>
   	<% if cart_products[:sell].count > 3 %>
@@ -27,9 +27,9 @@
         </ul>
       </div>
    </div>
-  <% if cart_products[:buy].count <=1  %>
+  <% if cart_products[:buy].count <=1 %>
   	<div class= "checkout_bar_buy1">
-  <% elsif cart_products[:buy].count == 2%>
+  <% elsif cart_products[:buy].count == 2 %>
  		<div class= "checkout_bar_buy2">
   <% else%>
  		<div class= "checkout_bar_buy3">
@@ -57,10 +57,10 @@
 	  	<span class="show_result" style="display: none;">You get: $<%= format_num(-cart_amount) %></span>
 	  <% end %>
 	</div>
-	<p id = "text_buying"  style="height: 20px; top: 60px; position: absolute;display:none; left: 50%; margin-left: -83px;"class="btn show_button_buy"> Done Choosing </p>
-	<a id="done_button" href="javascript:showScreenToBuy();" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_sell">Swap for...</a>
+	<p id="text_buying" style="height: 20px; top: 60px; position: absolute;display:none; left: 50%; margin-left: -83px;"class="btn show_button_buy">Done Choosing</p>
+	<a id="done_button" href="javascript:showScreenToBuy();" style="height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -90px; width: 182px; font-size: 19px;" class="btn show_button_sell">Choose what you want</a>
 	<a id="checkout_button" href="javascript:gotoCheckout();" style="display: none; height: 20px; top: 60px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy">Checkout</a>
-	<a id="done_button_for_buy"  href="javascript:showScreenToTrade();" style="height: 20px; top: 60px; position: absolute;display:none; left: 50%; margin-left: -83px;" class="btn show_button_buy">Done</a>
+	<a id="done_button_for_buy"  href="javascript:showScreenToTrade();" style="height: 20px; top: 60px; position: absolute;display:none; left: 50%; margin-left: -83px;" class="btn show_button_buy">I'm Done</a>
 <% end %>
 <style>
 	.step_sell_1{
@@ -72,44 +72,37 @@
 		top: 0px;
 		margin:auto;
 	}
-	
 	.checkout_bar_step1 {
-		
 		height: 120px;
 		margin: 0 0 0 300px;
 		width: 100px;
 		float: left;
 	}
 	.checkout_bar_step2 {
-		
 		height: 120px;
 		margin: 0 0 0 250px;
 		width: 190px;
 		float:left;
 	}
 	.checkout_bar_step3 {
-		
 		height: 120px;
 		margin: 0 0 0 230px;
 		width: 285px;
 		float:left;
 	}
 	.checkout_bar_buy1 {
-		
 		height: 120px;
 		margin: 0 285px 0 0;
 		width: 100px;
 		float: right;
 	}
 	.checkout_bar_buy2 {
-		
 		height: 120px;
 		margin: 0px 240px 0 0;
 		width: 190px;
 		float: right;
 	}
 	.checkout_bar_buy3 {
-		
 		height: 120px;
 		margin: 0px 200px 0 0;
 		width: 285px;

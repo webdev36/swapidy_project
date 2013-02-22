@@ -10,12 +10,14 @@ body{
 <div class="content" style="">
 
 <%= render :partial => "steps", :locals => {:current_step => 2 } %>
-<div class="container" style="position: relative; height:700px;">
-  <div class="headings_pink" style="text-align:center;">Payment Information</div>
-  <div class="confirm_image_container" style="position: absolute;top: 100px;width: 480px;left: 215px;-webkit-border-radius: 20px;padding: 10px;">
+<div class="" style="margin-top:30px;height:700px;">
+  <div class="headings_pink" style="text-align:center;">Payment Information</div><br/>
+ 
+  <div style="width: 480px;position:relative; left: 215px;-webkit-border-radius: 20px;padding: 10px; height:100px;">
   	<%= render :partial => "/orders/order_product_images" %>
   </div>
-  <div class="payment_container" style="">
+
+  <div class="payment_container" style="bottom: 70px;">
     <div id="checkout_content" class="payment_editing_block">
       <div class="payment_group_contents">
         <div id="payment_form" class="valid_form payout_form standard_form paypal" style="display: block;">
@@ -57,11 +59,4 @@ body{
     });
 	}
 </script>
-<style>
 
-	.payment_container{
-		position: absolute;
-		left: 215px;
-		z-index: 2000;
-	}
-</style>

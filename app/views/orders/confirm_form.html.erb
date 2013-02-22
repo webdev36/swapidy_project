@@ -8,17 +8,14 @@
     background: white;
   }
 </style>
-<div class="content" style="height:550px;" >
+<div class="content" style="height:590px;" >
 
 <div class="container" style="">
-  <div class="headings_pink" style="margin-top:-45px;">Confirm Your Details</div>
-  <div class="confirm_image_container" style="margin-top: 49px;">
-    <div style ="margin-top:100px;">
-  	 <%= render :partial => "/orders/order_product_images" %>
-    </div>
+  <div class="headings_pink" style="margin-left: 340px;margin-top: -45px;">Confirm Your Details</div>
+  <div class="confirm_image_container" style="margin-top:55px;">
+    <%= render :partial => "/orders/order_product_images" %>
   </div>
-
-  <div class="confirm_container" style="bottom: 235px;">
+  <div class="confirm_container" style="">
     <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
     <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
     
