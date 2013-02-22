@@ -8,7 +8,7 @@
 	  <div class="order_slider_sell">
 			<span class="old_stuff">My old stuff</span>
 	    <% if cart_products[:sell].count > 1 %>
-		    <button class="prev product_button_buy" style="width: 30px;position: absolute;top:10px;left: -130px;">&lt;</button>
+		    <button class="prev product_button_buy" style="width: 30px;position: absolute;top:10px;left: -130px;z-index: 1000">&lt;</button>
 		    <button class="next product_button_buy" style="width: 30px;position: absolute;top: 10px;left: 20px;z-index: 1000">&gt;</button>
 	 	  <% end %>
 	    <div class="order_sell_display" style="width: 100%;margin: auto">
@@ -26,7 +26,7 @@
 		 	  <span class="new_stuff">My new stuff</span>
 		  	<% if cart_products[:sell].count > 1 %>
 				  <button class="prev_buy product_button_buy" style="width: 30px;top: 10px;right: 150px;position: absolute;z-index: 1000">&lt;</button>
-				  <button class="next_buy product_button_buy"style="width: 30px;top: 10px;right: 20px;position: absolute">&gt;</button>
+				  <button class="next_buy product_button_buy"style="width: 30px;top: 10px;right: 20px;position: absolute;z-index: 1000">&gt;</button>
 		  	<% end %>
 		  	<div class="order_buy_display" style="width: 100%; text-align: right;margin:auto;" >
 		  	<ul id="mycarousel"  class="jcarousel-skin">
