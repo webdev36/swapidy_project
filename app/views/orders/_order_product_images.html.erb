@@ -4,14 +4,15 @@
 	<div style="width: 100%; display: block;">
   	<img class="circ_arrow" src="/images/circular_arrow.png">
   </div>
-  <div style="width: 100%; display: block; margin-top: 10px;">
+  <div style="width: 100%; display: block; margin-top: 10px;height: 200px">
 	  <div class="order_slider_sell">
 			<span class="old_stuff">My old stuff</span>
+	   <div style="height: 180px;width:200px; position: relative">
 	    <% if cart_products[:sell].count > 1 %>
-		    <button class="prev product_button_buy" style="width: 30px;position: absolute;top:10px;left: -130px;z-index: 1000">&lt;</button>
-		    <button class="next product_button_buy" style="width: 30px;position: absolute;top: 10px;left: 20px;z-index: 1000">&gt;</button>
+		    <button class="prev product_button_buy" style="width: 30px;position: absolute;top:10px;left:-140px;z-index: 1000">&lt;</button>
+		    <button class="next product_button_buy" style="width: 30px;position: absolute;top: 10px;left:30px;z-index: 1000;">&gt;</button>
 	 	  <% end %>
-	    <div class="order_sell_display" style="width: 100%;margin: auto">
+	    <div class="order_sell_display" style="width: 100%;margin: auto;">
 	  	  <ul id="mycarousel"  class="jcarousel-skin">
 			    <% cart_products[:sell].each do |order_product|%>
 			    	<li style="height:160px;width: 120px"> <img style=" max-width: 100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" /> 
@@ -22,11 +23,13 @@
 		    </ul>
 		  </div>
 		  </div>
+		  </div>
 		  <div class="order_slider_buy">
 		 	  <span class="new_stuff">My new stuff</span>
+		   <div style=" height: 180px;width:200px; position: relative">
 		  	<% if cart_products[:sell].count > 1 %>
-				  <button class="prev_buy product_button_buy" style="width: 30px;top: 10px;right: 150px;position: absolute;z-index: 1000">&lt;</button>
-				  <button class="next_buy product_button_buy"style="width: 30px;top: 10px;right: 20px;position: absolute;z-index: 1000">&gt;</button>
+				  <button class="prev_buy product_button_buy" style="width: 30px;top: 10px;right:170px;position: absolute;z-index: 1000">&lt;</button>
+				  <button class="next_buy product_button_buy"style="width: 30px;top: 10px;right:0px;position: absolute;z-index: 1000">&gt;</button>
 		  	<% end %>
 		  	<div class="order_buy_display" style="width: 100%; text-align: right;margin:auto;" >
 		  	<ul id="mycarousel"  class="jcarousel-skin">
@@ -37,6 +40,7 @@
 		    		</li>
 		    	<% end %>
 		    </ul>
+	  	</div>
 	  	</div>
 	  </div>
 	</div>
@@ -78,7 +82,7 @@
 	  position: relative;
 	  left: 50%;
 	  margin-left: -66px;
-	  margin-top: 20px;
+	  margin-top: -20px;
 	}
 	.old_stuff, .new_stuff{
 	  margin-left: 60px;
