@@ -627,7 +627,6 @@ RailsAdmin.config do |config|
       field :using_condition
       field :price
       field :product
-      field :user
     end
     export do
       field :sell_or_buy
@@ -635,7 +634,7 @@ RailsAdmin.config do |config|
       field :weight_lb
       field :using_condition
       field :price
-      field :user
+      field :order
     end
     show do
       field :sell_or_buy
@@ -643,7 +642,7 @@ RailsAdmin.config do |config|
       field :weight_lb
       field :using_condition
       field :price
-      field :user
+      field :order
     end
     edit do
       field :sell_or_buy
@@ -656,7 +655,7 @@ RailsAdmin.config do |config|
       field :using_condition
       field :price
       
-      field :user
+      field :order
     end
   end  
   config.model Order do

@@ -4,10 +4,11 @@
     <a href="#" onclick="$('#shopping_cart').fadeOut('slow'); show_checkout_bar = false;" style="height: 20px; top: 70px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy" id= "close_shopping_cart" >Close</a>
   </div>
 <% else %>
-  	<a style="position: absolute; left: 0; bottom: 50%; background-color: #38B4DE; padding: 5px;">My old stuff</a>
-  	<a style="position: absolute; right: 0; bottom: 50%; background-color: #fa3e6e; padding: 5px;">My new stuff</a>
-  	<a id="icon_sell" href="javascript:showScreenToSell();" title="Add Sell" style="position: absolute;top:80px;width: 40px;height: 30px;left: 20px"><img src="/images/add_more.png" /></a>
-  	<a id="icon_buy" href="javascript:showScreenToBuy();" title="Add Buy" style="position: absolute;top:80px;width: 40px;height: 30px;right: 20px"><img src="/images/add_more.png" /></a>
+	<a style="position: absolute; left: 0; bottom: 50%; background-color: #38B4DE; padding: 5px;">My old stuff</a>
+	<a style="position: absolute; right: 0; bottom: 50%; background-color: #fa3e6e; padding: 5px;">My new stuff</a>
+	<a id="icon_sell" href="javascript:showScreenToSell();" title="Add Sell" style="position: absolute;top:80px;width: 40px;height: 30px;left: 20px"><img src="/images/add_more.png" /></a>
+	<a id="icon_buy" href="javascript:showScreenToBuy();" title="Add Buy" style="position: absolute;top:80px;width: 40px;height: 30px;right: 20px"><img src="/images/add_more.png" /></a>
+ 	
  	<% if cart_products[:sell].count <= 1 %>
   	<div class= "checkout_bar_step1">
  	<% elsif cart_products[:sell].count == 2 %>

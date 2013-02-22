@@ -9,20 +9,4 @@ class ShippingStamp < ActiveRecord::Base
   
   belongs_to :order
   
-  def self.create_from_stamp_api order, order_stamp
-      new_stamp = order.shipping_stamps.new
-      new_stamp.integrator_tx_id = order_stamp[:integrator_tx_id]
-      new_stamp.tracking_number = order_stamp[:tracking_number]
-      new_stamp.service_type = order_stamp[:rate][:service_type]
-      new_stamp.rate_amount = order_stamp[:rate][:amount]
-      new_stamp.package_type = order_stamp[:rate][:package_type] 
-      new_stamp.due_date = order_stamp[:rate][:ship_date]
-      new_stamp.stamps_tx_id = order_stamp[:stamps_tx_id]
-      new_stamp.url = order_stamp[:url]
-      new_stamp.status = "pending"
-      new_stamp.sell_or_buy = order_stamp[:sell_or_buy]
-      new_stamp.save
-      return new_stamp
-  end
-  
 end
