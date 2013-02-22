@@ -15,18 +15,28 @@
   <div class="payment_product_info">
   	<br/>
   	<span style="color:black; font-family:'myriad'; font-size:20px;">
+  	<%if cart_amount >= 0%>
   		<%= number_to_currency(current_user.balance_amount) %> - <%= number_to_currency(cart_amount) %> = <%= number_to_currency(current_user.balance_amount - cart_amount) %>
+	  	<br />
+		<br />	
+	  <label style="color:black; font-family:'myriad';">Total due today:</label>
+	  <span style="color:black; font-family:'myriad'; font-size:20px;">	
+	  	<%if current_user.balance_amount - cart_amount >0 %>
+	  		$0  
+		<%else%>
+		<%= number_to_currency(cart_amount-current_user.balance_amount)%>
+		<%end%>
 	  </span>
+	<%else%>
+	  	<%= number_to_currency(current_user.balance_amount) %> + <%= number_to_currency(-cart_amount) %> = <%= number_to_currency(current_user.balance_amount - cart_amount) %>
+	  	</span>
 		<br />
 		<br />
 	  <label style="color:black; font-family:'myriad';">Total due today:</label>
-	  <span style="color:black; font-family:'myriad'; font-size:20px;">
-      <% if (current_user.balance_amount-cart_amount) >= 0 %>
-	  	  $0
-	    <% else %>
-  	    <%= number_to_currency((cart_amount)- current_user.balance_amount)%> 
-  		<% end %>
-	  </span>
+	  <span style="color:black; font-family:'myriad'; font-size:20px;">	
+	  		$0
+	  </span>  
+	  <%end%>
 	</div>	
   <input name="commit" class="product_button_buy" type="submit" value="Continue" style="right:60px;"/>
 <% end %>
