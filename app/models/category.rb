@@ -1,11 +1,13 @@
 class Category < ActiveRecord::Base
-  attr_accessible :title, :image_file_name, :image_content_type, :image_file_size
+  attr_accessible :title, :image_file_name, :image_content_type, :image_file_size, :sort_number
   
   belongs_to :user
   has_many :products
-  has_many :product_models
+  has_many :product_models, :order => :sort_number
   has_many :category_attributes
   has_many :images, :as => :for_object, :class_name => "Image"
+
+  scope :sorted, :order => :sort_number 
 
   def main_image_url(type)
     main_image.photo.url(type)
