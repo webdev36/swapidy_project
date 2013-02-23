@@ -95,7 +95,45 @@ namespace :swapidy do
           lines.each_with_index do |line, index|
             next if index == 0
             logger.info "line: #{line}"
-            product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", logger) #rescue nil
+            product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", :update_if_existed, logger) #rescue nil
+            product_ids << product.id if product
+            logger.info product
+          end
+        end
+        
+        logger.info product_ids.to_s
+        del_products = Product.where("id not in (#{product_ids.join(',')})")
+        logger.info del_products.map{|p| p.id }.to_s
+        del_products.each {|p| p.destroy }
+      rescue Exception => e
+        logger.info e.message
+      end
+    end
+    
+    
+    desc "Insert new products database from excel file"
+    task :insert_new_products => :environment do
+      logger = Logger.new("log/swapidy_tasks.log")
+      begin
+        product_ids = []
+        ["products_20130114_buy.csv", "products_20130114_sell.csv"].each do |file_name|
+          logger.info file_name
+          
+          file = File.open(File.join(Rails.root, 'demo_data', file_name),"r")
+          content = file.read
+          lines = content.split(/\r/)
+          
+          headers = lines[0].split(/\,/)
+          return nil if headers.size < 7
+          
+          ["Weight lb", "Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
+            attrs = CategoryAttribute.where(:title => cat_title).each {|attr| attr.destroy }
+          end
+
+          lines.each_with_index do |line, index|
+            next if index == 0
+            logger.info "line: #{line}"
+            product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", :return_if_existed, logger) #rescue nil
             product_ids << product.id if product
             logger.info product
           end
