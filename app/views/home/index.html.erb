@@ -93,7 +93,7 @@
       <a class="left carousel-control buttons prev">&lsaquo;</a>
       <div class="viewport">
         <ul class="overview" style="width: 1560px;">
-          <% Category.all.each_with_index do |category, index| %>
+          <% Category.sorted.each_with_index do |category, index| %>
             <li id="cat_<%= category.id %>" class="item category span3" >
               <img class="cat_item" alt="<%= category.title %>" style="height: 160px; width: auto;" src="<%= category.main_image_url(:medium) %>">
               <div style="display:block;">
@@ -108,7 +108,7 @@
   </div>
 <% end %>
 
-<% Category.all.each do |category| %>
+<% Category.sorted.each do |category| %>
     <div id="container_cat_<%= category.id %>" class="product_search_container" style="display:none;">
       <div class="headings_pink_edit" style="text-align: center; padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">Choose your model</div>
       <div style="display: block;padding:0 0 30px;">

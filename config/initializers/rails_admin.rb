@@ -171,11 +171,13 @@ RailsAdmin.config do |config|
       field :title
       field :user
       field :product_models
+      field :sort_number
      end
      export do; end
      show do; end
      edit do
       field :title
+      field :sort_number
      end
      create do; end
      update do; end
@@ -269,9 +271,11 @@ RailsAdmin.config do |config|
     configure :images, :has_many_association   #   # Found columns:
     configure :created_at, :datetime 
     configure :updated_at, :datetime 
-    
+
     list do
+      filters [:title, :category]
       field :title
+      field :sort_number
       field :category
       field :images
       field :weight_lb
@@ -281,6 +285,7 @@ RailsAdmin.config do |config|
     show do; end
     update do
       field :title
+      field :sort_number
       field :product_model_attributes
       field :images
       field :comment
@@ -288,6 +293,7 @@ RailsAdmin.config do |config|
     end
     create do
       field :title
+      field :sort_number
       field :category
       field :product_model_attributes
       field :images

@@ -11,11 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130213034214) do
+ActiveRecord::Schema.define(:version => 20130223203126) do
 
   create_table "categories", :force => true do |t|
     t.string  "title"
     t.integer "user_id"
+    t.integer "sort_number"
   end
 
   create_table "category_attributes", :force => true do |t|
@@ -23,6 +24,8 @@ ActiveRecord::Schema.define(:version => 20130213034214) do
     t.string  "attribute_type"
     t.string  "title"
   end
+
+  add_index "category_attributes", ["category_id"], :name => "index_category_attributes_on_category_id"
 
   create_table "free_honeys", :force => true do |t|
     t.integer  "sender_id"
@@ -84,7 +87,6 @@ ActiveRecord::Schema.define(:version => 20130213034214) do
     t.integer  "product_id"
     t.integer  "user_id"
     t.integer  "status"
-
     t.datetime "created_at",                                                                :null => false
     t.datetime "updated_at",                                                                :null => false
     t.string   "shipping_method"
@@ -96,7 +98,7 @@ ActiveRecord::Schema.define(:version => 20130213034214) do
     t.string   "shipping_state"
     t.string   "shipping_zip_code"
     t.string   "shipping_country"
-    t.decimal  "balance_amount",            :precision => 10, :scale => 2
+    t.decimal  "balance_amount",            :precision => 10, :scale => 2, :default => 0.0
     t.string   "using_condition"
     t.string   "shipping_zip_code_add_on"
   end
@@ -140,7 +142,10 @@ ActiveRecord::Schema.define(:version => 20130213034214) do
     t.string  "comment"
     t.integer "category_id"
     t.decimal "weight_lb",   :default => 1.0
+    t.integer "sort_number"
   end
+
+  add_index "product_models", ["category_id"], :name => "index_product_models_on_category_id"
 
   create_table "products", :force => true do |t|
     t.string  "title"
@@ -156,6 +161,9 @@ ActiveRecord::Schema.define(:version => 20130213034214) do
     t.integer "swap_type",                                          :default => 0
   end
 
+  add_index "products", ["category_id"], :name => "index_products_on_category_id"
+  add_index "products", ["product_model_id"], :name => "index_products_on_product_model_id"
+
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
     t.string   "username"
@@ -166,6 +174,8 @@ ActiveRecord::Schema.define(:version => 20130213034214) do
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
+
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
   create_table "redeem_codes", :force => true do |t|
     t.string   "code"

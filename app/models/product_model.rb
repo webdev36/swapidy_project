@@ -1,8 +1,9 @@
 class ProductModel < ActiveRecord::Base
-  attr_accessible :title, :comment, :category_id, :weight_lb, :product_model_attribute_ids, :image_ids
+  attr_accessible :title, :comment, :category_id, :weight_lb, :product_model_attribute_ids, :image_ids, :sort_number
   
   belongs_to :category
   has_many :products
+  scope :sorted, :order => :sort_number 
 
   has_many :product_model_attributes
   #has_many :category_attributes, :thought => :product_model_attributes
