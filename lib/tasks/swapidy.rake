@@ -134,7 +134,6 @@ namespace :swapidy do
             next if index == 0
             logger.info "line: #{line}"
             product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", :return_if_existed, logger) #rescue nil
-            product_ids << product.id if product
             logger.info product
           end
         end
