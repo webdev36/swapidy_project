@@ -43,7 +43,7 @@ RailsAdmin.config do |config|
   #config.excluded_models = [Comment, Post]
 
   # Add models here if you want to go 'whitelist mode':
-  config.included_models = [Category, CategoryAttribute, Image, Order, OrderProduct, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User, FreeHoney, RedeemCode, SwapidySetting, LocationVote ]
+  config.included_models = [BrandEmail, BrandEmailCustomer, Category, CategoryAttribute, Image, Order, OrderProduct, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User, FreeHoney, RedeemCode, SwapidySetting, LocationVote ]
 
   # Application wide tried label methods for models' instances
   # config.label_methods << :description # Default is [:name, :title]
@@ -754,4 +754,71 @@ RailsAdmin.config do |config|
        field :created_at
      end
   end
+  
+  config.model BrandEmail do
+    list do
+      filters [:title]
+      field :title
+      field :email_total
+      field :sending_count
+      field :sent_count
+      field :failure_count
+      field :created_at
+    end
+    export do
+      field :title
+      field :email_total
+      field :sending_count
+      field :sent_count
+      field :failure_count
+      field :created_at
+      field :customers
+    end
+    show do
+      field :title
+      field :content
+      field :email_total
+      field :sending_count
+      field :sent_count
+      field :failure_count
+      field :created_at
+      field :customers
+    end
+    create do
+      field :title
+      field :content, :text
+      field :customers, :text
+      field :suggest_user_emails, :text do
+        read_only true
+      end
+    end
+  end
+  
+  config.model BrandEmailCustomer do
+    configure :status, :enum do
+      enum do
+        [['Sending', BrandEmailCustomer::STATUS[:sending]], 
+         ['Sent', BrandEmailCustomer::STATUS[:sent]], 
+         ['Failure', BrandEmailCustomer::STATUS[:failure]]]
+      end
+    end
+    list do
+      filters [:brand_email, :email]
+      field :email
+      field :brand_email
+      field :user
+      field :status
+      field :created_at
+      field :updated_at
+    end
+    export do
+      field :email
+      field :brand_email
+      field :user
+      field :status
+      field :created_at
+      field :updated_at
+    end
+  end
+
 end
