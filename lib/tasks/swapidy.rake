@@ -138,11 +138,6 @@ namespace :swapidy do
             logger.info product
           end
         end
-        
-        logger.info product_ids.to_s
-        del_products = Product.where("id not in (#{product_ids.join(',')})")
-        logger.info del_products.map{|p| p.id }.to_s
-        del_products.each {|p| p.destroy }
       rescue Exception => e
         logger.info e.message
       end
