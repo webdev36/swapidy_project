@@ -92,8 +92,9 @@ module ImportExcelProduct
     category = Category.create(:title => columns[MODEL_INDEXES[:category]]) unless category
     
     model = category.product_models.find_by_title columns[MODEL_INDEXES[:product_model]]
+    return model if model
     model = category.product_models.create(:title => columns[MODEL_INDEXES[:product_model]], 
-                                           :weight_lb => columns[MODEL_INDEXES[:weight_lb]]) unless model
+                                           :weight_lb => columns[MODEL_INDEXES[:weight_lb]])
     
     attr_names = []
     (MODEL_PROPERTY_START_INDEX..(columns.size-2)).to_a.each do |column_index|

@@ -38,8 +38,8 @@ namespace :swapidy do
       #reset_products
     end
     
-    desc "Reset database from excel file"
-    task :reset_models => :environment do
+    desc "Insert to ProductModel database from excel file"
+    task :insert_models => :environment do
       logger = Logger.new("log/swapidy_tasks.log")
       
       file = File.open(File.join(Rails.root, 'demo_data', "models_20130111.csv"),"r")
@@ -48,8 +48,7 @@ namespace :swapidy do
       headers = lines[0].split(",")
       
       return nil if headers.size < 3
-      ProductModel.all.each {|model| model.destroy }
-
+      
       lines.each_with_index do |line, index|
         next if index == 0
         logger.info "line: #{line}"
