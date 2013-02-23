@@ -13,7 +13,7 @@ module ImportExcelProduct
             }
   PROPERTY_START_INDEX = 7
   
-  def self.import_from_textline(textline, headers, for_buying = true, logger = nil)
+  def self.import_from_textline(textline, headers, for_buying = true, action_type = :updated_if_existed, logger = nil)
     
     logger = Logger.new("log/swapidy_tasks.log") unless logger
     
@@ -31,6 +31,7 @@ module ImportExcelProduct
 
     product = Product.where(:title => columns[INDEXES[:title]], :swap_type => for_buying ? 2 : 1).first
     if product
+      return unless action_type != :updated_if_existed
       if for_buying
         product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
         product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
