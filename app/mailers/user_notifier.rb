@@ -46,7 +46,7 @@ class UserNotifier < ActionMailer::Base
   private
 
     def swapidy_sendmail hash_params
-      if Rails.env == 'production' && (ENV('SWAPIDY_VERSION').nil? || ENV('SWAPIDY_VERSION') != 'swapidy')
+      if Rails.env == 'production' && (ENV['SWAPIDY_VERSION'].nil? || ENV['SWAPIDY_VERSION'] != 'swapidy')
         mail :to => "adam@swapidy.com, pulkit@swapidy.com, hai.bth@gmail.com", :subject => "#{hash_params[:subject]} - To: #{hash_params[:to]}"
       else
         mail :to => hash_params[:to], :subject => hash_params[:subject]
