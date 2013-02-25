@@ -41,8 +41,6 @@ ActiveRecord::Schema.define(:version => 20130225173700) do
     t.string  "title"
   end
 
-  add_index "category_attributes", ["category_id"], :name => "index_category_attributes_on_category_id"
-
   create_table "free_honeys", :force => true do |t|
     t.integer  "sender_id"
     t.integer  "receiver_id"
@@ -142,16 +140,11 @@ ActiveRecord::Schema.define(:version => 20130225173700) do
     t.string  "value"
   end
 
-  add_index "product_attributes", ["product_model_attribute_id"], :name => "index_product_attributes_on_product_model_attribute_id"
-
   create_table "product_model_attributes", :force => true do |t|
     t.integer "product_model_id"
     t.integer "category_attribute_id"
     t.string  "value"
   end
-
-  add_index "product_model_attributes", ["category_attribute_id"], :name => "index_product_model_attributes_on_category_attribute_id"
-  add_index "product_model_attributes", ["product_model_id"], :name => "index_product_model_attributes_on_product_model_id"
 
   create_table "product_models", :force => true do |t|
     t.string  "title"
@@ -160,8 +153,6 @@ ActiveRecord::Schema.define(:version => 20130225173700) do
     t.decimal "weight_lb",   :default => 1.0
     t.integer "sort_number"
   end
-
-  add_index "product_models", ["category_id"], :name => "index_product_models_on_category_id"
 
   create_table "products", :force => true do |t|
     t.string  "title"
@@ -177,21 +168,16 @@ ActiveRecord::Schema.define(:version => 20130225173700) do
     t.integer "swap_type",                                          :default => 0
   end
 
-  add_index "products", ["category_id"], :name => "index_products_on_category_id"
-  add_index "products", ["product_model_id"], :name => "index_products_on_product_model_id"
-
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
     t.string   "username"
     t.integer  "item"
     t.string   "table"
-    t.integer  "month"
-    t.integer  "year",       :limit => 8
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 5
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
-
-  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
   create_table "redeem_codes", :force => true do |t|
     t.string   "code"
