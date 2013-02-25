@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   before_filter :check_uri #deployed on swapidy.com
   before_filter :prepaire_add_money
-  
+  before_filter :check_browsers
   def check_uri
     #clear_cart_products
     return unless Rails.env == 'production'
@@ -97,6 +97,13 @@ class ApplicationController < ActionController::Base
   
   def check_to_display_guide
     session[:need_to_display_guide] = true if current_user && current_user.sign_in_count <= 3
+  end
+  
+  def check_browsers
+    user_agent =request.env['HTTP_USER_AGENT'].downcase
+    if user_agent =~ /msie/i
+      render :action => 'support_browsers'
+    end
   end
 
   private
