@@ -143,7 +143,7 @@ function display_guide() {
   attachTo: "#nav_login",
   buttons: [{ name: "Close" },
     { name: "Next" }],
-  description: "Get free cash by inviting upto 3 friends and making them use Swapidy.",
+  description: "Get free cash by inviting up to 3 friends and making them use Swapidy.",
   id: "fifth",
   next: "sixth",
   position: '6',
