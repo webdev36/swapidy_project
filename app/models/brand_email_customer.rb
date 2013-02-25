@@ -14,12 +14,12 @@ class BrandEmailCustomer < ActiveRecord::Base
   scope :failure, :conditions => {:status => 2}
 
   def send_email
-    if self.user
-      notification = self.user.notifications.new(:user_id => self.user.id)
-      notification.title = self.brand_email.title
-      notification.description = self.brand_email.content
-      notification.save
-    end
+    #if self.user
+    #  notification = self.user.notifications.new(:user_id => self.user.id)
+    #  notification.title = "Support Customer's email sent"
+    #  notification.description = "Please check your email about: #{self.brand_email.title}"
+    #  notification.save
+    #end
     UserNotifier.brand_email(self.email, self.brand_email.title, self.brand_email.content).deliver
     self.update_attribute(:status, STATUS[:sent])
   end

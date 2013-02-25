@@ -3,15 +3,21 @@ class BrandEmail < ActiveRecord::Base
 
   has_many :brand_email_customers
   has_many :users, :through => :brand_email_customers
-  validates :content, :title, :customers, :presence => true
-  
+  validates :title, :presence => true, :length => { :maximum => 2000 }
+  validates :content, :length => { :maximum => 2000 }, :presence => true
+  validates :customers, :presence => true
+
   after_create :send_notifications
   
   def customers=(value)
+    emails = []
     value.split(',').map{|email| email.strip}.each do |email|
       next if email.blank?
+      next if emails.include?(email)
+      emails << email
       user = User.find_by_email(email)
-      self.brand_email_customers.new(:email => email, :user_id => user ? user.id : nil)
+      customer = self.brand_email_customers.new(:email => email, :user_id => user ? user.id : nil)
+      errors.add(:customers, "has invalid email \"#{email}\"") unless customer.valid? 
     end
   end
   

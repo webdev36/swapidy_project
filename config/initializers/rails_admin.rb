@@ -786,7 +786,9 @@ RailsAdmin.config do |config|
     end
     create do
       field :title
-      field :content, :text
+      field :content, :text do
+        help "Required. Length up to 2000."
+      end
       field :customers, :text
       field :suggest_user_emails, :text do
         read_only true
