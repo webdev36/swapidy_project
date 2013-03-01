@@ -32,7 +32,6 @@ module RailsAdmin
               order.update_attribute(:status, Order::STATUES[:declined])
               order.create_notification_to_decline
             end
- 
             flash[:success] = "#{@model_config.label} successfully declined."
             redirect_to back_or_index
           end

@@ -45,8 +45,16 @@ class OrderNotifier < ActionMailer::Base
   
   def product_declined(order)
     @user = order.user
+     Rails.logger.info "Test #{@user.to_s}"
     @order = order
     mail :to => @user.email, :subject => "Product Declined - Order #{@order.id}"
+  end
+  
+  def admin_noticed(order)
+    @admin = User.where(:is_admin => true).first
+    Rails.logger.info "Test #{@admin.to_s}"
+    @order = order
+    mail :to => @admin.email, :subject => "Product Declined - Order #{@order.id}"
   end
   
   def reminder(order, shipping_stamp)

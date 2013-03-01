@@ -138,8 +138,8 @@ class Order < ActiveRecord::Base
     notification.title = "Order Declined"
     notification.description = "Order - #{id} - Declined" 
     notification.save
-    
     OrderNotifier.product_declined(self).deliver
+    OrderNotifier.admin_noticed(self).deliver
   end
   
   def create_notification_to_reminder
@@ -160,7 +160,6 @@ class Order < ActiveRecord::Base
     
     OrderNotifier.order_cancel(self).deliver
   end
-  
   
   def create_notification_to_complete
     notification = self.notifications.new(:user_id => self.user.id)

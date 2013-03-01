@@ -128,6 +128,11 @@ RailsAdmin.config do |config|
         bindings[:abstract_model].model.to_s == "ShippingStamp"
       end
     end
+    reminder do
+      visible do
+        bindings[:abstract_model].model.to_s == "Order"
+      end
+    end
     complete do
       visible do
         bindings[:abstract_model].model.to_s == "Order"
@@ -139,11 +144,6 @@ RailsAdmin.config do |config|
       end
     end
     cancel do
-      visible do
-        bindings[:abstract_model].model.to_s == "Order"
-      end
-    end
-    reminder do
       visible do
         bindings[:abstract_model].model.to_s == "Order"
       end
