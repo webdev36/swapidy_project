@@ -1,9 +1,9 @@
-<div id="shopping_cart" <% if cart_products_empty? %> style="display:none;height: 130px;" <% end %> >
+<div id="shopping_cart" <% if ShoppingCart.cart_products_empty? %> style="display:none;height: 130px;" <% end %> >
   <%= render :partial => "/home/shopping_cart" %>
 </div>
 
 <script language="JavaScript">
-	<% if cart_products_empty? %>
+	<% if ShoppingCart.cart_products_empty? %>
 		var show_checkout_bar = false;
   <% else %>
   	var show_checkout_bar = true;

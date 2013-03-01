@@ -1,4 +1,4 @@
-<% if cart_products_empty? %>
+<% if ShoppingCart.cart_products_empty? %>
   <div id="product_items" style="height: 130px; min-width:600px;">
     <div style="width: 100%; text-align: center; padding-top: 40px;"> <span class="headings_pink">Empty Swapping Cart</span></div>
     <a href="#" onclick="$('#shopping_cart').fadeOut('slow'); show_checkout_bar = false;" style="height: 20px; top: 70px; position: absolute; left: 50%; margin-left: -83px;" class="btn show_button_buy" id= "close_shopping_cart" >Close</a>
@@ -9,53 +9,53 @@
 	<a id="icon_sell" href="javascript:showScreenToSell();" title="Add Sell" style="position: absolute;top:80px;width: 40px;height: 30px;left: 20px"><img src="/images/add_more.png" /></a>
 	<a id="icon_buy" href="javascript:showScreenToBuy();" title="Add Buy" style="position: absolute;top:80px;width: 40px;height: 30px;right: 20px"><img src="/images/add_more.png" /></a>
  	
- 	<% if cart_products[:sell].count <= 1 %>
+ 	<% if ShoppingCart.cart_products[:sell].count <= 1 %>
   	<div class= "checkout_bar_step1">
- 	<% elsif cart_products[:sell].count == 2 %>
+ 	<% elsif ShoppingCart.cart_products[:sell].count == 2 %>
  		<div class= "checkout_bar_step2">
  	<% else %>
  		<div class= "checkout_bar_step3">
 	<% end %>
-  	<% if cart_products[:sell].count > 3 %>
+  	<% if ShoppingCart.cart_products[:sell].count > 3 %>
 	 	  <button class="prev" style="width: 30px;position: absolute;top:50px;margin-left:-50px;float: left">&lt;&lt;</button>
 	 	  <button class="next" style="width: 30px;position: absolute;top: 50px;margin-left:295px;float: right">&gt;&gt;</button>
  	  <% end %>
       <div class = "sell_display step_sell_1" style="width:100% !important;">
        	<ul style="position: none;">
-        <% cart_products[:sell].each do |order_product|%>
+        <% ShoppingCart.cart_products[:sell].each do |order_product|%>
        		<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product} %>
         <% end %>
         </ul>
       </div>
    </div>
-  <% if cart_products[:buy].count <=1 %>
+  <% if ShoppingCart.cart_products[:buy].count <=1 %>
   	<div class= "checkout_bar_buy1">
-  <% elsif cart_products[:buy].count == 2 %>
+  <% elsif ShoppingCart.cart_products[:buy].count == 2 %>
  		<div class= "checkout_bar_buy2">
   <% else%>
  		<div class= "checkout_bar_buy3">
   <% end %>
-    <% if cart_products[:buy].count > 3 %>
+    <% if ShoppingCart.cart_products[:buy].count > 3 %>
       <button class="prev_buy" style="width: 30px;top: 50px;right: 465px;position: absolute;float: left">&lt;&lt;</button>
  	  	<button class="next_buy"style="width: 30px;top: 50px;right: 125px;position: absolute;float: right">&gt;&gt;</button>
 	  <% end %>
         <div class="buy_display step_buy_1"style="width:100% !important;">
 	      <ul style="position: none;">
-	      	<% cart_products[:buy].each do |order_product| %>
+	      	<% ShoppingCart.cart_products[:buy].each do |order_product| %>
 	        	<%= render :partial => "/home/cart_product_thumb", :locals => {:order_product => order_product}%>
 	      	<% end %>
 	      </ul>
 	    </div>
 	</div> 
 	<div class="show_result" style="position:absolute; left:50%; margin-left:-125px; min-width: 250px; text-align: center; top: 30px; font-size: 25px;display: none">
-	  <% if cart_amount > 0 %>
+	  <% if ShoppingCart.cart_amount > 0 %>
 	  	<% if current_user && current_user.balance_amount && current_user.balance_amount > 0 %>
-	    	You pay: $<%= format_num(cart_amount) %> - $<%= format_num(current_user.balance_amount) %>
+	    	You pay: $<%= format_num(ShoppingCart.cart_amount) %> - $<%= format_num(current_user.balance_amount) %>
 	  	<% else %>
-	  	<span class="show_result" style="display: none;">  You pay: $<%= format_num(cart_amount) %> </span>
+	  	<span class="show_result" style="display: none;">  You pay: $<%= format_num(ShoppingCart.cart_amount) %> </span>
 	  	<% end %>
 	  <% else %>
-	  	<span class="show_result" style="display: none;">You get: $<%= format_num(-cart_amount) %></span>
+	  	<span class="show_result" style="display: none;">You get: $<%= format_num(-ShoppingCart.cart_amount) %></span>
 	  <% end %>
 	</div>
 	<p id="text_buying" style="height: 20px; top: 60px; position: absolute;display:none; left: 50%;width:160px; margin-left: -83px;color: white;" class="btn show_button_buy">I'm Done Buying</p>

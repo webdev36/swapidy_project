@@ -26,7 +26,7 @@ class Order < ActiveRecord::Base
   after_create :create_notification
   #after_create :adjust_current_balance
 
-  STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3, :confirmed_to_ship => 4, :reminder => 5}
+  STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3, :delivery => 4, :reminder => 5}
   SHIPPING_METHODS = {:box => "box", :usps => "usps", :fedex => "fedex"}
 
   SHIPPING_METHOD_NAMES = { :box => "A box and prepaid label", 
@@ -82,14 +82,33 @@ class Order < ActiveRecord::Base
     return result
   end
   
+  def create_stamp_to_deliver
+    if self.order_products.for_buy.count > 0
+      weight_total = 0
+      self.order_products.for_buy.each { |order_product| weight_total += order_product.weight_lb }
+      #for testing only
+      if Rails.env == 'production' || Rails.env == 'stamps_dev'
+        stamp = create_stamp(weight_total, :for_buy)
+      else
+        stamp = create_test_stamp
+      end
+      
+      new_shipping_stamp = self.shipping_stamps.for_buy.new(:status => "pending")
+      new_shipping_stamp.integrator_tx_id = stamp[:integrator_tx_id]
+      new_shipping_stamp.tracking_number = stamp[:tracking_number]
+      new_shipping_stamp.service_type = stamp[:rate][:service_type]
+      new_shipping_stamp.rate_amount = stamp[:rate][:amount]
+      new_shipping_stamp.package_type = stamp[:rate][:package_type] 
+      new_shipping_stamp.due_date = stamp[:rate][:ship_date]
+      new_shipping_stamp.stamps_tx_id = stamp[:stamps_tx_id]
+      new_shipping_stamp.url = stamp[:url]
+      new_shipping_stamp.order = self
+      new_shipping_stamp.save
+      return new_shipping_stamp
+    end
+  end
+  
   def create_new_stamps
-    #if self.order_products.for_buy.count > 0
-    #  weight_total = 0
-    #  self.order_products.for_buy.each { |order_product| weight_total += order_product.weight_lb }
-    #  stamp = create_stamp(weight_total, :for_buy)
-    #  ShippingStamp.create_from_stamp_api(self, stamp.merge(:sell_or_buy => "buy"))
-    #end
-    
     if self.order_products.for_sell.count > 0
       weight_total = 0
       self.order_products.for_sell.each { |order_product| weight_total += order_product.weight_lb }

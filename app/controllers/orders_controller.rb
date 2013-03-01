@@ -3,6 +3,8 @@ class OrdersController < ApplicationController
   before_filter :require_login, :only => [:payment_info, :shipping_info, :confirm, :create, :reload_payment_order_info]
   before_filter :set_order_product, :only => [:new, :email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
 
+  ADMIN_EMAIL = "adam@swapidy.com"
+
   def new
     if user_signed_in?
       page_title "Payment Information"
@@ -52,7 +54,7 @@ class OrdersController < ApplicationController
   end
   
   def create
-    if @order.valid? && @order.shipping_address_valid? && current_user.could_order?(cart_amount)
+    if @order.valid? && @order.shipping_address_valid? && current_user.could_order?(ShoppingCart.cart_amount)
       begin
         Order.transaction do
           session[:cart_products][:sell].each do |obj_hash|
@@ -67,28 +69,29 @@ class OrdersController < ApplicationController
                                       :using_condition => obj_hash[:using_condition], 
                                       :sell_or_buy => "buy")
           end
-          if current_user.extra_money_for(cart_amount) > 0
-            @payment = current_user.payments.new(:amount => cart_amount)
-            if current_user.create_payment_charge(@payment)
-              @payment.card_type = current_user.card_type
-              @payment.card_expired_year = current_user.card_expired_year
-              @payment.card_expired_month = current_user.card_expired_month
-              @payment.card_name = current_user.card_name
-              @payment.card_last_four_number = current_user.card_last_four_number
-              unless @payment.save
-                Rails.logger.info "Error to save payment transaction"
-                raise "Error to save payment transaction" 
-              end
-              new_balance_amount = 0
-            else
-              Rails.logger.info "has failure to charge the credit card"
-              raise "has failure to charge the credit card"
-            end
-          end
-          if @order.save && @order.adjust_current_balance(new_balance_amount)
-            @order.create_new_stamps
+          #if current_user.extra_money_for(cart_amount) > 0
+          #  @payment = current_user.payments.new(:amount => cart_amount)
+          #  if current_user.create_payment_charge(@payment)
+          #    @payment.card_type = current_user.card_type
+          #    @payment.card_expired_year = current_user.card_expired_year
+          #    @payment.card_expired_month = current_user.card_expired_month
+          #    @payment.card_name = current_user.card_name
+          #    @payment.card_last_four_number = current_user.card_last_four_number
+          #    unless @payment.save
+          #      Rails.logger.info "Error to save payment transaction"
+          #      raise "Error to save payment transaction" 
+          #    end
+          #    new_balance_amount = 0
+          #  else
+          #    Rails.logger.info "has failure to charge the credit card"
+          #    raise "has failure to charge the credit card"
+          #  end
+          #end
+          if @order.save# && @order.adjust_current_balance(new_balance_amount)
+            @order.create_stamp_to_deliver
             OrderNotifier.start_processing(@order).deliver
-            clear_cart_products 
+            OrderNotifier.start_processing_for_admin(@order).deliver
+            ShoppingCart.clear_cart_products 
           end
         end
         redirect_to "/orders/#{@order.id}"
@@ -144,7 +147,7 @@ class OrdersController < ApplicationController
       @order.status = Order::STATUES[:pending]
       @order.user = current_user
       @order.shipping_country = "US"
-      redirect_to "/" if cart_products[:sell].empty? && cart_products[:buy].empty?
+      redirect_to "/" if ShoppingCart.cart_products[:sell].empty? && ShoppingCart.cart_products[:buy].empty?
     end
     
 end

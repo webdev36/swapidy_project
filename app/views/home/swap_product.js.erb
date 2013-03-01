@@ -1,5 +1,5 @@
 $("#shopping_cart").html("<%= raw escape_javascript(@return_content) %>");
-<% unless cart_products_empty? %>
+<% unless ShoppingCart.cart_products_empty? %>
   $("#shopping_cart").show();
   $("#index_head").hide();
   $('#index_bg').css('height',170);

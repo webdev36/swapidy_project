@@ -214,8 +214,8 @@ Devise.setup do |config|
     #config.omniauth :facebook, '414885091929741', 'a398333c0aef1d7152169168aaf6179a', :scope => 'email,user_birthday,user_location'
     config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'], :scope => 'email,user_birthday,user_location'
   else
-    #Scrum2B
-    config.omniauth :facebook, '259670540817916', '02d78fa483f86404570fe7a50965b319', :scope => 'email,user_birthday,user_location'
+    #Scrum2B Local Developer
+    config.omniauth :facebook, '497743503621761', '5df05aafd72550cdcb78d6e35905a9ea', :scope => 'email,user_birthday,user_location'
   end
 
   # ==> Warden configuration
