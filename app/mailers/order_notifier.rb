@@ -1,6 +1,7 @@
 class OrderNotifier < ActionMailer::Base
 
   default :from => "\"#{SITE_NAME}\"<system@#{ROOT_URI}>"
+  ADMIN_EMAIL = "adam@swapidy.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -10,12 +11,26 @@ class OrderNotifier < ActionMailer::Base
   def start_processing(order, host_with_port = "https://www.swapidy.com")
     @user = order.user
     @order = order
-    @shipping_stamp = @order.shipping_stamps.for_sell.first
-    mail :to => @user.email, :subject => "Print Shipping Label" do |format|
+    @shipping_stamp = @order.shipping_stamps.for_buy.first
+    mail :to => @user.email, :subject => "Order Start processing" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
         attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
           render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb')
+        )
+      end
+    end
+  end
+  
+  def start_processing_for_admin(order, host_with_port = "https://www.swapidy.com")
+    @user = order.user
+    @order = order
+    @shipping_stamp = @order.shipping_stamps.for_buy.first
+    mail :to => ADMIN_EMAIL, :subject => "Admin: Order Start processing from #{@user.email}" do |format|
+      format.html # renders send_report.text.erb for body of email
+      format.pdf do
+        attachments["Order_#{@order.id}_for_deliver.pdf"] = WickedPdf.new.pdf_from_string(
+          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order_for_deliver.pdf.erb')
         )
       end
     end

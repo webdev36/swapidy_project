@@ -930,9 +930,9 @@ text-decoration:underline;
 
 #product_scrollup_link {
   position: fixed;
-  right: 0px;
-  bottom: 5px;
-  z-index: 10;
+  right: 20px;
+  bottom: 30px;
+  z-index: 10000000;
 }
 
 #sell_and_buy_message_guide {
