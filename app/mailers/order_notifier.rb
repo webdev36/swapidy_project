@@ -75,14 +75,14 @@ class OrderNotifier < ActionMailer::Base
   def reminder(order, shipping_stamp)
     @user = order.user
     @order = order
-    @shipping_stamp = shipping_stamp
+    @trade_ins_stamp = shipping_stamp
     #attachments["ShippingLabel_#{@order.id}_#{@shipping_stamp.id}.png"] = File.read(@shipping_stamp.url)
     #mail :to => @user.email, :subject => "Order #{@order.id} Reminder"
     mail :to => @user.email, :subject => "Order #{@order.id} Reminder" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
-        attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
-          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb')
+        attachments["Order_#{@order.id}_reminder.pdf"] = WickedPdf.new.pdf_from_string(
+          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb')
         )
       end
     end

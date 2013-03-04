@@ -15,7 +15,7 @@ module RailsAdmin
         end
 
         register_instance_option :link_icon do
-          'icon-check'
+          'icon-step-forward'
         end
         
         register_instance_option :controller do
