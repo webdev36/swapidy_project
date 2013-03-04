@@ -99,5 +99,11 @@ class OrderNotifier < ActionMailer::Base
     @order = order
     mail :to => @user.email, :subject => "Product verified - Order #{@order.id}"
   end
+  
+  def product_delived(order)
+    @user = order.user
+    @order = order
+    mail :to => @user.email, :subject => "Product delivery - Order #{@order.id}"
+  end
 
 end

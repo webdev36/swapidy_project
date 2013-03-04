@@ -44,6 +44,14 @@ en:
         bulk_link: "Reminder"
         member: "Reminder"
         done: "Remindered"
+      delivery:
+        title: "Delivery"
+        menu: "Delivery"
+        breadcrumb: "Delivery"
+        link: "Delivery"
+        bulk_link: "Delivery"
+        member: "Delivery"
+        done: "Delivery"
   
   helpers:
     label:
