@@ -100,10 +100,17 @@ class OrderNotifier < ActionMailer::Base
     mail :to => @user.email, :subject => "Product verified - Order #{@order.id}"
   end
   
-  def product_delived(order)
+  def product_delived(order, trade_ins_stamp)
     @user = order.user
     @order = order
-    mail :to => @user.email, :subject => "Product delivery - Order #{@order.id}"
+    @trade_ins_stamp = trade_ins_stamp
+    mail :to => @user.email, :subject => "Order #{@order.id} Delivery" do |format|
+    format.html # renders send_report.text.erb for body of email
+      format.pdf do
+        attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
+          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb')
+        )
+      end
+    end
   end
-
 end

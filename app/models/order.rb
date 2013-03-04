@@ -191,12 +191,12 @@ class Order < ActiveRecord::Base
   end
   
   def create_notification_to_delivery
+    trade_ins_stamp = self.create_new_stamps
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "Order Delivery"
     notification.description = "Order - #{id} - Delivery." 
     notification.save
-    
-    OrderNotifier.product_delived(self).deliver
+    OrderNotifier.product_delived(self,trade_ins_stamp).deliver
   end
   
   def generate_product_title
