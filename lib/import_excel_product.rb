@@ -15,7 +15,8 @@ module ImportExcelProduct
   
   def self.import_from_textline(textline, headers, for_buying = true, updated_if_existed = nil, logger = nil)
     
-    logger = Logger.new("log/swapidy_tasks.log") unless logger
+    #logger = Logger.new("log/swapidy_tasks.log") unless logger
+    logger = Rails.logger
     
     columns = textline.split(/,/).map{|value| value.strip}
     logger.info "columns.size: #{columns.size} - headers.size: #{headers.size}"
