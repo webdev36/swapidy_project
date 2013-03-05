@@ -13,7 +13,7 @@ module ImportExcelProduct
             }
   PROPERTY_START_INDEX = 7
   
-  def self.import_from_textline(textline, headers, for_buying = true, updated_if_existed = nil, logger = nil)
+  def self.import_from_textline(textline, headers, for_buying = true, action_type = :updated_if_existed, logger = nil)
     
     #logger = Logger.new("log/swapidy_tasks.log") unless logger
     logger = Rails.logger
@@ -32,8 +32,9 @@ module ImportExcelProduct
 
     product = Product.where(:title => columns[INDEXES[:title]], :swap_type => for_buying ? 2 : 1).first
     logger.info "tessssssssssssssssssss"
+    logger.info "Tesssssssss2"
     if product
-      return product unless updated_if_existed
+      return product unless action_type == :updated_if_existed
       if for_buying
         product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
         product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
