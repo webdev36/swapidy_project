@@ -31,6 +31,7 @@ module ImportExcelProduct
     logger.info "model: #{model.id} - #{model.title}"
 
     product = Product.where(:title => columns[INDEXES[:title]], :swap_type => for_buying ? 2 : 1).first
+    logger.info "tessssssssssssssssssss"
     if product
       return product unless updated_if_existed
       if for_buying
