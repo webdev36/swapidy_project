@@ -15,7 +15,8 @@ module ImportExcelProduct
   
   def self.import_from_textline(textline, headers, for_buying = true, action_type = :updated_if_existed, logger = nil)
     
-    logger = Logger.new("log/swapidy_tasks.log") unless logger
+    #logger = Logger.new("log/swapidy_tasks.log") unless logger
+    logger = Rails.logger
     
     columns = textline.split(/,/).map{|value| value.strip}
     logger.info "columns.size: #{columns.size} - headers.size: #{headers.size}"
@@ -31,8 +32,8 @@ module ImportExcelProduct
 
     product = Product.where(:title => columns[INDEXES[:title]], :swap_type => for_buying ? 2 : 1).first
     if product
-      return product unless action_type == :updated_if_existed
-      if for_buying
+      return product unless action_type
+       if for_buying
         product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
         product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
         product.price_for_poor_buy = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
@@ -46,7 +47,6 @@ module ImportExcelProduct
       product.category = category
       product.product_model = model
     end
-    
     if for_buying
       product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
       product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
@@ -60,7 +60,6 @@ module ImportExcelProduct
     (PROPERTY_START_INDEX..(columns.size-1)).to_a.each do |column_index|
       next if columns[column_index].blank?
       logger.info "#{column_index}: #{headers[column_index]} - #{columns[column_index]}"
-      
       cat_attr = category.category_attributes.find_by_title headers[column_index]
       cat_attr = category.category_attributes.create(:title => headers[column_index]) unless cat_attr
       
@@ -70,11 +69,16 @@ module ImportExcelProduct
         model_attr_value.category_attribute = cat_attr
         model_attr_value.save
       end
-      
+    
       attr = product.product_attributes.new
       attr.product_model_attribute = model_attr_value
     end
-    return product if product.save
+    if product.save
+      return product 
+    else
+      logger.info product.errors.full_messages
+      return nil
+    end  
   end
   
   MODEL_INDEXES = {:category => 0,
