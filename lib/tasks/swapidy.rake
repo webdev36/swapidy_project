@@ -41,7 +41,6 @@ namespace :swapidy do
     desc "Insert to ProductModel database from excel file"
     task :insert_models => :environment do
       logger = Logger.new("log/swapidy_tasks.log")
-      
       file = File.open(File.join(Rails.root, 'demo_data', "models_20130111.csv"),"r")
       content = file.read
       lines = content.split(/\r/)
@@ -76,9 +75,11 @@ namespace :swapidy do
     desc "Insert products database from excel file"
     task :insert_products => :environment do
       logger = Logger.new("log/swapidy_tasks.log")
+      logger.info "file_name"
       begin
         product_ids = []
         ["products_20130114_buy.csv", "products_20130114_sell.csv"].each do |file_name|
+        #["products_20130114_sell.csv"].each do |file_name|
           logger.info file_name
           
           file = File.open(File.join(Rails.root, 'demo_data', file_name),"r")
@@ -96,15 +97,15 @@ namespace :swapidy do
             next if index == 0
             logger.info "line: #{line}"
             product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", :update_if_existed, logger) #rescue nil
-            product_ids << product.id if product
+            # product_ids << product.id if product
             logger.info product
           end
         end
         
-        logger.info product_ids.to_s
-        del_products = Product.where("id not in (#{product_ids.join(',')})")
-        logger.info del_products.map{|p| p.id }.to_s
-        del_products.each {|p| p.destroy }
+        # logger.info product_ids.to_s
+        # del_products = Product.where("id not in (#{product_ids.join(',')})")
+        # logger.info del_products.map{|p| p.id }.to_s
+        # del_products.each {|p| p.destroy }
       rescue Exception => e
         logger.info e.message
       end
@@ -133,6 +134,7 @@ namespace :swapidy do
           lines.each_with_index do |line, index|
             next if index == 0
             logger.info "line: #{line}"
+            #product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", nil, logger) #rescue nil
             product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", :return_if_existed, logger) #rescue nil
             logger.info product
           end

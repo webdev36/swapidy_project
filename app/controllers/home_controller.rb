@@ -53,7 +53,7 @@ class HomeController < ApplicationController
   end
 
   def swap_product
-    add_cart_product(:type => params[:type],:price => params[:price],:product_id => params[:product_id],:using_condition => params[:condition])
+    ShoppingCart.add_cart_product(:type => params[:type],:price => params[:price],:product_id => params[:product_id],:using_condition => params[:condition])
     @changed_type = params[:type] && params[:type] == "sell" ? :sell : :buy 
     respond_to do |format|
       format.js {

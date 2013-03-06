@@ -1,4 +1,4 @@
-<% if cart_products_empty? %>
+<% if ShoppingCart.cart_products_empty? %>
   <div>Empty Swapping Cart</div>  
 <% else %>
 	<div style="width: 100%; display: block;">
@@ -8,13 +8,13 @@
 	  <div class="order_slider_sell">
 			<span class="old_stuff">My old stuff</span>
 	   <div style="height: 180px;width:200px; position: relative">
-	    <% if cart_products[:sell].count > 1 %>
+	    <% if ShoppingCart.cart_products[:sell].count > 1 %>
 		    <button class="prev product_button_buy" style="width: 30px;position: absolute;top:10px;left:-140px;z-index: 1000">&lt;</button>
 		    <button class="next product_button_buy" style="width: 30px;position: absolute;top: 10px;left:30px;z-index: 1000;">&gt;</button>
 	 	  <% end %>
 	    <div class="order_sell_display" style="width: 100%;margin: auto;">
 	  	  <ul id="mycarousel"  class="jcarousel-skin">
-			    <% cart_products[:sell].each do |order_product|%>
+			    <% ShoppingCart.cart_products[:sell].each do |order_product|%>
 			    	<li style="height:160px;width: 120px"> <img style=" max-width: 100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" /> 
 			    	<br/>
 			    	<span style="font-family:'myriad-s';"> <%= order_product.title %></span> <br />
@@ -27,13 +27,13 @@
 		  <div class="order_slider_buy">
 		 	  <span class="new_stuff">My new stuff</span>
 		   <div style=" height: 180px;width:200px; position: relative">
-		  	<% if cart_products[:sell].count > 1 %>
+		  	<% if ShoppingCart.cart_products[:sell].count > 1 %>
 				  <button class="prev_buy product_button_buy" style="width: 30px;top: 10px;right:170px;position: absolute;z-index: 1000">&lt;</button>
 				  <button class="next_buy product_button_buy"style="width: 30px;top: 10px;right:0px;position: absolute;z-index: 1000">&gt;</button>
 		  	<% end %>
 		  	<div class="order_buy_display" style="width: 100%; text-align: right;margin:auto;" >
 		  	<ul id="mycarousel"  class="jcarousel-skin">
-		    	<% cart_products[:buy].each do |order_product| %>
+		    	<% ShoppingCart.cart_products[:buy].each do |order_product| %>
 		    		<li style="height: 160px;width: 120px;z-index: 1000;"> <img style=" max-width:100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" />
 		    		<br />
 			    	<span style="font-family:'myriad-s';"> <%= order_product.title %></span> <br />
