@@ -216,7 +216,7 @@ left:50%;
   margin: 0 auto -4em;
   padding: 30px 0 30px 0;
   background-color: whitesmoke;
-  height:230px;
+  height:400px;
   border-top: 1px solid #ccc;
   overflow:hidden;
 }
@@ -809,18 +809,27 @@ ul.left_menu li a {
 #media{
   width:100%;
   float: left;
-  margin-left: 140px;
-  margin-bottom: 50px;
+  margin-left: 20px;
 }
 .media_title{
   font-family:'myriad-s';
   color:#666;
 }
 .media_img{
-  height: 50px;
-  margin-bottom: 10px;
+  height: 60px;
+  margin-bottom: 50px;
   float: left;
-  margin-right: 40px;
+}
+
+.media_pando{
+  margin-right: 80px;
+    margin-bottom: 50px;
+}
+.media_patch{
+    margin-right: 80px;
+}
+.media_hn{
+  margin-bottom: 50px;
 }
 #mcts1 
 {
@@ -961,4 +970,13 @@ width: 100%;
   top:0px;
   right: 40px;
   z-index: 10000;
+}
+.media_imgs{
+  float:left;
+  width:400px;
+}
+.video_title{
+  float:left;
+  font-family:'myriad-s';
+  color:#666;
 }

@@ -254,12 +254,12 @@
 				    }
 			    }else{
 			    	if($(this).attr('data-placement') !== undefined){
-				    	$(this).data('popover').options.placement = 'right';
+				    	$(this).data('popover').options.placement = 'right'; 
 				    }else{
-				    	$(this).attr('data-placement', 'right');
+				    	$(this).attr('data-placement', 'right'); 
 				    }
 			    }
-			    $(this).popover();
+			    $(this).popover({html:true});
 			  });
 		    	
 		    current_popup_id = popup_id;
