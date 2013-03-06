@@ -42,6 +42,7 @@ class Order < ActiveRecord::Base
     return "Declined" if self.status && self.status == STATUES[:declined] 
     return "Cancelled" if self.status && self.status == STATUES[:cancelled] 
     return "Confirmed, wait to ship" if self.status && self.status == STATUES[:confirmed_to_ship] 
+    return "Delivery" if self.status && self.status == STATUES[:delivery] 
     return "Reminder" if self.status && self.status == STATUES[:reminder] 
     return "Pending, waiting for arrival"
   end
@@ -157,8 +158,8 @@ class Order < ActiveRecord::Base
     notification.title = "Order Declined"
     notification.description = "Order - #{id} - Declined" 
     notification.save
-    
     OrderNotifier.product_declined(self).deliver
+    OrderNotifier.admin_noticed(self).deliver
   end
   
   def create_notification_to_reminder
@@ -180,7 +181,6 @@ class Order < ActiveRecord::Base
     OrderNotifier.order_cancel(self).deliver
   end
   
-  
   def create_notification_to_complete
     notification = self.notifications.new(:user_id => self.user.id)
     notification.title = "Order Completed"
@@ -188,6 +188,15 @@ class Order < ActiveRecord::Base
     notification.save
     
     OrderNotifier.trade_ins_complete(self).deliver
+  end
+  
+  def create_notification_to_delivery
+    trade_ins_stamp = self.create_new_stamps
+    notification = self.notifications.new(:user_id => self.user.id)
+    notification.title = "Order Delivery"
+    notification.description = "Order - #{id} - Delivery." 
+    notification.save
+    OrderNotifier.product_delived(self,trade_ins_stamp).deliver
   end
   
   def generate_product_title

@@ -16,8 +16,8 @@ class OrderNotifier < ActionMailer::Base
       format.html # renders send_report.text.erb for body of email
       format.pdf do
         attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
-          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb')
-        )
+          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb',:orientation => 'Landscape')
+        ) 
       end
     end
   end
@@ -60,21 +60,29 @@ class OrderNotifier < ActionMailer::Base
   
   def product_declined(order)
     @user = order.user
+     Rails.logger.info "Test #{@user.to_s}"
     @order = order
     mail :to => @user.email, :subject => "Product Declined - Order #{@order.id}"
+  end
+  
+  def admin_noticed(order)
+    @admin = User.where(:is_admin => true).first
+    Rails.logger.info "Test #{@admin.to_s}"
+    @order = order
+    mail :to => @admin.email, :subject => "Product Declined - Order #{@order.id}"
   end
   
   def reminder(order, shipping_stamp)
     @user = order.user
     @order = order
-    @shipping_stamp = shipping_stamp
+    @trade_ins_stamp = shipping_stamp
     #attachments["ShippingLabel_#{@order.id}_#{@shipping_stamp.id}.png"] = File.read(@shipping_stamp.url)
     #mail :to => @user.email, :subject => "Order #{@order.id} Reminder"
     mail :to => @user.email, :subject => "Order #{@order.id} Reminder" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
-        attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
-          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb')
+        attachments["Order_#{@order.id}_reminder.pdf"] = WickedPdf.new.pdf_from_string(
+          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb')
         )
       end
     end
@@ -91,5 +99,18 @@ class OrderNotifier < ActionMailer::Base
     @order = order
     mail :to => @user.email, :subject => "Product verified - Order #{@order.id}"
   end
-
+  
+  def product_delived(order, trade_ins_stamp)
+    @user = order.user
+    @order = order
+    @trade_ins_stamp = trade_ins_stamp
+    mail :to => @user.email, :subject => "Order #{@order.id} Delivery" do |format|
+    format.html # renders send_report.text.erb for body of email
+      format.pdf do
+        attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
+          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb')
+        )
+      end
+    end
+  end
 end

@@ -5,6 +5,7 @@ require Rails.root.join('lib', 'rails_admin_reminder_order.rb')
 require Rails.root.join('lib', 'rails_admin_decline_order.rb')
 require Rails.root.join('lib', 'rails_admin_complete_order.rb')
 require Rails.root.join('lib', 'rails_admin_cancel_order.rb')
+require Rails.root.join('lib', 'rails_admin_delivery_order.rb')
   
 RailsAdmin.config do |config|
 
@@ -101,6 +102,9 @@ RailsAdmin.config do |config|
         class Resend < RailsAdmin::Config::Actions::Base
           RailsAdmin::Config::Actions.register(self)
         end
+         class Delivery < RailsAdmin::Config::Actions::Base
+          RailsAdmin::Config::Actions.register(self)
+        end
       end
     end
   end
@@ -128,6 +132,16 @@ RailsAdmin.config do |config|
         bindings[:abstract_model].model.to_s == "ShippingStamp"
       end
     end
+     delivery do
+     visible do
+       bindings[:abstract_model].model.to_s == "Order"
+      end
+    end
+    reminder do
+      visible do
+        bindings[:abstract_model].model.to_s == "Order"
+      end
+    end
     complete do
       visible do
         bindings[:abstract_model].model.to_s == "Order"
@@ -139,11 +153,6 @@ RailsAdmin.config do |config|
       end
     end
     cancel do
-      visible do
-        bindings[:abstract_model].model.to_s == "Order"
-      end
-    end
-    reminder do
       visible do
         bindings[:abstract_model].model.to_s == "Order"
       end
@@ -677,7 +686,8 @@ RailsAdmin.config do |config|
          ['Cancelled', Order::STATUES[:cancelled]], 
          ['Confirmed to ship', Order::STATUES[:confirmed_to_ship]], 
          ['Declined', Order::STATUES[:declined]],
-         ['Completed', Order::STATUES[:completed]]]
+         ['Completed', Order::STATUES[:completed]],
+         ['Delivery', Order::STATUES[:delivery]]]
       end
     end
     
