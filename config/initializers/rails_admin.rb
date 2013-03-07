@@ -44,7 +44,7 @@ RailsAdmin.config do |config|
   #config.excluded_models = [Comment, Post]
 
   # Add models here if you want to go 'whitelist mode':
-  config.included_models = [BrandEmail, BrandEmailCustomer, Category, CategoryAttribute, Image, Order, OrderProduct, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User, FreeHoney, RedeemCode, SwapidySetting, LocationVote ]
+  config.included_models = [BrandEmail, BrandEmailCustomer, Category, CategoryAttribute, Image, Order, OrderProduct, ShippingStamp, PaymentTransaction, Product, ProductModel, ProductAttribute, ProductModelAttribute, User, FreeHoney, RedeemCode, SwapidySetting, LocationVote,UploadDatabase ]
 
   # Application wide tried label methods for models' instances
   # config.label_methods << :description # Default is [:name, :title]
@@ -830,6 +830,29 @@ RailsAdmin.config do |config|
       field :status
       field :created_at
       field :updated_at
+    end
+  end
+  
+  config.model UploadDatabase do
+    configure :data_content,:text 
+    #configure :product_id, :integer         # Hidden 
+    list do
+      field :data_content
+      field :product_type
+    
+    end
+    export do
+      field :data_content
+      field :product_type
+
+    end
+    show do
+      field :data_content
+      field :product_type
+    end
+    create do
+      field :product_type
+      field :data_content
     end
   end
 

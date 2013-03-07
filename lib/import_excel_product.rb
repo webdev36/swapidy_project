@@ -31,8 +31,10 @@ module ImportExcelProduct
     logger.info "model: #{model.id} - #{model.title}"
 
     product = Product.where(:title => columns[INDEXES[:title]], :swap_type => for_buying ? 2 : 1).first
+    logger.info "modelssssssssssssssssssssssssss"
     if product
       return product unless action_type
+    logger.info "stttttttttttttttttttttt: #{product}"
        if for_buying
         product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
         product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)

@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
   belongs_to :product_model
-
+  belongs_to :upload_database
   
   has_many :images, :as => :for_object, :dependent => :destroy
   has_many :product_attributes, :dependent => :destroy
