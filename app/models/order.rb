@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   include StampsShippingGateway
   include CardInfo
   
-  attr_accessible :status, :user_id, :balance_amount,
+  attr_accessible :status, :user_id, :balance_amount, :payment_option, 
                   :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_optional_address,
                   :shipping_city, :shipping_state, :shipping_zip_code, :shipping_country, :shipping_method,
                   :candidate_addresses, :shipping_zip_code_add_on, :is_candidate_address, :token_key, :email
@@ -12,11 +12,12 @@ class Order < ActiveRecord::Base
   validates :shipping_first_name, :shipping_last_name, :shipping_address, :shipping_city, :shipping_state, 
             :shipping_zip_code, :shipping_country, :presence => true
 
-  attr_accessor :candidate_addresses, :is_candidate_address, :token_key, :email
+  attr_accessor :candidate_addresses, :is_candidate_address, :token_key, :email, :payment_option
 
   belongs_to :user
   
   has_many :order_products
+  has_many :payment_transactions
   has_many :products, :through => :order_products
 
   has_many :shipping_stamps, :order => "created_at desc"
@@ -24,7 +25,6 @@ class Order < ActiveRecord::Base
   
   before_save  :calc_balance_amount
   after_create :create_notification
-  #after_create :adjust_current_balance
 
   STATUES = {:pending => 0, :completed => 1, :declined => 2, :cancelled => 3, :delivery => 4, :reminder => 5}
   SHIPPING_METHODS = {:box => "box", :usps => "usps", :fedex => "fedex"}
@@ -253,6 +253,31 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def pre_authorize_payment?
+    return true if self.payment_option && self.payment_option == PaymentTransaction::METHODS[:pre_authorize]
+    first_payment = self.payment_transactions.first
+    return first_payment && first_payment.pre_authorize_method?
+  end
+
+  def do_payment
+    cart_amount = calc_balance_amount
+    
+    if self.pre_authorize_payment? && self.user.extra_money_for(cart_amount) > 0
+      payment = self.user.payments.stripe.charge.direct.new(:amount => cart_amount)
+      payment.card_type = self.user.card_type
+      payment.card_expired_year = self.user.card_expired_year
+      payment.card_expired_month = self.user.card_expired_month
+      payment.card_name = self.user.card_name
+      payment.card_last_four_number = self.user.card_last_four_number
+      payment.order = self
+      unless payment.save
+        Rails.logger.info "Error to save payment transaction"
+        raise "Error to save payment transaction" 
+      end
+      new_balance_amount = 0
+    end
+    self.adjust_current_balance(new_balance_amount)
+  end
 
   private
   
