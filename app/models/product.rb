@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
 
   attr_accessible :title, :price_for_sell, :product_model_id, :image_ids, :for_sell, :for_buy,
-                  :product_attribute_ids, :product_model_attribute_ids, :price_for_good_sell, :price_for_poor_sell
+                  :product_attribute_ids, :product_model_attribute_ids, :price_for_good_sell, :price_for_poor_sell ,:upload_database_id
   
   has_attached_file :image, :styles => {:thumb => "50x50>", :medium => "200x200>"}
   

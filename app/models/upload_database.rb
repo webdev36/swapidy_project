@@ -6,12 +6,20 @@ class UploadDatabase < ActiveRecord::Base
   
   def import_products
     #data_content
-          contents = UploadDatabase.first
+    logger = Logger.new("log/upload_database.log") unless logger
+          contents = UploadDatabase.last
           content = contents.data_content
           product_type = contents.product_type
+        if product_type == "for_buying"
+          product_type = 2
+        else
+          product_type = 1
+        end
           lines = content.split(/\r/)
-         Rails.logger.info "Step2 #{lines}"
+         logger.info"Step2 #{lines}" 
+         logger.info"Step2 #{product_type}"
           headers = lines[0].split(/\,/)
+          logger.info "Step2 #{lines}"
           return nil if headers.size < 7
           
           ["Weight lb", "Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
@@ -22,8 +30,7 @@ class UploadDatabase < ActiveRecord::Base
             next if index == 0
            
             #product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", nil, logger) #rescue nil
-            product = ImportExcelProduct.import_from_textline(line, headers, product_type == "sell", :return_if_existed, logger) #rescue nil
-            Rails.logger.info "Test :#{product.to_s}"
+            product = ImportExcelProduct.import_from_textline(line, headers, product_type, :return_if_existed, logger) #rescue nil
           end
       
       rescue Exception => e

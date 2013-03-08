@@ -835,6 +835,7 @@ RailsAdmin.config do |config|
   
   config.model UploadDatabase do
     configure :data_content,:text 
+    configure :product_type
     #configure :product_id, :integer         # Hidden 
     list do
       field :data_content
@@ -851,8 +852,14 @@ RailsAdmin.config do |config|
       field :product_type
     end
     create do
-      field :product_type
+      field :product_type,:enum do
+        label "ProductType"
+      enum do
+        ['for_buying','for_selling']
+      end
+      end
       field :data_content
+      
     end
   end
 
