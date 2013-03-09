@@ -12,7 +12,7 @@ class OrderNotifier < ActionMailer::Base
     @user = order.user
     @order = order
     @shipping_stamp = @order.shipping_stamps.for_buy.first
-    mail :to => @user.email, :subject => "Order Start processing" do |format|
+    mail :to => @user.email, :subject => "Swapidy Order Processing" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
         attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
@@ -26,7 +26,7 @@ class OrderNotifier < ActionMailer::Base
     @user = order.user
     @order = order
     @shipping_stamp = @order.shipping_stamps.for_buy.first
-    mail :to => ADMIN_EMAIL, :subject => "Admin: Order Start processing from #{@user.email}" do |format|
+    mail :to => ADMIN_EMAIL, :subject => "Admin: Swapidy Order Processing #{@user.email}" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
         attachments["Order_#{@order.id}_for_deliver.pdf"] = WickedPdf.new.pdf_from_string(
