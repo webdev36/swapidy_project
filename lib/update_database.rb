@@ -38,7 +38,6 @@ module UpdateDatabase
       return product unless action_type
     logger.info "Step1 #{product.title} --product_type #{product_type}"
        if (product_type.to_i && product_type.to_i == 2)
-         logger.info "Step2 #{for_buying.to_s}"
         product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
         product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
         product.price_for_poor_buy = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
