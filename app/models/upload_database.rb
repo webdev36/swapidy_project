@@ -10,7 +10,7 @@ class UploadDatabase < ActiveRecord::Base
           contents = UploadDatabase.last
           content = contents.data_content
           product_type = contents.product_type
-        if product_type == "for_buying"
+        if product_type.to_s == "for_buying"
           product_type = 2
         else
           product_type = 1
@@ -30,7 +30,7 @@ class UploadDatabase < ActiveRecord::Base
             next if index == 0
            
             #product = ImportExcelProduct.import_from_textline(line, headers, file_name == "products_20130114_buy.csv", nil, logger) #rescue nil
-            product = ImportExcelProduct.import_from_textline(line, headers, product_type, :return_if_existed, logger) #rescue nil
+            product = UpdateDatabase.import_from_textline(line, headers, product_type, :return_if_existed, logger) #rescue nil
           end
       
       rescue Exception => e
