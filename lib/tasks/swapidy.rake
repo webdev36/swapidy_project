@@ -145,7 +145,7 @@ namespace :swapidy do
     desc "Enter the default address"
     task :set_company_address => :environment do
       settings = {"COMPANY_NAME" => "Swapidy", 
-                  "COMPANY_ADDRESS" => "211 Hope St." "PO Box 390603", 
+                  "COMPANY_ADDRESS" => "211 Hope St.","PO Box 390603", 
                   "COMPANY_CITY" => "Mountain View", 
                   "COMPANY_STATE" => "CA", 
                   "COMPANY_ZIP_CODE" => "94041"}
