@@ -25,7 +25,10 @@
        data-animation="true"
        data-trigger="hover"
        data-original-title="Flawless"
-       data-content="Looks like it's never been used"
+       data-content="<b>Looks like it's never been used</b> <ul><li>Works perfectly</li>
+<li>No noticeable flaws, still in its package or looks like new</li>
+<li>Has zero scratches</li>
+<li>Has no dust under the glass</li></ul>"
        product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
         <label for="Flawless" ><%= product.flaw_less_name %></label>
         <span class="product_desc">$<%= format_num(product.price_for_sell)%></span>
@@ -37,7 +40,9 @@
        data-animation="true"
        data-trigger="hover"
        data-original-title="Good"
-       data-content="Visible signs of use"
+       data-content="<b>Visible signs of use</b><ul><li>Phone is in great working order</li>
+<li>Very minor signs of wear and scratches</li>
+<li>No cracks or missing buttons</li>"
        product-id= "<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" type= "sell" >
         <label for="Good">Good</label>
         <span class="product_desc">$<%= format_num(product.price_for_good_sell)%> </span>
