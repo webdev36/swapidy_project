@@ -247,17 +247,10 @@
 		    
 		    $('#' + popup_id + ' .price_type').each(function() {
 		    	if(new_left > 470){
-			    	if($(this).attr('data-placement') !== undefined){
 				      $(this).data('popover').options.placement = 'left';
-				    }else{
-				    	$(this).attr('data-placement', 'left');
-				    }
+				
 			    }else{
-			    	if($(this).attr('data-placement') !== undefined){
 				    	$(this).data('popover').options.placement = 'right';
-				    }else{
-				    	$(this).attr('data-placement', 'right');
-				    }
 			    }
 			    $(this).popover();
 			  });

@@ -977,6 +977,7 @@ font-size: 14px;
 .price_type{
   text-align: center;
   padding: 5px;
+  z-index:1000000000;
 }
 .price_type:hover{
   background: #38B4DE;
