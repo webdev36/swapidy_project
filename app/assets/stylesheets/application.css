@@ -980,23 +980,6 @@ width: 100%;
   font-family:'myriad-s';
   color:#666;
 }
-.promotion_or{
-  color: white;
-  font-size: 30px;
-  margin-top: 20px;
-}
-
-.promotion_signup_field {
-  background: white;
-  border: 1px double #DDD;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #333;
-  color: #666;
-  float: left;
-  height: 50px;
-  padding: 5px 10px;
-  width: 365px;
-  outline: none;
-  position: relative;
-  right:170px;
+.password-warning{
+  display: none;
 }
