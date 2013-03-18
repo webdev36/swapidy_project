@@ -58,6 +58,7 @@ class HomeController < ApplicationController
     respond_to do |format|
       format.js {
         @return_content = render_to_string(:partial => "/home/shopping_cart")
+        @return_dropbox_item = render_to_string(:partial => "/layouts/shopping_cart")
       }
     end
   end

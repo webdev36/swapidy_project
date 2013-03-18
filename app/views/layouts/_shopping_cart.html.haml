@@ -1,0 +1,17 @@
+- if ShoppingCart.cart_products_empty?
+	#product_items{:style => "height: 100px; min-width:350px;"}
+		%div{:style => "width: 100%; text-align: center; padding-top: 40px;"}
+			%span.headings_pink Empty Swapping Cart		
+- else
+	- if ShoppingCart.cart_products[:sell].count > 0
+		%li 
+			%p.item-name Buy item
+			%ul.product-item.buy-item{:style => "position: none;"}
+				- ShoppingCart.cart_products[:buy].each do |order_product|
+					= render :partial => "/layouts/cart_product_thumb", :locals => {:order_product => order_product}
+	- if ShoppingCart.cart_products[:sell].count > 0
+		%li 
+			%p.item-name Sell item
+			%ul.product-item.buy-item{:style => "position: none;"}
+				- ShoppingCart.cart_products[:sell].each do |order_product|
+					= render :partial => "/layouts/cart_product_thumb", :locals => {:order_product => order_product}		

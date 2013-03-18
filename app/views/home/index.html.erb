@@ -199,13 +199,12 @@
 			$.ajax({
 				url : url_select_price,
 				beforeSend : function(xhr) {
-		        	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-		      	},
-		      	data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
+		      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+		    },
+		    data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
 				type: 'POST',
 				dataType: 'script', 
-				success:function(){
-				}
+				success:function(){}
 			});
 			$("#" + current_popup_id).removeClass('active');
 			$("#" + current_popup_id).fadeOut('slow');
