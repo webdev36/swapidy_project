@@ -69,25 +69,9 @@ class OrdersController < ApplicationController
                                       :using_condition => obj_hash[:using_condition], 
                                       :sell_or_buy => "buy")
           end
-          #if current_user.extra_money_for(cart_amount) > 0
-          #  @payment = current_user.payments.new(:amount => cart_amount)
-          #  if current_user.create_payment_charge(@payment)
-          #    @payment.card_type = current_user.card_type
-          #    @payment.card_expired_year = current_user.card_expired_year
-          #    @payment.card_expired_month = current_user.card_expired_month
-          #    @payment.card_name = current_user.card_name
-          #    @payment.card_last_four_number = current_user.card_last_four_number
-          #    unless @payment.save
-          #      Rails.logger.info "Error to save payment transaction"
-          #      raise "Error to save payment transaction" 
-          #    end
-          #    new_balance_amount = 0
-          #  else
-          #    Rails.logger.info "has failure to charge the credit card"
-          #    raise "has failure to charge the credit card"
-          #  end
-          #end
-          if @order.save# && @order.adjust_current_balance(new_balance_amount)
+          
+          if @order.save
+            @order.do_payment
             @order.create_stamp_to_deliver
             OrderNotifier.start_processing(@order).deliver
             OrderNotifier.start_processing_for_admin(@order).deliver

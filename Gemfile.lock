@@ -109,6 +109,7 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    libv8 (3.11.8.13)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -199,6 +200,7 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     recaptcha (0.3.4)
+    ref (1.0.2)
     remotipart (1.0.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -233,6 +235,9 @@ GEM
     stripe (1.7.8)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
+    therubyracer (0.11.4)
+      libv8 (~> 3.11.8.12)
+      ref
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -281,6 +286,7 @@ DEPENDENCIES
   simple_form
   sqlite3
   stripe
+  therubyracer
   thin
   uglifier (>= 1.0.3)
   wicked_pdf

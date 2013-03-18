@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225173700) do
+ActiveRecord::Schema.define(:version => 20130307043712) do
 
   create_table "brand_email_customers", :force => true do |t|
     t.integer  "user_id"
@@ -130,8 +130,10 @@ ActiveRecord::Schema.define(:version => 20130225173700) do
     t.string   "card_expired_month",    :limit => 2
     t.string   "card_expired_year",     :limit => 4
     t.string   "card_last_four_number", :limit => 4
-    t.datetime "created_at",                                                                       :null => false
-    t.datetime "updated_at",                                                                       :null => false
+    t.datetime "created_at",                                                                              :null => false
+    t.datetime "updated_at",                                                                              :null => false
+    t.string   "method",                                                            :default => "direct"
+    t.integer  "order_id"
   end
 
   create_table "product_attributes", :force => true do |t|
@@ -160,12 +162,14 @@ ActiveRecord::Schema.define(:version => 20130225173700) do
     t.integer "category_id"
     t.decimal "price_for_sell",      :precision => 10, :scale => 2
     t.integer "product_model_id"
+    t.boolean "for_buy",                                            :default => true
+    t.boolean "for_sell",                                           :default => true
     t.decimal "price_for_good_sell", :precision => 10, :scale => 2
     t.decimal "price_for_poor_sell", :precision => 10, :scale => 2
     t.decimal "price_for_buy",       :precision => 10, :scale => 2
     t.decimal "price_for_good_buy",  :precision => 10, :scale => 2
     t.decimal "price_for_poor_buy",  :precision => 10, :scale => 2
-    t.integer "swap_type",                                          :default => 0
+    t.integer "upload_database_id"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
@@ -208,6 +212,13 @@ ActiveRecord::Schema.define(:version => 20130225173700) do
     t.string "title"
     t.string "value"
     t.string "value_type"
+  end
+
+  create_table "upload_databases", :force => true do |t|
+    t.text     "data_content"
+    t.string   "product_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "user_providers", :force => true do |t|
