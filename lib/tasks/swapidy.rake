@@ -145,10 +145,10 @@ namespace :swapidy do
     desc "Enter the default address"
     task :set_company_address => :environment do
       settings = {"COMPANY_NAME" => "Swapidy", 
-                  "COMPANY_ADDRESS" => "PO Box 390603 211 Hope St.", 
-                  "COMPANY_CITY" => "Mountain View", 
+                  "COMPANY_ADDRESS" => "1259 El Camino Real. #232", 
+                  "COMPANY_CITY" => "Menlo Park", 
                   "COMPANY_STATE" => "CA", 
-                  "COMPANY_ZIP_CODE" => "94041"}
+                  "COMPANY_ZIP_CODE" => "94025"}
       settings.keys.each do |key|
         setting = SwapidySetting.find_by_title key
         setting = SwapidySetting.new(:title => key, :value_type => SwapidySetting::TYPES[:string]) unless setting
