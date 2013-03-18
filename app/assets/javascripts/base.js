@@ -6,6 +6,7 @@ $(function() {
     layoutMode : 'fitRows'
   });
 
+$('.price_type').popover({ html : true });
 //footer
   $('#footer_fb').mouseover(function(){
     $(this).attr("src",'/images/footer_fb_hover.png');

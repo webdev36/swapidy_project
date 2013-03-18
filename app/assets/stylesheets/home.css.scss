@@ -244,8 +244,8 @@ text-align: center;
   position:relative;
   bottom:30px;
   font-family:"myriad";
-  position: relative;
   margin-bottom: 20px;
+  display:none;
 }
 
 #product_type .headings_pink {
@@ -977,6 +977,7 @@ font-size: 14px;
 .price_type{
   text-align: center;
   padding: 5px;
+  z-index:1000000000;
 }
 .price_type:hover{
   background: #38B4DE;

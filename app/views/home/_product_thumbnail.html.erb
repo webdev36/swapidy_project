@@ -25,7 +25,11 @@
        data-animation="true"
        data-trigger="hover"
        data-original-title="Flawless"
-       data-content="Looks like it's never been used and works without any problems"
+
+       data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Looks like it's never been used.</span> All of the following conditions must be true <ul><li>Works perfectly</li>
+<li>No noticeable flaws, still in its package or looks like-new</li>
+<li>Has zero scratches</li>
+<li>Has no dust under the glass</li></ul>"
        product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
         <label for="Flawless" ><%= product.flaw_less_name %></label>
         <span class="product_desc">$<%= format_num(product.price_for_sell)%></span>
@@ -37,7 +41,10 @@
        data-animation="true"
        data-trigger="hover"
        data-original-title="Good"
-       data-content="Your device works without any problems but has some normal signs of usage"
+
+       data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Visible signs of use</span><ul><li>Phone is in great working order</li>
+<li>Very minor signs of wear and scratches</li>
+<li>No cracks or missing buttons</li>"
        product-id= "<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" type= "sell" >
         <label for="Good">Good</label>
         <span class="product_desc">$<%= format_num(product.price_for_good_sell)%> </span>
@@ -49,8 +56,12 @@
        data-animation="true"
        data-trigger="hover"
        data-original-title="Poor"
-       data-content="- Doesn't turn on<br/>                                            - Doesn't turn on <br/>                                                               
-                  - Body cracked and/or missing &nbsp;parts"
+
+       data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Doesn't turn on or has physical damage.</span> Any of the following is true:<ul><li>Does not power on
+broken or cracked LCD screen or glass</li>
+<li>Missing buttons (power, home, ringer, volume)</li>
+<li>Broken or cracked hardware (charging ports, casing, etc.)</li>
+</ul>"
        product-id="<%= product.id %>" product-price="<%= product.price_for_poor_sell %>" product-using_condition="Poor" type= "sell" >
         <label for="Poor">Poor</label>
         <span class="product_desc">$<%= format_num(product.price_for_poor_sell)%> </span>

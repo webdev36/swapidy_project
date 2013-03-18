@@ -55,10 +55,14 @@
 </script>
 
 <%= render :partial => "/home/index_head_guide" %>
-
+<div class="index_buttons">
+<a href="javascript:showScreenToSell('scroll');"><button class="order_button_buy">I want to sell</button></a>
+<a href="javascript:showScreenToBuy('scroll');"><button class="order_button_buy"  >I want to swap</button></a>
+<a href="javascript:showScreenToTrade('scroll');"><button class="order_button_buy">I want to buy</button></a>
+</div>
 <a id="sell_and_buy_message_guide" style="display: none;">
-	<span class="sell">You are currently choosing your products to sell. Click on "Click here to continue" on top once you've selected products.</span>
-	<span class="buy" style="display: none;">You are currently choosing which products you want to buy. Click on "I'm Done Buying" on top once finished.</span>
+	<span class="sell">You are currently choosing your products to sell.</span>
+	<span class="buy" style="display: none;">You are currently choosing which products you want to buy.</span>
 </a>
 
 <a id="product_scrollup_link" style="display: none;" href="#" onclick="scrollToSelectCategory();"><img src="/images/scrollup.png"></a>
@@ -194,6 +198,7 @@
   var current_popup_id = "";
 
 	$(document).ready(function() {
+
 		$('.popup_select_price .price_type').live('click', function(){
 	  	var url_select_price = '/home/swap_product';
 			$.ajax({
@@ -247,17 +252,11 @@
 		    
 		    $('#' + popup_id + ' .price_type').each(function() {
 		    	if(new_left > 470){
-			    	if($(this).attr('data-placement') !== undefined){
 				      $(this).data('popover').options.placement = 'left';
-				    }else{
-				    	$(this).attr('data-placement', 'left');
-				    }
+				
 			    }else{
-			    	if($(this).attr('data-placement') !== undefined){
-				    	$(this).data('popover').options.placement = 'right'; 
-				    }else{
-				    	$(this).attr('data-placement', 'right'); 
-				    }
+
+				    	$(this).data('popover').options.placement = 'right';
 			    }
 			    $(this).popover({html:true});
 			  });
@@ -450,24 +449,24 @@
 	   var sell_count = $('#shopping_cart').find('.sell_display li').length;
 	   var buy_count = $('#shopping_cart').find('.buy_display li').length;
 	   
-	   if(buy_count == 0) {
+	   /*if(buy_count == 0) {
 	   	 alert("You have not selected any products to buy");
 	   }else if(sell_count == 0){
 	   	 alert("You have not selected any products to swap");
 	   	 showScreenToSell('scroll');
 	   }else{
 	   	 window.location = "/orders/new";	
-	   }
+	   }*/
 	}
 	function showScreenToTrade(){
 		var sell_count = $('#shopping_cart').find('.sell_display li').length;
-	  if(sell_count == 0) {
+	  /*if(sell_count == 0) {
 	   	alert("You have not selected any products to sell");
 	   	if(for_what == "for_buying") {
 	   		showScreenToSell('scroll');
 	   	}
 	   	return;
-	  }
+	  }*/
     for_what = "for_buying";
     $("#sell_message").hide();
     $("#buy_message").show();
@@ -496,13 +495,13 @@
 
   function showScreenToBuy() {
   	var sell_count = $('#shopping_cart').find('.sell_display li').length;
-	  if(sell_count == 0) {
+	  /*if(sell_count == 0) {
 	   	alert("You have not selected any products to sell");
 	   	if(for_what == "for_buying") {
 	   		showScreenToSell('scroll');
 	   	}
 	   	return;
-	  }
+	  }*/
 	var check_buying = $('#shopping_cart').find('.buy_display li').length;
 	if(check_buying == 0){
 		$('#text_buying').show();
@@ -567,8 +566,7 @@
     	scrollToSelectCategory();	
     }
     
-  }
-  
+ }
   function centerIsotypeImages(){
     $('#products .item').each(function(){
       var $this = jQuery(this);

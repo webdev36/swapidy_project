@@ -23,7 +23,8 @@ Swapidy::Application.routes.draw do
   match "/team" => "home#static_page", :method => :get, :content => "team", :page_title => "Our Team" 
   match "/terms" => "home#static_page", :method => :get, :content => "terms", :page_title => "Terms of Service"
   match "/privacy" => "home#static_page", :method => :get, :content => "privacy", :page_title => "Privacy Policy"
-  
+  match "/s4" => "home#static_page", :method => :get, :content => "s4", :page_title => "Pre-order S4"
+
   match "/testimonials" => "home#static_page", :method => :get, :content => "testimonials", :page_title => "Testimonials"
 
   match "/send_contact" => "home#contact_us", :method => :post

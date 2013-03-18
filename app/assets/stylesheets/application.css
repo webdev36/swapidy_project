@@ -934,7 +934,7 @@ line-height: 1.5;
 #index_bg{
 height: 290px;
 width: 100%;
-
+height: 400px;
 }
 
 .index_text{
@@ -979,4 +979,12 @@ width: 100%;
   float:left;
   font-family:'myriad-s';
   color:#666;
+}
+.password-warning{
+  display: none;
+}
+.index_buttons{
+  position: relative;
+  bottom:130px;
+  margin-left: 100px;
 }

@@ -6,7 +6,12 @@
   <body>
  
     <%= render :partial => "/layouts/header" %>
-    
+    <script type="text/javascript">    
+    if ($.browser.msie  && parseInt($.browser.version) <= 8) 
+{
+       $('body').html('<span> This site does not support IE8 or below.</span>')
+}</script>
+
     <div class="content">
       <div class="container min_height_container">
         <%=yield %>
