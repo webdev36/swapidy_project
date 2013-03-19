@@ -988,3 +988,7 @@ height: 400px;
   bottom:130px;
   margin-left: 100px;
 }
+
+a.index_buttons{
+text-align: center;
+}
