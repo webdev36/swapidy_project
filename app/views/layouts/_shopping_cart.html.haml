@@ -13,32 +13,24 @@
 	- if ShoppingCart.cart_products[:sell].count > 0
 		%li#sell-items
 			%p.item-name Sell item
-			%ul.product-item.buy-item{:style => "position: none;"}
+			%ul.product-item.sell-item{:style => "position: none;"}
 				- ShoppingCart.cart_products[:sell].each do |order_product|
 					= render :partial => "/layouts/cart_product_thumb", :locals => {:order_product => order_product}		
-	
+	%a{:id=>"checkout_btn", :href=>"javascript:gotoCheckout();", :style=>"height: 15px; left: 50%; margin: 10px 0 10px 30px; width: 100px;", :class=>"btn show_button_buy"} Checkout
+
 :javascript
-	function getCookie(c_name){
-	  var i,x,y,ARRcookies=document.cookie.split(";");
-	  for (i=0;i<ARRcookies.length;i++)
-	  {
-	    x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
-	    y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
-	    x=x.replace(/^\s+|\s+$/g,"");
-	    if (x==c_name){
-	      return unescape(y);
-	    }	    
-	  }
-	}
 	var shop_type = getCookie("shop_type");
 	console.log(shop_type);
-	if(shop_type=="sell"){
-		$("#buy-items").hide();
-		$("#sell-items").show();
-	}else if(shop_type=="buy"){
-		$("#buy-items").show();
-		$("#sell-items").hide();
-	}else{
-		$("#sell-items").show();
-		$("#buy-items").show();
-	}
+	sell_item_count = $("#sell-items").find('ul.sell-item li').length
+	buy_item_count = $("#buy-items").find('ul.buy-item li').length
+
+/	if(shop_type=="sell"){
+/		$("#buy-items").hide();
+/		$("#sell-items").show();		
+/	}else if(shop_type=="buy"){
+/		$("#buy-items").show();
+/		$("#sell-items").hide();	
+/	}else{
+/		$("#sell-items").show();
+/		$("#buy-items").show();
+/	}

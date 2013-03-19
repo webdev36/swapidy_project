@@ -1,15 +1,9 @@
+<!--
 <div id="shopping_cart" <% if ShoppingCart.cart_products_empty? %> style="display:none;height: 130px;" <% end %> >
   <%= render :partial => "/home/shopping_cart" %>
 </div>
-
-<script language="JavaScript">
-	function setCookie(c_name,value,exdays){
-	  var exdate=new Date();
-	  exdate.setDate(exdate.getDate() + exdays);
-	  var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-	  document.cookie=c_name + "=" + c_value;
-	}	
-	setCookie("shop_type", "swap", 1);
+-->
+<script language="JavaScript">	
 	<% if ShoppingCart.cart_products_empty? %>
 		var show_checkout_bar = false;
   <% else %>
@@ -64,13 +58,15 @@
 <%= render :partial => "/home/index_head_guide" %>
 <div class="index_buttons">
 <a href="javascript:showScreenToSell('scroll');"><img src="/images/get_cash.png"></a>
-<a href="javascript:showScreenToBuy('scroll');"><img src="/images/swap.png" style="margin-left:100px;">I want to swap</button></a>
-<a href="javascript:showScreenToTrade('scroll');"><img src="/images/buy.png">I want to buy</button></a>
+<a href="javascript:showScreenToTrade('scroll');"><img src="/images/swap.png" style="margin-left:100px;">I want to swap</button></a>
+<a href="javascript:showScreenToBuy('scroll');"><img src="/images/buy.png">I want to buy</button></a>
 </div>
 <a id="sell_and_buy_message_guide" style="display: none;">
 	<span class="sell">You are currently choosing your products to sell.</span>
 	<span class="buy" style="display: none;">You are currently choosing which products you want to buy.</span>
 </a>
+
+<a id="continue_button" href="javascript:select_complete();" style="height: 20px; top: 150px; position: fixed; right: 0px; width: 222px; font-size: 19px; display: none;" class="btn show_button_sell">Choose Products to sell</a>
 
 <a id="product_scrollup_link" style="display: none;" href="#" onclick="scrollToSelectCategory();"><img src="/images/scrollup.png"></a>
 <script>
@@ -452,20 +448,55 @@
   }
   
 	function gotoCheckout(){
-	   var sell_count = $('#shopping_cart').find('.sell_display li').length;
-	   var buy_count = $('#shopping_cart').find('.buy_display li').length;
-	   
-	   /*if(buy_count == 0) {
-	   	 alert("You have not selected any products to buy");
-	   }else if(sell_count == 0){
-	   	 alert("You have not selected any products to swap");
-	   	 showScreenToSell('scroll');
-	   }else{
-	   	 window.location = "/orders/new";	
-	   }*/
+		var shop_type  = getCookie("shop_type");
+		var select_state = false;
+console.log(shop_type);		
+		if(shop_type == "sell"){
+			if(!sell_item_count > 0){
+				alert("You have not selected any products to sell");	
+				select_state = false;
+			}else{
+				select_state = true;
+			}
+		}else if(shop_type == "buy"){
+			if(!buy_item_count > 0) {
+				alert("You have not selected any products to buy");
+				select_state = false;
+			}else{
+				select_state = true;
+			}
+		}else if(shop_type == "swap"){
+			if(!sell_item_count > 0 || !buy_item_count > 0) {
+				alert("You have not selected any products to swap");	
+				select_state = false;
+			}else{
+				select_state = true;
+			}
+		}		
+		if( select_state ) window.location = "/orders/new";	
 	}
+	function select_complete(){
+		var shop_type  = getCookie("shop_type");
+		console.log(sell_item_count);
+		if(sell_item_count < 1){
+				showScreenToSell();
+		}else	if(buy_item_count < 1){
+				showScreenToBuy();
+		}else{
+
+		}	
+	}
+
 	function showScreenToTrade(){
 		setCookie("shop_type", "swap", 1);
+		swapped_state = true;		
+  	$("#continue_button").show();
+  	if( sell_item_count < 1 ){
+  		$("#continue_button").text("Choose Products to sell");
+  	}else if( buy_item_count < 1 ){
+  		$("#continue_button").text("Choose Products to buy");
+  	}
+
 		var sell_count = $('#shopping_cart').find('.sell_display li').length;
 	  /*if(sell_count == 0) {
 	   	alert("You have not selected any products to sell");
@@ -502,6 +533,12 @@
 
   function showScreenToBuy() {
   	setCookie("shop_type", "buy", 1);
+		if(swapped_state && !sell_item_count > 0){
+			$("#continue_button").show();
+  		$("#continue_button").text("Choose Products to sell");
+		}else{
+			$("#continue_button").hide();
+		}	
   	var sell_count = $('#shopping_cart').find('.sell_display li').length;
 	  /*if(sell_count == 0) {
 	   	alert("You have not selected any products to sell");
@@ -510,15 +547,15 @@
 	   	}
 	   	return;
 	  }*/
-	var check_buying = $('#shopping_cart').find('.buy_display li').length;
-	if(check_buying == 0){
-		$('#text_buying').show();
-		$("#done_button_for_buy").hide();
-	}
-	if(check_buying > 0){
-		$('#text_buying').hide();
-		$("#done_button_for_buy").show();
-	}
+		var check_buying = $('#shopping_cart').find('.buy_display li').length;
+		if(check_buying == 0){
+			$('#text_buying').show();
+			$("#done_button_for_buy").hide();
+		}
+		if(check_buying > 0){
+			$('#text_buying').hide();
+			$("#done_button_for_buy").show();
+		}
     for_what = "for_buying";
     $("#sell_message").hide();
     $("#buy_message").show();
@@ -548,7 +585,14 @@
 	
   function showScreenToSell(scroll) {  	
   	setCookie("shop_type", "sell", 1);
-
+  	var swapped  = getCookie("swapped");
+		if(swapped_state && !buy_item_count > 0){
+			$("#continue_button").show();
+  		$("#continue_button").text("Choose Products to bye");
+		}else{
+			$("#continue_button").hide();
+		}	
+  	
 		for_what = "for_selling";
     $("#sell_message").show();
     $("#buy_message").hide();
