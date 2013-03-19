@@ -985,8 +985,17 @@ height: 400px;
 }
 .index_buttons{
   position: relative;
+<<<<<<< HEAD
   bottom:70px;
   margin-left: 100px;
+=======
+  bottom:130px;
+  margin-left: 50px;
+}
+
+a.index_buttons{
+text-align: center;
+>>>>>>> icon change
 }
 
 a.index_buttons{
