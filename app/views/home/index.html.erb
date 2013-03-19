@@ -3,6 +3,13 @@
 </div>
 
 <script language="JavaScript">
+	function setCookie(c_name,value,exdays){
+	  var exdate=new Date();
+	  exdate.setDate(exdate.getDate() + exdays);
+	  var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+	  document.cookie=c_name + "=" + c_value;
+	}	
+	setCookie("shop_type", "swap", 1);
 	<% if ShoppingCart.cart_products_empty? %>
 		var show_checkout_bar = false;
   <% else %>
@@ -458,6 +465,7 @@
 	   }*/
 	}
 	function showScreenToTrade(){
+		setCookie("shop_type", "swap", 1);
 		var sell_count = $('#shopping_cart').find('.sell_display li').length;
 	  /*if(sell_count == 0) {
 	   	alert("You have not selected any products to sell");
@@ -493,6 +501,7 @@
 	}
 
   function showScreenToBuy() {
+  	setCookie("shop_type", "buy", 1);
   	var sell_count = $('#shopping_cart').find('.sell_display li').length;
 	  /*if(sell_count == 0) {
 	   	alert("You have not selected any products to sell");
@@ -537,8 +546,10 @@
     scrollToSelectCategory();
   }
 	
-  function showScreenToSell(scroll) {
-    for_what = "for_selling";
+  function showScreenToSell(scroll) {  	
+  	setCookie("shop_type", "sell", 1);
+
+		for_what = "for_selling";
     $("#sell_message").show();
     $("#buy_message").hide();
     $('#checkout_button').hide();

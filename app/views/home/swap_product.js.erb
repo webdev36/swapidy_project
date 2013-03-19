@@ -1,4 +1,5 @@
-$("#shopping_cart").html("<%= raw escape_javascript(@return_content) %>");
+$("#shopping_cart").html("<%= raw escape_javascript(@return_content[0]) %>");
+$("#drop_items").html("<%= raw escape_javascript(@return_content[1]) %>");
 <% unless ShoppingCart.cart_products_empty? %>
   $("#shopping_cart").show();
   $("#index_head").hide();

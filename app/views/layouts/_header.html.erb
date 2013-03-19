@@ -79,15 +79,7 @@
               <%= link_to('LOG OUT', destroy_user_session_path, :method => :delete) %>
             </li>
           </ul>
-        </li>
-        <li class="divider-vertical"></li>
-
-        <li class="dropdown" style="width: 65px;">
-          <a id="dropdown_shop_cart_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <%= image_tag("shop_cart.png", :class => "nav_icons nav_shop_cart")%> </a>
-          <ul id="drop_items" class="dropdown-menu dropdown_shop_cart_icon" role="menu" aria-labelledby="dropdown_shop_cart_icon" style="width: 200px;max-height: 500px; overflow-y: scroll; width: 200px;">
-            <%= render "layouts/shopping_cart" %>
-          </ul>
-        </li>
+        </li>     
         
         <li class="divider-vertical"></li>
 
@@ -107,6 +99,14 @@
           <a href="javascript:refresh_signin_form();" >LOG IN</a>
         </li>
         <% end %>
+         <li class="divider-vertical"></li>
+
+          <li class="dropdown" style="width: 65px;">
+            <a id="dropdown_shop_cart_icon" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <%= image_tag("shop_cart.png", :class => "nav_icons nav_shop_cart")%> </a>
+            <ul id="drop_items" class="dropdown-menu dropdown_shop_cart_icon" role="menu" aria-labelledby="dropdown_shop_cart_icon" style="width: 200px;max-height: 500px; overflow-y: scroll; width: 200px;">
+              <%= render "layouts/shopping_cart" %>
+            </ul>
+          </li>
       </ul>
     </div>
   </div>

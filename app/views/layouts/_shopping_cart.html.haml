@@ -1,17 +1,44 @@
 - if ShoppingCart.cart_products_empty?
-	#product_items{:style => "height: 100px; min-width:350px;"}
-		%div{:style => "width: 100%; text-align: center; padding-top: 40px;"}
-			%span.headings_pink Empty Swapping Cart		
+	#product_items{:style => "height: 100px; min-width:180px;"}
+		%div{:style => "width: 100%; text-align: center; padding-top: 20px;"}
+			%span.headings_pink{:style=>"font-size:16px;"} Empty Swapping Cart
+			%a{:href=>"#", :onclick=>"$('#shopping_cart').fadeOut('slow'); show_checkout_bar = false;", :style=>"height: 15px; left: 50%; margin-left: -60px; position: absolute; top: 45px; width: 100px;", :class=>"btn show_button_buy", :id=> "close_shopping_cart"} Close
 - else
-	- if ShoppingCart.cart_products[:sell].count > 0
-		%li 
+	- if ShoppingCart.cart_products[:buy].count > 0
+		%li#buy-items
 			%p.item-name Buy item
-			%ul.product-item.buy-item{:style => "position: none;"}
+			%ul.product-item.buy-item{:buy => "position: none;"}
 				- ShoppingCart.cart_products[:buy].each do |order_product|
 					= render :partial => "/layouts/cart_product_thumb", :locals => {:order_product => order_product}
 	- if ShoppingCart.cart_products[:sell].count > 0
-		%li 
+		%li#sell-items
 			%p.item-name Sell item
 			%ul.product-item.buy-item{:style => "position: none;"}
 				- ShoppingCart.cart_products[:sell].each do |order_product|
 					= render :partial => "/layouts/cart_product_thumb", :locals => {:order_product => order_product}		
+	
+:javascript
+	function getCookie(c_name){
+	  var i,x,y,ARRcookies=document.cookie.split(";");
+	  for (i=0;i<ARRcookies.length;i++)
+	  {
+	    x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+	    y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+	    x=x.replace(/^\s+|\s+$/g,"");
+	    if (x==c_name){
+	      return unescape(y);
+	    }	    
+	  }
+	}
+	var shop_type = getCookie("shop_type");
+	console.log(shop_type);
+	if(shop_type=="sell"){
+		$("#buy-items").hide();
+		$("#sell-items").show();
+	}else if(shop_type=="buy"){
+		$("#buy-items").show();
+		$("#sell-items").hide();
+	}else{
+		$("#sell-items").show();
+		$("#buy-items").show();
+	}

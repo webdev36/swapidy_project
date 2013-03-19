@@ -55,15 +55,18 @@ class HomeController < ApplicationController
   def swap_product
     ShoppingCart.add_cart_product(:type => params[:type],:price => params[:price],:product_id => params[:product_id],:using_condition => params[:condition])
     @changed_type = params[:type] && params[:type] == "sell" ? :sell : :buy 
+    @return_content = []
     respond_to do |format|
       format.js {
-        @return_content = render_to_string(:partial => "/home/shopping_cart")
-        @return_dropbox_item = render_to_string(:partial => "/layouts/shopping_cart")
+        @return_content[0] = render_to_string(:partial => "/home/shopping_cart")
+        @return_content[1] = render_to_string(:partial => "/layouts/shopping_cart")
+        @return_content
       }
     end
   end
 
   def del_product
+    @return_content = []
     if session[:cart_products]
       index_for_sell = session[:cart_products][:sell].index{|x| x[:order_product_id].to_i == params[:order_id].to_i}
       if index_for_sell && index_for_sell.to_i >= 0
@@ -79,7 +82,9 @@ class HomeController < ApplicationController
     end
     respond_to do |format|
       format.js {
-        @return_content = render_to_string(:partial => "/home/shopping_cart")
+        @return_content[0] = render_to_string(:partial => "/home/shopping_cart")
+        @return_content[1] = render_to_string(:partial => "/layouts/shopping_cart")
+        @return_content
       }
     end
   end

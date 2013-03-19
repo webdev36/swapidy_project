@@ -7,9 +7,3 @@
 				= order_product.using_condition
 		.span1{:style => "width: 40px; margin-top: 20px;"}
 			%a.del-product{:href => "#", :order_product_id => order_product.order_product_id, :title => "Delete"}	
-	
-:javascript
-	$('ul.product-item li a.del-product').click(function(){
-		console.log($(this).html());
-		$(this).parent().parent().parent().remove();		
-	});
