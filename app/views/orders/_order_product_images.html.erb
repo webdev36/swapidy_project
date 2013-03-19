@@ -1,10 +1,13 @@
 <% if ShoppingCart.cart_products_empty? %>
   <div>Empty Swapping Cart</div>  
 <% else %>
+	<%if session[:shop_type]=="swap" %>
 	<div style="width: 100%; display: block;">
   	<img class="circ_arrow" src="/images/circular_arrow.png">
   </div>
+ 	<% end %>
   <div style="width: 100%; display: block; margin-top: 10px;height: 200px">
+	  <%if session[:shop_type]=="sell" || session[:shop_type]=="swap" %>
 	  <div class="order_slider_sell">
 			<span class="old_stuff">My old stuff</span>
 	   <div style="height: 180px;width:200px; position: relative">
@@ -24,6 +27,8 @@
 		  </div>
 		  </div>
 		  </div>
+		  <% end %>
+		  <% if session[:shop_type]=="buy" || session[:shop_type]=="swap" %>
 		  <div class="order_slider_buy">
 		 	  <span class="new_stuff">My new stuff</span>
 		   <div style=" height: 180px;width:200px; position: relative">
@@ -43,10 +48,13 @@
 	  	</div>
 	  	</div>
 	  </div>
+	  <% end %>
 	</div>
+	<%if session[:shop_type]=="swap" %>
   <div style="width: 100%; display: block; position: relative;">
   	<img class="r_circ_arrow" src="/images/r_circular_arrow.png">
   </div>
+ <% end %>
 <% end %>
 
 <style>

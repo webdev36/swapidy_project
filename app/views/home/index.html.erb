@@ -449,21 +449,22 @@
   
 	function gotoCheckout(){
 		var shop_type  = getCookie("shop_type");
-		var select_state = false;
-console.log(shop_type);		
+		var select_state = false;		
 		if(shop_type == "sell"){
 			if(!sell_item_count > 0){
-				alert("You have not selected any products to sell");	
+				alert("You have not selected any products to sell");					
 				select_state = false;
 			}else{
-				select_state = true;
+				select_state = true;				
+
 			}
 		}else if(shop_type == "buy"){
 			if(!buy_item_count > 0) {
 				alert("You have not selected any products to buy");
-				select_state = false;
+				select_state = false;				
 			}else{
 				select_state = true;
+
 			}
 		}else if(shop_type == "swap"){
 			if(!sell_item_count > 0 || !buy_item_count > 0) {
@@ -472,8 +473,8 @@ console.log(shop_type);
 			}else{
 				select_state = true;
 			}
-		}		
-		if( select_state ) window.location = "/orders/new";	
+		}						
+		if( select_state ) window.location = "/orders/new/?shop_type="+shop_type;	
 	}
 	function select_complete(){
 		var shop_type  = getCookie("shop_type");

@@ -2,8 +2,8 @@ function setCookie(c_name,value,exdays){
   var exdate=new Date();
   exdate.setDate(exdate.getDate() + exdays);
   var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-  document.cookie=c_name + "=" + c_value;
-} 
+  document.cookie=c_name + "=" + c_value;   
+}
 function getCookie(c_name){
   var i,x,y,ARRcookies=document.cookie.split(";");
   for (i=0;i<ARRcookies.length;i++)
@@ -16,11 +16,13 @@ function getCookie(c_name){
     }     
   }
 }
+function eraseCookie(c_name){
+  setCookie(c_name, "", -1);
+}
 // glabal variables 
 
 var sell_item_count = buy_item_count = 0;
 var swapped_state = 0;
-setCookie("shop_type", "swap", 1);
 
 $(function() {
 var container = $('#container');
