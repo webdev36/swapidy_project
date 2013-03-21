@@ -1,0 +1,5 @@
+$("#popup-dialog_paypal_email_form .render_form form").html("<%= raw escape_javascript(@return_content) %>");
+<% if @success_message %>
+  $("a.paypal-email-address").html("<%= @user.paypal_email %>");
+<% end %>
+

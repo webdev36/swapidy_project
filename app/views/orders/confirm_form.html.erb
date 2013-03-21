@@ -38,12 +38,22 @@
         <div class="confirm_payment_container" style="padding-top: 40px;">
           <div class="headings_pink" style="font-size:20px; position:relative; bottom:270px;">Payment Information</div>
           <br />
+          <% if session[:shop_type] == "sell" %>
+          <div class="payment-info-box" style="position:relative; bottom:290px;">
+            <%= render :partial =>"payment_info_description", :locals => { :order => @order } %>
+          </div>
+          <% else %>
           <div style="position:relative; bottom:290px;">
               <span>Current Balance:</span>
               <%= number_to_currency(current_user.balance_amount) %><br/>
               <% if ShoppingCart.cart_amount < 0 %>
-							  <span>You get:</span>
-							  <%= number_to_currency(-ShoppingCart.cart_amount) %>
+                <span> You will be paid 
+                  <%= number_to_currency(-ShoppingCart.cart_amount) %>
+                  on 
+                  <a class="paypal-email-address">  <%= current_user.paypal_email %>  </a>
+                  via paypal
+                </span>                
+
 							<% else %>
 							  <span>You pay:</span>
 				        <%= number_to_currency(ShoppingCart.cart_amount) %> <br /> 
@@ -60,7 +70,7 @@
 	              <input type="button" value="Add Credit Card" class="order_button_buy" style="margin-left: 125px; margin-top: 20px;"  onclick="refresh_add_money_form();" />
 	          	<% end %>
 	        </div>
-          
+          <% end %>
           <% unless current_user.extra_money_for(ShoppingCart.cart_amount) > 0 && !current_user.has_card_info? %>
 	          <% has_agreement_before = !current_user.last_order.nil? %>
 	          <div style="position:relative; bottom:290px;">

@@ -52,6 +52,7 @@ Swapidy::Application.routes.draw do
   match "/orders/create" => "orders#create", :method => :post
   match "/orders/complete" => "orders#complete", :method => :get
   match "/orders/change_email" => "orders#change_email", :method => :post
+  match "/orders/change_paypal_email" => "orders#change_paypal_email", :method => :post
   match "/orders/change_shipping_info" => "orders#change_shipping_info", :method => :post
   match "/orders/reload_payment_order_info" => "orders#reload_payment_order_info", :method => :post
 

@@ -1,0 +1,19 @@
+%input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}/
+%div
+  %label{:for => "user_paypal_email"} PayPal Email
+  %br/
+  %input#user_email{:name => "user[paypal_email]", :size => "30", :type => "email", :value => user.paypal_email}/
+- unless session[:signed_in_via_facebook]
+  %div
+    %label{:for => "user_current_password"} Current Password
+    %i (we need your current password to confirm your changes)
+    %br/
+    %input#user_current_password{:name => "user[current_password]", :size => "30", :type => "password"}/
+%div
+  - if !user.errors.empty? || @error_message
+    .alert.alert-error
+      = user.errors.full_messages.join('.')
+      = @error_message if @error_message
+  - elsif @success_message
+    .alert.alert-success= @success_message
+  %input.update_button_buy{:type => "submit", :value => "Update"}/

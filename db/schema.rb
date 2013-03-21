@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307043712) do
+ActiveRecord::Schema.define(:version => 20130320062617) do
 
   create_table "brand_email_customers", :force => true do |t|
     t.integer  "user_id"
@@ -162,13 +162,12 @@ ActiveRecord::Schema.define(:version => 20130307043712) do
     t.integer "category_id"
     t.decimal "price_for_sell",      :precision => 10, :scale => 2
     t.integer "product_model_id"
-    t.boolean "for_buy",                                            :default => true
-    t.boolean "for_sell",                                           :default => true
     t.decimal "price_for_good_sell", :precision => 10, :scale => 2
     t.decimal "price_for_poor_sell", :precision => 10, :scale => 2
     t.decimal "price_for_buy",       :precision => 10, :scale => 2
     t.decimal "price_for_good_buy",  :precision => 10, :scale => 2
     t.decimal "price_for_poor_buy",  :precision => 10, :scale => 2
+    t.integer "swap_type",                                          :default => 0
     t.integer "upload_database_id"
   end
 
@@ -262,6 +261,7 @@ ActiveRecord::Schema.define(:version => 20130307043712) do
     t.string   "provider_image"
     t.boolean  "is_admin",                                                               :default => false
     t.integer  "redeem_code_id"
+    t.string   "paypal_email"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

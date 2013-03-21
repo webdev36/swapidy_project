@@ -9,7 +9,9 @@
   <div style="width: 100%; display: block; margin-top: 10px;height: 200px">
 	  <%if session[:shop_type]=="sell" || session[:shop_type]=="swap" %>
 	  <div class="order_slider_sell">
+	  	<% if session[:shop_type]=="swap" %>
 			<span class="old_stuff">My old stuff</span>
+			<% end %>
 	   <div style="height: 180px;width:200px; position: relative">
 	    <% if ShoppingCart.cart_products[:sell].count > 1 %>
 		    <button class="prev product_button_buy" style="width: 30px;position: absolute;top:10px;left:-140px;z-index: 1000">&lt;</button>
@@ -30,7 +32,9 @@
 		  <% end %>
 		  <% if session[:shop_type]=="buy" || session[:shop_type]=="swap" %>
 		  <div class="order_slider_buy">
+		  	<% if session[:shop_type]=="swap" %>
 		 	  <span class="new_stuff">My new stuff</span>
+		 	 	<% end %>
 		   <div style=" height: 180px;width:200px; position: relative">
 		  	<% if ShoppingCart.cart_products[:sell].count > 1 %>
 				  <button class="prev_buy product_button_buy" style="width: 30px;top: 10px;right:170px;position: absolute;z-index: 1000">&lt;</button>

@@ -56,36 +56,80 @@ class OrdersController < ApplicationController
   
   def create
     if @order.valid? && @order.shipping_address_valid? && current_user.could_order?(ShoppingCart.cart_amount)
-      begin
-        Order.transaction do
-          session[:cart_products][:sell].each do |obj_hash|
-            @order.order_products.new(:product_id => obj_hash[:product_id], 
-                                      :price => obj_hash[:price], 
-                                      :using_condition => obj_hash[:using_condition], 
-                                      :sell_or_buy => "sell")
+      if session[:shop_type] == "sell"
+         Order.transaction do
+            session[:cart_products][:sell].each do |obj_hash|
+              @order.order_products.new(:product_id => obj_hash[:product_id], 
+                                        :price => obj_hash[:price], 
+                                        :using_condition => obj_hash[:using_condition], 
+                                        :sell_or_buy => "sell")
+            end
+            
+            if @order.save
+              @order.do_payment
+              @order.create_stamp_to_deliver(session[:shop_type])
+              OrderNotifier.start_processing(@order, session[:shop_type]).deliver
+              OrderNotifier.start_processing_for_admin(@order, session[:shop_type]).deliver
+              ShoppingCart.clear_cart_products 
+            end
           end
-          session[:cart_products][:buy].each do |obj_hash|
-            @order.order_products.new(:product_id => obj_hash[:product_id], 
-                                      :price => obj_hash[:price], 
-                                      :using_condition => obj_hash[:using_condition], 
-                                      :sell_or_buy => "buy")
+          redirect_to "/orders/#{@order.id}"
+      elsif session[:shop_type] == "buy"
+        begin
+          Order.transaction do
+            session[:cart_products][:buy].each do |obj_hash|
+              @order.order_products.new(:product_id => obj_hash[:product_id], 
+                                        :price => obj_hash[:price], 
+                                        :using_condition => obj_hash[:using_condition], 
+                                        :sell_or_buy => "buy")
+            end            
+            if @order.save
+              @order.do_payment
+              @order.create_stamp_to_deliver
+              OrderNotifier.start_processing(@order).deliver
+              OrderNotifier.start_processing_for_admin(@order).deliver
+              ShoppingCart.clear_cart_products 
+            end
           end
-          
-          if @order.save
-            @order.do_payment
-            @order.create_stamp_to_deliver
-            OrderNotifier.start_processing(@order).deliver
-            OrderNotifier.start_processing_for_admin(@order).deliver
-            ShoppingCart.clear_cart_products 
-          end
+          redirect_to "/orders/#{@order.id}"
+        rescue Exception => e
+          @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
+          page_title "Confirm Your Details"
+          current_user.copy_to_new_card
+          render "confirm_form"
         end
-        redirect_to "/orders/#{@order.id}"
-      rescue Exception => e
-        @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
-        page_title "Confirm Your Details"
-        current_user.copy_to_new_card
-        render "confirm_form"
-      end
+      elsif session[:shop_type] == "swap"
+        begin
+          Order.transaction do
+            session[:cart_products][:sell].each do |obj_hash|
+              @order.order_products.new(:product_id => obj_hash[:product_id], 
+                                        :price => obj_hash[:price], 
+                                        :using_condition => obj_hash[:using_condition], 
+                                        :sell_or_buy => "sell")
+            end
+            session[:cart_products][:buy].each do |obj_hash|
+              @order.order_products.new(:product_id => obj_hash[:product_id], 
+                                        :price => obj_hash[:price], 
+                                        :using_condition => obj_hash[:using_condition], 
+                                        :sell_or_buy => "buy")
+            end
+            
+            if @order.save
+              @order.do_payment
+              @order.create_stamp_to_deliver
+              OrderNotifier.start_processing(@order).deliver
+              OrderNotifier.start_processing_for_admin(@order).deliver
+              ShoppingCart.clear_cart_products 
+            end
+          end
+          redirect_to "/orders/#{@order.id}"
+        rescue Exception => e
+          @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
+          page_title "Confirm Your Details"
+          current_user.copy_to_new_card
+          render "confirm_form"
+        end
+      end      
     else
       page_title "Confirm Your Details"
       current_user.copy_to_new_card
@@ -113,6 +157,23 @@ class OrdersController < ApplicationController
       @changed_content = render_to_string(:partial => "/orders/email_label", :locals => {:user => @user})
     end 
     @return_content = render_to_string(:partial => "/orders/change_email_form", :locals => {:user => @user})
+  end
+
+  def change_paypal_email
+    @user = User.find current_user.id
+    @user.paypal_email = params[:user][:paypal_email]
+
+    if @user.paypal_email == current_user.paypal_email
+      @error_message = "Please enter another email to change!"
+    elsif session[:signed_in_via_facebook].nil? 
+      @error_message = "Please enter vaild password" unless @user.valid_password?(params[:user][:current_password])
+    end
+    
+    if @error_message.nil? && @user.save
+      current_user.email = @user.email
+      @success_message = "Your email has changed successfully!"
+    end 
+    @return_content = render_to_string(:partial => "/orders/change_paypal_email_form", :locals => {:user => @user})
   end
 
   def change_shipping_info

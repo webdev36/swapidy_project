@@ -8,10 +8,15 @@ class OrderNotifier < ActionMailer::Base
   #
   #   en.authentication_notifier.user_activation.subject
   #
-  def start_processing(order, host_with_port = "https://www.swapidy.com")
+  def start_processing(order, shop_type, host_with_port = "https://www.swapidy.com")
     @user = order.user
     @order = order
-    @shipping_stamp = @order.shipping_stamps.for_buy.first
+
+    if shop_type == "sell"
+      @shipping_stamp = @order.shipping_stamps.for_sell.first
+    else
+      @shipping_stamp = @order.shipping_stamps.for_buy.first
+    end
     mail :to => @user.email, :subject => "Swapidy Order Processing" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
@@ -22,10 +27,14 @@ class OrderNotifier < ActionMailer::Base
     end
   end
   
-  def start_processing_for_admin(order, host_with_port = "https://www.swapidy.com")
+  def start_processing_for_admin(order, shop_type, host_with_port = "https://www.swapidy.com")
     @user = order.user
     @order = order
-    @shipping_stamp = @order.shipping_stamps.for_buy.first
+    if shop_type == "sell"
+      @shipping_stamp = @order.shipping_stamps.for_sell.first
+    else
+      @shipping_stamp = @order.shipping_stamps.for_buy.first
+    end      
     mail :to => ADMIN_EMAIL, :subject => "Admin: Swapidy Order Processing #{@user.email}" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do

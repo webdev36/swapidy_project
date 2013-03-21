@@ -1,0 +1,25 @@
+.row
+	%p
+		You will be paid	#{number_to_currency(-ShoppingCart.cart_amount)} within 2~3 business days after receiving your product
+	%p Choose how you want to get paid
+.row
+	.span2
+		%label{:style => "font-size: 16px;"}
+			%input#option_paypalemail{:name => "paypal-option", :type => "radio", :value => "paypal", :style => "margin-top: -1px;"}/
+			Paypal
+	.span3
+		%label{:style => "font-size: 16px;"}
+			%input#optionsRadios2{:name => "paypal-option", :type => "radio", :value => "certified", :style => "margin-top: -1px;"}/
+			Certified check
+.row
+	%p 
+		Your paypal email:	
+		%a.paypal-email-address #{current_user.paypal_email} 
+:javascript
+	$("#option_paypalemail").click(function(){
+		$("#popup-dialog_paypal_email_form form input[email]").attr("value", "<%= current_user.paypal_email %>");
+		$("#popup-dialog_paypal_email_form form .alert").hide();
+		showPopup('popup-dialog_paypal_email_form');
+	});
+
+

@@ -56,6 +56,7 @@ end
 group :development, :test do
   gem 'mailcatcher'
   gem 'sqlite3'
+  gem "wkhtmltopdf"
 end
 
 # To use ActiveModel has_secure_password
