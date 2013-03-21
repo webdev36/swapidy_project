@@ -985,8 +985,12 @@ height: 400px;
 }
 .index_buttons{
   position: relative;
-  bottom:70px;
-  margin-left: 100px;
+  bottom:130px;
+  margin-left: 50px;
+}
+
+a.index_buttons{
+text-align: center;
 }
 
 a.index_buttons{
