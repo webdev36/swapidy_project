@@ -147,7 +147,6 @@ namespace :swapidy do
     desc "Enter the default address"
     task :set_company_address => :environment do
       settings = {"COMPANY_NAME" => "Swapidy", 
-
                   "COMPANY_ADDRESS" => "1259 El Camino Real. #232", 
                   "COMPANY_CITY" => "Menlo Park", 
                   "COMPANY_STATE" => "CA", 
