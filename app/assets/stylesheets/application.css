@@ -986,13 +986,31 @@ height: 400px;
 .index_buttons{
   position: relative;
   bottom:130px;
-  margin-left: 50px;
+    cursor: pointer;
+
 }
 
-a.index_buttons{
-text-align: center;
-}
+.index_buttons a{
+color:#666;
+  cursor: pointer;
 
-a.index_buttons{
-text-align: center;
+}
+.index_buttons a:hover{
+color:#666;
+  cursor: pointer;
+
+}
+.index_button{
+  text-align: center;
+  width: 250px;
+  float: left;
+  font-size: 20px;
+  font-family: 'myriad-s';
+  cursor: pointer;
+}
+.button_2{
+  margin-left: 80px;
+}
+.button_3{
+  margin-left: 80px;
 }
