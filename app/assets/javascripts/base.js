@@ -22,7 +22,6 @@ function eraseCookie(c_name){
 // glabal variables 
 
 var sell_item_count = buy_item_count = 0;
-var swapped_state = 0;
 
 $(function() {
 var container = $('#container');

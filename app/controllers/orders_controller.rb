@@ -57,23 +57,28 @@ class OrdersController < ApplicationController
   def create
     if @order.valid? && @order.shipping_address_valid? && current_user.could_order?(ShoppingCart.cart_amount)
       if session[:shop_type] == "sell"
-         Order.transaction do
+        begin
+          Order.transaction do
             session[:cart_products][:sell].each do |obj_hash|
               @order.order_products.new(:product_id => obj_hash[:product_id], 
                                         :price => obj_hash[:price], 
                                         :using_condition => obj_hash[:using_condition], 
                                         :sell_or_buy => "sell")
             end
-            
             if @order.save
-              @order.do_payment
-              @order.create_stamp_to_deliver(session[:shop_type])
-              OrderNotifier.start_processing(@order, session[:shop_type]).deliver
-              OrderNotifier.start_processing_for_admin(@order, session[:shop_type]).deliver
-              ShoppingCart.clear_cart_products 
-            end
+                @order.create_stamp_to_deliver(session[:shop_type])
+                OrderNotifier.start_processing(@order, session[:shop_type]).deliver
+                OrderNotifier.start_processing_for_admin(@order, session[:shop_type]).deliver
+                ShoppingCart.clear_cart_products 
+             end
           end
           redirect_to "/orders/#{@order.id}"
+        rescue Exception => e
+          @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
+          page_title "Confirm Your Details"
+          current_user.copy_to_new_card
+          render "confirm_form"
+        end
       elsif session[:shop_type] == "buy"
         begin
           Order.transaction do
@@ -84,20 +89,17 @@ class OrdersController < ApplicationController
                                         :sell_or_buy => "buy")
             end            
             if @order.save
-              @order.do_payment
-              @order.create_stamp_to_deliver
-              OrderNotifier.start_processing(@order).deliver
-              OrderNotifier.start_processing_for_admin(@order).deliver
-              ShoppingCart.clear_cart_products 
+                @order.do_payment
+                ShoppingCart.clear_cart_products 
             end
-          end
+          end        
           redirect_to "/orders/#{@order.id}"
-        rescue Exception => e
-          @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
-          page_title "Confirm Your Details"
-          current_user.copy_to_new_card
-          render "confirm_form"
-        end
+          rescue Exception => e
+            @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
+            page_title "Confirm Your Details"
+            current_user.copy_to_new_card
+            render "confirm_form" 
+          end
       elsif session[:shop_type] == "swap"
         begin
           Order.transaction do
@@ -116,9 +118,9 @@ class OrdersController < ApplicationController
             
             if @order.save
               @order.do_payment
-              @order.create_stamp_to_deliver
-              OrderNotifier.start_processing(@order).deliver
-              OrderNotifier.start_processing_for_admin(@order).deliver
+              @order.create_stamp_to_deliver(session[:shop_type])
+              OrderNotifier.start_processing(@order, session[:shop_type]).deliver
+              OrderNotifier.start_processing_for_admin(@order,session[:shop_type]).deliver
               ShoppingCart.clear_cart_products 
             end
           end

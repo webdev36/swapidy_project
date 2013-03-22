@@ -16,8 +16,9 @@ class Product < ActiveRecord::Base
   
   scope :for_buy, :conditions => ["swap_type = 2"]
   scope :for_sell, :conditions => ["swap_type = 1"]
-  
-  SWAP_TYPES = {0 => "Sell and Buy", 1 => "Sell", 2 => "Buy"}
+  scope :for_sell_only, :conditions => ["swap_type = 3"]
+
+  SWAP_TYPES = {0 => "Sell and Buy", 1 => "Sell", 2 => "Buy", 3 => "Sell Only"}
   
   USING_CONDITIONS = {:poor => "Poor", :good => "Good", :flawless => "Flawless"}
   PRICE_RANGES = {300 => "Below 300", 
@@ -161,15 +162,19 @@ class Product < ActiveRecord::Base
     self.has_flawless_buy? || self.has_poor_buy? || self.has_good_buy?
   end
   
-   def for_sells?
-    self.has_flawless_sell? || self.has_poor_sell? || self.has_good_sell?
+  def for_sells?    
+    (self.has_flawless_sell? || self.has_poor_sell? || self.has_good_sell?) && self.swap_type != 3
   end
-  
+  def for_sells_only?
+    self.swap_type == 3 ? true : false
+  end
   def set_auto_value_fields
     self.category = self.product_model.category if self.product_model
-    self.swap_type = (for_buys? && for_sells?) ? 0 : (for_sells? ? 1 : 2)
+    self.swap_type = (for_buys? && for_sells?) ? 0 : (for_buys? ? 2 : (for_sells? ? 1 : 3))
   end
-  
+  def get_shop_type
+    SWAP_TYPES[self.swap_type].downcase.tr(" ", "-")
+  end
   def weight_lb
     product_model.weight_lb
   end
