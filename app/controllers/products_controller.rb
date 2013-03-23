@@ -7,7 +7,10 @@ class ProductsController < ApplicationController
   	if user_signed_in?
   		render :text => "You are not an administrator" and return if !current_user.is_admin?
 
-  		file_name = params[:fn].to_s+".csv"  		
+  		file_name = params[:fn].to_s+".csv"	
+
+render :text => file_name and return
+
 	  	product_models = ProductModel.all.map{|pm| [pm.id, pm.title]}
 	  	pma_attr = ["Weight lb", "Year", "Space",	"Network", "Color", "Generation", "Screen Size",	"Retina Display",	"Memory",	"Hard Disk", "Processor"]
 	 	
