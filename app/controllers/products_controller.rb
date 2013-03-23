@@ -4,6 +4,9 @@ class ProductsController < ApplicationController
     params[:using_condition]
   end
   def csv_import
+  	
+  	render :text => "You are not an Administrator" and return if !current_user.is_admin? 
+
   	file_name = params[:fn].to_s+".csv"
 
   	product_models = ProductModel.all.map{|pm| [pm.id, pm.title]}

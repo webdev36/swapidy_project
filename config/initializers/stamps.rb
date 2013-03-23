@@ -25,9 +25,9 @@ Stamps.configure do |config|
   end
   config.log_messages   = true
   #config.return_address = { :full_name    => 'Swapidy Inc.',
-  #                          :address1     => '2310 Rock Street Apt 38',
-  #                          :city         => 'Mountain View',
+  #                          :address1     => '1259 El Camino Real. #232',
+  #                          :city         => 'Menlo Park',
   #                          :state        => 'CA',
-  #                          :zip_code     => '94043'
+  #                          :zip_code     => '94025'
   #                         }
 end

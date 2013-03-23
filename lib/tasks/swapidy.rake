@@ -130,7 +130,6 @@ namespace :swapidy do
           ["Weight lb", "Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
             attrs = CategoryAttribute.where(:title => cat_title).each {|attr| attr.destroy }
           end
-
           lines.each_with_index do |line, index|
             next if index == 0
             logger.info "line: #{line}"
@@ -147,11 +146,10 @@ namespace :swapidy do
     desc "Enter the default address"
     task :set_company_address => :environment do
       settings = {"COMPANY_NAME" => "Swapidy", 
-                  "COMPANY_ADDRESS" => "211 Hope St., PO Box 390603", 
-
-                  "COMPANY_CITY" => "Mountain View", 
+                  "COMPANY_ADDRESS" => "1259 El Camino Real. #232", 
+                  "COMPANY_CITY" => "Menlo Park", 
                   "COMPANY_STATE" => "CA", 
-                  "COMPANY_ZIP_CODE" => "94041"}
+                  "COMPANY_ZIP_CODE" => "94025"}
       settings.keys.each do |key|
         setting = SwapidySetting.find_by_title key
         setting = SwapidySetting.new(:title => key, :value_type => SwapidySetting::TYPES[:string]) unless setting
