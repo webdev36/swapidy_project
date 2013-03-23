@@ -20,7 +20,13 @@ class ProductsController < ApplicationController
 			CSV.foreach(file_name) do |row|
 				c_id = categories.find{|ct| ct[1]==row[4]}
 				if c_id.present?
-			    product = Product.new()
+					old_p = Product.where(:title=>row[0],:swap_type=>"3")
+					if old_p.present?
+						old_p.each do |p|
+							p.destroy
+						end
+					end
+			    product = Product.new()			    
 			    product.title = row[0]
 			    product.category_id = c_id[0]
 			    product.product_model_id = product_models.find{|pm| pm[1]==row[5]}[0]
@@ -56,5 +62,6 @@ class ProductsController < ApplicationController
   	else
   		redirect_to "/"
   	end  	
+  	redirect_to "/"
   end 
 end
