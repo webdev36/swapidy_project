@@ -984,8 +984,7 @@ height: 400px;
   display: none;
 }
 .index_buttons{
-  position: relative;
-  bottom:130px;
+    margin-top: 80px;
     cursor: pointer;
 
 }
@@ -997,7 +996,7 @@ color:#666;
 }
 .index_buttons a:hover{
 color:#666;
-  cursor: pointer;
+cursor: pointer;
 
 }
 .index_button{

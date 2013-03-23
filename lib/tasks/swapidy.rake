@@ -130,7 +130,6 @@ namespace :swapidy do
           ["Weight lb", "Memory Space", "Network Type", "Ram", "Hard Drive", "Processor (GHZ)", "General"].each do |cat_title|
             attrs = CategoryAttribute.where(:title => cat_title).each {|attr| attr.destroy }
           end
-
           lines.each_with_index do |line, index|
             next if index == 0
             logger.info "line: #{line}"

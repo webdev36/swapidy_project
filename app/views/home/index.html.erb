@@ -55,7 +55,6 @@
 	}
 </script>
 
-<%= render :partial => "/home/index_head_guide" %>
 <div class="index_buttons">
 	<div class="index_button button_1">	
 		<a href="javascript:showScreenToSell('scroll');"><img src="/images/get_cash.png"><br/><br/> Get cash for your device</a>
@@ -67,6 +66,8 @@
 		<a href="javascript:showScreenToBuy('scroll');"><img src="/images/buy.png"><br/><br/>Buy brand new device</button></a>
 	</div>
 </div>
+<%= render :partial => "/home/index_head_guide" %>
+
 <a id="sell_and_buy_message_guide" style="display: none;">
 	<span class="sell">You are currently choosing your products to sell.</span>
 	<span class="buy" style="display: none;">You are currently choosing which products you want to buy.</span>
@@ -96,7 +97,7 @@
   <div id="product_type" style="display:none;">
     <div class="headings_pink" style="text-align:center;">
       <div style="text-align:center;">
-      	<span >What do you want to swap today?</span><br/>
+      	<div >What do you want to swap today?</div><br/>
       	<span id="sell_message" class="motto_sub">Select what you have to sell</span>
       	<span style="display:none;" id="buy_message" class="motto_sub">Choose what you want to buy</span>
       </div>

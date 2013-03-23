@@ -241,11 +241,12 @@ text-align: center;
 }
 
 #product_type{
+  display:none;
+
   position:relative;
   bottom:30px;
   font-family:"myriad";
   margin-bottom: 20px;
-  display:none;
 }
 
 #product_type .headings_pink {
