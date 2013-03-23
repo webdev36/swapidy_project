@@ -9,8 +9,6 @@ class ProductsController < ApplicationController
 
   		file_name = params[:fn].to_s+".csv"	
 
-render :text => file_name and return
-
 	  	product_models = ProductModel.all.map{|pm| [pm.id, pm.title]}
 	  	pma_attr = ["Weight lb", "Year", "Space",	"Network", "Color", "Generation", "Screen Size",	"Retina Display",	"Memory",	"Hard Disk", "Processor"]
 	 	
@@ -56,7 +54,7 @@ render :text => file_name and return
 				end						
 		 	end #foreach 
   	else
-  		redirect_to :user_session
+  		redirect_to "/"
   	end  	
   end 
 end
