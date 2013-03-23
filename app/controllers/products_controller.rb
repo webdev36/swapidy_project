@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
     @product = Product.find params[:id]
     params[:using_condition]
   end
-
   def csv_import
 <<<<<<< HEAD
   	

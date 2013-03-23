@@ -517,13 +517,8 @@
   	}
   	showScreenToSell();
 		var sell_count = $('#shopping_cart').find('.sell_display li').length;
-	  /*if(sell_count == 0) {
-	   	alert("You have not selected any products to sell");
-	   	if(for_what == "for_buying") {
-	   		showScreenToSell('scroll');
-	   	}
-	   	return;
-	  }*/
+	  
+
     for_what = "for_buying";
     $("#sell_message").hide();
     $("#buy_message").show();
@@ -560,13 +555,8 @@
 			$("#continue_button").text("Continue to swap");
 		}	
   	var sell_count = $('#shopping_cart').find('.sell_display li').length;
-	  /*if(sell_count == 0) {
-	   	alert("You have not selected any products to sell");
-	   	if(for_what == "for_buying") {
-	   		showScreenToSell('scroll');
-	   	}
-	   	return;
-	  }*/
+	  
+	  
 		var check_buying = $('#shopping_cart').find('.buy_display li').length;
 		if(check_buying == 0){
 			$('#text_buying').show();
