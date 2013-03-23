@@ -4,9 +4,6 @@ class ProductsController < ApplicationController
     params[:using_condition]
   end
   def csv_import
-  	render :text => "You are not an Administrator" and return if !current_user.is_admin? 
-
-  	file_name = params[:fn].to_s+".csv"
   	if user_signed_in?
   		render :text => "You are not an administrator" and return if !current_user.is_admin?
 
