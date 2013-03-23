@@ -188,7 +188,7 @@
           <div class="product_container">
             <div id="products" class="isotope" style="padding-bottom: 150px;">
               <% category.products.each do |product| %>
-                <% cache("homepage_product_thumb_#{product.id}") do %>
+        				<% cache("homepage_product_thumb_#{product.id}") do %>
                   <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>
                 <% end %>
               <% end %>
@@ -229,8 +229,9 @@
 	  // });
 	  $("#close_shopping_cart").live('click',function(){
 	  	  $("#index_head").show();
-	  	  $('#index_bg').css('height',290);
-	  	  eraseCookie("shop_type");
+	  	  $('#index_bg').css('height',350);
+	  	  setCookie("shop_type", "sell", 1);
+	  	  $("#continue_button").css("display", "none");
 	  });
 	  
 	  $("#done_button_for_buy").live('click',function(){
@@ -276,7 +277,7 @@
 	
 	  $('#slider-code').tinycarousel({display: 2});
 	  //sliderHeight();
-	  showScreenToSell('not_scroll');
+	  showScreenToSellOnly('not_scroll');
 	  $('div#product_type').fadeIn(600);
 	
 	  $('#product_type .cat_item').live('click', function() {
@@ -484,27 +485,32 @@
 		if( select_state ) window.location = "/orders/new/?shop_type="+shop_type;	
 	}
 	function select_complete(){
-		var shop_type  = getCookie("shop_type");
-		console.log(sell_item_count);
-		if(sell_item_count < 1){
-				showScreenToSell();
-		}else	if(buy_item_count < 1){
-				showScreenToBuy();
+		var shop_type  = getCookie("shop_type");		
+		if(sell_item_count < 1){			
+			showScreenToSell();		
+			$("#continue_button").text("Choose Products to sell");	
+		}else	if(buy_item_count < 1){			
+			showScreenToBuy();
+			$("#continue_button").text("Choose Products to buy");
 		}else{
-
+			setCookie("shop_type", "swap", 1);
+			$("#continue_button").css("display", "none");			
 		}	
 	}
 
 	function showScreenToTrade(){
 		setCookie("shop_type", "swap", 1);
-		swapped_state = true;		
-  	$("#continue_button").show();
+		$("#checkout_btn").hide();
+
+		$("#continue_button").css("display", "block");
   	if( sell_item_count < 1 ){
   		$("#continue_button").text("Choose Products to sell");
   	}else if( buy_item_count < 1 ){
   		$("#continue_button").text("Choose Products to buy");
+  	}else{
+  		$("#continue_button").text("Continue to swap");
   	}
-
+  	showScreenToSell();
 		var sell_count = $('#shopping_cart').find('.sell_display li').length;
 	  /*if(sell_count == 0) {
 	   	alert("You have not selected any products to sell");
@@ -539,13 +545,14 @@
     scrollToSelectCategory();
 	}
 
-  function showScreenToBuy() {
+  function showScreenToBuy() {  	
+  	var swapped_state = $("#continue_button").css("display") == "block" ? true : false;
   	setCookie("shop_type", "buy", 1);
-		if(swapped_state && !sell_item_count > 0){
-			$("#continue_button").show();
+  	if(swapped_state && !sell_item_count > 0){
+			$("#continue_button").css("display", "block");
   		$("#continue_button").text("Choose Products to sell");
 		}else{
-			$("#continue_button").hide();
+			$("#continue_button").text("Continue to swap");
 		}	
   	var sell_count = $('#shopping_cart').find('.sell_display li').length;
 	  /*if(sell_count == 0) {
@@ -591,17 +598,54 @@
     scrollToSelectCategory();
   }
 	
-  function showScreenToSell(scroll) {  	
+  function showScreenToSell(scroll) {
+  	var swapped_state = $("#continue_button").css("display") == "block" ? true : false;
+  	if( swapped_state == false ) {
+  		showScreenToSellOnly(scroll);
+  		return;
+  	}
+
   	setCookie("shop_type", "sell", 1);
-  	var swapped  = getCookie("swapped");
+  	
 		if(swapped_state && !buy_item_count > 0){
-			$("#continue_button").show();
-  		$("#continue_button").text("Choose Products to bye");
+			$("#continue_button").css("display", "block");
+  		$("#continue_button").text("Choose Products to buy");
 		}else{
-			$("#continue_button").hide();
+			$("#continue_button").text("Continue to swap");
 		}	
   	
 		for_what = "for_selling";
+    $("#sell_message").show();
+    $("#buy_message").hide();
+    $('#checkout_button').hide();
+    $("#done_button_for_buy").hide();
+    $('#done_button').show();
+    $('#text_buying').hide();
+    $("#sell_and_buy_message_guide span.buy").hide();
+    $("#sell_and_buy_message_guide span.sell").show();
+    
+		$('li.product_model').not('#filter_model_all').hide();
+    $('li.model_for_selling').show();
+    $(".thumbnail .box .button_for_buy").hide();
+    $(".thumbnail .box .button_for_sell").show();
+    $(".product_search_container .nav-pills").each(function(index) {
+      $(this).addClass("models_for_sell").removeClass("models_for_buy");
+    });
+    $(".all_using_condition_filter").removeClass("option-set").hide();
+    $(".attr_filter_model_all_for_buying").not(".attr_filter_model_all_for_selling").addClass("hidden_filter");
+    $(".attr_filter_model_all_for_selling").removeClass("hidden_filter");
+  	
+  	unselectCurrentCategory();
+    $('div#product_type').fadeIn(600);
+    if(scroll == 'scroll'){
+    	scrollToSelectCategory();	
+    }
+    
+ }
+ function showScreenToSellOnly(scroll) {	
+
+  	setCookie("shop_type", "sell", 1);
+		for_what = "for_sell_only";
     $("#sell_message").show();
     $("#buy_message").hide();
     $('#checkout_button').hide();

@@ -1,8 +1,17 @@
-<div class="item thumbnail product_filter_model_<%= product.product_model.id %> <%= product.gen_attribute_filter_ids %>  <%= "for_buying" if product.for_buys? %> <%= "for_selling" if product.for_sells? %>">
-  <div class="box">
+<div class="item thumbnail product_filter_model_<%= product.product_model.id %> 
+ <%= "for_buying" if product.for_buys? %> 
+ <%= "for_selling" if product.for_sells? %>  
+ <%= "for_sell_only" if product.for_sells_only? %>
+ ">
+  <div class="box" >
     <div class="product_title" style="color:#fa3e6e; font-family:'myriad-s'; font-size:15px;" title="<%= product.title %>"><%= product.title %></div>
     <div class="product_image thumbnail"><img title="<%= product.title %>" src="<%= product.main_image_url(:thumb) %>"></div>
     <div>
+      <% if product.for_sells_only? %>
+        <div class="dropdown button_for_sell" id= "button_block">
+          <a style="width: 80px;" popup_id="popup_selling_price_<%= product.id %>" class="btn btn-primary select-price" title="Sell now: <%= product.title %>">Sell Only</a>
+        </div>
+      <% end %>
       <% if product.for_sells? %>
 		    <div class="dropdown button_for_sell" id= "button_block">
           <a style="width: 80px;" popup_id="popup_selling_price_<%= product.id %>" class="btn btn-primary select-price" title="Sell now: <%= product.title %>">Sell</a>
@@ -17,59 +26,125 @@
   </div>
 </div>
 
-<% if product.for_sells? %>
-	<div id="popup_selling_price_<%= product.id %>" class="popup_select_price for_selling_price" style= "width: 155px">
+<!-- =============================== PRODUCT OF SELL_ONLY ====================================-->
+<% if product.for_sells_only? %>
+<p id ="sell_only_product"> OK? </p>
+  <div id="popup_selling_price_<%= product.id %>" class="popup_select_price for_selling_price" style= "width: 155px">
     <% if product.has_flawless_sell? %>
       <div class="price_type"
-       data-toggle="popover" 
-       data-animation="true"
-       data-trigger="hover"
-       data-original-title="Flawless"
+        data-toggle="popover" 
+        data-animation="true"
+        data-trigger="hover"
+        data-original-title="Flawless"
 
-       data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Looks like it's never been used.</span> All of the following conditions must be true <ul><li>Works perfectly</li>
-<li>No noticeable flaws, still in its package or looks like-new</li>
-<li>Has zero scratches</li>
-<li>Has no dust under the glass</li></ul>"
-       product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
+        data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Looks like it's never been used.</span> All of the following conditions must be true 
+        <ul><li>Works perfectly</li>
+          <li>No noticeable flaws, still in its package or looks like-new</li>
+          <li>Has zero scratches</li>
+          <li>Has no dust under the glass</li>
+        </ul>"
+        product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
         <label for="Flawless" ><%= product.flaw_less_name %></label>
         <span class="product_desc">$<%= format_num(product.price_for_sell)%></span>
       </div>
     <% end %>
     <% if product.has_good_sell? %>
       <div class="price_type"
-       data-toggle="popover" 
-       data-animation="true"
-       data-trigger="hover"
-       data-original-title="Good"
+        data-toggle="popover" 
+        data-animation="true"
+        data-trigger="hover"
+        data-original-title="Good"
 
-       data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Visible signs of use</span><ul><li>Phone is in great working order</li>
-<li>Very minor signs of wear and scratches</li>
-<li>No cracks or missing buttons</li>"
-       product-id= "<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" type= "sell" >
+        data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Visible signs of use</span>
+          <ul>
+            <li>Phone is in great working order</li>
+            <li>Very minor signs of wear and scratches</li>
+            <li>No cracks or missing buttons</li>
+          </ul>"
+        product-id= "<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" type= "sell" >
         <label for="Good">Good</label>
         <span class="product_desc">$<%= format_num(product.price_for_good_sell)%> </span>
       </div>
     <% end %>
     <% if product.has_poor_sell? %>
       <div class="price_type"
-       data-toggle="popover" 
-       data-animation="true"
-       data-trigger="hover"
-       data-original-title="Poor"
+        data-toggle="popover" 
+        data-animation="true"
+        data-trigger="hover"
+        data-original-title="Poor"
+        data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Doesn't turn on or has physical damage.</span> Any of the following is true:
+          <ul>
+            <li>Does not power on broken or cracked LCD screen or glass</li>
+            <li>Missing buttons (power, home, ringer, volume)</li>
+            <li>Broken or cracked hardware (charging ports, casing, etc.)</li>
+          </ul>"
+        product-id="<%= product.id %>" product-price="<%= product.price_for_poor_sell %>" product-using_condition="Poor" type= "sell" >
+        <label for="Poor">Poor</label>
+        <span class="product_desc">$<%= format_num(product.price_for_poor_sell)%> </span>
+      </div>
+    <% end %>
+  </div>
+<% end %>    
 
-       data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Doesn't turn on or has physical damage.</span> Any of the following is true:<ul><li>Does not power on
-broken or cracked LCD screen or glass</li>
-<li>Missing buttons (power, home, ringer, volume)</li>
-<li>Broken or cracked hardware (charging ports, casing, etc.)</li>
-</ul>"
-       product-id="<%= product.id %>" product-price="<%= product.price_for_poor_sell %>" product-using_condition="Poor" type= "sell" >
+<!-- =============================== PRODUCT OF SELL ====================================-->
+<% if product.for_sells? %>
+	<div id="popup_selling_price_<%= product.id %>" class="popup_select_price for_selling_price" style= "width: 155px">
+    <% if product.has_flawless_sell? %>
+      <div class="price_type"
+        data-toggle="popover" 
+        data-animation="true"
+        data-trigger="hover"
+        data-original-title="Flawless"
+
+        data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Looks like it's never been used.</span> All of the following conditions must be true 
+        <ul><li>Works perfectly</li>
+          <li>No noticeable flaws, still in its package or looks like-new</li>
+          <li>Has zero scratches</li>
+          <li>Has no dust under the glass</li>
+        </ul>"
+        product-id="<%= product.id %>" product-price="<%= product.price_for_sell %>" product-using_condition="Flawless" type= "sell">
+        <label for="Flawless" ><%= product.flaw_less_name %></label>
+        <span class="product_desc">$<%= format_num(product.price_for_sell)%></span>
+      </div>
+    <% end %>
+    <% if product.has_good_sell? %>
+      <div class="price_type"
+        data-toggle="popover" 
+        data-animation="true"
+        data-trigger="hover"
+        data-original-title="Good"
+
+        data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Visible signs of use</span>
+          <ul>
+            <li>Phone is in great working order</li>
+            <li>Very minor signs of wear and scratches</li>
+            <li>No cracks or missing buttons</li>
+          </ul>"
+        product-id= "<%= product.id %>" product-price="<%= product.price_for_good_sell %>" product-using_condition="Good" type= "sell" >
+        <label for="Good">Good</label>
+        <span class="product_desc">$<%= format_num(product.price_for_good_sell)%> </span>
+      </div>
+    <% end %>
+    <% if product.has_poor_sell? %>
+      <div class="price_type"
+        data-toggle="popover" 
+        data-animation="true"
+        data-trigger="hover"
+        data-original-title="Poor"
+        data-content="<img src='/images/alert.png'><span style='color:#fa3e6e'>Doesn't turn on or has physical damage.</span> Any of the following is true:
+          <ul>
+            <li>Does not power on broken or cracked LCD screen or glass</li>
+            <li>Missing buttons (power, home, ringer, volume)</li>
+            <li>Broken or cracked hardware (charging ports, casing, etc.)</li>
+          </ul>"
+        product-id="<%= product.id %>" product-price="<%= product.price_for_poor_sell %>" product-using_condition="Poor" type= "sell" >
         <label for="Poor">Poor</label>
         <span class="product_desc">$<%= format_num(product.price_for_poor_sell)%> </span>
       </div>
   	<% end %>
   </div>
 <% end %>
-  
+<!-- =============================== PRODUCT OF BUY ====================================-->
 <% if product.for_buys? %>
 	<div id="popup_buying_price_<%= product.id %>" class="popup_select_price for_buying_price">
     <% if product.has_flawless_buy?%>

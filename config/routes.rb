@@ -36,7 +36,7 @@ Swapidy::Application.routes.draw do
   match "/location/:location" => "location#change", :method => :get
   
   resources :products
-  
+  match "/csv_import/:fn" => "products#csv_import"
   #match "/payments/new" => "payments#new", :method => :post
   #match "/payments/confirm" => "payments#confirm", :method => :post
   #match "/payments/edit_card" => "payments#edit_card", :method => :post
