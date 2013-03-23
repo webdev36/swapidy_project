@@ -1031,11 +1031,22 @@ font-size: 14px;
   font-size :13px;
 }
 
-
 div.index_buttons{
-  a{
-    img{
-      max-width: 200px;
-    }
+  height: 225px;
+  .index_button {
+    cursor: pointer;
+    float: left;
+    font-family: 'myriad-s';
+    font-size: 20px;
+    text-align: center;
+    width: 250px;
+    a{
+      color: #666666;
+      cursor: pointer;
+      img{
+        max-width: 200px;
+      }
+    }  
+
   }  
 }
