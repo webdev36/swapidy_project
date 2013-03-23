@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
     @product = Product.find params[:id]
     params[:using_condition]
   end
-
   def csv_import
   	if user_signed_in?
   		render :text => "You are not an administrator" and return if !current_user.is_admin?

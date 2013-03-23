@@ -981,19 +981,18 @@ text-decoration:underline;
 }
 
 #sell_and_buy_message_guide {
-position: fixed;
-left: 10px;
-bottom: 0;
-padding: 10px;
-background-color: rgba(0, 0, 0, 0.8);
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
-z-index: 10;
-width: 300px;
-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-font-family: arial, san;
-font-size: 14px;
-
+  position: fixed;
+  left: 10px;
+  bottom: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: 10;
+  width: 300px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  font-family: arial, san;
+  font-size: 14px;
 }
 
 .popup_select_price {
@@ -1031,7 +1030,6 @@ font-size: 14px;
 .price_type span {
   font-size :13px;
 }
-
 div.index_buttons{
   height: 225px;
   .index_button {
