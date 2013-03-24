@@ -223,16 +223,23 @@ left:50%;
 #footer_info{
     text-align: center;
     clear: both;
+    color: #666;
 
 }
 .footer ul{
     border-top: 1px solid #E5E5E5;
     padding-top: 10px;
+    color: #666;
 
 }
 .footer li{
   display: inline;
   margin-right: 20px;
+  color: #666;
+
+}
+.footer li a{
+  color: #666;
 }
 .container a,
 .container a:hover {
@@ -811,6 +818,7 @@ ul.left_menu li a {
   float: left;
   margin-left: 20px;
 }
+
 .media_title{
   font-family:'myriad-s';
   color:#666;
@@ -830,6 +838,7 @@ ul.left_menu li a {
 }
 .media_hn{
   margin-bottom: 50px;
+  margin-right: 80px;
 }
 #mcts1 
 {
@@ -924,7 +933,6 @@ ul.left_menu li a {
 }
 
 #index_head{
-
 height: 270px;
 position: absolute;
 top: 70px;
