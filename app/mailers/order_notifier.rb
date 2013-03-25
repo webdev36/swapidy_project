@@ -11,6 +11,7 @@ class OrderNotifier < ActionMailer::Base
   def start_processing(order, shop_type, host_with_port = "https://www.swapidy.com")
     @user = order.user
     @order = order
+    @shop_type = shop_type
 
     if shop_type == "sell"
       @shipping_stamp = @order.shipping_stamps.for_sell.first
@@ -21,7 +22,7 @@ class OrderNotifier < ActionMailer::Base
       format.html # renders send_report.text.erb for body of email
       format.pdf do
         attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
-          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb',:orientation => 'Landscape', :shop_type => shop_type)
+          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb',:orientation => 'Landscape')
         ) 
       end
     end
