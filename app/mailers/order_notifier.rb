@@ -11,13 +11,16 @@ class OrderNotifier < ActionMailer::Base
   def start_processing(order, shop_type, host_with_port = "https://www.swapidy.com")
     @user = order.user
     @order = order
-
+    subject = nil
     if shop_type == "sell"
       @shipping_stamp = @order.shipping_stamps.for_sell.first
-    else
+      subject = "Congrats you have completed swap!"
+    elsif shop_type == "swap"
       @shipping_stamp = @order.shipping_stamps.for_buy.first
+      subject = "Ship your product"
     end
-    mail :to => @user.email, :subject => "Swapidy Order Processing" do |format|
+
+    mail :to => @user.email, :subject => subject do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
         attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(

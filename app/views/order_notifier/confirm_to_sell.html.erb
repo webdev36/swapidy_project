@@ -13,26 +13,21 @@
 		<br/>
 		<br/>
 
-<div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">Good Day <%= @user.name_in_email %>,<br/>
+<div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">
+	i <%= @user.first_name + " " + @user.last_name%>,<br/>
 <br/>
-Congrats! You're getting <%= number_with_delimiter(@order.calc_balance_amount) %>&nbsp; in exchange for some products.
-We're eagerly waiting to receive your items!<br/>
+	Thanks for selling your products on Swapidy
 <br/>
-Your shipping label is attached to this email. 
-Please send out your product(s) within 72 hours so we can fulfill your order. 
-As soon as your product arrives, we will notify you and ship out any products you have ordered from us right away.<br/>
+Your cash will be sent to you as soon as we receive your product. <br /> 
+Please see attached for shipping label and order details.
+
+Thanks!
 <br/>
-<b>Instructions for shipping</b><br/>
-<br/>
-1) Package the item listed above along with any cables, parts, manuals, etc. into a secure box. Use packing material to avoid damage (newspapers work great!).<br/>
-<br/>
-2) Affix the attached prepaid label to the package.<br/>
-<br/>
-3) Put your package into your mailbox if it fits, otherwise drop it off at any collection box or post office. No need to pay, we took care of it.<br/>
+
 <br/>
 If you have any questions, please email support@swapidy.com. Make sure to mention your name and your email. We will answer your questions within 12 hours or less.<br/>
 <br/>
-Cheerio,<br/>
+
 <br/>
 	<a href="http://www.twitter.com/theswapdaddy" style="color:#666;"><strong>@TheSwapDaddy</strong></a><br/>
 			<a href="http://www.twitter.com/swapidy" style="color:#666;"><strong>@Swapidy</strong></a><br/>
