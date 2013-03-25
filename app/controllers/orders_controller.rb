@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   ADMIN_EMAIL = "adam@swapidy.com"
 
   def new
-    session[:shop_type] = params[:shop_type];    
+    session[:shop_type] = params[:shop_type].presence || session[:shop_type];
     if user_signed_in?
       page_title "Payment Information"
       render "payment_info_page"
