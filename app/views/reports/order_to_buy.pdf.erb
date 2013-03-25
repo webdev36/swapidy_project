@@ -1,18 +1,76 @@
 <h1>Order Number: <%= @order.id %> </h1>
+<p> Shop type : Buy only </p>
 <p>Created at: <%= @order.created_at %></p>
 <br/>
 
-<h2>Item: <%= @order.product.title %></h2>
-<p>
-  <u><i>Model:</i> <strong><%= @product.product_model.title %></strong></u><br/>
-  <% @product.product_model_attributes.each do |model_attribute| %>
-    <i><%= model_attribute.category_attribute.title %></i>: <strong><%= model_attribute.value %></strong><br/>
-  <% end %>
-</p>
-<p><i>Condition</i>: <strong><%= @order.using_condition %></strong></p>
-<p><strong><i>Price</i>: <%= number_with_delimiter(@product.honey_price) %> Honey</strong></p>
+<% sell_amount = 0 %>
+<% if @order.order_products.for_sell.count > 0 %>
+<h2>Trade-in products:</h2>
+<table border="1" width="100%">
+  <tr>
+    <td width="40px" style="text-align: center;">No.</td>
+    <td style="text-align: center;">Product</td>
+    <td width="120px" style="text-align: center;">Model</td>
+    <td width="80px" style="text-align: center;">Condition</td>
+    <td width="60px" style="text-align: center;">Weight</td>
+    <td width="100px" style="text-align: center;">Price</td>
+  </tr>
+<% @order.order_products.for_sell.each_with_index do |order_product, index| %>
+  <% sell_amount += order_product.price %>
+  <tr>
+    <td><%= index + 1%></td>
+    <td><%= order_product.product.title %></td>
+    <td><%= order_product.product.product_model.title %></td>
+    <td><%= order_product.using_condition %></td>
+    <td style="text-align: right;"><%= number_with_delimiter(order_product.weight_lb) %> lbs</td>
+    <td style="text-align: right;">$<%= number_with_delimiter(order_product.price) %></td>
+  </tr>
+<% end %>
+  <tr>
+    <td style="text-align: right;" colspan="5">Total</td>
+    <td style="text-align: right;">$<%= number_with_delimiter(sell_amount) %></td>
+  <tr>
+</table>
+<% end %>
 
-<h2>Shipping to</h2>
+<% buy_amount = 0 %>  
+<% if @order.order_products.for_buy.count > 0 %>
+<h2>Ordered products:</h2>
+<table border="1" width="100%">
+  <tr>
+    <td width="40px" style="text-align: center;">No.</td>
+    <td style="text-align: center;">Product</td>
+    <td width="120px" style="text-align: center;">Model</td>
+    <td width="80px" style="text-align: center;">Condition</td>
+    <td width="60px" style="text-align: center;">Weight</td>
+    <td width="100px" style="text-align: center;">Price</td>
+  </tr>
+<% amount = 0 %>  
+<% @order.order_products.for_buy.each_with_index do |order_product, index| %>
+  <% buy_amount += order_product.price %>
+  <tr>
+    <td><%= index + 1%></td>
+    <td><%= order_product.product.title %></td>
+    <td><%= order_product.product.product_model.title %></td>
+    <td><%= order_product.using_condition %></td>
+    <td style="text-align: right;"><%= number_with_delimiter(order_product.weight_lb) %> lbs</td>
+    <td style="text-align: right;">$<%= number_with_delimiter(order_product.price) %></td>
+  </tr>
+<% end %>
+  <tr>
+    <td style="text-align: right;" colspan="5">Total</td>
+    <td style="text-align: right;">$<%= number_with_delimiter(buy_amount) %></td>
+  <tr>
+</table>
+<% end %>
+
+<% if buy_amount > sell_amount %>
+<h2>Difference paid: $<%= number_with_delimiter(buy_amount - sell_amount) %></h2>
+<% else %>
+<h2>Remaining balance: $<%= number_with_delimiter(sell_amount - buy_amount) %></h2>
+<% end %>
+
+<h2>Your Shipping Address</h2>
 <p>
   <%= @order.shipping_first_name %> <%= @order.shipping_last_name %><br />
   <%= @order.shipping_address %><br />
@@ -20,6 +78,13 @@
   <%= @order.shipping_city %><br />
   <%= @order.shipping_state %><br />
   <%= @order.shipping_zip_code %><br />
-  <%= @order.shipping_country %><br />
+  <%= @order.shipping_country %>
 </p>
-<p><i>Tracking number</i>: <strong><%= @shipping_stamp.tracking_number %></strong></p>
+<br/>
+
+<h2>Tracking Number</h2>
+<p>
+  We will deliver your ordered product(s) with the stamp has Tracking Number: <%= @shipping_stamp.tracking_number %> 
+  <br/>
+  <b>Note: Ship your product(s) as soon as possible after you get ordered product(s) to avoid delay in receiving your order</b>
+</p>
