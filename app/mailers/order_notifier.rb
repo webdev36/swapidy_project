@@ -10,14 +10,15 @@ class OrderNotifier < ActionMailer::Base
   #
   def start_processing(order, shop_type, host_with_port = "https://www.swapidy.com")
     @user = order.user
-    @order = order
+    @order = order    
+    @shop_type = shop_type
     subject = nil
     if shop_type == "sell"
       @shipping_stamp = @order.shipping_stamps.for_sell.first
-      subject = "Congrats you have completed swap!"
+      subject = "Ship your product"
     elsif shop_type == "swap"
       @shipping_stamp = @order.shipping_stamps.for_buy.first
-      subject = "Ship your product"
+      subject = "Congrats you have completed swap!"
     end
 
     mail :to => @user.email, :subject => subject do |format|
