@@ -14,12 +14,14 @@
 		<br/>
 
 <div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">
-		Hi <%= @user.first_name + " " + @user.last_name%>,<br/>
-	<br/>
+		<br/>
+		Hi <%= @user.first_name.to_s + " " + @user.last_name.to_s %>,<br/>
+		<br/>
 		Thanks for selling your products on Swapidy. <br /><br/>
 		your cash will be sent to you ans soon as we receive you product. <br /><br/>
 		Please see attached for shipping label and order details.<br /><br/>
-<br/>
+		Thanks
+		<br/>
 	<a href="http://www.twitter.com/theswapdaddy" style="color:#666;"><strong>@TheSwapDaddy</strong></a><br/>
 			<a href="http://www.twitter.com/swapidy" style="color:#666;"><strong>@Swapidy</strong></a><br/>
 	</div>
