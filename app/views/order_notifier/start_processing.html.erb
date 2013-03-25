@@ -28,12 +28,12 @@
 				<% @order.order_products.for_buy.each_with_index do |order_product, index| %>
 				  <% sell_amount += order_product.price %>
 				  <ul>
-				    <li style = "list-style: none;, float:left;"><%= index + 1%></li>
-				    <li style = "list-style: none;, float:left;"><%= order_product.product.title %></li>
-				    <li style = "list-style: none;, float:left;"><%= order_product.product.product_model.title %></li>
-				    <li style = "list-style: none;, float:left;"><%= order_product.using_condition %></li>
-				    <li style = "text-align: right;, float:left;"><%= number_with_delimiter(order_product.weight_lb) %> lbs</li>
-				    <li style = "text-align: right;, float:left;">$<%= number_with_delimiter(order_product.price) %></li>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= index + 1%></li>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= order_product.product.title %></li>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= order_product.product.product_model.title %></li>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= order_product.using_condition %></li>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= number_with_delimiter(order_product.weight_lb) %> lbs</li>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= number_with_delimiter(order_product.price) %></li>
 				  </ul>
 				<% end %>
 				Amount deducted : <%= sell_amount %>
