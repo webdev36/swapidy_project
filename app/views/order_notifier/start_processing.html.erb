@@ -28,16 +28,15 @@
 				<% @order.order_products.for_buy.each_with_index do |order_product, index| %>
 				  <% sell_amount += order_product.price %>
 				  <ul>
-				    <li><%= index + 1%></td>
-				    <li><%= order_product.product.title %></td>
-				    <li><%= order_product.product.product_model.title %></td>
-				    <li><%= order_product.using_condition %></td>
-				    <td style="text-align: right;"><%= number_with_delimiter(order_product.weight_lb) %> lbs</td>
-				    <td style="text-align: right;">$<%= number_with_delimiter(order_product.price) %></td>
-				  </tr>
+				    <li style = "list-style: none;, float:left;"><%= index + 1%></li>
+				    <li style = "list-style: none;, float:left;"><%= order_product.product.title %></li>
+				    <li style = "list-style: none;, float:left;"><%= order_product.product.product_model.title %></li>
+				    <li style = "list-style: none;, float:left;"><%= order_product.using_condition %></li>
+				    <li style = "text-align: right;, float:left;"><%= number_with_delimiter(order_product.weight_lb) %> lbs</li>
+				    <li style = "text-align: right;, float:left;">$<%= number_with_delimiter(order_product.price) %></li>
+				  </ul>
 				<% end %>
 				Amount deducted : <%= sell_amount %>
-
 			<% else %>
 				<br/>
 				Thanks for swapping your products on Swapidy

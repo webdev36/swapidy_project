@@ -18,7 +18,7 @@ class OrderNotifier < ActionMailer::Base
       subject = "Ship your product"
     elsif shop_type == "buy"
       @shipping_stamp = @order.shipping_stamps.for_buy.first
-      subject = "Congrats you order"
+      subject = "Congrats your order"
     else
       @shipping_stamp = @order.shipping_stamps.for_buy.first
       subject = "Congrats you have completed swap!"
@@ -26,14 +26,16 @@ class OrderNotifier < ActionMailer::Base
 
     mail :to => @user.email, :subject => subject do |format|
       format.html # renders send_report.text.erb for body of email
-      format.pdf do
-        attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
-          if shop_type == "sell"
-            render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb',:orientation => 'Landscape')          
-          elsif shop_type == "swap"
-            render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb',:orientation => 'Landscape')
-          end
-        ) 
+      if shop_type != "buy"
+        format.pdf do
+          attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
+            if shop_type == "sell"
+              render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb',:orientation => 'Landscape')          
+            elsif shop_type == "swap"
+              render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb',:orientation => 'Landscape')
+            end
+          ) 
+        end
       end
     end
   end
