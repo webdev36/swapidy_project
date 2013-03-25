@@ -21,7 +21,24 @@
 				Thanks for selling your products on Swapidy. <br /><br/>
 				Your cash will be sent to you ans soon as we receive you product. <br /><br/>
 				Please see attached for shipping label and order details.<br /><br/>
-			<% else%>			
+			<% elsif @shop_type == "buy"%>
+				Congratulations, your order has been placed.<br /><br/>
+				You ordered:
+				<%sell_amount = 0 %>	
+				<% @order.order_products.for_buy.each_with_index do |order_product, index| %>
+				  <% sell_amount += order_product.price %>
+				  <ul>
+				    <li><%= index + 1%></td>
+				    <li><%= order_product.product.title %></td>
+				    <li><%= order_product.product.product_model.title %></td>
+				    <li><%= order_product.using_condition %></td>
+				    <td style="text-align: right;"><%= number_with_delimiter(order_product.weight_lb) %> lbs</td>
+				    <td style="text-align: right;">$<%= number_with_delimiter(order_product.price) %></td>
+				  </tr>
+				<% end %>
+				Amount deducted : <%= sell_amount %>
+
+			<% else %>
 				<br/>
 				Thanks for swapping your products on Swapidy
 				<br/>			
