@@ -1,12 +1,12 @@
 class OrdersController < ApplicationController
 
   before_filter :require_login, :only => [:payment_info, :shipping_info, :confirm, :create, :reload_payment_order_info]
-  before_filter :set_order_product , :only => [:new, :email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
+  before_filter :set_order_product, :only => [:new, :email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
 
   ADMIN_EMAIL = "adam@swapidy.com"
 
   def new
-    session[:shop_type] = params[:shop_type].presence || session[:shop_type];
+    session[:shop_type] = params[:shop_type];    
     if user_signed_in?
       page_title "Payment Information"
       render "payment_info_page"
@@ -67,17 +67,13 @@ class OrdersController < ApplicationController
             end
             if @order.save
                 @order.create_stamp_to_deliver(session[:shop_type])
-#                OrderNotifier.start_processing(@order, session[:shop_type]).deliver
+                OrderNotifier.start_processing(@order, session[:shop_type]).deliver
                 OrderNotifier.start_processing_for_admin(@order, session[:shop_type]).deliver
                 ShoppingCart.clear_cart_products 
              end
           end
           redirect_to "/orders/#{@order.id}"
         rescue Exception => e
-          res = e.message
-          res = "#{res} , " +  e.backtrace.inspect
-          render :text => res and return
-
           @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
           page_title "Confirm Your Details"
           current_user.copy_to_new_card
@@ -94,18 +90,11 @@ class OrdersController < ApplicationController
             end            
             if @order.save
                 @order.do_payment
-                @order.create_stamp_to_deliver(session[:shop_type])
-                OrderNotifier.start_processing(@order, session[:shop_type]).deliver
-                OrderNotifier.start_processing_for_admin(@order,session[:shop_type]).deliver
                 ShoppingCart.clear_cart_products 
             end
           end        
           redirect_to "/orders/#{@order.id}"
           rescue Exception => e
-            res = e.message
-            res = "#{res} , " +  e.backtrace.inspect
-            render :text => res and return
-
             @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
             page_title "Confirm Your Details"
             current_user.copy_to_new_card
@@ -137,10 +126,6 @@ class OrdersController < ApplicationController
           end
           redirect_to "/orders/#{@order.id}"
         rescue Exception => e
-          res = e.message
-          res = "#{res} , " +  e.backtrace.inspect
-          render :text => res and return
-
           @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
           page_title "Confirm Your Details"
           current_user.copy_to_new_card
@@ -194,19 +179,13 @@ class OrdersController < ApplicationController
   end
 
   def change_shipping_info
-    begin      
-      if @order.valid? && @order.shipping_address_valid?
-        @success_message = "Your shipping address has been updated successfully!"
-        @changed_content = render_to_string(:partial => "/orders/shipping_label", :locals => {:order => @order})
-      elsif @order.candidate_addresses && !@order.candidate_addresses.empty?
-        @candidate_content = render_to_string(:partial => "/orders/candidate_address_form", :locals => {:order => @order})
-      end
-      @return_content = render_to_string(:partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Change"})
-    rescue Exception => e
-      res = e.message
-      res = "#{res} , " +  e.backtrace.inspect
-      render :text => res and return
+    if @order.valid? && @order.shipping_address_valid?
+      @success_message = "Your shipping address has been updated successfully!"
+      @changed_content = render_to_string(:partial => "/orders/shipping_label", :locals => {:order => @order})
+    elsif @order.candidate_addresses && !@order.candidate_addresses.empty?
+      @candidate_content = render_to_string(:partial => "/orders/candidate_address_form", :locals => {:order => @order})
     end
+    @return_content = render_to_string(:partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Change"})
   end
 
   private

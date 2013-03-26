@@ -10,32 +10,19 @@ class OrderNotifier < ActionMailer::Base
   #
   def start_processing(order, shop_type, host_with_port = "https://www.swapidy.com")
     @user = order.user
-    @order = order    
-    @shop_type = shop_type
-    subject = nil
+    @order = order
+
     if shop_type == "sell"
       @shipping_stamp = @order.shipping_stamps.for_sell.first
-      subject = "Ship your product"
-    elsif shop_type == "buy"
-      @shipping_stamp = @order.shipping_stamps.for_buy.first
-      subject = "Congrats your order"
     else
       @shipping_stamp = @order.shipping_stamps.for_buy.first
-      subject = "Congrats you have completed swap!"
     end
-
-    mail :to => @user.email, :subject => subject do |format|
+    mail :to => @user.email, :subject => "Swapidy Order Processing" do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
-        if shop_type != "buy"
-          attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
-            if shop_type == "sell"
-              render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order_to_sell.pdf.erb',:orientation => 'Landscape')          
-            elsif shop_type == "swap"
-              render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb',:orientation => 'Landscape')
-            end
-          ) 
-        end
+        attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
+          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb',:orientation => 'Landscape')
+        ) 
       end
     end
   end
@@ -43,8 +30,6 @@ class OrderNotifier < ActionMailer::Base
   def start_processing_for_admin(order, shop_type, host_with_port = "https://www.swapidy.com")
     @user = order.user
     @order = order
-    @shop_type = shop_type
-    subject = nil
     if shop_type == "sell"
       @shipping_stamp = @order.shipping_stamps.for_sell.first
     else
