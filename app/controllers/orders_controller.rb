@@ -66,8 +66,9 @@ class OrdersController < ApplicationController
                                         :sell_or_buy => "sell")
             end
             if @order.save
-                @order.create_stamp_to_deliver(session[:shop_type])
-                
+                render :text => @order.create_stamp_to_deliver(session[:shop_type]) and return
+                OrderNotifier.start_processing(@order, session[:shop_type]).deliver
+                OrderNotifier.start_processing_for_admin(@order, session[:shop_type]).deliver
                 ShoppingCart.clear_cart_products 
              end
           end
