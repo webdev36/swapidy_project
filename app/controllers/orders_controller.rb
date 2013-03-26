@@ -202,7 +202,7 @@ class OrdersController < ApplicationController
         @candidate_content = render_to_string(:partial => "/orders/candidate_address_form", :locals => {:order => @order})
       end
       @return_content = render_to_string(:partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Change"})
-    rescue Exeption => e
+    rescue Exception => e
       res = e.message
       res = "#{res} , " +  e.backtrace.inspect
       render :text => res and return
