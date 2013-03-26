@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
 #  before_filter :require_login, :only => [:payment_info, :shipping_info, :confirm, :create, :reload_payment_order_info]
-  before_filter :set_order_product, :only => [:new, :email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
+  before_filter :set_order_product #, :only => [:new, :email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
 
   ADMIN_EMAIL = "adam@swapidy.com"
 
@@ -216,7 +216,7 @@ class OrdersController < ApplicationController
       @order.status = Order::STATUES[:pending]
       @order.user = current_user
       @order.shipping_country = "US"
-      redirect_to "/" if ShoppingCart.cart_products[:sell].empty? && ShoppingCart.cart_products[:buy].empty?
+#      redirect_to "/" if ShoppingCart.cart_products[:sell].empty? && ShoppingCart.cart_products[:buy].empty?
     end
     
 end
