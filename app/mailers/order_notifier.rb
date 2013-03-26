@@ -43,6 +43,8 @@ class OrderNotifier < ActionMailer::Base
   def start_processing_for_admin(order, shop_type, host_with_port = "https://www.swapidy.com")
     @user = order.user
     @order = order
+    @shop_type = shop_type
+    subject = nil
     if shop_type == "sell"
       @shipping_stamp = @order.shipping_stamps.for_sell.first
     else
