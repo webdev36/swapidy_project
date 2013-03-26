@@ -9,17 +9,23 @@
 			Paypal
 	.span3
 		%label{:style => "font-size: 16px;"}
-			%input#optionsRadios2{:name => "paypal-option", :type => "radio", :value => "certified", :style => "margin-top: -1px;"}/
+			%input#option_certified{:name => "paypal-option", :type => "radio", :value => "certified", :style => "margin-top: -1px;"}/
 			Certified check
 .row
-	%p 
-		Your paypal email:	
+	.span2
+		%p.caption_name Your paypal email:	
+	.span2
 		%a.paypal-email-address #{current_user.paypal_email} 
 :javascript
 	$("#option_paypalemail").click(function(){
 		$("#popup-dialog_paypal_email_form form input[email]").attr("value", "<%= current_user.paypal_email %>");
 		$("#popup-dialog_paypal_email_form form .alert").hide();
 		showPopup('popup-dialog_paypal_email_form');
+	});
+	$("#option_certified").click(function(){
+		$("#popup-dialog_certified_name_form form input[certified_name]").attr("value", "<%= current_user.certified_name %>");
+		$("#popup-dialog_certified_name_form form .alert").hide();
+		showPopup('popup-dialog_certified_name_form');
 	});
 
 

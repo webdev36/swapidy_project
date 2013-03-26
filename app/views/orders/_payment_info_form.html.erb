@@ -11,20 +11,18 @@
  <br />
  <br />
  <br />
+ <% if session[:shop_type] != "sell"%>  		
   <div class="payment_product_info"><br/>
     <label style="color:black; padding-top: 10px;">Current Balance:</label>
     <span style="color:black; font-family:'myriad'"><%= number_to_currency(current_user.balance_amount) %> </span>
   </div>
+  <% end %>
   <div class="payment_product_info">
-  	<% if session[:shop_type] == "sell"%>
-  		<%= number_to_currency(current_user.balance_amount) %> + 
-  		<%= number_to_currency(ShoppingCart.sell_cart_amount) %> = 
-  		<%= number_to_currency(current_user.balance_amount + (ShoppingCart.sell_cart_amount)) %>
-	  	<br />
+  	<% if session[:shop_type] == "sell"%>  		
 			<br />	
 		  <label style="color:black; font-family:'myriad';" >It should just You get:</label>
 	  	<span style="color:black; font-family:'myriad'; font-size:20px;">	
-		  	<%= number_to_currency((ShoppingCart.sell_cart_amount)+current_user.balance_amount)%>				
+		  	<%= number_to_currency((ShoppingCart.sell_cart_amount))%>				
 	  	</span>
 	  <% elsif session[:shop_type] == "buy"%>
 	  	<%= number_to_currency(current_user.balance_amount) %> - 
