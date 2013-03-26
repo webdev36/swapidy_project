@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   ADMIN_EMAIL = "adam@swapidy.com"
 
   def new
-    session[:shop_type] = params[:shop_type];    
+    session[:shop_type] = params[:shop_type] if params[:shop_type].present?
     if user_signed_in?
       page_title "Payment Information"
       render "payment_info_page"
@@ -89,8 +89,11 @@ class OrdersController < ApplicationController
                                         :sell_or_buy => "buy")
             end            
             if @order.save
-                @order.do_payment
-                ShoppingCart.clear_cart_products 
+              @order.do_payment
+              @order.create_stamp_to_deliver(session[:shop_type])
+              OrderNotifier.start_processing(@order, session[:shop_type]).deliver
+              OrderNotifier.start_processing_for_admin(@order,session[:shop_type]).deliver
+              ShoppingCart.clear_cart_products 
             end
           end        
           redirect_to "/orders/#{@order.id}"
