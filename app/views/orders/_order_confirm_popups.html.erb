@@ -32,7 +32,7 @@
     <div class="container" style="background-color: white; border-radius: 10px; padding: 30px 20px; width:590px; margin-left:160px;" >
       <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
       <div class="render_form">
-        <div class='headings_pink_edit'>Change your paypal email</div>
+        <div class='headings_pink_edit'>Change your certified name</div>
         <form accept-charset='UTF-8' action='/orders/change_certified_name' class='edit_user nonConfirmForm' id='change_certified_name_form' method='post'>
           <%= render :partial => "/orders/change_certified_name_form", :locals => {:user => current_user, :form_id => "popup_change_certified_name_form"} %>
         </form>
