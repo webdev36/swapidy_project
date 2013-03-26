@@ -89,8 +89,11 @@ class OrdersController < ApplicationController
                                         :sell_or_buy => "buy")
             end            
             if @order.save
-                @order.do_payment
-                ShoppingCart.clear_cart_products 
+              @order.do_payment
+              @order.create_stamp_to_deliver(session[:shop_type])
+              OrderNotifier.start_processing(@order, session[:shop_type]).deliver
+              OrderNotifier.start_processing_for_admin(@order,session[:shop_type]).deliver
+              ShoppingCart.clear_cart_products 
             end
           end        
           redirect_to "/orders/#{@order.id}"

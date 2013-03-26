@@ -26,9 +26,11 @@ class OrderNotifier < ActionMailer::Base
     mail :to => @user.email, :subject => subject do |format|
       format.html # renders send_report.text.erb for body of email
       format.pdf do
-        attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
-          render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb',:orientation => 'Landscape')
-        ) 
+        if shop_type != "buy"
+          attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
+            render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb',:orientation => 'Landscape')
+          ) 
+        end
       end
     end
   end
