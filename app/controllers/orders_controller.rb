@@ -74,6 +74,10 @@ class OrdersController < ApplicationController
           end
           redirect_to "/orders/#{@order.id}"
         rescue Exception => e
+          res = e.message
+          res = "#{res} , " +  e.backtrace.inspect
+          render :text => res and return
+
           @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
           page_title "Confirm Your Details"
           current_user.copy_to_new_card
@@ -98,6 +102,10 @@ class OrdersController < ApplicationController
           end        
           redirect_to "/orders/#{@order.id}"
           rescue Exception => e
+            res = e.message
+            res = "#{res} , " +  e.backtrace.inspect
+            render :text => res and return
+
             @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
             page_title "Confirm Your Details"
             current_user.copy_to_new_card
@@ -129,6 +137,10 @@ class OrdersController < ApplicationController
           end
           redirect_to "/orders/#{@order.id}"
         rescue Exception => e
+          res = e.message
+          res = "#{res} , " +  e.backtrace.inspect
+          render :text => res and return
+
           @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
           page_title "Confirm Your Details"
           current_user.copy_to_new_card
@@ -182,13 +194,19 @@ class OrdersController < ApplicationController
   end
 
   def change_shipping_info
-    if @order.valid? && @order.shipping_address_valid?
-      @success_message = "Your shipping address has been updated successfully!"
-      @changed_content = render_to_string(:partial => "/orders/shipping_label", :locals => {:order => @order})
-    elsif @order.candidate_addresses && !@order.candidate_addresses.empty?
-      @candidate_content = render_to_string(:partial => "/orders/candidate_address_form", :locals => {:order => @order})
+    begin      
+      if @order.valid? && @order.shipping_address_valid?
+        @success_message = "Your shipping address has been updated successfully!"
+        @changed_content = render_to_string(:partial => "/orders/shipping_label", :locals => {:order => @order})
+      elsif @order.candidate_addresses && !@order.candidate_addresses.empty?
+        @candidate_content = render_to_string(:partial => "/orders/candidate_address_form", :locals => {:order => @order})
+      end
+      @return_content = render_to_string(:partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Change"})
+    rescue Exeption => e
+      res = e.message
+      res = "#{res} , " +  e.backtrace.inspect
+      render :text => res and return
     end
-    @return_content = render_to_string(:partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Change"})
   end
 
   private
