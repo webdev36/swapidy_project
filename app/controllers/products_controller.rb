@@ -4,10 +4,17 @@ class ProductsController < ApplicationController
     params[:using_condition]
   end
   def csv_import
+<<<<<<< HEAD
+  	
+  	render :text => "You are not an Administrator" and return if !current_user.is_admin? 
+
+  	file_name = params[:fn].to_s+".csv"
+=======
   	if user_signed_in?
   		render :text => "You are not an administrator" and return if !current_user.is_admin?
-  		file_name = params[:fn].to_s+".csv"	
+>>>>>>> master-a
 
+  		file_name = params[:fn].to_s+".csv"  		
 	  	product_models = ProductModel.all.map{|pm| [pm.id, pm.title]}
 	  	pma_attr = ["Weight lb", "Year", "Space",	"Network", "Color", "Generation", "Screen Size",	"Retina Display",	"Memory",	"Hard Disk", "Processor"]
 	 	
@@ -19,13 +26,7 @@ class ProductsController < ApplicationController
 			CSV.foreach(file_name) do |row|
 				c_id = categories.find{|ct| ct[1]==row[4]}
 				if c_id.present?
-					old_p = Product.where(:title=>row[0],:swap_type=>"3")
-					if old_p.present?
-						old_p.each do |p|
-							p.destroy
-						end
-					end
-			    product = Product.new()			    
+			    product = Product.new()
 			    product.title = row[0]
 			    product.category_id = c_id[0]
 			    product.product_model_id = product_models.find{|pm| pm[1]==row[5]}[0]
@@ -59,8 +60,7 @@ class ProductsController < ApplicationController
 				end						
 		 	end #foreach 
   	else
-  		redirect_to "/"
+  		redirect_to :user_session
   	end  	
-  	redirect_to "/"
   end 
 end

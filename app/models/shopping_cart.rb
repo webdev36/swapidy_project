@@ -30,17 +30,6 @@ module ShoppingCart
     return amount
   end 
   
-  def self.sell_cart_amount
-    amount=0
-    cart_products[:sell].each {|order_product| amount += order_product.price }    
-    amount
-  end
-  def self.buy_cart_amount
-    amount=0
-    cart_products[:buy].each {|order_product| amount += order_product.price }    
-    amount
-  end
-
   def self.add_cart_product cart_params
     session[:cart_products] = {:sell => [], :buy => [], :max_order_product_id => 0} if session[:cart_products].nil?
     session[:cart_products][:max_order_product_id] = (session[:cart_products][:max_order_product_id] || 0) + 1
