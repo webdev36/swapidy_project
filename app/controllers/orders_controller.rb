@@ -181,6 +181,23 @@ class OrdersController < ApplicationController
     @return_content = render_to_string(:partial => "/orders/change_paypal_email_form", :locals => {:user => @user})
   end
 
+  def change_certified_name
+    @user = User.find current_user.id
+    @user.certified_name = params[:user][:certified_name]
+
+    if @user.certified_name == current_user.certified_name
+      @error_message = "Please enter another certified_name to change!"
+    elsif session[:signed_in_via_facebook].nil? 
+      @error_message = "Please enter vaild password" unless @user.valid_password?(params[:user][:current_password])
+    end
+    
+    if @error_message.nil? && @user.save
+      current_user.certified_name = @user.certified_name
+      @success_message = "Your certified name has changed successfully!"
+    end 
+     @return_content = render_to_string(:partial => "/orders/change_certified_name_form", :locals => {:user => @user})
+  end
+
   def change_shipping_info
     if @order.valid? && @order.shipping_address_valid?
       @success_message = "Your shipping address has been updated successfully!"

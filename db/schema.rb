@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320062617) do
+ActiveRecord::Schema.define(:version => 20130326214712) do
 
   create_table "brand_email_customers", :force => true do |t|
     t.integer  "user_id"
@@ -262,6 +262,7 @@ ActiveRecord::Schema.define(:version => 20130320062617) do
     t.boolean  "is_admin",                                                               :default => false
     t.integer  "redeem_code_id"
     t.string   "paypal_email"
+    t.string   "certified_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
