@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
 #  before_filter :require_login, :only => [:payment_info, :shipping_info, :confirm, :create, :reload_payment_order_info]
-#  before_filter :set_order_product, :only => [:new, :email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
+  before_filter :set_order_product, :only => [:new, :email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
 
   ADMIN_EMAIL = "adam@swapidy.com"
 
