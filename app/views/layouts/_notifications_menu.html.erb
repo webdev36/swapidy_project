@@ -1,6 +1,11 @@
 <% if current_user.notifications.unread.count == 0 %>
+<<<<<<< HEAD
   <a id="notify_icon" href="#" role="button" style="padding-top: 30px;" class="dropdown-toggle" data-toggle="dropdown">    
     <%= image_tag("notification_icon.png", :class=>"nav_notification") %>
+=======
+  <a id="notify_icon" href="#" role="button" style="padding-top: 30px;" class="dropdown-toggle" data-toggle="dropdown">
+    <%= image_tag("notification_icon.png", :class => "nav_notification") %>
+>>>>>>> master-a
   </a>
   <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
     <li><a tabindex="-1" href="#">No new events</a></li>
@@ -12,11 +17,15 @@
     <span class="notif_count">
     <%= current_user.notifications.unread.count %>
     </span> 
+<<<<<<< HEAD
     <img class="nav_notification" style="position: absolute; left: 0; bottom: 0px" src="/images/notification_icon.png">
 =======
   <a id="notify_icon" href="#" role="button" style="padding-top: 0px;" class="dropdown-toggle" data-toggle="dropdown"><span class="notif_count"><%= current_user.notifications.unread.count %></span> 
     <%= image_tag("notification_icon.png", :class=>"nav_notification", :style=>"position: absolute; left: 0; bottom: 0px") %>
 >>>>>>> 9e969f111b16c008301f7f9db862ec6e0493412d
+=======
+    <%= image_tag("notification_icon.png", :class => "nav_notification", :style=>"position: absolute; left: 0; bottom: 0px") %>
+>>>>>>> master-a
   </a>
   <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
     <li class="all_new">
