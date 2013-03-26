@@ -14,38 +14,46 @@
 		<br/>
 
 		<div style="font-family:'Trebuchet MS', sans-serif; color:#666; font-size:14px; line-height:17px; ">
-			Good Day <%= @user.name_in_email %>,
+			Hi <%= @user.name_in_email %>,<br/>
 			<br/>
-			<br/>
-			<% if @order.calc_balance_amount > 0 %>
-				Congrats! You're getting $<%= number_with_delimiter(@order.calc_balance_amount) %>&nbsp; in exchange for some products.
+			<% if @shop_type == "sell"%>
+				<br/>
+				Thanks for selling your products on Swapidy. <br /><br/>
+				Your cash will be sent to you ans soon as we receive you product. <br /><br/>
+				Please see attached for shipping label and order details.<br /><br/>
+			<% elsif @shop_type == "buy"%>
+				Congratulations, your order has been placed.<br /><br/>
+				You ordered:
+				<%sell_amount = 0 %>	
+				<% @order.order_products.for_buy.each_with_index do |order_product, index| %>
+				  <% sell_amount += order_product.price %>
+				  <ul>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= index + 1%></li>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= order_product.product.title %></li>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= order_product.product.product_model.title %></li>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= order_product.using_condition %></li>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= number_with_delimiter(order_product.weight_lb) %> lbs</li>
+				    <li style="float: left; list-style: none outside none; margin-left: 15px;"><%= number_with_delimiter(order_product.price) %></li>
+				  </ul>
+				  <br/>
+				<% end %>
+				<br/>
+				<br/>
+				<br/>
+				Amount deducted : <%= sell_amount %>
 			<% else %>
-				Congrats! You just swapped your stuff on Swapidy. 
+				<br/>
+				Thanks for swapping your products on Swapidy
+				<br/>			
+				<br/>
+				Your free shipping label to send your products to us is attached to this email.
+				<br/>
+				<br/>
+				Please ship products within 48 hours.
+				<br/>
 			<% end %>
-			We're eagerly waiting to receive your items!
 			<br/>
-			<br/>
-			Your shipping label is attached to this email.
-			Please send out your product(s) within 72 hours so we can fulfill your order.
-			As soon as your product arrives, we will notify you and ship out the products you have ordered from us right away.
-			<br/>
-			<br/>
-			<b>Instructions for shipping</b>
-			<br/>
-			<br/>
-			1) Package the item listed above along with any cables, parts, manuals, etc. into a secure box. Use packing material to avoid damage (newspapers work great!).
-			<br/>
-			<br/>
-			2) Affix the attached prepaid label to the package.
-			<br/>
-			<br/>
-			3) Put your package into your mailbox if it fits, otherwise drop it off at any collection box or post office. No need to pay, we took care of it.
-			<br/>
-			<br/>
-			If you have any questions, please email support@swapidy.com. Make sure to mention your name and your email. We will answer your questions within 12 hours or less.
-			<br/>
-			<br/>
-			Cheerio,
+			Thanks
 			<br/>
 			<br/>
 			<a href="http://www.twitter.com/theswapdaddy" style="color:#666;"><strong>@TheSwapDaddy</strong></a>
