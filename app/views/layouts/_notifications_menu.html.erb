@@ -1,5 +1,7 @@
 <% if current_user.notifications.unread.count == 0 %>
-  <a id="notify_icon" href="#" role="button" style="padding-top: 30px;" class="dropdown-toggle" data-toggle="dropdown"><img class="nav_notification" src="/images/notification_icon.png"></a>
+  <a id="notify_icon" href="#" role="button" style="padding-top: 30px;" class="dropdown-toggle" data-toggle="dropdown">
+    <%= image_tag("notification_icon.png", :class => "nav_notification") %>
+  </a>
   <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
     <li><a tabindex="-1" href="#">No new events</a></li>
     <li><a tabindex="-1" href="/notifications" class="see_all">See All</a></li>
@@ -9,7 +11,7 @@
     <span class="notif_count">
     <%= current_user.notifications.unread.count %>
     </span> 
-    <img class="nav_notification" style="position: absolute; left: 0; bottom: 0px" src="/images/notification_icon.png">
+    <%= image_tag("notification_icon.png", :class => "nav_notification", :style=>"position: absolute; left: 0; bottom: 0px") %>
   </a>
   <ul class="dropdown-menu" role="menu" aria-labelledby="notify_icon">
     <li class="all_new">
