@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
-#  before_filter :require_login, :only => [:payment_info, :shipping_info, :confirm, :create, :reload_payment_order_info]
-  before_filter :set_order_product #, :only => [:new, :email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
+  before_filter :require_login, :only => [:payment_info, :shipping_info, :confirm, :create, :reload_payment_order_info]
+  before_filter :set_order_product , :only => [:new, :email_info, :payment_info, :shipping_info, :confirm, :create, :change_shipping_info]
 
   ADMIN_EMAIL = "adam@swapidy.com"
 
@@ -68,7 +68,7 @@ class OrdersController < ApplicationController
             if @order.save
                 @order.create_stamp_to_deliver(session[:shop_type])
                 OrderNotifier.start_processing(@order, session[:shop_type]).deliver
-                OrderNotifier.start_processing_for_admin(@order, session[:shop_type]).deliver
+#                OrderNotifier.start_processing_for_admin(@order, session[:shop_type]).deliver
                 ShoppingCart.clear_cart_products 
              end
           end
@@ -96,7 +96,7 @@ class OrdersController < ApplicationController
                 @order.do_payment
                 @order.create_stamp_to_deliver(session[:shop_type])
                 OrderNotifier.start_processing(@order, session[:shop_type]).deliver
-                OrderNotifier.start_processing_for_admin(@order,session[:shop_type]).deliver
+#                OrderNotifier.start_processing_for_admin(@order,session[:shop_type]).deliver
                 ShoppingCart.clear_cart_products 
             end
           end        
@@ -216,7 +216,7 @@ class OrdersController < ApplicationController
       @order.status = Order::STATUES[:pending]
       @order.user = current_user
       @order.shipping_country = "US"
-#      redirect_to "/" if ShoppingCart.cart_products[:sell].empty? && ShoppingCart.cart_products[:buy].empty?
+      redirect_to "/" if ShoppingCart.cart_products[:sell].empty? && ShoppingCart.cart_products[:buy].empty?
     end
     
 end
