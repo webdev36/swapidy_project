@@ -63,11 +63,16 @@
 </table>
 <% end %>
 
-<% if buy_amount > sell_amount %>
-<h2>Difference paid: $<%= number_with_delimiter(buy_amount - sell_amount) %></h2>
+<% if @shop_type == "sell" %>
+  <h2>Remaining balance: $<%= number_with_delimiter(@user.balance_amount + sell_amount) %></h2>
 <% else %>
-<h2>Remaining balance: $<%= number_with_delimiter(sell_amount - buy_amount) %></h2>
+  <% if buy_amount > sell_amount %>
+  <h2>Difference paid: $<%= number_with_delimiter(buy_amount - sell_amount) %></h2>
+  <% else %>
+  <h2>Remaining balance: $<%= number_with_delimiter(sell_amount - buy_amount) %></h2>
+  <% end %>
 <% end %>
+
 
 <h2>Your Shipping Address</h2>
 <p>
