@@ -22,7 +22,7 @@
 			    <% ShoppingCart.cart_products[:sell].each do |order_product|%>
 			    	<li style="height:160px;width: 120px"> <img style=" max-width: 100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" /> 
 			    	<br/>
-			    	<span style="font-family:'myriad-s';"> <%= order_product.title %></span> <br />
+			    	<span style="font-family:'myriad-s';"> <%= order_product.title %>(<%= order_product.using_condition %>)</span> <br />
 			    	</li>
 		   		<% end %>
 		    </ul>
