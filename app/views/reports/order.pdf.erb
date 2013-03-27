@@ -1,6 +1,5 @@
 <h1>Order Number: <%= @order.id %> </h1>
 <p>Created at: <%= @order.created_at %></p>
-<br/>
 <% sell_amount = 0 %>
 <% if @order.order_products.for_sell.count > 0 %>
 <h2>Trade-in products:</h2>
@@ -73,17 +72,13 @@
 <% end %>
 
 <h2>Your Shipping Address</h2>
-<p>
+<label>
   <%= @order.shipping_first_name %> <%= @order.shipping_last_name %><br />
   <%= @order.shipping_address %><br />
   <%= @order.shipping_optional_address %>
-  <%= @order.shipping_city %><br />
-  <%= @order.shipping_state %><br />
-  <%= @order.shipping_zip_code %><br />
-  <%= @order.shipping_country %>
-</p>
-<br/>
-
+  <%= @order.shipping_city %> <br/>
+  State : <%= @order.shipping_state %>, Zip code: <%= @order.shipping_zip_code %>, Country :  <%= @order.shipping_country %>
+</label>
 <h2>Tracking Number</h2>
 <p>
 	We will deliver your ordered product(s) with the stamp has Tracking Number: <%= @shipping_stamp.tracking_number %> 
@@ -97,7 +92,6 @@
   Simply drop it off at any USPS location or your mailbox if it fits.<br/>  
   <b>Note: Ship your product(s) as soon as possible to avoid delay in receiving your order</b>
 </p>
-
 <div style="width:100%; page-break-before: always; height: 60px; border-style:solid; border-width: 1px; border-color: black; border-bottom: none;">
   <img src="<%= File.expand_path(Rails.root) %>/public/images/swapidy_logo.png" style="height: 50px; padding: 5px;">
 </div>
