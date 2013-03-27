@@ -6,8 +6,8 @@
     <% else %>
       <img class="nav_icons nav_profile" src="/images/profile_icon.png">
     <% end %>
-    <%user_amount = current_user.balance_amount > 0 ? current_user.balance_amount : 0%>
-    <%= link_to(current_user.full_name.upcase, transactions_path, :method => :get) %>:$<%= format_num(user_amount)%>
+    
+    <%= link_to(current_user.full_name.upcase, transactions_path, :method => :get) %>:$<%= format_num(current_user.balance_amount)%>
 
   </div>
 </li>
