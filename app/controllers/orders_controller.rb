@@ -168,9 +168,10 @@ class OrdersController < ApplicationController
     @user = User.find current_user.id
     @user.paypal_email = params[:user][:paypal_email]
 
-    if @user.paypal_email == current_user.paypal_email
-      @error_message = "Please enter another email to change!"
-    elsif session[:signed_in_via_facebook].nil? 
+    #if @user.paypal_email == current_user.paypal_email
+    #  @error_message = "Please enter another email to change!"
+    #els
+    if session[:signed_in_via_facebook].nil? 
       @error_message = "Please enter vaild password" unless @user.valid_password?(params[:user][:current_password])
     end
     
@@ -185,9 +186,10 @@ class OrdersController < ApplicationController
     @user = User.find current_user.id
     @user.certified_name = params[:user][:certified_name]
 
-    if @user.certified_name == current_user.certified_name
-      @error_message = "Please enter another certified_name to change!"
-    elsif session[:signed_in_via_facebook].nil? 
+    #if @user.certified_name == current_user.certified_name
+    #  @error_message = "Please enter another certified_name to change!"
+    #els
+    if session[:signed_in_via_facebook].nil? 
       @error_message = "Please enter vaild password" unless @user.valid_password?(params[:user][:current_password])
     end
     
