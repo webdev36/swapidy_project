@@ -50,7 +50,7 @@
               	<% if current_user.extra_money_for(ShoppingCart.cart_amount) > 0 && current_user.has_card_info? %>
   	            	You would be charged: 
                   <%= number_to_currency(current_user.balance_amount) %> 
-                  <%= number_to_currency(ShoppingCart.cart_amount) %>
+                  + <%= number_to_currency(ShoppingCart.cart_amount) %>
                   = <%= number_to_currency(ShoppingCart.cart_amount - current_user.balance_amount) %>
   	            	<br/>
   	              <input type="button" value="Change Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="refresh_add_money_form();" />
