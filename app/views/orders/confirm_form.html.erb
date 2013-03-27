@@ -46,22 +46,12 @@
             <div style="position:relative; bottom:290px;">
                 <span>Current Balance:</span>
                 <%= number_to_currency(current_user.balance_amount) %><br/>
-                <% if ShoppingCart.cart_amount < 0 %>
-                  <span> You will be paid 
-                    <%= number_to_currency(-ShoppingCart.cart_amount) %>
-                    on 
-                    <a class="paypal-email-address">  <%= current_user.paypal_email %>  </a>
-                    via paypal
-                  </span>                
-
-  							<% else %>
-  							  <span>You pay:</span>
-  				        <%= number_to_currency(ShoppingCart.cart_amount) %> <br /> 
-  				        <span>Your balance will be deducted.</span><br />
-  							<% end %>
   			      
               	<% if current_user.extra_money_for(ShoppingCart.cart_amount) > 0 && current_user.has_card_info? %>
-  	            	You would be charged: <%= number_to_currency(ShoppingCart.cart_amount) %> - <%= number_to_currency(current_user.balance_amount) %> = <%= number_to_currency(ShoppingCart.cart_amount - current_user.balance_amount) %>
+  	            	You would be charged: 
+                  <%= number_to_currency(current_user.balance_amount) %> 
+                  <%= number_to_currency(ShoppingCart.cart_amount) %>
+                  = <%= number_to_currency(ShoppingCart.cart_amount - current_user.balance_amount) %>
   	            	<br/>
   	              <input type="button" value="Change Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="refresh_add_money_form();" />
   	          	<% elsif current_user.extra_money_for(ShoppingCart.cart_amount) > 0 && !current_user.has_card_info? %>

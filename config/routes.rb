@@ -77,6 +77,7 @@ Swapidy::Application.routes.draw do
   match "/home/disconect_fb" => "home#disconect_fb"
   match "/home/swap_product" => "home#swap_product"
   match "/home/del_product" => "home#del_product"
+  match "/home/clear_checkout_item" => "home#clear_checkout_item"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

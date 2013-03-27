@@ -33,9 +33,8 @@
 		  <label style="color:black; font-family:'myriad';" >Total due today:</label>
 	  	<span style="color:black; font-family:'myriad'; font-size:20px;">	
 		  	<% amount = 0 
-		  		if (current_user.balance_amount-ShoppingCart.buy_cart_amount) > 0
-		  			amount = current_user.balance_amount-ShoppingCart.buy_cart_amount
-		  		end
+		  		
+		  			amount = current_user.balance_amount-ShoppingCart.buy_cart_amount < 0 ? (current_user.balance_amount-ShoppingCart.buy_cart_amount)*-1 : current_user.balance_amount-ShoppingCart.buy_cart_amount		  		
 		  	%>
 		  	<%= number_to_currency(amount)%>
 	  	</span>
@@ -62,7 +61,11 @@
 				<br />
 			  <label style="color:black; font-family:'myriad';">Total due today:</label>
 			  <span style="color:black; font-family:'myriad'; font-size:20px;">	
-	        $0
+	        <% amount = 0
+	        	 amount = current_user.balance_amount - ShoppingCart.cart_amount < 0 ? (current_user.balance_amount - ShoppingCart.cart_amount)*-1 : current_user.balance_amount - ShoppingCart.cart_amount
+	        %>
+
+	        <%= number_to_currency(amount) %>
 			  </span>  
 		  <% end %>
   	<% end %>
