@@ -77,7 +77,8 @@ module StampsShippingGateway
     if for_type == :for_sell
       return create_shipping_stamp(weigth_lb, client_address[:address], get_company_address)
     else
-      return create_shipping_stamp(weigth_lb, get_company_address, client_address[:address])
+      #return create_shipping_stamp(weigth_lb, get_company_address, client_address[:address])
+      return create_shipping_stamp(weigth_lb, client_address[:address], get_company_address)
     end
   end
   

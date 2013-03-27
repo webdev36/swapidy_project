@@ -224,6 +224,11 @@
 			  	}else if( sell_item_count > 0 && buy_item_count > 0 ){
 			  		$("#continue_button").css("display", "none");	
 			  	}	
+			  	if(getCookie("shop_type") == "sell"){
+			  		$("#sell-items p.item-name").html("Only Sell item");
+			  	}else if(getCookie("shop_type") == "buy"){
+			  		$("#buy-items p.item-name").html("Only Buy item");
+			  	}
 				}
 			});
 			$("#" + current_popup_id).removeClass('active');
@@ -515,6 +520,18 @@
   	}else{
   		$("#continue_button").text("Continue to swap");
   	}
+  	var url_ajax = '/home/clear_checkout_item';	
+		$.ajax({
+			url :url_ajax,
+			beforeSend : function(xhr) {
+		    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+	  	},
+			type: "POST",
+			dataType:'script',
+			success :function(){
+				console.log("ok?");
+			}
+		});
   	showScreenToSell();
 	}
 
@@ -526,6 +543,19 @@
   	}else if(shop_type == 'buy'){
   		setCookie("shop_type", "buy", 1);
   		$("#continue_button").css("display", "none");
+		 	var url_ajax = '/home/clear_checkout_item';	
+			$.ajax({
+				url :url_ajax,
+				beforeSend : function(xhr) {
+			    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+		  	},
+				type: "POST",
+				dataType:'script',
+				success :function(){
+					console.log("ok?");
+				}
+			});
+
   	}  		
   	var sell_count = $('#shopping_cart').find('.sell_display li').length;
 	  
@@ -610,7 +640,21 @@
     }
     
  }
- function showScreenToSellOnly(scroll) {	
+ function showScreenToSellOnly(scroll) {
+
+ 	var url_ajax = '/home/clear_checkout_item';	
+	$.ajax({
+		url :url_ajax,
+		beforeSend : function(xhr) {
+	    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+  	},
+		type: "POST",
+		dataType:'script',
+		success :function(){
+			console.log("ok?");
+		}
+	});
+
 
   	setCookie("shop_type", "sell", 1);
   	$("#continue_button").css("display", "none");
