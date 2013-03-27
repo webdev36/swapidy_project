@@ -1,7 +1,6 @@
 <h1>Order Number: <%= @order.id %> </h1>
 <p>Created at: <%= @order.created_at %></p>
 <br/>
-
 <% sell_amount = 0 %>
 <% if @order.order_products.for_sell.count > 0 %>
 <h2>Trade-in products:</h2>
@@ -73,7 +72,6 @@
   <% end %>
 <% end %>
 
-
 <h2>Your Shipping Address</h2>
 <p>
   <%= @order.shipping_first_name %> <%= @order.shipping_last_name %><br />
@@ -92,14 +90,11 @@
 	<br/>
 	<b>Note: Ship your product(s) as soon as possible after you get ordered product(s) to avoid delay in receiving your order</b>
 </p>
-
-
 <h2>Shipping Label</h2>
 <p>
   Your shipping label is on the next page.
   Print it out and affix it on top of the package with your trade-in products. 
-  Simply drop it off at any USPS location or your mailbox if it fits.<br/>
-  <br/>
+  Simply drop it off at any USPS location or your mailbox if it fits.<br/>  
   <b>Note: Ship your product(s) as soon as possible to avoid delay in receiving your order</b>
 </p>
 
