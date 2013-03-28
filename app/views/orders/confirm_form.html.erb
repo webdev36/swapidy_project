@@ -71,6 +71,7 @@
   	          	<% end %>
   	        </div>
           <% end %>
+
           <% if session[:shop_type] == "sell"%>
               <% has_agreement_before = !current_user.last_order.nil? %>
               <div style="position:relative; bottom:290px;">

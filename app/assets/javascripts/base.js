@@ -50,8 +50,41 @@ $('.price_type').popover({ html : true });
   $("#popup-box-bg").live("click", function(){
     hidePopup();
   });
-  
+  $('.get_cash').on('mouseover', function(){
+    $('.img_get_cash').attr("src",'/images/get_cash_hover.png');
+  })
+  .mouseout(function(){
+    $('.img_get_cash').attr("src", '/images/get_cash.png');
+  });
 
+  $('.get_cash').on('click', function() {
+    $(this).find('img').attr({
+      src: '/images/get_cash_hover.png'
+    });  
+  });
+
+
+  $('.swap').mouseover(function(){
+    $('.img_swap').attr("src",'/images/swap_hover.png');
+  })
+  .mouseout(function(){
+    $('.img_swap').attr("src",'/images/swap.png');
+  });
+
+$('.buy').click(function(){
+  $('.img_buy').attr("src",'/images/buy_hover.png');
+});
+
+  $('.buy').mouseover(function(){
+    $('.img_buy').attr("src",'/images/buy_hover.png');
+  })
+  .mouseout(function(){
+    $('.img_buy').attr("src",'/images/buy.png');
+  });
+
+$('.buy').click(function(){
+  $('.img_buy').attr("src",'/images/buy_hover.png');
+});
   $('.nav_notification').mouseover(function(){
     $(this).attr("src",'/images/notification_icon_hover.png');
   })

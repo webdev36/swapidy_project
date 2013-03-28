@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
 
   		file_name = params[:fn].to_s+".csv"	
 
-	  	product_models = ProductModel.all.map{|pm| [pm.id, pm.title]}
+   	  	product_models = ProductModel.all.map{|pm| [pm.id, pm.title]}
 	  	pma_attr = ["Weight lb", "Year", "Space",	"Network", "Color", "Generation", "Screen Size",	"Retina Display",	"Memory",	"Hard Disk", "Processor"]
 	 	
 	  	categories = Category.all.map{|cat| [cat.id, cat.title]}
