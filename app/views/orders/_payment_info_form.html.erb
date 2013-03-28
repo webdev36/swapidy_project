@@ -11,53 +11,73 @@
  <br />
  <br />
  <br />
+ <% if session[:shop_type] != "sell"%>  		
   <div class="payment_product_info"><br/>
     <label style="color:black; padding-top: 10px;">Current Balance:</label>
     <span style="color:black; font-family:'myriad'"><%= number_to_currency(current_user.balance_amount) %> </span>
   </div>
+  <% end %>
   <div class="payment_product_info">
-  	<% if session[:shop_type] == "sell"%>
-  		<%= number_to_currency(current_user.balance_amount) %> + 
-  		<%= number_to_currency(ShoppingCart.cart_amount) %> = 
-  		<%= number_to_currency(current_user.balance_amount + ShoppingCart.cart_amount) %>
-	  	<br />
+  	<% 
+  		remaining_amount = current_user.balance_amount - ShoppingCart.cart_amount 
+  		amount = remaining_amount < 0 ? remaining_amount*-1 : 0
+  	%>
+  		
+  	<% if session[:shop_type] == "sell"%>  		
 			<br />	
-		  <label style="color:black; font-family:'myriad';" >Total due today:</label>
+		  <label style="color:black; font-family:'myriad';" >It should just You get:</label>
 	  	<span style="color:black; font-family:'myriad'; font-size:20px;">	
-		  	<%= number_to_currency(ShoppingCart.cart_amount+current_user.balance_amount)%>				
+		  	<%= number_to_currency((ShoppingCart.sell_cart_amount))%>				
 	  	</span>
 	  <% elsif session[:shop_type] == "buy"%>
 	  	<%= number_to_currency(current_user.balance_amount) %> - 
-  		<%= number_to_currency(ShoppingCart.cart_amount) %> = 
-  		<%= number_to_currency(current_user.balance_amount - ShoppingCart.cart_amount) %>
+  		<%= number_to_currency(ShoppingCart.buy_cart_amount) %> = 
+  		<%= number_to_currency(current_user.balance_amount - ShoppingCart.buy_cart_amount) %>
 	  	<br />
 			<br />	
-		  <label style="color:black; font-family:'myriad';" >Total due today:</label>
-	  	<span style="color:black; font-family:'myriad'; font-size:20px;">	
-		  	<%= number_to_currency(ShoppingCart.cart_amount-current_user.balance_amount)%>				
-	  	</span>
+		
+			<label style="color:black; font-family:'myriad';" >Total due today: </label>
+			<span style="color:black; font-family:'myriad'; font-size:20px;">	
+  			<%= number_to_currency( amount ) %>
+  		</span>	<br/><br/>
+
+  		<% remaining_amount = remaining_amount < 0 ? 0 : remaining_amount %>
+			<label style="color:black; font-family:'myriad';" >Remainig balance:</label>
+  		<span style="color:black; font-family:'myriad'; font-size:20px;">	
+  			<%= number_to_currency( remaining_amount ) %>
+  		</span>			
+		
   	<% else %>
-			<% if ShoppingCart.cart_amount >= 0 %>
-	  		<%= number_to_currency(current_user.balance_amount) %> - <%= number_to_currency(ShoppingCart.cart_amount) %> = <%= number_to_currency(current_user.balance_amount - ShoppingCart.cart_amount) %>
-		  	<br />
-				<br />	
-			  <label style="color:black; font-family:'myriad';" >Total due today:</label>
-		  	<span style="color:black; font-family:'myriad'; font-size:20px;">	
-			  	<% if current_user.balance_amount - ShoppingCart.cart_amount > 0 %>
-			  		$0  
-					<% else %>
-						<%= number_to_currency(ShoppingCart.cart_amount-current_user.balance_amount)%>
-					<% end %>
-		  	</span>
-			<% else %>
-				<%= number_to_currency(current_user.balance_amount) %> + <%= number_to_currency(-ShoppingCart.cart_amount) %> = <%= number_to_currency(current_user.balance_amount - ShoppingCart.cart_amount) %>
-		 		<br />
-				<br />
-			  <label style="color:black; font-family:'myriad';">Total due today:</label>
-			  <span style="color:black; font-family:'myriad'; font-size:20px;">	
-	        $0
-			  </span>  
-		  <% end %>
+  		<br/>
+			<%= number_to_currency(current_user.balance_amount) %> 
+  			+ <%= number_to_currency(ShoppingCart.sell_cart_amount) %> 
+  			- <%= number_to_currency(ShoppingCart.buy_cart_amount) %> 
+  			= <%= number_to_currency(current_user.balance_amount - ShoppingCart.cart_amount) %>
+	  	<br />
+			<br />	
+				
+					<label style="color:black; font-family:'myriad';" >Total due today: </label>
+					<span style="color:black; font-family:'myriad'; font-size:20px;">	
+		  			<%= number_to_currency( amount ) %>
+		  		</span>	<br/><br/>
+
+		  		<% remaining_amount = remaining_amount < 0 ? 0 : remaining_amount %>
+					<label style="color:black; font-family:'myriad';" >Remainig balance:</label>
+		  		<span style="color:black; font-family:'myriad'; font-size:20px;">	
+		  			<%= number_to_currency( remaining_amount ) %>
+		  		</span>
+		  		
+		  		
+	  		
+					<!-- 
+						<% if current_user.balance_amount - ShoppingCart.cart_amount > 0 %>
+							<%= number_to_currency(ShoppingCart.cart_amount-current_user.balance_amount)%>
+						<% else %>
+							<%= number_to_currency(ShoppingCart.cart_amount-current_user.balance_amount)%>
+						<% end %>
+					-->
+					</span>
+	  		
   	<% end %>
 
   	<br/>

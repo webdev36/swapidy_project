@@ -1,6 +1,7 @@
 
        <div id="index_header_title">
-       	<div class="index_header_tagline">Buy and sell your electronics instantly.<br/><span class="index_header_subtitle">Trade your iphone, galaxy, mac, ipod and ipad for brand new stuff within 72 hours.</span><br/><div style="margin-left:505px;"><img class="index_head_1" src="/images/index_head/1.png"><span class="index_head_1_text">Get paid instantly</span><img class="index_head_2" src="/images/index_head/2.png"><span class="index_head_2_text">Fastest transactions on the internet</span><img class="index_head_3" src="/images/index_head/3.png"><span class="index_head_3_text">No shipping costs</span></div></div>
+       	<div class="index_header_tagline">Sell, Swap, and Buy electronics instantly.<br/><span class="index_header_subtitle">Unlock your desire to get the latest and greatest Galaxy, iPad, iPhone, Macbook, and iPad with ease and affordibility.</span><br/><div style="margin-left:505px;"><img class="index_head_1" src="/images/index_head/1.png"><span class="index_head_1_text">Get paid within 72 hours.</span><img class="index_head_2" src="/images/index_head/2.png"><span class="index_head_2_text">Fastest turnaround time.</span><img class="index_head_3" src="/images/index_head/3.png"><span class="index_head_3_text">No fees.</span></div></div>
+
        </div>
 <!--
 <div id="shopping_cart" <% if ShoppingCart.cart_products_empty? %> style="display:none;height: 130px;" <% end %> >
@@ -63,13 +64,14 @@
 <div class="index_buttons">
 	<span class="index_instr">Get started by selecting what you want to do</span><br/><br/><br/>
 	<div class="index_button button_1">	
-		<a class="get_cash" href="javascript:showScreenToSell('scroll');"><img class="img_get_cash" src="/images/get_cash.png"><br/><br/> Get cash for your device</a>
+
+		<a href="javascript:showScreenToSell('scroll','sell');"><img src="/images/get_cash.png"><br/><br/> Get cash</a>
 	</div>
 	<div class="index_button button_2">
-		<a class="swap" href="javascript:showScreenToTrade('scroll');"><img class="img_swap" src="/images/swap.png"><br/><br/>Swap your old device for brand new device</button></a>
+		<a href="javascript:showScreenToTrade('scroll');"><img src="/images/swap.png"><br/><br/>Swap old for new</button></a>
 	</div>
 	<div class="index_button button_3">
-		<a class="buy" href="javascript:showScreenToBuy('scroll');"><img class="img_buy" src="/images/buy.png"><br/><br/>Buy brand new device</button></a>
+		<a href="javascript:showScreenToBuy('scroll','buy');"><img src="/images/buy.png"><br/><br/>Buy</button></a>
 	</div>
 </div>
 <a id="sell_and_buy_message_guide" style="display: none;">
@@ -100,7 +102,8 @@
 
 <% cache("homepage_available_categories", :expires_in => 1.hour) do %>
   <div id="product_type" style="display:none;">
-    <div class="headings_pink" style="text-align: center; padding-top: 50px;">
+
+    <div class="headings_pink" style="text-align: center; margin-top: 100px;">
       <div style="text-align:center; margin-top 120px;">
       	<span >What do you want to swap today?</span><br/>
       	<span id="sell_message" class="motto_sub">Select what you have to sell</span>
@@ -223,7 +226,20 @@
 		    data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
 				type: 'POST',
 				dataType: 'script', 
-				success:function(){}
+				success:function(){
+					if( sell_item_count > 0 ){
+			  		$("#continue_button").text("Choose Products to buy");
+			  	}else if( buy_item_count > 0 ){
+						$("#continue_button").text("Choose Products to sell");
+			  	}else if( sell_item_count > 0 && buy_item_count > 0 ){
+			  		$("#continue_button").css("display", "none");	
+			  	}	
+			  	if(getCookie("shop_type") == "sell"){
+			  		$("#sell-items p.item-name").html("Only Sell item");
+			  	}else if(getCookie("shop_type") == "buy"){
+			  		$("#buy-items p.item-name").html("Only Buy item");
+			  	}
+				}
 			});
 			$("#" + current_popup_id).removeClass('active');
 			$("#" + current_popup_id).fadeOut('slow');
@@ -492,10 +508,10 @@
 	function select_complete(){
 		var shop_type  = getCookie("shop_type");		
 		if(sell_item_count < 1){			
-			showScreenToSell();		
+			showScreenToSell('scroll','swap');
 			$("#continue_button").text("Choose Products to sell");	
 		}else	if(buy_item_count < 1){			
-			showScreenToBuy();
+			showScreenToBuy('scroll', 'swap');
 			$("#continue_button").text("Choose Products to buy");
 		}else{
 			setCookie("shop_type", "swap", 1);
@@ -505,55 +521,52 @@
 
 	function showScreenToTrade(){
 		setCookie("shop_type", "swap", 1);
-		$("#checkout_btn").hide();
 
 		$("#continue_button").css("display", "block");
-  	if( sell_item_count < 1 ){
+  	if( buy_item_count < 1 ){
   		$("#continue_button").text("Choose Products to sell");
-  	}else if( buy_item_count < 1 ){
+  	}else if( sell_item_count < 1 ){
   		$("#continue_button").text("Choose Products to buy");
   	}else{
   		$("#continue_button").text("Continue to swap");
   	}
+  	var url_ajax = '/home/clear_checkout_item';	
+		$.ajax({
+			url :url_ajax,
+			beforeSend : function(xhr) {
+		    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+	  	},
+			type: "POST",
+			dataType:'script',
+			success :function(){
+				console.log("ok?");
+			}
+		});
   	showScreenToSell();
-		var sell_count = $('#shopping_cart').find('.sell_display li').length;
-	  
-
-    for_what = "for_buying";
-    $("#sell_message").hide();
-    $("#buy_message").show();
-    $("#done_button_for_buy").hide();
-    $('#checkout_button').show();
-    $('#done_button').hide();
-    
-    $("#sell_and_buy_message_guide span.buy").show();
-    $("#sell_and_buy_message_guide span.sell").hide();
-    
-    $('li.product_model').not('#filter_model_all').hide();
-    $('li.model_for_buying').show();
-    $(".thumbnail .box .button_for_buy").show();
-    $(".thumbnail .box .button_for_sell").hide();
-    $(".product_search_container .nav-pills").each(function(index) {
-      $(this).addClass("models_for_buy").removeClass("models_for_sell");
-    });
-    
-    $(".attr_filter_model_all_for_selling").not(".attr_filter_model_all_for_buying").addClass("hidden_filter");
-    $(".attr_filter_model_all_for_buying").removeClass("hidden_filter");
-    
-    unselectCurrentCategory();
-    $('div#product_type').fadeIn(600);
-    scrollToSelectCategory();
 	}
 
-  function showScreenToBuy() {  	
-  	var swapped_state = $("#continue_button").css("display") == "block" ? true : false;
-  	setCookie("shop_type", "buy", 1);
-  	if(swapped_state && !sell_item_count > 0){
-			$("#continue_button").css("display", "block");
+  function showScreenToBuy(scroll, shop_type) {
+  	if (shop_type == 'swap'){
+  		$("#continue_button").css("display", "block");
   		$("#continue_button").text("Choose Products to sell");
-		}else{
-			$("#continue_button").text("Continue to swap");
-		}	
+  		setCookie("shop_type", "swap", 1);
+  	}else if(shop_type == 'buy'){
+  		setCookie("shop_type", "buy", 1);
+  		$("#continue_button").css("display", "none");
+		 	var url_ajax = '/home/clear_checkout_item';	
+			$.ajax({
+				url :url_ajax,
+				beforeSend : function(xhr) {
+			    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+		  	},
+				type: "POST",
+				dataType:'script',
+				success :function(){
+					console.log("ok?");
+				}
+			});
+
+  	}  		
   	var sell_count = $('#shopping_cart').find('.sell_display li').length;
 	  
 	  
@@ -593,16 +606,16 @@
     scrollToSelectCategory();
   }
 	
-  function showScreenToSell(scroll) {
-  	var swapped_state = $("#continue_button").css("display") == "block" ? true : false;
-  	if( swapped_state == false ) {
+  function showScreenToSell(scroll, shop_type) {
+  	if(shop_type == "sell"){
   		showScreenToSellOnly(scroll);
   		return;
   	}
-
-  	setCookie("shop_type", "sell", 1);
-  	
-		if(swapped_state && !buy_item_count > 0){
+  	setCookie("shop_type", "swap", 1);
+  	if( sell_item_count < 1 ){
+  		$("#continue_button").css("display", "block");
+  		$("#continue_button").text("Choose Products to sell");
+  	}else if( !buy_item_count > 0 ){
 			$("#continue_button").css("display", "block");
   		$("#continue_button").text("Choose Products to buy");
 		}else{
@@ -637,9 +650,24 @@
     }
     
  }
- function showScreenToSellOnly(scroll) {	
+ function showScreenToSellOnly(scroll) {
+
+ 	var url_ajax = '/home/clear_checkout_item';	
+	$.ajax({
+		url :url_ajax,
+		beforeSend : function(xhr) {
+	    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+  	},
+		type: "POST",
+		dataType:'script',
+		success :function(){
+			console.log("ok?");
+		}
+	});
+
 
   	setCookie("shop_type", "sell", 1);
+  	$("#continue_button").css("display", "none");
 		for_what = "for_sell_only";
     $("#sell_message").show();
     $("#buy_message").hide();
@@ -705,6 +733,7 @@
 	<a class="learn_sell" href="javascript:showPopup('popup-dialog_sell');">Learn more</a>
 	<a class="learn_swap" href="javascript:refresh_how_it_works();">Learn more</a>
 	<a class="learn_buy" href="javascript:showPopup('popup-dialog_buy');">Learn more</a>
+
 
 </div>
 <img class="device_mashup" src="/images/device_mashup.png">

@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   ADMIN_EMAIL = "adam@swapidy.com"
 
   def new
-    session[:shop_type] = params[:shop_type];    
+    session[:shop_type] = params[:shop_type] if params[:shop_type].present?
     if user_signed_in?
       page_title "Payment Information"
       render "payment_info_page"
@@ -89,8 +89,11 @@ class OrdersController < ApplicationController
                                         :sell_or_buy => "buy")
             end            
             if @order.save
-                @order.do_payment
-                ShoppingCart.clear_cart_products 
+              @order.do_payment
+              @order.create_stamp_to_deliver(session[:shop_type])
+              OrderNotifier.start_processing(@order, session[:shop_type]).deliver
+              OrderNotifier.start_processing_for_admin(@order,session[:shop_type]).deliver
+              ShoppingCart.clear_cart_products 
             end
           end        
           redirect_to "/orders/#{@order.id}"
@@ -165,9 +168,10 @@ class OrdersController < ApplicationController
     @user = User.find current_user.id
     @user.paypal_email = params[:user][:paypal_email]
 
-    if @user.paypal_email == current_user.paypal_email
-      @error_message = "Please enter another email to change!"
-    elsif session[:signed_in_via_facebook].nil? 
+    #if @user.paypal_email == current_user.paypal_email
+    #  @error_message = "Please enter another email to change!"
+    #els
+    if session[:signed_in_via_facebook].nil? 
       @error_message = "Please enter vaild password" unless @user.valid_password?(params[:user][:current_password])
     end
     
@@ -176,6 +180,24 @@ class OrdersController < ApplicationController
       @success_message = "Your email has changed successfully!"
     end 
     @return_content = render_to_string(:partial => "/orders/change_paypal_email_form", :locals => {:user => @user})
+  end
+
+  def change_certified_name
+    @user = User.find current_user.id
+    @user.certified_name = params[:user][:certified_name]
+
+    #if @user.certified_name == current_user.certified_name
+    #  @error_message = "Please enter another certified_name to change!"
+    #els
+    if session[:signed_in_via_facebook].nil? 
+      @error_message = "Please enter vaild password" unless @user.valid_password?(params[:user][:current_password])
+    end
+    
+    if @error_message.nil? && @user.save
+      current_user.certified_name = @user.certified_name
+      @success_message = "Your certified name has changed successfully!"
+    end 
+     @return_content = render_to_string(:partial => "/orders/change_certified_name_form", :locals => {:user => @user})
   end
 
   def change_shipping_info

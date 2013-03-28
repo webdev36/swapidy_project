@@ -53,6 +53,8 @@ Swapidy::Application.routes.draw do
   match "/orders/complete" => "orders#complete", :method => :get
   match "/orders/change_email" => "orders#change_email", :method => :post
   match "/orders/change_paypal_email" => "orders#change_paypal_email", :method => :post
+  match "/orders/change_certified_name" => "orders#change_certified_name", :method => :post
+
   match "/orders/change_shipping_info" => "orders#change_shipping_info", :method => :post
   match "/orders/reload_payment_order_info" => "orders#reload_payment_order_info", :method => :post
 
@@ -75,6 +77,7 @@ Swapidy::Application.routes.draw do
   match "/home/disconect_fb" => "home#disconect_fb"
   match "/home/swap_product" => "home#swap_product"
   match "/home/del_product" => "home#del_product"
+  match "/home/clear_checkout_item" => "home#clear_checkout_item"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

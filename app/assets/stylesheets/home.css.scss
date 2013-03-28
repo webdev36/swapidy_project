@@ -18,13 +18,13 @@
   src: url('/halter.ttf') format("truetype");
 }
 #iphone{
-  height:350px;
-  width:350px;
+	height:350px;
+	width:350px;
 }
 
 #imac{
-  height:350px;
-  width:550px;
+	height:350px;
+	width:550px;
 }
 .container{
   font-family:"myriad", "myriad-s";
@@ -35,15 +35,15 @@ a:visited
 
 
 #main_catalog{
-  text-align:center;
+	text-align:center;
 }
 
 .thumbnail{
-  text-align:center;
+	text-align:center;
 }
 
 .icon{
-  padding-left:5px;
+	padding-left:5px;
 }
 
 td{
@@ -51,8 +51,8 @@ td{
 
 
 button{
-  width:300px;
-  margin-left:30px;
+	width:300px;
+	margin-left:30px;
 }
 
 ul{
@@ -60,22 +60,22 @@ ul{
 }
 
 #c_macbook{
-  width:300px;
-  padding-right:0px;
+	width:300px;
+	padding-right:0px;
 
 }
 #c_ipod{
-  width:200px;
+	width:200px;
 }
 #c_iphone{
-  width:200px;
+	width:200px;
 }
 
 #search_container .s_category{
   font-family:"myriad";
 }
 #product_lineup{
-  float:left;
+	float:left;
   width:500px;
 }
 
@@ -241,6 +241,8 @@ text-align: center;
 }
 
 #product_type{
+  display:none;
+
   position:relative;
   top:50px;
   font-family:"myriad";

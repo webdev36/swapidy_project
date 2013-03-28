@@ -272,10 +272,12 @@ class Order < ActiveRecord::Base
   end
   
   def adjust_current_balance(new_balance_amount = nil)
+    amount = ((self.user.balance_amount || 0) + self.balance_amount) > 0 ? (self.user.balance_amount || 0) + self.balance_amount : 0
+
     if new_balance_amount
       self.user.update_attribute :balance_amount, new_balance_amount
     else
-      self.user.update_attribute :balance_amount, ((self.user.balance_amount || 0) + self.balance_amount)
+      self.user.update_attribute :balance_amount, (amount)
     end
   end
 

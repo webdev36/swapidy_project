@@ -1127,7 +1127,7 @@ margin-top: 30px;
 .learn_sell{
   color: white;
   text-decoration: underline;
-   position: relative;
+  position: relative;
   right:60px;
   bottom:40px;
   font-size: 20px;
@@ -1164,5 +1164,6 @@ padding: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
 padding: 10px;
+
 
 }

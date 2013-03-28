@@ -1,6 +1,6 @@
 <div id="login_container">
   <a class="close-popup" onclick="hidePopup();" style="position:relative; top:30px; right:95px;" href="#" title="Cancel">Cancel</a>
-  <img id="login_circle" src="/images/free_money_rectangle.png" style="top: 338.5px; display: block;">
+  <%= image_tag("free_money_rectangle.png", :id=>"login_circle", :style=>"top: 338.5px; display: block;")%>
   <div style="position: absolute; top: 180px; width: 440px; text-align: center;">
     <%= form_for(@free_money, :as => "free_money", :url => "/free_moneys/create", :html => {:id => "add_money"}) do |f| %>
       <div class="free_money_info">
