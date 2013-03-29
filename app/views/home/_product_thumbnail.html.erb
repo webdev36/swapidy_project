@@ -9,7 +9,7 @@
     <div>
       <% if product.for_sells_only? %>
         <div class="dropdown button_for_sell" id= "button_block">
-          <a style="width: 80px;" popup_id="popup_selling_price_<%= product.id %>" class="btn btn-primary select-price" title="Sell now: <%= product.title %>">Sell Only</a>
+          <a style="width: 80px;" popup_id="popup_selling_price_<%= product.id %>" class="btn btn-primary select-price" title="Sell now: <%= product.title %>">Sell</a>
         </div>
       <% end %>
       <% if product.for_sells? %>
