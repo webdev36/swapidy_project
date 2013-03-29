@@ -5,8 +5,8 @@ Recaptcha.configure do |config|
     #config.proxy = 'http://myproxy.com.au:8080'
   else
     #Please run "rails s -p 80" to test
-    config.public_key  = '6LcM5dsSAAAAANxB0i4fIVn9ZweRz5Y_X46BmwUO'
-    config.private_key = '6LcM5dsSAAAAAFgEI1IwhAl8SwR7EmvjMLe_ttBv'
+    config.public_key  = '6LcqFt8SAAAAAAQ8Se-_AdiUIs7loP78Qje11td0'
+    config.private_key = '6LcqFt8SAAAAAF1rjumfXddh9II2HFARIPqH0Bx0'
     #config.proxy = 'http://myproxy.com.au:8080'
   end
 end
