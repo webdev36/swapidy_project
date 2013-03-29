@@ -67,10 +67,10 @@
 		<a class="get_cash" href="javascript:showScreenToSell('scroll','sell');"><p>Get cash</p></a>
 	</div>
 	<div class="index_button button_2">
-		<a class="swap" href="javascript:showScreenToTrade('scroll');"><p>Swap old for new</p></a>
+		<a class="get_swap" href="javascript:showScreenToTrade('scroll');"><p>Swap old for new</p></a>
 	</div>
 	<div class="index_button button_3">
-		<a class="buy" href="javascript:showScreenToBuy('scroll','buy');"><p>Buy</p></a>
+		<a class="get_buy" href="javascript:showScreenToBuy('scroll','buy');"><p>Buy</p></a>
 	</div>
 </div>
 <a id="sell_and_buy_message_guide" style="display: none;">
@@ -538,7 +538,7 @@
 			type: "POST",
 			dataType:'script',
 			success :function(){
-				console.log("ok?");
+
 			}
 		});
   	showScreenToSell('scroll');
@@ -561,7 +561,7 @@
 				type: "POST",
 				dataType:'script',
 				success :function(){
-					console.log("ok?");
+					
 				}
 			});
 
@@ -660,7 +660,6 @@
 		type: "POST",
 		dataType:'script',
 		success :function(){
-			console.log("ok?");
 		}
 	});
 
