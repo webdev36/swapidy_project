@@ -243,8 +243,7 @@ text-align: center;
 #product_type{
   display:none;
 
-  position:relative;
-  bottom:30px;
+ 
   font-family:"myriad";
   margin-bottom: 20px;
   display:none;
@@ -1050,4 +1049,62 @@ div.index_buttons{
     }  
 
   }  
+}
+
+a.get_cash{
+  background-image: url("get_cash.png");
+  display: block;
+  height: 253px;
+  width: 250px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("get_cash_hover.png");
+  }
+  &:focus{
+    background-image: url("get_cash_hover.png");
+  }
+}
+a.cash_selected{
+  background-image: url("get_cash_hover.png");
+}
+a.swap{
+  background-image: url("swap.png");
+  display: block;
+  height: 253px;
+  width: 250px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("swap_hover.png");
+  }
+  &:focus{
+    background-image: url("swap_hover.png");
+  }
+}
+a.swap_selected{
+  background-image: url("swap_hover.png");
+}
+a.buy{
+  background-image: url("buy.png");
+  display: block;
+  height: 253px;
+  width: 250px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("buy_hover.png");
+  }
+  &:focus{
+    background-image: url("buy_hover.png");
+  }
+}
+a.buy_selected{
+  background-image: url("buy_hover.png");
 }

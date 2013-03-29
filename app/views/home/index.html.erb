@@ -1,6 +1,7 @@
 
        <div id="index_header_title">
-       	<div class="index_header_tagline">Buy and sell your electronics instantly.<br/><span class="index_header_subtitle">Trade your iphone, galaxy, mac, ipod and ipad for brand new stuff within 72 hours.</span><br/><div style="margin-left:505px;"><img class="index_head_1" src="/images/index_head/1.png"><span class="index_head_1_text">Get paid instantly</span><img class="index_head_2" src="/images/index_head/2.png"><span class="index_head_2_text">Fastest transactions on the internet</span><img class="index_head_3" src="/images/index_head/3.png"><span class="index_head_3_text">No shipping costs</span></div></div>
+       	<div class="index_header_tagline">Sell, Swap, and Buy electronics instantly.<br/><span class="index_header_subtitle">Unlock your desire to get the latest and greatest Galaxy, iPad, iPhone, Macbook, and iPad with ease and affordibility.</span><br/><div style="margin-left:375px;"><img class="index_head_1" src="/images/index_head/1.png"><span class="index_head_1_text">Get paid within 72 hours.</span><img class="index_head_2" src="/images/index_head/2.png"><span class="index_head_2_text">Fastest turnaround time.</span><img class="index_head_3" src="/images/index_head/3.png"><span class="index_head_3_text">No fees.</span></div></div>
+
        </div>
 <!--
 <div id="shopping_cart" <% if ShoppingCart.cart_products_empty? %> style="display:none;height: 130px;" <% end %> >
@@ -15,7 +16,6 @@
     $(function() {
 			display_checkout_sliders();
 		});
-		$('#index_bg').css('height',170);
 	<% end %>
 	
 	$(".del-product").live('click', function(){
@@ -64,13 +64,13 @@
 <div class="index_buttons">
 	<span class="index_instr">Get started by selecting what you want to do</span><br/><br/><br/>
 	<div class="index_button button_1">	
-		<a href="javascript:showScreenToSell('scroll','sell');"><img src="/images/get_cash.png"><br/><br/> Get cash for your device</a>
+		<a class="get_cash" href="javascript:showScreenToSell('scroll','sell');"><p>Get cash</p></a>
 	</div>
 	<div class="index_button button_2">
-		<a href="javascript:showScreenToTrade('scroll');"><img src="/images/swap.png"><br/><br/>Swap your old device for brand new device</button></a>
+		<a class="swap" href="javascript:showScreenToTrade('scroll');"><p>Swap old for new</p></a>
 	</div>
 	<div class="index_button button_3">
-		<a href="javascript:showScreenToBuy('scroll','buy');"><img src="/images/buy.png"><br/><br/>Buy brand new device</button></a>
+		<a class="buy" href="javascript:showScreenToBuy('scroll','buy');"><p>Buy</p></a>
 	</div>
 </div>
 <a id="sell_and_buy_message_guide" style="display: none;">
@@ -101,6 +101,7 @@
 
 <% cache("homepage_available_categories", :expires_in => 1.hour) do %>
   <div id="product_type" style="display:none;">
+
     <div class="headings_pink" style="text-align: center; margin-top: 100px;">
       <div style="text-align:center; margin-top 120px;">
       	<span >What do you want to swap today?</span><br/>
@@ -728,9 +729,10 @@
 
 <div id="index_usp" style="height:440px; text-align:center;">
 	<img class="hiw_sketch" src="/images/hiw.png"><br/>
-	<a class="learn_sell" href="javascript:refresh_how_it_works();">Learn more</a>
+	<a class="learn_sell" href="javascript:showPopup('popup-dialog_sell');">Learn more</a>
 	<a class="learn_swap" href="javascript:refresh_how_it_works();">Learn more</a>
-	<a class="learn_buy" href="javascript:refresh_how_it_works();">Learn more</a>
+	<a class="learn_buy" href="javascript:showPopup('popup-dialog_buy');">Learn more</a>
+
 
 </div>
 <img class="device_mashup" src="/images/device_mashup.png">

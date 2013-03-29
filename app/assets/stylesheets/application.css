@@ -1048,7 +1048,7 @@ cursor: pointer;
   font-size: 20px;
   position: relative;
   top:20px;
-  left: 65px;
+  left: 190px;
   text-shadow: 3px 2px 8px rgba(150, 150, 150, 1);
 }
 .index_instr{
@@ -1127,24 +1127,43 @@ margin-top: 30px;
 .learn_sell{
   color: white;
   text-decoration: underline;
-   position: relative;
-  right:90px;
+  position: relative;
+  right:60px;
   bottom:40px;
   font-size: 20px;
+  background:#fa3a6e;
+  height: 35px;
+  -webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+padding: 10px;
 }
 .learn_swap{
   position: relative;
-  left:50px;
+  left:60px;
   bottom:40px;
   font-size: 20px;
   text-decoration: underline;
+    background:#fa3a6e;
+  height: 35px;
+  -webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+padding: 10px;
 
 }
 .learn_buy{
   position: relative;
-  left:200px;
+  left:190px;
   bottom:40px;
   font-size: 20px;
   text-decoration: underline;
+    background:#fa3a6e;
+  height: 35px;
+  -webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+padding: 10px;
+
 
 }

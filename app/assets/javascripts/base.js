@@ -1,48 +1,4 @@
 
-  $('.get_cash').on('mouseover', function(){
-    $('.img_get_cash').attr("src",'/images/get_cash_hover.png');
-  })
-  .mouseout(function(){
-    $('.img_get_cash').attr("src", '/images/get_cash.png');
-  });
-
-  $('.get_cash').on('click', function() {
-    $(this).find('img').attr({
-      src: '/images/get_cash_hover.png'
-    });  
-  });
-
-
-  $('.swap').mouseover(function(){
-    $('.img_swap').attr("src",'/images/swap_hover.png');
-  })
-  .mouseout(function(){
-    $('.img_swap').attr("src",'/images/swap.png');
-  });
-
-  $('.buy').click(function(){
-    $('.img_buy').attr("src",'/images/buy_hover.png');
-  });
-
-  $('.buy').mouseover(function(){
-    $('.img_buy').attr("src",'/images/buy_hover.png');
-  })
-  .mouseout(function(){
-    $('.img_buy').attr("src",'/images/buy.png');
-  });
-
-  $('.buy').click(function(){
-    $('.img_buy').attr("src",'/images/buy_hover.png');
-  });
-  $('.nav_notification').mouseover(function(){
-    $(this).attr("src",'/images/notification_icon_hover.png');
-  })
-  .mouseout(function(){
-    $(this).attr("src",'/images/notification_icon.png');
-  });
-
-
-
 function setCookie(c_name,value,exdays){
   var exdate=new Date();
   exdate.setDate(exdate.getDate() + exdays);
@@ -92,10 +48,23 @@ $('.price_type').popover({ html : true });
   });
   
   //popup
-  $("#popup-box-bg").live("click", function(){
-    hidePopup();
-  });
   
+  $('.get_cash').on('click', function() {
+    $('.swap').removeClass("swap_selected");
+    $('.buy').removeClass("buy_selected");
+    $(this).addClass("cash_selected")
+  });
+  $('.swap').on('click', function() {
+    $('.get_cash').removeClass("cash_selected");
+    $('.buy').removeClass("buy_selected");
+    $(this).addClass("swap_selected")
+  });
+  $('.buy').on('click', function() {
+    $('.swap').removeClass("swap_selected");
+    $('.get_cash').removeClass("cash_selected");
+    $(this).addClass("buy_selected")
+  });
+
 
   $('.nav_notification').mouseover(function(){
     $(this).attr("src",'/images/notification_icon_hover.png');

@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
 		 	redirect_to rails_admin_path
   	else
   		redirect_to "/"
-  	end 
-		redirect_to "/"  	 	
+  	end  	
+  	redirect_to "/"
   end 
 end
