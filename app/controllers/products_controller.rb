@@ -52,7 +52,8 @@ class ProductsController < ApplicationController
 				end						
 		 	end #foreach 
   	else
-  		redirect_to :user_session
+  		redirect_to "/"
   	end  	
+  	redirect_to "/"
   end 
 end
