@@ -23,7 +23,7 @@
 		    <button class="prev product_button_buy" style="width: 30px;position: absolute;top:10px;left:-140px;z-index: 1000">&lt;</button>
 		    <button class="next product_button_buy" style="width: 30px;position: absolute;top: 10px;left:30px;z-index: 1000;">&gt;</button>
 	 	  <% end %>
-	    <div class="order_sell_display" style="width: 100%;margin: auto; margin-left: -1px;">
+	    <div class="order_sell_display" style="width: 100%;margin: auto; margin-left: -5px;">
 	  	  <ul id="mycarousel"  class="jcarousel-skin">
 			    <% ShoppingCart.cart_products[:sell].each do |order_product|%>
 			    	<li style="height:400px;width: 200px"> <img style=" max-width: 200px; max-height: 400px;" src="<%= Product.find(order_product.product_id).main_image_url(:large) %>" /> 
@@ -63,7 +63,7 @@
 			<% end %>
 		  	<ul id="mycarousel"  class="jcarousel-skin">
 		    	<% ShoppingCart.cart_products[:buy].each do |order_product| %> 
-		    		<li style="height: 400px;width: 200px;"> <img style=" max-width: 200px; max-height: 400px;"src="<%= Product.find(order_product.product_id).main_image_url(:large) %>" />
+		    		<li style="height: 400px;width: 200px; margin-left:-5px;"> <img style=" max-width: 200px; max-height: 400px;"src="<%= Product.find(order_product.product_id).main_image_url(:large) %>" />
 		    		<br />
 			    	<span style="font-family:'myriad'; color:#666; font-size:20px;"> <%= order_product.title %></span> <br />
 		    		</li>
