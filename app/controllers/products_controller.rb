@@ -51,8 +51,10 @@ class ProductsController < ApplicationController
 
 				end						
 		 	end #foreach 
+		 	redirect_to rails_admin_path
   	else
-  		redirect_to :user_session
-  	end  	
+  		redirect_to "/"
+  	end 
+		redirect_to "/"  	 	
   end 
 end
