@@ -1,3 +1,4 @@
+
 <%= form_for(@order, :as => 'order', :url => "/orders/shipping_info", :html => {:id => "new_order"}) do |f| %>
   <%= f.hidden_field :shipping_first_name %>
   <%= f.hidden_field :shipping_last_name %>
@@ -12,9 +13,9 @@
  <br />
  <br />
  <% if session[:shop_type] != "sell"%>  		
-  <div class="payment_product_info"><br/>
-    <label style="color:black; padding-top: 10px;">Current Balance:</label>
-    <span style="color:black; font-family:'myriad'"><%= number_to_currency(current_user.balance_amount) %> </span>
+  <div class="payment_product_info" style="position:relative; bottom:290px; left:245px; "><br/>
+    <label style="color:#666; padding-top: 10px;">Current Balance:</label>
+    <span style="color:#666; font-family:'myriad'"><%= number_to_currency(current_user.balance_amount) %> </span>
   </div>
   <% end %>
   <div class="payment_product_info">
@@ -25,8 +26,8 @@
   		
   	<% if session[:shop_type] == "sell"%>  		
 			<br />	
-		  <label style="color:black; font-family:'myriad';" >It should just You get:</label>
-	  	<span style="color:black; font-family:'myriad'; font-size:20px;">	
+		  <label style="color:#666; font-family:'myriad';" >You get:</label>
+	  	<span style="color:#666; font-family:'myriad'; font-size:20px;">	
 		  	<%= number_to_currency((ShoppingCart.sell_cart_amount))%>				
 	  	</span>
 	  <% elsif session[:shop_type] == "buy"%>
@@ -36,14 +37,14 @@
 	  	<br />
 			<br />	
 		
-			<label style="color:black; font-family:'myriad';" >Total due today: </label>
-			<span style="color:black; font-family:'myriad'; font-size:20px;">	
+			<label style="color:#666; font-family:'myriad';" >Total due today: </label>
+			<span style="color:#666; font-family:'myriad'; font-size:20px;">	
   			<%= number_to_currency( amount ) %>
   		</span>	<br/><br/>
 
   		<% remaining_amount = remaining_amount < 0 ? 0 : remaining_amount %>
-			<label style="color:black; font-family:'myriad';" >Remainig balance:</label>
-  		<span style="color:black; font-family:'myriad'; font-size:20px;">	
+			<label style="color:#666; font-family:'myriad';" >Remaining balance:</label>
+  		<span style="color:#666; font-family:'myriad'; font-size:20px;">	
   			<%= number_to_currency( remaining_amount ) %>
   		</span>			
 		
@@ -56,14 +57,14 @@
 	  	<br />
 			<br />	
 				
-					<label style="color:black; font-family:'myriad';" >Total due today: </label>
-					<span style="color:black; font-family:'myriad'; font-size:20px;">	
+					<label style="color:#666; font-family:'myriad';" >Total due today: </label>
+					<span style="color:#666; font-family:'myriad'; font-size:20px;">	
 		  			<%= number_to_currency( amount ) %>
 		  		</span>	<br/><br/>
 
 		  		<% remaining_amount = remaining_amount < 0 ? 0 : remaining_amount %>
-					<label style="color:black; font-family:'myriad';" >Remainig balance:</label>
-		  		<span style="color:black; font-family:'myriad'; font-size:20px;">	
+					<label style="color:#666; font-family:'myriad';" >Remainig balance:</label>
+		  		<span style="color:#666; font-family:'myriad'; font-size:20px;">	
 		  			<%= number_to_currency( remaining_amount ) %>
 		  		</span>
 		  		
@@ -80,9 +81,7 @@
 	  		
   	<% end %>
 
-  	<br/>
-  	
-	  <br/>
+
 <!--	  
 	  <br/>
 	  <label style="color:black; font-family:'myriad';">Payment options:</label><br/>
@@ -91,5 +90,5 @@
 	  <br/>
 -->	  
 	</div>	
-  <input name="commit" class="product_button_buy" type="submit" value="Continue" style="position:relative; bottom:30px; right:70px;"/>
+  <input name="commit" class="product_button_buy" type="submit" value="Continue" style="position:relative; bottom:260px; left:180px;"/>
 <% end %>

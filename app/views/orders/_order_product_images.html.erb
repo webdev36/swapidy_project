@@ -6,7 +6,7 @@
   	<img class="circ_arrow" src="/images/circular_arrow.png">
   </div>
  	<% end %>
-  <div style="width: 100%; display: block; margin-top: 10px;height: 200px">
+  <div style="position:relative; right:240px; display: block; margin-top:-50px;height: 200px">
 	  <%if session[:shop_type]=="sell" || session[:shop_type]=="swap" %>
 	  <div class="order_slider_sell">
 	  	<% if session[:shop_type]=="swap" %>
@@ -20,9 +20,9 @@
 	    <div class="order_sell_display" style="width: 100%;margin: auto;">
 	  	  <ul id="mycarousel"  class="jcarousel-skin">
 			    <% ShoppingCart.cart_products[:sell].each do |order_product|%>
-			    	<li style="height:160px;width: 120px"> <img style=" max-width: 100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" /> 
+			    	<li style="height:400px;width: 200px"> <img style=" max-width: 200px; max-height: 400px;" src="<%= Product.find(order_product.product_id).main_image_url(:large) %>" /> 
 			    	<br/>
-			    	<span style="font-family:'myriad-s';"> <%= order_product.title %>(<%= order_product.using_condition %>)</span> <br />
+			    	<span style="font-family:'myriad'; color:#666; font-size:20px;"> <%= order_product.title %>(<%= order_product.using_condition %>)</span> <br />
 			    	</li>
 		   		<% end %>
 		    </ul>
@@ -42,10 +42,10 @@
 		  	<% end %>
 		  	<div class="order_buy_display" style="width: 100%; text-align: right;margin:auto;" >
 		  	<ul id="mycarousel"  class="jcarousel-skin">
-		    	<% ShoppingCart.cart_products[:buy].each do |order_product| %>
-		    		<li style="height: 160px;width: 120px;z-index: 1000;"> <img style=" max-width:100px; max-height: 100px;" src="<%= Product.find(order_product.product_id).main_image_url(:thumb) %>" />
+		    	<% ShoppingCart.cart_products[:buy].each do |order_product| %> 
+		    		<li style="height: 400px;width: 300px;z-index: 1000;"> <img style=" margin-left:60px; max-width: 200px; max-height: 400px;"src="<%= Product.find(order_product.product_id).main_image_url(:large) %>" />
 		    		<br />
-			    	<span style="font-family:'myriad-s';"> <%= order_product.title %></span> <br />
+			    	<span style="font-family:'myriad'; color:#666; font-size:20px;"> <%= order_product.title %></span> <br />
 		    		</li>
 		    	<% end %>
 		    </ul>
@@ -83,16 +83,16 @@
 		display:inline-block
 	}
 	.circ_arrow{
-	  height: 70px;
+	  height: 80px;
 	  position: relative;
-	  left: 50%;
+	  left: 5%;
 	  margin-left: -50px;
-	  top:-15px;
+	  top:100px;
 	}
 	.r_circ_arrow{
-	  height: 70px;
+	  height: 80px;
 	  position: relative;
-	  left: 50%;
+	  left: 5%;
 	  margin-left: -66px;
 	  margin-top: -20px;
 	}
@@ -105,10 +105,14 @@
 	  border-radius: 5px;
 	}
 	.old_stuff{
-	  background: #fa3e6e;
+	  color: #666;
+	  font-size: 20px;
 	}
 	.new_stuff{
-	  background: #38B4DE;
+	  margin-left: 120px;
+	  color: #666;
+	  font-size: 20px;
+	  width: 100px;
 	}
 	.circ_arrow1{
 	  height: 70px;
