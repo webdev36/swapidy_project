@@ -50,17 +50,17 @@ $('.price_type').popover({ html : true });
   //popup
   
   $('.get_cash').on('click', function() {
-    $('.swap').removeClass("swap_selected");
-    $('.buy').removeClass("buy_selected");
+    $('.get_swap').removeClass("swap_selected");
+    $('.get_buy').removeClass("buy_selected");
     $(this).addClass("cash_selected");
   });
   $('.get_swap').on('click', function() {
     $('.get_cash').removeClass("cash_selected");
-    $('.buy').removeClass("buy_selected");
+    $('.get_buy').removeClass("buy_selected");
     $(this).addClass("swap_selected");
   });
   $('.get_buy').on('click', function() {
-    $('.swap').removeClass("swap_selected");
+    $('.get_swap').removeClass("swap_selected");
     $('.get_cash').removeClass("cash_selected");
     $(this).addClass("buy_selected");
   });

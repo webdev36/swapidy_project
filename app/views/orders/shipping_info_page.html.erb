@@ -14,7 +14,11 @@ body{
     <div class="confirm_image_container" style="position:absolute; top: 280px; height: 410px;">
 	    <%= render :partial => "/orders/order_product_images" %>
 		</div>
+  <% if session[:shop_type] == "swap" %>
+    <div class="shipping_form_container" style="top: -360px; margin-top: 0px; bottom: 0px; left: 350px;" >
+  <% else %>
     <div class="shipping_form_container">
+  <% end %>
       <div style="width: 500px; margin-left: -20px;">
         <div class="shipping_product_info"></div>  
         <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; padding: 15px 0px 20px;">

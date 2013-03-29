@@ -214,6 +214,15 @@
   var current_popup_id = "";
 
 	$(document).ready(function() {
+		
+		$("#dropdown_shop_cart_icon").popover({
+      title: 'Please Checkout now', 
+      content: "Your product has been added. Click icon to checkout now!", placement:'bottom', 
+      delay: { show: 5000, hide: 3000 }
+    });
+		$("#dropdown_shop_cart_icon").click(function(){
+			$("#dropdown_shop_cart_icon").popover("hide");
+		});
 
 		$('.popup_select_price .price_type').live('click', function(){
 	  	var url_select_price = '/home/swap_product';
@@ -225,7 +234,7 @@
 		    data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
 				type: 'POST',
 				dataType: 'script', 
-				success:function(){
+				success:function(){					
 					if( sell_item_count > 0 ){
 			  		$("#continue_button").text("Choose Products to buy");
 			  	}else if( buy_item_count > 0 ){
@@ -238,6 +247,10 @@
 			  	}else if(getCookie("shop_type") == "buy"){
 			  		$("#buy-items p.item-name").html("Only Buy item");
 			  	}
+			  	$("#dropdown_shop_cart_icon").popover('show');
+					setTimeout(function() {
+            $("#dropdown_shop_cart_icon").popover('hide');
+        	}, 10000);
 				}
 			});
 			$("#" + current_popup_id).removeClass('active');
