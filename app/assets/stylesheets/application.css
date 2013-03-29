@@ -1122,14 +1122,14 @@ z-index: 1000;
 
  }
 .hiw_sketch{
-margin-top: 30px;
+margin-top: 10px;
 }
 .learn_sell{
   color: white;
   text-decoration: underline;
   position: relative;
   right:60px;
-  bottom:40px;
+  bottom:55px;
   font-size: 20px;
   background:#fa3a6e;
   height: 35px;
@@ -1141,7 +1141,7 @@ padding: 10px;
 .learn_swap{
   position: relative;
   left:60px;
-  bottom:40px;
+  bottom:55px;
   font-size: 20px;
   text-decoration: underline;
     background:#fa3a6e;
@@ -1155,7 +1155,7 @@ padding: 10px;
 .learn_buy{
   position: relative;
   left:190px;
-  bottom:40px;
+  bottom:55px;
   font-size: 20px;
   text-decoration: underline;
     background:#fa3a6e;

@@ -29,21 +29,21 @@ body{
 				</p>
 				<div id="thanks_container">
 					<div class="thanks_steps step1" style="display:none;">
-						<img src="/images/thanks_step1.png">
+						<img src="/images/c_sell_1.png">
 						<p class="thanks_steps_text">
 							Check your email for the shipping label
 						</p>
 					</div>
 
 					<div class="thanks_steps step2" style="display:none;">
-						<img src="/images/thanks_step2.png">
+						<img src="/images/c_sell_2.png">
 						<p class="thanks_steps_text">
 							Ship your product out immediately
 						</p>
 					</div>
 
 					<div class="thanks_steps step3" style="display:none;">
-						<img src="/images/thanks_step3.png">
+						<img src="/images/c_sell_3.png">
 						<p class="thanks_steps_text">
 							Your order will be shipped as soon as we receive your items
 						</p>
@@ -55,41 +55,20 @@ body{
 			</div>
 		</div>
 	<% elsif session[:shop_type] == "buy"%>
-		<div class="container">		
-				<div class="headings_pink" >
-					Congratulations, your <%= session[:shop_type] %> transaction was successful!
-				</div>		
-				<div class="thank_container" style="border: 1px solid">
-					<p>
-						<label class="thanks_subheading headings_pink" >For buy</label>
-					</p>
-					<div id="thanks_container">
-						<div class="thanks_steps step1" style="display:none;">
-							<img src="/images/thanks_step1.png">
-							<p class="thanks_steps_text">
-								Check your email for the shipping label
-							</p>
-						</div>
+		
+ <div class="container"> 
+ 	<div class="headings_pink thank_head" >Congratulations, your transaction was successful!</div> 
+<div class="thank_container">
 
-						<div class="thanks_steps step2" style="display:none;">
-							<img src="/images/thanks_step2.png">
-							<p class="thanks_steps_text">
-								Ship your product out immediately
-							</p>
-						</div>
-
-						<div class="thanks_steps step3" style="display:none;">
-							<img src="/images/thanks_step3.png">
-							<p class="thanks_steps_text">
-								Your order will be shipped as soon as we receive your items
-							</p>
-						</div>
-					</div>
-					<p>
-						<a href="/" class="thanks_button_buy" style="width: 180px; height: 50px; padding:10px; display:none;margin-left: 70%">Again, again, again!</a>
-					</p>
-				</div>
-			</div>
+	<div class="thanks_heading">Thank You! Your order has been successfully placed!</div><br/>
+	<img class="thanks_img_order" src="/images/show_order.png">
+	<p><label class="thanks_subheading">What Happens Next?</label>
+	</p>
+	<p class="thanks_list">Check your email. We will be shipping your order soon! Please make sure you have dispatched all items from your previous trade-ins to avoid delay.</p>
+	  <a href="/" class="thanks_button_buy" style="padding:10px; right: 0px; ">Continue to Marketplace</a>
+	</p>
+</div>
+</div>
 	<% elsif session[:shop_type] == "swap"%>
 		<div class="container">		
 			<div class="headings_pink" >
@@ -103,21 +82,20 @@ body{
 					<div class="thanks_steps step1" style="display:none;">
 						<img src="/images/thanks_step1.png">
 						<p class="thanks_steps_text">
-							Check your email for the shipping label
+							Print out the prepaid shipping label.
 						</p>
 					</div>
 
 					<div class="thanks_steps step2" style="display:none;">
 						<img src="/images/thanks_step2.png">
 						<p class="thanks_steps_text">
-							Ship your product out immediately
-						</p>
+Box the device and paste your prepaid shipping label on the box. It's time to send your the device to us!						</p>
 					</div>
 
 					<div class="thanks_steps step3" style="display:none;">
 						<img src="/images/thanks_step3.png">
 						<p class="thanks_steps_text">
-							Your order will be shipped as soon as we receive your items
+							Receive your cash within 30 minutes after we get your device. Your cash will be sent to you via Paypal or Certified Check.
 						</p>
 					</div>
 				</div>
