@@ -20,7 +20,7 @@
 			<% end %>	   		 
 	  <% end %>
 	    <% if ShoppingCart.cart_products[:sell].count > 1 %>
-		    <button class="prev product_button_buy" style="width: 30px;position: absolute;top:10px;left:-140px;z-index: 1000">&lt;</button>
+		    <button class="prev product_button_buy" style="width: 30px;position: absolute;top:10px;left:-150px;z-index: 1000">&lt;</button>
 		    <button class="next product_button_buy" style="width: 30px;position: absolute;top: 10px;left:30px;z-index: 1000;">&gt;</button>
 	 	  <% end %>
 	    <div class="order_sell_display" style="width: 100%;margin: auto; margin-left: -5px;">
@@ -49,7 +49,11 @@
 				<% end %>	   		 
 		  <% end %>
 		  	<% if ShoppingCart.cart_products[:buy].count > 1 %>
-				  <button class="prev_buy product_button_buy" style="width: 30px;top: 10px;right:170px;position: absolute;z-index: 1000">&lt;</button>
+		  		<% if session[:shop_type]=="swap" %>
+				  	<button class="prev_buy product_button_buy" style="width: 30px;top: 10px;right:170px;position: absolute;z-index: 1000; left: -110px">&lt;</button>
+				  <% else %>
+				  	<button class="prev_buy product_button_buy" style="width: 30px;top: 10px;right:170px;position: absolute;z-index: 1000; left: -150px">&lt;</button>
+				  <% end %>
 				  <button class="next_buy product_button_buy"style="width: 30px;top: 10px;right:0px;position: absolute;z-index: 1000">&gt;</button>
 		  	<% end %>
 		  <% if session[:shop_type] == "swap" %>
