@@ -23,7 +23,10 @@
 	console.log(shop_type);
 	sell_item_count = $("#sell-items").find('ul.sell-item li').length;
 	buy_item_count = $("#buy-items").find('ul.buy-item li').length;
-	$("#product_count").html(sell_item_count+buy_item_count);
+	if ( sell_item_count+buy_item_count > 0 )
+		$("#product_count").html(sell_item_count+buy_item_count);
+	else
+		$("#product_count").html("");
 /	if(shop_type=="sell"){
 /		$("#buy-items").hide();
 /		$("#sell-items").show();		
