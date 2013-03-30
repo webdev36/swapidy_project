@@ -17,7 +17,9 @@ class ProductModel < ActiveRecord::Base
   def for_sell?
     self.products.for_sell.count > 0
   end
-
+  def for_sell_only?
+    self.products.for_sell_only.count > 0
+  end
   def main_image_url(type)
     main_image.photo.url(type)
   end

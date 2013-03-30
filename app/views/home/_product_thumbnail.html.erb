@@ -1,8 +1,8 @@
 <div class="item thumbnail product_filter_model_<%= product.product_model.id %> 
- <%= "for_buying" if product.for_buys? %> 
- <%= "for_selling" if product.for_sells? %>  
- <%= "for_sell_only" if product.for_sells_only? %>
- ">
+  <%= product.gen_attribute_filter_ids %>
+  <%= "for_buying" if product.for_buys? %> 
+  <%= "for_selling" if product.for_sells? %>  
+  <%= "for_sell_only" if product.for_sells_only? %>">
   <div class="box" >
     <div class="product_title" style="color:#fa3e6e; font-family:'myriad-s'; font-size:15px;" title="<%= product.title %>"><%= product.title %></div>
     <div class="product_image thumbnail"><img title="<%= product.title %>" src="<%= product.main_image_url(:thumb) %>"></div>
