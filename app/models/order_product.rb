@@ -24,7 +24,7 @@ class OrderProduct < ActiveRecord::Base
   def title
     result = self.product.title if self.product && !self.product.title.blank?
     result = "#{self.product.category.title} #{self.product.product_model.title}" if result.nil? && self.product && self.product.product_model
-#    return "#{result} (#{product.flaw_less_name})" if for_buy?
+    #return "#{result} (#{product.flaw_less_name})" if for_buy?
     "#{result} (#{using_condition})"
   end
   
