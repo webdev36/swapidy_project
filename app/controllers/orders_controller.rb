@@ -95,7 +95,8 @@ class OrdersController < ApplicationController
               OrderNotifier.start_processing_for_admin(@order,session[:shop_type]).deliver
               ShoppingCart.clear_cart_products 
             end
-          end        
+          end 
+          sleep 20
           redirect_to "/orders/#{@order.id}"
           rescue Exception => e
             @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
