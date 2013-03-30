@@ -15,7 +15,11 @@
   <div class="confirm_image_container" style="margin-top:55px;">
     <%= render :partial => "/orders/order_product_images" %>
   </div>
+  <% if session[:shop_type] == "swap" %>
+  <div class="confirm_container" style="bottom: 440px; left: 260px; margin-left: 250px; margin-top: 0px;">
+  <% else %>
   <div class="confirm_container" style="bottom: 220px;">
+  <% end %>
     <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
     <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
     
