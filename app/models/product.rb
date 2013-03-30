@@ -184,5 +184,6 @@ class Product < ActiveRecord::Base
   def weight_lb
     product_model.weight_lb
   end
-
 end
+
+
