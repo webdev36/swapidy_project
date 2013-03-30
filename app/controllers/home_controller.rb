@@ -90,6 +90,7 @@ class HomeController < ApplicationController
   end
   def clear_checkout_item    
     @return_content = []
+    
     session[:cart_products][:buy] = []
     session[:cart_products][:sell] = []
     
@@ -98,7 +99,7 @@ class HomeController < ApplicationController
         #@return_content[0] = render_to_string(:partial => "/home/shopping_cart")
         @return_content[1] = render_to_string(:partial => "/layouts/shopping_cart")
         @return_content
-      }
+      }      
     end
   end
 end

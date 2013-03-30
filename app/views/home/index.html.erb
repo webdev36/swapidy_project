@@ -531,6 +531,26 @@
 		}	
 	}
 
+	function clearItems(){
+		if( sell_item_count+buy_item_count > 0){
+			var url_ajax = '/home/clear_checkout_item';	
+			$.ajax({
+				url :url_ajax,
+				beforeSend : function(xhr) {
+			    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+		  	},
+				type: "POST",
+				dataType:'script',
+				success :function(){
+
+				}
+			});
+		}else{
+			return
+		}
+		return
+	}
+
 	function showScreenToTrade(){
 		setCookie("shop_type", "swap", 1);
 		$("#category_page_title").text("What do you want to swap today?");
@@ -541,19 +561,8 @@
   		$("#continue_button").text("Choose Products to buy");
   	}else{
   		$("#continue_button").text("Continue to swap");
-  	}
-  	var url_ajax = '/home/clear_checkout_item';	
-		$.ajax({
-			url :url_ajax,
-			beforeSend : function(xhr) {
-		    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-	  	},
-			type: "POST",
-			dataType:'script',
-			success :function(){
-
-			}
-		});
+  	}  	
+  	clearItems();
   	showScreenToSell('scroll');
 	}
 
@@ -566,19 +575,7 @@
   		setCookie("shop_type", "buy", 1);
   		$("#category_page_title").html("What do you want to buy today?");
   		$("#continue_button").css("display", "none");
-		 	var url_ajax = '/home/clear_checkout_item';	
-			$.ajax({
-				url :url_ajax,
-				beforeSend : function(xhr) {
-			    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-		  	},
-				type: "POST",
-				dataType:'script',
-				success :function(){
-					
-				}
-			});
-
+		 	clearItems();
   	}  		
   	var sell_count = $('#shopping_cart').find('.sell_display li').length;
 	  
@@ -665,18 +662,7 @@
  }
  function showScreenToSellOnly(scroll) {
 	$("#category_page_title").text("What do you want to sell today?");
- 	var url_ajax = '/home/clear_checkout_item';	
-	$.ajax({
-		url :url_ajax,
-		beforeSend : function(xhr) {
-	    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-  	},
-		type: "POST",
-		dataType:'script',
-		success :function(){
-		}
-	});
-
+ 	clearItems();
 
   	setCookie("shop_type", "sell", 1);
   	$("#continue_button").css("display", "none");
