@@ -68,8 +68,8 @@ class OrdersController < ApplicationController
 
             if @order.save
                 @order.create_stamp_to_deliver(session[:shop_type])
-                OrderNotifier.start_processing(@order, session[:shop_type]).deliver
-                OrderNotifier.start_processing_for_admin(@order, session[:shop_type]).deliver
+                OrderNotifier.delay.start_processing(@order, session[:shop_type])
+                OrderNotifier.delay.start_processing_for_admin(@order, session[:shop_type])
                 ShoppingCart.clear_cart_products 
              end
           end          
