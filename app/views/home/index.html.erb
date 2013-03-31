@@ -191,17 +191,17 @@
         	Sorry, this product is not available.
         	<a href="/contact_us" style="color: #1D95CB">Contact us</a> so we can add it. Please make sure to mention the specs.
         </div>
-
+				<% cache("homepage_product_container_category_#{category.id}", :expires_in => 1.hour) do %>
           <div class="product_container">
             <div id="products" class="isotope" style="padding-bottom: 150px;">
               <% category.products.each do |product| %>
-
-                  <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>
-                <% end %>
-
+	              <% cache("homepage_product_thumb_#{product.id}") do %>
+	                <%= render :partial => "/home/product_thumbnail.html", :locals => {:product => product} %>
+              	<% end %>
+              <% end %>
             </div>
           </div>
-
+        <% end %>
       </div>
     </div>
 <% end %>
