@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
             end
 
             if @order.save
-                @order.create_stamp_to_deliver(session[:shop_type])
+                @order.delay.create_stamp_to_deliver(session[:shop_type])
                 OrderNotifier.delay.start_processing(@order, session[:shop_type])
                 OrderNotifier.delay.start_processing_for_admin(@order, session[:shop_type])
                 ShoppingCart.clear_cart_products 
@@ -91,7 +91,7 @@ class OrdersController < ApplicationController
             end            
             if @order.save
               @order.do_payment
-              @order.create_stamp_to_deliver(session[:shop_type])
+              @order.delay.create_stamp_to_deliver(session[:shop_type])
               OrderNotifier.delay.start_processing(@order, session[:shop_type])
               OrderNotifier.delay.start_processing_for_admin(@order,session[:shop_type])
               ShoppingCart.clear_cart_products
