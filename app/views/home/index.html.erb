@@ -114,7 +114,7 @@
       <div class="viewport">
         <ul class="overview" style="width: 1560px;">
           <% Category.sorted.each_with_index do |category, index| %>
-            <li id="cat_<%= category.id %>" class="item category span3" >
+            <li id="cat_<%= category.id %>" class="item category span3" style="background:#f5f5f5;" >
               <img class="cat_item" alt="<%= category.title %>" style="height: 160px; width: auto;" src="<%= category.main_image_url(:medium) %>">
               <div style="display:block;">
                 <%= category.title %>
@@ -216,7 +216,7 @@
 	$(document).ready(function() {
 		
 		$("#dropdown_shop_cart_icon").popover({
-      title: 'Please Checkout now', 
+      title: 'Your product has been added', 
       content: "Your product has been added. Click icon to checkout now!", placement:'bottom', 
       delay: { show: 5000, hide: 3000 }
     });
