@@ -49,12 +49,7 @@
   		</span>			
 		
   	<% else %>
-  		<br/>
-			<%= number_to_currency(current_user.balance_amount) %> 
-  			+ <%= number_to_currency(ShoppingCart.sell_cart_amount) %> 
-  			- <%= number_to_currency(ShoppingCart.buy_cart_amount) %> 
-  			= <%= number_to_currency(current_user.balance_amount - ShoppingCart.cart_amount) %>
-	  	<br />
+  		
 			<br />	
 				
 					<label style="color:#666; font-family:'myriad';" >Total due today: </label>
