@@ -9,7 +9,7 @@
           <img src="/images/questions.png"></a>
         </li>  
         <li>
-          <a href="javascript:refresh_how_it_works();">HOW IT WORKS</a>
+          <a href="javascript:showPopup('popup-main_hiw');">HOW IT WORKS</a>
         </li>
         <li class="divider-vertical"></li>
 
@@ -198,6 +198,16 @@
     <div class="container" style="background:url('/images/popup-bg.png') repeat; border-radius: 10px; padding: 30px 30px; position:fixed; top:20px; height:400px;" >
       <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
       <%= render :partial => "/home/how_buy_works" %>
+    </div>
+  </div>
+</div>
+
+
+<div id="popup-main_hiw" style="display:none; width: 0px; padding: 0px;" class="popup-box-wrapper standard-popup">
+  <div id="dialog-content">
+    <div class="container" style="background:url('/images/popup-bg.png') repeat; border-radius: 10px; padding: 30px 30px; position:fixed; top:20px; height:600px;" >
+      <a class="close-popup" onclick="hidePopup();" href="#" title="Cancel">Cancel</a>
+      <%= render :partial => "/home/main_hiw" %>
     </div>
   </div>
 </div>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Action Controller: Exception caught</title>
+  <style>
+    body { background-color: #fff; color: #333; }
+
+    body, p, ol, ul, td {
+      font-family: helvetica, verdana, arial, sans-serif;
+      font-size:   13px;
+      line-height: 18px;
+    }
+
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      font-size: 11px;
+      white-space: pre-wrap;
+    }
+
+    a { color: #000; }
+    a:visited { color: #666; }
+    a:hover { color: #fff; background-color:#000; }
+  </style>
+</head>
+<body>
+
+<h1>
+  ActionView::MissingTemplate in
+  Home#index
+</h1>
+
+<p>
+  Showing <i>/Users/pulkitjaiswal/Desktop/swapidy/app/views/layouts/_header.html.erb</i> where line <b>#210</b> raised:
+  <pre><code>Missing partial /home/main_hiw with {:locale=&gt;[:en], :formats=&gt;[:html], :handlers=&gt;[:erb, :builder, :coffee, :haml]}. Searched in:
+  * &quot;/Users/pulkitjaiswal/Desktop/swapidy/app/views&quot;
+  * &quot;/Users/pulkitjaiswal/.rvm/gems/ruby-1.9.3-p385/gems/rails_admin-0.4.0/app/views&quot;
+  * &quot;/Users/pulkitjaiswal/.rvm/gems/ruby-1.9.3-p385/gems/kaminari-0.14.1/app/views&quot;
+  * &quot;/Users/pulkitjaiswal/.rvm/gems/ruby-1.9.3-p385/gems/devise-2.2.0/app/views&quot;
+</code></pre>
+</p>
+
+<p>Extracted source (around line <b>#210</b>):
+<pre><code>207:   &lt;div id=&quot;dialog-content&quot;&gt;
+208:     &lt;div class=&quot;container&quot; style=&quot;background:url(&#x27;/images/popup-bg.png&#x27;) repeat; border-radius: 10px; padding: 30px 30px; position:fixed; top:20px; height:400px;&quot; &gt;
+209:       &lt;a class=&quot;close-popup&quot; onclick=&quot;hidePopup();&quot; href=&quot;#&quot; title=&quot;Cancel&quot;&gt;Cancel&lt;/a&gt;
+210:       &lt;%= render :partial =&gt; &quot;/home/main_hiw&quot; %&gt;
+211:     &lt;/div&gt;
+212:   &lt;/div&gt;
+213: &lt;/div&gt;
+</code></pre></p>
+
+<p>Trace of template inclusion: app/views/layouts/application_with_slider.html.erb</p>
+
+
+<p><code>Rails.root: /Users/pulkitjaiswal/Desktop/swapidy</code></p>
+
+<div id="traces">
+    <a href="#" onclick="document.getElementById(&#x27;Framework-Trace&#x27;).style.display=&#x27;none&#x27;;document.getElementById(&#x27;Full-Trace&#x27;).style.display=&#x27;none&#x27;;document.getElementById(&#x27;Application-Trace&#x27;).style.display=&#x27;block&#x27;;; return false;">Application Trace</a> |
+    <a href="#" onclick="document.getElementById(&#x27;Application-Trace&#x27;).style.display=&#x27;none&#x27;;document.getElementById(&#x27;Full-Trace&#x27;).style.display=&#x27;none&#x27;;document.getElementById(&#x27;Framework-Trace&#x27;).style.display=&#x27;block&#x27;;; return false;">Framework Trace</a> |
+    <a href="#" onclick="document.getElementById(&#x27;Application-Trace&#x27;).style.display=&#x27;none&#x27;;document.getElementById(&#x27;Framework-Trace&#x27;).style.display=&#x27;none&#x27;;document.getElementById(&#x27;Full-Trace&#x27;).style.display=&#x27;block&#x27;;; return false;">Full Trace</a> 
+
+    <div id="Application-Trace" style="display: block;">
+      <pre><code>app/views/layouts/_header.html.erb:210:in `_app_views_layouts__header_html_erb__998522187316975348_70211412193360&#x27;
+app/views/layouts/application_with_slider.html.erb:8:in `_app_views_layouts_application_with_slider_html_erb___79624367100922594_70211518222160&#x27;
+app/controllers/home_controller.rb:10:in `index&#x27;</code></pre>
+    </div>
+    <div id="Framework-Trace" style="display: none;">
+      <pre><code>actionpack (3.2.11) lib/action_view/path_set.rb:58:in `find&#x27;
+actionpack (3.2.11) lib/action_view/lookup_context.rb:109:in `find&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:339:in `find_template&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:333:in `find_partial&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:222:in `render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:41:in `render_partial&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:15:in `render&#x27;
+actionpack (3.2.11) lib/action_view/helpers/rendering_helper.rb:24:in `render&#x27;
+haml (3.1.7) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml&#x27;
+actionpack (3.2.11) lib/action_view/template.rb:145:in `block in render&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:125:in `instrument&#x27;
+actionpack (3.2.11) lib/action_view/template.rb:143:in `render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:265:in `render_partial&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:238:in `block in render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:123:in `block in instrument&#x27;
+activesupport (3.2.11) lib/active_support/notifications/instrumenter.rb:20:in `instrument&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:123:in `instrument&#x27;
+actionpack (3.2.11) lib/action_view/renderer/abstract_renderer.rb:38:in `instrument&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:237:in `render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:41:in `render_partial&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:15:in `render&#x27;
+actionpack (3.2.11) lib/action_view/helpers/rendering_helper.rb:24:in `render&#x27;
+haml (3.1.7) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml&#x27;
+actionpack (3.2.11) lib/action_view/template.rb:145:in `block in render&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:125:in `instrument&#x27;
+actionpack (3.2.11) lib/action_view/template.rb:143:in `render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/template_renderer.rb:59:in `render_with_layout&#x27;
+actionpack (3.2.11) lib/action_view/renderer/template_renderer.rb:45:in `render_template&#x27;
+actionpack (3.2.11) lib/action_view/renderer/template_renderer.rb:18:in `render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:36:in `render_template&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:17:in `render&#x27;
+actionpack (3.2.11) lib/abstract_controller/rendering.rb:110:in `_render_template&#x27;
+actionpack (3.2.11) lib/action_controller/metal/streaming.rb:225:in `_render_template&#x27;
+actionpack (3.2.11) lib/abstract_controller/rendering.rb:103:in `render_to_body&#x27;
+actionpack (3.2.11) lib/action_controller/metal/renderers.rb:28:in `render_to_body&#x27;
+actionpack (3.2.11) lib/action_controller/metal/compatibility.rb:50:in `render_to_body&#x27;
+actionpack (3.2.11) lib/abstract_controller/rendering.rb:88:in `render&#x27;
+actionpack (3.2.11) lib/action_controller/metal/rendering.rb:16:in `render&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:40:in `block (2 levels) in render&#x27;
+activesupport (3.2.11) lib/active_support/core_ext/benchmark.rb:5:in `block in ms&#x27;
+/Users/pulkitjaiswal/.rvm/rubies/ruby-1.9.3-p385/lib/ruby/1.9.1/benchmark.rb:295:in `realtime&#x27;
+activesupport (3.2.11) lib/active_support/core_ext/benchmark.rb:5:in `ms&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:40:in `block in render&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:83:in `cleanup_view_runtime&#x27;
+activerecord (3.2.11) lib/active_record/railties/controller_runtime.rb:24:in `cleanup_view_runtime&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:39:in `render&#x27;
+wicked_pdf (0.9.2) lib/pdf_helper.rb:23:in `render_with_wicked_pdf&#x27;
+actionpack (3.2.11) lib/action_controller/metal/implicit_render.rb:4:in `send_action&#x27;
+actionpack (3.2.11) lib/abstract_controller/base.rb:167:in `process_action&#x27;
+actionpack (3.2.11) lib/action_controller/metal/rendering.rb:10:in `process_action&#x27;
+actionpack (3.2.11) lib/abstract_controller/callbacks.rb:18:in `block in process_action&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:447:in `_run__2076713654250727289__process_action__2950905005176792853__callbacks&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:405:in `__run_callback&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:81:in `run_callbacks&#x27;
+actionpack (3.2.11) lib/abstract_controller/callbacks.rb:17:in `process_action&#x27;
+actionpack (3.2.11) lib/action_controller/metal/rescue.rb:29:in `process_action&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:123:in `block in instrument&#x27;
+activesupport (3.2.11) lib/active_support/notifications/instrumenter.rb:20:in `instrument&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:123:in `instrument&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:29:in `process_action&#x27;
+actionpack (3.2.11) lib/action_controller/metal/params_wrapper.rb:207:in `process_action&#x27;
+activerecord (3.2.11) lib/active_record/railties/controller_runtime.rb:18:in `process_action&#x27;
+actionpack (3.2.11) lib/abstract_controller/base.rb:121:in `process&#x27;
+actionpack (3.2.11) lib/abstract_controller/rendering.rb:45:in `process&#x27;
+actionpack (3.2.11) lib/action_controller/metal.rb:203:in `dispatch&#x27;
+actionpack (3.2.11) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch&#x27;
+actionpack (3.2.11) lib/action_controller/metal.rb:246:in `block in action&#x27;
+actionpack (3.2.11) lib/action_dispatch/routing/route_set.rb:73:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/routing/route_set.rb:73:in `dispatch&#x27;
+actionpack (3.2.11) lib/action_dispatch/routing/route_set.rb:36:in `call&#x27;
+journey (1.0.4) lib/journey/router.rb:68:in `block in call&#x27;
+journey (1.0.4) lib/journey/router.rb:56:in `each&#x27;
+journey (1.0.4) lib/journey/router.rb:56:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/routing/route_set.rb:601:in `call&#x27;
+rack-pjax (0.7.0) lib/rack/pjax.rb:12:in `call&#x27;
+omniauth (1.1.1) lib/omniauth/strategy.rb:177:in `call!&#x27;
+omniauth (1.1.1) lib/omniauth/strategy.rb:157:in `call&#x27;
+sass (3.2.5) lib/sass/plugin/rack.rb:54:in `call&#x27;
+warden (1.2.1) lib/warden/manager.rb:35:in `block in call&#x27;
+warden (1.2.1) lib/warden/manager.rb:34:in `catch&#x27;
+warden (1.2.1) lib/warden/manager.rb:34:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call&#x27;
+rack (1.4.3) lib/rack/etag.rb:23:in `call&#x27;
+rack (1.4.3) lib/rack/conditionalget.rb:25:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/head.rb:14:in `call&#x27;
+remotipart (1.0.2) lib/remotipart/middleware.rb:30:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/params_parser.rb:21:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/flash.rb:242:in `call&#x27;
+rack (1.4.3) lib/rack/session/abstract/id.rb:210:in `context&#x27;
+rack (1.4.3) lib/rack/session/abstract/id.rb:205:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/cookies.rb:341:in `call&#x27;
+activerecord (3.2.11) lib/active_record/query_cache.rb:64:in `call&#x27;
+activerecord (3.2.11) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:405:in `_run__2296695645381619706__call__123773277448312757__callbacks&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:405:in `__run_callback&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:385:in `_run_call_callbacks&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:81:in `run_callbacks&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/callbacks.rb:27:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/reloader.rb:65:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/remote_ip.rb:31:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call&#x27;
+railties (3.2.11) lib/rails/rack/logger.rb:32:in `call_app&#x27;
+railties (3.2.11) lib/rails/rack/logger.rb:16:in `block in call&#x27;
+activesupport (3.2.11) lib/active_support/tagged_logging.rb:22:in `tagged&#x27;
+railties (3.2.11) lib/rails/rack/logger.rb:16:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/request_id.rb:22:in `call&#x27;
+rack (1.4.3) lib/rack/methodoverride.rb:21:in `call&#x27;
+rack (1.4.3) lib/rack/runtime.rb:17:in `call&#x27;
+activesupport (3.2.11) lib/active_support/cache/strategy/local_cache.rb:72:in `call&#x27;
+rack (1.4.3) lib/rack/lock.rb:15:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/static.rb:62:in `call&#x27;
+rack-cache (1.2) lib/rack/cache/context.rb:136:in `forward&#x27;
+rack-cache (1.2) lib/rack/cache/context.rb:245:in `fetch&#x27;
+rack-cache (1.2) lib/rack/cache/context.rb:185:in `lookup&#x27;
+rack-cache (1.2) lib/rack/cache/context.rb:66:in `call!&#x27;
+rack-cache (1.2) lib/rack/cache/context.rb:51:in `call&#x27;
+railties (3.2.11) lib/rails/engine.rb:479:in `call&#x27;
+railties (3.2.11) lib/rails/application.rb:223:in `call&#x27;
+rack (1.4.3) lib/rack/content_length.rb:14:in `call&#x27;
+railties (3.2.11) lib/rails/rack/log_tailer.rb:17:in `call&#x27;
+thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process&#x27;
+thin (1.5.0) lib/thin/connection.rb:79:in `catch&#x27;
+thin (1.5.0) lib/thin/connection.rb:79:in `pre_process&#x27;
+thin (1.5.0) lib/thin/connection.rb:54:in `process&#x27;
+thin (1.5.0) lib/thin/connection.rb:39:in `receive_data&#x27;
+eventmachine (1.0.0) lib/eventmachine.rb:187:in `run_machine&#x27;
+eventmachine (1.0.0) lib/eventmachine.rb:187:in `run&#x27;
+thin (1.5.0) lib/thin/backends/base.rb:63:in `start&#x27;
+thin (1.5.0) lib/thin/server.rb:159:in `start&#x27;
+rack (1.4.3) lib/rack/handler/thin.rb:13:in `run&#x27;
+rack (1.4.3) lib/rack/server.rb:268:in `start&#x27;
+railties (3.2.11) lib/rails/commands/server.rb:70:in `start&#x27;
+railties (3.2.11) lib/rails/commands.rb:55:in `block in &lt;top (required)&gt;&#x27;
+railties (3.2.11) lib/rails/commands.rb:50:in `tap&#x27;
+railties (3.2.11) lib/rails/commands.rb:50:in `&lt;top (required)&gt;&#x27;
+script/rails:6:in `require&#x27;
+script/rails:6:in `&lt;main&gt;&#x27;</code></pre>
+    </div>
+    <div id="Full-Trace" style="display: none;">
+      <pre><code>actionpack (3.2.11) lib/action_view/path_set.rb:58:in `find&#x27;
+actionpack (3.2.11) lib/action_view/lookup_context.rb:109:in `find&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:339:in `find_template&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:333:in `find_partial&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:222:in `render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:41:in `render_partial&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:15:in `render&#x27;
+actionpack (3.2.11) lib/action_view/helpers/rendering_helper.rb:24:in `render&#x27;
+haml (3.1.7) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml&#x27;
+app/views/layouts/_header.html.erb:210:in `_app_views_layouts__header_html_erb__998522187316975348_70211412193360&#x27;
+actionpack (3.2.11) lib/action_view/template.rb:145:in `block in render&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:125:in `instrument&#x27;
+actionpack (3.2.11) lib/action_view/template.rb:143:in `render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:265:in `render_partial&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:238:in `block in render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:123:in `block in instrument&#x27;
+activesupport (3.2.11) lib/active_support/notifications/instrumenter.rb:20:in `instrument&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:123:in `instrument&#x27;
+actionpack (3.2.11) lib/action_view/renderer/abstract_renderer.rb:38:in `instrument&#x27;
+actionpack (3.2.11) lib/action_view/renderer/partial_renderer.rb:237:in `render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:41:in `render_partial&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:15:in `render&#x27;
+actionpack (3.2.11) lib/action_view/helpers/rendering_helper.rb:24:in `render&#x27;
+haml (3.1.7) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml&#x27;
+app/views/layouts/application_with_slider.html.erb:8:in `_app_views_layouts_application_with_slider_html_erb___79624367100922594_70211518222160&#x27;
+actionpack (3.2.11) lib/action_view/template.rb:145:in `block in render&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:125:in `instrument&#x27;
+actionpack (3.2.11) lib/action_view/template.rb:143:in `render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/template_renderer.rb:59:in `render_with_layout&#x27;
+actionpack (3.2.11) lib/action_view/renderer/template_renderer.rb:45:in `render_template&#x27;
+actionpack (3.2.11) lib/action_view/renderer/template_renderer.rb:18:in `render&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:36:in `render_template&#x27;
+actionpack (3.2.11) lib/action_view/renderer/renderer.rb:17:in `render&#x27;
+actionpack (3.2.11) lib/abstract_controller/rendering.rb:110:in `_render_template&#x27;
+actionpack (3.2.11) lib/action_controller/metal/streaming.rb:225:in `_render_template&#x27;
+actionpack (3.2.11) lib/abstract_controller/rendering.rb:103:in `render_to_body&#x27;
+actionpack (3.2.11) lib/action_controller/metal/renderers.rb:28:in `render_to_body&#x27;
+actionpack (3.2.11) lib/action_controller/metal/compatibility.rb:50:in `render_to_body&#x27;
+actionpack (3.2.11) lib/abstract_controller/rendering.rb:88:in `render&#x27;
+actionpack (3.2.11) lib/action_controller/metal/rendering.rb:16:in `render&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:40:in `block (2 levels) in render&#x27;
+activesupport (3.2.11) lib/active_support/core_ext/benchmark.rb:5:in `block in ms&#x27;
+/Users/pulkitjaiswal/.rvm/rubies/ruby-1.9.3-p385/lib/ruby/1.9.1/benchmark.rb:295:in `realtime&#x27;
+activesupport (3.2.11) lib/active_support/core_ext/benchmark.rb:5:in `ms&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:40:in `block in render&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:83:in `cleanup_view_runtime&#x27;
+activerecord (3.2.11) lib/active_record/railties/controller_runtime.rb:24:in `cleanup_view_runtime&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:39:in `render&#x27;
+wicked_pdf (0.9.2) lib/pdf_helper.rb:23:in `render_with_wicked_pdf&#x27;
+app/controllers/home_controller.rb:10:in `index&#x27;
+actionpack (3.2.11) lib/action_controller/metal/implicit_render.rb:4:in `send_action&#x27;
+actionpack (3.2.11) lib/abstract_controller/base.rb:167:in `process_action&#x27;
+actionpack (3.2.11) lib/action_controller/metal/rendering.rb:10:in `process_action&#x27;
+actionpack (3.2.11) lib/abstract_controller/callbacks.rb:18:in `block in process_action&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:447:in `_run__2076713654250727289__process_action__2950905005176792853__callbacks&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:405:in `__run_callback&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:81:in `run_callbacks&#x27;
+actionpack (3.2.11) lib/abstract_controller/callbacks.rb:17:in `process_action&#x27;
+actionpack (3.2.11) lib/action_controller/metal/rescue.rb:29:in `process_action&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:123:in `block in instrument&#x27;
+activesupport (3.2.11) lib/active_support/notifications/instrumenter.rb:20:in `instrument&#x27;
+activesupport (3.2.11) lib/active_support/notifications.rb:123:in `instrument&#x27;
+actionpack (3.2.11) lib/action_controller/metal/instrumentation.rb:29:in `process_action&#x27;
+actionpack (3.2.11) lib/action_controller/metal/params_wrapper.rb:207:in `process_action&#x27;
+activerecord (3.2.11) lib/active_record/railties/controller_runtime.rb:18:in `process_action&#x27;
+actionpack (3.2.11) lib/abstract_controller/base.rb:121:in `process&#x27;
+actionpack (3.2.11) lib/abstract_controller/rendering.rb:45:in `process&#x27;
+actionpack (3.2.11) lib/action_controller/metal.rb:203:in `dispatch&#x27;
+actionpack (3.2.11) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch&#x27;
+actionpack (3.2.11) lib/action_controller/metal.rb:246:in `block in action&#x27;
+actionpack (3.2.11) lib/action_dispatch/routing/route_set.rb:73:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/routing/route_set.rb:73:in `dispatch&#x27;
+actionpack (3.2.11) lib/action_dispatch/routing/route_set.rb:36:in `call&#x27;
+journey (1.0.4) lib/journey/router.rb:68:in `block in call&#x27;
+journey (1.0.4) lib/journey/router.rb:56:in `each&#x27;
+journey (1.0.4) lib/journey/router.rb:56:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/routing/route_set.rb:601:in `call&#x27;
+rack-pjax (0.7.0) lib/rack/pjax.rb:12:in `call&#x27;
+omniauth (1.1.1) lib/omniauth/strategy.rb:177:in `call!&#x27;
+omniauth (1.1.1) lib/omniauth/strategy.rb:157:in `call&#x27;
+sass (3.2.5) lib/sass/plugin/rack.rb:54:in `call&#x27;
+warden (1.2.1) lib/warden/manager.rb:35:in `block in call&#x27;
+warden (1.2.1) lib/warden/manager.rb:34:in `catch&#x27;
+warden (1.2.1) lib/warden/manager.rb:34:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call&#x27;
+rack (1.4.3) lib/rack/etag.rb:23:in `call&#x27;
+rack (1.4.3) lib/rack/conditionalget.rb:25:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/head.rb:14:in `call&#x27;
+remotipart (1.0.2) lib/remotipart/middleware.rb:30:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/params_parser.rb:21:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/flash.rb:242:in `call&#x27;
+rack (1.4.3) lib/rack/session/abstract/id.rb:210:in `context&#x27;
+rack (1.4.3) lib/rack/session/abstract/id.rb:205:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/cookies.rb:341:in `call&#x27;
+activerecord (3.2.11) lib/active_record/query_cache.rb:64:in `call&#x27;
+activerecord (3.2.11) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:405:in `_run__2296695645381619706__call__123773277448312757__callbacks&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:405:in `__run_callback&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:385:in `_run_call_callbacks&#x27;
+activesupport (3.2.11) lib/active_support/callbacks.rb:81:in `run_callbacks&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/callbacks.rb:27:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/reloader.rb:65:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/remote_ip.rb:31:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call&#x27;
+railties (3.2.11) lib/rails/rack/logger.rb:32:in `call_app&#x27;
+railties (3.2.11) lib/rails/rack/logger.rb:16:in `block in call&#x27;
+activesupport (3.2.11) lib/active_support/tagged_logging.rb:22:in `tagged&#x27;
+railties (3.2.11) lib/rails/rack/logger.rb:16:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/request_id.rb:22:in `call&#x27;
+rack (1.4.3) lib/rack/methodoverride.rb:21:in `call&#x27;
+rack (1.4.3) lib/rack/runtime.rb:17:in `call&#x27;
+activesupport (3.2.11) lib/active_support/cache/strategy/local_cache.rb:72:in `call&#x27;
+rack (1.4.3) lib/rack/lock.rb:15:in `call&#x27;
+actionpack (3.2.11) lib/action_dispatch/middleware/static.rb:62:in `call&#x27;
+rack-cache (1.2) lib/rack/cache/context.rb:136:in `forward&#x27;
+rack-cache (1.2) lib/rack/cache/context.rb:245:in `fetch&#x27;
+rack-cache (1.2) lib/rack/cache/context.rb:185:in `lookup&#x27;
+rack-cache (1.2) lib/rack/cache/context.rb:66:in `call!&#x27;
+rack-cache (1.2) lib/rack/cache/context.rb:51:in `call&#x27;
+railties (3.2.11) lib/rails/engine.rb:479:in `call&#x27;
+railties (3.2.11) lib/rails/application.rb:223:in `call&#x27;
+rack (1.4.3) lib/rack/content_length.rb:14:in `call&#x27;
+railties (3.2.11) lib/rails/rack/log_tailer.rb:17:in `call&#x27;
+thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process&#x27;
+thin (1.5.0) lib/thin/connection.rb:79:in `catch&#x27;
+thin (1.5.0) lib/thin/connection.rb:79:in `pre_process&#x27;
+thin (1.5.0) lib/thin/connection.rb:54:in `process&#x27;
+thin (1.5.0) lib/thin/connection.rb:39:in `receive_data&#x27;
+eventmachine (1.0.0) lib/eventmachine.rb:187:in `run_machine&#x27;
+eventmachine (1.0.0) lib/eventmachine.rb:187:in `run&#x27;
+thin (1.5.0) lib/thin/backends/base.rb:63:in `start&#x27;
+thin (1.5.0) lib/thin/server.rb:159:in `start&#x27;
+rack (1.4.3) lib/rack/handler/thin.rb:13:in `run&#x27;
+rack (1.4.3) lib/rack/server.rb:268:in `start&#x27;
+railties (3.2.11) lib/rails/commands/server.rb:70:in `start&#x27;
+railties (3.2.11) lib/rails/commands.rb:55:in `block in &lt;top (required)&gt;&#x27;
+railties (3.2.11) lib/rails/commands.rb:50:in `tap&#x27;
+railties (3.2.11) lib/rails/commands.rb:50:in `&lt;top (required)&gt;&#x27;
+script/rails:6:in `require&#x27;
+script/rails:6:in `&lt;main&gt;&#x27;</code></pre>
+    </div>
+</div>
+
+
+
+<h2 style="margin-top: 30px">Request</h2>
+<p><b>Parameters</b>: <pre>None</pre></p>
+
+<p><a href="#" onclick="document.getElementById('session_dump').style.display='block'; return false;">Show session dump</a></p>
+<div id="session_dump" style="display:none"><pre>_csrf_token: &quot;4yVoKCdPfxKAPNBltjsL7XIxfmFP/d7A9x6eoBPkpio=&quot;
+session_id: &quot;c9157a099aa67f7d1ba99723a158d7fe&quot;</pre></div>
+
+<p><a href="#" onclick="document.getElementById('env_dump').style.display='block'; return false;">Show env dump</a></p>
+<div id="env_dump" style="display:none"><pre>GATEWAY_INTERFACE: &quot;CGI/1.2&quot;
+HTTP_ACCEPT: &quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;
+HTTP_ACCEPT_CHARSET: &quot;ISO-8859-1,utf-8;q=0.7,*;q=0.3&quot;
+HTTP_ACCEPT_ENCODING: &quot;gzip,deflate,sdch&quot;
+HTTP_ACCEPT_LANGUAGE: &quot;en-US,en;q=0.8&quot;
+HTTP_CACHE_CONTROL: &quot;max-age=0&quot;
+REMOTE_ADDR: &quot;127.0.0.1&quot;
+SERVER_NAME: &quot;localhost&quot;
+SERVER_PROTOCOL: &quot;HTTP/1.1&quot;</pre></div>
+
+
+<h2 style="margin-top: 30px">Response</h2>
+<p><b>Headers</b>: <pre>None</pre></p>
+
+
+
+</body>
+</html>
