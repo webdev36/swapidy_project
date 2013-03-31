@@ -29,7 +29,6 @@ class OrderNotifier < ActionMailer::Base
         if shop_type != "buy"
           attachments["Order_#{@order.id}.pdf"] = WickedPdf.new.pdf_from_string(
             render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order.pdf.erb',:orientation => 'Landscape')
-            #render_to_string(:pdf => "Order_#{@order.id}.pdf",:template => '/reports/order_for_deliver.pdf.erb')
           ) 
         end
       end

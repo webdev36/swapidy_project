@@ -65,11 +65,12 @@ class OrdersController < ApplicationController
                                         :using_condition => obj_hash[:using_condition], 
                                         :sell_or_buy => "sell")
             end
+
             if @order.save
                 @order.create_stamp_to_deliver(session[:shop_type])
-                OrderNotifier.start_processing(@order, session[:shop_type]).deliver
-                OrderNotifier.start_processing_for_admin(@order, session[:shop_type]).deliver
-                ShoppingCart.clear_cart_products 
+                OrderNotifier.delay.start_processing(@order, session[:shop_type]).deliver
+                OrderNotifier.delay.start_processing_for_admin(@order, session[:shop_type]).deliver
+                ShoppingCart.delay.clear_cart_products 
              end
           end          
           redirect_to "/orders/#{@order.id}"
@@ -91,9 +92,9 @@ class OrdersController < ApplicationController
             if @order.save
               @order.do_payment
               @order.create_stamp_to_deliver(session[:shop_type])
-              OrderNotifier.start_processing(@order, session[:shop_type]).deliver
-              OrderNotifier.start_processing_for_admin(@order,session[:shop_type]).deliver
-              ShoppingCart.clear_cart_products 
+              OrderNotifier.delay.start_processing(@order, session[:shop_type]).deliver
+              OrderNotifier.delay.start_processing_for_admin(@order,session[:shop_type]).deliver
+              ShoppingCart.delay.clear_cart_products
             end
           end
           redirect_to "/orders/#{@order.id}"
@@ -121,9 +122,9 @@ class OrdersController < ApplicationController
             if @order.save
               @order.do_payment
               @order.create_stamp_to_deliver(session[:shop_type])
-              OrderNotifier.start_processing(@order, session[:shop_type]).deliver
-              OrderNotifier.start_processing_for_admin(@order,session[:shop_type]).deliver
-              ShoppingCart.clear_cart_products 
+              OrderNotifier.delay.start_processing(@order, session[:shop_type]).deliver
+              OrderNotifier.delay.start_processing_for_admin(@order,session[:shop_type]).deliver
+              ShoppingCart.delay.clear_cart_products 
             end
           end
           redirect_to "/orders/#{@order.id}"

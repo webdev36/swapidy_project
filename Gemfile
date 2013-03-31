@@ -28,7 +28,11 @@ gem 'rails_admin_import'
 gem 'savon', '0.8.6'
 gem 'httpi', '0.7.9'
 gem 'multi_json', '~> 1.0'
-gem 'rack-timeout'
+
+gem 'delayed_job_active_record'
+
+#gem 'rack-timeout'
+#gem 'resque'
 #gem 'stamps'
 #gem 'active_shipping'
 

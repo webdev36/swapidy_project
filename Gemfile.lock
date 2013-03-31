@@ -69,6 +69,11 @@ GEM
     crack (0.1.8)
     daemons (1.1.9)
     dalli (2.6.0)
+    delayed_job (3.0.5)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.4.3)
+      activerecord (>= 2.1.0, < 4)
+      delayed_job (~> 3.0)
     devise (2.2.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -167,7 +172,6 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rack-timeout (0.0.3)
     rails (3.2.11)
       actionmailer (= 3.2.11)
       actionpack (= 3.2.11)
@@ -270,6 +274,7 @@ DEPENDENCIES
   carmen-rails
   coffee-rails (~> 3.2.1)
   dalli
+  delayed_job_active_record
   devise
   haml
   httpi (= 0.7.9)
@@ -280,7 +285,6 @@ DEPENDENCIES
   omniauth-facebook
   paperclip
   pg
-  rack-timeout
   rails (= 3.2.11)
   rails_admin
   rails_admin_import
