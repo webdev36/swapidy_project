@@ -70,7 +70,7 @@ class OrdersController < ApplicationController
                 @order.create_stamp_to_deliver(session[:shop_type])
                 OrderNotifier.delay.start_processing(@order, session[:shop_type])
                 OrderNotifier.delay.start_processing_for_admin(@order, session[:shop_type])
-                ShoppingCart.delay.clear_cart_products 
+                ShoppingCart.clear_cart_products 
              end
           end          
           redirect_to "/orders/#{@order.id}"
@@ -94,7 +94,7 @@ class OrdersController < ApplicationController
               @order.create_stamp_to_deliver(session[:shop_type])
               OrderNotifier.delay.start_processing(@order, session[:shop_type])
               OrderNotifier.delay.start_processing_for_admin(@order,session[:shop_type])
-              ShoppingCart.delay.clear_cart_products
+              ShoppingCart.clear_cart_products
             end
           end
           redirect_to "/orders/#{@order.id}"
@@ -124,7 +124,7 @@ class OrdersController < ApplicationController
               @order.create_stamp_to_deliver(session[:shop_type])
               OrderNotifier.delay.start_processing(@order, session[:shop_type])
               OrderNotifier.delay.start_processing_for_admin(@order,session[:shop_type])
-              ShoppingCart.delay.clear_cart_products 
+              ShoppingCart.clear_cart_products 
             end
           end
           redirect_to "/orders/#{@order.id}"
