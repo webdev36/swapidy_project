@@ -71,7 +71,7 @@ class OrdersController < ApplicationController
                 OrderNotifier.start_processing_for_admin(@order, session[:shop_type]).deliver
                 ShoppingCart.clear_cart_products 
              end
-          end
+          end          
           redirect_to "/orders/#{@order.id}"
         rescue Exception => e
           @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
@@ -95,8 +95,7 @@ class OrdersController < ApplicationController
               OrderNotifier.start_processing_for_admin(@order,session[:shop_type]).deliver
               ShoppingCart.clear_cart_products 
             end
-          end 
-          sleep 20
+          end
           redirect_to "/orders/#{@order.id}"
           rescue Exception => e
             @order.errors.add(:shipping_stamp, " has errors to create: #{e.message}")
@@ -118,8 +117,7 @@ class OrdersController < ApplicationController
                                         :price => obj_hash[:price], 
                                         :using_condition => obj_hash[:using_condition], 
                                         :sell_or_buy => "buy")
-            end
-            
+            end            
             if @order.save
               @order.do_payment
               @order.create_stamp_to_deliver(session[:shop_type])
