@@ -224,6 +224,17 @@
 			$("#dropdown_shop_cart_icon").popover("hide");
 		});
 
+		$("#continue_button").popover({
+			title: 'Please click', 
+      content: "Please click this button!", placement:'bottom', 
+      delay: { show: 5000, hide: 3000 }
+		});
+		
+		$("#continue_button").click(function(){
+			$("continue_button").popover("hide");
+		});
+
+
 		$('.popup_select_price .price_type').live('click', function(){
 	  	var url_select_price = '/home/swap_product';
 			$.ajax({
@@ -234,14 +245,24 @@
 		    data:'product_id=' + $(this).attr('product-id')+ '&price='+$(this).attr('product-price')+ '&type='+$(this).attr('type')+ '&condition='+$(this).attr('product-using_condition'),
 				type: 'POST',
 				dataType: 'script', 
-				success:function(){					
+				success:function(){									
 					if( sell_item_count > 0 ){
-			  		$("#continue_button").text("Choose Products to buy");
+			  		$("#continue_button").text("Choose Products to buy");			  		
 			  	}else if( buy_item_count > 0 ){
-						$("#continue_button").text("Choose Products to sell");
-			  	}else if( sell_item_count > 0 && buy_item_count > 0 ){
+						$("#continue_button").text("Choose Products to sell");						
+			  	}
+
+			  	if( sell_item_count > 0 && buy_item_count > 0 ){
 			  		$("#continue_button").css("display", "none");	
-			  	}	
+			  	}
+
+			  	if(sell_item_count < 1 || buy_item_count < 1){
+			  		$("#continue_button").popover("show");
+			  		setTimeout(function() {
+	            $("#continue_button").popover('hide');
+	        	}, 5000);
+			  	}
+
 			  	if(getCookie("shop_type") == "sell"){
 			  		$("#sell-items p.item-name").html("Only Sell item");
 			  	}else if(getCookie("shop_type") == "buy"){
