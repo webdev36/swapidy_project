@@ -1,0 +1,213 @@
+<script type="text/javascript">
+  function how_can_sell(){
+    $("dd.sell_view").show();
+    $("dd.swap_view").hide();
+    $("dd.buy_view").hide();
+  }
+  function how_can_swap(){
+    $("dd.sell_view").hide();
+    $("dd.swap_view").show();
+    $("dd.buy_view").hide();
+  }
+  function how_can_buy(){
+    $("dd.sell_view").hide();
+    $("dd.swap_view").hide();
+    $("dd.buy_view").show();
+  }
+  $(document).ready(function() {
+
+    $('.container').fadeIn(1000);
+    // ---- FAQs ---------------------------------------------------------------------------------------------------------------
+
+    $('.faqs dd').hide();
+    // Hide all DDs inside .faqs
+    $('.faqs dt').hover(function() {
+      $(this).addClass('hover')
+    }, function() {
+      $(this).removeClass('hover')
+    }).click(function() {// Add class "hover" on dt when hover
+      $(this).next().slideToggle('normal');
+      $('.hiw_category').css("height", "500px");
+      // Toggle dd when the respective dt is clicked
+    });
+   
+    // Hide all DDs inside .faqs
+    $('.faq_cat').hover(function() {
+      $(this).addClass('hover')
+    }, function() {
+      $(this).removeClass('hover')
+    }).click(function() {// Add class "hover" on dt when hover
+      $(this).next().slideToggle('normal');
+      // Toggle dd when the respective dt is clicked
+    });
+
+  }); 
+</script>
+
+<style type="text/css">
+  .left_menu{
+    display: none;
+  }
+  .index_button{
+    width: 100px;
+  }
+  .hiw_category{
+    text-align: center;
+    margin-right: -50px;
+    height: 200px;
+  }
+  .hiw_img{
+    float: left;
+    text-align: center;
+    line-height: 2;
+    font-size: 20px;
+    position: relative;
+    right: 100px;
+
+  }
+  .hiw_get_cash{
+    margin-right: 80px;
+
+  }
+  .hiw_swap{
+    margin-right: 80px;
+    position:relative;
+  }
+  .hiw_buy{
+    position:relative;
+  }
+
+  dd{
+    position: absolute;
+    top:400px;
+  }
+</style>
+
+
+<div class="headings_pink" style="font-size:35px; margin-top:70px; margin-bottom:40px; position:relative; right:100px;">How it works</div>
+<div class="hiw_category">
+  <dl class="faqs">
+    <dt> 
+      <div class="hiw_img hiw_get_cash">
+        <a class="how_can_sell" href="javascript:how_can_sell();"></a>
+        <p>How can I sell</p>
+      </div>
+    </dt>
+    
+    <dd class="sell_view">
+      <div class="hiw_step hiw_1 s1" style="position:relative; right:80px;">
+        <img class="hiw_img"src="/images/hiw_sell_1.png"><br/>
+          Choose the product(s) you want to sell
+      </div>
+      <div class="hiw_step hiw_2 s2" style="position:relative; right:80px;">
+        <img class="hiw_img"src="/images/hiw_sell_2.png"><br/>
+        Checkout and print prepaid shipping label
+      </div>
+      <div class="hiw_step hiw_3 s3" style="position:relative; right:80px; top:30px;">
+        <img class="hiw_img"src="/images/hiw_sell_3.png"><br/>
+        Package device and attach label to box 
+      </div>
+      <div class="hiw_step hiw_3 s4" style="position:relative; right:10px; top:30px;">
+        <img class="hiw_img"src="/images/hiw_sell_4.png"><br/>
+        Get paid upon arrival
+      </div>
+    </dd>
+
+    <dt>
+      <div class="hiw_img hiw_swap">  
+        <a class="how_can_swap" href="javascript:how_can_swap('scroll');"></a>        
+        <p>How can I swap</p>
+      </div>
+    </dt>
+    <dd class="swap_view">
+      <div class="hiw_step hiw_1 s1" style="margin-left:50px; ">
+      <img class="hiw_img"src="/images/hiw_s_s1.png"><br/>
+            Choose the product(s) you want to swap
+      </div>
+      <div class="hiw_step hiw_2 s2" style="margin-left:40px;">
+      <img class="hiw_img"src="/images/hiw_s_s2.png"><br/>
+            Pay the difference, if any
+      </div>
+      <div class="hiw_step hiw_3 s3" style="margin-left:40px; margin-top:60px;">
+      <img class="hiw_img"src="/images/hiw_s_s3.png"><br/>
+            Ship your product and upon arrival we'll send your newly swapped product
+      </div>
+    </dd>
+
+    <dt>
+      <div class="hiw_img hiw_buy">
+        <a class="how_can_buy" href="javascript:how_can_buy('scroll','buy');"></a>
+        <p>How can I buy</p>
+      </div>
+    </dt>
+
+    <dd class="buy_view">
+      <div class="hiw_step hiw_1 s1" style="margin-left:50px;">
+        <img class="hiw_img"src="/images/hiw_buy_1.png"><br/>
+                Choose the product(s) you want to buy
+
+      </div>
+      <div class="hiw_step hiw_2 s2" style="margin-left:40px;">
+        <img class="hiw_img"src="/images/hiw_buy_2.png"><br/>
+                Pay the dollar amount
+      </div>
+      <div class="hiw_step hiw_3 s3" style="margin-left:40px; margin-top:60px;">
+        <img class="hiw_img"src="/images/hiw_buy_3.png"><br/>
+        Receive your product(s) within 3-5 business days
+      </div>
+    </dd>
+  </dl>
+
+</div>
+
+  <div id="index_usp" style="height:440px; text-align:center;">
+  <img class="hiw_sketch" src="/images/hiw.png"><br/>
+  <a class="learn_sell" href="javascript:showPopup('popup-dialog_sell');">Learn more</a>
+  <a class="learn_swap" href="javascript:showPopup('popup-dialog_how_it_work');">Learn more</a>
+  <a class="learn_buy" href="javascript:showPopup('popup-dialog_buy');">Learn more</a>
+
+</div>
+<img class="device_mashup" src="/images/device_mashup.png">
+<div class="index_success">
+      <ul>
+        <li>
+          <img class="success_img" src="/images/testimonials/1.png" style="" />
+          
+        </li>
+        <li>
+          <img class="success_img" src="/images/testimonials/2.png" style="" />
+          
+        </li>
+        <li>
+          <img class="success_img" src="/images/testimonials/3.png" style="" />
+          
+        </li>
+          <li>
+          <img class="success_img" src="/images/testimonials/4.png" style="" />
+          
+        </li>
+          <li>
+          <img class="success_img" src="/images/testimonials/5.png" style="" />
+          
+        </li>
+
+      </ul>
+</div>
+<div class="swapidy_motto">Let's trade.</div>
+<script>
+$(document).ready(function() {
+  $(".index_success").show();
+  $(".index_success").jCarouselLite({
+      btnNext: null,
+      btnPrev: null,
+      visible: 1,
+      scroll: 1,
+      vertical: true,
+      circular: true,
+      itemFallbackDimension: 150,
+      start: 0,
+      auto: 4000,
+      speed: 1000 
+  });
+});
+</script>

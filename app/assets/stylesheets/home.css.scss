@@ -241,11 +241,13 @@ text-align: center;
 }
 
 #product_type{
-  position:relative;
-  bottom:30px;
+  display:none;
+
+ 
   font-family:"myriad";
-  position: relative;
   margin-bottom: 20px;
+  display:none;
+  padding: 60px;
 }
 
 #product_type .headings_pink {
@@ -277,7 +279,6 @@ margin-bottom:30px;
   display: inline-block;
   margin: 0;
   padding: 0;
-  background: #fff;
   cursor: pointer;
   float: center;
   text-align: center;
@@ -669,6 +670,50 @@ bottom: 10px;
   position:relative;
   bottom:9px;
 }
+
+.nav_shop_cart{
+  width:30px;
+  height:30px;
+  position:relative;
+  bottom:5px; 
+}
+.nav_shop_cart:hover{
+  height:35px;
+  width: 38px;
+  bottom:8px;
+  left: -2px;
+}
+
+ul.dropdown_shop_cart_icon{
+  li{
+    list-style: none;
+    p.item-name{
+      border-bottom: 2px solid #DDDDDD;
+      color: #4D90FE;
+      font-size: 16px;
+      margin: 15px 0 5px 10px;
+      padding-left: 10px;
+    }
+    ul.product-item{
+      margin-left: 5px;
+      li{
+        list-style: none;
+        margin-right: 5px;
+        .row{
+          margin-left:0px;
+          border-bottom: solid 1px #ddd;
+          .span1{
+            margin-left: 5px;
+          }
+        }
+      }
+      li:hover{
+        background-color: #EAEAEA;
+        cursor: pointer;
+      }
+    }
+  }
+}
 .nav_down{
   height:15px;
   position:relative;
@@ -936,19 +981,18 @@ text-decoration:underline;
 }
 
 #sell_and_buy_message_guide {
-position: fixed;
-left: 10px;
-bottom: 0;
-padding: 10px;
-background-color: rgba(0, 0, 0, 0.8);
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
-z-index: 10;
-width: 300px;
-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-font-family: arial, san;
-font-size: 14px;
-
+  position: fixed;
+  left: 10px;
+  bottom: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: 10;
+  width: 300px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  font-family: arial, san;
+  font-size: 14px;
 }
 
 .popup_select_price {
@@ -985,4 +1029,142 @@ font-size: 14px;
 .price_type label,
 .price_type span {
   font-size :13px;
+}
+div.index_buttons{
+  height: 225px;
+  .index_button {
+    cursor: pointer;
+    float: left;
+    font-family: 'myriad-s';
+    font-size: 20px;
+    text-align: center;
+    width: 250px;
+    a{
+      color: #666666;
+      cursor: pointer;
+      img{
+        max-width: 200px;
+      }
+    }  
+
+  }  
+}
+
+a.get_cash{
+  background-image: url("get_cash.png");
+  display: block;
+  height: 253px;
+  width: 250px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("get_cash_hover.png");
+  }
+  &:focus{
+    background-image: url("get_cash_hover.png");
+  }
+}
+a.cash_selected{
+  background-image: url("get_cash_hover.png");
+}
+a.get_swap{
+  background-image: url("swap.png");
+  display: block;
+  height: 253px;
+  width: 250px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("swap_hover.png");
+  }
+  &:focus{
+    background-image: url("swap_hover.png");
+  }
+}
+a.swap_selected{
+  background-image: url("swap_hover.png");
+}
+a.get_buy{
+  background-image: url("buy.png");
+  display: block;
+  height: 253px;
+  width: 250px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("buy_hover.png");
+  }
+  &:focus{
+    background-image: url("buy_hover.png");
+  }
+}
+a.buy_selected{
+  background-image: url("buy_hover.png");
+}
+
+div.index_buttons{
+  margin-bottom: 200px;
+}
+
+div.content{
+  background-color: white;
+}
+
+
+a.how_can_sell{
+  background-image: url("get_cash.png");
+  background-size: 100% 100%;
+  display: block;
+  height: 200px;
+  width: 200px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("get_cash_hover.png");
+  }
+  &:focus{
+    background-image: url("get_cash_hover.png");
+  }
+}
+a.how_can_swap{
+  background-image: url("swap.png");
+  background-size: 100% 100%;
+  display: block;
+  height: 200px;
+  width: 200px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("swap_hover.png");
+  }
+  &:focus{
+    background-image: url("swap_hover.png");
+  }
+}
+a.how_can_buy{
+  background-image: url("buy.png");
+  background-size: 100% 100%;
+  display: block;
+  height: 200px;
+  width: 200px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("buy_hover.png");
+  }
+  &:focus{
+    background-image: url("buy_hover.png");
+  }
 }
