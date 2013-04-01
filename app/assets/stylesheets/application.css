@@ -1033,7 +1033,7 @@ cursor: pointer;
   min-width: 1020px;
   height: 210px;
   z-index: 0;
-  background-color: #00A1C7;
+  background-color: #666;
 }
 .index_header_tagline{
   margin-top: 60px;
@@ -1043,14 +1043,12 @@ cursor: pointer;
   color: white;
   font-family: "myriad-s";
   font-size: 35px;
-  text-shadow: 3px 2px 8px rgba(150, 150, 150, 1);
 }
 .index_header_subtitle{
   font-size: 20px;
   position: relative;
   top:20px;
   left: 190px;
-  text-shadow: 3px 2px 8px rgba(150, 150, 150, 1);
 }
 .index_instr{
   font-size: 20px;

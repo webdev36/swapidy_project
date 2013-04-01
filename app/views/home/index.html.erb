@@ -226,7 +226,7 @@
 
 		$("#continue_button").popover({
 			title: 'Please click', 
-      content: "Please click this button!", placement:'bottom', 
+      content: "Please click this button!", placement:'left', 
       delay: { show: 5000, hide: 3000 }
 		});
 		
@@ -252,16 +252,11 @@
 						$("#continue_button").text("Choose Products to sell");						
 			  	}
 
-			  	if( sell_item_count > 0 && buy_item_count > 0 ){
+			  	if( sell_item_count == 0 && buy_item_count == 0 ){
 			  		$("#continue_button").css("display", "none");	
 			  	}
 
-			  	if(sell_item_count < 1 || buy_item_count < 1){
-			  		$("#continue_button").popover("show");
-			  		setTimeout(function() {
-	            $("#continue_button").popover('hide');
-	        	}, 5000);
-			  	}
+			  	
 
 			  	if(getCookie("shop_type") == "sell"){
 			  		$("#sell-items p.item-name").html("Only Sell item");
@@ -576,9 +571,9 @@
 		setCookie("shop_type", "swap", 1);
 		$("#category_page_title").text("What do you want to swap today?");
 		$("#continue_button").css("display", "block");
-  	if( buy_item_count < 1 ){
+  	if( buy_item_count > 0 ){
   		$("#continue_button").text("Choose Products to sell");
-  	}else if( sell_item_count < 1 ){
+  	}else if( sell_item_count > 0 ){
   		$("#continue_button").text("Choose Products to buy");
   	}else{
   		$("#continue_button").text("Continue to swap");
