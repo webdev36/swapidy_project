@@ -331,7 +331,8 @@
 	
 	  $('#slider-code').tinycarousel({display: 2});
 	  //sliderHeight();
-	  showScreenToSellOnly('not_scroll');
+	  $("#slider-code").hide();
+	  //showScreenToSellOnly('not_scroll');
 	  $('div#product_type').fadeIn(600);
 	
 	  $('#product_type .cat_item').live('click', function() {
@@ -574,6 +575,7 @@
 
 	function showScreenToTrade(){
 		setCookie("shop_type", "swap", 1);
+		$("#slider-code").show();
 		$("#category_page_title").text("What do you want to swap today?");
 		$("#continue_button").css("display", "block");
   	if( buy_item_count < 1 ){
@@ -594,6 +596,7 @@
   		setCookie("shop_type", "swap", 1);
   	}else if(shop_type == 'buy'){
   		setCookie("shop_type", "buy", 1);
+  		$("#slider-code").show();
   		$("#category_page_title").html("What do you want to buy today?");
   		$("#continue_button").css("display", "none");
 		 	clearItems();
@@ -684,6 +687,8 @@
  function showScreenToSellOnly(scroll) {
 	$("#category_page_title").text("What do you want to sell today?");
  	clearItems();
+
+ 		$("#slider-code").show();
 
   	setCookie("shop_type", "sell", 1);
   	$("#continue_button").css("display", "none");
