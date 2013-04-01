@@ -24,6 +24,7 @@ Swapidy::Application.routes.draw do
   match "/terms" => "home#static_page", :method => :get, :content => "terms", :page_title => "Terms of Service"
   match "/privacy" => "home#static_page", :method => :get, :content => "privacy", :page_title => "Privacy Policy"
   match "/s4" => "home#static_page", :method => :get, :content => "s4", :page_title => "Pre-order S4"
+  match "/main_hiw" => "home#static_page", :method => :get, :content => "main_hiw", :page_title => "How it Works"
 
   match "/testimonials" => "home#static_page", :method => :get, :content => "testimonials", :page_title => "Testimonials"
 
