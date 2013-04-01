@@ -29,6 +29,9 @@
 </script>
 
 <style type="text/css">
+.left_menu{
+  display: none;
+}
 .index_button{
   width: 100px;
 }
@@ -61,7 +64,7 @@ dd{
 </style>
 
 <div class="headings_pink" style="font-size:35px; margin-top:40px; margin-bottom:40px;">How it works</div>
-<div class="hiw_category">
+<div class="hiw_category" style="height:700px;">
   <dl class="faqs">
     <dt> <div class="hiw_img hiw_get_cash"><img src="/images/get_cash.png" style="width:200px; height:auto;"><br/>How can I sell</div></dt>
     <dd>
@@ -121,5 +124,54 @@ dd{
 
 </div>
 
-  
+  <div id="index_usp" style="height:440px; text-align:center;">
+  <img class="hiw_sketch" src="/images/hiw.png"><br/>
+  <a class="learn_sell" href="javascript:showPopup('popup-dialog_sell');">Learn more</a>
+  <a class="learn_swap" href="javascript:showPopup('popup-dialog_how_it_work');">Learn more</a>
+  <a class="learn_buy" href="javascript:showPopup('popup-dialog_buy');">Learn more</a>
 
+</div>
+<img class="device_mashup" src="/images/device_mashup.png">
+<div class="index_success">
+      <ul>
+        <li>
+          <img class="success_img" src="/images/testimonials/1.png" style="" />
+          
+        </li>
+        <li>
+          <img class="success_img" src="/images/testimonials/2.png" style="" />
+          
+        </li>
+        <li>
+          <img class="success_img" src="/images/testimonials/3.png" style="" />
+          
+        </li>
+          <li>
+          <img class="success_img" src="/images/testimonials/4.png" style="" />
+          
+        </li>
+          <li>
+          <img class="success_img" src="/images/testimonials/5.png" style="" />
+          
+        </li>
+
+      </ul>
+</div>
+<div class="swapidy_motto">Let's trade.</div>
+<script>
+$(document).ready(function() {
+  $(".index_success").show();
+  $(".index_success").jCarouselLite({
+      btnNext: null,
+      btnPrev: null,
+      visible: 1,
+      scroll: 1,
+      vertical: true,
+      circular: true,
+      itemFallbackDimension: 150,
+      start: 0,
+      auto: 4000,
+      speed: 1000 
+  });
+});
+</script>

@@ -280,7 +280,6 @@ h2{
 }
 .item {
   margin-bottom: 0px;
-  background-color: #f5f5f5;
 }
 
 .login_or {
@@ -963,8 +962,8 @@ height: 400px;
 .index_success{
   width: 450px;
   position:relative;
-  margin-left: 270px;
-  bottom:390px;
+  margin-left: 190px;
+  bottom:360px;
 
 }
 .success_img{
