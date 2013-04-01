@@ -1115,3 +1115,56 @@ div.index_buttons{
 div.content{
   background-color: white;
 }
+
+
+a.how_can_sell{
+  background-image: url("get_cash.png");
+  background-size: 100% 100%;
+  display: block;
+  height: 200px;
+  width: 200px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("get_cash_hover.png");
+  }
+  &:focus{
+    background-image: url("get_cash_hover.png");
+  }
+}
+a.how_can_swap{
+  background-image: url("swap.png");
+  background-size: 100% 100%;
+  display: block;
+  height: 200px;
+  width: 200px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("swap_hover.png");
+  }
+  &:focus{
+    background-image: url("swap_hover.png");
+  }
+}
+a.how_can_buy{
+  background-image: url("buy.png");
+  background-size: 100% 100%;
+  display: block;
+  height: 200px;
+  width: 200px;
+  p{
+    padding-top:270px; 
+    margin-bottom: 0px;
+  }
+  &:hover{
+    background-image: url("buy_hover.png");
+  }
+  &:focus{
+    background-image: url("buy_hover.png");
+  }
+}
