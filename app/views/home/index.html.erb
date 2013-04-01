@@ -340,9 +340,13 @@
 	
 	  $('#slider-code').tinycarousel({display: 2});
 	  //sliderHeight();
+<<<<<<< HEAD
 	  //$("#slider-code").hide();
 	  
 	  //showScreenToSellOnly('not_scroll');
+=======
+	  showScreenToSellOnly('not_scroll');
+>>>>>>> 3b3ede2f915f200148a289c31fb2fe3547f31e83
 	  $('div#product_type').fadeIn(600);
 		
 	  $('#product_type .cat_item').live('click', function() {
@@ -600,7 +604,10 @@
 
 	function showScreenToTrade(){
 		setCookie("shop_type", "swap", 1);
+<<<<<<< HEAD
 		showProduct();
+=======
+>>>>>>> 3b3ede2f915f200148a289c31fb2fe3547f31e83
 		$("#category_page_title").text("What do you want to swap today?");
 		$("#continue_button").css("display", "block");
   	if( buy_item_count > 0 ){
@@ -621,7 +628,10 @@
   		setCookie("shop_type", "swap", 1);
   	}else if(shop_type == 'buy'){
   		setCookie("shop_type", "buy", 1);
+<<<<<<< HEAD
   		showProduct();
+=======
+>>>>>>> 3b3ede2f915f200148a289c31fb2fe3547f31e83
   		$("#category_page_title").html("What do you want to buy today?");
   		$("#continue_button").css("display", "none");
 		 	clearItems();
@@ -712,6 +722,7 @@
  function showScreenToSellOnly(scroll) {
 	$("#category_page_title").text("What do you want to sell today?");
  	clearItems();
+<<<<<<< HEAD
 	showProduct();
 	setCookie("shop_type", "sell", 1);
 	$("#continue_button").css("display", "none");
@@ -741,6 +752,37 @@
   if(scroll == 'scroll'){
   	scrollToSelectCategory();	
   }
+=======
+
+  	setCookie("shop_type", "sell", 1);
+  	$("#continue_button").css("display", "none");
+		for_what = "for_sell_only";
+    $("#sell_message").show();
+    $("#buy_message").hide();
+    $('#checkout_button').hide();
+    $("#done_button_for_buy").hide();
+    $('#done_button').show();
+    $('#text_buying').hide();
+    $("#sell_and_buy_message_guide span.buy").hide();
+    $("#sell_and_buy_message_guide span.sell").show();
+    
+		$('li.product_model').not('#filter_model_all').hide();
+    $('li.model_for_selling').show();
+    $(".thumbnail .box .button_for_buy").hide();
+    $(".thumbnail .box .button_for_sell").show();
+    $(".product_search_container .nav-pills").each(function(index) {
+      $(this).addClass("models_for_sell").removeClass("models_for_buy");
+    });
+    $(".all_using_condition_filter").removeClass("option-set").hide();
+    $(".attr_filter_model_all_for_buying").not(".attr_filter_model_all_for_selling").addClass("hidden_filter");
+    $(".attr_filter_model_all_for_selling").removeClass("hidden_filter");
+  	
+  	unselectCurrentCategory();
+    $('div#product_type').fadeIn(600);
+    if(scroll == 'scroll'){
+    	scrollToSelectCategory();	
+    }
+>>>>>>> 3b3ede2f915f200148a289c31fb2fe3547f31e83
     
  }
   function centerIsotypeImages(){
@@ -775,6 +817,7 @@
 
 </script>
 
+<<<<<<< HEAD
 <div id="index_usp" style="height:440px; text-align:center;">
 	<img class="hiw_sketch" src="/images/hiw.png"><br/>
 	<a class="learn_sell" href="javascript:showPopup('popup-dialog_sell');">Learn more</a>
@@ -815,3 +858,5 @@ $(document).ready(function() {
 	hideProduct();  
 });
 </script>
+=======
+>>>>>>> 3b3ede2f915f200148a289c31fb2fe3547f31e83
