@@ -1,0 +1,7 @@
+.span4.offset0
+	= render :partial => "/orders/order_product_images"
+.span6
+	%form#new_order.new_order{"accept-charset" => "UTF-8", :action => "/orders/confirm", :method => "post"}
+	%input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}/
+	.render_form
+		= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Continue"}		

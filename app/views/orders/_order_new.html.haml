@@ -1,0 +1,10 @@
+-if session[:shop_type] == "swap"
+	.span8
+		= render :partial => "/orders/order_swap_product_images"
+-else
+	.span4.offset2
+		= render :partial => "/orders/order_product_images"
+.span4.payment_container
+	.row
+		.payout_form.standard_form.paypal
+			= render :partial => "/orders/payment_info_form"			

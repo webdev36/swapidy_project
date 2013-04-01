@@ -6,7 +6,7 @@
   	<img class="circ_arrow" src="/images/circular_arrow.png">
   </div>
  	<% end %>
-  <div style="position:relative; right:240px; display: block; margin-top:-50px;">
+  <div>
 	  <%if session[:shop_type]=="sell" || session[:shop_type]=="swap" %>
 	  <div class="order_slider_sell">
 	  	<% if session[:shop_type]=="swap" %>
@@ -16,7 +16,7 @@
 			<% if controller.action_name =="new" %>
 				<div style="height: 180px;width:200px; position: relative; margin-top: 50px;">
 			<% else %>
-				<div style="height: 180px;width:200px; position: relative; margin-left: 375px; margin-top: 50px;">
+				<div style="height: 180px;width:200px;">
 			<% end %>	   		 
 	  <% end %>
 	    <% if ShoppingCart.cart_products[:sell].count > 1 %>
@@ -37,17 +37,17 @@
 		  </div>
 		  <% end %>
 		  <% if session[:shop_type]=="buy" || session[:shop_type]=="swap" %>
-		  <div class="order_slider_buy">
+			  <% if session[:shop_type]=="buy" %>
+			  	<div class="order_slider_buy" style="float: left;">
+			  <% else %>
+			  	<div class="order_slider_buy" style="float: right;">
+			  <% end %>
+
 		  	<% if session[:shop_type]=="swap" %>
 		 	  <span class="new_stuff">My new stuff</span>
 		 	 	<% end %>		 	 	
-		   <% if session[:shop_type]=="buy" %>
-				<% if controller.action_name =="new" %>
-					<div style="height: 180px;width:200px; position: relative; margin-top: 50px;">
-				<% else %>
-					<div style="height: 180px;width:200px; position: relative; margin-left: 150px; margin-top: 50px;">
-				<% end %>	   		 
-		  <% end %>
+		 	 	<div style="height: 180px;width:200px; position: relative;">
+		   
 		  	<% if ShoppingCart.cart_products[:buy].count > 1 %>
 		  		<% if session[:shop_type]=="swap" %>
 				  	<button class="prev_buy product_button_buy" style="width: 30px;top: 10px;right:170px;position: absolute;z-index: 1000; left: -110px">&lt;</button>

@@ -9,32 +9,13 @@ body{
 <div class="content" style="">
 
 <%= render :partial => "steps", :locals => {:current_step => 2 } %>
-<div class="" style="margin-top:30px;height:285px;">
-  <div class="headings_pink" style="text-align:center;">Payment Information</div><br/>
-   <% if session[:shop_type]=="swap" %> 
-    <div style="width: 480px;position:relative; left: 215px;-webkit-border-radius: 20px;padding: 10px; height:100px;">
-   <% elsif session[:shop_type]=="sell" %>
-    <div style="width: 480px;position:relative; left: 355px;-webkit-border-radius: 20px;padding: 10px; height:100px;">
-   <% else session[:shop_type]=="buy" %>
-    <div style="width: 480px;position:relative; left: 115px;-webkit-border-radius: 20px;padding: 10px; height:100px;">
-   <% end %>
-  	<%= render :partial => "/orders/order_product_images" %>
+<div class="new_order_content_page" style="margin-top:30px;height:285px;">
+  <div class="row">
+    <div class="headings_pink" style="text-align:center;">Payment Information</div><br/>
   </div>
-
-  <% if session[:shop_type] == "swap"%>
-    <div class="payment_container" style="bottom: 250px; display: block; margin-left: 500px; position: relative; text-align: center;">
-  <% else %>
-    <div class="payment_container" style="text-align: center; display: block; margin: 250px auto; position:relative; bottom:100px; left:250px;">
-  <% end %>
-  
-    <div id="checkout_content" class="payment_editing_block">
-      <div class="payment_group_contents">
-        <div id="payment_form" class="valid_form payout_form standard_form paypal" style="display: block;">
-          <%= render :partial => "/orders/payment_info_form"%>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="row">
+    <%= render :partial => "order_new" %>    
+  </div>   
 </div>
 <script language="JavaScript">
   function reload_payment_order_info() {

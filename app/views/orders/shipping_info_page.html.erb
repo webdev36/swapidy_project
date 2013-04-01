@@ -8,29 +8,32 @@ body{
 }
 </style>
 <div class="content " style="height:600px;">
-  <%= render :partial => "steps", :locals => {:current_step => 3 } %>
-  <div class="container">
+  <div class = "row">
+    <%= render :partial => "steps", :locals => {:current_step => 3 } %>
+  </div>
+  <div class = "row container">    
     <div class="headings_pink" style="position:relative; bottom:30px; text-align:center;">Shipping Address<span>*</span></div>
-    <div class="confirm_image_container" style="position:absolute; top: 280px; height: 410px;">
-	    <%= render :partial => "/orders/order_product_images" %>
-		</div>
-  <% if session[:shop_type] == "swap" %>
-    <div class="shipping_form_container" style="top: -360px; margin-top: 0px; bottom: 0px; left: 350px;" >
-  <% else %>
-    <div class="shipping_form_container">
-  <% end %>
-      <div style="width: 500px; margin-left: -20px;">
-        <div class="shipping_product_info"></div>  
-        <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; padding: 15px 0px 20px;">
+    
+    <% if session[:shop_type]=="swap" %>
+      <div class="span8" style="margin-left: -240px;margin-top: 40px;">
+        <%= render :partial => "/orders/order_swap_product_images" %>
+      </div>      
+    <% else %>
+      <div class="span3 offset1">
+        <%= render :partial => "/orders/order_product_images" %>
+      </div>      
+    <% end %>
+      
+
+    <div class="span7">
+      <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; padding: 15px 0px 20px 40px;">
           <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
           <div class="render_form">
             <%= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Continue"} %>
           </div>
         </form>
-      </div>
     </div>
   </div>
-</div>
 
 <div id="popup-dialog_candidate_address_form" style="display:none; height:320px; padding: 0px; position: fixed; top: 60px;" class="popup-box-wrapper standard-popup">
   <div id="dialog-content">

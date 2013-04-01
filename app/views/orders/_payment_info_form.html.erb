@@ -8,17 +8,16 @@
   <%= f.hidden_field :shipping_state %>
   <%= f.hidden_field :shipping_zip_code %>
   <%= f.hidden_field :shipping_country %>
- <br />
- <br />
- <br />
- <br />
+ 
  <% if session[:shop_type] != "sell"%>  		
-  <div class="payment_product_info" style="position:relative; bottom:290px; left:245px; "><br/>
-    <label style="color:#666; padding-top: 10px;">Current Balance:</label>
-    <span style="color:#666; font-family:'myriad'"><%= number_to_currency(current_user.balance_amount) %> </span>
+  <div class="payment_product_info"><br/>
+    <p class="payment-description">
+    	Current Balance:
+    	<%= number_to_currency(current_user.balance_amount) %> 
+    </p>
   </div>
   <% end %>
-  <div class="payment_product_info">
+  <div class="payment_info">
   	<% 
   		remaining_amount = current_user.balance_amount - ShoppingCart.cart_amount 
   		amount = remaining_amount < 0 ? remaining_amount*-1 : 0
@@ -26,63 +25,49 @@
   		
   	<% if session[:shop_type] == "sell"%>  		
 			<br />	
-		  <label style="color:#666; font-family:'myriad';" >You get:</label>
-	  	<span style="color:#666; font-family:'myriad'; font-size:20px;">	
+		  <p class="payment-description">
+		  	You get:
 		  	<%= number_to_currency((ShoppingCart.sell_cart_amount))%>				
-	  	</span>
+	  	</p>
 	  <% elsif session[:shop_type] == "buy"%>
-	  	<%= number_to_currency(current_user.balance_amount) %> - 
-  		<%= number_to_currency(ShoppingCart.buy_cart_amount) %> = 
-  		<%= number_to_currency(current_user.balance_amount - ShoppingCart.buy_cart_amount) %>
-	  	<br />
-			<br />	
-			<label style="color:#666; font-family:'myriad';" >Total due today: </label>
-			<span style="color:#666; font-family:'myriad'; font-size:20px;">	
+	  	<p class="payment-description">
+				Total due today: 			
   			<%= number_to_currency( amount ) %>
-  		</span>	<br/><br/>
+  		</p>	<br/><br/>
 
   		<% remaining_amount = remaining_amount < 0 ? 0 : remaining_amount %>
-			<label style="color:#666; font-family:'myriad';" >Remaining balance:</label>
-  		<span style="color:#666; font-family:'myriad'; font-size:20px;">	
+			<p class="payment-description">
+				Remaining balance:  		
   			<%= number_to_currency( remaining_amount ) %>
-  		</span>			
+  		</p>
 		
-  	<% else %>
-  		
-			<br />	
-				
-					<label style="color:#666; font-family:'myriad';" >Total due today: </label>
-					<span style="color:#666; font-family:'myriad'; font-size:20px;">	
-		  			<%= number_to_currency( amount ) %>
-		  		</span>	<br/><br/>
+  	<% else %>  		
+			<p class="payment-description">
+				Total due today: 			
+  			<%= number_to_currency( amount ) %>
+  		</p>
+  		<br/>
+  		<br/>
 
-		  		<% remaining_amount = remaining_amount < 0 ? 0 : remaining_amount %>
-					<label style="color:#666; font-family:'myriad';" >Remaining balance:</label>
-		  		<span style="color:#666; font-family:'myriad'; font-size:20px;">	
-		  			<%= number_to_currency( remaining_amount ) %>
-		  		</span>
-		  		
-		  		
-	  		
-					<!-- 
-						<% if current_user.balance_amount - ShoppingCart.cart_amount > 0 %>
-							<%= number_to_currency(ShoppingCart.cart_amount-current_user.balance_amount)%>
-						<% else %>
-							<%= number_to_currency(ShoppingCart.cart_amount-current_user.balance_amount)%>
-						<% end %>
-					-->
-					</span>
-	  		
+  		<% remaining_amount = remaining_amount < 0 ? 0 : remaining_amount %>
+			<p class="payment-description">
+				Remaining balance:
+  			<%= number_to_currency( remaining_amount ) %> 
+  		</p>
   	<% end %>
-
-
-<!--	  
-	  <br/>
-	  <label style="color:black; font-family:'myriad';">Payment options:</label><br/>
-  	<input type="radio" name="order[payment_option]" value="direct" checked="checked"/>Direct &nbsp;&nbsp;&nbsp;
-  	<input type="radio" name="order[payment_option]" value="pre_authorize" disabled="disabled"/>Pre-authorize
-	  <br/>
--->	  
-	</div>	
-  <input name="commit" class="product_button_buy" type="submit" value="Continue" style="position:relative; bottom:260px; left:180px;"/>
+	</div>		
+  <input name="commit" class="product_button_buy" type="submit" value="Continue" style=""/>
 <% end %>
+
+<style type="text/css">
+	p.payment-description{
+		font-size: 20px;		
+		color:#666; 
+		font-family:'myriad';
+		width: 100%;
+		text-align: center;
+	}
+	input.product_button_buy{
+		margin-left: 90px;	
+	}
+</style>

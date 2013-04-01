@@ -9,112 +9,109 @@
   }
 </style>
 <div class="content" style="height:590px;" >
-
-<div class="container" style="">
-  <div class="headings_pink" style="margin-left: 340px;margin-top: -45px;">Confirm Your Details</div>
-  <div class="confirm_image_container" style="margin-top:55px;">
-    <%= render :partial => "/orders/order_product_images" %>
-  </div>
-  <% if session[:shop_type] == "swap" %>
-  <div class="confirm_container" style="bottom: 440px; left: 260px; margin-left: 250px; margin-top: 0px;">
-  <% else %>
-  <div class="confirm_container" style="bottom: 220px;">
-  <% end %>
-    <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
-    <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
-    
-      <% unless @order.errors.empty? %>
-        <%= raw @order.errors.full_messages.join(".<br/>") %>
-        <br/>
+  <div class="container" style="">
+    <div class="row">
+      <div class="headings_pink" style="margin-left: 340px;margin-top: -45px;">Confirm Your Details</div>      
+      <% if session[:shop_type]=="swap" %>
+        <div class="span8" style="margin-left: -240px;margin-top: 40px;">
+          <%= render :partial => "/orders/order_swap_product_images" %>
+        </div>      
+      <% else %>
+        <div class="span3 offset1">
+          <%= render :partial => "/orders/order_product_images" %>
+        </div>      
       <% end %>
-  
-      <br/>
-      <div>
-       <br />
-        <div id="email_label_info" style="position:relative; bottom:60px;">
-          <%= render :partial => "email_label", :locals => {:user => current_user} %>
-        </div>
-        <br/>
-        <div id="shipping_label_info">
-          <%= render :partial => "shipping_label", :locals => {:order => @order} %>
-        </div>
+      
+      <% if session[:shop_type]=="swap" %>        
+      <div class="span6 offset1">
+      <% else %>
+      <div class="span7 offset1">
+      <% end %>      
+        <div class="confirm_detail">
+          <p class="confirm_subheading">Just confirm your transaction information and you're set!</p>
+          <%= form_for(@order, :as => 'order', :url => "/orders/create", :html => {:id => "new_order"}) do |f| %>
+          
+            <% unless @order.errors.empty? %>
+              <%= raw @order.errors.full_messages.join(".<br/>") %>
+              <br/>
+            <% end %>
+        
+            <br/>
+            <div>
+             <br />
+              <div id="email_label_info" style="position:relative; bottom:60px;">
+                <%= render :partial => "email_label", :locals => {:user => current_user} %>
+              </div>
+              <br/>
+              <div id="shipping_label_info">
+                <%= render :partial => "shipping_label", :locals => {:order => @order} %>
+              </div>
 
-        <div class="confirm_payment_container" style="padding-top: 40px;">
-          <div class="headings_pink" style="font-size:20px; position:relative; bottom:270px;">Payment Information</div>
-          <br />
-          <% if session[:shop_type] == "sell" %>
-            <div class="payment-info-box" style="position:relative; bottom:290px;">
-              <%= render :partial =>"payment_info_description", :locals => { :order => @order } %>
+              <div class="confirm_payment_container" style="padding-top: 40px;">
+                <div class="headings_pink" style="font-size:20px; position:relative; bottom:270px;">Payment Information</div>
+                <br />
+                <% if session[:shop_type] == "sell" %>
+                  <div class="payment-info-box" style="position:relative; bottom:290px;">
+                    <%= render :partial =>"payment_info_description", :locals => { :order => @order } %>
+                  </div>
+                <% else %>
+
+                  <div style="position:relative; bottom:290px;">              
+                      <% if current_user.extra_money_for(ShoppingCart.cart_amount) > 0 && current_user.has_card_info? %>
+                        You would be charged: 
+                        <%= number_to_currency(ShoppingCart.cart_amount) %> 
+                        - <%= number_to_currency(current_user.balance_amount) %> 
+                        = <%= number_to_currency(ShoppingCart.cart_amount - current_user.balance_amount) %>
+                        <br/>
+                        <input type="button" value="Change Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="refresh_add_money_form();" />
+                    <% elsif current_user.extra_money_for(ShoppingCart.cart_amount) > 0 && !current_user.has_card_info? %>
+                        You would be charged: 
+                        <%= number_to_currency(ShoppingCart.cart_amount) %> 
+                        - <%= number_to_currency(current_user.balance_amount) %> 
+                        = <%= number_to_currency(ShoppingCart.cart_amount - current_user.balance_amount) %>
+                        <br/>
+                        <input type="button" value="Add Credit Card" class="order_button_buy" style="margin-left: 125px; margin-top: 20px;"  onclick="refresh_add_money_form();" />
+                    <% end %>
+                  </div>
+                <% end %>
+
+                <% if session[:shop_type] == "sell"%>
+                    <% has_agreement_before = !current_user.last_order.nil? %>
+                    <div style="position:relative; bottom:290px;">
+                      <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:100px;">Terms of Service</div></label>
+                      <p><br/>
+                        <input id="terms_of_service_checkbox" type="checkbox" style="position:relative;
+                        bottom:5px;"<% if has_agreement_before %>checked="checked"<% end %> />
+                        <span>By checking this box, you agree to our <a class="order_link" href="/terms">terms of service</a></span>
+                      </p>
+                    </div>
+                    <br/>
+                    <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" style="margin-top:60px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />            
+                <% else %>
+                  <% unless current_user.extra_money_for(ShoppingCart.cart_amount) > 0 && !current_user.has_card_info? %>
+                    <% has_agreement_before = !current_user.last_order.nil? %>
+                    <div style="position:relative; bottom:290px;">
+                      <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:100px;">Terms of Service</div></label>
+                      <p><br/>
+                        <input id="terms_of_service_checkbox" type="checkbox" style="position:relative;
+                        bottom:5px;"<% if has_agreement_before %>checked="checked"<% end %> />
+                        <span>By checking this box, you agree to our <a class="order_link" href="/terms">terms of service</a></span>
+                      </p>
+                    </div>
+                    <br/>
+                    <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" style="margin-top:60px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
+                  <% end %> 
+                <% end %>          
+              <% end %>
             </div>
-          <% else %>
-<!-- 
-              <% if ShoppingCart.cart_amount < 0 %>
-                <span> You will be paid 
-                  <%= number_to_currency(-ShoppingCart.cart_amount) %>
-                  on 
-                  <a class="paypal-email-address">  <%= current_user.paypal_email %>  </a>
-                  via paypal
-                </span>                
-
-              <% else %>
-                <span>You pay:</span>
-                <%= number_to_currency(ShoppingCart.cart_amount) %> <br /> 
-                <span>Your balance will be deducted.</span><br />
-              <% end %>
--->            
-
-            <div style="position:relative; bottom:290px;">              
-                <% if current_user.extra_money_for(ShoppingCart.cart_amount) > 0 && current_user.has_card_info? %>
-                  You would be charged: 
-                  <%= number_to_currency(ShoppingCart.cart_amount) %> 
-                  - <%= number_to_currency(current_user.balance_amount) %> 
-                  = <%= number_to_currency(ShoppingCart.cart_amount - current_user.balance_amount) %>
-                  <br/>
-                  <input type="button" value="Change Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="refresh_add_money_form();" />
-              <% elsif current_user.extra_money_for(ShoppingCart.cart_amount) > 0 && !current_user.has_card_info? %>
-                  You would be charged: 
-                  <%= number_to_currency(ShoppingCart.cart_amount) %> 
-                  - <%= number_to_currency(current_user.balance_amount) %> 
-                  = <%= number_to_currency(ShoppingCart.cart_amount - current_user.balance_amount) %>
-                  <br/>
-                  <input type="button" value="Add Credit Card" class="order_button_buy" style="margin-left: 125px; margin-top: 20px;"  onclick="refresh_add_money_form();" />
-              <% end %>
-  	        </div>
-          <% end %>
-
-          <% if session[:shop_type] == "sell"%>
-              <% has_agreement_before = !current_user.last_order.nil? %>
-              <div style="position:relative; bottom:290px;">
-                <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:100px;">Terms of Service</div></label>
-                <p><br/>
-                  <input id="terms_of_service_checkbox" type="checkbox" style="position:relative;
-                  bottom:5px;"<% if has_agreement_before %>checked="checked"<% end %> />
-                  <span>By checking this box, you agree to our <a class="order_link" href="/terms">terms of service</a></span>
-                </p>
-              </div>
-              <br/>
-              <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" style="margin-top:60px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />            
-          <% else %>
-            <% unless current_user.extra_money_for(ShoppingCart.cart_amount) > 0 && !current_user.has_card_info? %>
-              <% has_agreement_before = !current_user.last_order.nil? %>
-              <div style="position:relative; bottom:290px;">
-                <label class="confirm_info_head"><div class="headings_pink" style="font-size:20px; position:relative; top:100px;">Terms of Service</div></label>
-                <p><br/>
-                  <input id="terms_of_service_checkbox" type="checkbox" style="position:relative;
-                  bottom:5px;"<% if has_agreement_before %>checked="checked"<% end %> />
-                  <span>By checking this box, you agree to our <a class="order_link" href="/terms">terms of service</a></span>
-                </p>
-              </div>
-              <br/>
-              <input name="commit" onclick="showPageLoading();" id="submit_button" class="confirm_button_buy" style="margin-top:60px;" type="submit" <% unless has_agreement_before %> disabled="disabled" <% end %> value="Continue" />
-            <% end %> 
-          <% end %>          
-        <% end %>
-      </div>
-      <%= render :partial => "order_confirm_popups" %>
-    </div>
+            <%= render :partial => "order_confirm_popups" %>
+          </div>
+        </div>
+      </div> <!-- span7 -->
+    </div>  
   </div>
 </div>
+
 <script>
 	$(function() {
   	order_sliders();
