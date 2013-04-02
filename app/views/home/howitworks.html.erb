@@ -1,4 +1,6 @@
 <script type="text/javascript">
+
+
   function how_can_sell(){
     $("dd.sell_view").show();
     $("dd.swap_view").hide();
@@ -14,9 +16,10 @@
     $("dd.swap_view").hide();
     $("dd.buy_view").show();
   }
+
   $(document).ready(function() {
 
-    $('.container').fadeIn(1000);
+    $('')
     // ---- FAQs ---------------------------------------------------------------------------------------------------------------
 
     $('.faqs dd').hide();
@@ -26,7 +29,6 @@
     }, function() {
       $(this).removeClass('hover')
     }).click(function() {// Add class "hover" on dt when hover
-      $(this).next().slideToggle('normal');
       $('.hiw_category').css("height", "500px");
       // Toggle dd when the respective dt is clicked
     });
@@ -79,12 +81,12 @@
 
   dd{
     position: absolute;
-    top:400px;
+    top:500px;
   }
 </style>
+<div class="container">
 
-
-<div class="headings_pink" style="font-size:35px; margin-top:70px; margin-bottom:40px; position:relative; right:100px;">How it works</div>
+<div class="headings_pink" style="font-size:35px; margin-top:70px; margin-bottom:40px; position:relative; right:180px;">How it works</div>
 <div class="hiw_category">
   <dl class="faqs">
     <dt> 
@@ -97,19 +99,19 @@
     <dd class="sell_view">
       <div class="hiw_step hiw_1 s1" style="position:relative; right:80px;">
         <img class="hiw_img"src="/images/hiw_sell_1.png"><br/>
-          Choose the product(s) you want to sell
+          <span style='position:relative; right:100px;'>Choose the product(s) you want to sell</span>
       </div>
       <div class="hiw_step hiw_2 s2" style="position:relative; right:80px;">
         <img class="hiw_img"src="/images/hiw_sell_2.png"><br/>
-        Checkout and print prepaid shipping label
+        <span style='position:relative; right:100px;'>Checkout and print prepaid shipping label</span>
       </div>
       <div class="hiw_step hiw_3 s3" style="position:relative; right:80px; top:30px;">
         <img class="hiw_img"src="/images/hiw_sell_3.png"><br/>
-        Package device and attach label to box 
+        <span style='position:relative; right:100px;'>Package device and attach label to box </span>
       </div>
-      <div class="hiw_step hiw_3 s4" style="position:relative; right:10px; top:30px;">
+      <div class="hiw_step hiw_3 s4" style="position:relative; right:40px; top:30px;">
         <img class="hiw_img"src="/images/hiw_sell_4.png"><br/>
-        Get paid upon arrival
+        <span style='position:relative; right:100px;'>Get paid upon arrival</span>
       </div>
     </dd>
 
@@ -120,17 +122,17 @@
       </div>
     </dt>
     <dd class="swap_view">
-      <div class="hiw_step hiw_1 s1" style="margin-left:50px; ">
+      <div class="hiw_step hiw_1 s1" style="margin-left:-20px; ">
       <img class="hiw_img"src="/images/hiw_s_s1.png"><br/>
-            Choose the product(s) you want to swap
+        <span style='position:relative; right:100px;'>    Choose the product(s) you want to swap</span>
       </div>
-      <div class="hiw_step hiw_2 s2" style="margin-left:40px;">
+      <div class="hiw_step hiw_2 s2" style="margin-left:30px;">
       <img class="hiw_img"src="/images/hiw_s_s2.png"><br/>
-            Pay the difference, if any
+           <span style='position:relative; right:100px;'> Pay the difference, if any</span>
       </div>
       <div class="hiw_step hiw_3 s3" style="margin-left:40px; margin-top:60px;">
       <img class="hiw_img"src="/images/hiw_s_s3.png"><br/>
-            Ship your product and upon arrival we'll send your newly swapped product
+           <span style='position:relative; right:100px;'> Ship your product and upon arrival we'll send your newly swapped product</span>
       </div>
     </dd>
 
@@ -142,18 +144,18 @@
     </dt>
 
     <dd class="buy_view">
-      <div class="hiw_step hiw_1 s1" style="margin-left:50px;">
+      <div class="hiw_step hiw_1 s1" style="margin-left:-20px;">
         <img class="hiw_img"src="/images/hiw_buy_1.png"><br/>
-                Choose the product(s) you want to buy
+           <span style='position:relative; right:100px;'>     Choose the product(s) you want to buy</span>
 
       </div>
-      <div class="hiw_step hiw_2 s2" style="margin-left:40px;">
+      <div class="hiw_step hiw_2 s2" style="margin-left:30px;">
         <img class="hiw_img"src="/images/hiw_buy_2.png"><br/>
-                Pay the dollar amount
+            <span style='position:relative; right:100px;'>    Pay the dollar amount</span>
       </div>
-      <div class="hiw_step hiw_3 s3" style="margin-left:40px; margin-top:60px;">
+      <div class="hiw_step hiw_3 s3" style="margin-left:40px; margin-top:70px;">
         <img class="hiw_img"src="/images/hiw_buy_3.png"><br/>
-        Receive your product(s) within 3-5 business days
+       <span style='position:relative; right:100px;'> Receive your product(s) within 3-5 business days</span>
       </div>
     </dd>
   </dl>
@@ -192,6 +194,7 @@
         </li>
 
       </ul>
+</div>
 </div>
 <div class="swapidy_motto">Let's trade.</div>
 <script>
