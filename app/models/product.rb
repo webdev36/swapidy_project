@@ -116,8 +116,7 @@ class Product < ActiveRecord::Base
     prices = PRICE_RANGES.keys.sort
     prices.each_with_index do |price, index|
       if index == 0
-        (result << "price_range_#{price}"; next) if price_for_sell && price_for_sell > 0 && price_for_sell <= price 
-        
+        (result << "price_range_#{price}"; next) if price_for_sell && price_for_sell > 0 && price_for_sell <= price        
         (result << "price_range_#{price}"; next) if price_for_buy && price_for_buy > 0 && price_for_buy <= price 
 #        (result << "price_range_#{price}"; next) if price_for_good_sell && price_for_good_sell > 0 && price_for_good_sell <= price 
 #        (result << "price_range_#{price}"; next) if price_for_poor_sell && price_for_poor_sell > 0 && price_for_poor_sell <= price 
