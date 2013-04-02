@@ -962,8 +962,8 @@ height: 400px;
 .index_success{
   width: 450px;
   position:relative;
-  margin-left: 190px;
-  bottom:360px;
+  margin-left: 50px;
+  bottom:400px;
 
 }
 .success_img{
@@ -1108,15 +1108,15 @@ cursor: pointer;
  }
  .device_mashup{
   margin-top: 700px;
-  width:1000px;
-  height: auto;
- }
+  position: relative;
+  right: 200px; }
  .swapidy_motto{
 color: #666;
 font-size: 60px;
 text-align: center;
 position: relative;
 bottom:150px;
+right: 110px;
 font-family: 'myriad-s';
 z-index: 1000;
 
