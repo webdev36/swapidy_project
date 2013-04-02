@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
 					product.price_for_good_buy = nil 
 					product.price_for_poor_buy = nil
 			    product.swap_type = 3
-			    product.upload_database_id = nil	
+#			    product.upload_database_id = nil	
 			    if product.save 	    			    	
 				    CategoryAttribute.all.each do |ca| 
 				    	if pma_attr.include? ca.title
