@@ -53,8 +53,7 @@ class ProductsController < ApplicationController
 		 	end #foreach 
 		 	redirect_to rails_admin_path
   	else
-  		redirect_to "/"
+  		render :text=> "please login with administrator"
   	end  	
-  	redirect_to "/"
   end 
 end
