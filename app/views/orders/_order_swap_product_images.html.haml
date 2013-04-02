@@ -8,7 +8,8 @@
 					.row{:style=>"margin-left:0px;margin-left: 0;position: relative;z-index: 99;"}
 						%button.ctrl_button.prev.prev_product_button_buy{:style => "float:left;"} <
 						%button.ctrl_button.next.next_product_button_buy{:style => "float:right;"} >
-				.order_sell_display{:style => "width: 200px; overflow: hidden; z-index: 2; margin-top: -65px;"}
+				- style = ShoppingCart.cart_products[:sell].count > 1 ? " margin-top: -65px;" : " margin-top: -20px;"				
+				.order_sell_display{:style => "width: 200px; overflow: hidden; z-index:2;#{style}"}
 					%ul#mycarousel.jcarousel-skin
 						- ShoppingCart.cart_products[:sell].each do |order_product|
 							%li{:style => "height:400px;width: 200px;margin-left: 10px;"}
@@ -29,7 +30,8 @@
 					.row{:style=>"margin-left:0px;margin-left: 0;position: relative;z-index: 99;"}
 						%button.ctrl_button.prev_buy.prev_product_button_buy{:style => "float:left;"} <
 						%button.ctrl_button.next_buy.next_product_button_buy{:style => "float:right;"} >
-				.order_buy_display{:style => "width: 200px; overflow: hidden; z-index: 2; margin-top: -65px;"}
+				- style = ShoppingCart.cart_products[:buy].count > 1 ? "margin-top: -65px;" : " margin-top: -20px;"
+				.order_buy_display{:style => "width: 200px; overflow: hidden; z-index: 2;#{style}"}
 					%ul#mycarousel.jcarousel-skin
 						- ShoppingCart.cart_products[:buy].each do |order_product|
 							%li{:style => "height: 400px;width: 200px; margin-left: 10px;"}
