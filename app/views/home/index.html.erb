@@ -87,12 +87,9 @@
 		<a class="get_buy" href="javascript:showScreenToBuy('scroll','buy');"><p>Buy</p></a>
 	</div>
 </div>
-<a id="sell_and_buy_message_guide" style="display: none;">
-	<span class="sell">You are currently choosing your products to sell.</span>
-	<span class="buy" style="display: none;">You are currently choosing which products you want to buy.</span>
-</a>
 
-<a id="continue_button" href="javascript:select_complete();" style="height: 20px; top: 150px; position: fixed; right: 0px; width: 222px; font-size: 19px; display: none;" class="btn show_button_sell">Choose Products to sell</a>
+
+<a id="continue_button" href="javascript:select_complete();" style="height: 20px; top: 150px; position: fixed; left: 0px; width: 222px; font-size: 19px; display: none;" class="btn show_button_sell">Choose Products to sell</a>
 
 <a id="product_scrollup_link" style="display: none;" href="#" onclick="scrollToSelectCategory();"><img src="/images/scrollup.png"></a>
 <script>
@@ -422,16 +419,12 @@
 	function showProduct(){
 		$("#slider-code").show();
 		$("#product_type").show();
-		$("#index_usp").show();
-		$("img.device_mashup").show();
 		$("div.index_success").show();
 		$("div.swapidy_motto").show();
 	}
 	function hideProduct(){		
 		$("#slider-code").hide();
 		$("#product_type").hide();
-		$("#index_usp").hide();
-		$("img.device_mashup").hide();
 		$("div.index_success").hide();
 		$("div.swapidy_motto").hide();
 	}
@@ -772,42 +765,6 @@ function showScreenToSellOnly(scroll) {
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script>
-
-<div id="index_usp" style="height:440px; text-align:center;">
-	<img class="hiw_sketch" src="/images/hiw.png"><br/>
-	<a class="learn_sell" href="javascript:showPopup('popup-dialog_sell');">Learn more</a>
-	<a class="learn_swap" href="javascript:showPopup('popup-dialog_how_it_work');">Learn more</a>
-	<a class="learn_buy" href="javascript:showPopup('popup-dialog_buy');">Learn more</a>
-</div>
-<img class="device_mashup" src="/images/device_mashup.png">
-<div class="index_success">
-			<ul>
-				<li>
-					<img class="success_img" src="/images/testimonials/1.png" style="" />
-					
-				</li>
-				<li>
-					<img class="success_img" src="/images/testimonials/2.png" style="" />
-					
-				</li>
-				<li>
-					<img class="success_img" src="/images/testimonials/3.png" style="" />
-					
-				</li>
-					<li>
-					<img class="success_img" src="/images/testimonials/4.png" style="" />
-					
-				</li>
-					<li>
-					<img class="success_img" src="/images/testimonials/5.png" style="" />
-					
-				</li>
-
-			</ul>
-</div>
-<div class="swapidy_motto">Let's trade.</div>
-<script>
 $(document).ready(function() {
 	hideProduct();  
 });
