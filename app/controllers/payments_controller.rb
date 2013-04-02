@@ -69,6 +69,7 @@ class PaymentsController < ApplicationController
   end
   
   def create
+render :text => "PaymentTransaction Create" and return    
     @payment = PaymentTransaction.new(params[:payment])
     @payment.amount = params[:payment][:amount].gsub(",", "").to_i rescue nil
     @payment.user = current_user
