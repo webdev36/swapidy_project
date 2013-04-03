@@ -18,7 +18,7 @@ class OrderNotifier < ActionMailer::Base
       subject = "Ship your product"
     elsif shop_type == "buy"
       @shipping_stamp = @order.shipping_stamps.for_buy.first
-      subject = "Congrats your order!"
+      subject = "Congrats on your order!"
     else
       @shipping_stamp = @order.shipping_stamps.for_buy.first
       subject = "Congrats you have completed swap!"

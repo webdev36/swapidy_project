@@ -25,22 +25,13 @@
 				Congratulations, your order has been placed.<br /><br/>
 				You ordered:
 				<%sell_amount = 0 %>	
-				<% @order.order_products.for_buy.each_with_index do |order_product, index| %>
+				<b><% @order.order_products.for_buy.each_with_index do |order_product, index| %>
 				  <% sell_amount += order_product.price %>
-				  <ul>
-				    <li style="float: left; list-style: none margin-left: 15px;"><%= index + 1%></li>
-				    <li style="float: left; list-style: none margin-left: 15px;"><%= order_product.product.title %></li>
-				    <li style="float: left; list-style: none margin-left: 15px;"><%= order_product.product.product_model.title %></li>
-				    <li style="float: left; list-style: none margin-left: 15px;"><%= order_product.using_condition %></li>
-				    <li style="float: left; list-style: none margin-left: 15px;"><%= number_with_delimiter(order_product.weight_lb) %> lbs</li>
-				    <li style="float: left; list-style: none margin-left: 15px;"><%= number_with_delimiter(order_product.price) %></li>
-				  </ul>
-				  <br/>
+				    <%= index + 1%>)<%= order_product.product.title %>(<%= order_product.using_condition %>)		</b>	  <br/>
 				<% end %>
 				<br/>
-				<br/>
-				<br/>
-				Amount deducted : <%= sell_amount %>
+				
+				<b>Amount deducted : <%= sell_amount %></b>
 			<% else %>
 				<br/>
 				Thanks for swapping your products on Swapidy
