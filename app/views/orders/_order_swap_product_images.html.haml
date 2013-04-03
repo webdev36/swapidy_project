@@ -11,15 +11,15 @@
 				.order_sell_display{:style => "width: 200px; overflow: hidden; z-index: 2; margin-top: -65px;"}
 					%ul#mycarousel.jcarousel-skin
 						- ShoppingCart.cart_products[:sell].each do |order_product|
-							%li{:style => "height:400px;width: 200px;margin-left: 10px;"}
+							%li{:style => "height:400px;width: 200px;margin-left: 55px; margin-top:100px;"}
 								.image-container
 									%img{:src => Product.find(order_product.product_id).main_image_url(:large), :style => " max-width: 160px; max-height: 400px; margin-left: 25px;"}/
 								%br/
-								%p{:style => "font-family:'myriad'; color:#666; font-size:20px;width:100%;text-align:center;"}
+								%p{:style => "font-family:'myriad'; color:#666; font-size:20px;width:100%;text-align:center; margin-left:10px;"}
 									= order_product.title
 								%br
 		.span2{:style=>"padding-top: 30px;"}
-			%div{:style => ""}
+			%div{:style => "margin-left:20px;"}
 				%img.circ_arrow{:src => "/images/circular_arrow.png"}/
 			%div{:style => "margin-top:20px;"}
 				%img.r_circ_arrow{:src => "/images/r_circular_arrow.png"}/
@@ -32,11 +32,11 @@
 				.order_buy_display{:style => "width: 200px; overflow: hidden; z-index: 2; margin-top: -65px;"}
 					%ul#mycarousel.jcarousel-skin
 						- ShoppingCart.cart_products[:buy].each do |order_product|
-							%li{:style => "height: 400px;width: 200px; margin-left: 10px;"}
+							%li{:style => "height: 400px;width: 200px; margin-left: -20px; margin-top:100px;"}
 								.image-container
 									%img{:src => Product.find(order_product.product_id).main_image_url(:large), :style => " max-width: 160px; max-height: 400px;margin-left: 25px;"}/
 								%br/
-								%p{:style => "font-family:'myriad'; color:#666; font-size:20px;width:100%;text-align:center;"}
+								%p{:style => "font-family:'myriad'; color:#666; font-size:20px;width:100%;text-align:center; margin-left:-10px;"}
 									= order_product.title
 								%br/
 
