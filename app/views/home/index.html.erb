@@ -237,12 +237,12 @@
 
 		$("#continue_button").popover({
 			title: 'Please click', 
-      content: "Please click this button!", placement:'left', 
+      content: "Please click this button!", placement:'right', 
       delay: { show: 5000, hide: 3000 }
 		});
 		
 		$("#continue_button").click(function(){
-			$("continue_button").popover("hide");
+			$("#continue_button").popover("hide");
 		});
 
 
@@ -258,7 +258,12 @@
 				dataType: 'script', 
 				success:function(){									
 					if( sell_item_count > 0 ){
-			  		$("#continue_button").text("Choose Products to buy");			  		
+			  		$("#continue_button").text("Choose Products to buy");
+			  		$("#continue_button").popover("show");
+			  		setTimeout(function() {
+	            $("#continue_button").popover('hide');
+	        	}, 3000);	
+
 			  	}else if( buy_item_count > 0 ){
 						$("#continue_button").text("Choose Products to sell");						
 			  	}
@@ -266,11 +271,9 @@
 			  	if( sell_item_count == 0 && buy_item_count == 0 ){
 			  		$("#continue_button").css("display", "none");	
 			  	}
-
-			  	
-
+		  	
 			  	if(getCookie("shop_type") == "sell"){
-			  		$("#sell-items p.item-name").html("Only Sell item");
+			  		$("#sell-items p.item-name").html("Only Sell item");			  		
 			  	}else if(getCookie("shop_type") == "buy"){
 			  		$("#buy-items p.item-name").html("Only Buy item");
 			  	}
