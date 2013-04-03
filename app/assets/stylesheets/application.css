@@ -1167,3 +1167,6 @@ padding: 10px;
 
 }
 
+#continue_button{
+  z-index:1000;
+}

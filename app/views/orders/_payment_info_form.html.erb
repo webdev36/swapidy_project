@@ -25,24 +25,28 @@
   		
   	<% if session[:shop_type] == "sell"%>  		
 			<br />	
-		  <p class="payment-description">
+		  <p class="payment-description" style="margin-top:100px;     text-align: center;
+">
 		  	You get:
 		  	<%= number_to_currency((ShoppingCart.sell_cart_amount))%>				
 	  	</p>
 	  <% elsif session[:shop_type] == "buy"%>
-	  	<p class="payment-description">
+	  	<p class="payment-description" style="margin-top:100px;     text-align: center;
+">
 				Total due today: 			
   			<%= number_to_currency( amount ) %>
   		</p>	<br/><br/>
 
   		<% remaining_amount = remaining_amount < 0 ? 0 : remaining_amount %>
-			<p class="payment-description">
+			<p class="payment-description" style="margin-top:100px;     text-align: center;
+">
 				Remaining balance:  		
   			<%= number_to_currency( remaining_amount ) %>
   		</p>
 		
   	<% else %>  		
-			<p class="payment-description">
+			<p class="payment-description" style="margin-top:100px;     text-align: center;
+">
 				Total due today: 			
   			<%= number_to_currency( amount ) %>
   		</p>
@@ -50,7 +54,8 @@
   		<br/>
 
   		<% remaining_amount = remaining_amount < 0 ? 0 : remaining_amount %>
-			<p class="payment-description">
+			<p class="payment-description" style="text-align: center;
+">
 				Remaining balance:
   			<%= number_to_currency( remaining_amount ) %> 
   		</p>
@@ -65,7 +70,6 @@
 		color:#666; 
 		font-family:'myriad';
 		width: 100%;
-		text-align: center;
 	}
 	input.product_button_buy{
 		margin-left: 90px;	
