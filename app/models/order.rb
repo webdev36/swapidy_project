@@ -299,9 +299,6 @@ class Order < ActiveRecord::Base
       payment.card_name = self.user.card_name
       payment.card_last_four_number = self.user.card_last_four_number
       payment.order_id = self.id
-
-return payment
-
       unless payment.save
         Rails.logger.info "Error to save payment transaction"
         raise "Error to save payment transaction"
@@ -309,7 +306,6 @@ return payment
       new_balance_amount = 0
     end
     self.adjust_current_balance(new_balance_amount)
-#return "NO"
   end
 
   private
