@@ -89,6 +89,7 @@ class OrdersController < ApplicationController
                                         :using_condition => obj_hash[:using_condition], 
                                         :sell_or_buy => "buy")
             end            
+            @order.payment_option = PaymentTransaction::METHODS[:pre_authorize]
             if @order.save
               @order.do_payment
               @order.delay.create_stamp_to_deliver(session[:shop_type])
@@ -121,7 +122,7 @@ class OrdersController < ApplicationController
             end 
             @order.payment_option = PaymentTransaction::METHODS[:pre_authorize]
             if @order.save
-              @order.do_payment
+              @order.do_payment.inspect
               @order.delay.create_stamp_to_deliver(session[:shop_type])
               OrderNotifier.delay.start_processing(@order, session[:shop_type])
               OrderNotifier.delay.start_processing_for_admin(@order,session[:shop_type])
