@@ -1036,6 +1036,7 @@ cursor: pointer;
 }
 .index_header_tagline{
   margin-top: 60px;
+  margin-left: 350px;
   position: relative;
   right: 180px;
   text-align: center;
@@ -1047,7 +1048,7 @@ cursor: pointer;
   font-size: 20px;
   position: relative;
   top:20px;
-  left: 190px;
+  text-align: center;
 }
 .index_instr{
   font-size: 20px;
