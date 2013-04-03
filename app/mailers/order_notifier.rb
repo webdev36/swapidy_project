@@ -18,10 +18,10 @@ class OrderNotifier < ActionMailer::Base
       subject = "Ship your product"
     elsif shop_type == "buy"
       @shipping_stamp = @order.shipping_stamps.for_buy.first
-      subject = "Congrats on your order!"
+      subject = "Swapidy Order Complete!"
     else
       @shipping_stamp = @order.shipping_stamps.for_buy.first
-      subject = "Congrats you have completed swap!"
+      subject = "Swapidy Swap Next Steps!"
     end
     mail :to => @user.email, :subject => subject do |format|
       format.html # renders send_report.text.erb for body of email
@@ -116,7 +116,7 @@ class OrderNotifier < ActionMailer::Base
   def trade_ins_complete(order)
     @user = order.user
     @order = order
-    mail :to => @user.email, :subject => "Product verified - Order #{@order.id}"
+    mail :to => @user.email, :subject => "Product Verified - Order #{@order.id}"
   end
   
   def product_delived(order, trade_ins_stamp)

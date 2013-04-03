@@ -18,11 +18,25 @@
 			<br/>
 			<% if @shop_type == "sell"%>
 				<br/>
-				Thanks for selling your products on Swapidy. <br /><br/>
-				Your cash will be sent to you ans soon as we receive you product. <br /><br/>
-				Please see attached for shipping label and order details.<br /><br/>
+				Thank you for selling your products on Swapidy! Your cash will be sent to you in the payment method you chose soon as we receive you product. 
+				<br>
+				Please see attached for shipping label and order details.
+				<br>
+				<b>Instructions for shipping</b><br/>
+<br/>
+1) Package the item listed above along with any cables, parts, manuals, etc. into a secure box. Use packing material to avoid damage (newspapers work great!).<br/>
+<br/>
+2) Affix the attached prepaid label to the package.<br/>
+<br/>
+3) Put your package into your mailbox if it fits, otherwise drop it off at any collection box or post office. No need to pay, we took care of it.<br/>
+<br/>
+If you have any questions, please email support@swapidy.com. Make sure to mention your name and your email. We will answer your questions within 12 hours or less.<br/>
+
 			<% elsif @shop_type == "buy"%>
-				Congratulations, your order has been placed.<br /><br/>
+				Your Swapidy order has been successfully placed! Your products will be shipping out soon.<br /><br/>
+			        <br>
+			        We'll email you a tracking number as soon as it ships. 
+			        <br>
 				You ordered:
 				<%sell_amount = 0 %>	
 				<b><% @order.order_products.for_buy.each_with_index do |order_product, index| %>
@@ -34,17 +48,23 @@
 				<b>Amount deducted : <%= sell_amount %></b>
 			<% else %>
 				<br/>
-				Thanks for swapping your products on Swapidy
-				<br/>			
+				Thank you for swapping your products on Swapidy! We look forward to completing the transaction in the fastest way possible.
 				<br/>
-				Your free shipping label to send your products to us is attached to this email.
+				Your free shipping label and order details is attached to this email. Please ship your products within 48 hours.
 				<br/>
-				<br/>
-				Please ship products within 48 hours.
+				<b>Instructions for shipping</b><br/>
+<br/>
+1) Package the item listed above along with any cables, parts, manuals, etc. into a secure box. Use packing material to avoid damage (newspapers work great!).<br/>
+<br/>
+2) Affix the attached prepaid label to the package.<br/>
+<br/>
+3) Put your package into your mailbox if it fits, otherwise drop it off at any collection box or post office. No need to pay, we took care of it.<br/>
+<br/>
+If you have any questions, please email support@swapidy.com. Make sure to mention your name and your email. We will answer your questions within 12 hours or less.<br/>
 				<br/>
 			<% end %>
 			<br/>
-			Thanks
+			Cheerio,
 			<br/>
 			<br/>
 			<a href="http://www.twitter.com/theswapdaddy" style="color:#666;"><strong>@TheSwapDaddy</strong></a>
