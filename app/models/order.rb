@@ -288,10 +288,8 @@ class Order < ActiveRecord::Base
   end
 
   def do_payment
-    cart_amount = calc_balance_amount
-return self.pre_authorize_payment?
+    cart_amount = calc_balance_amount < 0 ? calc_balance_amount * -1 : calc_balance_amount
     if self.pre_authorize_payment? && self.user.extra_money_for(cart_amount) > 0
-return "IFCONDITION"
       payment = self.user.payments.stripe.charge.direct.new(:amount => cart_amount)
       payment.card_type = self.user.card_type
       payment.card_expired_year = self.user.card_expired_year
@@ -299,14 +297,15 @@ return "IFCONDITION"
       payment.card_name = self.user.card_name
       payment.card_last_four_number = self.user.card_last_four_number
       payment.order = self
+return "TRANSACTION SUCCESS"
       unless payment.save
         Rails.logger.info "Error to save payment transaction"
-        raise "Error to save payment transaction" 
+        raise "Error to save payment transaction"
       end
       new_balance_amount = 0
     end
-#    self.adjust_current_balance(new_balance_amount)
-return "NOT TRANSCTION"
+    self.adjust_current_balance(new_balance_amount)
+return "NOT TRANSACTION"
   end
 
   private

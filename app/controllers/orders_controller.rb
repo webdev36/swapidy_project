@@ -118,9 +118,10 @@ class OrdersController < ApplicationController
                                         :price => obj_hash[:price], 
                                         :using_condition => obj_hash[:using_condition], 
                                         :sell_or_buy => "buy")
-            end            
+            end 
+            @order.payment_option = PaymentTransaction::METHODS[:pre_authorize]
             if @order.save
-              
+#              @order.do_payment
               render :text => @order.do_payment.inspect and return
 
               @order.delay.create_stamp_to_deliver(session[:shop_type])
