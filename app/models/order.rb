@@ -287,23 +287,23 @@ class Order < ActiveRecord::Base
     return first_payment && first_payment.pre_authorize_method?
   end
 
-  def do_payment
-    #  < 0 ? calc_balance_amount * -1 : calc_balance_amount
-    cart_amount = calc_balance_amount< 0 ? calc_balance_amount * -1 : calc_balance_amount
-    
+  def do_payment        
+    cart_amount = calc_balance_amount < 0 ? calc_balance_amount * -1 : calc_balance_amount
     if self.pre_authorize_payment? && self.user.extra_money_for(cart_amount) > 0
       payment = self.user.payments.stripe.charge.direct.new(:amount => cart_amount)
-      payment.card_type = self.user.card_type
-      payment.card_expired_year = self.user.card_expired_year
-      payment.card_expired_month = self.user.card_expired_month
-      payment.card_name = self.user.card_name
-      payment.card_last_four_number = self.user.card_last_four_number
-      payment.order_id = self.id
-      unless payment.save
-        Rails.logger.info "Error to save payment transaction"
-        raise "Error to save payment transaction"
+      if self.user.create_payment_charge(payment)
+        payment.card_type = self.user.card_type
+        payment.card_expired_year = self.user.card_expired_year
+        payment.card_expired_month = self.user.card_expired_month
+        payment.card_name = self.user.card_name
+        payment.card_last_four_number = self.user.card_last_four_number
+        payment.order_id = self.id
+        unless payment.save
+          Rails.logger.info "Error to save payment transaction"
+          raise "Error to save payment transaction"
+        end
+        new_balance_amount = 0
       end
-      new_balance_amount = 0
     end
     self.adjust_current_balance(new_balance_amount)
   end
