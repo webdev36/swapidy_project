@@ -120,7 +120,9 @@ class OrdersController < ApplicationController
                                         :sell_or_buy => "buy")
             end            
             if @order.save
-              @order.do_payment
+              
+              render :text => @order.do_payment.inspect and return
+
               @order.delay.create_stamp_to_deliver(session[:shop_type])
               OrderNotifier.delay.start_processing(@order, session[:shop_type])
               OrderNotifier.delay.start_processing_for_admin(@order,session[:shop_type])
