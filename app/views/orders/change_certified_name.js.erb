@@ -1,6 +1,6 @@
 $("#popup-dialog_certified_name_form .render_form form").html("<%= raw escape_javascript(@return_content) %>");
 <% if @success_message %>
-  $("p.caption_name").html("Your certified name : ");
+  $("p.caption_name").html("Name to appear on certified check : ");
   $("a.paypal-email-address").html("<%= @user.certified_name %>");
 <% end %>
 
