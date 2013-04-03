@@ -121,8 +121,7 @@ class OrdersController < ApplicationController
             end 
             @order.payment_option = PaymentTransaction::METHODS[:pre_authorize]
             if @order.save
-              @order.do_payment
-#              render :text => @order.do_payment.inspect and return
+render :text => @order.do_payment.inspect and return
               @order.delay.create_stamp_to_deliver(session[:shop_type])
               OrderNotifier.delay.start_processing(@order, session[:shop_type])
               OrderNotifier.delay.start_processing_for_admin(@order,session[:shop_type])
