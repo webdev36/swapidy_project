@@ -287,9 +287,10 @@ class Order < ActiveRecord::Base
     return first_payment && first_payment.pre_authorize_method?
   end
 
-  def do_payment      
-    if calc_balance_amount < 0
-      cart_amount = calc_balance_amount < 0 ? calc_balance_amount*-1 : calc_balance_amount
+  def do_payment
+    balance_value = self.user.balance_amount + calc_balance_amount
+    if balance_value < 0
+      cart_amount = balance_value *-1
       if self.pre_authorize_payment? && self.user.extra_money_for(cart_amount) > 0
         payment = self.user.payments.stripe.charge.direct.new(:amount => cart_amount)
         if self.user.create_payment_charge(payment)
@@ -307,7 +308,7 @@ class Order < ActiveRecord::Base
         end
       end    
     else
-      new_balance_amount = calc_balance_amount
+      new_balance_amount = balance_value
     end
     
     self.adjust_current_balance(new_balance_amount)
