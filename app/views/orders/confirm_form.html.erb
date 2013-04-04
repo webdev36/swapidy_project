@@ -11,7 +11,9 @@
 <div class="content" style="height:590px;" >
   <div class="container" style="">
     <div class="row">
-      <div class="headings_pink" style="margin-left: 340px;margin-top: -45px;">Confirm Your Details</div>      
+      <div class="headings_pink" style="margin-left: 340px;">Confirm Your Details</div>      
+    </div>
+    <div class="row">
       <% if session[:shop_type]=="swap" %>
         <div class="span8" style="margin-left: -80px;margin-top: 40px;">
           <%= render :partial => "/orders/order_swap_product_images" %>
@@ -23,7 +25,7 @@
       <% end %>
       
       <% if session[:shop_type]=="swap" %>        
-      <div class="span6 offset1" style="position:relative; bottom:470px; left:430px;">
+      <div class="span6 offset1" style="position:relative; bottom:400px; left:500px;">
       <% else %>
       <div class="span7 offset1">
       <% end %>      
