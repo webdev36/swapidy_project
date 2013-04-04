@@ -1025,14 +1025,14 @@ cursor: pointer;
 }
 
 #index_header_title{
-  position: absolute;
-  top: 60px;
-  left: 0px;
-  width: 100%;
-  min-width: 1020px;
-  height: 210px;
-  z-index: 0;
-  background-color: #666;
+position: absolute;
+top: 70px;
+left: 0px;
+width: 100%;
+min-width: 1020px;
+height: 200px;
+z-index: 0;
+background-color: #666;
 }
 .index_header_tagline{
   margin-top: 60px;
@@ -1172,4 +1172,14 @@ padding: 10px;
   z-index:1000;
 }
 
+#buy-items{
+  margin:0;
+}
 
+#sell-items{
+  margin:0;
+}
+
+#drop_items{
+  overflow-y:auto;
+}

@@ -687,15 +687,17 @@ bottom: 10px;
 ul.dropdown_shop_cart_icon{
   li{
     list-style: none;
+    margin: 0;
+
     p.item-name{
-      border-bottom: 2px solid #DDDDDD;
-      color: #4D90FE;
-      font-size: 16px;
-      margin: 15px 0 5px 10px;
-      padding-left: 10px;
+      border-bottom: 2px solid #DDD;
+color: #4D90FE;
+font-size: 16px;
+padding: 10px 0 10px 10px;
+margin: 0;
     }
     ul.product-item{
-      margin-left: 5px;
+      margin-left: 0px;
       li{
         list-style: none;
         margin-right: 5px;
@@ -1140,6 +1142,7 @@ a.how_can_swap{
   display: block;
   height: 200px;
   width: 200px;
+  outline:none
   p{
     padding-top:270px; 
     margin-bottom: 0px;
