@@ -37,12 +37,14 @@ body{
       </form>
     </div>
     <%else%>
-        <div style="width:500px; position:relative; bottom:100px; left:550px;">
-      <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; position:relative;">
-          <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
-          <div class="render_form">
-            <%= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Continue"} %>
-          </div>
+      <div style="width:500px; position:relative; bottom:100px; left:550px;">
+        <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; position:relative;">
+            <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
+            <div class="render_form">
+              <%= render :partial => "/orders/shipping_form", :locals => {:order => @order, :submit_title => "Continue"} %>
+            </div>
+        </form>
+      </div>
     <%end%>
   </div>
 
