@@ -30,6 +30,13 @@ module ShoppingCart
     return amount
   end 
 
+  def self.amount_val
+    amount = 0    
+    cart_products[:sell].each {|order_product| amount += order_product.price }
+    cart_products[:buy].each {|order_product| amount -= order_product.price }
+    return amount
+  end
+
   def self.sell_cart_amount
     amount = 0
     cart_products[:sell].each {|order_product| amount += order_product.price }

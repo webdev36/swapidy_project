@@ -65,21 +65,32 @@
                       You would be charged: 
                       <%= number_to_currency(ShoppingCart.cart_amount) %> 
                       - <%= number_to_currency(current_user.balance_amount) %> 
-                      = <%= number_to_currency(ShoppingCart.cart_amount - current_user.balance_amount) %>
+                      = <%= number_to_currency(ShoppingCart.cart_amount-current_user.balance_amount) %>
                       <br/>
                       <input type="button" value="Change Credit Card" class="order_button_buy" style="font-size:15px; width: 150px;height: 30px;"  onclick="refresh_add_money_form();" />
                     <% elsif current_user.extra_money_for(ShoppingCart.cart_amount) > 0 && !current_user.has_card_info? %>
                       You would be charged: 
                       <%= number_to_currency(ShoppingCart.cart_amount) %> 
                       - <%= number_to_currency(current_user.balance_amount) %> 
-                      = <%= number_to_currency(ShoppingCart.cart_amount - current_user.balance_amount) %>
+                      = <%= number_to_currency(ShoppingCart.cart_amount-current_user.balance_amount) %>
                       <br/>
                       <input type="button" value="Add Credit Card" class="order_button_buy" style="margin-left: 125px; margin-top: 20px;"  onclick="refresh_add_money_form();" />
-                    <% else%>
-                        You would be charged: $0<br/>
-                        Your balance will decrease to <%= number_to_currency(current_user.balance_amount) %> - <%= number_to_currency(ShoppingCart.cart_amount) %>
-                        = <%= number_to_currency(current_user.balance_amount -  ShoppingCart.cart_amount) %>
-                        <br/>
+                    <% else %>
+                        <% if ShoppingCart.amount_val > 0 %>
+                          You would be charged: $0<br/>
+                          Your balance will increase to 
+                          <%= number_to_currency(current_user.balance_amount) %> 
+                          + <%= number_to_currency(ShoppingCart.amount_val) %>
+                          = <%= number_to_currency(current_user.balance_amount +  ShoppingCart.amount_val) %>
+                          <br/>
+                        <% else %>
+                          You would be charged: $0<br/>
+                          Your balance will decrease to 
+                          <%= number_to_currency(current_user.balance_amount) %> 
+                          <%= number_to_currency(ShoppingCart.amount_val) %>
+                          = <%= number_to_currency(current_user.balance_amount +  ShoppingCart.amount_val) %>
+                          <br/>
+                        <% end %>
                     <% end %>
                   </div>
                 <% end %>
