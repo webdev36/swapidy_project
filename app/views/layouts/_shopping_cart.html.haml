@@ -2,7 +2,7 @@
 	#product_items{:style => "height: 100px; min-width:180px;"}
 		%div{:style => "width: 100%; text-align: center; padding-top: 20px;"}
 			%span.headings_pink{:style=>"font-size:16px;"} Empty Swapping Cart
-			%a{:href=>"#", :onclick=>"$('#shopping_cart').fadeOut('slow'); show_checkout_bar = false;", :style=>"height: 15px; left: 50%; margin-left: -60px; position: absolute; top: 45px; width: 100px;", :class=>"btn show_button_buy", :id=> "close_shopping_cart"} Close
+			%a{:href=>"#", :onclick=>"$('#shopping_cart').fadeOut('slow'); show_checkout_bar = false;", :style=>"height: 15px; left: 50%; margin-left: -60px; position: absolute; top: 45px; width: 100px; font-size:15px; ", :class=>"btn show_button_buy", :id=> "close_shopping_cart"} Close
 - else
 	- if ShoppingCart.cart_products[:buy].count > 0
 		%li#buy-items
@@ -35,6 +35,10 @@
 		$("#product_count").html(sell_item_count+buy_item_count);
 	else
 		$("#product_count").html("");
+
+	if ( sell_item_count+buy_item_count == 0 )
+	$('#checkout_container').hide();
+
 
 /	if(shop_type=="sell"){
 /		$("#buy-items").hide();
