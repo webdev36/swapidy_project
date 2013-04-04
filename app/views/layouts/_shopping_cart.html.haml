@@ -16,6 +16,8 @@
 			%ul.product-item.sell-item{:style => "position: none;"}
 				- ShoppingCart.cart_products[:sell].each do |order_product|
 					= render :partial => "/layouts/cart_product_thumb", :locals => {:order_product => order_product}
+					
+#checkout_container	
 	%div{:style => "margin-left:120px; margin-top:10px; font-size:15px;"}
 		-if (ShoppingCart.cart_amount)<0
 			%span{:style => "color:green; font-size:15px;"} You get
