@@ -12,20 +12,20 @@
 				.order_sell_display{:style => "width: 200px; overflow: hidden; position: absolute; z-index:2;#{style}"}
 					%ul#mycarousel.jcarousel-skin
 						- ShoppingCart.cart_products[:sell].each do |order_product|
-							%li{:style => "height:400px;width: 200px;margin-left: 10px;"}
+							%li{:style => "height:350px;width: 200px;margin-left: 10px; position: relative;"}
 								.image-container
-									%img{:src => Product.find(order_product.product_id).main_image_url(:large), :style => " max-width: 160px; max-height: 400px; margin-left: 20px;"}/
+									%img{:src => Product.find(order_product.product_id).main_image_url(:large), :style => " max-width: 160px; max-height: 320px; margin-left: 20px;"}/
 								%br/
 								%p{:style => "font-family:'myriad'; color:#666; font-size:20px;width:100%;text-align:center; margin-left:10px;"}
 									= order_product.title
 								%br
-								%span{ :style =>"font-size:20px; margin-left:60px;"}= number_to_currency(order_product.price)
+								%p{ :style =>"font-size:20px; width: 100%; text-align: center; position: absolute; bottom: 0px;"}= number_to_currency(order_product.price)
 								%br
 		.span2{:style=>"padding-top: 30px;"}
-			%div{:style => "margin-left:20px; height:70px; margin-top:50px;"}
-				%img.circ_arrow{:src => "/images/circular_arrow.png", :style => "height:70px; position:relative; top:80px;"}/
-			%div{:style => "margin-top:20px; height:70px;"}
-				%img.r_circ_arrow{:src => "/images/r_circular_arrow.png", :style => "height:70px; position:relative; top:80px;"}/
+			%div{:style => "margin-left:20px; height:70px;"}
+				%img.circ_arrow{:src => "/images/circular_arrow.png", :style => "height:70px; position:relative; top:25px;"}/
+			%div{:style => "height:70px;"}
+				%img.r_circ_arrow{:src => "/images/r_circular_arrow.png", :style => "height:70px; position:relative; top:60px;"}/
 		.span3.order_slider_buy{:style => "margin-left: 0px; float: right;"}
 			%div
 				- if ShoppingCart.cart_products[:buy].count > 1
@@ -36,14 +36,14 @@
 				.order_buy_display{:style => "width: 200px; overflow: hidden; z-index: 2; position: absolute; #{style}"}
 					%ul#mycarousel.jcarousel-skin
 						- ShoppingCart.cart_products[:buy].each do |order_product|
-							%li{:style => "height: 400px;width: 200px; margin-left: 20px;"}
+							%li{:style => "height: 350px;width: 200px; margin-left: 20px; position: relative;"}
 								.image-container
-									%img{:src => Product.find(order_product.product_id).main_image_url(:large), :style => " max-width: 160px; max-height: 400px;margin-left: 10px;"}/
+									%img{:src => Product.find(order_product.product_id).main_image_url(:large), :style => " max-width: 160px; max-height: 320px;margin-left: 10px;"}/
 								%br/
 								%p{:style => "font-family:'myriad'; color:#666; font-size:20px;width:100%;text-align:center; margin-left:-10px;"}
 									= order_product.title
 								%br
-								%span{ :style =>"margin-left:50px; font-size:20px;"}= number_to_currency(order_product.price)
+								%p{ :style =>"font-size:20px; width: 100%; text-align: center; position: absolute; bottom: 0px;"}= number_to_currency(order_product.price)
 								/
 
 :css		

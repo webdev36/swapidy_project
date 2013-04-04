@@ -18,7 +18,7 @@ body{
     <div class="headings_pink" style="position:relative; bottom:30px; text-align:center;">Shipping Address<span>*</span></div>
     
     <% if session[:shop_type]=="swap" %>
-      <div class="span8" style="margin-left: -80px;margin-top: 40px;">
+      <div class="span8" style="margin-left: -80px;margin-top: 10px;">
         <%= render :partial => "/orders/order_swap_product_images" %>
       </div>      
     <% else %>
@@ -28,7 +28,7 @@ body{
     <% end %>
       
     <% if session[:shop_type]=="swap" %>
-    <div style="width:500px; position:relative; bottom:400px; left:550px;">
+    <div style="width:500px; position:relative; bottom:350px; left:550px;">
       <form accept-charset="UTF-8" action="/orders/confirm" class="new_order" id="new_order" method="post" style="text-align: left; vertical-align: top; display: inline-block; position:relative;">
           <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden' />
           <div class="render_form">
