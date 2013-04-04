@@ -1,5 +1,5 @@
        <div id="index_header_title">
-       	<div class="index_header_tagline">Sell, Swap, and Buy electronics instantly.<br/><span class="index_header_subtitle">Unlock your desire to get the latest and greatest Galaxy, iPad, iPhone, Macbook, and iPad with ease and affordibility.</span><br/><div style="margin-left:375px;"><img class="index_head_1" src="/images/index_head/1.png"><span class="index_head_1_text">Get paid within 72 hours.</span><img class="index_head_2" src="/images/index_head/2.png"><span class="index_head_2_text">Fastest turnaround time.</span><img class="index_head_3" src="/images/index_head/3.png"><span class="index_head_3_text">No fees.</span></div></div>
+       	<div class="index_header_tagline">Sell, Swap, and Buy electronics instantly.<br/><span class="index_header_subtitle">Sell products for cash. Swap old products for new. Buy new products. </span><br/><div style="margin-left:265px;"><img class="index_head_1" src="/images/index_head/1.png"><span class="index_head_1_text">Get paid fast</span><img class="index_head_2" src="/images/index_head/2.png"><span class="index_head_2_text">Free shipping</span><img class="index_head_3" src="/images/index_head/3.png"><span class="index_head_3_text">No fees</span></div></div>
 
        </div>
 <!--
@@ -158,7 +158,12 @@
                     <div class="s_category" style="color:#38B4DE; font-size:18px;"><%= attr.title %></div>
                     <div class="attr_filter_column_items" >
                       <% attr.attributes_in_models.each do |attr_value_with_models| %>
-                        <div class="attr_filter <%= "attr_filter_model_all_for_buying" if attr_value_with_models[3] > 0 %> <%= "attr_filter_model_all_for_selling" if attr_value_with_models[4] > 0 %> <%= attr_value_with_models[2].map{|model_attribute| model_attribute.filter_content}.join(" ") %>" >
+                        <div class="attr_filter 
+                        	<%= "attr_filter_model_all_for_buying" if attr_value_with_models[3] > 0 %> 
+                        	<%= "attr_filter_model_all_for_selling" if attr_value_with_models[4] > 0 %> 
+                        	<%= "attr_filter_model_all_for_sell_only" if attr_value_with_models[5] > 0 %> 
+                        	<%= attr_value_with_models[2].map{|model_attribute| model_attribute.filter_content}.join(" ") %>" >
+
                           <div style="display: inline-block; line-height: 30px;" >
                             <input type="checkbox" id="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>" class="regular-checkbox big-checkbox"
                                 attr-filter-option='<%= attr_value_with_models[0] %>' />
@@ -350,10 +355,10 @@
 	     }
 	     
 	     unselectCurrentCategory();
-	
+
 	     current_category_id = $(this).parent().attr("id");
 	     $("#" + current_category_id).addClass("select");
-	
+
 	     $("#container_" + current_category_id + " .attr_filter_column").addClass("hidden_filter");
 	     $("#container_" + current_category_id + " .attr_filter").addClass("hidden_filter");
 	     $("#container_" + current_category_id + " .attr_" + current_model_id + '_' + for_what).removeClass("hidden_filter");

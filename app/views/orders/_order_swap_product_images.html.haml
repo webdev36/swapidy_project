@@ -19,9 +19,11 @@
 								%p{:style => "font-family:'myriad'; color:#666; font-size:20px;width:100%;text-align:center; margin-left:10px;"}
 									= order_product.title
 								%br
-		.span2
-			%div{:style => "margin-left:20px; height:70px;"}
-				%img.circ_arrow{:src => "/images/circular_arrow.png", :style => "height:70px; position:relative; top:50px;"}/
+								%span{ :style =>"font-size:20px; margin-left:60px;"}= number_to_currency(order_product.price)
+								%br
+		.span2{:style=>"padding-top: 30px;"}
+			%div{:style => "margin-left:20px; height:70px; margin-top:50px;"}
+				%img.circ_arrow{:src => "/images/circular_arrow.png", :style => "height:70px; position:relative; top:80px;"}/
 			%div{:style => "margin-top:20px; height:70px;"}
 				%img.r_circ_arrow{:src => "/images/r_circular_arrow.png", :style => "height:70px; position:relative; top:80px;"}/
 		.span3.order_slider_buy{:style => "margin-left: 0px; float: right;"}
@@ -40,7 +42,9 @@
 								%br/
 								%p{:style => "font-family:'myriad'; color:#666; font-size:20px;width:100%;text-align:center; margin-left:-10px;"}
 									= order_product.title
-								%br/
+								%br
+								%span{ :style =>"margin-left:50px; font-size:20px;"}= number_to_currency(order_product.price)
+								/
 
 :css		
 	button.ctrl_button{

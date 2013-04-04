@@ -118,6 +118,7 @@ class Product < ActiveRecord::Base
       if index == 0
         (result << "price_range_#{price}"; next) if price_for_sell && price_for_sell > 0 && price_for_sell <= price        
         (result << "price_range_#{price}"; next) if price_for_buy && price_for_buy > 0 && price_for_buy <= price 
+
 #        (result << "price_range_#{price}"; next) if price_for_good_sell && price_for_good_sell > 0 && price_for_good_sell <= price 
 #        (result << "price_range_#{price}"; next) if price_for_poor_sell && price_for_poor_sell > 0 && price_for_poor_sell <= price 
       elsif index < prices.size - 1
@@ -134,7 +135,8 @@ class Product < ActiveRecord::Base
         (result << "price_range_#{price}"; next) if price_for_buy && price_for_buy >= price 
       end
     end
-    
+
+    result << "sell_only" if for_sells_only?
     result << "sell" if for_sells?
     result << "buy" if for_buys?
     result << "both" if for_sells? || for_buys?

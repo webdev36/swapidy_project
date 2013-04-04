@@ -15,8 +15,17 @@
 			%p.item-name Sell item
 			%ul.product-item.sell-item{:style => "position: none;"}
 				- ShoppingCart.cart_products[:sell].each do |order_product|
-					= render :partial => "/layouts/cart_product_thumb", :locals => {:order_product => order_product}		
-	%a{:id=>"checkout_btn", :href=>"javascript:gotoCheckout();", :style=>"height: 15px; left: 50%; margin: 10px 0 10px 30px; width: 100px;", :class=>"btn show_button_buy"} Checkout
+					= render :partial => "/layouts/cart_product_thumb", :locals => {:order_product => order_product}
+					
+#checkout_container	
+	%div{:style => "margin-left:120px; margin-top:10px; font-size:15px;"}
+		-if (ShoppingCart.cart_amount)<0
+			%span{:style => "color:green; font-size:15px;"} You get
+			%span= number_to_currency(-1 * ShoppingCart.cart_amount) 
+		-else
+			%span You pay
+			%span{:style => "color:red; font-size:15px;"}= number_to_currency(ShoppingCart.cart_amount) 		
+	%a{:id=>"checkout_btn", :href=>"javascript:gotoCheckout();", :style=>"height: 15px; left: 50%; margin: 10px 0 10px 110px; width: 100px; font-size:15px;", :class=>"btn show_button_buy"} Checkout
 
 :javascript
 	var shop_type = getCookie("shop_type");

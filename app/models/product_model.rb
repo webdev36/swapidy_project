@@ -28,6 +28,7 @@ class ProductModel < ActiveRecord::Base
     result = ""
     result += " attr_filter_model_#{self.id}_for_buying" if self.products.for_buy.price_range(range, :for_buy).count > 0
     result += " attr_filter_model_#{self.id}_for_selling" if self.products.for_sell.price_range(range, :for_sell).count > 0
+    result += " attr_filter_model_#{self.id}_for_sell_only" if self.products.for_sell_only.price_range(range, :for_sell_only).count > 0
     return result
   end
   

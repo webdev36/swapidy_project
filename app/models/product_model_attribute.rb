@@ -19,13 +19,18 @@ class ProductModelAttribute < ActiveRecord::Base
     self.products.for_sell.count
   end
   
+  def count_for_sell_only
+    self.products.for_sell_only.count
+  end
+
   def filter_content
     result = ""
     result += " attr_filter_model_#{self.product_model.id}_for_selling" if self.products.for_sell.count > 0
     result += " attr_filter_model_#{self.product_model.id}_for_buying" if self.products.for_buy.count > 0
+    result += " attr_filter_model_#{self.product_model.id}_for_sell_only" if self.products.for_sell_only.count > 0
     return result
   end
-  
+
   def title
     [product_model.title, category_attribute.title, value].join(" - ") rescue ""
   end
