@@ -18,9 +18,9 @@
 			<br/>
 			<% if @shop_type == "sell"%>
 				<br/>
-				Thank you for selling your products on Swapidy! Your cash will be sent to you in the payment method you chose soon as we receive you product. 
+				Thank you for selling your products on Swapidy! Your cash will be sent to you in the payment method you chose soon as we receive you product.<br> 
 				<br>
-				Please see attached for shipping label and order details.
+				Please see attached for shipping label and order details.<br>
 				<br>
 				<b>Instructions for shipping</b><br/>
 <br/>
@@ -33,7 +33,7 @@
 If you have any questions, please email support@swapidy.com. Make sure to mention your name and your email. We will answer your questions within 12 hours or less.<br/>
 
 			<% elsif @shop_type == "buy"%>
-				Your Swapidy order has been successfully placed! Your products will be shipping out soon.<br /><br/>
+				Your Swapidy order has been successfully placed! Your products will be shipping out soon.<br>
 			        <br>
 			        We'll email you a tracking number as soon as it ships. <br/>
 			        <br>
@@ -42,15 +42,18 @@ If you have any questions, please email support@swapidy.com. Make sure to mentio
 				<b><% @order.order_products.for_buy.each_with_index do |order_product, index| %>
 				  <% sell_amount += order_product.price %>
 				    <%= index + 1%>)<%= order_product.product.title %>(<%= order_product.using_condition %>)		</b>	  <br/>
+				    <br>
+				If you have any questions, please email support@swapidy.com. Make sure to mention your name and your email. We will answer your questions within 12 hours or less.<br/>
+				<br/>   
 				<% end %>
 				<br/>
 				
-				<b>Amount deducted : <%= sell_amount %></b><br/>
+				<b>Amount deducted: <%= sell_amount %></b><br/>
 			<% else %>
 				<br/>
-				Thank you for swapping your products on Swapidy! We look forward to completing the transaction in the fastest way possible.
+				Thank you for swapping your products on Swapidy! We look forward to completing the transaction in the fastest way possible.<br>
 				<br/>
-				Your free shipping label and order details is attached to this email. Please ship your products within 48 hours.
+				Your free shipping label and order details is attached to this email. Please ship your products within 48 hours.<br>
 				<br/>
 				<b>Instructions for shipping</b><br/>
 <br/>
