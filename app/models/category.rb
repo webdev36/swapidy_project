@@ -31,8 +31,8 @@ class Category < ActiveRecord::Base
       html += product_models.map{|model| " attr_filter_model_#{model.id}_for_sell_only "}.join("")
     elsif Product::PRICE_RANGES.keys.include?(price_range_key)
       html += " attr_filter_model_all_for_buying " if products.for_buy.price_range(price_range_key, :for_buy).count > 0
-      html += " attr_filter_model_all_for_selling attr_filter_model_all_for_sell_only " if products.for_sell.price_range(price_range_key, :for_sell).count > 0
-#      html += " attr_filter_model_all_for_sell_only " if products.for_sell_only.price_range(price_range_key, :for_sell).count > 0
+      html += " attr_filter_model_all_for_selling " if products.for_sell.price_range(price_range_key, :for_sell).count > 0
+      html += " attr_filter_model_all_for_sell_only " if products.for_sell.price_range(price_range_key, :for_sell).count > 0
       html += product_models.map{|model| model.price_range_filter_content(price_range_key) }.join(" ")
     end
     html

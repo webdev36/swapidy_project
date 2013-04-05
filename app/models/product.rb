@@ -111,7 +111,7 @@ class Product < ActiveRecord::Base
   def gen_attribute_filter_ids
     result = []
     self.product_model_attributes.each do |product_model_attribute|
-      result << product_model_attribute.gen_fitler_id
+      result << product_model_attribute.gen_filter_id
     end
     prices = PRICE_RANGES.keys.sort
     prices.each_with_index do |price, index|
@@ -185,6 +185,7 @@ class Product < ActiveRecord::Base
   def weight_lb
     product_model.weight_lb
   end
+  
 end
 
 

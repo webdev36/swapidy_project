@@ -27,7 +27,7 @@ class ProductModelAttribute < ActiveRecord::Base
     result = ""
     result += " attr_filter_model_#{self.product_model.id}_for_selling" if self.products.for_sell.count > 0
     result += " attr_filter_model_#{self.product_model.id}_for_buying" if self.products.for_buy.count > 0
-    result += " attr_filter_model_#{self.product_model.id}_for_sell_only" if self.products.for_sell_only.count > 0
+    result += " attr_filter_model_#{self.product_model.id}_for_sell_only" if self.products.for_sell.count > 0
     return result
   end
 
@@ -39,7 +39,7 @@ class ProductModelAttribute < ActiveRecord::Base
     return CategoryAttribute.convert_value(self.category_attribute.attribute_type, self.value)
   end
   
-  def gen_fitler_id
+  def gen_filter_id
     ext_name = [category_attribute.id.to_s, value].join("_").parameterize
     return "filter_#{ext_name}"
   end

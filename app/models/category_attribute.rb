@@ -54,21 +54,70 @@ class CategoryAttribute < ActiveRecord::Base
     for_sell_only_attributes = {}
 
     self.product_model_attributes.each do |attribute|
-      attribute_titles.merge! attribute.gen_fitler_id => attribute.value
+      attribute_titles.merge! attribute.gen_filter_id => attribute.value
       
-      if attribute_values[attribute.gen_fitler_id]
-        attribute_values[attribute.gen_fitler_id] << attribute
-        for_buy_attributes[attribute.gen_fitler_id] += attribute.count_for_buy
-        for_sell_attributes[attribute.gen_fitler_id] += attribute.count_for_sell
-        for_sell_only_attributes[attribute.gen_fitler_id] += attribute.count_for_sell_only
+      if attribute_values[attribute.gen_filter_id]
+        attribute_values[attribute.gen_filter_id] << attribute
+        for_buy_attributes[attribute.gen_filter_id] += attribute.count_for_buy
+        for_sell_attributes[attribute.gen_filter_id] += attribute.count_for_sell
+        for_sell_only_attributes[attribute.gen_filter_id] += attribute.count_for_sell_only
       else
-        for_buy_attributes.merge! attribute.gen_fitler_id => attribute.count_for_buy
-        for_sell_attributes.merge! attribute.gen_fitler_id => attribute.count_for_sell
-        for_sell_only_attributes.merge! attribute.gen_fitler_id => attribute.count_for_sell_only
-        attribute_values.merge! attribute.gen_fitler_id => [attribute]
+        for_buy_attributes.merge! attribute.gen_filter_id => attribute.count_for_buy
+        for_sell_attributes.merge! attribute.gen_filter_id => attribute.count_for_sell
+        for_sell_only_attributes.merge! attribute.gen_filter_id => attribute.count_for_sell_only
+        attribute_values.merge! attribute.gen_filter_id => [attribute]
       end
     end
-    return attribute_values.keys.reject{|key| (for_buy_attributes[key] + for_sell_attributes[key] + for_sell_only_attributes[key]) == 0 }.map{|key| [key, attribute_titles[key], attribute_values[key], for_buy_attributes[key], for_sell_attributes[key],for_sell_only_attributes[key]] }
+    return attribute_values.keys.reject{|key| (for_buy_attributes[key] 
+      + for_sell_attributes[key] 
+      + for_sell_only_attributes[key]) == 0 }
+    .map{|key| [key, 
+      attribute_titles[key], 
+      attribute_values[key], 
+      for_buy_attributes[key], 
+      for_sell_attributes[key],
+      for_sell_only_attributes[key]] }
+  end
+  def test
+    result = []
+    attribute_filters = []
+    filter_key = ""
+    filter_count = 0
+    self.product_model_attributes.group(:value).each do |attribute|
+      if attribute.value.present?        
+        attr_val = attribute.value.strip
+        filter_key = "filter_#{self.id}_#{attr_val.downcase}"
+        filter_name = attr_val
+        sell_products = self.category.products.all(:conditions=>["swap_type=? and product_model_attributes.value=?", "1", "#{attr_val}"], 
+        :joins=>"left join product_model_attributes on products.product_model_id=product_model_attributes.product_model_id", 
+        :group=>"products.product_model_id")        
+        attribute_filters << "attr_filter_model_all_for_selling" if sell_products.count > 0
+        filter_count += sell_products.count
+        sell_products.each do |sp|
+          attribute_filters << "attr_filter_model_#{sp.product_model.id}_for_selling"
+        end
+
+        buy_products = self.category.products.all(:conditions=>["swap_type=? and product_model_attributes.value=?", "2", "#{attr_val}"], 
+          :joins=>"left join product_model_attributes on products.product_model_id=product_model_attributes.product_model_id", 
+          :group=>"products.product_model_id")
+        attribute_filters << "attr_filter_model_all_for_buying" if buy_products.count > 0
+        filter_count += buy_products.count
+        buy_products.each do |bp|
+          attribute_filters << "attr_filter_model_#{bp.product_model.id}_for_buying"
+        end
+
+        sell_only_products = self.category.products.all(:conditions=>["swap_type=? and product_model_attributes.value=?", "3", "#{attr_val}"], 
+          :joins=>"left join product_model_attributes on products.product_model_id=product_model_attributes.product_model_id", 
+          :group=>"products.product_model_id")
+        attribute_filters << "attr_filter_model_all_for_sell_only" if sell_only_products.count > 0
+        filter_count += sell_only_products.count
+        sell_only_products.each do |sop|
+          attribute_filters << "attr_filter_model_#{sop.product_model.id}_for_sell_only"
+        end                
+        result << [filter_key, filter_name, attribute_filters.uniq] if filter_count > 0
+      end      
+    end    
+    return result
   end
 
   after_save :expired_fragment_caches
