@@ -3,15 +3,12 @@ class ProductsController < ApplicationController
     @product = Product.find params[:id]
     params[:using_condition]
   end
-  
-  require import_excel_product
-
   def csv_import
   	if user_signed_in?
 #  		render :text => "You are not an administrator" and return if !current_user.is_admin?
-  		file_name = params[:fn].to_s+".csv"
+  		file_name = params[:fn].to_s+".csv"  		
 	  	product_models = ProductModel.all.map{|pm| [pm.id, pm.title]}
-	  	pma_attrs = ["Weight lb", "Year", "Space",	"Network", "Color", "Generation", "Screen Size",	"Retina Display",	"Memory",	"Hard Disk", "Processor"]
+	  	pma_attr = ["Weight lb", "Year", "Space",	"Network", "Color", "Generation", "Screen Size",	"Retina Display",	"Memory",	"Hard Disk", "Processor"]
 	 	
 	  	categories = Category.all.map{|cat| [cat.id, cat.title]}
 	  	headers = [ "val",					"Flawlesss",			"Good",		"Poor",				"Category",		"Product model",	
@@ -33,22 +30,21 @@ class ProductsController < ApplicationController
 					product.price_for_good_buy = nil 
 					product.price_for_poor_buy = nil
 			    product.swap_type = 3
-			    product.upload_database_id = nil	
+#			    product.upload_database_id = nil	
 			    if product.save 	    			    	
 				    CategoryAttribute.all.each do |ca| 
-				    	if pma_attrs.include? ca.title
+				    	if pma_attr.include? ca.title
 				    		pma = ProductModelAttribute.new
 				    		pma.product_model_id = product_models.find{|pm| pm[1]==row[5]}[0]
 				    		pma.category_attribute_id =ca.id
 				    		pma.value = row[headers.index(ca.title)]
-				    		next if row[headers.index(ca.title)].blank?
 				    		if pma.save	
 									pa = ProductAttribute.new
 					    		pa.product_id = product.id
 					    		pa.product_model_attribute_id = pma.id
-					    		pa.value = pma.value
+					    		pa.value = nil
 					    		pa.save
-								end								
+								end
 				    	end
 				    end #ca
 				  end #product save
