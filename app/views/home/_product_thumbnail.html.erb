@@ -19,7 +19,7 @@
       <% end %>
       <% if product.for_buys? %>
         <div class="dropdown button_for_buy" id= "button_block">
-          <a style="width: 80px;" popup_id="popup_buying_price_<%= product.id %>" class="btn btn-primary select-price" title="Buy now: <%= product.title %>">Buy</a>
+          <a style="width: 80px;" popup_id="popup_buying_price_<%= product.id %>" class="btn btn-primary select-price" title="Buy now: <%= product.price_for_buy %>--<% product.price_for_good_buy %>--<% product.price_for_poor_buy %>">Buy</a>          
         </div>
       <% end %>
     </div>

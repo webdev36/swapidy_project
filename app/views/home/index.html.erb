@@ -157,19 +157,15 @@
                   <div class="sub_frame">
                     <div class="s_category" style="color:#38B4DE; font-size:18px;"><%= attr.title %></div>
                     <div class="attr_filter_column_items" >
-                      <% attr.attributes_in_models.each do |attr_value_with_models| %>
-                        <div class="attr_filter 
-                        	<%= "attr_filter_model_all_for_buying" if attr_value_with_models[3] > 0 %> 
-                        	<%= "attr_filter_model_all_for_selling" if attr_value_with_models[4] > 0 %> 
-                        	<%= "attr_filter_model_all_for_sell_only" if attr_value_with_models[4] > 0 %> 
-                        	<%= attr_value_with_models[2].map{|model_attribute| model_attribute.filter_content}.join(" ") %>" >
+                      <% attr.get_attributes_models.each do |attr_models| %>
+                        <div class="attr_filter <%= attr_models[2].join(" ") %>" >
 
                           <div style="display: inline-block; line-height: 30px;" >
-                            <input type="checkbox" id="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>" class="regular-checkbox big-checkbox"
-                                attr-filter-option='<%= attr_value_with_models[0] %>' />
-                            <label for="checkbox-<%= attr.id %>-<%= attr_value_with_models[0] %>"></label>
+                            <input type="checkbox" id="checkbox-<%= attr.id %>-<%= attr_models[0] %>" class="regular-checkbox big-checkbox"
+                                attr-filter-option='<%= attr_models[0] %>' />
+                            <label for="checkbox-<%= attr.id %>-<%= attr_models[0] %>"></label>
                           </div>
-                          <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 0px;"><%= attr_value_with_models[1] %></div>
+                          <div style="display:inline-block; margin-top: -5px; font-size: 14px; padding-right: 0px;"><%= attr_models[1] %></div>
                         </div>
                       <% end %>
                     </div>  
@@ -220,7 +216,7 @@
       </div>
     </div>
 <% end %>
-
+<!--
 <div class="row share-buttons" style="margin-top: -20px; margin-bottom: 50px;">
 	<div class="span1" style="margin-left:375px;">
 		<script src="https://connect.facebook.net/en_US/all.js#xfbml=1"></script>
@@ -232,7 +228,7 @@
 	</div>
   
 </div>
-
+-->
 <script language="JavaScript">
 
   var for_what = "for_selling";

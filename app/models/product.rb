@@ -166,11 +166,13 @@ class Product < ActiveRecord::Base
   end
   
   def for_buys?
-    self.has_flawless_buy? || self.has_poor_buy? || self.has_good_buy?
+    #self.has_flawless_buy? || self.has_poor_buy? || self.has_good_buy?
+    self.swap_type == 2 ? true : false
   end
   
   def for_sells?    
-    (self.has_flawless_sell? || self.has_poor_sell? || self.has_good_sell?) && self.swap_type != 3
+    #(self.has_flawless_sell? || self.has_poor_sell? || self.has_good_sell?) && self.swap_type != 3
+    self.swap_type == 1 ? true : false
   end
   def for_sells_only?
     self.swap_type == 3 ? true : false

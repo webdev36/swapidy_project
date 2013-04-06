@@ -78,7 +78,7 @@ class CategoryAttribute < ActiveRecord::Base
       for_sell_attributes[key],
       for_sell_only_attributes[key]] }
   end
-  def test
+  def get_attributes_models
     result = []
     attribute_filters = []
     filter_key = ""

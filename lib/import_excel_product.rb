@@ -33,7 +33,7 @@ module ImportExcelProduct
     product = Product.where(:title => columns[INDEXES[:title]], :swap_type => for_buying ? 2 : 1).first
     if product
       return product unless action_type
-       if for_buying
+      if for_buying
         product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
         product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
         product.price_for_poor_buy = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
@@ -81,10 +81,10 @@ module ImportExcelProduct
     end  
   end
   
-  MODEL_INDEXES = {:category => 0,
-             :product_model => 1,
-             :weight_lb => 2
-            }
+  MODEL_INDEXES = { :category => 0,
+                    :product_model => 1,
+                    :weight_lb => 2
+                  }
   MODEL_PROPERTY_START_INDEX = 3
   def self.import_model(textline, headers, logger = nil)
     

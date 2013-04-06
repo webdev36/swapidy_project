@@ -839,13 +839,11 @@ RailsAdmin.config do |config|
     #configure :product_id, :integer         # Hidden 
     list do
       field :data_content
-      field :product_type
-    
+      field :product_type  
     end
     export do
       field :data_content
       field :product_type
-
     end
     show do
       field :data_content
@@ -854,12 +852,11 @@ RailsAdmin.config do |config|
     create do
       field :product_type,:enum do
         label "ProductType"
-      enum do
-        ['for_buying','for_selling']
+        enum do
+          ['for_buying','for_selling','for_sell_only']
+        end
       end
-      end
-      field :data_content
-      
+      field :data_content      
     end
   end
 

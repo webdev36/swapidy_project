@@ -19,6 +19,7 @@ module UpdateDatabase
     logger.info "columns.size: #{columns.size} - headers.size: #{headers.size}"
     return if columns.size < PROPERTY_START_INDEX || columns.size > headers.size
     logger.info "Product_type: #{product_type}"
+
     category = Category.find_by_title columns[INDEXES[:category]]
     category = Category.create(:title => columns[INDEXES[:category]]) unless category
     logger.info "category: #{category.id} - #{category.title}"
@@ -32,12 +33,17 @@ module UpdateDatabase
     elsif product_type.to_i == 2
      logger.info "Product _swaptype #{product_type}"
       product = Product.where(:title => columns[INDEXES[:title]], :swap_type => 2).first
+    elsif product_type.to_i == 3
+      logger.info "Product _swaptype #{product_type}"
+      product = Product.where(:title => columns[INDEXES[:title]], :swap_type => 3).first  
     end
-    logger.info "Product column #{columns[INDEXES[:title]]} --swap_type #{product.swap_type}"
-    if product
-      return product unless action_type
-    logger.info "Step1 #{product.title} --product_type #{product_type}"
-       if (product_type.to_i && product_type.to_i == 2)
+    
+    logger.info "Product column #{columns[INDEXES[:title]]} --swap_type #{product_type}"
+    
+    if product.present?
+      return product unless action_type   
+      logger.info "Step1 #{product.title} --product_type #{product.swap_type}"
+      if (product_type.to_i && product_type.to_i == 2)
         product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
         product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
         product.price_for_poor_buy = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
@@ -45,11 +51,23 @@ module UpdateDatabase
         product.price_for_sell = (columns[INDEXES[:price]].to_f rescue nil)
         product.price_for_good_sell = (columns[INDEXES[:price_for_good]].to_f rescue nil)
         product.price_for_poor_sell = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
-        logger.info "Product for sell  #{columns[INDEXES[:price_for_good]]} -- #{columns[INDEXES[:price_for_good]]}"
+        logger.info "Product for sell  #{columns[INDEXES[:price]]} -- #{columns[INDEXES[:price_for_good]]}"
       end
     else
       logger.info "Step3"
       product = Product.new(:title => columns[INDEXES[:title]])
+
+      if (product_type.to_i && product_type.to_i == 2)
+        product.price_for_buy = (columns[INDEXES[:price]].to_f rescue nil)
+        product.price_for_good_buy = (columns[INDEXES[:price_for_good]].to_f rescue nil)
+        product.price_for_poor_buy = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
+      else
+        product.price_for_sell = (columns[INDEXES[:price]].to_f rescue nil)
+        product.price_for_good_sell = (columns[INDEXES[:price_for_good]].to_f rescue nil)
+        product.price_for_poor_sell = (columns[INDEXES[:price_for_poor]].to_f rescue nil)
+        logger.info "Product for sell  #{columns[INDEXES[:price]]} -- #{columns[INDEXES[:price_for_good]]}"
+      end
+      product.swap_type = product_type.to_i 
       product.category = category
       product.product_model = model
     end
@@ -82,7 +100,8 @@ module UpdateDatabase
       attr.product_model_attribute = model_attr_value
     end
     if product.save
-      logger.info "Product_for save: #{product.title}"
+      logger.info "Product_for save: #{product.title} === #{product.swap_type}"
+      logger.info "Product_for save: #{product.price_for_buy} === #{columns[INDEXES[:price]].to_f}"
       return product 
     else
       logger.info product.errors.full_messages
@@ -91,9 +110,9 @@ module UpdateDatabase
   end
   
   MODEL_INDEXES = {:category => 0,
-             :product_model => 1,
-             :weight_lb => 2
-            }
+                   :product_model => 1,
+                   :weight_lb => 2
+                  }
   MODEL_PROPERTY_START_INDEX = 3
   def self.import_model(textline, headers, logger = nil)
     
