@@ -1183,3 +1183,41 @@ padding: 10px;
 #drop_items{
   overflow-y:auto;
 }
+a.how_can_swap{
+outline:none
+
+}
+
+.device_mashup_index{
+  width: 940px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  position: relative;
+  right:10px;
+}
+
+ .swapidy_motto_index{
+color: #666;
+font-size: 60px;
+text-align: center;
+font-family: 'myriad-s';
+z-index: 1000;
+margin-top: 100px;
+margin-bottom: 100px;
+ }
+
+ .success_img_index{
+  height: 260px;
+margin-left: 20px;}
+
+.index_testimonial{
+  height: 400px;
+}
+.index_success_index{
+  width: 450px;
+  position:absolute;
+  margin-left: 270px;
+  bottom:400px;
+}
