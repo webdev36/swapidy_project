@@ -8,18 +8,6 @@
 </div>
 -->
 <script language="JavaScript">	
-	$(".index_success").jCarouselLite({
-      btnNext: null,
-      btnPrev: null,
-      visible: 1,
-      scroll: 1,
-      vertical: true,
-      circular: true,
-      itemFallbackDimension: 150,
-      start: 0,
-      auto: 4000,
-      speed: 1000 
-  });
 
 
 	<% if ShoppingCart.cart_products_empty? %>
@@ -216,7 +204,51 @@
       </div>
     </div>
 <% end %>
-<!--
+
+<div class="index_testimonial">
+	<img class="device_mashup_index" src="/images/device_mashup.png">
+	<div class="index_success_index">
+      <ul>
+        <li>
+          <img class="success_img_index" src="/images/testimonials/1.png" style="" />
+        </li>
+        <li>
+          <img class="success_img_index" src="/images/testimonials/2.png" style="" />
+       </li>
+        <li>
+          <img class="success_img_index" src="/images/testimonials/3.png" style="" />
+        </li>
+        <li>
+          <img class="success_img_index" src="/images/testimonials/4.png" style="" />
+        </li>
+        <li>
+          <img class="success_img_index" src="/images/testimonials/5.png" style="" />
+        </li>
+      </ul>
+ 	 </div>
+</div>
+
+<div class="swapidy_motto_index">Let's trade.</div>
+<script>
+$(document).ready(function() {
+  $(".index_success_index").show();
+  $(".index_success_index").jCarouselLite({
+      btnNext: null,
+      btnPrev: null,
+      visible: 1,
+      scroll: 1,
+      vertical: true,
+      circular: true,
+      itemFallbackDimension: 150,
+      start: 0,
+      auto: 4000,
+      speed: 1000 
+  });
+});
+
+</script>
+
+
 <div class="row share-buttons" style="margin-top: -20px; margin-bottom: 50px;">
 	<div class="span1" style="margin-left:375px;">
 		<script src="https://connect.facebook.net/en_US/all.js#xfbml=1"></script>
@@ -228,7 +260,7 @@
 	</div>
   
 </div>
--->
+
 <script language="JavaScript">
 
   var for_what = "for_selling";
